@@ -10,10 +10,10 @@
     <string name="button5">Button5</string>
     <string name="button6">Button6</string>
     <string name="button7">Button7</string>
-    <string name="button8">Button8</string>
+    <string name="button8">Phone Status</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
-    <string name="phoneStatus_button_getBatteryStatus">Battery Status</string>
+    <string name="phoneStatus_button_getBatteryStatus">Battery Level</string>
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
     <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>
     <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>

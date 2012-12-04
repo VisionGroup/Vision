@@ -15,8 +15,9 @@ public final class R {
         public static final int sos_pic=0x7f020001;
     }
     public static final class id {
-        public static final int SOS_textview=0x7f07000a;
+        public static final int SOS_textview=0x7f07000b;
         public static final int SOSbutton=0x7f070000;
+        public static final int blindButton1=0x7f07000a;
         public static final int button2=0x7f070001;
         public static final int button3=0x7f070002;
         public static final int button4=0x7f070003;
@@ -26,7 +27,7 @@ public final class R {
         public static final int button8=0x7f070007;
         public static final int button_getBatteryStatus=0x7f070009;
         public static final int button_getReceptionStatus=0x7f070008;
-        public static final int menu_settings=0x7f07000b;
+        public static final int menu_settings=0x7f07000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

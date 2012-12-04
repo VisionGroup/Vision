@@ -23,6 +23,12 @@
             android:layout_marginTop="10dp"
             android:text="@string/phoneStatus_button_getBatteryStatus" />
 
+        <com.yp2012g4.blindroid.customUI.BlindButton
+            android:id="@+id/blindButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_launcher" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Blindroid</string>
+    <string name="menu_settings">Settings</string>
+    <string name="button_send">SOS</string>
+    <string name="button2">Button2</string>
+    <string name="button3">Button3</string>
+    <string name="button4">Button4</string>
+    <string name="button5">Button5</string>
+    <string name="button6">Button6</string>
+    <string name="button7">Button7</string>
+    <string name="button8">Button8</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_sos">SOSActivity</string>
+    <string name="phoneStatus_button_getBatteryStatus">Battery Status</string>
+    <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
+    <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>
+    <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
+    <string name="phoneStatus_wai_Main">Phone Status</string>
+    <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
+    <string name="title_activity_phone_status">PhoneStatusActivity</string>
+
+</resources>

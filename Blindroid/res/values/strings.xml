@@ -20,5 +20,16 @@
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
+    
+    <string name="quickDial">Quick Dial</string>
+    <string name="title_activity_quick_dial">QuickDialActivity</string>
+    <string name="Contact_number_1">Contact number 1</string>
+    <string name="Contact_number_2">Contact number 2</string>
+    <string name="Contact_number_3">Contact number 3</string>
+    <string name="Contact_number_4">Contact number 4</string>
+    <string name="Contact_number_5">Contact number 5</string>
+    <string name="Contact_number_6">Contact number 6</string>
+    <string name="Contact_number_7">Contact number 7</string>
+    <string name="Contact_number_8">Contact number 8</string>
 
 </resources>

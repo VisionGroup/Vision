@@ -21,11 +21,11 @@
                 android:text="@string/button_send" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/quickDail"
                 android:layout_width="wrap_content"
                 android:layout_height="111dp"
                 android:layout_weight="0.24"
-                android:text="@string/button2" />
+                android:text="@string/quickDial" />
         </LinearLayout>
 
         <LinearLayout

@@ -4,16 +4,20 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
-public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
+public class MainActivity extends Activity implements TextToSpeech.OnInitListener, OnTouchListener {
     /** Called when the activity is first created. */
     private TextToSpeech tts;
+    private Rect rect;
+    
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,16 +33,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 				startActivity(intent);
 			}
 		});	
-        b.setOnTouchListener(new View.OnTouchListener() {
+        b.setOnTouchListener(this);
+        		/*new View.OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				speakOut("on Touch " + ((Button)v).getText().toString());
 				return false;
 			}
-		});
+		});*/
         
-        b = (Button)findViewById(R.id.button2);
+        b = (Button)findViewById(R.id.quickDail);
         b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -130,8 +135,29 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event){
-		speakOut(event.toString());
-		return true;
+	public boolean onTouch(View v, MotionEvent event) {
+
+		// TODO Auto-generated method stub
+		//
+
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			// Construct a rect of the view's bounds
+			rect = new Rect(v.getLeft(), v.getTop(), v.getRight(),
+					v.getBottom());
+			speakOut(((Button) v).getText().toString());
+
+		}
+		if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			// Tabk l = (TableLayout) v;
+
+			if (rect.contains((int) event.getX(), (int) event.getY())) {
+				// User moved outside bounds
+				speakOut(((Button) v).getText().toString());
+			} else
+				speakOut("out");
+
+		}
+
+		return false;
 	}
 }

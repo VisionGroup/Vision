@@ -86,11 +86,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 				speakOut(((Button)v).getText().toString());
 			}
 		});	
-        b = (Button)findViewById(R.id.button7);
+        b = (Button)findViewById(R.id.clock);
         b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				speakOut(((Button)v).getText().toString());
+				Intent intent = new Intent(MainActivity.this, SpeakingClockActivity.class);
+				startActivity(intent);
 			}
 		});	
         b = (Button)findViewById(R.id.button8);

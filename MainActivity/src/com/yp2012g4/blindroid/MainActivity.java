@@ -98,6 +98,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 			@Override
 			public void onClick(View v) {
 				speakOut(((Button)v).getText().toString());
+				Intent intent = new Intent(MainActivity.this, PhoneStatusActivity.class);
+				startActivity(intent);
 			}
 		});	
     }

@@ -31,5 +31,8 @@
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
+    
+    <string name="ClockTitle">Speaking clock</string>
+     <string name="emptyHour">hh:mm:ss</string>
 
 </resources>

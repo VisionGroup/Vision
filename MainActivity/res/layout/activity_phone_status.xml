@@ -2,14 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PhoneStatus" >
-
-        <Button
-            android:id="@+id/button_getReceptionStatus"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/phoneStatus_button_getReceptionStatus" />
+    tools:context=".PhoneStatus" 
+    android:id="@+id/phoneStatusActivity">
 
         <Button
             android:id="@+id/button_getBatteryStatus"
@@ -18,7 +12,13 @@
             android:layout_marginTop="10dp"
             android:text="@string/phoneStatus_button_getBatteryStatus" />
 
-       
-
+        <Button
+            android:id="@+id/button_getReceptionStatus"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/button_getBatteryStatus"
+            android:layout_marginTop="20dp"
+            android:text="@string/phoneStatus_button_getReceptionStatus" />
 
 </RelativeLayout>

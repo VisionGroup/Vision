@@ -1,14 +1,14 @@
 package com.yp2012g4.blindroid;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MainActivity extends onTouchEventClass implements
-	TextToSpeech.OnInitListener {
+public class MainActivity extends onTouchEventClass {
     /** Called when the activity is first created. */
     // private TextToSpeech tts;
     // private Rect rect;
@@ -17,7 +17,12 @@ public class MainActivity extends onTouchEventClass implements
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
+	// TODO: Add to every activity!! or to the new Activity intrerface Yaron
+	// is making
+	setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
 	tts = new TextToSpeech(this, this);
+
 	// LinearLayout mainView = (LinearLayout)
 	// findViewById(R.id.MainActivityView);
 	// getButtonsPosition(mainView);
@@ -94,10 +99,12 @@ public class MainActivity extends onTouchEventClass implements
 	    @Override
 	    public void onClick(View v) {
 		speakOut(((Button) v).getText().toString());
+		Intent intent = new Intent(MainActivity.this,
+			PhoneStatusActivity.class);
+		startActivity(intent);
 	    }
 	});
 	b.setOnTouchListener(this);
-
     }
 
     @Override

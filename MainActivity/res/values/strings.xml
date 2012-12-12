@@ -32,6 +32,7 @@
     <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
+    <string name="status_charging">Charging</string>
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     
     <string name="ClockTitle">Speaking clock</string>

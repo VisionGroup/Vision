@@ -7,11 +7,14 @@ import android.content.IntentFilter;
 import android.telephony.PhoneStateListener;
 
 public class PhoneStatus {
+
     private static int _battery = -1;
     private static int _signal = -1;
+    Context cntxt;
     SignalStrengthListener signalStrengthListener;
 
     BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 	    context.unregisterReceiver(this);
@@ -24,6 +27,7 @@ public class PhoneStatus {
     };
 
     private class SignalStrengthListener extends PhoneStateListener {
+
 	@Override
 	public void onSignalStrengthsChanged(
 		android.telephony.SignalStrength signalStrength) {
@@ -31,14 +35,13 @@ public class PhoneStatus {
 	    // get the signal strength (a value between 0 and 31)
 	    _signal = signalStrength.getGsmSignalStrength();
 
-	    // do something with it (in this case we update a text view)
-	    // signalStrengthTextView.setText(String.valueOf(strengthAmplitude));
 	    super.onSignalStrengthsChanged(signalStrength);
 	}
     }
 
     public PhoneStatus(Context context) {
 
+	cntxt = context;
 	IntentFilter batteryLevelFilter = new IntentFilter(
 		Intent.ACTION_BATTERY_CHANGED);
 	context.registerReceiver(batteryLevelReceiver, batteryLevelFilter);

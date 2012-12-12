@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class PhoneStatusActivity extends onTouchEventClass {
+    /**
+     * Used to activate the onTouch button reading function.
+     */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 	super.onWindowFocusChanged(hasFocus);
@@ -22,10 +25,19 @@ public class PhoneStatusActivity extends onTouchEventClass {
 	getButtonsPosition(phoneStatusView);
     }
 
-    private int _battery = -1;
-    private int _signal = -1;
+    static final int MAX_SIGNAL = 31;
+    // private final PhoneStatus _phoneStatus = new PhoneStatus(this);
+    int _battery = -1;
+    int _signal = -1;
+    int _status;
     SignalStrengthListener signalStrengthListener;
 
+    /**
+     * A signal strength listner. Updates _signal between 0-31.
+     * 
+     * @author Dell
+     * 
+     */
     private class SignalStrengthListener extends PhoneStateListener {
 	@Override
 	public void onSignalStrengthsChanged(
@@ -44,20 +56,12 @@ public class PhoneStatusActivity extends onTouchEventClass {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_phone_status);
-
+	tts = new TextToSpeech(this, this);
 	BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-	    int scale = -1;
-
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
 		_battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-		scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1); // TODO:
-									    // CHeck
-									    // if
-									    // scale
-									    // is
-									    // mandatory.
-		Log.e("BatteryManager", "level is " + _battery + "/" + scale);
+		_status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
 	    }
 	};
 	IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -69,14 +73,12 @@ public class PhoneStatusActivity extends onTouchEventClass {
 		signalStrengthListener,
 		PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
 
-	tts = new TextToSpeech(this, this);
 	Button b = (Button) findViewById(R.id.button_getBatteryStatus);
 	b.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
 		speakOut(((Button) v).getText().toString() + "is " + _battery
-			+ "%");
-
+			+ "% " + getChargeStatus(_status));
 	    }
 	});
 	b.setOnTouchListener(this);
@@ -85,12 +87,29 @@ public class PhoneStatusActivity extends onTouchEventClass {
 	    @Override
 	    public void onClick(View v) {
 
-		speakOut(((Button) v).getText().toString() + "is" + _signal);
+		speakOut(((Button) v).getText().toString() + "is"
+			+ signalToPercent(_signal) + "%");
 		// TODO: Add signal status text (out of service...) and check on
 		// phone.
 	    }
 	});
 	b.setOnTouchListener(this);
+    }
+
+    public static int signalToPercent(int signal) {
+
+	Log.d("Signal", String.valueOf((int) ((signal * 100.0f) / MAX_SIGNAL)));
+	return (int) ((signal * 100.0f) / MAX_SIGNAL);
+    }
+
+    public String getChargeStatus(int status) {
+	switch (status) {
+	case BatteryManager.BATTERY_STATUS_CHARGING:
+	case BatteryManager.BATTERY_STATUS_FULL:
+	    return getString(R.string.status_charging);
+	default:
+	    return "";
+	}
     }
 
 }

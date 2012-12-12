@@ -35,6 +35,14 @@
             android:name="com.yp2012g4.blindroid.QuickDialActivity"
             android:label="@string/title_activity_quick_dial" >
         </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.PhoneStatusActivity"
+            android:label="@string/title_activity_phone_status" >
+        </activity>
+        <activity 
+            android:name="com.yp2012g4.blindroid.SpeakingClockActivity" 
+            android:label="@string/ClockTitle">
+        </activity>
     </application>
 
 </manifest>

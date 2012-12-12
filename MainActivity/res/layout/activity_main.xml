@@ -66,12 +66,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
+<<<<<<< HEAD
         <Button
             android:id="@+id/button7"
             android:layout_width="0dp"
             android:layout_height="111dp"
             android:layout_weight="1"
             android:text="@string/button7" />
+=======
+            <Button
+                android:id="@+id/clock"
+                android:layout_width="wrap_content"
+                android:layout_height="111dp"
+                android:layout_weight="0.24"
+                android:text="@string/ClockTitle" />
+>>>>>>> c3e38b0c993d2c71afe330b31973e24cbbf4bc4f
 
         <Button
             android:id="@+id/button8"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    
     <string name="app_name">Blindroid</string>
     <string name="menu_settings">Settings</string>
     <string name="button_send">SOS</string>
@@ -23,6 +24,7 @@
     <string name="Contact_number_6">Contact number 6</string>
     <string name="Contact_number_7">Contact number 7</string>
     <string name="Contact_number_8">Contact number 8</string>
+    <string name="Contact_number_9">Contact number 9</string>
     
      <string name="phoneStatus_button_getBatteryStatus">Battery Level</string>
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
@@ -34,5 +36,6 @@
     
     <string name="ClockTitle">Speaking clock</string>
      <string name="emptyHour">hh:mm:ss</string>
+
 
 </resources>

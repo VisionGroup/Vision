@@ -1,8 +1,5 @@
 package com.yp2012g4.blindroid;
 
-import java.util.Locale;
-
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,140 +10,106 @@ import android.speech.tts.TextToSpeech;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
-public class PhoneStatusActivity extends Activity implements
-		TextToSpeech.OnInitListener {
-	private TextToSpeech tts;
-	private int _battery = -1;
-	private int _signal = -1;
-	SignalStrengthListener signalStrengthListener;
+public class PhoneStatusActivity extends onTouchEventClass {
+    /**
+     * Used to activate the onTouch button reading function.
+     */
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+	super.onWindowFocusChanged(hasFocus);
+	ViewGroup phoneStatusView = (ViewGroup) findViewById(R.id.phoneStatusActivity);
+	getButtonsPosition(phoneStatusView);
+    }
 
-	private class SignalStrengthListener extends PhoneStateListener {
-		@Override
-		public void onSignalStrengthsChanged(
-				android.telephony.SignalStrength signalStrength) {
+    static final int MAX_SIGNAL = 31;
+    // private final PhoneStatus _phoneStatus = new PhoneStatus(this);
+    int _battery = -1;
+    int _signal = -1;
+    int _status;
+    SignalStrengthListener signalStrengthListener;
 
-			// get the signal strength (a value between 0 and 31)
-			_signal = signalStrength.getGsmSignalStrength();
-
-			// do something with it (in this case we update a text view)
-			// signalStrengthTextView.setText(String.valueOf(strengthAmplitude));
-			super.onSignalStrengthsChanged(signalStrength);
-		}
-	}
-
+    /**
+     * A signal strength listner. Updates _signal between 0-31.
+     * 
+     * @author Dell
+     * 
+     */
+    private class SignalStrengthListener extends PhoneStateListener {
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_phone_status);
+	public void onSignalStrengthsChanged(
+		android.telephony.SignalStrength signalStrength) {
 
-		BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-			int scale = -1;
+	    // get the signal strength (a value between 0 and 31)
+	    _signal = signalStrength.getGsmSignalStrength();
 
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				_battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-				scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1); // TODO:
-																			// CHeck
-																			// if
-																			// scale
-																			// is
-																			// mandatory.
-				Log.e("BatteryManager", "level is " + _battery + "/" + scale);
-			}
-		};
-		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-		registerReceiver(batteryReceiver, filter);
-
-		// start the signal strength listener
-		signalStrengthListener = new SignalStrengthListener();
-		((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(
-				signalStrengthListener,
-				SignalStrengthListener.LISTEN_SIGNAL_STRENGTHS);
-
-		tts = new TextToSpeech(this, this);
-		Button b = (Button) findViewById(R.id.button_getBatteryStatus);
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString() + "is " + _battery
-						+ "%");
-
-			}
-		});
-		b.setOnTouchListener(new View.OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				speakOut("on Touch " + ((Button) v).getText().toString());
-				return false;
-			}
-		});
-		b = (Button) findViewById(R.id.button_getReceptionStatus);
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				speakOut(((Button) v).getText().toString() + "is" + _signal);
-				// TODO: Add signal status text (out of service...) and check on
-				// phone.
-			}
-		});
-		b.setOnTouchListener(new View.OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				speakOut("on Touch " + ((Button) v).getText().toString());
-				return false;
-			}
-		});
-
+	    // do something with it (in this case we update a text view)
+	    // signalStrengthTextView.setText(String.valueOf(strengthAmplitude));
+	    super.onSignalStrengthsChanged(signalStrength);
 	}
+    }
 
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_phone_status, menu);
-		return true;
-	}*/
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_phone_status);
+	tts = new TextToSpeech(this, this);
+	BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+		_battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+		_status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+	    }
+	};
+	IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+	registerReceiver(batteryReceiver, filter);
 
-	private void speakOut(String s) {
-		tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+	// start the signal strength listener
+	signalStrengthListener = new SignalStrengthListener();
+	((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(
+		signalStrengthListener,
+		PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+
+	Button b = (Button) findViewById(R.id.button_getBatteryStatus);
+	b.setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+		speakOut(((Button) v).getText().toString() + "is " + _battery
+			+ "% " + getChargeStatus(_status));
+	    }
+	});
+	b.setOnTouchListener(this);
+	b = (Button) findViewById(R.id.button_getReceptionStatus);
+	b.setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View v) {
+
+		speakOut(((Button) v).getText().toString() + "is"
+			+ signalToPercent(_signal) + "%");
+		// TODO: Add signal status text (out of service...) and check on
+		// phone.
+	    }
+	});
+	b.setOnTouchListener(this);
+    }
+
+    public static int signalToPercent(int signal) {
+
+	Log.d("Signal", String.valueOf((int) ((signal * 100.0f) / MAX_SIGNAL)));
+	return (int) ((signal * 100.0f) / MAX_SIGNAL);
+    }
+
+    public String getChargeStatus(int status) {
+	switch (status) {
+	case BatteryManager.BATTERY_STATUS_CHARGING:
+	case BatteryManager.BATTERY_STATUS_FULL:
+	    return getString(R.string.status_charging);
+	default:
+	    return "";
 	}
-
-	@Override
-	public void onDestroy() {
-		if (tts != null) {
-			// speakOut("stop");
-			tts.stop();
-			tts.shutdown();
-		}
-		super.onDestroy();
-	}
-
-	@Override
-	public void onInit(int status) {
-		if (status == TextToSpeech.SUCCESS) {
-			int r = tts.setLanguage(Locale.US);
-			if (r == TextToSpeech.LANG_NOT_SUPPORTED
-					|| r == TextToSpeech.LANG_MISSING_DATA) {
-				Log.e("tts", "error setLanguage");
-				return;
-			}
-			speakOut("Phone Status");
-			return;
-		}
-		Log.e("tts", "error init language");
-
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		speakOut(event.toString());
-		return true;
-	}
+    }
 
 }

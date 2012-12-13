@@ -19,7 +19,8 @@ public class QuickDialActivity extends onTouchEventClass implements
 		OnClickListener {
 
 	protected List<String> list_of_phone_numbers = new ArrayList<String>();
-//	private static final int NUM_OF_QUICK_DIALS = 9;
+
+	// private static final int NUM_OF_QUICK_DIALS = 9;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,20 +29,21 @@ public class QuickDialActivity extends onTouchEventClass implements
 		telephone();
 		setContentView(R.layout.activity_quick_dial);
 		tts = new TextToSpeech(this, this);
-//		String phoneNumber = null;
-//		int i = 0;
+		// String phoneNumber = null;
+		// int i = 0;
 		// LinearLayout mainView = (LinearLayout)
 		// findViewById(R.id.QuickDialActivity);
 		// getButtonsPosition(mainView);
 
-//		final String[] projection = new String[] { ContactsContract.Contacts.STARRED
+		// final String[] projection = new String[] {
+		// ContactsContract.Contacts.STARRED
 
-//		};
+		// };
 
-//		ContentResolver cr = getContentResolver();
+		// ContentResolver cr = getContentResolver();
 
-//		Cursor starred = cr.query(ContactsContract.Contacts.CONTENT_URI,
-//				projection, ContactsContract.Contacts._ID + "=?", null, null);
+		// Cursor starred = cr.query(ContactsContract.Contacts.CONTENT_URI,
+		// projection, ContactsContract.Contacts._ID + "=?", null, null);
 		// int phoneNumberIndex = starred
 		// .getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER);
 		/*
@@ -63,35 +65,35 @@ public class QuickDialActivity extends onTouchEventClass implements
 		// }
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_2);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_3);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_4);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_5);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_6);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_7);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_8);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		b = (Button) findViewById(R.id.Contact_number_9);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
@@ -99,15 +101,18 @@ public class QuickDialActivity extends onTouchEventClass implements
 
 	private void telephone() {
 		TelephonyManager telephonyManager;
-//		PhoneStateListener listener;
+		// PhoneStateListener listener;
 
 		// Get the telephony manager
-//		telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		// telephonyManager = (TelephonyManager)
+		// getSystemService(Context.TELEPHONY_SERVICE);
 
 		// Create a new PhoneStateListener
-//		Log.i("MyLog" , this.getApplicationContext().toString());
-//		EndCallListener callListener = new EndCallListener(this.getApplicationContext());
-		EndCallListener callListener = new EndCallListener(this.getApplicationContext());
+		// Log.i("MyLog" , this.getApplicationContext().toString());
+		// EndCallListener callListener = new
+		// EndCallListener(this.getApplicationContext());
+		EndCallListener callListener = new EndCallListener(
+				this.getApplicationContext());
 		telephonyManager = (TelephonyManager) this
 				.getSystemService(Context.TELEPHONY_SERVICE);
 		telephonyManager
@@ -181,13 +186,13 @@ public class QuickDialActivity extends onTouchEventClass implements
 			// phoneCall("0524484993");
 			break;
 		case R.id.Contact_number_9:
-			// phoneCall("0524484993");
+			finish();
 			break;
 		}
 	}
 
 	private void phoneCall(String s) {
-		Intent call = new Intent(Intent.ACTION_DIAL);
+		Intent call = new Intent(Intent.ACTION_CALL);
 		// call.setData(Uri.parse("tel:"
 		// + list_of_phone_numbers.get(0)));
 		call.setData(Uri.parse("tel:" + s));

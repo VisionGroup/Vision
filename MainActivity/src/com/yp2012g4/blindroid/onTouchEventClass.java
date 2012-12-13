@@ -1,8 +1,8 @@
 package com.yp2012g4.blindroid;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import android.app.Activity;
 import android.graphics.Rect;
@@ -16,213 +16,208 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class onTouchEventClass extends Activity implements OnTouchListener,
-	TextToSpeech.OnInitListener {
-    protected Rect rect;
-    protected TextToSpeech tts;
-    protected ImageButton tool_tip;
-    protected ImageButton home_screen;
-    protected ImageButton help;
-    protected ImageButton back;
-    // protected Rect[] buttonsArray;
-    // protected Map<Rect, ImageButton> rb = new HashMap<Rect, ImageButton>();
-    protected List<View> list_of_buttons = new ArrayList<View>();
-    // protected List<Rect> list_of_rects = new ArrayList<Rect>();
+		TextToSpeech.OnInitListener {
+	protected Rect rect;
+	protected TextToSpeech tts;
+	protected Button tool_tip;
+	protected Button home_screen;
+	protected Button help;
+	protected Button back;
+	View prev_view;
+	View last_view;
+	protected Map<Button, Rect> button_to_rect = new HashMap<Button, Rect>();
+	protected Map<ImageButton, Rect> imageButton_to_rect = new HashMap<ImageButton, Rect>();
 
-    protected List<Float> list_of_x_coords = new ArrayList<Float>();
-    protected List<Float> list_of_y_coords = new ArrayList<Float>();
-    protected List<Float> list_of_widths = new ArrayList<Float>();
-    protected List<Float> list_of_heights = new ArrayList<Float>();
+	// protected Map<Button, Intent> button_to_intent = new HashMap<Button,
+	// Intent>();
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-	// View curr_view = v;
+	// protected GestureDetector gestureDetector = new GestureDetector(this);
+	/*
+	 * new GestureDetector . SimpleOnGestureListener () { public boolean
+	 * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here"
+	 * ); startActivity (( button_to_intent .get( last_view ))); return false ;
+	 * } });
+	 */
 
-	if (event.getAction() == MotionEvent.ACTION_DOWN) {
-	    // Construct a rect of the view's bounds
-	    rect = new Rect(v.getLeft(), v.getTop(),
-		    v.getRight(), v.getBottom());
-	    // Log.i("MyLog" , rect)
-	    //////////speakOut(((ImageButton) v).getText().toString());
-	    // Log.i("MyLog", "position of: " + ((ImageButton)
-	    // v).getText().toString()
-	    // + " left = " + getRelativeLeft(v) + " ------ top = "
-	    // + getRelativeTop(v) + " -------  width = " + v.getWidth()
-	    // + " ------ height = " + v.getHeight());
-	    // accurateX = getRelativeLeft(v) + event.getX();
-	    // accurateY = getRelativeTop(v) + event.getY();
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
 
-	}
-	if (event.getAction() == MotionEvent.ACTION_MOVE) {
-	    float accurateX = getRelativeLeft(v) + event.getX();
-	    float accurateY = getRelativeTop(v) + event.getY();
-	    // View new_view = getView(accurateX, accurateY);
-	    // if (new_view != curr_view){
-	    // curr_view.setPressed(false);
-	    // new_view.setPressed(true);
-	    // }
+		float accurateX = getRelativeLeft(v) + event.getX();
+		float accurateY = getRelativeTop(v) + event.getY();
+		
+		
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			prev_view = getView(accurateX, accurateY, v);
+			if (v instanceof Button) {
+				
+				speakOut(((Button) v).getText().toString());
+			}
+			if (v instanceof ImageButton) {
+				speakOut(((ImageButton) v).getContentDescription().toString());
+			}
 
-	    for (int i = 0; i < list_of_buttons.size(); i++)
-		if (accurateX >= list_of_x_coords.get(i)
-			&& accurateX <= list_of_x_coords.get(i)
-				+ list_of_widths.get(i)
-			&& accurateY >= list_of_y_coords.get(i)
-			&& accurateY <= list_of_y_coords.get(i)
-				+ list_of_heights.get(i)) {
-/*
-		    Log.i("MyLog", "moved to ImageButton: "
-			    + list_of_buttons.get(i).getText().toString());
-		    speakOut(list_of_buttons.get(i).getText().toString());*/
-		    // list_of_buttons.get(i).setPressed(true);
 		}
 
+		if (event.getAction() == MotionEvent.ACTION_MOVE) {
+			if (v instanceof Button) {
+				for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
+					if (entry.getValue().contains((int) accurateX,
+							(int) accurateY)) {
+						if (prev_view != entry.getKey()) {
+							Log.i("MyLog", "WTFFFFFFF");
+							speakOut(entry.getKey().getText().toString());
+//							prev_view.setSelected(!prev_view.isSelected());
+							// prev_view.setPressed(false);
+
+//							entry.getKey().setSelected(!prev_view.isSelected());
+							// prev_view.setPressed(true);
+							prev_view = entry.getKey();
+						}
+					}
+				}
+			}
+			
+			if (v instanceof ImageButton) {
+				for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
+					if (entry.getValue().contains((int) accurateX,
+							(int) accurateY)) {
+//						Log.i("MyLog" , "HERE!!!!");
+
+						if (prev_view != entry.getKey()) {
+							Log.i("MyLog" , "OUT OF BUTTON: "+ ((ImageButton)prev_view).getContentDescription().toString());
+
+							speakOut(entry.getKey().getContentDescription().toString());
+//							prev_view.setSelected(!prev_view.isSelected());
+							// prev_view.setPressed(false);
+
+//							entry.getKey().setSelected(!prev_view.isSelected());
+							// prev_view.setPressed(true);
+							prev_view = entry.getKey();
+						}
+					}
+				}
+			}
+			
+		}
+
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			last_view = getView(accurateX, accurateY, v);
+			last_view.setSelected(false);
+			// last_view.setPressed(true);
+			// last_view.setClickable(false);
+
+		}
+		// gestureDetector.setOnDoubleTapListener(this);
+		// return gestureDetector.onTouchEvent(event);
+		return false;
 	}
 
-	return false;
-    }
-
-    public void speakOut(String s) {
-	tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-    }
-
-    @Override
-    public void onDestroy() {
-	if (tts != null) {
-	    speakOut("stop");
-	    tts.stop();
-	    tts.shutdown();
+	public void speakOut(String s) {
+		tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
 	}
-	super.onDestroy();
-    }
 
-    @Override
-    public void onInit(int status) {
-	if (status == TextToSpeech.SUCCESS) {
-	    int r = tts.setLanguage(Locale.US);
-	    if (r == TextToSpeech.LANG_NOT_SUPPORTED
-		    || r == TextToSpeech.LANG_MISSING_DATA) {
-		Log.e("tts", "error setLanguage");
+	@Override
+	public void onDestroy() {
+		if (tts != null) {
+			speakOut("stop");
+			tts.stop();
+			tts.shutdown();
+		}
+		super.onDestroy();
+	}
+
+	@Override
+	public void onInit(int status) {
+		if (status == TextToSpeech.SUCCESS) {
+			int r = tts.setLanguage(Locale.US);
+			if (r == TextToSpeech.LANG_NOT_SUPPORTED
+					|| r == TextToSpeech.LANG_MISSING_DATA) {
+				Log.e("tts", "error setLanguage");
+				return;
+			}
+			speakOut("start");
+			return;
+		}
+		Log.e("tts", "error init language");
+
+	}
+
+	public void getButtonsPosition(View v) {
+
+		if (v instanceof Button) {
+
+			// Construct a rect of the view's bounds
+			rect = new Rect(getRelativeLeft(v), getRelativeTop(v),
+					getRelativeLeft(v) + v.getWidth(), getRelativeTop(v)
+							+ v.getHeight());
+			// list_of_x_coords.add(getRelativeLeft(v));
+			// list_of_y_coords.add(getRelativeTop(v));
+			// list_of_widths.add(getRelativeLeft(v) + v.getWidth());
+			// list_of_heights.add(getRelativeTop(v) + v.getHeight());
+			// list_of_buttons.add((Button) v);
+			// button_to_x.put((Button)v, getRelativeLeft(v));
+			// button_to_y.put((Button)v, getRelativeTop(v));
+			button_to_rect.put((Button) v, rect);
+			Log.i("MyLog", "size = " + button_to_rect.size());
+			Log.i("MyLog", "left= " + rect.left + "  ;  top = " + rect.top
+					+ "  ;  right = " + rect.right + "  ;  bottom = "
+					+ rect.bottom);
+			return;
+		}
+		if (v instanceof ImageButton) {
+			rect = new Rect(getRelativeLeft(v), getRelativeTop(v),
+					getRelativeLeft(v) + v.getWidth(), getRelativeTop(v)
+							+ v.getHeight());
+			imageButton_to_rect.put((ImageButton) v, rect);
+			Log.i("MyLog", "size of imagebuttons = " + imageButton_to_rect.size());
+			Log.i("MyLog", "Button: " + v.getId() +" dimensions are: "+"left= " + rect.left + "  ;  top = " + rect.top
+					+ "  ;  right = " + rect.right + "  ;  bottom = "
+					+ rect.bottom);
+			return;
+		}
+
+		ViewGroup vg = (ViewGroup) v;
+		for (int i = 0; i < vg.getChildCount(); i++) {
+			getButtonsPosition(vg.getChildAt(i));
+		}
 		return;
-	    }
-	    speakOut("start");
-	    return;
 	}
-	Log.e("tts", "error init language");
 
-    }
-
-    public void getButtonsPosition(View v) {
-	// View v = (View)ll;
-	if (v instanceof ImageButton || v instanceof Button) {
-	    list_of_x_coords.add(getRelativeLeft(v));
-	    list_of_y_coords.add(getRelativeTop(v));
-	    list_of_widths.add(getRelativeLeft(v) + v.getWidth());
-	    list_of_heights.add(getRelativeTop(v) + v.getHeight());
-	    list_of_buttons.add(v);
-	    return;
+	private int getRelativeLeft(View myView) {
+		if (myView.getParent() == myView.getRootView()) {
+			return myView.getLeft();
+		} else
+			return (myView.getLeft() + getRelativeLeft((View) myView
+					.getParent()));
 	}
-	ViewGroup vg = (ViewGroup) v;
-	for (int i = 0; i < vg.getChildCount(); i++)
-	    getButtonsPosition(vg.getChildAt(i));
 
-	/*
-	 * try {
-	 * 
-	 * DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	 * DocumentBuilder db;
-	 * 
-	 * db = dbf.newDocumentBuilder();
-	 * 
-	 * Document doc = db.parse(is); Log.i("MyLog" ,
-	 * "ENTERED!!!!!!!!!!!!!!");
-	 * 
-	 * doc.getDocumentElement().normalize(); NodeList nodeLst =
-	 * doc.getElementsByTagName("ImageButton"); Log.i("MyLog" ,
-	 * "-----size------ = " + nodeLst.getLength()); for (int i = 0; i <
-	 * nodeLst.getLength(); i++) { Log.i("MyLog" ,
-	 * nodeLst.item(i).toString());
-	 * list_of_x_coords.add(getRelativeLeft((ImageButton) nodeLst.item(i)));
-	 * list_of_y_coords.add(getRelativeTop((ImageButton) nodeLst.item(i)));
-	 * list_of_widths.add(getRelativeLeft((ImageButton) nodeLst.item(i)) +
-	 * ((ImageButton) nodeLst.item(i)).getWidth());
-	 * list_of_heights.add(getRelativeTop((ImageButton) nodeLst.item(i)) +
-	 * ((ImageButton) nodeLst.item(i)).getHeight()); list_of_buttons.add((ImageButton)
-	 * nodeLst.item(i)); } } catch (Exception e) { e.printStackTrace(); }
-	 */
-	/*
-	 * for (int i = 0; i < ll.getChildCount(); i++) { View view =
-	 * ll.getChildAt(i);
-	 * 
-	 * // Log.i("Mylog", "LinearLayout" + view.toString() + "num " + i); for
-	 * (int j = 0; j < ((LinearLayout) view).getChildCount(); j++) { View v
-	 * = ((LinearLayout) view).getChildAt(j);
-	 * 
-	 * // int[] location = new int[2];
-	 * 
-	 * if (v instanceof ImageButton) { Log.i("Mylog", "left position = " +
-	 * getRelativeLeft(v) + " and top = " + getRelativeTop(v)); //
-	 * rb.put(new Rect(v.getLeft(), v.getTop(), v.getRight(), v //
-	 * .getBottom()), (ImageButton) v); // v.getLocationOnScreen(location); //
-	 * Log.i("MyLog", "location of " // + ((ImageButton) v).getText().toString()
-	 * + "is: " // + location[0] + " , " + location[1]);
-	 * 
-	 * list_of_x_coords.add(getRelativeLeft(v));
-	 * list_of_y_coords.add(getRelativeTop(v));
-	 * list_of_widths.add(getRelativeLeft(v) + v.getWidth());
-	 * list_of_heights.add(getRelativeTop(v) + v.getHeight());
-	 * list_of_buttons.add((ImageButton) v);
-	 * 
-	 * // Rect rect = new Rect(); // ((ImageButton)v).getLocalVisibleRect(rect);
-	 * // Log.i("MyLog", "location of " // + ((ImageButton)
-	 * v).getText().toString() + "is: " // +rect.left + " , "+rect.right +
-	 * " , "+rect.bottom + // " , "+rect.top + "and width = " + rect.width()
-	 * + // "and height = " + rect.height());
-	 * 
-	 * // Rect newRect = new Rect(((ImageButton) v).getLeft(), // ((ImageButton)
-	 * v).getTop(), ((ImageButton) v).getRight(), // ((ImageButton) v).getBottom());
-	 * // Log.i("MyLog", ((ImageButton) v).getText().toString() // +
-	 * "location is: " + newRect.toShortString()); //
-	 * list_of_rects.add(newRect);
-	 * 
-	 * } } } // for (Map.Entry<Rect, ImageButton> entry : rb.entrySet()) { //
-	 * Log.i("MyLog", "BLABLA  " + entry.getValue().getText().toString());
-	 * // }
-	 */return;
-    }
+	private int getRelativeTop(View myView) {
+		if (myView.getParent() == myView.getRootView()) {
+			return myView.getTop();
+		} else
+			return (myView.getTop() + getRelativeTop((View) myView.getParent()));
+	}
 
-    private float getRelativeLeft(View myView) {
-	if (myView.getParent() == myView.getRootView())
-	    return myView.getLeft();
-	else
-	    return (myView.getLeft() + getRelativeLeft((View) myView
-		    .getParent()));
-    }
+	private View getView(float x, float y, View v) {
+		if (v instanceof Button) {
+			for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
+				if (entry.getValue().contains((int) x, (int) y)) {
+					return entry.getKey();
+				}
+			}
+		}
+		if (v instanceof ImageButton) {
+			Log.i("MyLog" , "ENTERE GETVIEW");
+			for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect
+					.entrySet()) {
+				if (entry.getValue().contains((int) x, (int) y)) {
+					return entry.getKey();
+				}
+			}
+		}
 
-    private float getRelativeTop(View myView) {
-	if (myView.getParent() == myView.getRootView())
-	    return myView.getTop();
-	else
-	    return (myView.getTop() + getRelativeTop((View) myView.getParent()));
-    }
+		return null;
 
-    /*
-     * private View getView(float x, float y) { for (int i = 0; i <
-     * list_of_buttons.size(); i++) {
-     * 
-     * if (x >= list_of_x_coords.get(i) && x <= list_of_x_coords.get(i) +
-     * list_of_widths.get(i) && y >= list_of_y_coords.get(i) && y <=
-     * list_of_y_coords.get(i) + list_of_heights.get(i)) {
-     * 
-     * return list_of_buttons.get(i); } } return null; }
-     */
+	}
 
-    /*
-     * private void buttonsPicker(ViewGroup v, Document doc) { XPath xpath =
-     * XPathFactory.newInstance().newXPath(); XPathExpression expr = null; try {
-     * expr = xpath.compile("//ImageButton"); } catch (XPathExpressionException e) {
-     * // TODO Auto-generated catch block e.printStackTrace(); } Object
-     * exprResult = null; try { exprResult = expr.evaluate(doc,
-     * XPathConstants.NODESET); } catch (XPathExpressionException e) { // TODO
-     * Auto-generated catch block e.printStackTrace(); } NodeList nodeList =
-     * (NodeList) exprResult; }
-     */
 }

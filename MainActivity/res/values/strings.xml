@@ -4,14 +4,14 @@
     
     <string name="app_name">Blindroid</string>
     <string name="menu_settings">Settings</string>
-    <string name="button1">Button1</string>
-    <string name="button2">Button2</string>
-    <string name="button3">Button3</string>
-    <string name="button4">Button4</string>
-    <string name="button5">Button5</string>
-    <string name="button6">Button6</string>
-    <string name="button7">Button7</string>
-    <string name="button8">Phone Status</string>
+    <string name="sos_button">SOS</string>
+    <string name="time_button">Time</string>
+    <string name="where_am_i_button">Where am i</string>
+    <string name="phone_status_button">Phone status</string>
+    <string name="signal_button">Signal</string>
+    <string name="alarm_clock_button">Alarm clock</string>
+    <string name="quick_dial_button">Quick dial</string>
+    <string name="quick_sms_button">Quick SMS</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
     
@@ -37,9 +37,9 @@
     
     <string name="ClockTitle">Speaking clock</string>
      <string name="emptyHour">hh:mm:ss</string>
-     <string name="buttonBack">buttonBack</string>
-     <string name="buttonNext">buttonNext</string>
-     <string name="buttonSettings">buttonSettings</string>
+     <string name="back_button">Back</string>
+     <string name="next_button">Next</string>
+     <string name="settings_button">Settings</string>
 
 
 </resources>

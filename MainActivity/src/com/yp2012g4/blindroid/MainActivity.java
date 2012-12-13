@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends onTouchEventClass {
 	/** Called when the activity is first created. */
@@ -26,22 +26,22 @@ public class MainActivity extends onTouchEventClass {
 		// LinearLayout mainView = (LinearLayout)
 		// findViewById(R.id.MainActivityView);
 		// getButtonsPosition(mainView);
-		Button b = (Button) findViewById(R.id.SOSbutton);
+		ImageButton b = (ImageButton) findViewById(R.id.button1);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("SOS");
 				Intent intent = new Intent(MainActivity.this, SOSActivity.class);
 				startActivity(intent);
 			}
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.quickDial);
+		b = (ImageButton) findViewById(R.id.button7);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Quick dial");
 				Intent intent = new Intent(MainActivity.this,
 						QuickDialActivity.class);
 				startActivity(intent);
@@ -49,47 +49,47 @@ public class MainActivity extends onTouchEventClass {
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.button3);
+		b = (ImageButton) findViewById(R.id.button3);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Where am I?");
 			}
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.button4);
+		b = (ImageButton) findViewById(R.id.button4);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Battery status");
 			}
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.button5);
+		b = (ImageButton) findViewById(R.id.button5);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Amir Blumental");
 			}
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.button6);
+		b = (ImageButton) findViewById(R.id.button6);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Alarm clock");
 			}
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.clock);
+		b = (ImageButton) findViewById(R.id.button2);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Speaking Clock");
 				Intent intent = new Intent(MainActivity.this,
 						SpeakingClockActivity.class);
 				startActivity(intent);
@@ -97,14 +97,23 @@ public class MainActivity extends onTouchEventClass {
 		});
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.button8);
+		b = (ImageButton) findViewById(R.id.button4);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				speakOut(((Button) v).getText().toString());
+				speakOut("Phone status");
 				Intent intent = new Intent(MainActivity.this,
 						PhoneStatusActivity.class);
 				startActivity(intent);
+			}
+		});
+		b.setOnTouchListener(this);
+		
+		b = (ImageButton) findViewById(R.id.button8);
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				speakOut("SMS");
 			}
 		});
 		b.setOnTouchListener(this);

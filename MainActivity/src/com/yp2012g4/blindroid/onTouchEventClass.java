@@ -13,18 +13,19 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class onTouchEventClass extends Activity implements OnTouchListener,
 	TextToSpeech.OnInitListener {
     protected Rect rect;
     protected TextToSpeech tts;
-    protected Button tool_tip;
-    protected Button home_screen;
-    protected Button help;
-    protected Button back;
+    protected ImageButton tool_tip;
+    protected ImageButton home_screen;
+    protected ImageButton help;
+    protected ImageButton back;
     // protected Rect[] buttonsArray;
-    // protected Map<Rect, Button> rb = new HashMap<Rect, Button>();
-    protected List<Button> list_of_buttons = new ArrayList<Button>();
+    // protected Map<Rect, ImageButton> rb = new HashMap<Rect, ImageButton>();
+    protected List<View> list_of_buttons = new ArrayList<View>();
     // protected List<Rect> list_of_rects = new ArrayList<Rect>();
 
     protected List<Float> list_of_x_coords = new ArrayList<Float>();
@@ -38,11 +39,11 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 
 	if (event.getAction() == MotionEvent.ACTION_DOWN) {
 	    // Construct a rect of the view's bounds
-	    rect = new Rect(((Button) v).getLeft(), ((Button) v).getTop(),
-		    ((Button) v).getRight(), ((Button) v).getBottom());
+	    rect = new Rect(v.getLeft(), v.getTop(),
+		    v.getRight(), v.getBottom());
 	    // Log.i("MyLog" , rect)
-	    speakOut(((Button) v).getText().toString());
-	    // Log.i("MyLog", "position of: " + ((Button)
+	    //////////speakOut(((ImageButton) v).getText().toString());
+	    // Log.i("MyLog", "position of: " + ((ImageButton)
 	    // v).getText().toString()
 	    // + " left = " + getRelativeLeft(v) + " ------ top = "
 	    // + getRelativeTop(v) + " -------  width = " + v.getWidth()
@@ -67,10 +68,10 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			&& accurateY >= list_of_y_coords.get(i)
 			&& accurateY <= list_of_y_coords.get(i)
 				+ list_of_heights.get(i)) {
-
-		    Log.i("MyLog", "moved to Button: "
+/*
+		    Log.i("MyLog", "moved to ImageButton: "
 			    + list_of_buttons.get(i).getText().toString());
-		    speakOut(list_of_buttons.get(i).getText().toString());
+		    speakOut(list_of_buttons.get(i).getText().toString());*/
 		    // list_of_buttons.get(i).setPressed(true);
 		}
 
@@ -111,12 +112,12 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 
     public void getButtonsPosition(View v) {
 	// View v = (View)ll;
-	if (v instanceof Button) {
+	if (v instanceof ImageButton || v instanceof Button) {
 	    list_of_x_coords.add(getRelativeLeft(v));
 	    list_of_y_coords.add(getRelativeTop(v));
 	    list_of_widths.add(getRelativeLeft(v) + v.getWidth());
 	    list_of_heights.add(getRelativeTop(v) + v.getHeight());
-	    list_of_buttons.add((Button) v);
+	    list_of_buttons.add(v);
 	    return;
 	}
 	ViewGroup vg = (ViewGroup) v;
@@ -135,16 +136,16 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	 * "ENTERED!!!!!!!!!!!!!!");
 	 * 
 	 * doc.getDocumentElement().normalize(); NodeList nodeLst =
-	 * doc.getElementsByTagName("Button"); Log.i("MyLog" ,
+	 * doc.getElementsByTagName("ImageButton"); Log.i("MyLog" ,
 	 * "-----size------ = " + nodeLst.getLength()); for (int i = 0; i <
 	 * nodeLst.getLength(); i++) { Log.i("MyLog" ,
 	 * nodeLst.item(i).toString());
-	 * list_of_x_coords.add(getRelativeLeft((Button) nodeLst.item(i)));
-	 * list_of_y_coords.add(getRelativeTop((Button) nodeLst.item(i)));
-	 * list_of_widths.add(getRelativeLeft((Button) nodeLst.item(i)) +
-	 * ((Button) nodeLst.item(i)).getWidth());
-	 * list_of_heights.add(getRelativeTop((Button) nodeLst.item(i)) +
-	 * ((Button) nodeLst.item(i)).getHeight()); list_of_buttons.add((Button)
+	 * list_of_x_coords.add(getRelativeLeft((ImageButton) nodeLst.item(i)));
+	 * list_of_y_coords.add(getRelativeTop((ImageButton) nodeLst.item(i)));
+	 * list_of_widths.add(getRelativeLeft((ImageButton) nodeLst.item(i)) +
+	 * ((ImageButton) nodeLst.item(i)).getWidth());
+	 * list_of_heights.add(getRelativeTop((ImageButton) nodeLst.item(i)) +
+	 * ((ImageButton) nodeLst.item(i)).getHeight()); list_of_buttons.add((ImageButton)
 	 * nodeLst.item(i)); } } catch (Exception e) { e.printStackTrace(); }
 	 */
 	/*
@@ -157,32 +158,32 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	 * 
 	 * // int[] location = new int[2];
 	 * 
-	 * if (v instanceof Button) { Log.i("Mylog", "left position = " +
+	 * if (v instanceof ImageButton) { Log.i("Mylog", "left position = " +
 	 * getRelativeLeft(v) + " and top = " + getRelativeTop(v)); //
 	 * rb.put(new Rect(v.getLeft(), v.getTop(), v.getRight(), v //
-	 * .getBottom()), (Button) v); // v.getLocationOnScreen(location); //
-	 * Log.i("MyLog", "location of " // + ((Button) v).getText().toString()
+	 * .getBottom()), (ImageButton) v); // v.getLocationOnScreen(location); //
+	 * Log.i("MyLog", "location of " // + ((ImageButton) v).getText().toString()
 	 * + "is: " // + location[0] + " , " + location[1]);
 	 * 
 	 * list_of_x_coords.add(getRelativeLeft(v));
 	 * list_of_y_coords.add(getRelativeTop(v));
 	 * list_of_widths.add(getRelativeLeft(v) + v.getWidth());
 	 * list_of_heights.add(getRelativeTop(v) + v.getHeight());
-	 * list_of_buttons.add((Button) v);
+	 * list_of_buttons.add((ImageButton) v);
 	 * 
-	 * // Rect rect = new Rect(); // ((Button)v).getLocalVisibleRect(rect);
-	 * // Log.i("MyLog", "location of " // + ((Button)
+	 * // Rect rect = new Rect(); // ((ImageButton)v).getLocalVisibleRect(rect);
+	 * // Log.i("MyLog", "location of " // + ((ImageButton)
 	 * v).getText().toString() + "is: " // +rect.left + " , "+rect.right +
 	 * " , "+rect.bottom + // " , "+rect.top + "and width = " + rect.width()
 	 * + // "and height = " + rect.height());
 	 * 
-	 * // Rect newRect = new Rect(((Button) v).getLeft(), // ((Button)
-	 * v).getTop(), ((Button) v).getRight(), // ((Button) v).getBottom());
-	 * // Log.i("MyLog", ((Button) v).getText().toString() // +
+	 * // Rect newRect = new Rect(((ImageButton) v).getLeft(), // ((ImageButton)
+	 * v).getTop(), ((ImageButton) v).getRight(), // ((ImageButton) v).getBottom());
+	 * // Log.i("MyLog", ((ImageButton) v).getText().toString() // +
 	 * "location is: " + newRect.toShortString()); //
 	 * list_of_rects.add(newRect);
 	 * 
-	 * } } } // for (Map.Entry<Rect, Button> entry : rb.entrySet()) { //
+	 * } } } // for (Map.Entry<Rect, ImageButton> entry : rb.entrySet()) { //
 	 * Log.i("MyLog", "BLABLA  " + entry.getValue().getText().toString());
 	 * // }
 	 */return;
@@ -217,7 +218,7 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
     /*
      * private void buttonsPicker(ViewGroup v, Document doc) { XPath xpath =
      * XPathFactory.newInstance().newXPath(); XPathExpression expr = null; try {
-     * expr = xpath.compile("//Button"); } catch (XPathExpressionException e) {
+     * expr = xpath.compile("//ImageButton"); } catch (XPathExpressionException e) {
      * // TODO Auto-generated catch block e.printStackTrace(); } Object
      * exprResult = null; try { exprResult = expr.evaluate(doc,
      * XPathConstants.NODESET); } catch (XPathExpressionException e) { // TODO

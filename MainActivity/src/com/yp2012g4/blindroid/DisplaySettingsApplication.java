@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.yp2012g4.blindroid.tools;
+package com.yp2012g4.blindroid;
 
 import android.app.Application;
 

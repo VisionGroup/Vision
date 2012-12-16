@@ -1,4 +1,4 @@
-package com.yp2012g4.blindroid.tools;
+package com.yp2012g4.blindroid;
 
 import com.yp2012g4.blindroid.R;
 import android.graphics.PorterDuff.Mode;

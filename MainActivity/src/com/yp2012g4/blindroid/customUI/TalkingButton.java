@@ -11,8 +11,24 @@ public class TalkingButton extends ImageButton {
 	// TODO Auto-generated constructor stub
     }
 
-    public String ReadText;
-    public String ReadToolTip;
+    public String getReadText() {
+	return ReadText;
+    }
+
+    public void setReadText(String readText) {
+	ReadText = readText;
+    }
+
+    public String getReadToolTip() {
+	return ReadToolTip;
+    }
+
+    public void setReadToolTip(String readToolTip) {
+	ReadToolTip = readToolTip;
+    }
+
+    private String ReadText;
+    private String ReadToolTip;
 
     // TODO: Check How to connect to foreground and background color settings
     // TODO: Set onTouch listener.

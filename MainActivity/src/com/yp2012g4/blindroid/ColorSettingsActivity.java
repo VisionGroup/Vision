@@ -5,7 +5,6 @@
 
 package com.yp2012g4.blindroid;
 
-import com.yp2012g4.blindroid.tools.DisplaySettingsApplication;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;

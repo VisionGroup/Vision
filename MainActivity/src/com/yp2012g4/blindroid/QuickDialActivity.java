@@ -2,7 +2,6 @@ package com.yp2012g4.blindroid;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;

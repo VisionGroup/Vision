@@ -1,5 +1,7 @@
 package com.yp2012g4.blindroid;
 
+import com.yp2012g4.blindroid.tools.DisplaySettingsApplication;
+
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		tts = new TextToSpeech(this, this);
-		
 		
 		ImageButton b = (ImageButton) findViewById(R.id.sos_button);
 		b.setOnClickListener(this);
@@ -57,8 +58,36 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 		b = (ImageButton) findViewById(R.id.quick_sms_button);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
+		
+		b = (ImageButton) findViewById(R.id.back_button);
+		b.setOnClickListener(this);
+		b.setOnTouchListener(this);
+		
+		b = (ImageButton) findViewById(R.id.settings_button);
+		b.setOnClickListener(this);
+		b.setOnTouchListener(this);
+		
+		b = (ImageButton) findViewById(R.id.next_button);
+		b.setOnClickListener(this);
+		b.setOnTouchListener(this);
 	}
-
+	@Override
+	public void onRestart() {
+		super.onRestart();
+		DisplaySettingsApplication appState = ((DisplaySettingsApplication)this.getApplication());
+		appState.settings.applyButtonSettings(findViewById(R.id.sos_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.alarm_clock_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.back_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.time_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.signal_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.phone_status_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.next_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.settings_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.where_am_i_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.quick_dial_button));
+		appState.settings.applyButtonSettings(findViewById(R.id.quick_sms_button));
+	}
+	
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
@@ -107,7 +136,17 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 		case R.id.quick_sms_button:
 			speakOut("SMS");
 			break;
-
+		case R.id.back_button:
+			speakOut("Previous screen");
+			break;
+		case R.id.settings_button:
+			speakOut("Settings");
+			intent = new Intent(MainActivity.this, ColorSettingsActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.next_button:
+			speakOut("Next screen");
+			break;
 		}
 	}
 }

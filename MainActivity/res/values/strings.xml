@@ -40,6 +40,14 @@
      <string name="back_button">Back</string>
      <string name="next_button">Next</string>
      <string name="settings_button">Settings</string>
+     <string name="WhiteBlack">White &amp; Black</string>
+     <string name="WhiteRed">White &amp; Red</string>
+     <string name="RedBlack">Red &amp; Black</string>
+     <string name="GreenBlack">Green &amp; Black</string>
+     <string name="WhiteGreen">White &amp; Green</string>
+     <string name="BlueBlack">Blue &amp; Black</string>
+     <string name="WhiteBlue">White &amp; Blue</string>
+     <string name="title_activity_color_settings">Color Settings</string>
 
 
 </resources>

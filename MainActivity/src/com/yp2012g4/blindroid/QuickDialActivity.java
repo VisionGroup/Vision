@@ -98,7 +98,7 @@ public class QuickDialActivity extends onTouchEventClass implements
 		b = (Button) findViewById(R.id.Contact_number_9);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
-		
+
 		ImageButton ib = (ImageButton) findViewById(R.id.next_button);
 		ib.setOnClickListener(this);
 		ib.setOnTouchListener(this);
@@ -172,45 +172,50 @@ public class QuickDialActivity extends onTouchEventClass implements
 	}
 
 	public void onClick(View v) {
-		speakOut("Dialing to" + ((Button) v).getText().toString());
-		switch (v.getId()) {
-		case R.id.Contact_number_1:
-			phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_2:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_3:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_4:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_5:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_6:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_7:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_8:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_9:
-			finish();
-			break;
-		case R.id.next_button:
-			speakOut("Next");
-			break;
-		case R.id.settings_button:
-			speakOut("Settings");
-			break;
-		case R.id.back_button:
-			speakOut("Back");
-			finish();
-			break;
+		if (v instanceof Button) {
+			speakOut("Dialing to" + ((Button) v).getText().toString());
+			switch (v.getId()) {
+			case R.id.Contact_number_1:
+				phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_2:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_3:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_4:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_5:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_6:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_7:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_8:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_9:
+				break;
+			}
+		}
+		if (v instanceof ImageButton) {
+			switch (v.getId()) {
+			case R.id.next_button:
+				speakOut("Next");
+				break;
+			case R.id.settings_button:
+				speakOut("Settings");
+				break;
+			case R.id.back_button:
+				speakOut("Back");
+				finish();
+				break;
+			}
 		}
 	}
 

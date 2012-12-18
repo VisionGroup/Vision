@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class QuickDialActivity extends onTouchEventClass implements
 		OnClickListener {
@@ -96,6 +98,18 @@ public class QuickDialActivity extends onTouchEventClass implements
 		b = (Button) findViewById(R.id.Contact_number_9);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
+
+		ImageButton ib = (ImageButton) findViewById(R.id.next_button);
+		ib.setOnClickListener(this);
+		ib.setOnTouchListener(this);
+
+		ib = (ImageButton) findViewById(R.id.settings_button);
+		ib.setOnClickListener(this);
+		ib.setOnTouchListener(this);
+
+		ib = (ImageButton) findViewById(R.id.back_button);
+		ib.setOnClickListener(this);
+		ib.setOnTouchListener(this);
 	}
 
 	private void telephone() {
@@ -158,35 +172,50 @@ public class QuickDialActivity extends onTouchEventClass implements
 	}
 
 	public void onClick(View v) {
-		speakOut("Dialing to" + ((Button) v).getText().toString());
-		switch (v.getId()) {
-		case R.id.Contact_number_1:
-			phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_2:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_3:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_4:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_5:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_6:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_7:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_8:
-			// phoneCall("0524484993");
-			break;
-		case R.id.Contact_number_9:
-			finish();
-			break;
+		if (v instanceof Button) {
+			speakOut("Dialing to" + ((Button) v).getText().toString());
+			switch (v.getId()) {
+			case R.id.Contact_number_1:
+				phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_2:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_3:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_4:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_5:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_6:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_7:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_8:
+				// phoneCall("0524484993");
+				break;
+			case R.id.Contact_number_9:
+				break;
+			}
+		}
+		if (v instanceof ImageButton) {
+			switch (v.getId()) {
+			case R.id.next_button:
+				speakOut("Next");
+				break;
+			case R.id.settings_button:
+				speakOut("Settings");
+				break;
+			case R.id.back_button:
+				speakOut("Back");
+				finish();
+				break;
+			}
 		}
 	}
 

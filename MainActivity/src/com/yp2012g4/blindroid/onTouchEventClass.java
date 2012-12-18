@@ -5,7 +5,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -23,9 +25,12 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	protected Button home_screen;
 	protected Button help;
 	protected Button back;
-	View prev_view;
-	View last_view;
-	View movedTo;;
+	protected View prev_view;
+	protected View last_view;
+	protected View movedTo;
+	protected Drawable d;
+	// protected OnDoubleTapListener l;
+
 	protected Map<Button, Rect> button_to_rect = new HashMap<Button, Rect>();
 	protected Map<ImageButton, Rect> imageButton_to_rect = new HashMap<ImageButton, Rect>();
 
@@ -53,8 +58,14 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 
 			if (v instanceof Button) {
 				speakOut(((Button) v).getText().toString());
+
 			}
 			if (v instanceof ImageButton) {
+//				d = ((ImageButton) v).getDrawable();
+//				Log.i("MyLog", "the drawable is: " + d.toString());
+				((ImageButton) v)
+						.setColorFilter(Color.argb(150, 255, 165, 0)); // or
+																			// null
 				speakOut(((ImageButton) v).getContentDescription().toString());
 			}
 
@@ -68,9 +79,19 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 				for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
 					if (entry.getValue().contains((int) accurateX,
 							(int) accurateY)) {
-						if ((prev_view != entry.getKey())
-								|| (prev_view instanceof ImageButton)) {
+						if (prev_view != entry.getKey()) {
+							if (prev_view instanceof ImageButton){
+//								((ImageButton) prev_view).getBackground().set
+								((ImageButton) prev_view).setColorFilter(Color
+										.argb(0, 255, 165, 0));
+							}
+							if (prev_view instanceof Button){
+								((Button)prev_view).setFocusableInTouchMode(false);
+								
+							}
 							speakOut(entry.getKey().getText().toString());
+							((Button)entry.getKey()).getBackground().setAlpha((int)( 0.8 * 255));
+
 							// prev_view.setSelected(!prev_view.isSelected());
 							// prev_view.setPressed(false);
 
@@ -88,9 +109,16 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 						.entrySet()) {
 					if (entry.getValue().contains((int) accurateX,
 							(int) accurateY)) {
-						if ((prev_view != entry.getKey())
-								|| (prev_view instanceof Button)) {
-
+						if (prev_view != entry.getKey()) {
+							if (prev_view instanceof Button){
+								((Button)prev_view).getBackground().setAlpha((int)( 1.0 * 255));
+							}
+							if (prev_view instanceof ImageButton){
+//								((ImageButton) prev_view).setBackgroundDrawable(d)/*setColorFilter(Color
+//										.argb(0, 255, 165, 0))*/;
+								((ImageButton)prev_view).setColorFilter(Color
+										.argb(0, 255, 165, 0));
+							}
 							speakOut(entry.getKey().getContentDescription()
 									.toString());
 							// prev_view.setSelected(!prev_view.isSelected());
@@ -98,6 +126,9 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 
 							// entry.getKey().setSelected(!prev_view.isSelected());
 							// prev_view.setPressed(true);
+							
+							entry.getKey().setColorFilter(
+									Color.argb(150, 255, 165, 0));
 							prev_view = entry.getKey();
 						}
 					}
@@ -107,7 +138,16 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_UP) {
-			// last_view = getView(accurateX, accurateY, v);
+			last_view = getView(accurateX, accurateY);
+			if (last_view instanceof ImageButton) {
+				((ImageButton) last_view).setColorFilter(Color.argb(0, 255,
+						165, 0)); // or null
+
+			}
+			if (last_view instanceof Button){
+				((Button)last_view).getBackground().setAlpha((int)( 1.0 * 255));
+
+			}
 			// last_view.setSelected(false);
 			// last_view.setPressed(true);
 			// last_view.setClickable(false);

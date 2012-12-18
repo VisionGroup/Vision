@@ -2,11 +2,18 @@ package com.yp2012g4.blindroid.customUI;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.Button;
+import android.widget.ImageButton;
 
-public class TalkingButton extends Button {
+/**
+ * This is a generic Image button to inherit from. It contains methods vital for
+ * TTS.
+ * 
+ * @author Dell
+ * 
+ */
+public class TalkingImageButton extends ImageButton {
 
-    public TalkingButton(Context context, AttributeSet attrs) {
+    public TalkingImageButton(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	// TODO Auto-generated constructor stub
     }
@@ -47,8 +54,8 @@ public class TalkingButton extends Button {
 	ReadToolTip = readToolTip;
     }
 
-    private String ReadText;
-    private String ReadToolTip;
+    private String ReadText = "";
+    private String ReadToolTip = "";
 
     // TODO: Check How to connect to foreground and background color settings
 

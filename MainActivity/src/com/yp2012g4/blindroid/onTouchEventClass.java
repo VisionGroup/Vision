@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+
 public class onTouchEventClass extends Activity implements OnTouchListener,
 		TextToSpeech.OnInitListener {
 	protected Rect rect;
@@ -31,8 +34,8 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	protected Drawable d;
 	// protected OnDoubleTapListener l;
 
-	protected Map<Button, Rect> button_to_rect = new HashMap<Button, Rect>();
-	protected Map<ImageButton, Rect> imageButton_to_rect = new HashMap<ImageButton, Rect>();
+	protected Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+	protected Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
 
 	// protected Map<Button, Intent> button_to_intent = new HashMap<Button,
 	// Intent>();
@@ -68,6 +71,9 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 																			// null
 				speakOut(((ImageButton) v).getContentDescription().toString());
 			}
+			else{ //we touched outside of any button...
+				Log.i("MyLog" , prev_view.getClass().getSimpleName());
+			}
 
 		}
 
@@ -76,7 +82,7 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			if (movedTo instanceof Button) {
 
 				Log.i("MyLog", "ON ACTION MOVE BUTTON");
-				for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
+				for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
 					if (entry.getValue().contains((int) accurateX,
 							(int) accurateY)) {
 						if (prev_view != entry.getKey()) {
@@ -104,8 +110,8 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 				}
 			}
 
-			else if (movedTo instanceof ImageButton) {
-				for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect
+			if (movedTo instanceof ImageButton) {
+				for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect
 						.entrySet()) {
 					if (entry.getValue().contains((int) accurateX,
 							(int) accurateY)) {
@@ -134,6 +140,7 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 					}
 				}
 			}
+			else prev_view = getView(accurateX, accurateY);
 
 		}
 
@@ -196,7 +203,7 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 
 			// Construct a rect of the view's bounds
 
-			button_to_rect.put((Button) v, rect);
+			button_to_rect.put((TalkingButton) v, rect);
 			// Log.i("MyLog", "size = " + button_to_rect.size());
 			// Log.i("MyLog", "left= " + rect.left + "  ;  top = " + rect.top
 			// + "  ;  right = " + rect.right + "  ;  bottom = "
@@ -204,7 +211,7 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			return;
 		}
 		if (v instanceof ImageButton) {
-			imageButton_to_rect.put((ImageButton) v, rect);
+			imageButton_to_rect.put((TalkingImageButton) v, rect);
 			// Log.i("MyLog", "size of imagebuttons = " +
 			// imageButton_to_rect.size());
 			// Log.i("MyLog", "ImageButton dimensions are: "+"left= " +
@@ -213,7 +220,6 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			// + rect.bottom);
 			return;
 		}
-
 		ViewGroup vg = (ViewGroup) v;
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			getButtonsPosition(vg.getChildAt(i));
@@ -237,14 +243,14 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	}
 
 	private View getView(float x, float y) {
-		for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
+		for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
 			Log.i("MyLog", "Button:     Left = " + entry.getValue().left
 					+ "  ;  Top = " + entry.getValue().top);
 			if (entry.getValue().contains((int) x, (int) y)) {
 				return ((Button) entry.getKey());
 			}
 		}
-		for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect
+		for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect
 				.entrySet()) {
 			Log.i("MyLog", "ImageButton:     Left = " + entry.getValue().left
 					+ "  ;  Top = " + entry.getValue().top + "  ;  Right = "

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/sos_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -18,8 +18,8 @@
             android:contentDescription="@string/sos_button"
             android:scaleType="fitCenter"
             android:src="@drawable/sos_button" />
-  
-        <ImageButton
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/time_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -28,14 +28,13 @@
             android:contentDescription="@string/time_button"
             android:scaleType="fitCenter"
             android:src="@drawable/time_button" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/where_am_i_button"
             style="android:ButtonStyle"
             android:layout_width="0dip"
@@ -46,7 +45,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/compass_button" />
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/phone_status_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -55,14 +54,13 @@
             android:contentDescription="@string/phone_status_button"
             android:scaleType="fitCenter"
             android:src="@drawable/battery_button" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/signal_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -72,7 +70,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/signal_button" />
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/alarm_clock_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -81,14 +79,13 @@
             android:contentDescription="@string/alarm_clock_button"
             android:scaleType="fitCenter"
             android:src="@drawable/alarm_clock_button" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"  >
+        android:layout_height="wrap_content" >
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/quick_dial_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -98,7 +95,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/quick_dial_button" />
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/quick_sms_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
@@ -107,14 +104,13 @@
             android:contentDescription="@string/quick_sms_button"
             android:scaleType="fitCenter"
             android:src="@drawable/quick_sms_button" />
-
     </LinearLayout>
-    
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"  >
 
-        <ImageButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/back_button"
             android:layout_width="0dip"
             android:layout_height="50dip"
@@ -123,8 +119,8 @@
             android:contentDescription="@string/back_button"
             android:scaleType="fitStart"
             android:src="@drawable/back_button" />
-        
-        <ImageButton
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/settings_button"
             android:layout_width="0dip"
             android:layout_height="50dip"
@@ -134,7 +130,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/settings_button" />
 
-        <ImageButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/next_button"
             android:layout_width="0dip"
             android:layout_height="50dip"
@@ -143,7 +139,6 @@
             android:contentDescription="@string/next_button"
             android:scaleType="fitEnd"
             android:src="@drawable/next_button" />
-
     </LinearLayout>
 
 </LinearLayout>

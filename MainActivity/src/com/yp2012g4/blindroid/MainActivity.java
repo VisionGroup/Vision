@@ -7,7 +7,8 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class MainActivity extends onTouchEventClass implements OnClickListener {
     /** Called when the activity is first created. */
@@ -23,48 +24,47 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 	tts = new TextToSpeech(this, this);
-
-	ImageButton b = (ImageButton) findViewById(R.id.sos_button);
+	TalkingImageButton b = (TalkingImageButton) findViewById(R.id.sos_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.time_button);
+	b = (TalkingImageButton) findViewById(R.id.time_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.where_am_i_button);
+	b = (TalkingImageButton) findViewById(R.id.where_am_i_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.phone_status_button);
+	b = (TalkingImageButton) findViewById(R.id.phone_status_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.signal_button);
+	b = (TalkingImageButton) findViewById(R.id.signal_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.alarm_clock_button);
+	b = (TalkingImageButton) findViewById(R.id.alarm_clock_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.quick_dial_button);
+	b = (TalkingImageButton) findViewById(R.id.quick_dial_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.quick_sms_button);
+	b = (TalkingImageButton) findViewById(R.id.quick_sms_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.back_button);
+	b = (TalkingImageButton) findViewById(R.id.back_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.settings_button);
+	b = (TalkingImageButton) findViewById(R.id.settings_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (ImageButton) findViewById(R.id.next_button);
+	b = (TalkingImageButton) findViewById(R.id.next_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
     }

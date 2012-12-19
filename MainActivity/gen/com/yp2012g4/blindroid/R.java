@@ -9,6 +9,22 @@ package com.yp2012g4.blindroid;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ReadText=0x7f010000;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ReadToolTip=0x7f010001;
     }
     public static final class color {
         public static final int BLACK=0x7f060001;
@@ -147,4 +163,49 @@ public final class R {
          */
         public static final int AppTheme=0x7f050001;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a TalkingImageButton.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TalkingImageButton_ReadText com.yp2012g4.blindroid:ReadText}</code></td><td></td></tr>
+           <tr><td><code>{@link #TalkingImageButton_ReadToolTip com.yp2012g4.blindroid:ReadToolTip}</code></td><td></td></tr>
+           </table>
+           @see #TalkingImageButton_ReadText
+           @see #TalkingImageButton_ReadToolTip
+         */
+        public static final int[] TalkingImageButton = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.yp2012g4.blindroid.R.attr#ReadText}
+          attribute's value can be found in the {@link #TalkingImageButton} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:ReadText
+        */
+        public static final int TalkingImageButton_ReadText = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.yp2012g4.blindroid.R.attr#ReadToolTip}
+          attribute's value can be found in the {@link #TalkingImageButton} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:ReadToolTip
+        */
+        public static final int TalkingImageButton_ReadToolTip = 1;
+    };
 }

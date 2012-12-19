@@ -12,7 +12,8 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.yp2012g4.blindroid.customUI.TalkingButton;
 
 public class PhoneStatusActivity extends onTouchEventClass {
     /**
@@ -73,21 +74,21 @@ public class PhoneStatusActivity extends onTouchEventClass {
 		signalStrengthListener,
 		PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
 
-	Button b = (Button) findViewById(R.id.button_getBatteryStatus);
+	TalkingButton b = (TalkingButton) findViewById(R.id.button_getBatteryStatus);
 	b.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
-		speakOut(((Button) v).getText().toString() + "is " + _battery
+		speakOut(((TalkingButton) v).getText().toString() + "is " + _battery
 			+ "% " + getChargeStatus(_status));
 	    }
 	});
 	b.setOnTouchListener(this);
-	b = (Button) findViewById(R.id.button_getReceptionStatus);
+	b = (TalkingButton) findViewById(R.id.button_getReceptionStatus);
 	b.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
 
-		speakOut(((Button) v).getText().toString() + "is"
+		speakOut(((TalkingButton) v).getText().toString() + "is"
 			+ signalToPercent(_signal) + "%");
 		// TODO: Add signal status text (out of service...) and check on
 		// phone.

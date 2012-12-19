@@ -13,8 +13,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class QuickDialActivity extends onTouchEventClass implements
 		OnClickListener {
@@ -58,7 +59,7 @@ public class QuickDialActivity extends onTouchEventClass implements
 		 * (starred.moveToNext()) continue; else break; } } finally { //
 		 * Log.v(TAG, "In finally"); starred.close(); } }
 		 */
-		Button b = (Button) findViewById(R.id.Contact_number_1);
+		TalkingButton b = (TalkingButton) findViewById(R.id.Contact_number_1);
 		// if (list_of_phone_numbers.isEmpty()) { // if no favorite contacts -
 		// make
 		// // button unclickable
@@ -67,47 +68,47 @@ public class QuickDialActivity extends onTouchEventClass implements
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_2);
+		b = (TalkingButton) findViewById(R.id.Contact_number_2);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_3);
+		b = (TalkingButton) findViewById(R.id.Contact_number_3);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_4);
+		b = (TalkingButton) findViewById(R.id.Contact_number_4);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_5);
+		b = (TalkingButton) findViewById(R.id.Contact_number_5);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_6);
+		b = (TalkingButton) findViewById(R.id.Contact_number_6);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_7);
+		b = (TalkingButton) findViewById(R.id.Contact_number_7);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_8);
+		b = (TalkingButton) findViewById(R.id.Contact_number_8);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_9);
+		b = (TalkingButton) findViewById(R.id.Contact_number_9);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		ImageButton ib = (ImageButton) findViewById(R.id.next_button);
+		TalkingImageButton ib = (TalkingImageButton) findViewById(R.id.next_button);
 		ib.setOnClickListener(this);
 		ib.setOnTouchListener(this);
 
-		ib = (ImageButton) findViewById(R.id.settings_button);
+		ib = (TalkingImageButton) findViewById(R.id.settings_button);
 		ib.setOnClickListener(this);
 		ib.setOnTouchListener(this);
 
-		ib = (ImageButton) findViewById(R.id.back_button);
+		ib = (TalkingImageButton) findViewById(R.id.back_button);
 		ib.setOnClickListener(this);
 		ib.setOnTouchListener(this);
 	}
@@ -172,8 +173,8 @@ public class QuickDialActivity extends onTouchEventClass implements
 	}
 
 	public void onClick(View v) {
-		if (v instanceof Button) {
-			speakOut("Dialing to" + ((Button) v).getText().toString());
+		if (v instanceof TalkingButton) {
+			speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
 			switch (v.getId()) {
 			case R.id.Contact_number_1:
 				phoneCall("0524484993");
@@ -203,7 +204,7 @@ public class QuickDialActivity extends onTouchEventClass implements
 				break;
 			}
 		}
-		if (v instanceof ImageButton) {
+		if (v instanceof TalkingImageButton) {
 			switch (v.getId()) {
 			case R.id.next_button:
 				speakOut("Next");

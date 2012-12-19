@@ -6,16 +6,21 @@
 package com.yp2012g4.blindroid;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.yp2012g4.blindroid.customUI.TalkingButton;
 
 public class ColorSettingsActivity extends onTouchEventClass implements
 		OnClickListener {
+	//will care for all posts
+    Handler mHandler = new Handler();
 
+   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,31 +28,31 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 		setContentView(R.layout.activity_color_settings);
 		tts = new TextToSpeech(this, this);
 
-		View b = findViewById(R.id.WhiteBlack);
+		TalkingButton b = (TalkingButton)findViewById(R.id.WhiteBlack);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = findViewById(R.id.WhiteRed);
+		b = (TalkingButton)findViewById(R.id.WhiteRed);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = findViewById(R.id.RedBlack);
+		b = (TalkingButton)findViewById(R.id.RedBlack);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = findViewById(R.id.WhiteGreen);
+		b = (TalkingButton)findViewById(R.id.WhiteGreen);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = findViewById(R.id.GreenBlack);
+		b = (TalkingButton)findViewById(R.id.GreenBlack);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = findViewById(R.id.WhiteBlue);
+		b = (TalkingButton)findViewById(R.id.WhiteBlue);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = findViewById(R.id.BlueBlack);
+		b = (TalkingButton)findViewById(R.id.BlueBlack);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 	}
@@ -68,8 +73,8 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 	}
 
 	public void onClick(View v) {
-		if (v instanceof Button)
-			speakOut(((Button) v).getText().toString());
+		if (v instanceof TalkingButton)
+			speakOut(((TalkingButton) v).getText().toString());
 		switch (v.getId()) {
 		case R.id.WhiteBlack:
 			changeSettings(R.color.WHITE, R.color.BLACK);
@@ -93,7 +98,8 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 			changeSettings(R.color.BLUE, R.color.BLACK);
 			break;
 		}
-		finish();
+		 mHandler.postDelayed(mLaunchTask,1000);
+		
 	}
 
 	private void changeSettings(int int1, int int2) {
@@ -101,6 +107,13 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 		appState.settings.setColors(int1, int2);
 
 	}
+	
+	 //will launch the activity
+    private Runnable mLaunchTask = new Runnable() {
+        public void run() {
+        	finish();
+        }
+     };
 
 }
 

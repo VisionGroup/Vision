@@ -5,7 +5,7 @@
     tools:context=".PhoneStatus" 
     android:id="@+id/phoneStatusActivity">
 
-        <Button
+        <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/button_getBatteryStatus"
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -14,7 +14,7 @@
             android:gravity="center_vertical"
             android:text="@string/phoneStatus_button_getBatteryStatus" />
 
-        <Button
+        <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/button_getReceptionStatus"
             android:layout_width="match_parent"
             android:layout_height="150dp"

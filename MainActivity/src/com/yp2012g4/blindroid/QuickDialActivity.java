@@ -164,11 +164,6 @@ public class QuickDialActivity extends onTouchEventClass implements
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		ViewGroup quickDialView = (ViewGroup) findViewById(R.id.QuickDialActivity);
-		// Resources res = getResources();
-		// XmlResourceParser parser = res.getXml(R.layout.activity_quick_dial);
-		// getButtonsPosition(quickDialView, parser);
-		// InputStream inputStream =
-		// getResources().openRawResource(R.layout.activity_main);
 		getButtonsPosition(quickDialView);
 	}
 

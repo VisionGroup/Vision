@@ -74,6 +74,7 @@ public class PhoneStatusActivity extends onTouchEventClass {
 		signalStrengthListener,
 		PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
 
+	
 	TalkingButton b = (TalkingButton) findViewById(R.id.button_getBatteryStatus);
 	b.setOnClickListener(new View.OnClickListener() {
 	    @Override

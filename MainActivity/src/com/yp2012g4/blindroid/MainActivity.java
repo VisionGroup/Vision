@@ -142,7 +142,9 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	    startActivity(intent);
 	    break;
 	case R.id.quick_sms_button:
-	    speakOut("SMS");
+	    speakOut("Quick SMS");
+	    intent = new Intent(MainActivity.this, QuickSMSActivity.class);
+	    startActivity(intent);
 	    break;
 	case R.id.back_button:
 	    speakOut("Previous screen");

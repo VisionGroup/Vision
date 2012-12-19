@@ -14,47 +14,50 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name="DisplaySettingsApplication"
+        android:name="com.yp2012g4.blindroid.DisplaySettingsApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        >
-        
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.yp2012g4.blindroid.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.yp2012g4.blindroid.SOSActivity"
-            android:label="@string/title_activity_sos" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_sos"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.yp2012g4.blindroid.QuickDialActivity"
-            android:label="@string/title_activity_quick_dial" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_quick_dial"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.yp2012g4.blindroid.PhoneStatusActivity"
-            android:label="@string/title_activity_phone_status" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_phone_status"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity 
-            android:name="com.yp2012g4.blindroid.SpeakingClockActivity" 
+        <activity
+            android:name="com.yp2012g4.blindroid.SpeakingClockActivity"
             android:label="@string/ClockTitle"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
-        <activity 
-            android:name="com.yp2012g4.blindroid.ColorSettingsActivity" 
+        <activity
+            android:name="com.yp2012g4.blindroid.ColorSettingsActivity"
             android:label="@string/title_activity_color_settings"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.QuickSMSActivity"
+            android:label="@string/title_activity_quick_sms" >
         </activity>
     </application>
 

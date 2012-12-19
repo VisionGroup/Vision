@@ -63,19 +63,29 @@ containing a value of this type.
         public static final int GreenBlack=0x7f080005;
         public static final int MainActivityView=0x7f080008;
         public static final int QuickDialActivity=0x7f080017;
+        public static final int QuickSMSActivity=0x7f080021;
         public static final int RedBlack=0x7f080003;
-        public static final int SOS_textview=0x7f080021;
-        public static final int Send_SOS_Message=0x7f080022;
+        public static final int SMS_number_1=0x7f080022;
+        public static final int SMS_number_2=0x7f080023;
+        public static final int SMS_number_3=0x7f080024;
+        public static final int SMS_number_4=0x7f080025;
+        public static final int SMS_number_5=0x7f080026;
+        public static final int SMS_number_6=0x7f080027;
+        public static final int SMS_number_7=0x7f080028;
+        public static final int SMS_number_8=0x7f080029;
+        public static final int SMS_number_9=0x7f08002a;
+        public static final int SOS_textview=0x7f08002b;
+        public static final int Send_SOS_Message=0x7f08002c;
         public static final int WhiteBlack=0x7f080001;
         public static final int WhiteBlue=0x7f080006;
         public static final int WhiteGreen=0x7f080004;
         public static final int WhiteRed=0x7f080002;
         public static final int alarm_clock_button=0x7f08000e;
-        public static final int analogClock1=0x7f080023;
+        public static final int analogClock1=0x7f08002d;
         public static final int back_button=0x7f080011;
         public static final int button_getBatteryStatus=0x7f080015;
         public static final int button_getReceptionStatus=0x7f080016;
-        public static final int menu_settings=0x7f080026;
+        public static final int menu_settings=0x7f080030;
         public static final int next_button=0x7f080013;
         public static final int phoneStatusActivity=0x7f080014;
         public static final int phone_status_button=0x7f08000c;
@@ -84,8 +94,8 @@ containing a value of this type.
         public static final int settings_button=0x7f080012;
         public static final int signal_button=0x7f08000d;
         public static final int sos_button=0x7f080009;
-        public static final int textView1=0x7f080024;
-        public static final int textView2=0x7f080025;
+        public static final int textView1=0x7f08002e;
+        public static final int textView2=0x7f08002f;
         public static final int time_button=0x7f08000a;
         public static final int where_am_i_button=0x7f08000b;
     }
@@ -94,13 +104,15 @@ containing a value of this type.
         public static final int activity_main=0x7f030001;
         public static final int activity_phone_status=0x7f030002;
         public static final int activity_quick_dial=0x7f030003;
-        public static final int activity_sos=0x7f030004;
-        public static final int activity_speaking_clock=0x7f030005;
+        public static final int activity_quick_sms=0x7f030004;
+        public static final int activity_sos=0x7f030005;
+        public static final int activity_speaking_clock=0x7f030006;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
         public static final int activity_quick_dial=0x7f070001;
-        public static final int activity_sos=0x7f070002;
+        public static final int activity_quick_sms=0x7f070002;
+        public static final int activity_sos=0x7f070003;
     }
     public static final class string {
         public static final int BlueBlack=0x7f040029;
@@ -116,6 +128,15 @@ containing a value of this type.
         public static final int Contact_number_9=0x7f040016;
         public static final int GreenBlack=0x7f040027;
         public static final int RedBlack=0x7f040026;
+        public static final int SMS_number_1=0x7f04002c;
+        public static final int SMS_number_2=0x7f04002d;
+        public static final int SMS_number_3=0x7f04002e;
+        public static final int SMS_number_4=0x7f04002f;
+        public static final int SMS_number_5=0x7f040030;
+        public static final int SMS_number_6=0x7f040031;
+        public static final int SMS_number_7=0x7f040032;
+        public static final int SMS_number_8=0x7f040033;
+        public static final int SMS_number_9=0x7f040034;
         public static final int WhiteBlack=0x7f040024;
         public static final int WhiteBlue=0x7f04002a;
         public static final int WhiteGreen=0x7f040028;
@@ -124,7 +145,6 @@ containing a value of this type.
         public static final int app_name=0x7f040000;
         public static final int back_button=0x7f040021;
         public static final int emptyHour=0x7f040020;
-        public static final int hello_world=0x7f04000a;
         public static final int menu_settings=0x7f040001;
         public static final int next_button=0x7f040022;
         public static final int phoneStatus_button_getBatteryStatus=0x7f040017;
@@ -145,6 +165,7 @@ containing a value of this type.
         public static final int title_activity_color_settings=0x7f04002b;
         public static final int title_activity_phone_status=0x7f04001e;
         public static final int title_activity_quick_dial=0x7f04000d;
+        public static final int title_activity_quick_sms=0x7f04000a;
         public static final int title_activity_sos=0x7f04000b;
         public static final int where_am_i_button=0x7f040004;
     }

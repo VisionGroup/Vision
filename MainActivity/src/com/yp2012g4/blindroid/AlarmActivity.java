@@ -1,4 +1,5 @@
 package com.yp2012g4.blindroid;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -49,7 +50,7 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
         if (AlarmService.mp != null)
-        	AlarmService.mp.stop();
+          AlarmService.mp.stop();
         alarmIsSet = false;
         // Tell the user about what we did.
         Toast.makeText(AlarmActivity.this, "Alarm is Canceled", Toast.LENGTH_LONG).show();
@@ -126,9 +127,7 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
       alarmTime.roll(Calendar.DAY_OF_MONTH, true);
     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
-    String ampm = alarmTime.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-    Integer h = alarmTime.get(Calendar.HOUR) == 0 ? 12 : alarmTime.get(Calendar.HOUR);
-    String s = "Alarm is set to  " + h + " " + ampm + " and " + alarmTime.get(Calendar.MINUTE) + " minutes";
+    String s = "Alarm is set to  " + SpeakingClockActivity.parseTime(alarmTime);
     Toast.makeText(AlarmActivity.this, s, Toast.LENGTH_LONG).show();
     speakOut(s);
   }

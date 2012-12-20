@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -222,7 +223,11 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			// + rect.bottom);
 			return;
 		}
+		Log.i("MyLog" , "getButtons: " + ((ViewGroup)v).getContext() + " --- "+((ViewGroup)v).getClass().getSimpleName());
 		ViewGroup vg = (ViewGroup) v;
+		if (vg instanceof TimePicker){ //TODO check how to handle TimePicker...
+			return;
+		}
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			getButtonsPosition(vg.getChildAt(i));
 		}

@@ -1,21 +1,19 @@
 package com.yp2012g4.blindroid;
 import java.util.Calendar;
-import java.util.Locale;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class AlarmActivity extends Activity implements TextToSpeech.OnInitListener {
-  public TextToSpeech tts;
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+
+public class AlarmActivity extends onTouchEventClass {
   public static PendingIntent pendingIntent;
   public static boolean alarmIsSet = false;
   private Integer lastHour = -1;
@@ -28,9 +26,9 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
     tts = new TextToSpeech(this, this);
-    Button buttonStart = (Button) findViewById(R.id.startalarm);
-    Button buttonCancel = (Button) findViewById(R.id.cancelalarm);
-    buttonStart.setOnClickListener(new Button.OnClickListener() {
+    TalkingButton buttonStart = (TalkingButton) findViewById(R.id.startalarm);
+    TalkingButton buttonCancel = (TalkingButton) findViewById(R.id.cancelalarm);
+    buttonStart.setOnClickListener(new TalkingButton.OnClickListener() {
       @Override
       public void onClick(View arg0) {
         Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);
@@ -41,7 +39,9 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
         setAlarm(hour, min);
       }
     });
-    buttonCancel.setOnClickListener(new Button.OnClickListener() {
+    buttonStart.setOnTouchListener(this);
+    
+    buttonCancel.setOnClickListener(new TalkingButton.OnClickListener() {
       @Override
       public void onClick(View arg0) {
         if (!alarmIsSet)
@@ -56,6 +56,8 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
         speakOut("Alarm is Canceled");
       }
     });
+    buttonCancel.setOnTouchListener(this);
+    
     TimePicker tp = (TimePicker) findViewById(R.id.timePicker1);
     lastHour = tp.getCurrentHour();
     lastMin = tp.getCurrentMinute();
@@ -82,27 +84,6 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
     });
   }
   
-  @Override
-  public void onDestroy() {
-    if (tts != null) {
-      tts.stop();
-      tts.shutdown();
-    }
-    super.onDestroy();
-  }
-  
-  @Override
-  public void onInit(int status) {
-    if (status == TextToSpeech.SUCCESS) {
-      int r = tts.setLanguage(Locale.US);
-      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
-        Log.e("tts", "error setLanguage");
-        return;
-      }
-      return;
-    }
-    Log.e("tts", "error init language");
-  }
   
   /**
    * set the alarm to hour:min
@@ -132,8 +113,13 @@ public class AlarmActivity extends Activity implements TextToSpeech.OnInitListen
     Toast.makeText(AlarmActivity.this, s, Toast.LENGTH_LONG).show();
     speakOut(s);
   }
+
   
-  public void speakOut(String s) {
-    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-  }
+  @Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		ViewGroup alarmView = (ViewGroup) findViewById(R.id.AlarmActivity);
+		getButtonsPosition(alarmView);
+	}
+
 }

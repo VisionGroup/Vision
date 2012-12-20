@@ -3,7 +3,6 @@ package com.yp2012g4.blindroid;
 import java.util.Calendar;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -14,7 +13,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
-public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener {
+public class AlarmPopup extends onTouchEventClass{
   static public MediaPlayer mp = null;
   private AlertDialog ad;
   public TextToSpeech tts;

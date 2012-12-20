@@ -135,6 +135,8 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	    break;
 	case R.id.alarm_clock_button:
 	    speakOut("Alarm clock");
+	    intent = new Intent(MainActivity.this, AlarmActivity.class);
+	    startActivity(intent);
 	    break;
 	case R.id.quick_dial_button:
 	    speakOut("Quick dial");

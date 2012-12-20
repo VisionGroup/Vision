@@ -59,6 +59,19 @@
             android:name="com.yp2012g4.blindroid.QuickSMSActivity"
             android:label="@string/title_activity_quick_sms" >
         </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.AlarmActivity"
+            android:label="@string/title_activity_alarm" 
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:name="com.yp2012g4.blindroid.AlarmPopup" 
+            android:theme="@android:style/Theme.Translucent" 
+            android:screenOrientation="portrait">
+            
+        </activity>
+        <service android:name="AlarmService"></service>
+     	
     </application>
 
 </manifest>

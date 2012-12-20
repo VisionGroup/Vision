@@ -45,8 +45,6 @@
     <string name="BlueBlack">Blue &amp; Black</string>
     <string name="WhiteBlue">White &amp; Blue</string>
     <string name="title_activity_color_settings">Color Settings</string>
-    
-    
     <string name="SMS_number_1">Will call you back</string>
     <string name="SMS_number_2">How are you?</string>
     <string name="SMS_number_3">Where have you been?</string>
@@ -56,6 +54,11 @@
     <string name="SMS_number_7">Where are you?</string>
     <string name="SMS_number_8">Do not have any more ideas</string>
     <string name="SMS_number_9">Bla Bla Bla</string>
-    
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_alarm">AlarmActivity</string>
+    <string name="turn_off">turn off</string>
+    <string name="snooze_time">1</string>
+    <string name="startAlarm">Start Alarm</string>
+    <string name="stopAlarm">Stop Alarm</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -16,7 +15,7 @@ import android.util.Log;
 public class AlarmPopup extends onTouchEventClass{
   static public MediaPlayer mp = null;
   private AlertDialog ad;
-  public TextToSpeech tts;
+//  public TextToSpeech tts;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,27 +25,27 @@ public class AlarmPopup extends onTouchEventClass{
     soundAlarm();
   }
   
-  @Override
-  public void onDestroy() {
-    if (tts != null) {
-      tts.stop();
-      tts.shutdown();
-    }
-    super.onDestroy();
-  }
+//  @Override
+//  public void onDestroy() {
+//    if (tts != null) {
+//      tts.stop();
+//      tts.shutdown();
+//    }
+//    super.onDestroy();
+//  }
   
-  @Override
-  public void onInit(int status) {
-    if (status == TextToSpeech.SUCCESS) {
-      int r = tts.setLanguage(Locale.US);
-      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
-        Log.e("tts", "error setLanguage");
-        return;
-      }
-      return;
-    }
-    Log.e("tts", "error init language");
-  }
+//  @Override
+//  public void onInit(int status) {
+//    if (status == TextToSpeech.SUCCESS) {
+//      int r = tts.setLanguage(Locale.US);
+//      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
+//        Log.e("tts", "error setLanguage");
+//        return;
+//      }
+//      return;
+//    }
+//    Log.e("tts", "error init language");
+//  }
   
   private void setDialog() {
     ad = new AlertDialog.Builder(this).create();
@@ -107,8 +106,8 @@ public class AlarmPopup extends onTouchEventClass{
     });
   }
   
-  public void speakOut(String s) {
-    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-  }
+//  public void speakOut(String s) {
+//    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+//  }
   
 }

@@ -12,7 +12,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteBlack"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
@@ -27,7 +27,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteRed"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/RED"
             android:text="@string/WhiteRed"
@@ -42,7 +42,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/RedBlack"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
@@ -57,7 +57,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteGreen"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
@@ -72,7 +72,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/GreenBlack"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
@@ -87,7 +87,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteBlue"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
@@ -102,12 +102,48 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/BlueBlack"
             android:layout_width="0dip"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"
             android:textColor="@color/BLUE"
             android:textSize="@android:dimen/app_icon_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         >
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/back_button"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:contentDescription="@string/back_button"
+            android:scaleType="fitStart"
+            android:src="@drawable/back_button" />
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:contentDescription="@string/settings_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/settings_button" />
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/next_button"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:contentDescription="@string/next_button"
+            android:scaleType="fitEnd"
+            android:src="@drawable/next_button" />
     </LinearLayout>
 
 </LinearLayout>

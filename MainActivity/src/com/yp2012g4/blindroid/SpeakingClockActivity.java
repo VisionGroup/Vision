@@ -4,17 +4,21 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AnalogClock;
 import android.widget.TextView;
 
-public class SpeakingClockActivity extends Activity implements TextToSpeech.OnInitListener {
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+
+public class SpeakingClockActivity extends onTouchEventClass implements OnClickListener {
   /**
    * @param cal
    *          - the Calendar you want to parse
@@ -27,13 +31,27 @@ public class SpeakingClockActivity extends Activity implements TextToSpeech.OnIn
     return s;
   }
   
-  private TextToSpeech tts;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     tts = new TextToSpeech(this, this);
+	mHandler = new Handler();
+
+    
+    back = (TalkingImageButton) findViewById(R.id.back_button);
+	back.setOnClickListener(this);
+	back.setOnTouchListener(this);
+
+	next = (TalkingImageButton) findViewById(R.id.settings_button);
+	next.setOnClickListener(this);
+	next.setOnTouchListener(this);
+
+	settings = (TalkingImageButton) findViewById(R.id.next_button);
+	settings.setOnClickListener(this);
+	settings.setOnTouchListener(this);  
+  
     Time today = new Time(Time.getCurrentTimezone());
     today.setToNow();
     TextView tvh = (TextView) findViewById(R.id.textView1);
@@ -65,14 +83,15 @@ public class SpeakingClockActivity extends Activity implements TextToSpeech.OnIn
     return true;
   }
   
-  @Override
-  public void onDestroy() {
-    if (tts != null) {
-      tts.stop();
-      tts.shutdown();
-    }
-    super.onDestroy();
-  }
+//  @Override
+//  public void onDestroy() {
+//    if (tts != null) {
+//      tts.stop();
+//      tts.shutdown();
+//    }
+//    super.onDestroy();
+//  }
+//  
   
   @Override
   public void onInit(int status) {
@@ -94,9 +113,29 @@ public class SpeakingClockActivity extends Activity implements TextToSpeech.OnIn
       speakOut(parseTime(cal));
     }
     super.onWindowFocusChanged(hasFocus);
+    ViewGroup speakingClockView = (ViewGroup) findViewById(R.id.SpeakingClockSctivity);
+	getButtonsPosition(speakingClockView);
   }
+
   
-  private void speakOut(String s) {
-    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-  }
+  @Override
+	public void onClick(View v) {
+		// Intent intent;
+		// speakOut(((Button) v).getText().toString());
+		switch (v.getId()) {
+		case R.id.back_button:
+			speakOut("Previous screen");
+			mHandler.postDelayed(mLaunchTask, 1000);
+			break;
+		case R.id.settings_button:
+			speakOut("Settings");
+			// intent = new Intent(MainActivity.this,
+			// ColorSettingsActivity.class);
+			// startActivity(intent);
+			break;
+		case R.id.next_button:
+			speakOut("Next screen");
+			break;
+		}
+	}
 }

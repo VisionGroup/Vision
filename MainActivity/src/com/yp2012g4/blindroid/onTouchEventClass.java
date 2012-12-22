@@ -7,13 +7,15 @@ import java.util.Map;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.AnalogClock;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
@@ -26,12 +28,16 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	protected TalkingButton tool_tip;
 	protected TalkingButton home_screen;
 	protected TalkingButton help;
-	protected TalkingButton back;
 	protected View prev_view;
 	protected View last_view;
 	protected View movedTo;
-	protected Drawable d;
+	Handler mHandler;
+
+//	protected Drawable d;
 	// protected OnDoubleTapListener l;
+	protected TalkingImageButton back;// = (TalkingImageButton) findViewById(R.id.back_button);
+	protected TalkingImageButton next;// = (TalkingImageButton) findViewById(R.id.next_button);
+	protected TalkingImageButton settings;// = (TalkingImageButton) findViewById(R.id.settings_button);
 
 	protected Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
 	protected Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
@@ -45,8 +51,9 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	 * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here"
 	 * ); startActivity (( button_to_intent .get( last_view ))); return false ;
 	 * } });
-	 */
-
+	 */ 
+	
+	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		float accurateX = getRelativeLeft(v) + event.getX();
@@ -223,11 +230,12 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			// + rect.bottom);
 			return;
 		}
-		Log.i("MyLog" , "getButtons: " + ((ViewGroup)v).getContext() + " --- "+((ViewGroup)v).getClass().getSimpleName());
-		ViewGroup vg = (ViewGroup) v;
-		if (vg instanceof TimePicker){ //TODO check how to handle TimePicker...
+//		Log.i("MyLog" , "getButtons: " + ((ViewGroup)v).getContext() + " --- "+((ViewGroup)v).getClass().getSimpleName());
+		else
+		if (v instanceof TimePicker || v instanceof AnalogClock || v instanceof TextView){ //TODO check how to handle TimePicker...
 			return;
 		}
+		ViewGroup vg = (ViewGroup) v;
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			getButtonsPosition(vg.getChildAt(i));
 		}
@@ -271,5 +279,13 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 		return null;
 
 	}
+	
+	
+	// will launch the activity
+	public Runnable mLaunchTask = new Runnable() {
+		public void run() {
+			finish();
+		}
+	};
 
 }

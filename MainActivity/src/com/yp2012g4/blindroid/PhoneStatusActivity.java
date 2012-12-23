@@ -11,11 +11,13 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
-public class PhoneStatusActivity extends onTouchEventClass {
+public class PhoneStatusActivity extends onTouchEventClass implements
+	OnClickListener {
     /**
      * Used to activate the onTouch button reading function.
      */
@@ -74,26 +76,12 @@ public class PhoneStatusActivity extends onTouchEventClass {
 		signalStrengthListener,
 		PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
 
-	TalkingButton b = (TalkingButton) findViewById(R.id.button_getBatteryStatus);
-	b.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
-		speakOut(((TalkingButton) v).getText().toString() + "is " + _battery
-			+ "% " + getChargeStatus(_status));
-	    }
-	});
+	// TODO: Change to Talking imagebutton
+	TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_getBatteryStatus);
+	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
-	b = (TalkingButton) findViewById(R.id.button_getReceptionStatus);
-	b.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
-
-		speakOut(((TalkingButton) v).getText().toString() + "is"
-			+ signalToPercent(_signal) + "%");
-		// TODO: Add signal status text (out of service...) and check on
-		// phone.
-	    }
-	});
+	b = (TalkingImageButton) findViewById(R.id.button_getReceptionStatus);
+	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
     }
 
@@ -111,6 +99,23 @@ public class PhoneStatusActivity extends onTouchEventClass {
 	default:
 	    return "";
 	}
+    }
+
+    @Override
+    public void onClick(View v) {
+	switch (v.getId()) {
+	case R.id.button_getBatteryStatus:
+	    speakOut(((TalkingImageButton) v).getReadText().toString() + "is "
+		    + _battery + "% " + getChargeStatus(_status));
+	    break;
+	case R.id.button_getReceptionStatus:
+	    speakOut(((TalkingImageButton) v).getReadText().toString() + "is"
+		    + signalToPercent(_signal) + "%");
+	    break;
+	default:
+	    break;
+	}
+
     }
 
 }

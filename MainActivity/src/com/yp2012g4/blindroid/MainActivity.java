@@ -14,15 +14,13 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
   /** Called when the activity is first created. */
   // private TextToSpeech tts;
   // private Rect rect;
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     // TODO: Add to every activity!! or to the new Activity intrerface Yaron
     // is making
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
     tts = new TextToSpeech(this, this);
-    speakOut(getResources().getString(R.string.welcome_message));
     TalkingImageButton b = (TalkingImageButton) findViewById(R.id.sos_button);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
@@ -58,10 +56,9 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
     settings.setOnTouchListener(this);
   }
   
-  @Override
-  public void onRestart() {
+  @Override public void onRestart() {
     super.onRestart();
-    DisplaySettingsApplication appState = ((DisplaySettingsApplication) getApplication());
+    DisplaySettingsApplication appState = (DisplaySettingsApplication) getApplication();
     appState.settings.applyButtonSettings(findViewById(R.id.sos_button));
     appState.settings.applyButtonSettings(findViewById(R.id.alarm_clock_button));
     appState.settings.applyButtonSettings(findViewById(R.id.back_button));
@@ -75,8 +72,7 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
     appState.settings.applyButtonSettings(findViewById(R.id.quick_sms_button));
   }
   
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     ViewGroup mainView = (ViewGroup) findViewById(R.id.MainActivityView);
     // Resources res = getResources();
@@ -88,8 +84,7 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
     getButtonsPosition(mainView);
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     Intent intent;
     // speakOut(((Button) v).getText().toString());
     switch (v.getId()) {
@@ -105,6 +100,8 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
         break;
       case R.id.where_am_i_button:
         speakOut("Where am I?");
+        intent = new Intent(MainActivity.this, WhereAmIActivity.class);
+        startActivity(intent);
         break;
       case R.id.phone_status_button:
         speakOut("Phone status");

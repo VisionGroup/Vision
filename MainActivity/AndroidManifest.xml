@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.yp2012g4.blindroid.DisplaySettingsApplication"
@@ -82,6 +84,7 @@
 
         <service android:name="AlarmService" >
         </service>
+        <activity android:label="@string/title_activity_where_am_i" android:name="com.yp2012g4.blindroid.WhereAmIActivity"></activity>
     </application>
 
 </manifest>

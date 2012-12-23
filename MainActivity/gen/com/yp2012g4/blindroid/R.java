@@ -126,7 +126,8 @@ containing a value of this type.
         public static final int activity_sos=0x7f030006;
         public static final int activity_speaking_clock=0x7f030007;
         public static final int activity_voice_note_recorder=0x7f030008;
-        public static final int control_bar_view=0x7f030009;
+        public static final int activity_where_am_i=0x7f030009;
+        public static final int control_bar_view=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_alarm=0x7f090000;
@@ -205,6 +206,7 @@ containing a value of this type.
         public static final int title_activity_quick_sms=0x7f06000b;
         public static final int title_activity_sos=0x7f06000d;
         public static final int title_activity_voice_note_recorder=0x7f060035;
+        public static final int title_activity_where_am_i=0x7f060049;
         public static final int turn_off=0x7f060045;
         public static final int voicenoterecorder_button_down=0x7f06003a;
         public static final int voicenoterecorder_button_play=0x7f060036;

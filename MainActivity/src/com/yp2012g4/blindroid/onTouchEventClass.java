@@ -5,29 +5,42 @@ import java.util.Locale;
 import java.util.Map;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.AnalogClock;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class onTouchEventClass extends Activity implements OnTouchListener,
 		TextToSpeech.OnInitListener {
 	protected Rect rect;
 	protected TextToSpeech tts;
-	protected Button tool_tip;
-	protected Button home_screen;
-	protected Button help;
-	protected Button back;
-	View prev_view;
-	View last_view;
-	View movedTo;;
-	protected Map<Button, Rect> button_to_rect = new HashMap<Button, Rect>();
-	protected Map<ImageButton, Rect> imageButton_to_rect = new HashMap<ImageButton, Rect>();
+	protected TalkingButton tool_tip;
+	protected TalkingButton home_screen;
+	protected TalkingButton help;
+	protected View prev_view;
+	protected View last_view;
+	protected View movedTo;
+	Handler mHandler;
+
+//	protected Drawable d;
+	// protected OnDoubleTapListener l;
+	protected TalkingImageButton back;// = (TalkingImageButton) findViewById(R.id.back_button);
+	protected TalkingImageButton next;// = (TalkingImageButton) findViewById(R.id.next_button);
+	protected TalkingImageButton settings;// = (TalkingImageButton) findViewById(R.id.settings_button);
+
+	protected Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+	protected Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
 
 	// protected Map<Button, Intent> button_to_intent = new HashMap<Button,
 	// Intent>();
@@ -38,8 +51,9 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	 * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here"
 	 * ); startActivity (( button_to_intent .get( last_view ))); return false ;
 	 * } });
-	 */
-
+	 */ 
+	
+	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		float accurateX = getRelativeLeft(v) + event.getX();
@@ -50,32 +64,54 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			// Log.i("MyLog", "accurateX = " + accurateX +
 			// "  -----  accurateY = " + accurateY);
 			prev_view = getView(accurateX, accurateY);
-
-			if (v instanceof Button) {
-				speakOut(((Button) v).getText().toString());
+			if (last_view != null && prev_view!=last_view){//if not first touch in activity 
+				last_view.setPressed(false);			   //and touching in different view
 			}
-			if (v instanceof ImageButton) {
-				speakOut(((ImageButton) v).getContentDescription().toString());
+			if (v instanceof TalkingButton) {
+				Log.i("MyLog" , "DOWN in Button");
+				speakOut(((TalkingButton) v).getText().toString());
+
+			}
+			if (v instanceof TalkingImageButton) {
+				Log.i("MyLog" , "DOWN in ImageButton");
+//				d = ((ImageButton) v).getDrawable();
+//				Log.i("MyLog", "the drawable is: " + d.toString());
+				((TalkingImageButton) v)
+						.setColorFilter(Color.argb(150, 255, 165, 0)); // or
+				speakOut(((TalkingImageButton) v).getContentDescription().toString());
+			}
+			else{ //we touched outside of any button...
+				Log.i("MyLog" , prev_view.getClass().getSimpleName());
 			}
 
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_MOVE) {
 			movedTo = getView(accurateX, accurateY /* v */);
-			if (movedTo instanceof Button) {
+			if (movedTo instanceof TalkingButton) {
 
 				Log.i("MyLog", "ON ACTION MOVE BUTTON");
-				for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
+				for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
 					if (entry.getValue().contains((int) accurateX,
 							(int) accurateY)) {
-						if ((prev_view != entry.getKey())
-								|| (prev_view instanceof ImageButton)) {
+						if (prev_view != entry.getKey()) {
+							if (prev_view instanceof TalkingImageButton){
+//								((ImageButton) prev_view).getBackground().set
+								((TalkingImageButton) prev_view).setColorFilter(Color
+										.argb(0, 255, 165, 0));
+							}
+							if (prev_view instanceof TalkingButton){
+//								((Button)prev_view).setFocusableInTouchMode(false);
+								((TalkingButton)prev_view).setPressed(false);
+							}
 							speakOut(entry.getKey().getText().toString());
+							((TalkingButton)entry.getKey()).getBackground().setAlpha((int)( 0.8 * 255));
+
 							// prev_view.setSelected(!prev_view.isSelected());
 							// prev_view.setPressed(false);
 
 							// entry.getKey().setSelected(!prev_view.isSelected());
-							// prev_view.setPressed(true);
+							entry.getKey().setPressed(true);
 							prev_view = entry.getKey();
 
 						}
@@ -83,14 +119,22 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 				}
 			}
 
-			else if (movedTo instanceof ImageButton) {
-				for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect
+			if (movedTo instanceof TalkingImageButton) {
+				for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect
 						.entrySet()) {
 					if (entry.getValue().contains((int) accurateX,
 							(int) accurateY)) {
-						if ((prev_view != entry.getKey())
-								|| (prev_view instanceof Button)) {
-
+						if (prev_view != entry.getKey()) {
+							if (prev_view instanceof TalkingButton){
+//								((TalkingButton)prev_view).getBackground().setAlpha((int)( 1.0 * 255));
+								((TalkingButton)prev_view).setPressed(false);
+							}
+							if (prev_view instanceof TalkingImageButton){
+//								((ImageButton) prev_view).setBackgroundDrawable(d)/*setColorFilter(Color
+//										.argb(0, 255, 165, 0))*/;
+								((TalkingImageButton)prev_view).setColorFilter(Color
+										.argb(0, 255, 165, 0));
+							}
 							speakOut(entry.getKey().getContentDescription()
 									.toString());
 							// prev_view.setSelected(!prev_view.isSelected());
@@ -98,16 +142,29 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 
 							// entry.getKey().setSelected(!prev_view.isSelected());
 							// prev_view.setPressed(true);
+							
+							entry.getKey().setColorFilter(
+									Color.argb(150, 255, 165, 0));
 							prev_view = entry.getKey();
 						}
 					}
 				}
 			}
+			else prev_view = getView(accurateX, accurateY);
 
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_UP) {
-			// last_view = getView(accurateX, accurateY, v);
+			last_view = getView(accurateX, accurateY);
+			if (last_view instanceof TalkingImageButton) {
+				((TalkingImageButton) last_view).setColorFilter(Color.argb(0, 255,
+						165, 0)); // or null
+
+			}
+			if (last_view instanceof TalkingButton){
+//				((TalkingButton)last_view).getBackground().setAlpha((int)( 1.0 * 255));
+//				((TalkingButton)last_view).setPressed(false);
+			}
 			// last_view.setSelected(false);
 			// last_view.setPressed(true);
 			// last_view.setClickable(false);
@@ -152,19 +209,19 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 		rect = new Rect(getRelativeLeft(v), getRelativeTop(v),
 				getRelativeLeft(v) + v.getWidth(), getRelativeTop(v)
 						+ v.getHeight());
-		if (v instanceof Button) {
+		if (v instanceof TalkingButton) {
 
 			// Construct a rect of the view's bounds
 
-			button_to_rect.put((Button) v, rect);
+			button_to_rect.put((TalkingButton) v, rect);
 			// Log.i("MyLog", "size = " + button_to_rect.size());
 			// Log.i("MyLog", "left= " + rect.left + "  ;  top = " + rect.top
 			// + "  ;  right = " + rect.right + "  ;  bottom = "
 			// + rect.bottom);
 			return;
 		}
-		if (v instanceof ImageButton) {
-			imageButton_to_rect.put((ImageButton) v, rect);
+		if (v instanceof TalkingImageButton) {
+			imageButton_to_rect.put((TalkingImageButton) v, rect);
 			// Log.i("MyLog", "size of imagebuttons = " +
 			// imageButton_to_rect.size());
 			// Log.i("MyLog", "ImageButton dimensions are: "+"left= " +
@@ -173,7 +230,11 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			// + rect.bottom);
 			return;
 		}
-
+//		Log.i("MyLog" , "getButtons: " + ((ViewGroup)v).getContext() + " --- "+((ViewGroup)v).getClass().getSimpleName());
+		else
+		if (v instanceof TimePicker || v instanceof AnalogClock || v instanceof TextView){ //TODO check how to handle TimePicker...
+			return;
+		}
 		ViewGroup vg = (ViewGroup) v;
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			getButtonsPosition(vg.getChildAt(i));
@@ -197,14 +258,14 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	}
 
 	private View getView(float x, float y) {
-		for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
+		for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
 			Log.i("MyLog", "Button:     Left = " + entry.getValue().left
 					+ "  ;  Top = " + entry.getValue().top);
 			if (entry.getValue().contains((int) x, (int) y)) {
-				return ((Button) entry.getKey());
+				return ((TalkingButton) entry.getKey());
 			}
 		}
-		for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect
+		for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect
 				.entrySet()) {
 			Log.i("MyLog", "ImageButton:     Left = " + entry.getValue().left
 					+ "  ;  Top = " + entry.getValue().top + "  ;  Right = "
@@ -212,11 +273,19 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 			Log.i("MyLog", "x = " + (int) x + "y = " + (int) y);
 
 			if (entry.getValue().contains((int) x, (int) y)) {
-				return ((ImageButton) entry.getKey());
+				return ((TalkingImageButton) entry.getKey());
 			}
 		}
 		return null;
 
 	}
+	
+	
+	// will launch the activity
+	public Runnable mLaunchTask = new Runnable() {
+		public void run() {
+			finish();
+		}
+	};
 
 }

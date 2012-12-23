@@ -1,27 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/phoneStatusActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PhoneStatus" 
-    android:id="@+id/phoneStatusActivity">
+    tools:context=".PhoneStatus" >
 
-        <Button
-            android:id="@+id/button_getBatteryStatus"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="10dp"
-            android:drawableTop="@drawable/battery_button"
-            android:gravity="center_vertical"
-            android:text="@string/phoneStatus_button_getBatteryStatus" />
+    <com.yp2012g4.blindroid.customUI.TalkingButton
+        android:id="@+id/button_getBatteryStatus"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:drawableTop="@drawable/battery_button"
+        android:gravity="center_vertical"
+        android:text="@string/phoneStatus_button_getBatteryStatus" />
 
-        <Button
-            android:id="@+id/button_getReceptionStatus"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/button_getBatteryStatus"
-            android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/signal_button"
-            android:text="@string/phoneStatus_button_getReceptionStatus" />
+    <com.yp2012g4.blindroid.customUI.TalkingButton
+        android:id="@+id/button_getReceptionStatus"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_getBatteryStatus"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/signal_button"
+        android:text="@string/phoneStatus_button_getReceptionStatus" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
+    </LinearLayout>
 
 </RelativeLayout>

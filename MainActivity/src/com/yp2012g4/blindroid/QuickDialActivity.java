@@ -7,14 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class QuickDialActivity extends onTouchEventClass implements
 		OnClickListener {
@@ -30,6 +32,8 @@ public class QuickDialActivity extends onTouchEventClass implements
 		telephone();
 		setContentView(R.layout.activity_quick_dial);
 		tts = new TextToSpeech(this, this);
+		mHandler = new Handler();
+
 		// String phoneNumber = null;
 		// int i = 0;
 		// LinearLayout mainView = (LinearLayout)
@@ -58,7 +62,7 @@ public class QuickDialActivity extends onTouchEventClass implements
 		 * (starred.moveToNext()) continue; else break; } } finally { //
 		 * Log.v(TAG, "In finally"); starred.close(); } }
 		 */
-		Button b = (Button) findViewById(R.id.Contact_number_1);
+		TalkingButton b = (TalkingButton) findViewById(R.id.Contact_number_1);
 		// if (list_of_phone_numbers.isEmpty()) { // if no favorite contacts -
 		// make
 		// // button unclickable
@@ -67,49 +71,49 @@ public class QuickDialActivity extends onTouchEventClass implements
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_2);
+		b = (TalkingButton) findViewById(R.id.Contact_number_2);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_3);
+		b = (TalkingButton) findViewById(R.id.Contact_number_3);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_4);
+		b = (TalkingButton) findViewById(R.id.Contact_number_4);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_5);
+		b = (TalkingButton) findViewById(R.id.Contact_number_5);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_6);
+		b = (TalkingButton) findViewById(R.id.Contact_number_6);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_7);
+		b = (TalkingButton) findViewById(R.id.Contact_number_7);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_8);
+		b = (TalkingButton) findViewById(R.id.Contact_number_8);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (Button) findViewById(R.id.Contact_number_9);
+		b = (TalkingButton) findViewById(R.id.Contact_number_9);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		ImageButton ib = (ImageButton) findViewById(R.id.next_button);
-		ib.setOnClickListener(this);
-		ib.setOnTouchListener(this);
+		back = (TalkingImageButton) findViewById(R.id.back_button);
+		back.setOnClickListener(this);
+		back.setOnTouchListener(this);
 
-		ib = (ImageButton) findViewById(R.id.settings_button);
-		ib.setOnClickListener(this);
-		ib.setOnTouchListener(this);
+		next = (TalkingImageButton) findViewById(R.id.settings_button);
+		next.setOnClickListener(this);
+		next.setOnTouchListener(this);
 
-		ib = (ImageButton) findViewById(R.id.back_button);
-		ib.setOnClickListener(this);
-		ib.setOnTouchListener(this);
+		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings.setOnClickListener(this);
+		settings.setOnTouchListener(this);
 	}
 
 	private void telephone() {
@@ -163,17 +167,13 @@ public class QuickDialActivity extends onTouchEventClass implements
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		ViewGroup quickDialView = (ViewGroup) findViewById(R.id.QuickDialActivity);
-		// Resources res = getResources();
-		// XmlResourceParser parser = res.getXml(R.layout.activity_quick_dial);
-		// getButtonsPosition(quickDialView, parser);
-		// InputStream inputStream =
-		// getResources().openRawResource(R.layout.activity_main);
 		getButtonsPosition(quickDialView);
 	}
 
 	public void onClick(View v) {
-		if (v instanceof Button) {
-			speakOut("Dialing to" + ((Button) v).getText().toString());
+		if (v instanceof TalkingButton) {
+			speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
+			mHandler.postDelayed(mLaunchTask, 1000);
 			switch (v.getId()) {
 			case R.id.Contact_number_1:
 				phoneCall("0524484993");
@@ -203,17 +203,17 @@ public class QuickDialActivity extends onTouchEventClass implements
 				break;
 			}
 		}
-		if (v instanceof ImageButton) {
+		if (v instanceof TalkingImageButton) {
 			switch (v.getId()) {
 			case R.id.next_button:
-				speakOut("Next");
+				speakOut("Next screen");
 				break;
 			case R.id.settings_button:
 				speakOut("Settings");
 				break;
 			case R.id.back_button:
-				speakOut("Back");
-				finish();
+				speakOut("Previous screen");
+				mHandler.postDelayed(mLaunchTask, 1000);
 				break;
 			}
 		}

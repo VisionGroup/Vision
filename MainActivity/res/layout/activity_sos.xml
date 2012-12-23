@@ -15,5 +15,13 @@
         android:scaleType="fitCenter"
         android:src="@drawable/sos_pic" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+		<include layout="@layout/control_bar_view"/>
+  
+    </LinearLayout>
 
 </RelativeLayout>

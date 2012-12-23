@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class ColorSettingsActivity extends onTouchEventClass implements
 		OnClickListener {
@@ -27,6 +28,7 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 
 		setContentView(R.layout.activity_color_settings);
 		tts = new TextToSpeech(this, this);
+		mHandler = new Handler();
 
 		TalkingButton b = (TalkingButton)findViewById(R.id.WhiteBlack);
 		b.setOnClickListener(this);
@@ -55,6 +57,18 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 		b = (TalkingButton)findViewById(R.id.BlueBlack);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
+		
+		back = (TalkingImageButton) findViewById(R.id.back_button);
+		back.setOnClickListener(this);
+		back.setOnTouchListener(this);
+
+		next = (TalkingImageButton) findViewById(R.id.settings_button);
+		next.setOnClickListener(this);
+		next.setOnTouchListener(this);
+
+		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings.setOnClickListener(this);
+		settings.setOnTouchListener(this);
 	}
 
 
@@ -96,6 +110,18 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 			break;
 		case R.id.BlueBlack:
 			changeSettings(R.color.BLUE, R.color.BLACK);
+			break;
+		case R.id.back_button:
+			speakOut("Previous screen");
+			break;
+		case R.id.settings_button:
+			speakOut("Settings");
+			// intent = new Intent(MainActivity.this,
+			// ColorSettingsActivity.class);
+			// startActivity(intent);
+			break;
+		case R.id.next_button:
+			speakOut("Next screen");
 			break;
 		}
 		 mHandler.postDelayed(mLaunchTask,1000);

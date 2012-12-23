@@ -84,7 +84,7 @@
 
         <service android:name="AlarmService" >
         </service>
-        <activity android:label="@string/title_activity_where_am_i" android:name="WhereAmIActivity"></activity>
+        <activity android:label="@string/title_activity_where_am_i" android:name="com.yp2012g4.blindroid.WhereAmIActivity"></activity>
     </application>
 
 </manifest>

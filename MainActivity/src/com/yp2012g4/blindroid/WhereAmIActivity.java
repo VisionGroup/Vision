@@ -23,9 +23,11 @@ public class WhereAmIActivity extends Activity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
-    
+    log("WhereAmIActivity::onCreate");
     LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    log("Got location manager");
     LocationFinder f = new LocationFinder(manager);
+    log("Got location finder");
     LocationHandler h = new LocationHandler() {
       @Override public void handleLocation(double longitude, double latitude, String provider, List<Address> addresses) {
         log("longitude = " + longitude + "\n");
@@ -38,7 +40,9 @@ public class WhereAmIActivity extends Activity {
         }
       }
     };
+    log("Got location handler");
     f.run(h, true, true, this);
+    log("Now running");
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

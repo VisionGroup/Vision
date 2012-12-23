@@ -5,16 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".DisplayMessageActivity" >
 
-    <com.yp2012g4.blindroid.customUI.TalkingImageButton
-        android:id="@+id/Send_SOS_Message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@string/send_SOS_message"
-        android:scaleType="fitCenter"
-        android:src="@drawable/sos_pic" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

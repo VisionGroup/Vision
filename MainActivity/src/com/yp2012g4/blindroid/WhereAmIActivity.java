@@ -22,7 +22,8 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
 public class WhereAmIActivity extends Activity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-//    setContentView(R.layout.); // TODO
+    setContentView(R.layout.activity_where_am_i);
+    
     LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     LocationFinder f = new LocationFinder(manager);
     LocationHandler h = new LocationHandler() {

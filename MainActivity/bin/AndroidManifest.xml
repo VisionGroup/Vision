@@ -84,6 +84,7 @@
 
         <service android:name="AlarmService" >
         </service>
+        <activity android:label="@string/title_activity_where_am_i" android:name="WhereAmIActivity"></activity>
     </application>
 
 </manifest>

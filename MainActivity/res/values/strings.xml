@@ -11,6 +11,7 @@
     <string name="alarm_clock_button">Alarm clock</string>
     <string name="quick_dial_button">Quick dial</string>
     <string name="quick_sms_button">Quick SMS</string>
+    <string name="title_activity_quick_sms">QuickSMSActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
     <string name="send_SOS_message">Send SOS</string>
@@ -51,6 +52,20 @@
     <string name="voicenoterecorder_button_record">Record</string>
     <string name="voicenoterecorder_button_up">Previous</string>
     <string name="voicenoterecorder_button_down">Next</string>
+    <string name="SMS_number_1">Will call you back</string>
+    <string name="SMS_number_2">How are you?</string>
+    <string name="SMS_number_3">Where have you been?</string>
+    <string name="SMS_number_4">I am going to sleep</string>
+    <string name="SMS_number_5">See you tomorrow</string>
+    <string name="SMS_number_6">Please feed my dog</string>
+    <string name="SMS_number_7">Where are you?</string>
+    <string name="SMS_number_8">Do not have any more ideas</string>
+    <string name="SMS_number_9">Bla Bla Bla</string>
+    <string name="title_activity_alarm">AlarmActivity</string>
+    <string name="turn_off">turn off</string>
+    <string name="snooze_time">1</string>
+    <string name="startAlarm">Start Alarm</string>
+    <string name="stopAlarm">Stop Alarm</string>
 
     
 

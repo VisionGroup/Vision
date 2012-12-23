@@ -64,6 +64,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.blindroid.MainActivity" />
         </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.QuickSMSActivity"
+            android:label="@string/title_activity_quick_sms"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.AlarmActivity"
+            android:label="@string/title_activity_alarm"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.AlarmPopup"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" >
+        </activity>
+
+        <service android:name="AlarmService" >
+        </service>
     </application>
 
 </manifest>

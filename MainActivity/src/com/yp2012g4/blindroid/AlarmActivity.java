@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -23,6 +22,10 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 	private Integer lastHour = -1;
 	private Integer lastMin = -1;
 	public static Calendar alarmTime = null;
+	
+  public int getViewId() {
+    return R.id.AlarmActivity;
+  }
 
 	/** Called when the activity is first created. */
 	@Override
@@ -40,7 +43,7 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 		next.setOnClickListener(this);
 		next.setOnTouchListener(this);
 
-		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings = (TalkingImageButton) findViewById(R.id.home_button);
 		settings.setOnClickListener(this);
 		settings.setOnTouchListener(this);
 
@@ -135,13 +138,6 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 	}
 
 	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		ViewGroup alarmView = (ViewGroup) findViewById(R.id.AlarmActivity);
-		getButtonsPosition(alarmView);
-	}
-
-	@Override
 	public void onClick(View v) {
 		// Intent intent;
 		// speakOut(((Button) v).getText().toString());
@@ -156,8 +152,8 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 			// ColorSettingsActivity.class);
 			// startActivity(intent);
 			break;
-		case R.id.next_button:
-			speakOut("Next screen");
+		case R.id.home_button:
+			speakOut("Home");
 			break;
 		}
 	}

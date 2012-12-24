@@ -13,7 +13,6 @@ import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -111,7 +110,7 @@ public class QuickDialActivity extends onTouchEventClass implements
 		next.setOnClickListener(this);
 		next.setOnTouchListener(this);
 
-		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings = (TalkingImageButton) findViewById(R.id.home_button);
 		settings.setOnClickListener(this);
 		settings.setOnTouchListener(this);
 	}
@@ -163,13 +162,6 @@ public class QuickDialActivity extends onTouchEventClass implements
 		return true;
 	}
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		ViewGroup quickDialView = (ViewGroup) findViewById(R.id.QuickDialActivity);
-		getButtonsPosition(quickDialView);
-	}
-
 	public void onClick(View v) {
 		if (v instanceof TalkingButton) {
 			speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
@@ -205,7 +197,7 @@ public class QuickDialActivity extends onTouchEventClass implements
 		}
 		if (v instanceof TalkingImageButton) {
 			switch (v.getId()) {
-			case R.id.next_button:
+			case R.id.home_button:
 				speakOut("Next screen");
 				break;
 			case R.id.settings_button:
@@ -227,5 +219,10 @@ public class QuickDialActivity extends onTouchEventClass implements
 		startActivity(call);
 
 	}
+
+  @Override
+  public int getViewId() {
+    return R.id.QuickDialActivity;
+  }
 
 }

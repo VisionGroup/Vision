@@ -105,6 +105,11 @@ public class AlarmPopup extends onTouchEventClass{
       }
     });
   }
+
+  @Override
+  public int getViewId() {
+    return 0; //////////????????
+  }
   
 //  public void speakOut(String s) {
 //    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);

@@ -13,22 +13,12 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class PhoneStatusActivity extends onTouchEventClass implements
 		OnClickListener {
-	/**
-	 * Used to activate the onTouch button reading function.
-	 */
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		ViewGroup phoneStatusView = (ViewGroup) findViewById(R.id.phoneStatusActivity);
-		getButtonsPosition(phoneStatusView);
-	}
 
 	static final int MAX_SIGNAL = 31;
 	// private final PhoneStatus _phoneStatus = new PhoneStatus(this);
@@ -88,15 +78,15 @@ public class PhoneStatusActivity extends onTouchEventClass implements
 		next.setOnClickListener(this);
 		next.setOnTouchListener(this);
 
-		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings = (TalkingImageButton) findViewById(R.id.home_button);
 		settings.setOnClickListener(this);
 		settings.setOnTouchListener(this);
 
-		TalkingButton b = (TalkingButton) findViewById(R.id.button_getBatteryStatus);
+		TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_getBatteryStatus);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 
-		b = (TalkingButton) findViewById(R.id.button_getReceptionStatus);
+		b = (TalkingImageButton) findViewById(R.id.button_getReceptionStatus);
 		b.setOnClickListener(this);
 		b.setOnTouchListener(this);
 	}
@@ -135,7 +125,7 @@ public class PhoneStatusActivity extends onTouchEventClass implements
 		}
 		if (v instanceof TalkingImageButton) {
 			switch (v.getId()) {
-			case R.id.next_button:
+			case R.id.home_button:
 				speakOut("Next screen");
 				break;
 			case R.id.settings_button:
@@ -148,5 +138,10 @@ public class PhoneStatusActivity extends onTouchEventClass implements
 			}
 		}
 	}
+
+  @Override
+  public int getViewId() {
+    return R.id.phoneStatusActivity;
+  }
 
 }

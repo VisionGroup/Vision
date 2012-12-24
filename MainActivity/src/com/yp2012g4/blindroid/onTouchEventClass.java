@@ -21,7 +21,7 @@ import android.widget.TimePicker;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
-public class onTouchEventClass extends Activity implements OnTouchListener,
+public abstract class onTouchEventClass extends Activity implements OnTouchListener,
 		TextToSpeech.OnInitListener {
 	protected Rect rect;
 	protected TextToSpeech tts;
@@ -53,6 +53,19 @@ public class onTouchEventClass extends Activity implements OnTouchListener,
 	 * } });
 	 */ 
 	
+	@Override
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    ViewGroup mainView = (ViewGroup) findViewById(getViewId());
+    getButtonsPosition(mainView);
+    DisplaySettingsApplication appState = ((DisplaySettingsApplication) getApplication());
+    for (TalkingImageButton b : imageButton_to_rect.keySet())
+      appState.settings.applyButtonSettings((View)b);
+    for (TalkingButton b : button_to_rect.keySet())
+      appState.settings.applyButtonSettings((View)b);
+  }
+  
+	public abstract int getViewId();
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {

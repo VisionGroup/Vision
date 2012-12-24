@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class MainActivity extends onTouchEventClass implements OnClickListener {
@@ -40,7 +38,7 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (TalkingImageButton) findViewById(R.id.signal_button);
+	b = (TalkingImageButton) findViewById(R.id.phone_status_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
@@ -64,12 +62,12 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	next.setOnClickListener(this);
 	next.setOnTouchListener(this);
 
-	settings = (TalkingImageButton) findViewById(R.id.next_button);
+	settings = (TalkingImageButton) findViewById(R.id.home_button);
 	settings.setOnClickListener(this);
 	settings.setOnTouchListener(this);
     }
 
-    @Override
+   /* @Override
     public void onRestart() {
 	super.onRestart();
 
@@ -79,7 +77,7 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 		.applyButtonSettings(findViewById(R.id.alarm_clock_button));
 	appState.settings.applyButtonSettings(findViewById(R.id.back_button));
 	appState.settings.applyButtonSettings(findViewById(R.id.time_button));
-	appState.settings.applyButtonSettings(findViewById(R.id.signal_button));
+	appState.settings.applyButtonSettings(findViewById(R.id.phone_status_button));
 	appState.settings
 		.applyButtonSettings(findViewById(R.id.phone_status_button));
 	appState.settings.applyButtonSettings(findViewById(R.id.next_button));
@@ -92,19 +90,10 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	appState.settings
 		.applyButtonSettings(findViewById(R.id.quick_sms_button));
 
-    }
+    }*/
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-	super.onWindowFocusChanged(hasFocus);
-	ViewGroup mainView = (ViewGroup) findViewById(R.id.MainActivityView);
-	// Resources res = getResources();
-	// XmlResourceParser parser = res.getXml(R.layout.activity_main);
-	// getButtonsPosition(mainView, parser);
-	// InputStream inputStream =
-	// getResources().openRawResource(R.layout.activity_main);
-	// File file = new File(inputStream);
-	getButtonsPosition(mainView);
+    public int getViewId() {
+      return R.id.MainActivityView;
     }
 
 	@Override
@@ -130,9 +119,6 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 			intent = new Intent(MainActivity.this, PhoneStatusActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.signal_button:
-			speakOut("Signal");
-			break;
 		case R.id.alarm_clock_button:
 			speakOut("Alarm clock");
 			intent = new Intent(MainActivity.this, AlarmActivity.class);
@@ -156,8 +142,8 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 			intent = new Intent(MainActivity.this, ColorSettingsActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.next_button:
-			speakOut("Next screen");
+		case R.id.home_button:
+			speakOut("Home");
 			break;
 		}
 	}

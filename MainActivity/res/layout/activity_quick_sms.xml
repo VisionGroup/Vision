@@ -12,8 +12,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_1"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_1" />
     </LinearLayout>
 
@@ -24,8 +27,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_2"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_2" />
     </LinearLayout>
 
@@ -36,8 +42,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_3"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_3" />
     </LinearLayout>
 
@@ -48,8 +57,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_4"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_4" />
     </LinearLayout>
 
@@ -60,8 +72,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_5"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_5" />
     </LinearLayout>
 
@@ -72,8 +87,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_6"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_6" />
     </LinearLayout>
 
@@ -84,8 +102,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_7"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_7" />
     </LinearLayout>
 
@@ -96,8 +117,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_8"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_8" />
     </LinearLayout>
 
@@ -108,8 +132,11 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_9"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="49dip"
             android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:textColor="@color/WHITE"
+            android:scaleType="fitCenter"
             android:text="@string/SMS_number_9" />
     </LinearLayout>
 

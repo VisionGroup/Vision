@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.speech.tts.TextToSpeech;
@@ -14,13 +16,15 @@ import android.view.View;
 import android.widget.AnalogClock;
 import android.widget.TextView;
 
-public class SpeakingClockActivity extends Activity implements TextToSpeech.OnInitListener {
-	private TextToSpeech tts;
+public class SpeakingClockActivity extends BlindroidActivity implements TextToSpeech.OnInitListener {
+	//private TextToSpeech tts;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_speaking_clock);
-		tts = new TextToSpeech(this,this);
+		
+		init(this, 0, "Speaking Clock", "Speaking Clock tool Tip");
+		//tts = new TextToSpeech(this,this);
 		 
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
@@ -32,7 +36,7 @@ public class SpeakingClockActivity extends Activity implements TextToSpeech.OnIn
 			public void onClick(View v) {
 				Calendar cal = Calendar.getInstance();
 				String date = DateFormat.getDateInstance().format(cal.getTime());
-				speakOut(date);
+				_t.speak(date);
 			}
 		});
 					
@@ -41,7 +45,7 @@ public class SpeakingClockActivity extends Activity implements TextToSpeech.OnIn
 				@Override
 				public void onClick(View v) {
 					Calendar cal = Calendar.getInstance();
-					speakOut(DateFormat.getTimeInstance().format(cal.getTime()));
+					_t.speak(DateFormat.getTimeInstance().format(cal.getTime()));
 				}
 			});	
 		
@@ -56,28 +60,11 @@ public class SpeakingClockActivity extends Activity implements TextToSpeech.OnIn
 	
 	@Override
 	public void onDestroy(){
-		if (tts!= null){
-			tts.stop();
-			tts.shutdown();
-		}
 		super.onDestroy();
 	}
 	@Override
 	public void onInit(int status) {
-		if (status == TextToSpeech.SUCCESS){
-			int r = tts.setLanguage(Locale.US);
-			if (r==TextToSpeech.LANG_NOT_SUPPORTED || r==TextToSpeech.LANG_MISSING_DATA){
-				Log.e("tts","error setLanguage");
-				return;
-			}
-			return;
+
 		}
-		Log.e("tts","error init language");
-				
-		}
-	
-	private void speakOut(String s) {
-		tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-	}
 
 }

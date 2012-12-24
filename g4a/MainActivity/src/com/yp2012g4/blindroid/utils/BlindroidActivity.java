@@ -35,4 +35,5 @@ public class BlindroidActivity extends Activity {
 		_name = name;
 		_toolTip = toolTip;
 	}
+	
 }

@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class onTouchEventClass extends Activity implements OnTouchListener,
-		TextToSpeech.OnInitListener {
+public class onTouchEventClass extends Activity 
+			implements OnTouchListener,	TextToSpeech.OnInitListener {
 	protected Rect rect;
 	protected TextToSpeech tts;
 	protected Button tool_tip;

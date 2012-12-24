@@ -60,5 +60,7 @@
     <string name="snooze_time">1</string>
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
-
+    <string name="title_activity_talking_sms">TalkingSMS</string>
+    <string name="title_activity_talking_list">TalkingList</string>
+    <string name="title_activity_talking_sms_list">TalkingSmsList</string>
 </resources>

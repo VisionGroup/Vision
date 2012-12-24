@@ -9,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.customUI.TalkingList;
+import com.yp2012g4.blindroid.customUI.TalkingSmsList;
 
 public class MainActivity extends onTouchEventClass implements OnClickListener {
     /** Called when the activity is first created. */
@@ -157,7 +159,9 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	    startActivity(intent);
 	    break;
 	case R.id.next_button:
-	    speakOut("Next screen");
+		speakOut("Talking SMS List");
+	    intent = new Intent(MainActivity.this, TalkingSmsList.class);
+	    startActivity(intent);
 	    break;
 	}
     }

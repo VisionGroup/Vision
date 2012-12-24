@@ -17,7 +17,7 @@ public class SmsAdapter extends BaseAdapter {
 	private ArrayList<SmsType> _data;
 	Context _c;
 
-	SmsAdapter(ArrayList<SmsType> data, Context c) {
+	public SmsAdapter(ArrayList<SmsType> data, Context c) {
 		_data = data;
 		_c = c;
 	}

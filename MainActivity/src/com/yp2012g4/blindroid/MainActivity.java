@@ -135,7 +135,9 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
         startActivity(intent);
         break;
       case R.id.next_button:
-        speakOut("Next screen");
+        speakOut("Read SMS");
+        intent = new Intent(MainActivity.this, TalkingSmsList.class);
+        startActivity(intent);
         break;
     }
   }

@@ -15,8 +15,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="com.yp2012g4.blindroid.DisplaySettingsApplication"
@@ -82,28 +82,22 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" >
         </activity>
-
-        <service android:name="AlarmService" >
-        </service>
-        <activity android:label="@string/title_activity_where_am_i" android:name="com.yp2012g4.blindroid.WhereAmIActivity"></activity>
-
-        <service android:name="com.yp2012g4.blindroid.AlarmService" >
-        </service>
-
         <activity
-            android:name="com.yp2012g4.blindroid.customUI.TalkingList"
-            android:label="@string/title_activity_talking_list" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.blindroid.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.yp2012g4.blindroid.customUI.TalkingSmsList"
+            android:name="com.yp2012g4.blindroid.TalkingSmsList"
             android:label="@string/title_activity_talking_sms_list" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.blindroid.MainActivity" />
         </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.WhereAmIActivity"
+            android:label="@string/title_activity_where_am_i" >
+        </activity>
+
+        <service android:name="AlarmService" >
+        </service>
+        <service android:name="com.yp2012g4.blindroid.AlarmService" >
+        </service>
     </application>
 
 </manifest>

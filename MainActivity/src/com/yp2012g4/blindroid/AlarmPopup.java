@@ -1,9 +1,7 @@
 package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
-import java.util.Locale;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -14,10 +12,9 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
-public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener {
+public class AlarmPopup extends onTouchEventClass{
   static public MediaPlayer mp = null;
   private AlertDialog ad;
-  public TextToSpeech tts;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -25,28 +22,6 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     tts = new TextToSpeech(this, this);
     setDialog();
     soundAlarm();
-  }
-  
-  @Override
-  public void onDestroy() {
-    if (tts != null) {
-      tts.stop();
-      tts.shutdown();
-    }
-    super.onDestroy();
-  }
-  
-  @Override
-  public void onInit(int status) {
-    if (status == TextToSpeech.SUCCESS) {
-      int r = tts.setLanguage(Locale.US);
-      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
-        Log.e("tts", "error setLanguage");
-        return;
-      }
-      return;
-    }
-    Log.e("tts", "error init language");
   }
   
   private void setDialog() {
@@ -81,7 +56,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     mp.start();
     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
       @Override
-      public void onCompletion(MediaPlayer mp) {
+      public void onCompletion(MediaPlayer mpc) {
         ad.cancel();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent myIntent = new Intent(AlarmPopup.this, AlarmService.class);
@@ -89,9 +64,9 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         String snooze = getResources().getString(R.string.snooze_time);
-        Integer snoozeTime = 5;
+        int snoozeTime = 5;
         try {
-          snoozeTime = Integer.parseInt(snooze);
+          snoozeTime = Integer.valueOf(snooze).intValue();
         } catch (NumberFormatException e) {
           Log.e("amir", "exception in parseInt!!! with " + snooze);
         }
@@ -102,14 +77,11 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
         AlarmActivity.alarmTime = calendar;
         speakOut("snooze for " + snooze + "minutes");
         while (tts.isSpeaking()) {
+          // Wait for message to finish playing and then finish the activity
         }
         finish();
       }
     });
-  }
-  
-  public void speakOut(String s) {
-    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
   }
   
 }

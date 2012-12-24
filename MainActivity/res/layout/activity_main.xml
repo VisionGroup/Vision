@@ -110,35 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/back_button"
-            android:layout_width="0dip"
-            android:layout_height="50dip"
-            android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:contentDescription="@string/back_button"
-            android:scaleType="fitStart"
-            android:src="@drawable/back_button" />
-
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/settings_button"
-            android:layout_width="0dip"
-            android:layout_height="50dip"
-            android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:contentDescription="@string/settings_button"
-            android:scaleType="fitCenter"
-            android:src="@drawable/settings_button" />
-
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/next_button"
-            android:layout_width="0dip"
-            android:layout_height="50dip"
-            android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:contentDescription="@string/next_button"
-            android:scaleType="fitEnd"
-            android:src="@drawable/next_button" />
+        <include layout="@layout/control_bar_view" />
     </LinearLayout>
 
 </LinearLayout>

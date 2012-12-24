@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Amit: This is the place to declare the new attributes for a new view you 
+have created. -->
+
 <resources>
   <declare-styleable name="TalkingImageButton">
     <attr name="ReadText" format="string" />
     <attr name="ReadToolTip" format="string" />
-    
+  </declare-styleable>
+  <declare-styleable name="TalkingButton">
+    <attr name="ReadText" />
+    <attr name="ReadToolTip" />
   </declare-styleable>
  
 </resources>

@@ -7,7 +7,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
 public class AlarmService extends Service {
@@ -40,7 +39,6 @@ public class AlarmService extends Service {
     if (AlarmActivity.alarmTime.before(maxTime) && AlarmActivity.alarmTime.after(minTime)) {
       Intent dialogIntent = new Intent(this, AlarmPopup.class);
       dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      Log.i("amir","before start");
       getApplication().startActivity(dialogIntent);
       AlarmActivity.alarmIsSet = false;
     }

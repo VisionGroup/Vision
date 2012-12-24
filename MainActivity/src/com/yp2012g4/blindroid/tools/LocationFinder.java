@@ -15,8 +15,8 @@ import android.util.Log;
 public class LocationFinder {
   List<LocationListener> listeners = null;
   LocationManager locationManager;
-  Context context;
   LocationHandler handler;
+  Geocoder coder = null;
   
   public LocationFinder(LocationManager newLocationManager) {
     locationManager = newLocationManager;
@@ -25,7 +25,7 @@ public class LocationFinder {
   
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork, Context con) {
     log("run");
-    context = con;
+    coder = new Geocoder(con);
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
@@ -54,14 +54,13 @@ public class LocationFinder {
     double latitude = location.getLatitude();
     double longitude = location.getLongitude();
     log("latitude = " + latitude + ", longitude = " + longitude);
-    Geocoder coder = new Geocoder(context);
+    if (coder == null)
+      log("Error in makeUseOfNewLocation: the coder was not initialised");
     List<Address> addresses = null;
     try {
       addresses = coder.getFromLocation(latitude, longitude, 1);
-      if (addresses.isEmpty()) {
+      if (addresses.isEmpty())
         log("No address returned");
-        return;
-      }
     } catch (Exception e) {
       log("Error in getFromLocation: " + e.getMessage());
       return;

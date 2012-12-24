@@ -1,27 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PhoneStatus" 
-    android:id="@+id/phoneStatusActivity">
+    android:id="@+id/phoneStatusActivity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".PhoneStatus" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/button_getBatteryStatus"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="10dp"
-            android:drawableTop="@drawable/battery_button"
-            android:gravity="center_vertical"
-            android:text="@string/phoneStatus_button_getBatteryStatus" />
+            android:layout_width="0dip"
+            android:layout_height="111dip"
+            android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:contentDescription="@string/phone_status_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/battery_button"
+            app:ReadText="@string/phoneStatus_button_getBatteryStatus_read" />
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/button_getReceptionStatus"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/button_getBatteryStatus"
-            android:layout_marginTop="20dp"
-            android:drawableTop="@drawable/signal_button"
-            android:text="@string/phoneStatus_button_getReceptionStatus" />
+            android:layout_width="0dip"
+            android:layout_height="111dip"
+            android:layout_weight="1"
+            android:background="@color/BLACK"
+            android:contentDescription="@string/signal_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/signal_button"
+            app:ReadText="@string/phoneStatus_button_getReceptionStatus_read" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

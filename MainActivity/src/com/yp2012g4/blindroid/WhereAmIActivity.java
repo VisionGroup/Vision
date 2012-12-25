@@ -73,7 +73,7 @@ public class WhereAmIActivity extends onTouchEventClass {
     Address a = addresses.get(0);
     for (int i = 0; i <= a.getMaxAddressLineIndex(); ++i)
       toSpeak += a.getAddressLine(i) + " ";
-    speakOut(toSpeak);
+    tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

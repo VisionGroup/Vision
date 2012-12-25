@@ -1,9 +1,7 @@
 package com.yp2012g4.blindroid.utils;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-
 import android.app.Activity;
 import android.graphics.Rect;
 import android.speech.tts.TextToSpeech;
@@ -18,7 +16,8 @@ import android.widget.ImageButton;
 public class onTouchEventClass extends Activity 
 			implements OnTouchListener,	TextToSpeech.OnInitListener {
 	protected Rect rect;
-	protected TextToSpeech tts;
+	//protected TextToSpeech tts;
+	protected TTS _t;
 	protected Button tool_tip;
 	protected Button home_screen;
 	protected Button help;
@@ -48,14 +47,10 @@ public class onTouchEventClass extends Activity
 		
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			prev_view = getView(accurateX, accurateY, v);
-			if (v instanceof Button) {
-				
+			if (v instanceof Button)
 				speakOut(((Button) v).getText().toString());
-			}
-			if (v instanceof ImageButton) {
+			if (v instanceof ImageButton) 
 				speakOut(((ImageButton) v).getContentDescription().toString());
-			}
-
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -113,33 +108,40 @@ public class onTouchEventClass extends Activity
 	}
 
 	public void speakOut(String s) {
-		tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+		//tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+		_t.speak(s);
 	}
 
 	@Override
 	public void onDestroy() {
-		if (tts != null) {
-			speakOut("stop");
-			tts.stop();
-			tts.shutdown();
-		}
+	  _t.shutdown();
+//		if (tts != null) {
+//			speakOut("stop");
+//			tts.stop();
+//			tts.shutdown();
+//		}
 		super.onDestroy();
 	}
 
 	@Override
 	public void onInit(int status) {
-		if (status == TextToSpeech.SUCCESS) {
-			int r = tts.setLanguage(Locale.US);
-			if (r == TextToSpeech.LANG_NOT_SUPPORTED
-					|| r == TextToSpeech.LANG_MISSING_DATA) {
-				Log.e("tts", "error setLanguage");
-				return;
-			}
-			speakOut("start");
-			return;
-		}
-		Log.e("tts", "error init language");
+//		if (status == TextToSpeech.SUCCESS) {
+//			int r = tts.setLanguage(Locale.US);
+//			if (r == TextToSpeech.LANG_NOT_SUPPORTED
+//					|| r == TextToSpeech.LANG_MISSING_DATA) {
+//				Log.e("tts", "error setLanguage");
+//				return;
+//			}
+//			speakOut("start");
+//			return;
+//		}
+//		Log.e("tts", "error init language");
 
+		_t = new TTS(this, this);
+		if (_t.isRuning())
+		  speakOut("start");
+		else
+		  Log.e("onTouchEventClass", "tts init error");
 	}
 
 	public void getButtonsPosition(View v) {
@@ -187,8 +189,7 @@ public class onTouchEventClass extends Activity
 		if (myView.getParent() == myView.getRootView()) {
 			return myView.getLeft();
 		} else
-			return (myView.getLeft() + getRelativeLeft((View) myView
-					.getParent()));
+			return (myView.getLeft() + getRelativeLeft((View) myView.getParent()));
 	}
 
 	private int getRelativeTop(View myView) {

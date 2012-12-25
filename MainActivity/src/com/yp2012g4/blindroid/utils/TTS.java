@@ -6,7 +6,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 public class TTS {
-	private static TextToSpeech _tts;
+	private TextToSpeech _tts;
 	private int _qm;
 	private Locale _language;
 	
@@ -18,6 +18,9 @@ public class TTS {
 		setLanguage(Locale.US);
 	}
 
+	public boolean isRuning(){
+	  return _tts==null ? false : true;
+	}
 	public void setQueueMode(int queueMode){
 		Log.e("TTS", "setQueueMode");
 		_qm=queueMode;
@@ -38,6 +41,7 @@ public class TTS {
 		Log.e("TTS", "shutdown");
 		stop();
 		_tts.shutdown();
+		_tts=null;
 	}
 	
 	

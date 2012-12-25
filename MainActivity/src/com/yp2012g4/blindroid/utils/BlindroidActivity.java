@@ -6,7 +6,6 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 
 public class BlindroidActivity extends onTouchEventClass {
 
-	protected TTS _t;
 	private int _icon;
 	private String _name;
 	private String _toolTip;
@@ -22,10 +21,6 @@ public class BlindroidActivity extends onTouchEventClass {
 	
 	@Override
 	public void onDestroy(){
-		if (_t!= null){
-			_t.stop();
-			_t.shutdown();
-		}
 		super.onDestroy();
 	}
 	

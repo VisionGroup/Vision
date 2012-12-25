@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid.tools;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.location.Address;
@@ -25,7 +26,7 @@ public class LocationFinder {
   
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork, Context con) {
     log("run");
-    coder = new Geocoder(con);
+    coder = new Geocoder(con, Locale.ENGLISH);
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";

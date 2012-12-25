@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.yp2012g4.blindroid.tools.LocationFinder;
 import com.yp2012g4.blindroid.tools.LocationHandler;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * 
@@ -23,7 +24,7 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
  * @author Olivier Hofman
  * 
  */
-public class WhereAmIActivity extends onTouchEventClass {
+public class WhereAmIActivity extends BlindroidActivity {
   Lock l = null;
   String lastProvider = "";
   Date lastUpdate = null;
@@ -46,7 +47,7 @@ public class WhereAmIActivity extends onTouchEventClass {
     f.run(h, true, true, this);
     log("Now running");
     l = new ReentrantLock();
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
   }
   
   void makeUseOfNewLocation(double longitude, double latitude, String provider, List<Address> addresses) {
@@ -78,7 +79,8 @@ public class WhereAmIActivity extends onTouchEventClass {
       toSpeak += a.getAddressLine(i) + " ";
     log("speaking out location: " + toSpeak + "\n");
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(toSpeak);
-    tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
+    speakOut(toSpeak);
+    //tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

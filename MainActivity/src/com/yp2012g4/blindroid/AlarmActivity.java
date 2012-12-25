@@ -20,13 +20,14 @@ import android.widget.Toast;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
-public class AlarmActivity extends onTouchEventClass implements OnClickListener {
+public class AlarmActivity extends com.yp2012g4.blindroid.utils.BlindroidActivity implements OnClickListener {
 	public static PendingIntent pendingIntent;
 	public static boolean alarmIsSet = false;
 	public int lastHour = -1;
 	public int lastMin = -1;
 	public static Calendar alarmTime = null;
 	
+  @Override
   public int getViewId() {
     return R.id.AlarmActivity;
   }
@@ -36,7 +37,6 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alarm);
-		tts = new TextToSpeech(this, this);
 		mHandler = new Handler();
 
 		back = (TalkingImageButton) findViewById(R.id.back_button);

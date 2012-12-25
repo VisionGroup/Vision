@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * This is the activity for viewing and hearing phone status (currently battery,
@@ -23,7 +24,7 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amit Yaffe
  * 
  */
-public class PhoneStatusActivity extends onTouchEventClass implements OnClickListener {
+public class PhoneStatusActivity extends BlindroidActivity implements OnClickListener {
   /**
    * Used to activate the onTouch button reading function.
    */
@@ -58,7 +59,7 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_phone_status);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     // Battery Broadcast receiver.
     BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
       @Override

@@ -7,6 +7,8 @@ package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
 
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
+
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -17,7 +19,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
-public class AlarmPopup extends onTouchEventClass{
+public class AlarmPopup extends BlindroidActivity{
   static public MediaPlayer mp = null;
   private AlertDialog ad;
   
@@ -27,7 +29,7 @@ public class AlarmPopup extends onTouchEventClass{
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     setDialog();
     soundAlarm();
   }
@@ -89,7 +91,7 @@ public class AlarmPopup extends onTouchEventClass{
         AlarmActivity.alarmIsSet = true;
         AlarmActivity.alarmTime = calendar;
         speakOut("snooze for " + snooze + "minutes");
-        while (tts.isSpeaking()) {
+        while (_t.isSpeaking()) {
           // Wait for message to finish playing and then finish the activity
         }
         finish();

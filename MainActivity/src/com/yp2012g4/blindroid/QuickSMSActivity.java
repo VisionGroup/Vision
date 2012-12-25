@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * This class is an activity that enables to send a quick SMS message
@@ -19,12 +20,12 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amir
  * @version 1.0
  */
-public class QuickSMSActivity extends onTouchEventClass implements OnClickListener {
+public class QuickSMSActivity extends BlindroidActivity implements OnClickListener {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     mHandler = new Handler();
     TalkingButton b = (TalkingButton) findViewById(R.id.SMS_number_1);
     b.setOnClickListener(this);

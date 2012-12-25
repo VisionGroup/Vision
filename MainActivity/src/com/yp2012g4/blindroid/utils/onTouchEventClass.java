@@ -1,31 +1,51 @@
 package com.yp2012g4.blindroid.utils;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.AnalogClock;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
-public class onTouchEventClass extends Activity 
-			implements OnTouchListener,	TextToSpeech.OnInitListener {
+import com.yp2012g4.blindroid.DisplaySettingsApplication;
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+
+
+public abstract class onTouchEventClass extends Activity implements OnTouchListener,
+		TextToSpeech.OnInitListener {
 	protected Rect rect;
 	//protected TextToSpeech tts;
-	protected TTS _t;
-	protected Button tool_tip;
-	protected Button home_screen;
-	protected Button help;
-	protected Button back;
-	View prev_view;
-	View last_view;
-	protected Map<Button, Rect> button_to_rect = new HashMap<Button, Rect>();
-	protected Map<ImageButton, Rect> imageButton_to_rect = new HashMap<ImageButton, Rect>();
+	
+	public TTS _t;
+	protected TalkingButton tool_tip;
+	protected TalkingButton home_screen;
+	protected TalkingButton help;
+	protected View prev_view;
+
+
+	protected View last_view;
+	protected View movedTo;
+	protected Handler mHandler;
+
+//	protected Drawable d;
+	// protected OnDoubleTapListener l;
+	protected TalkingImageButton back;// = (TalkingImageButton) findViewById(R.id.back_button);
+	protected TalkingImageButton next;// = (TalkingImageButton) findViewById(R.id.next_button);
+	protected TalkingImageButton settings;// = (TalkingImageButton) findViewById(R.id.settings_button);
+
+	protected Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+	protected Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
 
 	// protected Map<Button, Intent> button_to_intent = new HashMap<Button,
 	// Intent>();
@@ -36,189 +56,272 @@ public class onTouchEventClass extends Activity
 	 * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here"
 	 * ); startActivity (( button_to_intent .get( last_view ))); return false ;
 	 * } });
-	 */
-
+	 */ 
+	
+	@Override
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    ViewGroup mainView = (ViewGroup) findViewById(getViewId());
+    getButtonsPosition(mainView);
+    DisplaySettingsApplication appState = ((DisplaySettingsApplication) getApplication());
+    for (TalkingImageButton b : imageButton_to_rect.keySet())
+      appState.settings.applyButtonSettings(b);
+    for (TalkingButton b : button_to_rect.keySet())
+      appState.settings.applyButtonSettings(b);
+  }
+  
+	public abstract int getViewId();
+	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 
 		float accurateX = getRelativeLeft(v) + event.getX();
 		float accurateY = getRelativeTop(v) + event.getY();
-		
-		
+
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			prev_view = getView(accurateX, accurateY, v);
-			if (v instanceof Button)
-				speakOut(((Button) v).getText().toString());
-			if (v instanceof ImageButton) 
-				speakOut(((ImageButton) v).getContentDescription().toString());
-		}
 
-		if (event.getAction() == MotionEvent.ACTION_MOVE) {
-			if (v instanceof Button) {
-				for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
-					if (entry.getValue().contains((int) accurateX,
-							(int) accurateY)) {
-						if (prev_view != entry.getKey()) {
-							Log.i("MyLog", "WTFFFFFFF");
-							speakOut(entry.getKey().getText().toString());
-//							prev_view.setSelected(!prev_view.isSelected());
-							// prev_view.setPressed(false);
+			// Log.i("MyLog", "accurateX = " + accurateX +
+			// "    accurateY = " + accurateY);
 
-//							entry.getKey().setSelected(!prev_view.isSelected());
-							// prev_view.setPressed(true);
-							prev_view = entry.getKey();
-						}
-					}
-				}
+			prev_view = getView(accurateX, accurateY);
+			if (last_view != null && prev_view!=last_view){//if not first touch in activity 
+				last_view.setPressed(false);			   //and touching in different view
+
+
+
+
 			}
-			
-			if (v instanceof ImageButton) {
-				for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
-					if (entry.getValue().contains((int) accurateX,
-							(int) accurateY)) {
-//						Log.i("MyLog" , "HERE!!!!");
+			if (v instanceof TalkingButton) {
+				Log.i("MyLog" , "DOWN in Button");
+				speakOut(((TalkingButton) v).getText().toString());
 
-						if (prev_view != entry.getKey()) {
-							Log.i("MyLog" , "OUT OF BUTTON: "+ ((ImageButton)prev_view).getContentDescription().toString());
-
-							speakOut(entry.getKey().getContentDescription().toString());
-//							prev_view.setSelected(!prev_view.isSelected());
-							// prev_view.setPressed(false);
-
-//							entry.getKey().setSelected(!prev_view.isSelected());
-							// prev_view.setPressed(true);
-							prev_view = entry.getKey();
-						}
-					}
-				}
 			}
-			
-		}
+			if (v instanceof TalkingImageButton) {
+				Log.i("MyLog" , "DOWN in ImageButton");
+//				d = ((ImageButton) v).getDrawable();
+//				Log.i("MyLog", "the drawable is: " + d.toString());
+        ((TalkingImageButton) v).setColorFilter(Color.argb(150, 255, 165, 0)); // or
+        speakOut(((TalkingImageButton) v).getContentDescription().toString());
+      } else
+        Log.i("MyLog", prev_view.getClass().getSimpleName());
+    }
+    if (event.getAction() == MotionEvent.ACTION_MOVE) {
+      movedTo = getView(accurateX, accurateY /* v */);
+      if (movedTo instanceof TalkingButton) {
+        Log.i("MyLog", "ON ACTION MOVE BUTTON");
 
-		if (event.getAction() == MotionEvent.ACTION_UP) {
-			last_view = getView(accurateX, accurateY, v);
-			last_view.setSelected(false);
-			// last_view.setPressed(true);
-			// last_view.setClickable(false);
+        for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet())
+          if (entry.getValue().contains((int) accurateX, (int) accurateY))
 
-		}
-		// gestureDetector.setOnDoubleTapListener(this);
-		// return gestureDetector.onTouchEvent(event);
-		return false;
-	}
 
-	public void speakOut(String s) {
-		//tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-		_t.speak(s);
-	}
+            if (prev_view != entry.getKey()) {
+              if (prev_view instanceof TalkingImageButton)
+                // ((ImageButton) prev_view).getBackground().set
+                ((TalkingImageButton) prev_view).setColorFilter(Color.argb(0, 255, 165, 0));
+              if (prev_view instanceof TalkingButton)
+                // ((Button)prev_view).setFocusableInTouchMode(false);
+                ((TalkingButton) prev_view).setPressed(false);
 
-	@Override
-	public void onDestroy() {
-	  _t.shutdown();
-//		if (tts != null) {
-//			speakOut("stop");
-//			tts.stop();
-//			tts.shutdown();
-//		}
-		super.onDestroy();
-	}
+              speakOut(entry.getKey().getText().toString());
+              entry.getKey().getBackground().setAlpha((int) (0.8 * 255));
+              // prev_view.setSelected(!prev_view.isSelected());
+              // prev_view.setPressed(false);
 
-	@Override
-	public void onInit(int status) {
-//		if (status == TextToSpeech.SUCCESS) {
-//			int r = tts.setLanguage(Locale.US);
-//			if (r == TextToSpeech.LANG_NOT_SUPPORTED
-//					|| r == TextToSpeech.LANG_MISSING_DATA) {
-//				Log.e("tts", "error setLanguage");
-//				return;
-//			}
-//			speakOut("start");
-//			return;
-//		}
-//		Log.e("tts", "error init language");
+              // entry.getKey().setSelected(!prev_view.isSelected());
+              entry.getKey().setPressed(true);
+              prev_view = entry.getKey();
+            }
+      }
+      if (movedTo instanceof TalkingImageButton) {
 
-		_t = new TTS(this, this);
-		if (_t.isRuning())
-		  speakOut("start");
-		else
-		  Log.e("onTouchEventClass", "tts init error");
-	}
 
-	public void getButtonsPosition(View v) {
 
-		if (v instanceof Button) {
 
-			// Construct a rect of the view's bounds
-			rect = new Rect(getRelativeLeft(v), getRelativeTop(v),
-					getRelativeLeft(v) + v.getWidth(), getRelativeTop(v)
-							+ v.getHeight());
-			// list_of_x_coords.add(getRelativeLeft(v));
-			// list_of_y_coords.add(getRelativeTop(v));
-			// list_of_widths.add(getRelativeLeft(v) + v.getWidth());
-			// list_of_heights.add(getRelativeTop(v) + v.getHeight());
-			// list_of_buttons.add((Button) v);
-			// button_to_x.put((Button)v, getRelativeLeft(v));
-			// button_to_y.put((Button)v, getRelativeTop(v));
-			button_to_rect.put((Button) v, rect);
-			Log.i("MyLog", "size = " + button_to_rect.size());
-			Log.i("MyLog", "left= " + rect.left + "  ;  top = " + rect.top
-					+ "  ;  right = " + rect.right + "  ;  bottom = "
-					+ rect.bottom);
-			return;
-		}
-		if (v instanceof ImageButton) {
-			rect = new Rect(getRelativeLeft(v), getRelativeTop(v),
-					getRelativeLeft(v) + v.getWidth(), getRelativeTop(v)
-							+ v.getHeight());
-			imageButton_to_rect.put((ImageButton) v, rect);
-			Log.i("MyLog", "size of imagebuttons = " + imageButton_to_rect.size());
-			Log.i("MyLog", "Button: " + v.getId() +" dimensions are: "+"left= " + rect.left + "  ;  top = " + rect.top
-					+ "  ;  right = " + rect.right + "  ;  bottom = "
-					+ rect.bottom);
-			return;
-		}
+        for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet())
+          if (entry.getValue().contains((int) accurateX, (int) accurateY))
 
-		ViewGroup vg = (ViewGroup) v;
-		for (int i = 0; i < vg.getChildCount(); i++) {
-			getButtonsPosition(vg.getChildAt(i));
-		}
-		return;
-	}
 
-	private int getRelativeLeft(View myView) {
-		if (myView.getParent() == myView.getRootView()) {
-			return myView.getLeft();
-		} else
-			return (myView.getLeft() + getRelativeLeft((View) myView.getParent()));
-	}
 
-	private int getRelativeTop(View myView) {
-		if (myView.getParent() == myView.getRootView()) {
-			return myView.getTop();
-		} else
-			return (myView.getTop() + getRelativeTop((View) myView.getParent()));
-	}
 
-	private View getView(float x, float y, View v) {
-		if (v instanceof Button) {
-			for (Map.Entry<Button, Rect> entry : button_to_rect.entrySet()) {
-				if (entry.getValue().contains((int) x, (int) y)) {
-					return entry.getKey();
-				}
-			}
-		}
-		if (v instanceof ImageButton) {
-			Log.i("MyLog" , "ENTERE GETVIEW");
-			for (Map.Entry<ImageButton, Rect> entry : imageButton_to_rect
-					.entrySet()) {
-				if (entry.getValue().contains((int) x, (int) y)) {
-					return entry.getKey();
-				}
-			}
-		}
+            if (prev_view != entry.getKey()) {
+              if (prev_view instanceof TalkingButton)
+                // ((TalkingButton)prev_view).getBackground().setAlpha((int)(
+                // 1.0 * 255));
+                ((TalkingButton) prev_view).setPressed(false);
+              if (prev_view instanceof TalkingImageButton)
+                // ((ImageButton)
+                // prev_view).setBackgroundDrawable(d)/*setColorFilter(Color
+//										.argb(0, 255, 165, 0))*/;
+                ((TalkingImageButton) prev_view).setColorFilter(Color.argb(0, 255, 165, 0));
 
-		return null;
 
-	}
+              speakOut(entry.getKey().getContentDescription().toString());
+              // prev_view.setSelected(!prev_view.isSelected());
+              // prev_view.setPressed(false);
+
+              // entry.getKey().setSelected(!prev_view.isSelected());
+              // prev_view.setPressed(true);
+              entry.getKey().setColorFilter(Color.argb(150, 255, 165, 0));
+              prev_view = entry.getKey();
+            }
+      } else
+        prev_view = getView(accurateX, accurateY);
+    }
+    if (event.getAction() == MotionEvent.ACTION_UP) {
+      last_view = getView(accurateX, accurateY);
+      if (last_view instanceof TalkingImageButton)
+        ((TalkingImageButton) last_view).setColorFilter(Color.argb(0, 255, 165, 0)); // or
+                                                                                     // null
+      if (last_view instanceof TalkingButton) {
+//				((TalkingButton)last_view).getBackground().setAlpha((int)( 1.0 * 255));
+//				((TalkingButton)last_view).setPressed(false);
+      }
+
+
+
+
+
+
+      // last_view.setSelected(false);
+      // last_view.setPressed(true);
+      // last_view.setClickable(false);
+
+    }
+    // gestureDetector.setOnDoubleTapListener(this);
+    // return gestureDetector.onTouchEvent(event);
+    return false;
+  }
+  
+  public void speakOut(String s) {
+    _t.speak(s);
+    //tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+
+  }
+  
+  @Override
+  public void onDestroy() {
+    _t.shutdown();
+    super.onDestroy();
+  }
+  
+  @Override
+  public void onInit(int status) {
+//    if (status == TextToSpeech.SUCCESS) {
+//      int r = tts.setLanguage(Locale.US);
+//      if (r == TextToSpeech.LANG_NOT_SUPPORTED
+//          || r == TextToSpeech.LANG_MISSING_DATA) {
+//        Log.e("tts", "error setLanguage");
+//        return;
+
+//      }
+//      speakOut("start");
+//      return;
+
+//    }
+//    Log.e("tts", "error init language");
+
+    _t = new TTS(this, this);
+    if (_t.isRuning())
+      speakOut("start");
+    else
+      Log.e("onTouchEventClass", "tts init error");
+  }
+  
+  public void getButtonsPosition(View v) {
+    rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
+
+    if (v instanceof TalkingButton) {
+
+      // Construct a rect of the view's bounds
+
+
+
+
+
+
+
+
+
+
+      button_to_rect.put((TalkingButton) v, rect);
+      // Log.i("MyLog", "size = " + button_to_rect.size());
+      // Log.i("MyLog", "left= " + rect.left + "  ;  top = " + rect.top
+      // + "  ;  right = " + rect.right + "  ;  bottom = "
+      // + rect.bottom);
+      return;
+    }
+    if (v instanceof TalkingImageButton) {
+
+
+
+      imageButton_to_rect.put((TalkingImageButton) v, rect);
+      // Log.i("MyLog", "size of imagebuttons = " +
+      // imageButton_to_rect.size());
+      // Log.i("MyLog", "ImageButton dimensions are: "+"left= " +
+      // rect.left + "  ;  top = " + rect.top
+      // + "  ;  right = " + rect.right + "  ;  bottom = "
+      // + rect.bottom);
+      return;
+    }
+//		Log.i("MyLog" , "getButtons: " + ((ViewGroup)v).getContext() + "  "+((ViewGroup)v).getClass().getSimpleName());
+    else if (v instanceof TimePicker || v instanceof AnalogClock || v instanceof TextView)
+      return;
+
+    ViewGroup vg = (ViewGroup) v;
+    for (int i = 0; i < vg.getChildCount(); i++)
+      getButtonsPosition(vg.getChildAt(i));
+
+    return;
+  }
+  
+  private int getRelativeLeft(View myView) {
+    if (myView.getParent() == myView.getRootView())
+      return myView.getLeft();
+
+    return (myView.getLeft() + getRelativeLeft((View) myView.getParent()));
+  }
+  
+  private int getRelativeTop(View myView) {
+    if (myView.getParent() == myView.getRootView())
+      return myView.getTop();
+
+    return (myView.getTop() + getRelativeTop((View) myView.getParent()));
+  }
+  
+  private View getView(float x, float y) {
+
+    for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
+      Log.i("MyLog", "Button:     Left = " + entry.getValue().left + "  ;  Top = " + entry.getValue().top);
+      if (entry.getValue().contains((int) x, (int) y))
+        return (entry.getKey());
+    }
+    for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
+      Log.i("MyLog", "ImageButton:     Left = " + entry.getValue().left + "  ;  Top = " + entry.getValue().top + "  ;  Right = "
+          + entry.getValue().right);
+      Log.i("MyLog", "x = " + (int) x + "y = " + (int) y);
+      if (entry.getValue().contains((int) x, (int) y))
+        return (entry.getKey());
+    }
+    return null;
+
+
+
+
+
+
+
+
+
+  }
+  
+  // will launch the activity
+  public Runnable mLaunchTask = new Runnable() {
+    @Override
+    public void run() {
+      finish();
+
+
+    }
+  };
 
 }

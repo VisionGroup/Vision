@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
-public class BlindroidActivity extends onTouchEventClass {
+public abstract  class BlindroidActivity extends onTouchEventClass {
 
 	private int _icon;
 	private String _name;
@@ -18,6 +18,9 @@ public class BlindroidActivity extends onTouchEventClass {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
+	
+//	@Override
+//  public abstract int getViewId();
 	
 	@Override
 	public void onDestroy(){

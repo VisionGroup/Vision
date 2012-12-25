@@ -25,7 +25,7 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
    */
   public static String parseTime(Calendar cal) {
     String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-    Integer h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
+    int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
     String s = h + " " + " and " + cal.get(Calendar.MINUTE) + " minutes " + ampm;
     return s;
   }
@@ -36,33 +36,32 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     tts = new TextToSpeech(this, this);
-	mHandler = new Handler();
+    mHandler = new Handler();
 
     
     back = (TalkingImageButton) findViewById(R.id.back_button);
-	back.setOnClickListener(this);
-	back.setOnTouchListener(this);
-
-	next = (TalkingImageButton) findViewById(R.id.settings_button);
-	next.setOnClickListener(this);
-	next.setOnTouchListener(this);
-
 	settings = (TalkingImageButton) findViewById(R.id.home_button);
 	settings.setOnClickListener(this);
 	settings.setOnTouchListener(this);  
   
+  	next = (TalkingImageButton) findViewById(R.id.settings_button);
+  	next.setOnClickListener(this);
+  	next.setOnTouchListener(this);
+  
+  	settings = (TalkingImageButton) findViewById(R.id.current_menu_button);
+  	settings.setOnClickListener(this);
+  	settings.setOnTouchListener(this);  
+  
     Time today = new Time(Time.getCurrentTimezone());
     today.setToNow();
     TextView tvh = (TextView) findViewById(R.id.textView1);
-    Calendar cal = Calendar.getInstance();
-    String date = DateFormat.getDateInstance().format(cal.getTime());
+    String date = getDateFormat();
     tvh.setText(date);
     tvh.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Calendar cal = Calendar.getInstance();
-        String date = DateFormat.getDateInstance().format(cal.getTime());
-        speakOut(date);
+        String d = getDateFormat();
+        speakOut(d);
       }
     });
     AnalogClock ac = (AnalogClock) findViewById(R.id.analogClock1);
@@ -74,6 +73,16 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
       }
     });
   }
+
+
+  /**
+   * @return
+   */
+  private String getDateFormat() {
+    Calendar cal = Calendar.getInstance();
+    String date = DateFormat.getDateInstance().format(cal.getTime());
+    return date;
+  }
   
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,16 +90,6 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
     getMenuInflater().inflate(R.menu.activity_main, menu);
     return true;
   }
-  
-//  @Override
-//  public void onDestroy() {
-//    if (tts != null) {
-//      tts.stop();
-//      tts.shutdown();
-//    }
-//    super.onDestroy();
-//  }
-//  
   
   @Override
   public void onInit(int status) {

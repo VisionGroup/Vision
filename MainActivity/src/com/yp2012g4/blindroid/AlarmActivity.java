@@ -19,8 +19,8 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 public class AlarmActivity extends onTouchEventClass implements OnClickListener {
 	public static PendingIntent pendingIntent;
 	public static boolean alarmIsSet = false;
-	private Integer lastHour = -1;
-	private Integer lastMin = -1;
+	public int lastHour = -1;
+	public int lastMin = -1;
 	public static Calendar alarmTime = null;
 	
   public int getViewId() {
@@ -57,8 +57,8 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 				pendingIntent = PendingIntent.getService(AlarmActivity.this, 0,
 						myIntent, 0);
 				TimePicker tp = (TimePicker) findViewById(R.id.timePicker1);
-				Integer hour = tp.getCurrentHour();
-				Integer min = tp.getCurrentMinute();
+				int hour = tp.getCurrentHour().intValue();
+				int min = tp.getCurrentMinute().intValue();
 				setAlarm(hour, min);
 			}
 		});
@@ -83,8 +83,8 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 		buttonCancel.setOnTouchListener(this);
 
 		TimePicker tp = (TimePicker) findViewById(R.id.timePicker1);
-		lastHour = tp.getCurrentHour();
-		lastMin = tp.getCurrentMinute();
+		lastHour = tp.getCurrentHour().intValue();
+		lastMin = tp.getCurrentMinute().intValue();
 		tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 			@Override
 			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -116,7 +116,7 @@ public class AlarmActivity extends onTouchEventClass implements OnClickListener 
 	 * @param min
 	 *            - minutes between 0-59
 	 */
-	private void setAlarm(Integer hour, Integer min) {
+	private void setAlarm(int hour, int min) {
 		if (min < 0 || min > 59 || hour < 0 || hour > 23)
 			return;
 		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

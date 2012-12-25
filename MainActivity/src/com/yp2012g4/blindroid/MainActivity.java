@@ -38,10 +38,6 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);
 
-	b = (TalkingImageButton) findViewById(R.id.phone_status_button);
-	b.setOnClickListener(this);
-	b.setOnTouchListener(this);
-
 	b = (TalkingImageButton) findViewById(R.id.alarm_clock_button);
 	b.setOnClickListener(this);
 	b.setOnTouchListener(this);

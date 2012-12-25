@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".PhoneStatus" >
+    tools:context=".PhoneStatus" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,11 +17,12 @@
             android:layout_height="111dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/phoneStatus_button_getBatteryStatus"
+            android:contentDescription="@string/phone_status_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/battery_button" />
+            android:src="@drawable/battery_button"
+            app:ReadText="@string/phoneStatus_button_getBatteryStatus_read" />
     </LinearLayout>
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -35,13 +36,13 @@
             android:background="@color/BLACK"
             android:contentDescription="@string/phoneStatus_button_getReceptionStatus"
             android:scaleType="fitCenter"
+            app:ReadText="@string/phoneStatus_button_getReceptionStatus_read"
             android:src="@drawable/signal_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
         <include layout="@layout/control_bar_view" />
     </LinearLayout>
 

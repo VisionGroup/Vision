@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Blindroid</string>
+    <string name="welcome_message">Welcome to </string>
     <string name="menu_settings">Settings</string>
     <string name="sos_button">SOS</string>
     <string name="time_button">Time</string>
@@ -12,6 +13,7 @@
     <string name="quick_dial_button">Quick dial</string>
     <string name="quick_sms_button">Quick SMS</string>
     <string name="title_activity_quick_sms">QuickSMSActivity</string>
+    <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
     <string name="send_SOS_message">Send SOS</string>
     <string name="title_activity_quick_dial">QuickDialActivity</string>
@@ -28,9 +30,17 @@
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
     <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>
     <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
+    <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
+    <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
+    <string name="phoneStatus_message_noSignal_read">No Signal.</string>
+    <string name="phoneStatus_message_veryGoodSignal_read">Signal is very good.</string>
+    <string name="phoneStatus_message_goodSignal_read">Signal is good.</string>
+    <string name="phoneStatus_message_poorSignal_read">Signal is poor.</string>
+    <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor.</string>
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
-    <string name="status_charging">Charging</string>
+    <string name="phoneStatus_message_charging_read">Charging</string>
+    
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     <string name="ClockTitle">Speaking clock</string>
     <string name="emptyHour">hh:mm:ss</string>
@@ -45,6 +55,12 @@
     <string name="BlueBlack">Blue &amp; Black</string>
     <string name="WhiteBlue">White &amp; Blue</string>
     <string name="title_activity_color_settings">Color Settings</string>
+    <string name="title_activity_voice_note_recorder">VoiceNoteRecorderActivity</string>
+    <string name="voicenoterecorder_button_play">Play</string>
+    <string name="voicenoterecorder_button_stop">Stop</string>
+    <string name="voicenoterecorder_button_record">Record</string>
+    <string name="voicenoterecorder_button_up">Previous</string>
+    <string name="voicenoterecorder_button_down">Next</string>
     <string name="SMS_number_1">Will call you back</string>
     <string name="SMS_number_2">How are you?</string>
     <string name="SMS_number_3">Where have you been?</string>
@@ -54,13 +70,13 @@
     <string name="SMS_number_7">Where are you?</string>
     <string name="SMS_number_8">Do not have any more ideas</string>
     <string name="SMS_number_9">Bla Bla Bla</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_alarm">AlarmActivity</string>
     <string name="turn_off">turn off</string>
     <string name="snooze_time">1</string>
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
     <string name="read_sms_button">Read SMS</string>
+    <string name="title_activity_where_am_i">Where Am I</string>
     <string name="current_menu_button">Current menu</string>
 
 </resources>

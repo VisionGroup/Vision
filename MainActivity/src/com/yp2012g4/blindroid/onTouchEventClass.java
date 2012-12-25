@@ -60,9 +60,9 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     getButtonsPosition(mainView);
     DisplaySettingsApplication appState = ((DisplaySettingsApplication) getApplication());
     for (TalkingImageButton b : imageButton_to_rect.keySet())
-      appState.settings.applyButtonSettings((View)b);
+      appState.settings.applyButtonSettings(b);
     for (TalkingButton b : button_to_rect.keySet())
-      appState.settings.applyButtonSettings((View)b);
+      appState.settings.applyButtonSettings(b);
   }
   
 	public abstract int getViewId();
@@ -218,15 +218,13 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   private int getRelativeLeft(View myView) {
     if (myView.getParent() == myView.getRootView())
       return myView.getLeft();
-    else
-      return (myView.getLeft() + getRelativeLeft((View) myView.getParent()));
+    return (myView.getLeft() + getRelativeLeft((View) myView.getParent()));
   }
   
   private int getRelativeTop(View myView) {
     if (myView.getParent() == myView.getRootView())
       return myView.getTop();
-    else
-      return (myView.getTop() + getRelativeTop((View) myView.getParent()));
+    return (myView.getTop() + getRelativeTop((View) myView.getParent()));
   }
   
   private View getView(float x, float y) {

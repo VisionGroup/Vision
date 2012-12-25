@@ -5,25 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".where_am_i" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
+    tools:context=".where_am_i" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/button_whereAmI"
-            android:layout_width="0dip"
-            android:layout_height="111dip"
-            android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:contentDescription="@string/where_am_i_button"
-            android:scaleType="fitCenter"
-            android:src="@drawable/battery_button"
-            app:ReadText="@string/phoneStatus_button_getBatteryStatus_read"
-            />
-        <!-- TODO update this field app:ReadText="@string/phoneStatus_button_getBatteryStatus_read" -->
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

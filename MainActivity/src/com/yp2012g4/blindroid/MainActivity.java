@@ -98,6 +98,7 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
       case R.id.where_am_i_button:
         speakOut("Where am I?");
         intent = new Intent(MainActivity.this, WhereAmIActivity.class);
+        startActivity(intent);
         break;
       case R.id.phone_status_button:
         speakOut("Phone status");

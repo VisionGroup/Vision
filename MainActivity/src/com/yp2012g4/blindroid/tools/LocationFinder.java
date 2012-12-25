@@ -50,7 +50,7 @@ public class LocationFinder {
         log("Could not use Network location because it is disabled");
   }
   
-  private void makeUseOfNewLocation(Location location, String provider) {
+  void makeUseOfNewLocation(Location location, String provider) {
     log("Making use of new location from provider");
     double latitude = location.getLatitude();
     double longitude = location.getLongitude();
@@ -69,7 +69,7 @@ public class LocationFinder {
     handler.handleLocation(longitude, latitude, provider, addresses);
   }
   
-  void log(String s) {
+  static void log(String s) {
     Log.d("LocationFinder", s);
   }
   
@@ -81,12 +81,15 @@ public class LocationFinder {
       }
       
       @Override public void onProviderEnabled(String provider) {
+        // No modifications
       }
       
       @Override public void onProviderDisabled(String provider) {
+        // No modifications
       }
       
       @Override public void onStatusChanged(String provider, int status, Bundle extras) {
+        // No modifications
       }
     };
     return l;

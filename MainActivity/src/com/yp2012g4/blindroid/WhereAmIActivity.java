@@ -58,6 +58,7 @@ public class WhereAmIActivity extends onTouchEventClass {
         log("\t" + a.getAddressLine(i));
     }
     if (addresses.isEmpty()) {
+      speakOut("No addresses found");
       log("No addresses");
       return;
     }
@@ -82,13 +83,11 @@ public class WhereAmIActivity extends onTouchEventClass {
     return true;
   }
   
-  private void log(String s) {
+  private static void log(String s) {
     Log.d("WhereAmIActivity", s);
   }
   
   @Override public int getViewId() {
-    // TODO
-    // return R.id.W
-    return 0;
+    return R.id.where_am_i_Activity;
   }
 }

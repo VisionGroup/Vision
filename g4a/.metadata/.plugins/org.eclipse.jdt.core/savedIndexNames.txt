@@ -1,4 +1,0 @@
-INDEX VERSION 1.126+/home/olivier/g4a/.metadata/.plugins/org.eclipse.jdt.core
-765453901.index
-1081078965.index
-287915656.index

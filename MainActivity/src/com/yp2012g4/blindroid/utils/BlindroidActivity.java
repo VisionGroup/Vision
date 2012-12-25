@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
-public class BlindroidActivity extends Activity {
+public class BlindroidActivity extends onTouchEventClass {
 
 	protected TTS _t;
 	private int _icon;

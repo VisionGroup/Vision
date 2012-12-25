@@ -1,4 +1,4 @@
-package com.yp2012g4.blindroid;
+package com.yp2012g4.blindroid.utils;
 
 import java.util.HashMap;
 import java.util.Locale;

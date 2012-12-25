@@ -26,7 +26,9 @@ public class LocationFinder {
   
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork, Context con) {
     log("run");
-    coder = new Geocoder(con, Locale.ENGLISH);
+    for (Locale l : Locale.getAvailableLocales())
+      log(l.toString());
+    coder = new Geocoder(con, Locale.US);
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";

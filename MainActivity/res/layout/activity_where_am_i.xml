@@ -7,11 +7,18 @@
     android:orientation="vertical"
     tools:context=".where_am_i" >
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+
         <include layout="@layout/control_bar_view" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/where_am_i_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.39"
+        android:text="TextView" />
 
 </LinearLayout>

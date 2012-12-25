@@ -1,3 +1,7 @@
+/***
+ * @author Amir Blumental
+ * @version 1.0 
+ */
 package com.yp2012g4.blindroid;
 
 import java.text.DateFormat;
@@ -19,7 +23,7 @@ import android.widget.TextView;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class SpeakingClockActivity extends onTouchEventClass implements OnClickListener {
-  /**
+  /** Parse the Calendar to a string to speak
    * @param cal
    *          - the Calendar you want to parse
    * @return string to speak
@@ -76,7 +80,8 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
 
 
   /**
-   * @return
+   *  transform the system current date to string
+   * @return the current system date in string
    */
   private String getDateFormat() {
     Calendar cal = Calendar.getInstance();
@@ -104,6 +109,10 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
     Log.e("tts", "error init language");
   }
   
+  /**
+   * Perform actions when the window get into focus 
+   * we start the activity by reading out loud the current time
+   */
   @Override
   public void onWindowFocusChanged(boolean hasFocus) {
     if (hasFocus) {

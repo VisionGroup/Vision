@@ -1,3 +1,7 @@
+/***
+ * @author Amir Blumental
+ * @version 1.0 
+ */
 package com.yp2012g4.blindroid.test;
 
 import java.text.DateFormat;

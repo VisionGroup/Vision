@@ -1,3 +1,8 @@
+/***
+ * This class is responsible for the alarm popup when the alarm is beeping
+ * @author Amir Blumental
+ * @version 1.0 
+ */
 package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
@@ -16,6 +21,9 @@ public class AlarmPopup extends onTouchEventClass{
   static public MediaPlayer mp = null;
   private AlertDialog ad;
   
+  /***
+   * On the creation of the class we display the dialog and sound the alarm
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -24,6 +32,9 @@ public class AlarmPopup extends onTouchEventClass{
     soundAlarm();
   }
   
+  /**
+   * Set the Dialog for the alarm clock that snooze if not clicked on the close button 
+   */
   private void setDialog() {
     ad = new AlertDialog.Builder(this).create();
     ad.setTitle("Alarm clock");
@@ -50,7 +61,9 @@ public class AlarmPopup extends onTouchEventClass{
       Log.e("amir", "exception in show!!!" + getApplicationContext());
     }
   }
-  
+  /**
+   *  Sounds the alarm and on completion of the alarm set the alarm to snoozeTime 
+   */
   private void soundAlarm() {
     mp = MediaPlayer.create(getApplicationContext(), R.raw.alarm);
     mp.start();

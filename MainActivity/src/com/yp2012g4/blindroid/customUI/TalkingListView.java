@@ -23,14 +23,15 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
   private ViewListRun run = null;
   private GestureDetector gDetector = new GestureDetector(this);
   private int selectedItem = 0;
+  private boolean isInit = false;
   
-  @Override
-  public void onWindowFocusChanged(boolean hasWindowFocus) {
+  @Override public void onWindowFocusChanged(boolean hasWindowFocus) {
     super.onWindowFocusChanged(hasWindowFocus);
     this.requestFocusFromTouch();
     this.setSelection(selectedItem);
-    if (run != null) {
+    if (run != null && !isInit) {
       run.onInitSpeak(selectedItem);
+      isInit = true;
     }
   }
   
@@ -38,7 +39,6 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
     this.setOnScrollListener(this);
     this.setOnItemClickListener(this);
     this.setOnTouchListener(this);
-
   }
   
   public synchronized ViewListRun getRun() {
@@ -64,14 +64,12 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
     init();
   }
   
-  @Override
-  public boolean onDown(MotionEvent e) {
+  @Override public boolean onDown(MotionEvent e) {
     // TODO Auto-generated method stub
     return false;
   }
   
-  @Override
-  public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
+  @Override public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
     if (start.getRawY() < finish.getRawY()) {
       if (selectedItem < this.getCount() - 1) {
         selectedItem++;
@@ -87,50 +85,42 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
     return true;
   }
   
-  @Override
-  public void onLongPress(MotionEvent e) {
+  @Override public void onLongPress(MotionEvent e) {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+  @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
     // TODO Auto-generated method stub
     return false;
   }
   
-  @Override
-  public void onShowPress(MotionEvent e) {
+  @Override public void onShowPress(MotionEvent e) {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (run != null) {
       run.onClick(selectedItem);
     }
     return false;
   }
   
-  @Override
-  public boolean onTouch(View v, MotionEvent event) {
+  @Override public boolean onTouch(View v, MotionEvent event) {
     gDetector.onTouchEvent(event);
     this.requestFocusFromTouch();
     this.setSelection(selectedItem);
     return true;
   }
   
-  @Override
-  public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+  @Override public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+  @Override public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public void onScrollStateChanged(AbsListView view, int scrollState) {
+  @Override public void onScrollStateChanged(AbsListView view, int scrollState) {
     // TODO Auto-generated method stub
   }
 }

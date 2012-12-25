@@ -40,6 +40,9 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
     b = (TalkingImageButton) findViewById(R.id.quick_sms_button);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.read_sms_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
     back = (TalkingImageButton) findViewById(R.id.back_button);
     back.setOnClickListener(this);
     back.setOnTouchListener(this);
@@ -117,6 +120,11 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
       case R.id.quick_sms_button:
         speakOut("Quick SMS");
         intent = new Intent(MainActivity.this, QuickSMSActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.read_sms_button:
+        speakOut("Starting SMS reader please wait");
+        intent = new Intent(MainActivity.this, TalkingSmsList.class);
         startActivity(intent);
         break;
       case R.id.back_button:

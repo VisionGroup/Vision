@@ -20,14 +20,12 @@ public class TalkingSmsList extends Activity implements OnInitListener {
   AdapterView.AdapterContextMenuInfo info;
   protected TextToSpeech tts;
   
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     viewList.onWindowFocusChanged(hasFocus);
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     // TODO Auto-generated method stub
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_talking_sms_list);
@@ -37,30 +35,27 @@ public class TalkingSmsList extends Activity implements OnInitListener {
     details = smsReader.getIncomingMessages();
     viewList.setAdapter(new SmsAdapter(details, this));
     viewList.setRun(new ViewListRun() {
-      @Override
-      public void onClick(int selectedItem) {
+      @Override public void onClick(int selectedItem) {
         String onClickS = getName(selectedItem);
         onClickS += details.get(selectedItem).getBody();
         speakOut(onClickS);
       }
       
-      @Override
-      public void onFling(int selectedItem) {
+      @Override public void onFling(int selectedItem) {
         String onFlingS = getName(selectedItem);
         speakOut(onFlingS);
-        //Toast.makeText(getApplicationContext(), details.get(selectedItem).getAddress(), Toast.LENGTH_LONG).show();
+        // Toast.makeText(getApplicationContext(),
+        // details.get(selectedItem).getAddress(), Toast.LENGTH_LONG).show();
       }
       
-      @Override
-      public void onInitSpeak(int selectedItem) {
+      @Override public void onInitSpeak(int selectedItem) {
         String onInitS = getName(0);
         speakOut(onInitS);
       }
     });
   }
   
-  @Override
-  public void onInit(int status) {
+  @Override public void onInit(int status) {
     if (status == TextToSpeech.SUCCESS) {
       int r = tts.setLanguage(Locale.US);
       if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
@@ -82,6 +77,11 @@ public class TalkingSmsList extends Activity implements OnInitListener {
       }
     }
     return "";
+  }
+  
+  @Override public void onBackPressed() {
+    tts.stop();
+    super.onBackPressed();
   }
   
   

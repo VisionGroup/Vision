@@ -46,14 +46,14 @@
             android:src="@drawable/compass_button" />
 
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/phone_status_button"
+            android:id="@+id/read_sms_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/phone_status_button"
+            android:contentDescription="@string/read_sms_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/battery_button" />
+            android:src="@drawable/read_sms_button" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,14 +61,14 @@
         android:layout_height="wrap_content" >
 
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/signal_button"
+            android:id="@+id/phone_status_button"
             android:layout_width="0dip"
             android:layout_height="111dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/signal_button"
+            android:contentDescription="@string/phone_status_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/signal_button" />
+            android:src="@drawable/phone_status_button" />
 
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/alarm_clock_button"

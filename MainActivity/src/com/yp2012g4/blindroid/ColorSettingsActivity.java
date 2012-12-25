@@ -66,7 +66,7 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 		next.setOnClickListener(this);
 		next.setOnTouchListener(this);
 
-		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings = (TalkingImageButton) findViewById(R.id.home_button);
 		settings.setOnClickListener(this);
 		settings.setOnTouchListener(this);
 	}
@@ -74,15 +74,13 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_color_settings, menu);
 		return true;
 	}
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		ViewGroup ColorSettingsView = (ViewGroup) findViewById(R.id.ColorSettingsActivity);
+		ViewGroup ColorSettingsView = (ViewGroup) findViewById(getViewId());
 		getButtonsPosition(ColorSettingsView);
 	}
 
@@ -120,7 +118,7 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 			// ColorSettingsActivity.class);
 			// startActivity(intent);
 			break;
-		case R.id.next_button:
+		case R.id.home_button:
 			speakOut("Next screen");
 			break;
 		}
@@ -140,6 +138,12 @@ public class ColorSettingsActivity extends onTouchEventClass implements
         	finish();
         }
      };
+
+
+    @Override
+    public int getViewId() {
+      return R.id.ColorSettingsActivity;
+    }
 
 }
 

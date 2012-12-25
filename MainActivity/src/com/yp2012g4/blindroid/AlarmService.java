@@ -1,3 +1,7 @@
+/***
+ * @author Amir Blumental
+ * @version 1.0 
+ */
 package com.yp2012g4.blindroid;
 
 
@@ -28,7 +32,9 @@ public class AlarmService extends Service {
   public void onDestroy() {
     // TODO Auto-generated method stub
   }
-  
+  /***
+   * this method is called when a scheduled Alarm time arrives 
+   */
   @Override
   public void onStart(Intent intent, int startId) {
     super.onStart(intent, startId);

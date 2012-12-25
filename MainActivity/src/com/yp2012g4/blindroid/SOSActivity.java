@@ -7,7 +7,6 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
@@ -27,7 +26,7 @@ public class SOSActivity extends onTouchEventClass implements OnClickListener {
 		next.setOnClickListener(this);
 		next.setOnTouchListener(this);
 
-		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings = (TalkingImageButton) findViewById(R.id.home_button);
 		settings.setOnClickListener(this);
 		settings.setOnTouchListener(this);
 
@@ -44,13 +43,6 @@ public class SOSActivity extends onTouchEventClass implements OnClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_sos, menu);
 		return true;
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		ViewGroup sosView = (ViewGroup) findViewById(R.id.SOS_textview);
-		getButtonsPosition(sosView);
 	}
 
 //	// will launch the activity
@@ -83,9 +75,14 @@ public class SOSActivity extends onTouchEventClass implements OnClickListener {
 			// ColorSettingsActivity.class);
 			// startActivity(intent);
 			break;
-		case R.id.next_button:
+		case R.id.home_button:
 			speakOut("Next screen");
 			break;
 		}
 	}
+
+  @Override
+  public int getViewId() {
+    return R.id.SOS_textview;
+  }
 }

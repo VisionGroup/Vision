@@ -45,7 +45,7 @@ public class VoiceNoteRecorderActivity extends onTouchEventClass implements OnCl
     b = (TalkingImageButton) findViewById(R.id.button_recordStop);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
-    TalkingImageButton ib = (TalkingImageButton) findViewById(R.id.next_button);
+    TalkingImageButton ib = (TalkingImageButton) findViewById(R.id.current_menu_button);
     ib.setOnClickListener(this);
     ib.setOnTouchListener(this);
     ib = (TalkingImageButton) findViewById(R.id.settings_button);
@@ -88,7 +88,7 @@ public class VoiceNoteRecorderActivity extends onTouchEventClass implements OnCl
         case R.id.button_recordStop:
           _recordStop();
           break;
-        case R.id.next_button:
+        case R.id.current_menu_button:
           speakOut("Next");
           break;
         case R.id.settings_button:
@@ -147,5 +147,10 @@ public class VoiceNoteRecorderActivity extends onTouchEventClass implements OnCl
   
   private void _playStop() {
     // TODO Auto-generated method stub
+  }
+
+  @Override
+  public int getViewId() {
+    return R.id.VoiceNoteRecorderActivity;
   }
 }

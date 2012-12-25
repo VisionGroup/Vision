@@ -96,5 +96,10 @@ public class AlarmPopup extends onTouchEventClass{
       }
     });
   }
+
+  @Override
+  public int getViewId() {
+    return 0; //////////????????
+  }
   
 }

@@ -13,7 +13,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
@@ -28,13 +27,6 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
   /**
    * Used to activate the onTouch button reading function.
    */
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    ViewGroup phoneStatusView = (ViewGroup) findViewById(R.id.phoneStatusActivity);
-    getButtonsPosition(phoneStatusView);
-  }
-  
   static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
   int _battery = -1; // Battery status
   int _status = -1; // Charging Status
@@ -147,4 +139,9 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
         break;
     }
   }
+  @Override
+  public int getViewId() {
+    return R.id.phoneStatusActivity;
+  }
+
 }

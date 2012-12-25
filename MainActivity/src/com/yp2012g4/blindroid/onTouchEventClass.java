@@ -21,51 +21,72 @@ import android.widget.TimePicker;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
-public class onTouchEventClass extends Activity implements OnTouchListener, TextToSpeech.OnInitListener {
-  protected Rect rect;
-  protected TextToSpeech tts;
-  protected TalkingButton tool_tip;
-  protected TalkingButton home_screen;
-  protected TalkingButton help;
-  protected View prev_view;
-  protected View last_view;
-  protected View movedTo;
-  Handler mHandler;
+public abstract class onTouchEventClass extends Activity implements OnTouchListener,
+		TextToSpeech.OnInitListener {
+	protected Rect rect;
+	protected TextToSpeech tts;
+	protected TalkingButton tool_tip;
+	protected TalkingButton home_screen;
+	protected TalkingButton help;
+	protected View prev_view;
+	protected View last_view;
+	protected View movedTo;
+	Handler mHandler;
+
 //	protected Drawable d;
-  // protected OnDoubleTapListener l;
-  protected TalkingImageButton back;// = (TalkingImageButton)
-                                    // findViewById(R.id.back_button);
-  protected TalkingImageButton next;// = (TalkingImageButton)
-                                    // findViewById(R.id.next_button);
-  protected TalkingImageButton settings;// = (TalkingImageButton)
-                                        // findViewById(R.id.settings_button);
-  protected Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
-  protected Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
+	// protected OnDoubleTapListener l;
+	protected TalkingImageButton back;// = (TalkingImageButton) findViewById(R.id.back_button);
+	protected TalkingImageButton next;// = (TalkingImageButton) findViewById(R.id.next_button);
+	protected TalkingImageButton settings;// = (TalkingImageButton) findViewById(R.id.settings_button);
+
+	protected Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+	protected Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
+
+	// protected Map<Button, Intent> button_to_intent = new HashMap<Button,
+	// Intent>();
+
+	// protected GestureDetector gestureDetector = new GestureDetector(this);
+	/*
+	 * new GestureDetector . SimpleOnGestureListener () { public boolean
+	 * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here"
+	 * ); startActivity (( button_to_intent .get( last_view ))); return false ;
+	 * } });
+	 */ 
+	
+	@Override
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    ViewGroup mainView = (ViewGroup) findViewById(getViewId());
+    getButtonsPosition(mainView);
+    DisplaySettingsApplication appState = ((DisplaySettingsApplication) getApplication());
+    for (TalkingImageButton b : imageButton_to_rect.keySet())
+      appState.settings.applyButtonSettings((View)b);
+    for (TalkingButton b : button_to_rect.keySet())
+      appState.settings.applyButtonSettings((View)b);
+  }
   
-  // protected Map<Button, Intent> button_to_intent = new HashMap<Button,
-  // Intent>();
-  // protected GestureDetector gestureDetector = new GestureDetector(this);
-  /*
-   * new GestureDetector . SimpleOnGestureListener () { public boolean
-   * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here" );
-   * startActivity (( button_to_intent .get( last_view ))); return false ; } });
-   */
-  @Override
-  public boolean onTouch(View v, MotionEvent event) {
-    float accurateX = getRelativeLeft(v) + event.getX();
-    float accurateY = getRelativeTop(v) + event.getY();
-    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-      // Log.i("MyLog", "accurateX = " + accurateX +
-      // "  -----  accurateY = " + accurateY);
-      prev_view = getView(accurateX, accurateY);
-      if (last_view != null && prev_view != last_view)
-        last_view.setPressed(false); // and touching in different view
-      if (v instanceof TalkingButton) {
-        Log.i("MyLog", "DOWN in Button");
-        speakOut(((TalkingButton) v).getText().toString());
-      }
-      if (v instanceof TalkingImageButton) {
-        Log.i("MyLog", "DOWN in ImageButton");
+	public abstract int getViewId();
+	
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		float accurateX = getRelativeLeft(v) + event.getX();
+		float accurateY = getRelativeTop(v) + event.getY();
+
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+			// Log.i("MyLog", "accurateX = " + accurateX +
+			// "  -----  accurateY = " + accurateY);
+			prev_view = getView(accurateX, accurateY);
+			if (last_view != null && prev_view!=last_view){//if not first touch in activity 
+				last_view.setPressed(false);			   //and touching in different view
+			}
+			if (v instanceof TalkingButton) {
+				Log.i("MyLog" , "DOWN in Button");
+				speakOut(((TalkingButton) v).getText().toString());
+
+			}
+			if (v instanceof TalkingImageButton) {
+				Log.i("MyLog" , "DOWN in ImageButton");
 //				d = ((ImageButton) v).getDrawable();
 //				Log.i("MyLog", "the drawable is: " + d.toString());
         ((TalkingImageButton) v).setColorFilter(Color.argb(150, 255, 165, 0)); // or

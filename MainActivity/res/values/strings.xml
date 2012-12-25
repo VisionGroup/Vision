@@ -45,7 +45,7 @@
     <string name="ClockTitle">Speaking clock</string>
     <string name="emptyHour">hh:mm:ss</string>
     <string name="back_button">Back</string>
-    <string name="next_button">Next</string>
+    <string name="home_button">Home</string>
     <string name="settings_button">Settings</string>
     <string name="WhiteBlack">White &amp; Black</string>
     <string name="WhiteRed">White &amp; Red</string>
@@ -75,6 +75,11 @@
     <string name="snooze_time">1</string>
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
+    <string name="read_sms_button">Read SMS</string>
+    <string name="title_activity_talking_sms">TalkingSMS</string>
+    <string name="title_activity_talking_list">TalkingList</string>
     <string name="title_activity_where_am_i">Where Am I</string>
+    <string name="current_menu_button">Current menu</string>
 
+    <string name="title_activity_talking_sms_list">TalkingSmsList</string>
 </resources>

@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AnalogClock;
 import android.widget.TextView;
 
@@ -45,14 +44,15 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
 
     
     back = (TalkingImageButton) findViewById(R.id.back_button);
-  	back.setOnClickListener(this);
-  	back.setOnTouchListener(this);
+	settings = (TalkingImageButton) findViewById(R.id.home_button);
+	settings.setOnClickListener(this);
+	settings.setOnTouchListener(this);  
   
   	next = (TalkingImageButton) findViewById(R.id.settings_button);
   	next.setOnClickListener(this);
   	next.setOnTouchListener(this);
   
-  	settings = (TalkingImageButton) findViewById(R.id.next_button);
+  	settings = (TalkingImageButton) findViewById(R.id.current_menu_button);
   	settings.setOnClickListener(this);
   	settings.setOnTouchListener(this);  
   
@@ -120,8 +120,6 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
       speakOut(parseTime(cal));
     }
     super.onWindowFocusChanged(hasFocus);
-    ViewGroup speakingClockView = (ViewGroup) findViewById(R.id.SpeakingClockSctivity);
-	getButtonsPosition(speakingClockView);
   }
 
   
@@ -140,9 +138,15 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
 			// ColorSettingsActivity.class);
 			// startActivity(intent);
 			break;
-		case R.id.next_button:
+		case R.id.home_button:
 			speakOut("Next screen");
 			break;
 		}
 	}
+
+
+  @Override
+  public int getViewId() {
+    return R.id.SpeakingClockSctivity;
+  }
 }

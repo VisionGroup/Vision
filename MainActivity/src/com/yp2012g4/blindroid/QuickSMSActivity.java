@@ -9,7 +9,6 @@ import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -73,7 +72,7 @@ public class QuickSMSActivity extends onTouchEventClass implements
 		next.setOnClickListener(this);
 		next.setOnTouchListener(this);
 
-		settings = (TalkingImageButton) findViewById(R.id.next_button);
+		settings = (TalkingImageButton) findViewById(R.id.home_button);
 		settings.setOnClickListener(this);
 		settings.setOnTouchListener(this);
 
@@ -84,13 +83,6 @@ public class QuickSMSActivity extends onTouchEventClass implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_quick_sms, menu);
 		return true;
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		ViewGroup quickSMSView = (ViewGroup) findViewById(R.id.QuickSMSActivity);
-		getButtonsPosition(quickSMSView);
 	}
 
 	@Override
@@ -123,7 +115,7 @@ public class QuickSMSActivity extends onTouchEventClass implements
 		}
 		if (v instanceof TalkingImageButton) {
 			switch (v.getId()) {
-			case R.id.next_button:
+			case R.id.home_button:
 				speakOut("Next screen");
 				break;
 			case R.id.settings_button:
@@ -136,5 +128,10 @@ public class QuickSMSActivity extends onTouchEventClass implements
 			}
 		}
 	}
+
+  @Override
+  public int getViewId() {
+    return R.id.QuickSMSActivity;
+  }
 
 }

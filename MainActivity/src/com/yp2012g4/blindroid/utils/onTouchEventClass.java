@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -176,12 +177,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
 //				((TalkingButton)last_view).getBackground().setAlpha((int)( 1.0 * 255));
 //				((TalkingButton)last_view).setPressed(false);
       }
-
-
-
-
-
-
       // last_view.setSelected(false);
       // last_view.setPressed(true);
       // last_view.setClickable(false);
@@ -193,6 +188,10 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   }
   
   public void speakOut(String s) {
+    if (_t==null){
+      Log.e("onTouchEventClass", "TTS is null");
+      return;
+    }
     _t.speak(s);
     //tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
 
@@ -204,8 +203,8 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     super.onDestroy();
   }
   
-  @Override
-  public void onInit(int status) {
+//  @Override
+//  public void onInit(int status) {
 //    if (status == TextToSpeech.SUCCESS) {
 //      int r = tts.setLanguage(Locale.US);
 //      if (r == TextToSpeech.LANG_NOT_SUPPORTED
@@ -219,12 +218,15 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
 
 //    }
 //    Log.e("tts", "error init language");
-
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    
     _t = new TTS(this, this);
     if (_t.isRuning())
       speakOut("start");
     else
       Log.e("onTouchEventClass", "tts init error");
+    super.onCreate(savedInstanceState);
   }
   
   public void getButtonsPosition(View v) {
@@ -233,16 +235,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     if (v instanceof TalkingButton) {
 
       // Construct a rect of the view's bounds
-
-
-
-
-
-
-
-
-
-
       button_to_rect.put((TalkingButton) v, rect);
       // Log.i("MyLog", "size = " + button_to_rect.size());
       // Log.i("MyLog", "left= " + rect.left + "  ;  top = " + rect.top
@@ -304,14 +296,13 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     }
     return null;
 
-
-
-
-
-
-
-
-
+  }
+  
+  
+  @Override public void onInit(int status) {
+    if (!_t.isRuning())
+      _t = new TTS(this,this);
+    
   }
   
   // will launch the activity

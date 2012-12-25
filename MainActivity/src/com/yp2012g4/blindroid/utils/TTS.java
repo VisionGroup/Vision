@@ -2,7 +2,6 @@ package com.yp2012g4.blindroid.utils;
 
 import java.util.Locale;
 
-import android.R.bool;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;

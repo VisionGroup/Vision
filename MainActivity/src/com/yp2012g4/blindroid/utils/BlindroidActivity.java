@@ -19,9 +19,6 @@ public abstract  class BlindroidActivity extends onTouchEventClass {
 		super.onCreate(savedInstanceState);
 	}
 	
-//	@Override
-//  public abstract int getViewId();
-	
 	@Override
 	public void onDestroy(){
 		super.onDestroy();

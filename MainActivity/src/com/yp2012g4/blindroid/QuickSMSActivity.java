@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
@@ -21,13 +20,12 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * @version 1.0
  */
 public class QuickSMSActivity extends BlindroidActivity implements OnClickListener {
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  TalkingButton b;
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
-    //tts = new TextToSpeech(this, this);
     mHandler = new Handler();
-    TalkingButton b = (TalkingButton) findViewById(R.id.SMS_number_1);
+    b = (TalkingButton) findViewById(R.id.SMS_number_1);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
     b = (TalkingButton) findViewById(R.id.SMS_number_2);
@@ -65,32 +63,40 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
     settings.setOnTouchListener(this);
   }
   
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_quick_sms, menu);
     return true;
   }
   
-  @Override
-  public void onClick(View v) {
+  @SuppressWarnings("boxing")
+  @Override public void onClick(View v) {
     final View view = v;
     if (v instanceof TalkingButton) {
-      AlertDialog alertDialog = new AlertDialog.Builder(this).create(); 
+      final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
       alertDialog.setTitle("Choose contact");
       alertDialog.setCancelable(false);
       alertDialog.setMessage("will send the SMS to the chosen contact");
       alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
+        @Override public void onClick(DialogInterface dialog, int which) {
           String messageToSend = ((TalkingButton) view).getText().toString();
           String number = "0524484993";
           SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
           speakOut("Message has been sent");
         }
       });
-      alertDialog.show();
+      alertDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+        @Override public void onClick(DialogInterface dialog, int which) {
+          speakOut("Cancel");
+          alertDialog.dismiss();
+        }
+      });
       speakOut("Sending" + ((TalkingButton) v).getText().toString());
+      while (_t.isSpeaking()){
+        //wait...
+      }
+      alertDialog.show();
+      
     }
     if (v instanceof TalkingImageButton) {
       switch (v.getId()) {
@@ -108,8 +114,7 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
     }
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.QuickSMSActivity;
   }
 }

@@ -91,7 +91,7 @@ containing a value of this type.
         public static final int SOS_textview=0x7f0a002c;
         public static final int Send_SOS_Message=0x7f0a002d;
         public static final int SpeakingClockSctivity=0x7f0a002e;
-        public static final int TalkingListView=0x7f0a0043;
+        public static final int TalkingListView=0x7f0a0045;
         public static final int TalkingSmsListView=0x7f0a0032;
         public static final int VoiceNoteRecorderActivity=0x7f0a0033;
         public static final int WhiteBlack=0x7f0a0005;
@@ -100,7 +100,7 @@ containing a value of this type.
         public static final int WhiteRed=0x7f0a0006;
         public static final int alarm_clock_button=0x7f0a0012;
         public static final int analogClock1=0x7f0a002f;
-        public static final int back_button=0x7f0a0038;
+        public static final int back_button=0x7f0a003a;
         public static final int button_getBatteryStatus=0x7f0a0016;
         public static final int button_getReceptionStatus=0x7f0a0017;
         public static final int button_nextNote=0x7f0a0036;
@@ -108,29 +108,31 @@ containing a value of this type.
         public static final int button_prevNote=0x7f0a0034;
         public static final int button_recordStop=0x7f0a0035;
         public static final int cancelalarm=0x7f0a0003;
-        public static final int current_menu_button=0x7f0a003a;
-        public static final int description=0x7f0a003e;
-        public static final int from=0x7f0a003c;
-        public static final int home_button=0x7f0a003b;
-        public static final int menu_settings=0x7f0a0044;
+        public static final int current_menu_button=0x7f0a003c;
+        public static final int description=0x7f0a0040;
+        public static final int from=0x7f0a003e;
+        public static final int home_button=0x7f0a003d;
+        public static final int menu_settings=0x7f0a0046;
         public static final int phoneStatusActivity=0x7f0a0015;
         public static final int phone_status_button=0x7f0a0011;
         public static final int quick_dial_button=0x7f0a0013;
         public static final int quick_sms_button=0x7f0a0014;
         public static final int read_sms_button=0x7f0a0010;
-        public static final int settings_button=0x7f0a0039;
-        public static final int sms_body=0x7f0a0041;
-        public static final int sms_from=0x7f0a0040;
-        public static final int sms_time=0x7f0a0042;
+        public static final int settings_button=0x7f0a003b;
+        public static final int sms_body=0x7f0a0043;
+        public static final int sms_from=0x7f0a0042;
+        public static final int sms_time=0x7f0a0044;
         public static final int sos_button=0x7f0a000d;
         public static final int startalarm=0x7f0a0001;
-        public static final int subject=0x7f0a003d;
+        public static final int subject=0x7f0a003f;
         public static final int textView1=0x7f0a0030;
         public static final int textView2=0x7f0a0031;
-        public static final int time=0x7f0a003f;
+        public static final int time=0x7f0a0041;
         public static final int timePicker1=0x7f0a0002;
         public static final int time_button=0x7f0a000e;
+        public static final int where_am_i_Activity=0x7f0a0038;
         public static final int where_am_i_button=0x7f0a000f;
+        public static final int where_am_i_textview=0x7f0a0039;
     }
     public static final class layout {
         public static final int activity_alarm=0x7f030000;
@@ -152,12 +154,13 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int activity_alarm=0x7f090000;
-        public static final int activity_main=0x7f090001;
-        public static final int activity_quick_dial=0x7f090002;
-        public static final int activity_quick_sms=0x7f090003;
-        public static final int activity_sos=0x7f090004;
-        public static final int activity_talking_sms_list=0x7f090005;
-        public static final int activity_voice_note_recorder=0x7f090006;
+        public static final int activity_contacts_list=0x7f090001;
+        public static final int activity_main=0x7f090002;
+        public static final int activity_quick_dial=0x7f090003;
+        public static final int activity_quick_sms=0x7f090004;
+        public static final int activity_sos=0x7f090005;
+        public static final int activity_talking_sms_list=0x7f090006;
+        public static final int activity_voice_note_recorder=0x7f090007;
     }
     public static final class raw {
         public static final int alarm=0x7f040000;

@@ -2,7 +2,6 @@ package com.yp2012g4.blindroid;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
@@ -23,7 +22,6 @@ public class SOSActivity extends BlindroidActivity implements OnClickListener {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sos);
-    //tts = new TextToSpeech(this, this);
     mHandler = new Handler();
     back = (TalkingImageButton) findViewById(R.id.back_button);
     back.setOnClickListener(this);

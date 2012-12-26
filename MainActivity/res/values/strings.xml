@@ -74,6 +74,9 @@
     <string name="snooze_time">1</string>
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
+    <string name="noAlarm">No alarm</string>
+    <string name="setHour">Set Hour</string>
+    <string name="setMinutes">Set Minutes</string>
     <string name="read_sms_button">Read SMS</string>
     <string name="title_activity_talking_sms">TalkingSMS</string>
     <string name="title_activity_talking_list">TalkingList</string>
@@ -81,5 +84,8 @@
     <string name="current_menu_button">Current menu</string>
     <string name="title_activity_talking_sms_list">TalkingSmsList</string>
     <string name="title_activity_contacts_list">ContactsListActivity</string>
+    <string name="title_activity_set_clock">SetClockActivity</string>
+    <string name="setAlarmButton">Set Alarm</string>
+    <string name="alarmStatus">Alarm Status</string>
 
 </resources>

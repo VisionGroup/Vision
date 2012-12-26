@@ -1,4 +1,6 @@
-package com.yp2012g4.blindroid.customUI;
+package com.yp2012g4.blindroid.customUI.lists;
+
+
 
 import android.content.Context;
 import android.util.AttributeSet;

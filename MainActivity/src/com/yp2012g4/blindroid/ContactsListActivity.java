@@ -14,7 +14,7 @@ import com.yp2012g4.blindroid.customUI.lists.SmsAdapter;
 import com.yp2012g4.blindroid.customUI.lists.TalkingListView;
 import com.yp2012g4.blindroid.customUI.lists.ViewListRun;
 
-public class TalkingSmsList extends Activity implements OnInitListener {
+public class ContactsListActivity extends Activity implements OnInitListener {
   TalkingListView viewList;
   ArrayList<SmsType> details;
   AdapterView.AdapterContextMenuInfo info;
@@ -28,12 +28,14 @@ public class TalkingSmsList extends Activity implements OnInitListener {
   @Override protected void onCreate(Bundle savedInstanceState) {
     // TODO Auto-generated method stub
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_talking_sms_list);
-    viewList = (TalkingListView) findViewById(R.id.TalkingSmsListView);
+    setContentView(R.layout.contacts_list);
+    viewList = (TalkingListView) findViewById(R.id.ContactsListView);
     tts = new TextToSpeech(getApplicationContext(), this);
     SmsReader smsReader = new SmsReader(getApplicationContext());
     details = smsReader.getIncomingMessages();
     viewList.setAdapter(new SmsAdapter(details, this));
+    
+    
     viewList.setRun(new ViewListRun() {
       @Override public void onClick(int selectedItem) {
         String onClickS = getName(selectedItem);

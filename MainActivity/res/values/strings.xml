@@ -40,7 +40,6 @@
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="phoneStatus_message_charging_read">Charging</string>
-    
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     <string name="ClockTitle">Speaking clock</string>
     <string name="emptyHour">hh:mm:ss</string>
@@ -80,6 +79,7 @@
     <string name="title_activity_talking_list">TalkingList</string>
     <string name="title_activity_where_am_i">Where Am I</string>
     <string name="current_menu_button">Current menu</string>
-
     <string name="title_activity_talking_sms_list">TalkingSmsList</string>
+    <string name="title_activity_contacts_list">ContactsListActivity</string>
+
 </resources>

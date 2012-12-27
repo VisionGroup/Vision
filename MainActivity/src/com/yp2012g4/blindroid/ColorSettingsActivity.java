@@ -18,9 +18,6 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class ColorSettingsActivity extends onTouchEventClass implements
 		OnClickListener {
-	//will care for all posts
-    Handler mHandler = new Handler();
-
    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +76,7 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
+		//super.onWindowFocusChanged(hasFocus);
 		ViewGroup ColorSettingsView = (ViewGroup) findViewById(getViewId());
 		getButtonsPosition(ColorSettingsView);
 	}

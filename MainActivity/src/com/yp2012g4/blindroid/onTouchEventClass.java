@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -52,6 +53,11 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
 	 * ); startActivity (( button_to_intent .get( last_view ))); return false ;
 	 * } });
 	 */ 
+	@Override
+	protected void onCreate (Bundle savedInstanceState) {
+	  super.onCreate(savedInstanceState);
+	  DisplaySettings.setThemeToActivity(this);
+	}
 	
 	@Override
   public void onWindowFocusChanged(boolean hasFocus) {

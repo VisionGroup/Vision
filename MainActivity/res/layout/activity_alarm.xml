@@ -18,7 +18,8 @@
             android:background="@color/BLACK"
             android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-            android:text="@string/startAlarm" />
+            android:text="@string/startAlarm"
+            style="?textSize" />
 
     	</LinearLayout>
 
@@ -48,12 +49,13 @@
             android:background="@color/BLACK"
             android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-        	android:text="@string/stopAlarm" />
+        	android:text="@string/stopAlarm"
+        	style="?textSize" />
    </LinearLayout>
    
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal" >
 
         <include layout="@layout/control_bar_view" />

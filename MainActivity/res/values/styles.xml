@@ -1,25 +1,34 @@
-<resources>
-
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="WHITE">#FFFFFF</color>
     <color name="BLACK">#000000</color>
     <color name="RED">#FF0000</color>
     <color name="GREEN">#04B431</color>
     <color name="BLUE">#2E9AFE</color>
 
-</resources>
+   <style name="small_text">
+      <item name="android:textSize">20sp</item>
+   </style>
+   <style name="normal_text">
+      <item name="android:textSize">28sp</item>
+   </style>
+   <style name="large_text">
+      <item name="android:textSize">36sp</item>
+   </style>
+
+  <!-- Base application theme is the default theme. -->
+  <style name="Theme" parent="android:Theme">
+  </style>
+
+  <style name="Theme.Small">
+     <item name="textSize">@style/small_text</item>
+  </style>
+  
+    <style name="Theme.Normal">
+     <item name="textSize">@style/normal_text</item>
+  </style>
+  
+
+  <style name="Theme.Large">
+      <item name="textSize">@style/large_text</item>
+  </style>
+ </resources>

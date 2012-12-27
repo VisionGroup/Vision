@@ -82,4 +82,11 @@
     <string name="current_menu_button">Current menu</string>
 
     <string name="title_activity_talking_sms_list">TalkingSmsList</string>
+    <string name="normal_text_size_button">Normal Text Size</string>
+    <string name="large_text_size_button">Large Text Size</string>
+    <string name="small_text_size_button">Small Text Size</string>
+    <string name="title_activity_theme_settings">Theme Settings</string>
+    <string name="color_settings_button">Color Settings</string>
+    <string name="theme_settings_button">Text Size Settings</string>
+    <string name="title_activity_display_settings">Display Settings</string>
 </resources>

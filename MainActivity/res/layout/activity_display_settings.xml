@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/phoneStatusActivity"
+    android:id="@+id/displaySettingsActivity"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/BLACK"
-    tools:context=".PhoneStatus" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
+    tools:context=".DisplaySettings" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/button_getBatteryStatus"
+            android:id="@+id/button_set_colors"
             android:layout_width="0dip"
             android:layout_height="222dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/phone_status_button"
+            android:contentDescription="@string/color_settings_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/battery_button"
-            app:ReadText="@string/phoneStatus_button_getBatteryStatus_read" />
+            android:src="@drawable/color_settings_button" />
     </LinearLayout>
     
     <LinearLayout
@@ -29,16 +28,16 @@
         android:layout_height="wrap_content" >
 
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
-            android:id="@+id/button_getReceptionStatus"
+            android:id="@+id/button_set_theme"
             style="android:ButtonStyle"
             android:layout_width="0dip"
             android:layout_height="222dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/phoneStatus_button_getReceptionStatus"
+            android:contentDescription="@string/theme_settings_button"
             android:scaleType="fitCenter"
-            app:ReadText="@string/phoneStatus_button_getReceptionStatus_read"
-            android:src="@drawable/signal_button" />
+            android:src="@drawable/theme_settings_button" />
+
     </LinearLayout>
 
     <LinearLayout

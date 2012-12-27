@@ -17,7 +17,8 @@
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +33,8 @@
             android:background="@color/RED"
             android:text="@string/WhiteRed"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +49,8 @@
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
             android:textColor="@color/RED"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +65,8 @@
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,7 +81,8 @@
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
             android:textColor="@color/GREEN"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +97,8 @@
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,7 +113,8 @@
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"
             android:textColor="@color/BLUE"
-            android:textSize="@android:dimen/app_icon_size" />
+            android:textSize="@android:dimen/app_icon_size"
+            style="?textSize" />
     </LinearLayout>
 
     <LinearLayout

@@ -30,6 +30,8 @@
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
     <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>
     <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
+    <string name="phoneStatus_whereami">Phone Status Menu</string>
+    <string name="phoneStatus_help">You can press one of two buttons to get Battery level and charge status and to get Reception status.</string>
     <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
     <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
     <string name="phoneStatus_message_noSignal_read">No Signal.</string>

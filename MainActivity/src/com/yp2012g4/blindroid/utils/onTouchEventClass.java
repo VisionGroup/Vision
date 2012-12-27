@@ -53,6 +53,8 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   protected TalkingImageButton back;
   protected TalkingImageButton next;
   protected TalkingImageButton settings;
+  protected TalkingImageButton wai;
+  protected TalkingImageButton home;
   /**
    * Mapping from buttons to their locations on screen
    */
@@ -90,11 +92,10 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     float accurateY = getRelativeTop(v) + event.getY();
     if (event.getAction() == MotionEvent.ACTION_DOWN) {
       prev_view = getView(accurateX, accurateY);
-      if (last_view != null && prev_view != last_view) {// if not first touch in
-                                                        // activity and touching
-                                                        // in different view
+      if (last_view != null && prev_view != last_view)
+        // activity and touching
+        // in different view
         last_view.setPressed(false);
-      }
       if (v instanceof TalkingButton) {
         Log.i("MyLog", "DOWN in Button");
         speakOut(((TalkingButton) v).getText().toString());
@@ -127,12 +128,10 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
         for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet())
           if (entry.getValue().contains((int) accurateX, (int) accurateY))
             if (prev_view != entry.getKey()) {
-              if (prev_view instanceof TalkingButton) {
+              if (prev_view instanceof TalkingButton)
                 ((TalkingButton) prev_view).setPressed(false);
-              }
-              if (prev_view instanceof TalkingImageButton) {
+              if (prev_view instanceof TalkingImageButton)
                 ((TalkingImageButton) prev_view).setColorFilter(Color.argb(0, 255, 165, 0));
-              }
               speakOut(entry.getKey().getContentDescription().toString());
               entry.getKey().setColorFilter(Color.argb(150, 255, 165, 0));
               prev_view = entry.getKey();

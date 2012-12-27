@@ -10,13 +10,14 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.widget.AdapterView;
 
+import com.yp2012g4.blindroid.customUI.lists.ContactsAdapter;
 import com.yp2012g4.blindroid.customUI.lists.SmsAdapter;
 import com.yp2012g4.blindroid.customUI.lists.TalkingListView;
 import com.yp2012g4.blindroid.customUI.lists.ViewListRun;
 
 public class ContactsListActivity extends Activity implements OnInitListener {
   TalkingListView viewList;
-  ArrayList<SmsType> details;
+  ArrayList<ContactType> details;
   AdapterView.AdapterContextMenuInfo info;
   protected TextToSpeech tts;
   
@@ -32,8 +33,8 @@ public class ContactsListActivity extends Activity implements OnInitListener {
     viewList = (TalkingListView) findViewById(R.id.ContactsListView);
     tts = new TextToSpeech(getApplicationContext(), this);
     SmsReader smsReader = new SmsReader(getApplicationContext());
-    details = smsReader.getIncomingMessages();
-    viewList.setAdapter(new SmsAdapter(details, this));
+//    details = smsReader.getIncomingMessages();
+    viewList.setAdapter(new ContactsAdapter(details, this));
     
     
     viewList.setRun(new ViewListRun() {

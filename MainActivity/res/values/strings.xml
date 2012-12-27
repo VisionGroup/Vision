@@ -17,19 +17,21 @@
     <string name="title_activity_sos">SOSActivity</string>
     <string name="send_SOS_message">Send SOS</string>
     <string name="title_activity_quick_dial">QuickDialActivity</string>
-    <string name="Contact_number_1">Contact number 1</string>
-    <string name="Contact_number_2">Contact number 2</string>
-    <string name="Contact_number_3">Contact number 3</string>
-    <string name="Contact_number_4">Contact number 4</string>
-    <string name="Contact_number_5">Contact number 5</string>
-    <string name="Contact_number_6">Contact number 6</string>
-    <string name="Contact_number_7">Contact number 7</string>
-    <string name="Contact_number_8">Contact number 8</string>
-    <string name="Contact_number_9">Contact number 9</string>
+    <string name="Contact_number_1">Amit Yaffe</string>
+    <string name="Contact_number_2">Yaron Auster</string>
+    <string name="Contact_number_3">Roman Gurevitch</string>
+    <string name="Contact_number_4">Amir Blumental</string>
+    <string name="Contact_number_5">Amir Mizrachi</string>
+    <string name="Contact_number_6">Olivier Hofman</string>
+    <string name="Contact_number_7">Maytal Messing</string>
+    <string name="Contact_number_8">Yossi Gil</string>
+    <string name="Contact_number_9">Sabih Egbaria</string>
     <string name="phoneStatus_button_getBatteryStatus">Battery Level</string>
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
     <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>
     <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
+    <string name="phoneStatus_whereami">Phone Status Menu</string>
+    <string name="phoneStatus_help">You can press one of two buttons to get Battery level and charge status and to get Reception status.</string>
     <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
     <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
     <string name="phoneStatus_message_noSignal_read">No Signal.</string>
@@ -40,7 +42,6 @@
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="phoneStatus_message_charging_read">Charging</string>
-    
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     <string name="ClockTitle">Speaking clock</string>
     <string name="emptyHour">hh:mm:ss</string>
@@ -75,13 +76,20 @@
     <string name="snooze_time">1</string>
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
+    <string name="noAlarm">No alarm</string>
+    <string name="setHour">Set Hour</string>
+    <string name="setMinutes">Set Minutes</string>
     <string name="read_sms_button">Read SMS</string>
     <string name="title_activity_talking_sms">TalkingSMS</string>
     <string name="title_activity_talking_list">TalkingList</string>
     <string name="title_activity_where_am_i">Where Am I</string>
     <string name="current_menu_button">Current menu</string>
-
     <string name="title_activity_talking_sms_list">TalkingSmsList</string>
+    <string name="title_activity_contacts_list">ContactsListActivity</string>
+    <string name="title_activity_set_clock">SetClockActivity</string>
+    <string name="setAlarmButton">Set Alarm</string>
+    <string name="alarmStatus">Alarm Status</string>
+
     <string name="normal_text_size_button">Normal Text Size</string>
     <string name="large_text_size_button">Large Text Size</string>
     <string name="small_text_size_button">Small Text Size</string>

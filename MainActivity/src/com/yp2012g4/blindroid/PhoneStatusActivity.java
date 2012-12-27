@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
+import android.os.Handler;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * This is the activity for viewing and hearing phone status (currently battery,
@@ -23,7 +24,7 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amit Yaffe
  * 
  */
-public class PhoneStatusActivity extends onTouchEventClass implements OnClickListener {
+public class PhoneStatusActivity extends BlindroidActivity implements OnClickListener {
   /**
    * Used to activate the onTouch button reading function.
    */
@@ -43,8 +44,7 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
     protected SignalStrengthListener() {
     }
     
-    @Override
-    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
       // get the signal strength (a value between 0 and 31)
       _signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
@@ -54,15 +54,15 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
+        getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
-    tts = new TextToSpeech(this, this);
+    // tts = new TextToSpeech(this, this);
     // Battery Broadcast receiver.
     BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-      @Override
-      public void onReceive(Context context, Intent intent) {
+      @Override public void onReceive(Context context, Intent intent) {
         _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
       }
@@ -80,6 +80,19 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
     b = (TalkingImageButton) findViewById(R.id.button_getReceptionStatus);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
+    mHandler = new Handler();
+    back = (TalkingImageButton) findViewById(R.id.back_button);
+    back.setOnClickListener(this);
+    back.setOnTouchListener(this);
+    settings = (TalkingImageButton) findViewById(R.id.settings_button);
+    settings.setOnClickListener(this);
+    settings.setOnTouchListener(this);
+    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
+    wai.setOnClickListener(this);
+    wai.setOnTouchListener(this);
+    home = (TalkingImageButton) findViewById(R.id.home_button);
+    home.setOnClickListener(this);
+    home.setOnTouchListener(this);
   }
   
   /**
@@ -124,8 +137,7 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
@@ -135,13 +147,28 @@ public class PhoneStatusActivity extends onTouchEventClass implements OnClickLis
       case R.id.button_getReceptionStatus:
         speakOut(signalToString(_signal));
         break;
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.settings_button:
+        speakOut("Settings");
+        Intent intent = new Intent(this, ColorSettingsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.home_button:
+        speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + getString(R.string.phoneStatus_whereami));
+        break;
       default:
         break;
     }
   }
-  @Override
-  public int getViewId() {
+  
+  @Override public int getViewId() {
     return R.id.phoneStatusActivity;
   }
-
 }

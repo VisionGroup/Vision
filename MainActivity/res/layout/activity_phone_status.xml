@@ -18,7 +18,7 @@
             android:layout_height="222dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/phone_status_button"
+			android:contentDescription="@string/phoneStatus_button_getBatteryStatus_read"
             android:scaleType="fitCenter"
             android:src="@drawable/battery_button"
             app:ReadText="@string/phoneStatus_button_getBatteryStatus_read" />
@@ -35,7 +35,7 @@
             android:layout_height="222dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:contentDescription="@string/phoneStatus_button_getReceptionStatus"
+            android:contentDescription="@string/phoneStatus_button_getReceptionStatus_read"
             android:scaleType="fitCenter"
             app:ReadText="@string/phoneStatus_button_getReceptionStatus_read"
             android:src="@drawable/signal_button" />

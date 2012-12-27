@@ -15,8 +15,9 @@ import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class ColorSettingsActivity extends onTouchEventClass implements
+public class ColorSettingsActivity extends BlindroidActivity implements
 		OnClickListener {
    
 	@Override
@@ -24,7 +25,7 @@ public class ColorSettingsActivity extends onTouchEventClass implements
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_color_settings);
-		tts = new TextToSpeech(this, this);
+		//tts = new TextToSpeech(this, this);
 		mHandler = new Handler();
 
 		TalkingButton b = (TalkingButton)findViewById(R.id.WhiteBlack);

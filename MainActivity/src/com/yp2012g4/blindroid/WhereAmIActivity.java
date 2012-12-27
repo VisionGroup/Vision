@@ -12,9 +12,11 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.yp2012g4.blindroid.tools.LocationFinder;
 import com.yp2012g4.blindroid.tools.LocationHandler;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * 
@@ -22,7 +24,7 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
  * @author Olivier Hofman
  * 
  */
-public class WhereAmIActivity extends onTouchEventClass {
+public class WhereAmIActivity extends BlindroidActivity {
   Lock l = null;
   String lastProvider = "";
   Date lastUpdate = null;
@@ -45,7 +47,7 @@ public class WhereAmIActivity extends onTouchEventClass {
     f.run(h, true, true, this);
     log("Now running");
     l = new ReentrantLock();
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
   }
   
   void makeUseOfNewLocation(double longitude, double latitude, String provider, List<Address> addresses) {
@@ -59,6 +61,7 @@ public class WhereAmIActivity extends onTouchEventClass {
     }
     if (addresses.isEmpty()) {
       speakOut("No addresses found");
+      ((TextView) findViewById(R.id.where_am_i_textview)).setText("No addresses found");
       log("No addresses");
       return;
     }
@@ -74,7 +77,10 @@ public class WhereAmIActivity extends onTouchEventClass {
     Address a = addresses.get(0);
     for (int i = 0; i <= a.getMaxAddressLineIndex(); ++i)
       toSpeak += a.getAddressLine(i) + " ";
-    tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
+    log("speaking out location: " + toSpeak + "\n");
+    ((TextView) findViewById(R.id.where_am_i_textview)).setText(toSpeak);
+    speakOut(toSpeak);
+    //tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

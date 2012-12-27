@@ -3,13 +3,12 @@ package com.yp2012g4.blindroid;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.View.OnClickListener;
-
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class MainActivity extends onTouchEventClass implements OnClickListener {
+public class MainActivity extends BlindroidActivity implements OnClickListener {
   /** Called when the activity is first created. */
   // private TextToSpeech tts;
   // private Rect rect;
@@ -19,7 +18,7 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
     // TODO: Add to every activity!! or to the new Activity intrerface Yaron
     // is making
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     TalkingImageButton b = (TalkingImageButton) findViewById(R.id.sos_button);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
@@ -39,6 +38,9 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
     b = (TalkingImageButton) findViewById(R.id.quick_sms_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.read_sms_button);
     b.setOnClickListener(this);
     b.setOnTouchListener(this);
     back = (TalkingImageButton) findViewById(R.id.back_button);
@@ -118,6 +120,11 @@ public class MainActivity extends onTouchEventClass implements OnClickListener {
       case R.id.quick_sms_button:
         speakOut("Quick SMS");
         intent = new Intent(MainActivity.this, QuickSMSActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.read_sms_button:
+        speakOut("Starting SMS reader please wait");
+        intent = new Intent(MainActivity.this, TalkingSmsList.class);
         startActivity(intent);
         break;
       case R.id.back_button:

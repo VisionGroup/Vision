@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
@@ -17,6 +16,7 @@ import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * This class is an activity that quickly dials to a pre-defined limited number
@@ -25,7 +25,7 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amir
  * @version 1.0
  */
-public class QuickDialActivity extends onTouchEventClass implements OnClickListener {
+public class QuickDialActivity extends BlindroidActivity implements OnClickListener {
   protected List<String> list_of_phone_numbers = new ArrayList<String>();
   
   // private static final int NUM_OF_QUICK_DIALS = 9;
@@ -34,7 +34,7 @@ public class QuickDialActivity extends onTouchEventClass implements OnClickListe
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.activity_quick_dial);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     mHandler = new Handler();
     // String phoneNumber = null;
     // int i = 0;
@@ -146,26 +146,29 @@ public class QuickDialActivity extends onTouchEventClass implements OnClickListe
     return true;
   }
   
+  @SuppressWarnings("boxing")
   @Override
   public void onClick(View v) {
     if (v instanceof TalkingButton) {
       speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
-      mHandler.postDelayed(mLaunchTask, 1000);
+      while (_t.isSpeaking()){
+        //Wait...
+      }
       switch (v.getId()) {
         case R.id.Contact_number_1:
-          phoneCall("0524484993");
+          phoneCall("0529240424");
           break;
         case R.id.Contact_number_2:
-          // phoneCall("0524484993");
+           phoneCall("0528726908");
           break;
         case R.id.Contact_number_3:
-          // phoneCall("0524484993");
+           phoneCall("0544457141");
           break;
         case R.id.Contact_number_4:
-          // phoneCall("0524484993");
+           phoneCall("0542197720");
           break;
         case R.id.Contact_number_5:
-          // phoneCall("0524484993");
+           phoneCall("0524484993");
           break;
         case R.id.Contact_number_6:
           // phoneCall("0524484993");

@@ -20,8 +20,9 @@ import android.widget.AnalogClock;
 import android.widget.TextView;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class SpeakingClockActivity extends onTouchEventClass implements OnClickListener {
+public class SpeakingClockActivity extends BlindroidActivity implements OnClickListener {
   /** Parse the Calendar to a string to speak
    * @param cal
    *          - the Calendar you want to parse
@@ -39,7 +40,7 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     mHandler = new Handler();
 
     
@@ -96,18 +97,6 @@ public class SpeakingClockActivity extends onTouchEventClass implements OnClickL
     return true;
   }
   
-  @Override
-  public void onInit(int status) {
-    if (status == TextToSpeech.SUCCESS) {
-      int r = tts.setLanguage(Locale.US);
-      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
-        Log.e("tts", "error setLanguage");
-        return;
-      }
-      return;
-    }
-    Log.e("tts", "error init language");
-  }
   
   /**
    * Perform actions when the window get into focus 

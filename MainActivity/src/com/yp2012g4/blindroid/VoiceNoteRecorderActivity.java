@@ -13,8 +13,9 @@ import android.view.View.OnClickListener;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.fileUtils;
 import com.yp2012g4.blindroid.tools.fileUtils.TYPES;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class VoiceNoteRecorderActivity extends onTouchEventClass implements OnClickListener {
+public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnClickListener {
   private final android.media.MediaRecorder _recorder = new android.media.MediaRecorder();
   @SuppressWarnings("unused")
   private final android.media.MediaPlayer _player = new android.media.MediaPlayer();
@@ -31,7 +32,7 @@ public class VoiceNoteRecorderActivity extends onTouchEventClass implements OnCl
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_voice_note_recorder);
-    tts = new TextToSpeech(this, this);
+    //tts = new TextToSpeech(this, this);
     _setAudio();
     TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_prevNote);
     b.setOnClickListener(this);

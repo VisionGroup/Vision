@@ -2,13 +2,13 @@ package com.yp2012g4.blindroid;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * This class is an activity which sends a pre-defined SOS message to a
@@ -17,12 +17,11 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amir
  * @version 1.0
  */
-public class SOSActivity extends onTouchEventClass implements OnClickListener {
+public class SOSActivity extends BlindroidActivity implements OnClickListener {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sos);
-    tts = new TextToSpeech(this, this);
     mHandler = new Handler();
     back = (TalkingImageButton) findViewById(R.id.back_button);
     back.setOnClickListener(this);

@@ -1,8 +1,15 @@
 package com.yp2012g4.blindroid.tools;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 import android.content.Context;
 import android.location.Address;
@@ -10,6 +17,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -26,7 +34,7 @@ public class LocationFinder {
   
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork, Context con) {
     log("run");
-    coder = new Geocoder(con, Locale.ENGLISH);
+    coder = new Geocoder(con, Locale.US);
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
@@ -58,6 +66,7 @@ public class LocationFinder {
     if (coder == null)
       log("Error in makeUseOfNewLocation: the coder was not initialised");
     List<Address> addresses = null;
+    OpenStreetMapGeocoding(latitude, longitude);
     try {
       addresses = coder.getFromLocation(latitude, longitude, 1);
       if (addresses.isEmpty())
@@ -93,6 +102,35 @@ public class LocationFinder {
       }
     };
     return l;
+  }
+  
+  static void OpenStreetMapGeocoding(double latitude, double longitude) {
+    AsyncTask<URL, Void, String> downloader = new AsyncTask<URL, Void, String>() {
+      @Override protected String doInBackground(URL... params) {
+        String r = "";
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        try {
+          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+          Document d = dBuilder.parse(new InputSource(params[0].openStream()));
+          r = d.getElementsByTagName("result").item(0).getChildNodes().item(0).getNodeValue();
+        } catch (Exception e) {
+          log("Error: " + e.getMessage());
+        }
+        return r;
+      }
+      
+      @Override protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        log("Geocoding: " + result);
+      }
+    };
+    try {
+      URL sourceUrl = new URL("http://nominatim.openstreetmap.org/reverse?accept-language=en&lat=" + latitude + "&lon=" + longitude);
+      // String result = log("OpenStreetMap Geocoding: " + result);
+      downloader.execute(sourceUrl);
+    } catch (Exception e) {
+      log("Error: " + e.getMessage());
+    }
   }
   
   public void stop() {

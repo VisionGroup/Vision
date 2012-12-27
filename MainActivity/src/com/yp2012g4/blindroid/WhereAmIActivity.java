@@ -1,15 +1,12 @@
 package com.yp2012g4.blindroid;
 
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
-import android.location.Address;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
@@ -20,9 +17,7 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * 
- * 
  * @author Olivier Hofman
- * 
  */
 public class WhereAmIActivity extends BlindroidActivity {
   Lock l = null;
@@ -39,32 +34,21 @@ public class WhereAmIActivity extends BlindroidActivity {
     LocationFinder f = new LocationFinder(manager);
     log("Got location finder");
     LocationHandler h = new LocationHandler() {
-      @Override public void handleLocation(double longitude, double latitude, String provider, List<Address> addresses) {
-        makeUseOfNewLocation(longitude, latitude, provider, addresses);
+      @Override public void handleLocation(double longitude, double latitude, String provider, String address) {
+        makeUseOfNewLocation(longitude, latitude, provider, address);
       }
     };
     log("Got location handler");
-    f.run(h, true, true, this);
+    f.run(h, true, true);
     log("Now running");
     l = new ReentrantLock();
-    //tts = new TextToSpeech(this, this);
   }
   
-  void makeUseOfNewLocation(double longitude, double latitude, String provider, List<Address> addresses) {
+  void makeUseOfNewLocation(double longitude, double latitude, String provider, String address) {
     log("longitude = " + longitude + "\n");
     log("latitude = " + latitude + "\n");
     log("provider = " + provider + "\n");
-    for (Address a : addresses) {
-      log("new address: ");
-      for (int i = 0; i <= a.getMaxAddressLineIndex(); ++i)
-        log("\t" + a.getAddressLine(i));
-    }
-    if (addresses.isEmpty()) {
-      speakOut("No addresses found");
-      ((TextView) findViewById(R.id.where_am_i_textview)).setText("No addresses found");
-      log("No addresses");
-      return;
-    }
+    log("address: " + address);
     Date d = new Date();
     l.lock();
     if (lastUpdate == null || d.getTime() - lastUpdate.getTime() > updateTimeOut
@@ -73,14 +57,11 @@ public class WhereAmIActivity extends BlindroidActivity {
       lastProvider = provider;
     }
     l.unlock();
-    String toSpeak = "Your Location is: ";
-    Address a = addresses.get(0);
-    for (int i = 0; i <= a.getMaxAddressLineIndex(); ++i)
-      toSpeak += a.getAddressLine(i) + " ";
+    String toSpeak = "Your Location is: " + address;
     log("speaking out location: " + toSpeak + "\n");
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(toSpeak);
     speakOut(toSpeak);
-    //tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
+    // tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

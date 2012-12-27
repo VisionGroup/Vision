@@ -3,7 +3,6 @@ package com.yp2012g4.blindroid.tools;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -11,9 +10,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,16 +21,16 @@ public class LocationFinder {
   List<LocationListener> listeners = null;
   LocationManager locationManager;
   LocationHandler handler;
-  Geocoder coder = null;
   
+  // Geocoder coder = null;
   public LocationFinder(LocationManager newLocationManager) {
     locationManager = newLocationManager;
     log("created");
   }
   
-  public void run(LocationHandler h, boolean useGPS, boolean useNetwork, Context con) {
+  public void run(LocationHandler h, boolean useGPS, boolean useNetwork) {
     log("run");
-    coder = new Geocoder(con, Locale.US);
+//    coder = new Geocoder(con, Locale.US);
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
@@ -63,19 +59,18 @@ public class LocationFinder {
     double latitude = location.getLatitude();
     double longitude = location.getLongitude();
     log("latitude = " + latitude + ", longitude = " + longitude);
-    if (coder == null)
-      log("Error in makeUseOfNewLocation: the coder was not initialised");
-    List<Address> addresses = null;
-    OpenStreetMapGeocoding(latitude, longitude);
-    try {
-      addresses = coder.getFromLocation(latitude, longitude, 1);
-      if (addresses.isEmpty())
-        log("No address returned");
-    } catch (Exception e) {
-      log("Error in getFromLocation: " + e.getMessage());
-      return;
-    }
-    handler.handleLocation(longitude, latitude, provider, addresses);
+//    if (coder == null)
+//      log("Error in makeUseOfNewLocation: the coder was not initialised");
+//    List<Address> addresses = null;
+    OpenStreetMapGeocoding(latitude, longitude, provider);
+//    try {
+//      addresses = coder.getFromLocation(latitude, longitude, 1);
+//      if (addresses.isEmpty())
+//        log("No address returned");
+//    } catch (Exception e) {
+//      log("Error in getFromLocation: " + e.getMessage());
+//      return;
+//    }
   }
   
   static void log(String s) {
@@ -104,7 +99,7 @@ public class LocationFinder {
     return l;
   }
   
-  static void OpenStreetMapGeocoding(double latitude, double longitude) {
+  void OpenStreetMapGeocoding(final double latitude, final double longitude, final String provider) {
     AsyncTask<URL, Void, String> downloader = new AsyncTask<URL, Void, String>() {
       @Override protected String doInBackground(URL... params) {
         String r = "";
@@ -122,6 +117,7 @@ public class LocationFinder {
       @Override protected void onPostExecute(String result) {
         super.onPostExecute(result);
         log("Geocoding: " + result);
+        handler.handleLocation(longitude, latitude, provider, result);
       }
     };
     try {

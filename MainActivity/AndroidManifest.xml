@@ -100,6 +100,11 @@
         </service>
 
         <activity
+            android:name="com.yp2012g4.blindroid.SetClockActivity"
+            android:label="@string/title_activity_set_clock" >
+        </activity>
+
+        <activity
             android:name="com.yp2012g4.blindroid.ContactsListActivity"
             android:label="@string/title_activity_contacts_list" >
             <meta-data

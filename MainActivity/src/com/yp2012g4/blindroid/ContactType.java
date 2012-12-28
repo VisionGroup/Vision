@@ -29,6 +29,7 @@ public class ContactType {
    * @param cur
    * @param context
    */
+  @SuppressWarnings("boxing")
   public ContactType(Cursor cur, Context context) {
     address = cur.getString(cur.getColumnIndexOrThrow("address")).toString();
     String mili = cur.getString(cur.getColumnIndexOrThrow("date")).toString();

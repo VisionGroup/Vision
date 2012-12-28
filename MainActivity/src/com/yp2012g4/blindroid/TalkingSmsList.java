@@ -26,7 +26,6 @@ public class TalkingSmsList extends Activity implements OnInitListener {
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
-    // TODO Auto-generated method stub
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_talking_sms_list);
     viewList = (TalkingListView) findViewById(R.id.TalkingSmsListView);
@@ -68,14 +67,13 @@ public class TalkingSmsList extends Activity implements OnInitListener {
   }
   
   private String getName(int selectedItem) {
-    if (details.size() >= selectedItem) {
-      if (details.get(selectedItem).getPerson() != "") {
+    if (details.size() >= selectedItem)
+      if (details.get(selectedItem).getPerson() != "")
         return "From " + details.get(selectedItem).getPerson() + "  ";
-      } else {
+      else {
         String phoneNumber = details.get(selectedItem).getAddress();
         return "From" + phoneNumber + "  ";
       }
-    }
     return "";
   }
   
@@ -83,7 +81,6 @@ public class TalkingSmsList extends Activity implements OnInitListener {
     tts.stop();
     super.onBackPressed();
   }
-  
   
   private void speakOut(String s) {
     tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);

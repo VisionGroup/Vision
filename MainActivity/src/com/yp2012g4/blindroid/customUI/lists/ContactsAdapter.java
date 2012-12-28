@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.yp2012g4.blindroid.ContactType;
 import com.yp2012g4.blindroid.R;
-import com.yp2012g4.blindroid.SmsType;
 
 public class ContactsAdapter extends BaseAdapter {
 
@@ -25,21 +24,25 @@ public class ContactsAdapter extends BaseAdapter {
     _c = c;
   }
 
+  @Override
   public int getCount() {
     // TODO Auto-generated method stub
     return _data.size();
   }
 
+  @Override
   public Object getItem(int position) {
     // TODO Auto-generated method stub
     return _data.get(position);
   }
 
+  @Override
   public long getItemId(int position) {
     // TODO Auto-generated method stub
     return position;
   }
 
+  @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     View v = convertView;
     if (v == null) {

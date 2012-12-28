@@ -5,12 +5,17 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.LocationFinder;
 import com.yp2012g4.blindroid.tools.LocationHandler;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
@@ -19,29 +24,19 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * 
  * @author Olivier Hofman
  */
-public class WhereAmIActivity extends BlindroidActivity {
+public class WhereAmIActivity extends BlindroidActivity implements OnClickListener {
+  private static void log(String s) {
+    Log.d("WhereAmIActivity", s);
+  }
+  
   Lock l = null;
   String lastProvider = "";
   Date lastUpdate = null;
   long updateTimeOut = 60 * 1000; // 1 minute
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_where_am_i);
-    log("WhereAmIActivity::onCreate");
-    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    log("Got location manager");
-    LocationFinder f = new LocationFinder(manager);
-    log("Got location finder");
-    LocationHandler h = new LocationHandler() {
-      @Override public void handleLocation(double longitude, double latitude, String provider, String address) {
-        makeUseOfNewLocation(longitude, latitude, provider, address);
-      }
-    };
-    log("Got location handler");
-    f.run(h, true, true);
-    log("Now running");
-    l = new ReentrantLock();
+  @Override
+  public int getViewId() {
+    return R.id.where_am_i_Activity;
   }
   
   void makeUseOfNewLocation(double longitude, double latitude, String provider, String address) {
@@ -61,20 +56,70 @@ public class WhereAmIActivity extends BlindroidActivity {
     log("speaking out location: " + toSpeak + "\n");
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(toSpeak);
     speakOut(toSpeak);
-    // tts.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.settings_button:
+        speakOut("Settings");
+        Intent intent = new Intent(this, ColorSettingsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.home_button:
+        speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + getString(R.string.title_activity_where_am_i));
+        break;
+      default:
+        break;
+    }
+  }
+  
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_where_am_i);
+    mHandler = new Handler();
+    back = (TalkingImageButton) findViewById(R.id.back_button);
+    back.setOnClickListener(this);
+    back.setOnTouchListener(this);
+    settings = (TalkingImageButton) findViewById(R.id.settings_button);
+    settings.setOnClickListener(this);
+    settings.setOnTouchListener(this);
+    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
+    wai.setOnClickListener(this);
+    wai.setOnTouchListener(this);
+    home = (TalkingImageButton) findViewById(R.id.home_button);
+    home.setOnClickListener(this);
+    home.setOnTouchListener(this);
+    log("WhereAmIActivity::onCreate");
+    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    log("Got location manager");
+    LocationFinder f = new LocationFinder(manager);
+    log("Got location finder");
+    LocationHandler h = new LocationHandler() {
+      @Override
+      public void handleLocation(double longitude, double latitude, String provider, String address) {
+        makeUseOfNewLocation(longitude, latitude, provider, address);
+      }
+    };
+    log("Got location handler");
+    f.run(h, true, true);
+    log("Now running");
+    l = new ReentrantLock();
+  }
+  
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_main, menu);
     return true;
-  }
-  
-  private static void log(String s) {
-    Log.d("WhereAmIActivity", s);
-  }
-  
-  @Override public int getViewId() {
-    return R.id.where_am_i_Activity;
   }
 }

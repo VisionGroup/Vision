@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/AlarmActivity"
     android:layout_width="fill_parent"
@@ -6,63 +6,53 @@
     android:orientation="vertical"
     tools:context=".AlarmActivity" >
 
-   <LinearLayout
+    <com.yp2012g4.blindroid.customUI.TalkingButton
+        android:id="@+id/statusButton"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:layout_weight="1"
+        android:background="@color/BLACK"
+        android:scaleType="fitCenter"
+        android:text="@string/alarmStatus"
+        android:textColor="@color/WHITE" />
+
+    <com.yp2012g4.blindroid.customUI.TalkingButton
+        android:id="@+id/setButton"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:layout_weight="1"
+        android:background="@color/BLACK"
+        android:scaleType="fitCenter"
+        android:text="@string/setAlarmButton"
+        android:textColor="@color/WHITE" />
+
+    <com.yp2012g4.blindroid.customUI.TalkingButton
+        android:id="@+id/startalarm"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:layout_weight="1"
+        android:background="@color/BLACK"
+        android:scaleType="fitCenter"
+        android:text="@string/startAlarm"
+        android:textColor="@color/WHITE" />
+
+    <com.yp2012g4.blindroid.customUI.TalkingButton
+        android:id="@+id/cancelalarm"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:layout_weight="1"
+        android:background="@color/BLACK"
+        android:scaleType="fitCenter"
+        android:text="@string/stopAlarm"
+        android:textColor="@color/WHITE" />
+    
+     <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
         <include layout="@layout/control_bar_view" />
-
     </LinearLayout>
 
-   <com.yp2012g4.blindroid.customUI.TalkingButton
-       android:id="@+id/statusButton"
-       android:layout_width="match_parent"
-       android:layout_height="100sp"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentTop="true"
-       android:layout_weight="1"
-       android:background="@color/BLACK"
-       android:scaleType="fitCenter"
-       android:text="@string/alarmStatus"
-       android:textColor="@color/WHITE" />
-
-   <com.yp2012g4.blindroid.customUI.TalkingButton
-       android:id="@+id/setButton"
-       android:layout_width="match_parent"
-       android:layout_height="100sp"
-       android:layout_alignParentLeft="true"
-       android:layout_below="@+id/statusButton"
-       android:layout_weight="1"
-       android:background="@color/BLACK"
-       android:scaleType="fitCenter"
-       android:text="@string/setAlarmButton"
-       android:textColor="@color/WHITE" />
-
-   <com.yp2012g4.blindroid.customUI.TalkingButton
-       android:id="@+id/startalarm"
-       android:layout_width="match_parent"
-       android:layout_height="100sp"
-       android:layout_alignParentLeft="true"
-       android:layout_below="@+id/setButton"
-       android:layout_weight="1"
-       android:background="@color/BLACK"
-       android:scaleType="fitCenter"
-       android:text="@string/startAlarm"
-       android:textColor="@color/WHITE" />
-
-   <com.yp2012g4.blindroid.customUI.TalkingButton
-       android:id="@+id/cancelalarm"
-       android:layout_width="match_parent"
-       android:layout_height="100sp"
-       android:layout_alignParentLeft="true"
-       android:layout_below="@+id/startalarm"
-       android:layout_weight="1"
-       android:background="@color/BLACK"
-       android:scaleType="fitCenter"
-       android:text="@string/stopAlarm"
-       android:textColor="@color/WHITE" />
-
-</RelativeLayout>
+</LinearLayout>

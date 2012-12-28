@@ -13,12 +13,13 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_1"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-            android:text="@string/Contact_number_1" />
+            android:text="@string/Contact_number_1"
+            android:textColor="@color/WHITE" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -28,12 +29,13 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_2"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-            android:text="@string/Contact_number_2" />
+            android:text="@string/Contact_number_2"
+            android:textColor="@color/WHITE" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -43,12 +45,13 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_3"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-            android:text="@string/Contact_number_3" />
+            android:text="@string/Contact_number_3"
+            android:textColor="@color/WHITE" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +61,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_4"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:textColor="@color/WHITE"
@@ -73,7 +76,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_5"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:textColor="@color/WHITE"
@@ -88,7 +91,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_6"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:textColor="@color/WHITE"
@@ -103,7 +106,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_7"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="48dip"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:textColor="@color/WHITE"
@@ -118,12 +121,13 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_8"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="49dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-            android:text="@string/Contact_number_8" />
+            android:text="@string/Contact_number_8"
+            android:textColor="@color/WHITE" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -133,12 +137,13 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/Contact_number_9"
             android:layout_width="0dip"
-            android:layout_height="49dip"
+            android:layout_height="49dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
             android:scaleType="fitCenter"
-            android:text="@string/Contact_number_9" />
+            android:text="@string/Contact_number_9"
+            android:textColor="@color/WHITE" />
+
     </LinearLayout>
 
     <LinearLayout

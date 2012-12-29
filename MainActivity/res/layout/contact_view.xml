@@ -11,18 +11,21 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#003366" />
+        android:textColor="#003366"
+        style="?textAppearance" />
 
     <TextView
         android:id="@+id/contact_phone"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom" />
+        android:gravity="bottom"
+        style="?textAppearance" />
 
     <TextView
         android:id="@+id/contact_email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="right" />
+        android:gravity="right"
+        style="?textAppearance" />
 
 </LinearLayout>

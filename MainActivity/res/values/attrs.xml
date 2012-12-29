@@ -11,5 +11,9 @@ have created. -->
     <attr name="ReadText" />
     <attr name="ReadToolTip" />
   </declare-styleable>
+  
+  <!-- View styles -->
+  <attr name="textAppearance" format="reference" />
+  <attr name="backgroundColor" format="reference" />
  
 </resources>

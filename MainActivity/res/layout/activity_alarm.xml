@@ -4,52 +4,54 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".AlarmActivity" >
+    tools:context=".AlarmActivity"
+    style="?backgroundColor"  >
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/statusButton"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="95dp"
         android:layout_weight="1"
-        android:background="@color/BLACK"
         android:scaleType="fitCenter"
         android:text="@string/alarmStatus"
-        android:textColor="@color/WHITE" />
+        android:background="@android:color/transparent"
+        style="?textAppearance"  />
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/setButton"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="95dp"
         android:layout_weight="1"
-        android:background="@color/BLACK"
         android:scaleType="fitCenter"
         android:text="@string/setAlarmButton"
-        android:textColor="@color/WHITE" />
+        android:background="@android:color/transparent"
+        style="?textAppearance"  />
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/startalarm"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="95dp"
         android:layout_weight="1"
-        android:background="@color/BLACK"
         android:scaleType="fitCenter"
         android:text="@string/startAlarm"
-        android:textColor="@color/WHITE" />
+        android:background="@android:color/transparent"
+        style="?textAppearance"  />
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/cancelalarm"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="95dp"
         android:layout_weight="1"
-        android:background="@color/BLACK"
         android:scaleType="fitCenter"
         android:text="@string/stopAlarm"
-        android:textColor="@color/WHITE" />
+        android:background="@android:color/transparent"
+        style="?textAppearance"  />
     
      <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
         android:orientation="horizontal" >
 
         <include layout="@layout/control_bar_view" />

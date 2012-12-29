@@ -79,3 +79,5 @@ gen
 /mainactivity/bin/classes/com/yp2012g4/blindroid/*.class
 /mainactivity/bin/classes/com/yp2012g4/blindroid/*.class
 /mainactivity/gen/com/yp2012g4/blindroid/R.java
+/MainActivity/bin/classes/com/yp2012g4/blindroid/R$layout.class
+/MainActivity/bin/classes/com/yp2012g4/blindroid/R$string.class

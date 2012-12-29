@@ -24,7 +24,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/setHour"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        style="?textAppearance" />
 
     <TextView
         android:id="@+id/number"
@@ -34,6 +35,7 @@
         android:layout_centerVertical="true"
         android:text="@string/noAlarm"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        style="?textAppearance" />
 
 </RelativeLayout>

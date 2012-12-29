@@ -95,6 +95,7 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
         break;
       case R.id.home_button:
         speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.current_menu_button:
         speakOut("This is " + "the home screen");

@@ -88,7 +88,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ContactsListView=0x7f0a0047;
         public static final int GreenBlack=0x7f0a000b;
         public static final int Large_text_size_button=0x7f0a003c;
-        public static final int LinearLayout1=0x7f0a0001;
+        public static final int LinearLayout1=0x7f0a0005;
         public static final int MainActivityView=0x7f0a0011;
         public static final int Normal_text_size_button=0x7f0a003b;
         public static final int QuickDialActivity=0x7f0a001d;
@@ -125,7 +125,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button_recordStop=0x7f0a003f;
         public static final int button_set_colors=0x7f0a000f;
         public static final int button_set_theme=0x7f0a0010;
-        public static final int cancelalarm=0x7f0a0005;
+        public static final int cancelalarm=0x7f0a0004;
         public static final int contact_email=0x7f0a0046;
         public static final int contact_name=0x7f0a0044;
         public static final int contact_phone=0x7f0a0045;
@@ -140,15 +140,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int quick_dial_button=0x7f0a0018;
         public static final int quick_sms_button=0x7f0a0019;
         public static final int read_sms_button=0x7f0a0015;
-        public static final int setButton=0x7f0a0003;
+        public static final int setButton=0x7f0a0002;
         public static final int set_alarm_view=0x7f0a0031;
         public static final int settings_button=0x7f0a0049;
         public static final int sms_body=0x7f0a0051;
         public static final int sms_from=0x7f0a0050;
         public static final int sms_time=0x7f0a0052;
         public static final int sos_button=0x7f0a0012;
-        public static final int startalarm=0x7f0a0004;
-        public static final int statusButton=0x7f0a0002;
+        public static final int startalarm=0x7f0a0003;
+        public static final int statusButton=0x7f0a0001;
         public static final int subject=0x7f0a004d;
         public static final int textView1=0x7f0a0032;
         public static final int textView2=0x7f0a0033;
@@ -182,14 +182,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class menu {
         public static final int activity_alarm=0x7f090000;
-        public static final int activity_main=0x7f090001;
-        public static final int activity_quick_dial=0x7f090002;
-        public static final int activity_quick_sms=0x7f090003;
-        public static final int activity_set_clock=0x7f090004;
-        public static final int activity_sos=0x7f090005;
-        public static final int activity_talking_sms_list=0x7f090006;
-        public static final int activity_voice_note_recorder=0x7f090007;
-        public static final int contacts_list=0x7f090008;
+        public static final int activity_contacts_list=0x7f090001;
+        public static final int activity_main=0x7f090002;
+        public static final int activity_quick_dial=0x7f090003;
+        public static final int activity_quick_sms=0x7f090004;
+        public static final int activity_set_clock=0x7f090005;
+        public static final int activity_sos=0x7f090006;
+        public static final int activity_talking_sms_list=0x7f090007;
+        public static final int activity_voice_note_recorder=0x7f090008;
+        public static final int contacts_list=0x7f090009;
     }
     public static final class raw {
         public static final int alarm=0x7f040000;

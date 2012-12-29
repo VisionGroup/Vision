@@ -13,6 +13,12 @@ import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
+/**
+ * Tests for QuickSMSActivity
+ * 
+ * @author Amir
+ * @version 1.0
+ */
 public class QuickSMSActivityTest extends
 		ActivityInstrumentationTestCase2<QuickSMSActivity> {
 	private Solo solo;
@@ -23,6 +29,7 @@ public class QuickSMSActivityTest extends
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();

@@ -25,13 +25,22 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int ReadToolTip=0x7f010001;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int backgroundColor=0x7f010003;
+        /**  View styles 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int textAppearance=0x7f010002;
     }
     public static final class color {
-        public static final int BLACK=0x7f080001;
-        public static final int BLUE=0x7f080004;
-        public static final int GREEN=0x7f080003;
-        public static final int RED=0x7f080002;
-        public static final int WHITE=0x7f080000;
+        public static final int BLACK=0x7f070001;
+        public static final int BLUE=0x7f070004;
+        public static final int GREEN=0x7f070003;
+        public static final int RED=0x7f070002;
+        public static final int WHITE=0x7f070000;
     }
     public static final class dimen {
         public static final int NormalTextSize=0x7f050000;
@@ -40,125 +49,136 @@ containing a value of this type.
         public static final int alarm_clock_button=0x7f020000;
         public static final int back_button=0x7f020001;
         public static final int battery_button=0x7f020002;
-        public static final int compass_button=0x7f020003;
-        public static final int current_menu_button=0x7f020004;
-        public static final int down=0x7f020005;
-        public static final int home_button=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int next_button=0x7f020008;
-        public static final int phone_status_button=0x7f020009;
-        public static final int play=0x7f02000a;
-        public static final int quick_dial_button=0x7f02000b;
-        public static final int quick_sms_button=0x7f02000c;
-        public static final int read_sms_button=0x7f02000d;
-        public static final int record=0x7f02000e;
-        public static final int settings_button=0x7f02000f;
-        public static final int signal_button=0x7f020010;
-        public static final int sos_button=0x7f020011;
-        public static final int sos_pic=0x7f020012;
-        public static final int stop=0x7f020013;
-        public static final int time_button=0x7f020014;
-        public static final int up=0x7f020015;
-        public static final int voice_recorder_button=0x7f020016;
+        public static final int color_settings_button=0x7f020003;
+        public static final int compass_button=0x7f020004;
+        public static final int current_menu_button=0x7f020005;
+        public static final int down=0x7f020006;
+        public static final int home_button=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int next_button=0x7f020009;
+        public static final int phone_status_button=0x7f02000a;
+        public static final int play=0x7f02000b;
+        public static final int quick_dial_button=0x7f02000c;
+        public static final int quick_sms_button=0x7f02000d;
+        public static final int read_sms_button=0x7f02000e;
+        public static final int record=0x7f02000f;
+        public static final int settings_button=0x7f020010;
+        public static final int signal_button=0x7f020011;
+        public static final int sos_button=0x7f020012;
+        public static final int sos_pic=0x7f020013;
+        public static final int stop=0x7f020014;
+        public static final int theme_settings_button=0x7f020015;
+        public static final int time_button=0x7f020016;
+        public static final int up=0x7f020017;
+        public static final int voice_recorder_button=0x7f020018;
     }
     public static final class id {
         public static final int AlarmActivity=0x7f0a0000;
         public static final int BlueBlack=0x7f0a000d;
         public static final int ColorSettingsActivity=0x7f0a0006;
-        public static final int Contact_number_1=0x7f0a001b;
-        public static final int Contact_number_2=0x7f0a001c;
-        public static final int Contact_number_3=0x7f0a001d;
-        public static final int Contact_number_4=0x7f0a001e;
-        public static final int Contact_number_5=0x7f0a001f;
-        public static final int Contact_number_6=0x7f0a0020;
-        public static final int Contact_number_7=0x7f0a0021;
-        public static final int Contact_number_8=0x7f0a0022;
-        public static final int Contact_number_9=0x7f0a0023;
-        public static final int ContactsListView=0x7f0a0040;
+        public static final int Contact_number_1=0x7f0a001e;
+        public static final int Contact_number_2=0x7f0a001f;
+        public static final int Contact_number_3=0x7f0a0020;
+        public static final int Contact_number_4=0x7f0a0021;
+        public static final int Contact_number_5=0x7f0a0022;
+        public static final int Contact_number_6=0x7f0a0023;
+        public static final int Contact_number_7=0x7f0a0024;
+        public static final int Contact_number_8=0x7f0a0025;
+        public static final int Contact_number_9=0x7f0a0026;
+        public static final int ContactsListView=0x7f0a0047;
         public static final int GreenBlack=0x7f0a000b;
+        public static final int Large_text_size_button=0x7f0a003c;
         public static final int LinearLayout1=0x7f0a0005;
-        public static final int MainActivityView=0x7f0a000e;
-        public static final int QuickDialActivity=0x7f0a001a;
-        public static final int QuickSMSActivity=0x7f0a0024;
+        public static final int MainActivityView=0x7f0a0011;
+        public static final int Normal_text_size_button=0x7f0a003b;
+        public static final int QuickDialActivity=0x7f0a001d;
+        public static final int QuickSMSActivity=0x7f0a0027;
         public static final int RedBlack=0x7f0a0009;
-        public static final int SMS_number_1=0x7f0a0025;
-        public static final int SMS_number_2=0x7f0a0026;
-        public static final int SMS_number_3=0x7f0a0027;
-        public static final int SMS_number_4=0x7f0a0028;
-        public static final int SMS_number_5=0x7f0a0029;
-        public static final int SMS_number_6=0x7f0a002a;
-        public static final int SMS_number_7=0x7f0a002b;
-        public static final int SMS_number_8=0x7f0a002c;
-        public static final int SMS_number_9=0x7f0a002d;
-        public static final int SOS_textview=0x7f0a0031;
-        public static final int Send_SOS_Message=0x7f0a0032;
-        public static final int SpeakingClockSctivity=0x7f0a0033;
-        public static final int TalkingSmsListView=0x7f0a0035;
-        public static final int VoiceNoteRecorderActivity=0x7f0a0036;
+        public static final int SMS_number_1=0x7f0a0028;
+        public static final int SMS_number_2=0x7f0a0029;
+        public static final int SMS_number_3=0x7f0a002a;
+        public static final int SMS_number_4=0x7f0a002b;
+        public static final int SMS_number_5=0x7f0a002c;
+        public static final int SMS_number_6=0x7f0a002d;
+        public static final int SMS_number_7=0x7f0a002e;
+        public static final int SMS_number_8=0x7f0a002f;
+        public static final int SMS_number_9=0x7f0a0030;
+        public static final int SOS_textview=0x7f0a0034;
+        public static final int Send_SOS_Message=0x7f0a0035;
+        public static final int Small_text_size_button=0x7f0a003a;
+        public static final int SpeakingClockSctivity=0x7f0a0036;
+        public static final int TalkingSmsListView=0x7f0a0038;
+        public static final int ThemeSettingsActivity=0x7f0a0039;
+        public static final int VoiceNoteRecorderActivity=0x7f0a003d;
         public static final int WhiteBlack=0x7f0a0007;
         public static final int WhiteBlue=0x7f0a000c;
         public static final int WhiteGreen=0x7f0a000a;
         public static final int WhiteRed=0x7f0a0008;
-        public static final int alarm_clock_button=0x7f0a0014;
-        public static final int analogClock1=0x7f0a0034;
-        public static final int back_button=0x7f0a0041;
-        public static final int button_getBatteryStatus=0x7f0a0018;
-        public static final int button_getReceptionStatus=0x7f0a0019;
-        public static final int button_nextNote=0x7f0a0039;
-        public static final int button_playStop=0x7f0a003a;
-        public static final int button_prevNote=0x7f0a0037;
-        public static final int button_recordStop=0x7f0a0038;
+        public static final int alarm_clock_button=0x7f0a0017;
+        public static final int analogClock1=0x7f0a0037;
+        public static final int back_button=0x7f0a0048;
+        public static final int button_getBatteryStatus=0x7f0a001b;
+        public static final int button_getReceptionStatus=0x7f0a001c;
+        public static final int button_nextNote=0x7f0a0040;
+        public static final int button_playStop=0x7f0a0041;
+        public static final int button_prevNote=0x7f0a003e;
+        public static final int button_recordStop=0x7f0a003f;
+        public static final int button_set_colors=0x7f0a000f;
+        public static final int button_set_theme=0x7f0a0010;
         public static final int cancelalarm=0x7f0a0004;
-        public static final int contact_email=0x7f0a003f;
-        public static final int contact_name=0x7f0a003d;
-        public static final int contact_phone=0x7f0a003e;
-        public static final int current_menu_button=0x7f0a0043;
-        public static final int description=0x7f0a0047;
-        public static final int from=0x7f0a0045;
-        public static final int home_button=0x7f0a0044;
-        public static final int menu_settings=0x7f0a004c;
-        public static final int phoneStatusActivity=0x7f0a0017;
-        public static final int phone_status_button=0x7f0a0013;
-        public static final int quick_dial_button=0x7f0a0015;
-        public static final int quick_sms_button=0x7f0a0016;
-        public static final int read_sms_button=0x7f0a0012;
+        public static final int contact_email=0x7f0a0046;
+        public static final int contact_name=0x7f0a0044;
+        public static final int contact_phone=0x7f0a0045;
+        public static final int current_menu_button=0x7f0a004a;
+        public static final int description=0x7f0a004e;
+        public static final int displaySettingsActivity=0x7f0a000e;
+        public static final int from=0x7f0a004c;
+        public static final int home_button=0x7f0a004b;
+        public static final int menu_settings=0x7f0a0053;
+        public static final int phoneStatusActivity=0x7f0a001a;
+        public static final int phone_status_button=0x7f0a0016;
+        public static final int quick_dial_button=0x7f0a0018;
+        public static final int quick_sms_button=0x7f0a0019;
+        public static final int read_sms_button=0x7f0a0015;
         public static final int setButton=0x7f0a0002;
-        public static final int set_alarm_view=0x7f0a002e;
-        public static final int settings_button=0x7f0a0042;
-        public static final int sms_body=0x7f0a004a;
-        public static final int sms_from=0x7f0a0049;
-        public static final int sms_time=0x7f0a004b;
-        public static final int sos_button=0x7f0a000f;
+        public static final int set_alarm_view=0x7f0a0031;
+        public static final int settings_button=0x7f0a0049;
+        public static final int sms_body=0x7f0a0051;
+        public static final int sms_from=0x7f0a0050;
+        public static final int sms_time=0x7f0a0052;
+        public static final int sos_button=0x7f0a0012;
         public static final int startalarm=0x7f0a0003;
         public static final int statusButton=0x7f0a0001;
-        public static final int subject=0x7f0a0046;
-        public static final int textView1=0x7f0a002f;
-        public static final int textView2=0x7f0a0030;
-        public static final int time=0x7f0a0048;
-        public static final int time_button=0x7f0a0010;
-        public static final int where_am_i_Activity=0x7f0a003b;
-        public static final int where_am_i_button=0x7f0a0011;
-        public static final int where_am_i_textview=0x7f0a003c;
+        public static final int subject=0x7f0a004d;
+        public static final int textView1=0x7f0a0032;
+        public static final int textView2=0x7f0a0033;
+        public static final int time=0x7f0a004f;
+        public static final int time_button=0x7f0a0013;
+        public static final int where_am_i_Activity=0x7f0a0042;
+        public static final int where_am_i_button=0x7f0a0014;
+        public static final int where_am_i_textview=0x7f0a0043;
     }
     public static final class layout {
         public static final int activity_alarm=0x7f030000;
         public static final int activity_color_settings=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_phone_status=0x7f030003;
-        public static final int activity_quick_dial=0x7f030004;
-        public static final int activity_quick_sms=0x7f030005;
-        public static final int activity_set_clock=0x7f030006;
-        public static final int activity_sos=0x7f030007;
-        public static final int activity_speaking_clock=0x7f030008;
-        public static final int activity_talking_sms_list=0x7f030009;
-        public static final int activity_voice_note_recorder=0x7f03000a;
-        public static final int activity_where_am_i=0x7f03000b;
-        public static final int contact_view=0x7f03000c;
-        public static final int contacts_list=0x7f03000d;
-        public static final int control_bar_view=0x7f03000e;
-        public static final int list_row=0x7f03000f;
-        public static final int list_select=0x7f030010;
-        public static final int sms_view=0x7f030011;
+        public static final int activity_display_settings=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_phone_status=0x7f030004;
+        public static final int activity_quick_dial=0x7f030005;
+        public static final int activity_quick_sms=0x7f030006;
+        public static final int activity_set_clock=0x7f030007;
+        public static final int activity_sos=0x7f030008;
+        public static final int activity_speaking_clock=0x7f030009;
+        public static final int activity_talking_sms_list=0x7f03000a;
+        public static final int activity_theme_settings=0x7f03000b;
+        public static final int activity_voice_note_recorder=0x7f03000c;
+        public static final int activity_where_am_i=0x7f03000d;
+        public static final int contact_view=0x7f03000e;
+        public static final int contacts_list=0x7f03000f;
+        public static final int control_bar_view=0x7f030010;
+        public static final int list_row=0x7f030011;
+        public static final int list_select=0x7f030012;
+        public static final int sms_view=0x7f030013;
     }
     public static final class menu {
         public static final int activity_alarm=0x7f090000;
@@ -206,12 +226,15 @@ containing a value of this type.
         public static final int alarm_clock_button=0x7f060008;
         public static final int app_name=0x7f060000;
         public static final int back_button=0x7f06002c;
+        public static final int color_settings_button=0x7f06005c;
         public static final int current_menu_button=0x7f060052;
         public static final int emptyHour=0x7f06002b;
         public static final int hello_world=0x7f06000c;
         public static final int home_button=0x7f06002d;
+        public static final int large_text_size_button=0x7f060059;
         public static final int menu_settings=0x7f060002;
         public static final int noAlarm=0x7f06004b;
+        public static final int normal_text_size_button=0x7f060058;
         public static final int phoneStatus_button_getBatteryStatus=0x7f060019;
         public static final int phoneStatus_button_getBatteryStatus_read=0x7f06001a;
         public static final int phoneStatus_button_getReceptionStatus=0x7f06001b;
@@ -238,14 +261,17 @@ containing a value of this type.
         public static final int setMinutes=0x7f06004d;
         public static final int settings_button=0x7f06002e;
         public static final int signal_button=0x7f060007;
+        public static final int small_text_size_button=0x7f06005a;
         public static final int snooze_time=0x7f060048;
         public static final int sos_button=0x7f060003;
         public static final int startAlarm=0x7f060049;
         public static final int stopAlarm=0x7f06004a;
+        public static final int theme_settings_button=0x7f06005d;
         public static final int time_button=0x7f060004;
         public static final int title_activity_alarm=0x7f060046;
         public static final int title_activity_color_settings=0x7f060036;
         public static final int title_activity_contacts_list=0x7f060054;
+        public static final int title_activity_display_settings=0x7f06005e;
         public static final int title_activity_phone_status=0x7f060029;
         public static final int title_activity_quick_dial=0x7f06000f;
         public static final int title_activity_quick_sms=0x7f06000b;
@@ -254,6 +280,7 @@ containing a value of this type.
         public static final int title_activity_talking_list=0x7f060050;
         public static final int title_activity_talking_sms=0x7f06004f;
         public static final int title_activity_talking_sms_list=0x7f060053;
+        public static final int title_activity_theme_settings=0x7f06005b;
         public static final int title_activity_voice_note_recorder=0x7f060037;
         public static final int title_activity_where_am_i=0x7f060051;
         public static final int turn_off=0x7f060047;
@@ -266,21 +293,46 @@ containing a value of this type.
         public static final int where_am_i_button=0x7f060005;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
+        /**  Base application theme is the default theme. 
          */
-        public static final int AppBaseTheme=0x7f070000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f070001;
+        public static final int Theme=0x7f080010;
+        public static final int Theme_LargeBlueBlack=0x7f080024;
+        public static final int Theme_LargeGreenBlack=0x7f080025;
+        public static final int Theme_LargeRedBlack=0x7f080023;
+        public static final int Theme_LargeWhiteBlack=0x7f08001f;
+        public static final int Theme_LargeWhiteBlue=0x7f080022;
+        public static final int Theme_LargeWhiteGreen=0x7f080021;
+        public static final int Theme_LargeWhiteRed=0x7f080020;
+        public static final int Theme_NormalBlueBlack=0x7f08001d;
+        public static final int Theme_NormalGreenBlack=0x7f08001e;
+        public static final int Theme_NormalRedBlack=0x7f08001c;
+        public static final int Theme_NormalWhiteBlack=0x7f080018;
+        public static final int Theme_NormalWhiteBlue=0x7f08001b;
+        public static final int Theme_NormalWhiteGreen=0x7f08001a;
+        public static final int Theme_NormalWhiteRed=0x7f080019;
+        public static final int Theme_SmallBlueBlack=0x7f080016;
+        public static final int Theme_SmallGreenBlack=0x7f080017;
+        public static final int Theme_SmallRedBlack=0x7f080015;
+        public static final int Theme_SmallWhiteBlack=0x7f080011;
+        public static final int Theme_SmallWhiteBlue=0x7f080014;
+        public static final int Theme_SmallWhiteGreen=0x7f080013;
+        public static final int Theme_SmallWhiteRed=0x7f080012;
+        public static final int blackBackground=0x7f08000c;
+        public static final int blueBackground=0x7f08000d;
+        public static final int greenBackground=0x7f08000f;
+        public static final int large_blue_text=0x7f08000b;
+        public static final int large_green_text=0x7f08000a;
+        public static final int large_red_text=0x7f080009;
+        public static final int large_white_text=0x7f080008;
+        public static final int normal_blue_text=0x7f080007;
+        public static final int normal_green_text=0x7f080006;
+        public static final int normal_red_text=0x7f080005;
+        public static final int normal_white_text=0x7f080004;
+        public static final int redBackground=0x7f08000e;
+        public static final int small_blue_text=0x7f080003;
+        public static final int small_green_text=0x7f080002;
+        public static final int small_red_text=0x7f080001;
+        public static final int small_white_text=0x7f080000;
     }
     public static final class styleable {
         /** Attributes that can be used with a TalkingButton.

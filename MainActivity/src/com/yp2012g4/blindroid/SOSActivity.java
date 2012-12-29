@@ -3,6 +3,7 @@ package com.yp2012g4.blindroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +27,13 @@ public class SOSActivity extends BlindroidActivity implements OnClickListener {
   @Override
   public void onClick(View v) {
     switch (v.getId()) {
+      case R.id.Send_SOS_Message:
+        String messageToSend = "I need your help!";
+        String number = "0529240424";
+        SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
+        speakOut("SOS message has been sent");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
       case R.id.back_button:
         speakOut("Previous screen");
         mHandler.postDelayed(mLaunchTask, 1000);

@@ -80,7 +80,7 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
       alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
         @Override public void onClick(DialogInterface dialog, int which) {
           String messageToSend = ((TalkingButton) view).getText().toString();
-          String number = "0524484993";
+          String number = "0544457141";
           SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
           speakOut("Message has been sent");
         }

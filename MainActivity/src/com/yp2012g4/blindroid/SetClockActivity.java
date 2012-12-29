@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.GestureDetector;
@@ -120,21 +121,27 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
   
   @Override
   public void onClick(View v) {
+    Intent intent = new Intent(SetClockActivity.this, MainActivity.class);
     // Intent intent;
     // speakOut(((Button) v).getText().toString());
     switch (v.getId()) {
+      case R.id.settings_button:
+        speakOut("Settings");
+        intent = new Intent(this, ThemeSettingsActivity.class);
+        startActivity(intent);
+        break;
       case R.id.back_button:
         speakOut("Previous screen");
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        // intent = new Intent(MainActivity.this,
-        // ColorSettingsActivity.class);
-        // startActivity(intent);
-        break;
       case R.id.home_button:
         speakOut("Home");
+        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + getString(R.string.title_activity_set_clock));
+        break;
+      default:
         break;
     }
   }

@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsManager;
@@ -100,15 +101,23 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
     }
     if (v instanceof TalkingImageButton) {
       switch (v.getId()) {
-        case R.id.home_button:
-          speakOut("Next screen");
-          break;
         case R.id.settings_button:
           speakOut("Settings");
+          Intent intent = new Intent(this, ThemeSettingsActivity.class);
+          startActivity(intent);
           break;
         case R.id.back_button:
           speakOut("Previous screen");
           mHandler.postDelayed(mLaunchTask, 1000);
+          break;
+        case R.id.home_button:
+          speakOut("Home");
+          mHandler.postDelayed(mLaunchTask, 1000);
+          break;
+        case R.id.current_menu_button:
+          speakOut("This is " + getString(R.string.title_activity_quick_sms));
+          break;
+        default:
           break;
       }
     }

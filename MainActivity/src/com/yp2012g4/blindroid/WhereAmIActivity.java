@@ -67,7 +67,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        Intent intent = new Intent(this, ColorSettingsActivity.class);
+        Intent intent = new Intent(this, ThemeSettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:

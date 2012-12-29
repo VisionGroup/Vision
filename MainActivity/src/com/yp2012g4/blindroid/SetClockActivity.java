@@ -1,3 +1,9 @@
+/***
+ * Class that set a clock and returns the set time
+ * 
+ * @author Amir Blumental
+ * @version 1.0
+ */
 package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
@@ -25,20 +31,20 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
   // Can be either HOUR_CODE or MIN_CODE
   private int type;
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.set_alarm_view;
   }
   
-  @Override
-  public void onBackPressed() {
+  /**
+   * In order that the back key will be the same as the control bar's back
+   */
+  @Override public void onBackPressed() {
     speakOut("Previous screen");
     setResult(-1);
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.back_button:
         speakOut("Previous screen");
@@ -63,8 +69,7 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
     }
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_set_clock);
     gestureScanner = new GestureDetector(this);
@@ -100,21 +105,21 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
     tvTitle.setText(t);
   }
   
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_set_clock, menu);
     return true;
   }
   
-  @Override
-  public boolean onDown(MotionEvent e) {
+  @Override public boolean onDown(MotionEvent e) {
     // TODO Auto-generated method stub
     return false;
   }
   
-  @Override
-  public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
+  /**
+   * change the displayed time when user fling the screen
+   */
+  @Override public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
     int change = start.getRawY() < finish.getRawY() ? -1 : 1;
     int field = type == HOUR_CODE ? Calendar.HOUR_OF_DAY : Calendar.MINUTE;
     cal.roll(field, change);
@@ -124,32 +129,27 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
     return true;
   }
   
-  @Override
-  public void onLongPress(MotionEvent e) {
+  @Override public void onLongPress(MotionEvent e) {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+  @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
     // TODO Auto-generated method stub
     return false;
   }
   
-  @Override
-  public void onShowPress(MotionEvent e) {
+  @Override public void onShowPress(MotionEvent e) {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     int result = Integer.valueOf(tvNum.getText().toString()).intValue();
     setResult(result);
     finish();
     return true;
   }
   
-  @Override
-  public boolean onTouchEvent(MotionEvent event) {
+  @Override public boolean onTouchEvent(MotionEvent event) {
     return gestureScanner.onTouchEvent(event);
   }
   
@@ -157,8 +157,7 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current title
    */
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
     if (!hasFocus)
       return;
     TextView tvTitle = (TextView) findViewById(R.id.textView1);

@@ -1,9 +1,10 @@
 /***
+ * alarm service that wait for a set alarm to go off
+ * 
  * @author Amir Blumental
- * @version 1.0 
+ * @version 1.0
  */
 package com.yp2012g4.blindroid;
-
 
 import java.util.Calendar;
 
@@ -16,27 +17,24 @@ import android.widget.Toast;
 public class AlarmService extends Service {
   static public MediaPlayer mp = null;
   
-  @Override
-  public IBinder onBind(Intent intent) {
+  @Override public IBinder onBind(Intent intent) {
     // TODO Auto-generated method stub
     Toast.makeText(AlarmService.this, "onBind", Toast.LENGTH_LONG).show();
     return null;
   }
   
-  @Override
-  public void onCreate() {
+  @Override public void onCreate() {
     // TODO Auto-generated method stub
   }
   
-  @Override
-  public void onDestroy() {
+  @Override public void onDestroy() {
     // TODO Auto-generated method stub
   }
+  
   /***
-   * this method is called when a scheduled Alarm time arrives 
+   * this method is called when a scheduled Alarm time arrives
    */
-  @Override
-  public void onStart(Intent intent, int startId) {
+  @Override public void onStart(Intent intent, int startId) {
     super.onStart(intent, startId);
     Calendar maxTime = Calendar.getInstance();
     maxTime.add(Calendar.MINUTE, 1);
@@ -50,8 +48,7 @@ public class AlarmService extends Service {
     }
   }
   
-  @Override
-  public boolean onUnbind(Intent intent) {
+  @Override public boolean onUnbind(Intent intent) {
     // TODO Auto-generated method stub
     return super.onUnbind(intent);
   }

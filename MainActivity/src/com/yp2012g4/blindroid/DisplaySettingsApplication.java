@@ -7,8 +7,10 @@ import android.app.Application;
 
 /**
  * @author Maytal
- * 
+ *
  */
 public class DisplaySettingsApplication extends Application {
-  public DisplaySettings settings = new DisplaySettings();
+	
+	
+	public DisplaySettings settings = new DisplaySettings();
 }

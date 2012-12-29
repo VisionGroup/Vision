@@ -55,10 +55,7 @@ public class SOSActivity extends BlindroidActivity implements OnClickListener {
     back = (TalkingImageButton) findViewById(R.id.back_button);
     back.setOnClickListener(this);
     back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
+    settings = (TalkingImageButton) findViewById(R.id.settings_button);
     settings.setOnClickListener(this);
     settings.setOnTouchListener(this);
     wai = (TalkingImageButton) findViewById(R.id.current_menu_button);

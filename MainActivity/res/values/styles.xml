@@ -1,25 +1,172 @@
-<resources>
-
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="WHITE">#FFFFFF</color>
     <color name="BLACK">#000000</color>
     <color name="RED">#FF0000</color>
     <color name="GREEN">#04B431</color>
     <color name="BLUE">#2E9AFE</color>
 
-</resources>
+   <style name="small_white_text" parent="@android:style/TextAppearance.Small">
+      <item name="android:textColor">@color/WHITE</item>
+   </style>
+   <style name="small_red_text" parent="@android:style/TextAppearance.Small">
+      <item name="android:textColor">@color/RED</item>
+   </style>
+   <style name="small_green_text" parent="@android:style/TextAppearance.Small">
+      <item name="android:textColor">@color/GREEN</item>
+   </style>
+   <style name="small_blue_text" parent="@android:style/TextAppearance.Small">
+      <item name="android:textColor">@color/BLUE</item>
+   </style>
+   
+   <style name="normal_white_text" parent="@android:style/TextAppearance.Medium">
+      <item name="android:textColor">@color/WHITE</item>
+   </style>
+   <style name="normal_red_text" parent="@android:style/TextAppearance.Medium">
+      <item name="android:textColor">@color/RED</item>
+   </style>
+   <style name="normal_green_text" parent="@android:style/TextAppearance.Medium">
+      <item name="android:textColor">@color/GREEN</item>
+   </style>
+   <style name="normal_blue_text" parent="@android:style/TextAppearance.Medium">
+      <item name="android:textColor">@color/BLUE</item>
+   </style>
+   
+   <style name="large_white_text" parent="@android:style/TextAppearance.Large">
+      <item name="android:textColor">@color/WHITE</item>
+   </style>
+   <style name="large_red_text" parent="@android:style/TextAppearance.Large">
+      <item name="android:textColor">@color/RED</item>
+   </style>
+   <style name="large_green_text" parent="@android:style/TextAppearance.Large">
+      <item name="android:textColor">@color/GREEN</item>
+   </style>
+   <style name="large_blue_text" parent="@android:style/TextAppearance.Large">
+      <item name="android:textColor">@color/BLUE</item>
+   </style>
+
+   
+   <style name="blackBackground">
+      <item name="android:background">@color/BLACK</item>
+   </style>
+   <style name="blueBackground">
+      <item name="android:background">@color/BLUE</item>
+   </style>
+   <style name="redBackground">
+      <item name="android:background">@color/RED</item>
+   </style>
+   <style name="greenBackground">
+      <item name="android:background">@color/GREEN</item>
+   </style>
+
+  <!-- Base application theme is the default theme. -->
+  <style name="Theme" parent="android:Theme">
+  </style>
+
+  <style name="Theme.SmallWhiteBlack">
+     <item name="textAppearance">@style/small_white_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.SmallWhiteRed">
+     <item name="textAppearance">@style/small_white_text</item>
+     <item name="backgroundColor">@style/redBackground</item>
+  </style>
+
+  <style name="Theme.SmallWhiteGreen">
+     <item name="textAppearance">@style/small_white_text</item>
+     <item name="backgroundColor">@style/greenBackground</item>
+  </style>
+  
+  <style name="Theme.SmallWhiteBlue">
+     <item name="textAppearance">@style/small_white_text</item>
+     <item name="backgroundColor">@style/blueBackground</item>
+  </style>
+  
+  <style name="Theme.SmallRedBlack">
+     <item name="textAppearance">@style/small_red_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.SmallBlueBlack">
+     <item name="textAppearance">@style/small_blue_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.SmallGreenBlack">
+     <item name="textAppearance">@style/small_green_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+
+  
+  <style name="Theme.NormalWhiteBlack">
+     <item name="textAppearance">@style/normal_white_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.NormalWhiteRed">
+     <item name="textAppearance">@style/normal_white_text</item>
+     <item name="backgroundColor">@style/redBackground</item>
+  </style>
+
+  <style name="Theme.NormalWhiteGreen">
+     <item name="textAppearance">@style/normal_white_text</item>
+     <item name="backgroundColor">@style/greenBackground</item>
+  </style>
+  
+  <style name="Theme.NormalWhiteBlue">
+     <item name="textAppearance">@style/normal_white_text</item>
+     <item name="backgroundColor">@style/blueBackground</item>
+  </style>
+  
+  <style name="Theme.NormalRedBlack">
+     <item name="textAppearance">@style/normal_red_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.NormalBlueBlack">
+     <item name="textAppearance">@style/normal_blue_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.NormalGreenBlack">
+     <item name="textAppearance">@style/normal_green_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  
+  <style name="Theme.LargeWhiteBlack">
+     <item name="textAppearance">@style/large_white_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.LargeWhiteRed">
+     <item name="textAppearance">@style/large_white_text</item>
+     <item name="backgroundColor">@style/redBackground</item>
+  </style>
+
+  <style name="Theme.LargeWhiteGreen">
+     <item name="textAppearance">@style/large_white_text</item>
+     <item name="backgroundColor">@style/greenBackground</item>
+  </style>
+  
+  <style name="Theme.LargeWhiteBlue">
+     <item name="textAppearance">@style/large_white_text</item>
+     <item name="backgroundColor">@style/blueBackground</item>
+  </style>
+  
+  <style name="Theme.LargeRedBlack">
+     <item name="textAppearance">@style/large_red_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.LargeBlueBlack">
+     <item name="textAppearance">@style/large_blue_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+  <style name="Theme.LargeGreenBlack">
+     <item name="textAppearance">@style/large_green_text</item>
+     <item name="backgroundColor">@style/blackBackground</item>
+  </style>
+  
+ </resources>

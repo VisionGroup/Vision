@@ -39,7 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NoteNumber"
-            android:textSize="@dimen/NormalTextSize" />
+            android:textSize="@dimen/NormalTextSize"
+            style="?textAppearance" />
 
     </LinearLayout>
 

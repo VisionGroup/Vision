@@ -5,7 +5,6 @@ import java.util.HashSet;
 
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,22 +16,18 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnClickListener {
   private final android.media.MediaRecorder _recorder = new android.media.MediaRecorder();
-  @SuppressWarnings("unused")
-  private final android.media.MediaPlayer _player = new android.media.MediaPlayer();
-  @SuppressWarnings("unused")
-  private final int _currentNote = 0;
-  @SuppressWarnings("unused")
-  private final int _numberOfNotes = 0;
+  @SuppressWarnings("unused") private final android.media.MediaPlayer _player = new android.media.MediaPlayer();
+  @SuppressWarnings("unused") private final int _currentNote = 0;
+  @SuppressWarnings("unused") private final int _numberOfNotes = 0;
   private boolean _usingExternal = true;
   private final String LOG_TAG = "VNR";
   private final String DIR_NAME = "notes";
   private File _notesDir;
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_voice_note_recorder);
-    //tts = new TextToSpeech(this, this);
+    // tts = new TextToSpeech(this, this);
     _setAudio();
     TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_prevNote);
     b.setOnClickListener(this);
@@ -71,8 +66,7 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnCl
       _usingExternal = false;
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     if (v instanceof TalkingImageButton)
       // speakOut("Dialing to" + ((TalkingButton)
       // v).getText().toString());
@@ -104,8 +98,7 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnCl
       }
   }
   
-  @SuppressWarnings("unused")
-  private void _loadNoteList() {
+  @SuppressWarnings("unused") private void _loadNoteList() {
     if (_usingExternal) {
       _notesDir = fileUtils.getStorageDir(this, DIR_NAME);
       if (!_notesDir.isDirectory()) {
@@ -149,9 +142,8 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnCl
   private void _playStop() {
     // TODO Auto-generated method stub
   }
-
-  @Override
-  public int getViewId() {
+  
+  @Override public int getViewId() {
     return R.id.VoiceNoteRecorderActivity;
   }
 }

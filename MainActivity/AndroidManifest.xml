@@ -62,7 +62,8 @@
         </activity>
         <activity
             android:name="com.yp2012g4.blindroid.VoiceNoteRecorderActivity"
-            android:label="@string/title_activity_voice_note_recorder" >
+            android:label="@string/title_activity_voice_note_recorder" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.blindroid.MainActivity" />
@@ -84,14 +85,16 @@
         </activity>
         <activity
             android:name="com.yp2012g4.blindroid.TalkingSmsList"
-            android:label="@string/title_activity_talking_sms_list" >
+            android:label="@string/title_activity_talking_sms_list" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.blindroid.MainActivity" />
         </activity>
         <activity
             android:name="com.yp2012g4.blindroid.WhereAmIActivity"
-            android:label="@string/title_activity_where_am_i" >
+            android:label="@string/title_activity_where_am_i" 
+            android:screenOrientation="portrait" >
         </activity>
 
         <service android:name="com.yp2012g4.blindroid.AlarmService" >
@@ -101,12 +104,14 @@
 
         <activity
             android:name="com.yp2012g4.blindroid.SetClockActivity"
-            android:label="@string/title_activity_set_clock" >
+            android:label="@string/title_activity_set_clock" 
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
             android:name="com.yp2012g4.blindroid.ContactsListActivity"
-            android:label="@string/title_activity_contacts_list" >
+            android:label="@string/title_activity_contacts_list" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.blindroid.MainActivity" />

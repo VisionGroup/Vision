@@ -1,7 +1,8 @@
 package com.yp2012g4.blindroid;
 
+import java.util.Set;
+
 import com.yp2012g4.blindroid.R;
-import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 import android.graphics.PorterDuff.Mode;
@@ -18,12 +19,12 @@ import android.app.Activity;
  */
 public class DisplaySettings {
 	
-	protected SparseIntArray color_to_string = new SparseIntArray();
+	private static SparseIntArray color_to_string = new SparseIntArray();
 	public static String SIZE="NORMAL";
 	public static boolean settingChanged=false;
   static String THEME="";
-	private int textColor = R.color.WHITE;
-	private int backgroundColor = R.color.BLACK;
+	private static int textColor = R.color.WHITE;
+	private static int backgroundColor = R.color.BLACK;
 	
 	public DisplaySettings() {
 		color_to_string.append(R.color.BLACK, Color.parseColor("#000000"));
@@ -33,23 +34,26 @@ public class DisplaySettings {
 		color_to_string.append(R.color.BLUE, Color.parseColor("#2E9AFE"));
 	}
 	
-	public void setColors(int int1, int int2) {
+	public static void setColors(int int1, int int2) {
 		textColor = int1;
 		backgroundColor = int2;
 	}
 	
-	public void applyButtonSettings (View v) {
-		
-		if (v instanceof TalkingImageButton) {
-			// Set the correct new color
-			if (textColor == R.color.WHITE)
-				((ImageView)v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
-			else
-				((ImageView)v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
-		}
-		if (v instanceof TalkingButton)
-		  ((TalkingButton) v).setTextColor(color_to_string.get(textColor));
-		v.setBackgroundColor(color_to_string.get(backgroundColor));
+	public static void applyButtonSettings (Set<TalkingImageButton> buttons, View v) {
+	  v.setBackgroundColor(color_to_string.get(backgroundColor));
+		//if (v instanceof TalkingImageButton) {
+		// Set the correct new color
+		  if (textColor == R.color.WHITE)
+		    for (TalkingImageButton b : buttons)
+		      ((ImageView)b).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
+		  else
+		    for (TalkingImageButton b : buttons)
+		      ((ImageView)b).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
+		//}
+	}
+	
+	public static void applyViewSettings (View v) {
+	  v.setBackgroundResource(backgroundColor);
 	}
 
  public static void setThemeToActivity(Activity act)
@@ -57,12 +61,52 @@ public class DisplaySettings {
   
    try {
 
-   if (DisplaySettings.SIZE.equalsIgnoreCase("LARGE"))
-       act.setTheme(R.style.Theme_Large);
+   if (DisplaySettings.SIZE.equalsIgnoreCase("LARGE")) {
+     if (backgroundColor == R.color.BLUE)
+       act.setTheme(R.style.Theme_LargeWhiteBlue);
+     else if (backgroundColor == R.color.GREEN)
+       act.setTheme(R.style.Theme_LargeWhiteGreen);
+     else if (backgroundColor == R.color.RED)
+       act.setTheme(R.style.Theme_LargeWhiteRed);
+     else if (textColor == R.color.WHITE)
+       act.setTheme(R.style.Theme_LargeWhiteBlack);
+     else if (textColor == R.color.BLUE)
+       act.setTheme(R.style.Theme_LargeBlueBlack);
+     else if (textColor == R.color.RED)
+       act.setTheme(R.style.Theme_LargeRedBlack);
+     else
+       act.setTheme(R.style.Theme_LargeGreenBlack);
+   }
    else if (DisplaySettings.SIZE.equalsIgnoreCase("SMALL"))
-       act.setTheme(R.style.Theme_Small);
+     if (backgroundColor == R.color.BLUE)
+       act.setTheme(R.style.Theme_SmallWhiteBlue);
+     else if (backgroundColor == R.color.GREEN)
+       act.setTheme(R.style.Theme_SmallWhiteGreen);
+     else if (backgroundColor == R.color.RED)
+       act.setTheme(R.style.Theme_SmallWhiteRed);
+     else if (textColor == R.color.WHITE)
+       act.setTheme(R.style.Theme_SmallWhiteBlack);
+     else if (textColor == R.color.BLUE)
+       act.setTheme(R.style.Theme_SmallBlueBlack);
+     else if (textColor == R.color.RED)
+       act.setTheme(R.style.Theme_SmallRedBlack);
+     else
+       act.setTheme(R.style.Theme_SmallGreenBlack);
    else
-     act.setTheme(R.style.Theme_Normal);
+     if (backgroundColor == R.color.BLUE)
+       act.setTheme(R.style.Theme_NormalWhiteBlue);
+     else if (backgroundColor == R.color.GREEN)
+       act.setTheme(R.style.Theme_NormalWhiteGreen);
+     else if (backgroundColor == R.color.RED)
+       act.setTheme(R.style.Theme_NormalWhiteRed);
+     else if (textColor == R.color.WHITE)
+       act.setTheme(R.style.Theme_NormalWhiteBlack);
+     else if (textColor == R.color.BLUE)
+       act.setTheme(R.style.Theme_NormalBlueBlack);
+     else if (textColor == R.color.RED)
+       act.setTheme(R.style.Theme_NormalRedBlack);
+     else
+       act.setTheme(R.style.Theme_NormalGreenBlack);
   
    }
    catch (Exception e) {

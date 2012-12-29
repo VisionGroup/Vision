@@ -2,7 +2,6 @@ package com.yp2012g4.blindroid.utils;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -18,7 +17,7 @@ import android.widget.AnalogClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.yp2012g4.blindroid.DisplaySettingsApplication;
+import com.yp2012g4.blindroid.DisplaySettings;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
@@ -73,11 +72,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     super.onWindowFocusChanged(hasFocus);
     ViewGroup mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(mainView);
-    DisplaySettingsApplication appState = ((DisplaySettingsApplication) getApplication());
-    for (TalkingImageButton b : imageButton_to_rect.keySet())
-      appState.settings.applyButtonSettings(b);
-    for (TalkingButton b : button_to_rect.keySet())
-      appState.settings.applyButtonSettings(b);
+    DisplaySettings.applyButtonSettings(imageButton_to_rect.keySet(), mainView);
   }
   
   /**
@@ -178,6 +173,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
       speakOut("start");
     else
       Log.e("onTouchEventClass", "tts init error");
+    DisplaySettings.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
   }
   

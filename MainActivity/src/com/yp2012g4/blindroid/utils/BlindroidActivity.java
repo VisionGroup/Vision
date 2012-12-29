@@ -1,5 +1,7 @@
 package com.yp2012g4.blindroid.utils;
 
+import com.yp2012g4.blindroid.DisplaySettings;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -16,6 +18,7 @@ public abstract  class BlindroidActivity extends onTouchEventClass {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+	  DisplaySettings.setThemeToActivity(this);
 		super.onCreate(savedInstanceState);
 	}
 	

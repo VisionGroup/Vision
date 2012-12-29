@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/BLACK"
+    style="?backgroundColor"
     tools:context=".DisplaySettings" >
 
     <LinearLayout
@@ -15,9 +15,9 @@
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/button_set_colors"
             android:layout_width="0dip"
-            android:layout_height="222dip"
+            android:layout_height="190dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/color_settings_button"
             android:scaleType="fitCenter"
             android:src="@drawable/color_settings_button" />
@@ -31,9 +31,9 @@
             android:id="@+id/button_set_theme"
             style="android:ButtonStyle"
             android:layout_width="0dip"
-            android:layout_height="222dip"
+            android:layout_height="190dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/theme_settings_button"
             android:scaleType="fitCenter"
             android:src="@drawable/theme_settings_button" />

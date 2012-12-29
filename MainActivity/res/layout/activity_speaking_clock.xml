@@ -22,7 +22,7 @@
         android:text="@string/emptyHour"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
-        style="?textSize" />
+        style="?textAppearance" />
 
     <TextView
         android:id="@+id/textView2"
@@ -34,7 +34,7 @@
         android:text="@string/ClockTitle"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40sp"
-        style="?textSize" />
+        style="?textAppearance" />
 
     <LinearLayout
         android:layout_width="match_parent"

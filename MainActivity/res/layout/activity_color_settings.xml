@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ColorSettingsActivity"
     android:layout_width="fill_parent"
-    android:layout_height="444dip"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    style="?backgroundColor" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +13,12 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteBlack"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout
@@ -28,13 +28,12 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteRed"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/RED"
             android:text="@string/WhiteRed"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,13 +43,12 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/RedBlack"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
             android:textColor="@color/RED"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,13 +58,12 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteGreen"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout
@@ -76,13 +73,12 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/GreenBlack"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
             android:textColor="@color/GREEN"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,13 +88,12 @@
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteBlue"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
             android:textColor="@color/WHITE"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,14 +102,13 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/BlueBlack"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"
             android:textColor="@color/BLUE"
-            android:textSize="@android:dimen/app_icon_size"
-            style="?textSize" />
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout

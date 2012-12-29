@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/BLACK"
+    style="?backgroundColor"
     tools:context=".PhoneStatus" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
 
     <LinearLayout
@@ -15,9 +15,9 @@
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/button_getBatteryStatus"
             android:layout_width="0dip"
-            android:layout_height="222dip"
+            android:layout_height="195dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
+            android:background="@android:color/transparent"
 			android:contentDescription="@string/phoneStatus_button_getBatteryStatus_read"
             android:scaleType="fitCenter"
             android:src="@drawable/battery_button"
@@ -32,9 +32,9 @@
             android:id="@+id/button_getReceptionStatus"
             style="android:ButtonStyle"
             android:layout_width="0dip"
-            android:layout_height="222dip"
+            android:layout_height="190dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/phoneStatus_button_getReceptionStatus_read"
             android:scaleType="fitCenter"
             app:ReadText="@string/phoneStatus_button_getReceptionStatus_read"

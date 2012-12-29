@@ -8,13 +8,12 @@ package com.yp2012g4.blindroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class DisplaySettingsActivity extends onTouchEventClass implements
+public class DisplaySettingsActivity extends BlindroidActivity implements
     OnClickListener {
  
    /** Called when the activity is first created. */
@@ -23,7 +22,6 @@ public class DisplaySettingsActivity extends onTouchEventClass implements
    {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
-    tts = new TextToSpeech(this, this);
     mHandler = new Handler();
     TalkingImageButton b = (TalkingImageButton)findViewById(R.id.button_set_colors);
     b.setOnClickListener(this);
@@ -46,7 +44,8 @@ public class DisplaySettingsActivity extends onTouchEventClass implements
     settings.setOnTouchListener(this);
    }
 
-   public void onClick(View v)
+   @Override
+  public void onClick(View v)
    {
      if (v instanceof TalkingImageButton)
        speakOut(((TalkingImageButton) v).getContentDescription().toString());
@@ -78,21 +77,14 @@ public class DisplaySettingsActivity extends onTouchEventClass implements
     }
 
    }
+   @Override
        public void onBackPressed() {
     // TODO Auto-generated method stub
     super.onBackPressed();
     DisplaySettingsActivity.this.finish();
 
    }
-   
-  
-   //will launch the activity
-    private Runnable mLaunchTask = new Runnable() {
-        public void run() {
-          finish();
-        }
-     };
-
+    
 
     @Override
     public int getViewId() {

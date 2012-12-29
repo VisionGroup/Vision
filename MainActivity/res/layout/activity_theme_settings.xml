@@ -3,7 +3,8 @@
     android:id="@+id/ThemeSettingsActivity"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    style="?backgroundColor" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,10 +15,10 @@
             android:layout_width="0dp"
             android:layout_height="148dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
-            android:textSize="20sp"
-            android:text="@string/small_text_size_button" />
+            android:background="@android:color/transparent"
+            android:textSize="14sp"
+            android:text="@string/small_text_size_button"
+            style="?textAppearance" />
     </LinearLayout>
     
     <LinearLayout
@@ -29,10 +30,10 @@
             android:layout_width="0dp"
             android:layout_height="148dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
-            android:textSize="26sp"
-            android:text="@string/normal_text_size_button" />
+            android:background="@android:color/transparent"
+            android:textSize="18sp"
+            android:text="@string/normal_text_size_button"
+            style="?textAppearance" />
     </LinearLayout>
     
     <LinearLayout
@@ -44,10 +45,10 @@
             android:layout_width="0dip"
             android:layout_height="148dp"
             android:layout_weight="1"
-            android:background="@color/BLACK"
-            android:textColor="@color/WHITE"
-            android:textSize="32sp"
-            android:text="@string/large_text_size_button" />
+            android:background="@android:color/transparent"
+            android:textSize="22sp"
+            android:text="@string/large_text_size_button"
+            style="?textAppearance" />
     </LinearLayout>
 
     <LinearLayout

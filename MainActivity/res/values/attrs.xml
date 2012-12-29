@@ -13,6 +13,7 @@ have created. -->
   </declare-styleable>
   
   <!-- View styles -->
-  <attr name="textSize" format="reference" />
+  <attr name="textAppearance" format="reference" />
+  <attr name="backgroundColor" format="reference" />
  
 </resources>

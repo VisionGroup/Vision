@@ -15,7 +15,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/button_set_colors"
             android:layout_width="0dip"
-            android:layout_height="230dp"
+            android:layout_height="180dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:contentDescription="@string/color_settings_button"
@@ -31,7 +31,7 @@
             android:id="@+id/button_set_theme"
             style="android:ButtonStyle"
             android:layout_width="0dip"
-            android:layout_height="230dp"
+            android:layout_height="180dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:contentDescription="@string/theme_settings_button"

@@ -10,7 +10,7 @@
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/statusButton"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="105dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         android:text="@string/alarmStatus"
@@ -20,7 +20,7 @@
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/setButton"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="105dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         android:text="@string/setAlarmButton"
@@ -30,7 +30,7 @@
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/startalarm"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="105dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         android:text="@string/startAlarm"
@@ -40,7 +40,7 @@
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/cancelalarm"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="105dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         android:text="@string/stopAlarm"

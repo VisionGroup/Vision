@@ -14,7 +14,7 @@
    		<TextView
       	  android:id="@+id/where_am_i_textview"
       	  android:layout_width="0dip"
-      	  android:layout_height="460dp"
+      	  android:layout_height="360dp"
       	  android:layout_weight="1"
       	  android:background="@android:color/transparent"
       	  android:text="No Location Found Yet"

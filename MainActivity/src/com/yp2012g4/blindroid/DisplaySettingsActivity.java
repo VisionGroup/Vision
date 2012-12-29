@@ -80,4 +80,11 @@ public class DisplaySettingsActivity extends BlindroidActivity implements OnClic
     wai.setOnClickListener(this);
     wai.setOnTouchListener(this);
   }
+  
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Display Settings screen");
+    }
+  }
 }

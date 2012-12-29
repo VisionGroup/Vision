@@ -168,6 +168,13 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
     buttonCancel.setOnTouchListener(this);
   }
   
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Alarm screen");
+    }
+  }
+  
   /**
    * set the alarm to hour:min
    * 

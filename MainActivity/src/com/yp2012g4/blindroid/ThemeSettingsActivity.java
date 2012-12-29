@@ -89,4 +89,11 @@ public class ThemeSettingsActivity extends BlindroidActivity implements OnClickL
     wai.setOnClickListener(this);
     wai.setOnTouchListener(this);
   }
+  
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Theme settings screen");
+    }
+  }
 }

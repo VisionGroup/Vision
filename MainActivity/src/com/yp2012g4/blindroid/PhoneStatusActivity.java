@@ -156,6 +156,13 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
     home.setOnTouchListener(this);
   }
   
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Phone status screen");
+    }
+  }
+  
   /**
    * Returns the signal strength in percentage.
    * 

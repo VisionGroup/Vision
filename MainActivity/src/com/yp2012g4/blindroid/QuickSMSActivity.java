@@ -119,6 +119,13 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
     settings.setOnTouchListener(this);
   }
   
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Quick SMS screen");
+    }
+  }
+  
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_quick_sms, menu);

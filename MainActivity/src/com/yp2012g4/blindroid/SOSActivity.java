@@ -30,7 +30,7 @@ public class SOSActivity extends BlindroidActivity implements OnClickListener {
         String number = "0529240424";
         SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
         speakOut("SOS message has been sent");
-        mHandler.postDelayed(mLaunchTask, 1000);
+        mHandler.postDelayed(mLaunchTask, 1300);
         break;
       case R.id.back_button:
         speakOut("Previous screen");
@@ -72,6 +72,13 @@ public class SOSActivity extends BlindroidActivity implements OnClickListener {
     TalkingImageButton tb = (TalkingImageButton) findViewById(R.id.Send_SOS_Message);
     tb.setOnClickListener(this);
     tb.setOnTouchListener(this);
+  }
+  
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("SOS screen");
+    }
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

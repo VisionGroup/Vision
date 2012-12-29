@@ -156,6 +156,13 @@ public class QuickDialActivity extends BlindroidActivity implements OnClickListe
     home = (TalkingImageButton) findViewById(R.id.home_button);
   }
   
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Quick dial screen");
+    }
+  }
+  
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_quick_dial, menu);

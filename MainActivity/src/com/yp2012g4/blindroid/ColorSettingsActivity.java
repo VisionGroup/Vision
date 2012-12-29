@@ -111,11 +111,16 @@ public class ColorSettingsActivity extends BlindroidActivity implements OnClickL
     wai.setOnTouchListener(this);
   }
   
+  
+  
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     return true;
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Color Settings screen");
+    }
   }
 }

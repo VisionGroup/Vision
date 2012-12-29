@@ -16,11 +16,13 @@ import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.utils.TTS;
 
 /**
  * This is the activity for viewing and hearing phone status (currently battery,
  * charge and signal).
  * 
+ * @version 1.0
  * @author Amit Yaffe
  * 
  */
@@ -34,6 +36,7 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
   int _signal = -1; // Reception status
   SignalStrengthListener signalStrengthListener;
   
+  // private TextToSpeech tts;
   /**
    * A signal strength listener. Updates _signal between 0-31.
    * 
@@ -59,6 +62,7 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
     init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
         getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
+    _t = new TTS(getApplicationContext(), this);
     // tts = new TextToSpeech(this, this);
     // Battery Broadcast receiver.
     BroadcastReceiver batteryReceiver = new BroadcastReceiver() {

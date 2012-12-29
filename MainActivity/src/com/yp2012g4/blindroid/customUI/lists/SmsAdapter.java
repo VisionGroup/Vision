@@ -22,22 +22,26 @@ public class SmsAdapter extends BaseAdapter {
 		_c = c;
 	}
 
-	public int getCount() {
+	@Override
+  public int getCount() {
 		// TODO Auto-generated method stub
 		return _data.size();
 	}
 
-	public Object getItem(int position) {
+	@Override
+  public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		return _data.get(position);
 	}
 
-	public long getItemId(int position) {
+	@Override
+  public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
 	}
 
-	public View getView(int position, View convertView, ViewGroup parent) {
+	@Override
+  public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
 		if (v == null) {
 			LayoutInflater vi = (LayoutInflater) _c

@@ -7,11 +7,9 @@ package com.yp2012g4.blindroid;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -19,12 +17,10 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 public class ColorSettingsActivity extends BlindroidActivity implements
 		OnClickListener {
-	//will care for all posts
-    Handler mHandler = new Handler();
-
    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+	  DisplaySettings.setThemeToActivity(this);
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_color_settings);
@@ -81,11 +77,10 @@ public class ColorSettingsActivity extends BlindroidActivity implements
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		ViewGroup ColorSettingsView = (ViewGroup) findViewById(getViewId());
-		getButtonsPosition(ColorSettingsView);
 	}
 
-	public void onClick(View v) {
+	@Override
+  public void onClick(View v) {
 		if (v instanceof TalkingButton)
 			speakOut(((TalkingButton) v).getText().toString());
 		switch (v.getId()) {
@@ -127,18 +122,11 @@ public class ColorSettingsActivity extends BlindroidActivity implements
 		
 	}
 
-	private void changeSettings(int int1, int int2) {
-		DisplaySettingsApplication appState = ((DisplaySettingsApplication)this.getApplication());
-		appState.settings.setColors(int1, int2);
+	private static void changeSettings(int int1, int int2) {
+		DisplaySettings.setColors(int1, int2);
 
 	}
 	
-	 //will launch the activity
-    private Runnable mLaunchTask = new Runnable() {
-        public void run() {
-        	finish();
-        }
-     };
 
 
     @Override

@@ -32,8 +32,8 @@ public class SmsType {
   public SmsType(Cursor cur, Context context) {
     address = cur.getString(cur.getColumnIndexOrThrow("address")).toString();
     String mili = cur.getString(cur.getColumnIndexOrThrow("date")).toString();
-    long m = Long.valueOf(mili);
-    date = (String) DateFormat.format("dd/MM/yy", m);
+    Long m = Long.valueOf(mili);
+    date = (String) DateFormat.format("dd/MM/yy", m.longValue());
     protocol = cur.getString(cur.getColumnIndexOrThrow("protocol")).toString();
     read = cur.getString(cur.getColumnIndexOrThrow("read")).toString();
     status = cur.getString(cur.getColumnIndexOrThrow("status")).toString();

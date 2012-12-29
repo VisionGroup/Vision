@@ -90,7 +90,7 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        intent = new Intent(MainActivity.this, ColorSettingsActivity.class);
+        intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:

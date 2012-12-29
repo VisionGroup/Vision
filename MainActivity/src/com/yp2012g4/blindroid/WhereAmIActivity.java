@@ -34,8 +34,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
   Date lastUpdate = null;
   long updateTimeOut = 60 * 1000; // 1 minute
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.where_am_i_Activity;
   }
   
@@ -58,8 +57,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
     speakOut(toSpeak);
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.back_button:
         speakOut("Previous screen");
@@ -67,7 +65,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        Intent intent = new Intent(this, ThemeSettingsActivity.class);
+        Intent intent = new Intent(this, DisplaySettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:
@@ -82,8 +80,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
     }
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
     mHandler = new Handler();
@@ -105,8 +102,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
     LocationFinder f = new LocationFinder(manager);
     log("Got location finder");
     LocationHandler h = new LocationHandler() {
-      @Override
-      public void handleLocation(double longitude, double latitude, String provider, String address) {
+      @Override public void handleLocation(double longitude, double latitude, String provider, String address) {
         makeUseOfNewLocation(longitude, latitude, provider, address);
       }
     };
@@ -116,8 +112,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
     l = new ReentrantLock();
   }
   
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_main, menu);
     return true;

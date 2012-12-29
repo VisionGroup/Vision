@@ -1,14 +1,7 @@
 package com.yp2012g4.blindroid.tools;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,20 +10,36 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * This is a service which will wait for updates from a Location Provider
+ * (Network, GPS), and call a listener, providing an address corresponding to
+ * the current locations
+ * 
+ * @author Olivier Hofman
+ * @version 1.0
+ */
 public class LocationFinder {
   List<LocationListener> listeners = null;
   LocationManager locationManager;
   LocationHandler handler;
   
-  // Geocoder coder = null;
   public LocationFinder(LocationManager newLocationManager) {
     locationManager = newLocationManager;
     log("created");
   }
   
+  /**
+   * Start the daemon.
+   * 
+   * @param h
+   *          the handler to call when getting location update
+   * @param useGPS
+   *          Do we try to use the GPS
+   * @param useNetwork
+   *          Do we try to use the Network based location
+   */
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork) {
     log("run");
-//    coder = new Geocoder(con, Locale.US);
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
@@ -59,24 +68,26 @@ public class LocationFinder {
     double latitude = location.getLatitude();
     double longitude = location.getLongitude();
     log("latitude = " + latitude + ", longitude = " + longitude);
-//    if (coder == null)
-//      log("Error in makeUseOfNewLocation: the coder was not initialised");
-//    List<Address> addresses = null;
     OpenStreetMapGeocoding(latitude, longitude, provider);
-//    try {
-//      addresses = coder.getFromLocation(latitude, longitude, 1);
-//      if (addresses.isEmpty())
-//        log("No address returned");
-//    } catch (Exception e) {
-//      log("Error in getFromLocation: " + e.getMessage());
-//      return;
-//    }
   }
   
+  /**
+   * Log a string for this class
+   * 
+   * @param s
+   *          the message to log
+   */
   static void log(String s) {
     Log.d("LocationFinder", s);
   }
   
+  /**
+   * Create a location listener.
+   * 
+   * @param Provider
+   *          The provider this listener will listen to
+   * @return The listener
+   */
   private LocationListener createLocationListener(final String Provider) {
     LocationListener l = new LocationListener() {
       @Override public void onLocationChanged(Location location) {
@@ -99,19 +110,20 @@ public class LocationFinder {
     return l;
   }
   
+  /**
+   * Start an asynchronous task to convert coordinates to an address
+   * 
+   * @param latitude
+   *          the latitude
+   * @param longitude
+   *          the longitude
+   * @param provider
+   *          the provider of the current location
+   */
   void OpenStreetMapGeocoding(final double latitude, final double longitude, final String provider) {
-    AsyncTask<URL, Void, String> downloader = new AsyncTask<URL, Void, String>() {
-      @Override protected String doInBackground(URL... params) {
-        String r = "";
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        try {
-          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-          Document d = dBuilder.parse(new InputSource(params[0].openStream()));
-          r = d.getElementsByTagName("result").item(0).getChildNodes().item(0).getNodeValue();
-        } catch (Exception e) {
-          log("Error: " + e.getMessage());
-        }
-        return r;
+    AsyncTask<Void, Void, String> downloader = new AsyncTask<Void, Void, String>() {
+      @Override protected String doInBackground(Void... params) {
+        return OpenStreetMapGeocoder.GetAddress(latitude, longitude);
       }
       
       @Override protected void onPostExecute(String result) {
@@ -121,14 +133,15 @@ public class LocationFinder {
       }
     };
     try {
-      URL sourceUrl = new URL("http://nominatim.openstreetmap.org/reverse?accept-language=en&lat=" + latitude + "&lon=" + longitude);
-      // String result = log("OpenStreetMap Geocoding: " + result);
-      downloader.execute(sourceUrl);
+      downloader.execute();
     } catch (Exception e) {
       log("Error: " + e.getMessage());
     }
   }
   
+  /**
+   * Stop the service
+   */
   public void stop() {
     log("stopped");
     for (LocationListener l : listeners) {

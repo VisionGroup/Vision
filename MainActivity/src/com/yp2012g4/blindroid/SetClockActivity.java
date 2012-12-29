@@ -46,7 +46,6 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
   
   @Override public void onClick(View v) {
     Intent intent = new Intent(SetClockActivity.this, MainActivity.class);
-
     switch (v.getId()) {
       case R.id.back_button:
         speakOut("Previous screen");
@@ -55,7 +54,7 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        intent = new Intent(this, ThemeSettingsActivity.class);
+        intent = new Intent(this, DisplaySettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:

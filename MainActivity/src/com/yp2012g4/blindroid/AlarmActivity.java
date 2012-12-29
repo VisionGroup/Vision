@@ -1,4 +1,6 @@
 /***
+ * This is the alarm main activity
+ * 
  * @author Amir Blumental
  * @version 1.0
  */
@@ -29,7 +31,10 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   final static int REQUEST_CODE = 1234;
   
   /**
+   * This method call set clock activity
    * 
+   * @param isSettingMinutes
+   *          - tell the activity if we want to set hours or minutes
    */
   public void callSetClock(boolean isSettingMinutes) {
     waitForMinutes = isSettingMinutes;
@@ -47,7 +52,15 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == REQUEST_CODE)
+    if (requestCode == REQUEST_CODE) {
+      // if user pressed back
+      if (-1 == resultCode)
+        return;
+      // if user pressed home
+      if (-2 == resultCode) {
+        mHandler.postDelayed(mLaunchTask, 10);
+        return;
+      }
       if (waitForMinutes) {
         alarmTime = Calendar.getInstance();
         alarmTime.setTimeInMillis(System.currentTimeMillis());
@@ -64,6 +77,7 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
         reqHour = resultCode;
         callSetClock(true);
       }
+    }
   }
   
   @Override

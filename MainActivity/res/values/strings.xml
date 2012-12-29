@@ -86,7 +86,7 @@
     <string name="current_menu_button">Current menu</string>
     <string name="title_activity_talking_sms_list">TalkingSmsList</string>
     <string name="title_activity_contacts_list">ContactsListActivity</string>
-    <string name="title_activity_set_clock">SetClockActivity</string>
+    <string name="title_activity_set_clock">Set Clock</string>
     <string name="setAlarmButton">Set Alarm</string>
     <string name="alarmStatus">Alarm Status</string>
 

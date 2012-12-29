@@ -76,7 +76,7 @@ containing a value of this type.
         public static final int Contact_number_9=0x7f0a0023;
         public static final int ContactsListView=0x7f0a0040;
         public static final int GreenBlack=0x7f0a000b;
-        public static final int LinearLayout1=0x7f0a0001;
+        public static final int LinearLayout1=0x7f0a0005;
         public static final int MainActivityView=0x7f0a000e;
         public static final int QuickDialActivity=0x7f0a001a;
         public static final int QuickSMSActivity=0x7f0a0024;
@@ -108,7 +108,7 @@ containing a value of this type.
         public static final int button_playStop=0x7f0a003a;
         public static final int button_prevNote=0x7f0a0037;
         public static final int button_recordStop=0x7f0a0038;
-        public static final int cancelalarm=0x7f0a0005;
+        public static final int cancelalarm=0x7f0a0004;
         public static final int contact_email=0x7f0a003f;
         public static final int contact_name=0x7f0a003d;
         public static final int contact_phone=0x7f0a003e;
@@ -122,15 +122,15 @@ containing a value of this type.
         public static final int quick_dial_button=0x7f0a0015;
         public static final int quick_sms_button=0x7f0a0016;
         public static final int read_sms_button=0x7f0a0012;
-        public static final int setButton=0x7f0a0003;
+        public static final int setButton=0x7f0a0002;
         public static final int set_alarm_view=0x7f0a002e;
         public static final int settings_button=0x7f0a0042;
         public static final int sms_body=0x7f0a004a;
         public static final int sms_from=0x7f0a0049;
         public static final int sms_time=0x7f0a004b;
         public static final int sos_button=0x7f0a000f;
-        public static final int startalarm=0x7f0a0004;
-        public static final int statusButton=0x7f0a0002;
+        public static final int startalarm=0x7f0a0003;
+        public static final int statusButton=0x7f0a0001;
         public static final int subject=0x7f0a0046;
         public static final int textView1=0x7f0a002f;
         public static final int textView2=0x7f0a0030;

@@ -1,6 +1,5 @@
 package com.yp2012g4.blindroid.customUI.lists;
 
-
 /**
  * interface for Talking List View.
  * 
@@ -8,11 +7,21 @@ package com.yp2012g4.blindroid.customUI.lists;
  * 
  */
 public interface ViewListRun {
-	
-	public void onClick(int selectedItem);
-
+  /**
+   * set your own behavior of onClick in TalkingListView
+   * @param selectedItem
+   */
+  public void onClick(int selectedItem);
+  
+  /**
+   * set your own behavior of Init in TalkingListView
+   * @param selectedItem
+   */
   public void onInitSpeak(int selectedItem);
-
+  
+  /**
+   * set your own behavior of onFling in TalkingListView
+   * @param selectedItem
+   */
   public void onFling(int selectedItem);
-	
 }

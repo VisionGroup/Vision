@@ -22,7 +22,6 @@ public class ThemeSettingsActivity extends BlindroidActivity implements
    public void onCreate(Bundle savedInstanceState)
    {
     super.onCreate(savedInstanceState);
-    DisplaySettings.setThemeToActivity(this);
     setContentView(R.layout.activity_theme_settings);
     mHandler = new Handler();
     TalkingButton b = (TalkingButton)findViewById(R.id.Small_text_size_button);
@@ -98,13 +97,6 @@ public class ThemeSettingsActivity extends BlindroidActivity implements
     }
 
    }
-       @Override
-      public void onBackPressed() {
-    super.onBackPressed();
-    ThemeSettingsActivity.this.finish();
-
-   }
-   
 
 
     @Override

@@ -21,9 +21,7 @@ public class ColorSettingsActivity extends BlindroidActivity implements
    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-	  DisplaySettings.setThemeToActivity(this);
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_color_settings);
 		//tts = new TextToSpeech(this, this);
 		mHandler = new Handler();

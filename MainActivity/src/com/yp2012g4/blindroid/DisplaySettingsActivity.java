@@ -61,15 +61,19 @@ public class DisplaySettingsActivity extends BlindroidActivity implements
       intent = new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class);
       startActivity(intent);
      break;
-    case R.id.home_button:
-      speakOut("Next screen");
-      break;
     case R.id.settings_button:
       speakOut("Settings");
       break;
     case R.id.back_button:
       speakOut("Previous screen");
       mHandler.postDelayed(mLaunchTask, 1000);
+      break;
+    case R.id.home_button:
+      speakOut("Home");
+      mHandler.postDelayed(mLaunchTask, 1000);
+      break;
+    case R.id.current_menu_button:
+      speakOut("This is " + getString(R.string.title_activity_display_settings));
       break;
     default :
      break;

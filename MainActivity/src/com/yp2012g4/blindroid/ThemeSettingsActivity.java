@@ -5,6 +5,7 @@
 
 package com.yp2012g4.blindroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -52,6 +53,7 @@ public class ThemeSettingsActivity extends BlindroidActivity implements
    @Override
   public void onClick(View v)
    {
+     Intent intent = new Intent(ThemeSettingsActivity.this, MainActivity.class);
      if (v instanceof TalkingButton)
        speakOut(((TalkingButton) v).getText().toString());
     switch (v.getId())
@@ -75,6 +77,21 @@ public class ThemeSettingsActivity extends BlindroidActivity implements
       DisplaySettings.SIZE="LARGE";
       mHandler.postDelayed(mLaunchTask,1000);
    break;
+    case R.id.settings_button:
+      speakOut("Settings");
+      mHandler.postDelayed(mLaunchTask, 1000);
+      break;
+    case R.id.back_button:
+      speakOut("Previous screen");
+      mHandler.postDelayed(mLaunchTask, 1000);
+      break;
+    case R.id.home_button:
+      speakOut("Home");
+      startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+      break;
+    case R.id.current_menu_button:
+      speakOut("This is " + getString(R.string.title_activity_theme_settings));
+      break;
     default :
      break;
 

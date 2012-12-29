@@ -12,6 +12,12 @@ import com.yp2012g4.blindroid.SOSActivity;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.onTouchEventClass;
 
+/**
+ * Tests for SOSActivity
+ * 
+ * @author Amir
+ * @version 1.0
+ */
 public class SOSActivityTest extends
 		ActivityInstrumentationTestCase2<SOSActivity> {
 	private Solo solo;
@@ -21,6 +27,7 @@ public class SOSActivityTest extends
 		super("com.yp2012g4.blindroid", SOSActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
@@ -39,6 +46,7 @@ public class SOSActivityTest extends
 		}
 	}
 
+	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}

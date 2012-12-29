@@ -21,8 +21,10 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
+ * An activity which will reads to the user his current location.
  * 
  * @author Olivier Hofman
+ * @version 1.0
  */
 public class WhereAmIActivity extends BlindroidActivity implements OnClickListener {
   private static void log(String s) {

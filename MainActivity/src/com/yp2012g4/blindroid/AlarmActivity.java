@@ -28,9 +28,66 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   private int reqHour;
   final static int REQUEST_CODE = 1234;
   
+  /**
+   * 
+   */
+  public void callSetClock(boolean isSettingMinutes) {
+    waitForMinutes = isSettingMinutes;
+    Intent i = new Intent(AlarmActivity.this, SetClockActivity.class);
+    int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
+    i.putExtra("type", type);
+    startActivityForResult(i, REQUEST_CODE);
+  }
+  
   @Override
   public int getViewId() {
     return R.id.AlarmActivity;
+  }
+  
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == REQUEST_CODE)
+      if (waitForMinutes) {
+        alarmTime = Calendar.getInstance();
+        alarmTime.setTimeInMillis(System.currentTimeMillis());
+        alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
+        alarmTime.set(Calendar.MINUTE, resultCode);
+        String s = "Alarm is set to  " + SpeakingClockActivity.parseTime(alarmTime);
+        TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
+        buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
+        speakOut(s);
+        while (_t.isSpeaking() == Boolean.TRUE) {
+          // Wait for message to finish playing and then finish the activity
+        }
+      } else {
+        reqHour = resultCode;
+        callSetClock(true);
+      }
+  }
+  
+  @Override
+  public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.settings_button:
+        speakOut("Settings");
+        Intent intent = new Intent(this, ColorSettingsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.home_button:
+        speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + getString(R.string.title_activity_alarm));
+        break;
+      default:
+        break;
+    }
   }
   
   /** Called when the activity is first created. */
@@ -42,12 +99,15 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
     back = (TalkingImageButton) findViewById(R.id.back_button);
     back.setOnClickListener(this);
     back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
+    settings = (TalkingImageButton) findViewById(R.id.settings_button);
     settings.setOnClickListener(this);
     settings.setOnTouchListener(this);
+    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
+    wai.setOnClickListener(this);
+    wai.setOnTouchListener(this);
+    home = (TalkingImageButton) findViewById(R.id.home_button);
+    home.setOnClickListener(this);
+    home.setOnTouchListener(this);
     TalkingButton buttonStart = (TalkingButton) findViewById(R.id.startalarm);
     TalkingButton buttonCancel = (TalkingButton) findViewById(R.id.cancelalarm);
     TalkingButton buttonSet = (TalkingButton) findViewById(R.id.setButton);
@@ -99,28 +159,6 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
     buttonCancel.setOnTouchListener(this);
   }
   
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == REQUEST_CODE)
-      if (waitForMinutes) {
-        alarmTime = Calendar.getInstance();
-        alarmTime.setTimeInMillis(System.currentTimeMillis());
-        alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
-        alarmTime.set(Calendar.MINUTE, resultCode);
-        String s = "Alarm is set to  " + SpeakingClockActivity.parseTime(alarmTime);
-        TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
-        buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
-        speakOut(s);
-        while (_t.isSpeaking() == Boolean.TRUE) {
-          // Wait for message to finish playing and then finish the activity
-        }
-      } else {
-        reqHour = resultCode;
-        callSetClock(true);
-      }
-  }
-  
   /**
    * set the alarm to hour:min
    * 
@@ -151,37 +189,5 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
     while (_t.isSpeaking() == Boolean.TRUE) {
       // Wait for message to finish playing and then finish the activity
     }
-  }
-  
-  @Override
-  public void onClick(View v) {
-    // Intent intent;
-    // speakOut(((Button) v).getText().toString());
-    switch (v.getId()) {
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        // intent = new Intent(MainActivity.this,
-        // ColorSettingsActivity.class);
-        // startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        break;
-    }
-  }
-  
-  /**
-   * 
-   */
-  public void callSetClock(boolean isSettingMinutes) {
-    waitForMinutes = isSettingMinutes;
-    Intent i = new Intent(AlarmActivity.this, SetClockActivity.class);
-    int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
-    i.putExtra("type", type);
-    startActivityForResult(i, REQUEST_CODE);
   }
 }

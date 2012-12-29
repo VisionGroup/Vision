@@ -9,36 +9,40 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.yp2012g4.blindroid.ContactType;
 import com.yp2012g4.blindroid.R;
-import com.yp2012g4.blindroid.SmsType;
 
 public class ContactsAdapter extends BaseAdapter {
 
   
   //change smstype to contactType or whatever...
-  private ArrayList<SmsType> _data;
+  private ArrayList<ContactType> _data;
   Context _c;
 
-  public ContactsAdapter(ArrayList<SmsType> data, Context c) {
+  public ContactsAdapter(ArrayList<ContactType> data, Context c) {
     _data = data;
     _c = c;
   }
 
+  @Override
   public int getCount() {
     // TODO Auto-generated method stub
     return _data.size();
   }
 
+  @Override
   public Object getItem(int position) {
     // TODO Auto-generated method stub
     return _data.get(position);
   }
 
+  @Override
   public long getItemId(int position) {
     // TODO Auto-generated method stub
     return position;
   }
 
+  @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     View v = convertView;
     if (v == null) {
@@ -51,7 +55,7 @@ public class ContactsAdapter extends BaseAdapter {
     TextView bodyView = (TextView) v.findViewById(R.id.contact_phone);
     TextView timeView = (TextView) v.findViewById(R.id.contact_email);
 
-    SmsType msg = _data.get(position);
+    ContactType msg = _data.get(position);
     String person = msg.getPerson();
     if (person == ""){
       person = msg.getAddress();

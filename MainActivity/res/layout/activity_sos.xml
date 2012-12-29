@@ -14,7 +14,7 @@
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/Send_SOS_Message"
         android:layout_width="0dip"
-        android:layout_height="380dp"
+        android:layout_height="460dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:contentDescription="@string/send_SOS_message"
@@ -25,8 +25,9 @@
 	
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom" >
 		<include layout="@layout/control_bar_view"/>
   
     </LinearLayout>

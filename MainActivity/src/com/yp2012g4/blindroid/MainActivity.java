@@ -5,55 +5,11 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 public class MainActivity extends BlindroidActivity implements OnClickListener {
-  /** Called when the activity is first created. */
-  // private TextToSpeech tts;
-  // private Rect rect;
-  @Override public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    // TODO: Add to every activity!! or to the new Activity intrerface Yaron
-    // is making
-    setVolumeControlStream(AudioManager.STREAM_MUSIC);
-    //tts = new TextToSpeech(this, this);
-    TalkingImageButton b = (TalkingImageButton) findViewById(R.id.sos_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.time_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.where_am_i_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.phone_status_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.alarm_clock_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.quick_dial_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.quick_sms_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.read_sms_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-  }
-  
   /*
    * @Override public void onRestart() { super.onRestart();
    * 
@@ -79,11 +35,13 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
    * 
    * }
    */
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.MainActivityView;
   }
   
-  @Override public void onClick(View v) {
+  @Override
+  public void onClick(View v) {
     Intent intent;
     // speakOut(((Button) v).getText().toString());
     switch (v.getId()) {
@@ -138,6 +96,60 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
       case R.id.home_button:
         speakOut("Home");
         break;
+      case R.id.current_menu_button:
+        speakOut("This is " + "the home screen");
+        break;
+      default:
+        break;
     }
+  }
+  
+  /** Called when the activity is first created. */
+  // private TextToSpeech tts;
+  // private Rect rect;
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    // TODO: Add to every activity!! or to the new Activity intrerface Yaron
+    // is making
+    setVolumeControlStream(AudioManager.STREAM_MUSIC);
+    // tts = new TextToSpeech(this, this);
+    TalkingImageButton b = (TalkingImageButton) findViewById(R.id.sos_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.time_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.where_am_i_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.phone_status_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.alarm_clock_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.quick_dial_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.quick_sms_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    b = (TalkingImageButton) findViewById(R.id.read_sms_button);
+    b.setOnClickListener(this);
+    b.setOnTouchListener(this);
+    back = (TalkingImageButton) findViewById(R.id.back_button);
+    back.setOnClickListener(this);
+    back.setOnTouchListener(this);
+    next = (TalkingImageButton) findViewById(R.id.settings_button);
+    next.setOnClickListener(this);
+    next.setOnTouchListener(this);
+    settings = (TalkingImageButton) findViewById(R.id.home_button);
+    settings.setOnClickListener(this);
+    settings.setOnTouchListener(this);
+    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
+    wai.setOnClickListener(this);
+    wai.setOnTouchListener(this);
   }
 }

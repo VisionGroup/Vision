@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.QuickDialActivity;
 import com.yp2012g4.blindroid.R;
+import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class QuickDialActivityTest extends
@@ -44,15 +45,22 @@ public class QuickDialActivityTest extends
 	public void testClickOnBackButton() {
 		solo.assertCurrentActivity("Check on first activity",
 				QuickDialActivity.class);
-//		TalkingImageButton back = (TalkingImageButton)activity.findViewById(R.id.back_button);
 		ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
-		 TalkingImageButton btn = (TalkingImageButton) btnList.get(0);
-		 assertTrue(btn.getId()==R.id.back_button);
+		TalkingImageButton btn = (TalkingImageButton) btnList.get(0);
+		assertTrue(btn.getId() == R.id.back_button);
 		solo.clickOnImageButton(0);
-		solo.assertCurrentActivity("Back to main screen", QuickDialActivity.class);
-//		TalkingImageButton back = (TalkingImageButton)activity.findViewById(R.id.back_button);
-		
+		solo.assertCurrentActivity("Back to main screen",
+				QuickDialActivity.class);
 
 	}
 
+	public void testContactsText() {
+		String[] string = { "Amit Yaffe", "Yaron Auster", "Roman Gurevitch" };
+		ArrayList<Button> btnList = solo.getCurrentButtons();
+		for (int i = 0; i < 2; i++) {
+			TalkingButton btn = (TalkingButton) btnList.get(i);
+			assertTrue(btn.getText().toString().equals(string[i]));
+		}
+
+	}
 }

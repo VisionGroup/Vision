@@ -8,6 +8,7 @@ import android.widget.Button;
  * This is a Talking button used in a TTS project to provide the additional
  * functionality and information required by tts.
  * 
+ * @version 1.0
  * @author Amit Yaffe
  * 
  */

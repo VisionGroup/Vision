@@ -10,13 +10,13 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.widget.AdapterView;
 
-import com.yp2012g4.blindroid.customUI.lists.SmsAdapter;
+import com.yp2012g4.blindroid.customUI.lists.ContactsAdapter;
 import com.yp2012g4.blindroid.customUI.lists.TalkingListView;
 import com.yp2012g4.blindroid.customUI.lists.ViewListRun;
 
 public class ContactsListActivity extends Activity implements OnInitListener {
   TalkingListView viewList;
-  ArrayList<SmsType> details;
+  ArrayList<ContactType> details;
   AdapterView.AdapterContextMenuInfo info;
   protected TextToSpeech tts;
   
@@ -31,9 +31,9 @@ public class ContactsListActivity extends Activity implements OnInitListener {
     setContentView(R.layout.contacts_list);
     viewList = (TalkingListView) findViewById(R.id.ContactsListView);
     tts = new TextToSpeech(getApplicationContext(), this);
-    SmsReader smsReader = new SmsReader(getApplicationContext());
-    details = smsReader.getIncomingMessages();
-    viewList.setAdapter(new SmsAdapter(details, this));
+//    SmsReader smsReader = new SmsReader(getApplicationContext());
+//    details = smsReader.getIncomingMessages();
+    viewList.setAdapter(new ContactsAdapter(details, this));
     
     
     viewList.setRun(new ViewListRun() {
@@ -69,14 +69,13 @@ public class ContactsListActivity extends Activity implements OnInitListener {
     Log.e("tts", "error init language");
   }
   
-  private String getName(int selectedItem) {
+  public String getName(int selectedItem) {
     if (details.size() >= selectedItem) {
       if (details.get(selectedItem).getPerson() != "") {
         return "From " + details.get(selectedItem).getPerson() + "  ";
-      } else {
-        String phoneNumber = details.get(selectedItem).getAddress();
-        return "From" + phoneNumber + "  ";
       }
+      String phoneNumber = details.get(selectedItem).getAddress();
+      return "From" + phoneNumber + "  ";
     }
     return "";
   }
@@ -87,7 +86,35 @@ public class ContactsListActivity extends Activity implements OnInitListener {
   }
   
   
-  private void speakOut(String s) {
+  public void speakOut(String s) {
     tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
   }
 }
+
+
+
+
+// String phoneNumber = null;
+// int i = 0;
+// LinearLayout mainView = (LinearLayout)
+// findViewById(R.id.QuickDialActivity);
+// getButtonsPosition(mainView);
+// final String[] projection = new String[] {
+// ContactsContract.Contacts.STARRED
+// };
+// ContentResolver cr = getContentResolver();
+// Cursor starred = cr.query(ContactsContract.Contacts.CONTENT_URI,
+// projection, ContactsContract.Contacts._ID + "=?", null, null);
+// int phoneNumberIndex = starred
+// .getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER);
+/*
+ * Log.i("MyLog" , "starred = " + starred.toString() +
+ * " ---- phonNumberIndex = " + phoneNumberIndex); if (starred != null &&
+ * starred.moveToFirst()) { try { while ( !starred.isAfterLast() || i <
+ * NUM_OF_QUICK_DIALS) { // Log.v(TAG, "Moved to first"); // Log.v(TAG,
+ * "Cursor Moved to first and checking"); phoneNumber =
+ * starred.getString(phoneNumberIndex);
+ * list_of_phone_numbers.add(phoneNumber); i++; if (starred.moveToNext())
+ * continue; else break; } } finally { // Log.v(TAG, "In finally");
+ * starred.close(); } }
+ */

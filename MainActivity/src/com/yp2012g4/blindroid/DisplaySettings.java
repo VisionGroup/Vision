@@ -39,6 +39,14 @@ public class DisplaySettings {
 		backgroundColor = int2;
 	}
 	
+	public static int getTextColor() {
+    return textColor;
+  }
+	
+	public static int getBackgroundColor() {
+    return backgroundColor;
+  }
+	
 	public static void applyButtonSettings (Set<TalkingImageButton> buttons, View v) {
 	  v.setBackgroundColor(color_to_string.get(backgroundColor));
 		//if (v instanceof TalkingImageButton) {

@@ -1,4 +1,6 @@
 /**
+ * An Activity allowing the user to choose between different color themes.
+ * 
  * @author Maytal
  *
  */

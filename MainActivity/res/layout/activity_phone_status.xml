@@ -15,7 +15,7 @@
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/button_getBatteryStatus"
             android:layout_width="0dip"
-            android:layout_height="230dp"
+            android:layout_height="210dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
 			android:contentDescription="@string/phoneStatus_button_getBatteryStatus_read"
@@ -32,7 +32,7 @@
             android:id="@+id/button_getReceptionStatus"
             style="android:ButtonStyle"
             android:layout_width="0dip"
-            android:layout_height="230dp"
+            android:layout_height="210dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:contentDescription="@string/phoneStatus_button_getReceptionStatus_read"

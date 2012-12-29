@@ -27,15 +27,6 @@ import com.yp2012g4.blindroid.utils.TTS;
  * 
  */
 public class PhoneStatusActivity extends BlindroidActivity implements OnClickListener {
-  /**
-   * Used to activate the onTouch button reading function.
-   */
-  static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
-  int _battery = -1; // Battery status
-  int _status = -1; // Charging Status
-  int _signal = -1; // Reception status
-  SignalStrengthListener signalStrengthListener;
-  
   // private TextToSpeech tts;
   /**
    * A signal strength listener. Updates _signal between 0-31.
@@ -51,6 +42,72 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
       // get the signal strength (a value between 0 and 31)
       _signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
+    }
+  }
+  
+  /**
+   * Used to activate the onTouch button reading function.
+   */
+  static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
+  int _battery = -1; // Battery status
+  int _status = -1; // Charging Status
+  int _signal = -1; // Reception status
+  SignalStrengthListener signalStrengthListener;
+  
+  /**
+   * Returns the chargeStatus String according to charge status param. Empty
+   * string if not charging.
+   * 
+   * @param status
+   * @return
+   */
+  public String getChargeStatus(int status) {
+    switch (status) {
+      case BatteryManager.BATTERY_STATUS_CHARGING:
+      case BatteryManager.BATTERY_STATUS_FULL:
+        return getString(R.string.phoneStatus_message_charging_read);
+      default:
+        return "";
+    }
+  }
+  
+  @Override public int getViewId() {
+    return R.id.phoneStatusActivity;
+  }
+  
+  /**
+   * Adds onClick events to buttons in this view.
+   * 
+   * @see android.view.View.OnClickListener#onClick(android.view.View)
+   */
+  @Override public void onClick(View v) {
+    Resources res = getResources();
+    switch (v.getId()) {
+      case R.id.button_getBatteryStatus:
+        speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(_battery),
+            getChargeStatus(_status)));
+        break;
+      case R.id.button_getReceptionStatus:
+        speakOut(signalToString(_signal));
+        break;
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.settings_button:
+        speakOut("Settings");
+        Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.home_button:
+        speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + getString(R.string.phoneStatus_whereami));
+        break;
+      default:
+        break;
     }
   }
   
@@ -106,7 +163,7 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
    * @return
    */
   public String signalToString(int signal) {
-    Log.d("Signal", String.valueOf((int) ((signal * 100.0f) / MAX_SIGNAL)));
+    Log.d("Signal", String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);
     else if (signal >= 12)
@@ -117,62 +174,5 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
       return getString(R.string.phoneStatus_message_poorSignal_read);
     else
       return getString(R.string.phoneStatus_message_veryPoorSignal_read);
-  }
-  
-  /**
-   * Returns the chargeStatus String according to charge status param. Empty
-   * string if not charging.
-   * 
-   * @param status
-   * @return
-   */
-  public String getChargeStatus(int status) {
-    switch (status) {
-      case BatteryManager.BATTERY_STATUS_CHARGING:
-      case BatteryManager.BATTERY_STATUS_FULL:
-        return getString(R.string.phoneStatus_message_charging_read);
-      default:
-        return "";
-    }
-  }
-  
-  /**
-   * Adds onClick events to buttons in this view.
-   * 
-   * @see android.view.View.OnClickListener#onClick(android.view.View)
-   */
-  @Override public void onClick(View v) {
-    Resources res = getResources();
-    switch (v.getId()) {
-      case R.id.button_getBatteryStatus:
-        speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(_battery),
-            getChargeStatus(_status)));
-        break;
-      case R.id.button_getReceptionStatus:
-        speakOut(signalToString(_signal));
-        break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        Intent intent = new Intent(this, ColorSettingsActivity.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.phoneStatus_whereami));
-        break;
-      default:
-        break;
-    }
-  }
-  
-  @Override public int getViewId() {
-    return R.id.phoneStatusActivity;
   }
 }

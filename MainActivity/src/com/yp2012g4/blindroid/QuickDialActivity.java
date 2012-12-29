@@ -28,13 +28,11 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
 public class QuickDialActivity extends BlindroidActivity implements OnClickListener {
   protected List<String> list_of_phone_numbers = new ArrayList<String>();
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.QuickDialActivity;
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     if (v instanceof TalkingButton) {
       speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
       while (_t.isSpeaking() == Boolean.TRUE) {
@@ -67,6 +65,22 @@ public class QuickDialActivity extends BlindroidActivity implements OnClickListe
           break;
         case R.id.Contact_number_9:
           break;
+        case R.id.settings_button:
+          speakOut("Settings");
+          Intent intent = new Intent(this, ThemeSettingsActivity.class);
+          startActivity(intent);
+          break;
+        case R.id.back_button:
+          speakOut("Previous screen");
+          mHandler.postDelayed(mLaunchTask, 1000);
+          break;
+        case R.id.home_button:
+          speakOut("Home");
+          mHandler.postDelayed(mLaunchTask, 1000);
+          break;
+        case R.id.current_menu_button:
+          speakOut("This is " + getString(R.string.title_activity_quick_dial));
+          break;
         default:
           break;
       }
@@ -79,7 +93,7 @@ public class QuickDialActivity extends BlindroidActivity implements OnClickListe
           break;
         case R.id.settings_button:
           speakOut("Settings");
-          Intent intent = new Intent(this, ColorSettingsActivity.class);
+          Intent intent = new Intent(this, DisplaySettingsActivity.class);
           startActivity(intent);
           break;
         case R.id.home_button:
@@ -95,8 +109,7 @@ public class QuickDialActivity extends BlindroidActivity implements OnClickListe
   }
   
   // private static final int NUM_OF_QUICK_DIALS = 9;
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.activity_quick_dial);
@@ -143,14 +156,7 @@ public class QuickDialActivity extends BlindroidActivity implements OnClickListe
     home = (TalkingImageButton) findViewById(R.id.home_button);
   }
   
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    speakOut("Quick dial activity started");
-  }
-  
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_quick_dial, menu);
     return true;

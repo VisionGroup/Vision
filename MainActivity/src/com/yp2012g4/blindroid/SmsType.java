@@ -34,7 +34,7 @@ public class SmsType {
     String mili = cur.getString(cur.getColumnIndexOrThrow("date")).toString();
     Long m = Long.valueOf(mili);
     date = (String) DateFormat.format("dd/MM/yy", m.longValue());
-    protocol = cur.getString(cur.getColumnIndexOrThrow("protocol")).toString();
+    // protocol = cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can cause exception
     read = cur.getString(cur.getColumnIndexOrThrow("read")).toString();
     status = cur.getString(cur.getColumnIndexOrThrow("status")).toString();
     type = cur.getString(cur.getColumnIndexOrThrow("type")).toString();

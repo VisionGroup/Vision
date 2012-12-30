@@ -7,7 +7,11 @@ package com.yp2012g4.blindroid.test;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.Instrumentation;
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.TouchUtils;
+import android.view.MotionEvent;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.SmsReader;
@@ -33,19 +37,59 @@ public class TalkingSmsListTest extends
 	public void test() {
 		solo.assertCurrentActivity("wrong activity", TalkingSmsList.class);
 		TalkingSmsList tsl = (TalkingSmsList) activity;
+
 		SmsReader smsReader = new SmsReader(tsl.getApplicationContext());
-	    ArrayList<SmsType> details = smsReader.getIncomingMessages();
-		SmsType sms = tsl.getSelectedSms();
+		ArrayList<SmsType> originalSmsList = smsReader.getIncomingMessages();
+		ArrayList<SmsType> fromActivityList = tsl.getDetails();
+
+		assert (originalSmsList.size() == fromActivityList.size());
+
+		if (originalSmsList.size() == 0) {
+			return;
+		}
+
+		SmsType sms1;
+		SmsType sms2;
+
+		sms1 = originalSmsList.get(0);
+		if (originalSmsList.size() == 1) {
+			sms2 = sms1;
+		} else {
+			sms2 = originalSmsList.get(1);
+		}
+
+		SmsType lsms = tsl.getSelectedSms();
+
+		assert (lsms.getBody() == sms1.getBody());
+
+		flingDown();
+
+		lsms = tsl.getSelectedSms();
+		assert (sms2.getBody() == lsms.getBody());
 		
-		assert(sms.getBody() == details.get(0).getBody());
+		flingUp();
 		
-		solo.clickOnText(sms.getBody());
-		SmsType sms2 = tsl.getSelectedSms();
-		
-		assert(sms2.getBody() == details.get(1).getBody());
+		lsms = tsl.getSelectedSms();
+		assert (sms1.getBody() == lsms.getBody());
 		
 
 	}
 
+	private void flingDown() {
+		int screenHeight = getActivity().getWindowManager().getDefaultDisplay()
+				.getHeight();
+		int screenWidth = getActivity().getWindowManager().getDefaultDisplay()
+				.getWidth();
+		TouchUtils.drag(this, screenWidth / 2, screenWidth / 2,
+				screenHeight / 2, screenHeight / 2 + 1, 0);
+	}
 
+	private void flingUp() {
+		int screenHeight = getActivity().getWindowManager().getDefaultDisplay()
+				.getHeight();
+		int screenWidth = getActivity().getWindowManager().getDefaultDisplay()
+				.getWidth();
+		TouchUtils.drag(this, screenWidth / 2, screenWidth / 2,
+				screenHeight / 2, screenHeight / 2 - 1, 0);
+	}
 }

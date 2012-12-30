@@ -35,13 +35,11 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
    * 
    * }
    */
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.MainActivityView;
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     Intent intent;
     // speakOut(((Button) v).getText().toString());
     switch (v.getId()) {
@@ -107,8 +105,7 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
   /** Called when the activity is first created. */
   // private TextToSpeech tts;
   // private Rect rect;
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     // TODO: Add to every activity!! or to the new Activity intrerface Yaron
@@ -151,5 +148,12 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
     wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
     wai.setOnClickListener(this);
     wai.setOnTouchListener(this);
+  }
+  
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Main screen");
+    }
   }
 }

@@ -21,6 +21,13 @@ import com.yp2012g4.blindroid.DisplaySettings;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
+/**
+ * This super class is handling on touch events with text-to-speech feedback for
+ * the (blind) user
+ * 
+ * @author Amir
+ * @version 1.0
+ */
 public abstract class onTouchEventClass extends Activity implements OnTouchListener, TextToSpeech.OnInitListener {
   /**
    * Stores the dimensions of a button
@@ -59,15 +66,14 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    */
   private Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
   private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+  
   public Map<TalkingButton, Rect> getButton_to_rect() {
     return button_to_rect;
   }
-
+  
   public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
     return imageButton_to_rect;
   }
-
-  
   
   // protected Map<Button, Intent> button_to_intent = new HashMap<Button,
   // Intent>();

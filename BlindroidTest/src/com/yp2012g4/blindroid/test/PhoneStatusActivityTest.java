@@ -9,6 +9,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.PhoneStatusActivity;
+import com.yp2012g4.blindroid.R;
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 /**
  * @author Dell
@@ -61,6 +63,15 @@ public class PhoneStatusActivityTest extends
 	assertEquals(
 		getActivity().getChargeStatus(
 			BatteryManager.BATTERY_STATUS_NOT_CHARGING), "");
+    }
+
+    public void test_TalkingImageButton() {
+	TalkingImageButton tlkbtn = (TalkingImageButton) solo
+		.getView(R.id.button_getBatteryStatus);
+	tlkbtn.setReadText("Test String");
+	assertEquals(tlkbtn.getReadText(), "Test String");
+	tlkbtn.setReadToolTip("Test String2");
+	assertEquals(tlkbtn.getReadToolTip(), "Test String2");
     }
 
     /*

@@ -1,4 +1,6 @@
 /***
+ * This is the alarm main activity
+ * 
  * @author Amir Blumental
  * @version 1.0
  */
@@ -29,7 +31,10 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   final static int REQUEST_CODE = 1234;
   
   /**
+   * This method call set clock activity
    * 
+   * @param isSettingMinutes
+   *          - tell the activity if we want to set hours or minutes
    */
   public void callSetClock(boolean isSettingMinutes) {
     waitForMinutes = isSettingMinutes;
@@ -39,15 +44,24 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
     startActivityForResult(i, REQUEST_CODE);
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.AlarmActivity;
   }
   
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  /**
+   * This will be called when the result from the set clock activity returnes
+   */
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == REQUEST_CODE)
+    if (requestCode == REQUEST_CODE) {
+      // if user pressed back
+      if (-1 == resultCode)
+        return;
+      // if user pressed home
+      if (-2 == resultCode) {
+        mHandler.postDelayed(mLaunchTask, 10);
+        return;
+      }
       if (waitForMinutes) {
         alarmTime = Calendar.getInstance();
         alarmTime.setTimeInMillis(System.currentTimeMillis());
@@ -64,10 +78,10 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
         reqHour = resultCode;
         callSetClock(true);
       }
+    }
   }
   
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.back_button:
         speakOut("Previous screen");
@@ -75,7 +89,7 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        Intent intent = new Intent(this, ColorSettingsActivity.class);
+        Intent intent = new Intent(this, DisplaySettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:
@@ -91,8 +105,7 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   }
   
   /** Called when the activity is first created. */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
     mHandler = new Handler();
@@ -114,8 +127,7 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
     TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
     buttonStatus.setOnTouchListener(this);
     buttonStatus.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override
-      public void onClick(View v) {
+      @Override public void onClick(View v) {
         String s;
         if (alarmTime == null)
           s = getString(R.string.noAlarm);
@@ -130,22 +142,19 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
       }
     });
     buttonSet.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override
-      public void onClick(View v) {
+      @Override public void onClick(View v) {
         callSetClock(false);
       }
     });
     buttonSet.setOnTouchListener(this);
     buttonStart.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override
-      public void onClick(View arg0) {
+      @Override public void onClick(View arg0) {
         setAlarm();
       }
     });
     buttonStart.setOnTouchListener(this);
     buttonCancel.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override
-      public void onClick(View arg0) {
+      @Override public void onClick(View arg0) {
         if (!alarmIsSet)
           return;
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -157,6 +166,13 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
       }
     });
     buttonCancel.setOnTouchListener(this);
+  }
+  
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Alarm screen");
+    }
   }
   
   /**

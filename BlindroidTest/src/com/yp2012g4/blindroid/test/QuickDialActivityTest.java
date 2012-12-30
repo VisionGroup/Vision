@@ -13,15 +13,23 @@ import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
+/**
+ * Tests for QuickDialActivity
+ * 
+ * @author Amir
+ * @version 1.0
+ */
 public class QuickDialActivityTest extends
 		ActivityInstrumentationTestCase2<QuickDialActivity> {
 	private Solo solo;
 	private Activity activity;
 
+	
 	public QuickDialActivityTest() {
 		super("com.yp2012g4.blindroid", QuickDialActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();

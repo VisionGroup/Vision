@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsManager;
@@ -21,6 +22,61 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  */
 public class QuickSMSActivity extends BlindroidActivity implements OnClickListener {
   TalkingButton b;
+  
+  @Override public int getViewId() {
+    return R.id.QuickSMSActivity;
+  }
+  
+  @SuppressWarnings("boxing") @Override public void onClick(View v) {
+    final View view = v;
+    if (v instanceof TalkingButton) {
+      final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+      alertDialog.setTitle("Choose contact");
+      alertDialog.setCancelable(false);
+      alertDialog.setMessage("will send the SMS to the chosen contact");
+      alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
+        @Override public void onClick(DialogInterface dialog, int which) {
+          String messageToSend = ((TalkingButton) view).getText().toString();
+          String number = "0544457141";
+          SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
+          speakOut("Message has been sent");
+        }
+      });
+      alertDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+        @Override public void onClick(DialogInterface dialog, int which) {
+          speakOut("Cancel");
+          alertDialog.dismiss();
+        }
+      });
+      speakOut("Sending" + ((TalkingButton) v).getText().toString());
+      while (_t.isSpeaking()) {
+        // wait...
+      }
+      alertDialog.show();
+    }
+    if (v instanceof TalkingImageButton)
+      switch (v.getId()) {
+        case R.id.settings_button:
+          speakOut("Settings");
+          Intent intent = new Intent(this, DisplaySettingsActivity.class);
+          startActivity(intent);
+          break;
+        case R.id.back_button:
+          speakOut("Previous screen");
+          mHandler.postDelayed(mLaunchTask, 1000);
+          break;
+        case R.id.home_button:
+          speakOut("Home");
+          mHandler.postDelayed(mLaunchTask, 1000);
+          break;
+        case R.id.current_menu_button:
+          speakOut("This is " + getString(R.string.title_activity_quick_sms));
+          break;
+        default:
+          break;
+      }
+  }
+  
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
@@ -63,58 +119,16 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
     settings.setOnTouchListener(this);
   }
   
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      speakOut("Quick SMS screen");
+    }
+  }
+  
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_quick_sms, menu);
     return true;
-  }
-  
-  @SuppressWarnings("boxing")
-  @Override public void onClick(View v) {
-    final View view = v;
-    if (v instanceof TalkingButton) {
-      final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-      alertDialog.setTitle("Choose contact");
-      alertDialog.setCancelable(false);
-      alertDialog.setMessage("will send the SMS to the chosen contact");
-      alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
-        @Override public void onClick(DialogInterface dialog, int which) {
-          String messageToSend = ((TalkingButton) view).getText().toString();
-          String number = "0524484993";
-          SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
-          speakOut("Message has been sent");
-        }
-      });
-      alertDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
-        @Override public void onClick(DialogInterface dialog, int which) {
-          speakOut("Cancel");
-          alertDialog.dismiss();
-        }
-      });
-      speakOut("Sending" + ((TalkingButton) v).getText().toString());
-      while (_t.isSpeaking()){
-        //wait...
-      }
-      alertDialog.show();
-      
-    }
-    if (v instanceof TalkingImageButton) {
-      switch (v.getId()) {
-        case R.id.home_button:
-          speakOut("Next screen");
-          break;
-        case R.id.settings_button:
-          speakOut("Settings");
-          break;
-        case R.id.back_button:
-          speakOut("Previous screen");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-      }
-    }
-  }
-  
-  @Override public int getViewId() {
-    return R.id.QuickSMSActivity;
   }
 }

@@ -9,7 +9,6 @@ package com.yp2012g4.blindroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -18,14 +17,36 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 public class ColorSettingsActivity extends BlindroidActivity implements OnClickListener {
+  
+  /**
+   * set the text and background colors for the entire application
+   * 
+   * @param int1
+   *          - text Color
+   * @param int2
+   *          - background Color
+   */
   private static void changeSettings(int int1, int int2) {
     DisplaySettings.setColors(int1, int2);
   }
   
+  /**
+   * get the activity's main view ID
+   * 
+   */
   @Override public int getViewId() {
     return R.id.ColorSettingsActivity;
   }
   
+  
+  /**
+   * Adds onClick events to buttons in this view.
+   * 
+   * @see android.view.View.OnClickListener#onClick(android.view.View)
+   *
+   * @param v
+   *          - a View object on the screen
+   */
   @Override public void onClick(View v) {
     Intent intent = new Intent(ColorSettingsActivity.this, MainActivity.class);
     if (v instanceof TalkingButton)
@@ -73,6 +94,9 @@ public class ColorSettingsActivity extends BlindroidActivity implements OnClickL
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   
+  /**
+   * onCreate method.
+   */
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
@@ -113,12 +137,9 @@ public class ColorSettingsActivity extends BlindroidActivity implements OnClickL
     wai.setOnTouchListener(this);
   }
   
-  
-  
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    return true;
-  }
-  
+  /**
+   * Read the activity's name when activity becomes visible.
+   */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {

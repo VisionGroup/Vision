@@ -1,3 +1,9 @@
+/**
+ * A singleton class holding all the display preferences
+ * 
+ * @author Maytal
+ * 
+ */
 package com.yp2012g4.blindroid;
 
 import java.util.Set;
@@ -13,19 +19,18 @@ import android.graphics.Color;
 
 import android.app.Activity;
 
-/**
- * @author Maytal
- *
- */
 public class DisplaySettings {
 	
 	private static SparseIntArray color_to_string = new SparseIntArray();
 	public static String SIZE="NORMAL";
-	public static boolean settingChanged=false;
   static String THEME="";
 	private static int textColor = R.color.WHITE;
 	private static int backgroundColor = R.color.BLACK;
 	
+	 /**
+   * c'tor. initialize color mapping.
+   * 
+   */
 	public DisplaySettings() {
 		color_to_string.append(R.color.BLACK, Color.parseColor("#000000"));
 		color_to_string.append(R.color.WHITE, Color.parseColor("#FFFFFF"));
@@ -34,41 +39,63 @@ public class DisplaySettings {
 		color_to_string.append(R.color.BLUE, Color.parseColor("#2E9AFE"));
 	}
 	
+  /**
+   * set the text and background colors for the entire application
+   * 
+   * @param int1
+   *          - text Color
+   * @param int2
+   *          - background Color
+   */
 	public static void setColors(int int1, int int2) {
 		textColor = int1;
 		backgroundColor = int2;
 	}
 	
+  /**
+   * @return text color
+   * 
+   */
 	public static int getTextColor() {
     return textColor;
   }
 	
+	/**
+	 * 
+	 * @return bg color
+	 */
 	public static int getBackgroundColor() {
     return backgroundColor;
   }
 	
+  /**
+   * set color theme to image buttons and main view
+   * 
+   * @param buttons
+   *          - list of image buttons
+   * @param v
+   *          - main view of an activity
+   */
 	public static void applyButtonSettings (Set<TalkingImageButton> buttons, View v) {
 	  v.setBackgroundColor(color_to_string.get(backgroundColor));
-		//if (v instanceof TalkingImageButton) {
-		// Set the correct new color
-		  if (textColor == R.color.WHITE)
-		    for (TalkingImageButton b : buttons)
-		      ((ImageView)b).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
-		  else
-		    for (TalkingImageButton b : buttons)
-		      ((ImageView)b).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
-		//}
-	}
-	
-	public static void applyViewSettings (View v) {
-	  v.setBackgroundResource(backgroundColor);
+		if (textColor == R.color.WHITE)
+		  for (TalkingImageButton b : buttons)
+		    ((ImageView)b).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
+		else
+		  for (TalkingImageButton b : buttons)
+		    ((ImageView)b).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
 	}
 
+
+  /**
+   * set theme to the entire application
+   * 
+   * @param act
+   *          - current activity
+   */
  public static void setThemeToActivity(Activity act)
   {
   
-   try {
-
    if (DisplaySettings.SIZE.equalsIgnoreCase("LARGE")) {
      if (backgroundColor == R.color.BLUE)
        act.setTheme(R.style.Theme_LargeWhiteBlue);
@@ -115,11 +142,5 @@ public class DisplaySettings {
        act.setTheme(R.style.Theme_NormalRedBlack);
      else
        act.setTheme(R.style.Theme_NormalGreenBlack);
-  
-   }
-   catch (Exception e) {
-  e.printStackTrace();
- }
-  
   }
 }

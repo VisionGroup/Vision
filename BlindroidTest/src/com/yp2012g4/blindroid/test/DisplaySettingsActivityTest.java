@@ -152,11 +152,11 @@ public class DisplaySettingsActivityTest extends
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 	}
 	
-	public void testClickOnHomeButton() {
-		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-		solo.clickOnView(solo.getView(R.id.home_button));
-		solo.assertCurrentActivity("wrong activity",MainActivity.class);
-	}
+//	public void testClickOnHomeButton() {
+//		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
+//		solo.clickOnView(solo.getView(R.id.home_button));
+//		solo.assertCurrentActivity("wrong activity",MainActivity.class);
+//	}
 	
 	public void testClickOnSettingsButton() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);

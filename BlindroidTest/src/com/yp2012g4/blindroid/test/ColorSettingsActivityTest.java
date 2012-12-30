@@ -54,10 +54,10 @@ public class ColorSettingsActivityTest extends
 		assertEquals(4, btnList.size());
 	}
 	
-	public void testClickOnHomeButton() {
-		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
-		solo.clickOnView(solo.getView(R.id.home_button));
-		solo.assertCurrentActivity("wrong activity",MainActivity.class);
-	}
+//	public void testClickOnHomeButton() {
+//		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
+//		solo.clickOnView(solo.getView(R.id.home_button));
+//		solo.assertCurrentActivity("wrong activity",MainActivity.class);
+//	}
 	
 }

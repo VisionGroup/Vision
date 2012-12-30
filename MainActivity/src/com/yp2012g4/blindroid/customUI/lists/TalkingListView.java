@@ -26,6 +26,13 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
   private boolean isInit = false;
   
   /**
+   * get selected item number
+   */
+  public int getSelectedItemNumber() {
+    return selectedItem;
+  }
+  
+  /**
    * On window focus change behavior
    */
   @Override public void onWindowFocusChanged(boolean hasWindowFocus) {
@@ -156,7 +163,7 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
   }
   
   /**
-   * Use our own gesture detection for custom gestures 
+   * Use our own gesture detection for custom gestures
    */
   @Override public boolean onTouch(View v, MotionEvent event) {
     gDetector.onTouchEvent(event);
@@ -164,18 +171,21 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
     this.setSelection(selectedItem);
     return true;
   }
+  
   /**
    * Overridden function to suppress the ability
    */
   @Override public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
     // TODO Auto-generated method stub
   }
+  
   /**
    * Overridden function to suppress the ability
    */
   @Override public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
     // TODO Auto-generated method stub
   }
+  
   /**
    * Overridden function to suppress the ability
    */

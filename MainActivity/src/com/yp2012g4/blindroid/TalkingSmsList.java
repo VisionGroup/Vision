@@ -25,6 +25,21 @@ public class TalkingSmsList extends Activity implements OnInitListener {
   protected TextToSpeech tts;
   
   /**
+   * For testing
+   * @return SMS list
+   */
+  public ArrayList<SmsType> getDetails(){
+    return details;
+  }
+  /**
+   * For testing
+   * @return
+   */
+  public SmsType getSelectedSms(){
+    return details.get(viewList.getSelectedItemNumber());
+  }
+  
+  /**
    * init when set on focus
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {

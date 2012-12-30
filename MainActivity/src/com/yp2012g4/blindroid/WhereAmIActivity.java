@@ -35,6 +35,7 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
   String lastProvider = "";
   Date lastUpdate = null;
   long updateTimeOut = 60 * 1000; // 1 minute
+  LocationFinder f;
   
   @Override public int getViewId() {
     return R.id.where_am_i_Activity;
@@ -82,6 +83,21 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
     }
   }
   
+  private void init() {
+    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    log("Got location manager");
+    f = new LocationFinder(manager);
+    log("Got location finder");
+    LocationHandler h = new LocationHandler() {
+      @Override public void handleLocation(double longitude, double latitude, String provider, String address) {
+        makeUseOfNewLocation(longitude, latitude, provider, address);
+      }
+    };
+    log("Got location handler");
+    f.run(h, true, true);
+    log("Now running");
+  }
+  
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
@@ -99,19 +115,25 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
     home.setOnClickListener(this);
     home.setOnTouchListener(this);
     log("WhereAmIActivity::onCreate");
-    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    log("Got location manager");
-    LocationFinder f = new LocationFinder(manager);
-    log("Got location finder");
-    LocationHandler h = new LocationHandler() {
-      @Override public void handleLocation(double longitude, double latitude, String provider, String address) {
-        makeUseOfNewLocation(longitude, latitude, provider, address);
-      }
-    };
-    log("Got location handler");
-    f.run(h, true, true);
-    log("Now running");
     l = new ReentrantLock();
+  }
+  
+  @Override protected void onStart() {
+    log("onStart");
+    init();
+    super.onStart();
+  }
+  
+  @Override protected void onStop() {
+    log("onstop");
+    f.stop();
+    log("f stopped");
+    super.onStop();
+  }
+  
+  @Override protected void onPause() {
+    log("onpause");
+    super.onPause();
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

@@ -27,6 +27,7 @@
         <activity
             android:name="com.yp2012g4.blindroid.MainActivity"
             android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -96,6 +97,7 @@
         <activity
             android:name="com.yp2012g4.blindroid.TalkingSmsList"
             android:label="@string/title_activity_talking_sms_list" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -10,19 +10,16 @@ import java.util.Calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class SetClockActivity extends BlindroidActivity implements OnClickListener, OnGestureListener {
+public class SetClockActivity extends BlindroidActivity implements OnGestureListener {
   public final static int HOUR_CODE = 0;
   public final static int MIN_CODE = 1;
   private GestureDetector gestureScanner;
@@ -74,19 +71,6 @@ public class SetClockActivity extends BlindroidActivity implements OnClickListen
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_set_clock);
     gestureScanner = new GestureDetector(this);
-    mHandler = new Handler();
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.settings_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
-    home.setOnClickListener(this);
-    home.setOnTouchListener(this);
     Bundle b = getIntent().getExtras();
     type = b.getInt("type");
     cal = Calendar.getInstance();

@@ -7,11 +7,8 @@ package com.yp2012g4.blindroid.test;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Instrumentation;
-import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
-import android.view.MotionEvent;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.SmsReader;

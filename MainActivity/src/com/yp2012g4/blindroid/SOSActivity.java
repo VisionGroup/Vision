@@ -2,13 +2,10 @@ package com.yp2012g4.blindroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
@@ -18,7 +15,7 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * @author Amir
  * @version 1.0
  */
-public class SOSActivity extends BlindroidActivity implements OnClickListener {
+public class SOSActivity extends BlindroidActivity {
   @Override public int getViewId() {
     return R.id.SOS_textview;
   }
@@ -56,22 +53,6 @@ public class SOSActivity extends BlindroidActivity implements OnClickListener {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sos);
-    mHandler = new Handler();
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.settings_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
-    home.setOnClickListener(this);
-    home.setOnTouchListener(this);
-    TalkingImageButton tb = (TalkingImageButton) findViewById(R.id.Send_SOS_Message);
-    tb.setOnClickListener(this);
-    tb.setOnTouchListener(this);
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {

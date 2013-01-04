@@ -7,16 +7,12 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
-import com.yp2012g4.blindroid.utils.TTS;
 
 /**
  * This is the activity for viewing and hearing phone status (currently battery,
@@ -26,8 +22,7 @@ import com.yp2012g4.blindroid.utils.TTS;
  * @author Amit Yaffe
  * 
  */
-public class PhoneStatusActivity extends BlindroidActivity implements OnClickListener {
-  // private TextToSpeech tts;
+public class PhoneStatusActivity extends BlindroidActivity {
   /**
    * A signal strength listener. Updates _signal between 0-31.
    * 
@@ -119,8 +114,7 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
     init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
         getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
-    _t = new TTS(getApplicationContext(), this);
-    // tts = new TextToSpeech(this, this);
+
     // Battery Broadcast receiver.
     BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
       @Override public void onReceive(Context context, Intent intent) {
@@ -133,27 +127,7 @@ public class PhoneStatusActivity extends BlindroidActivity implements OnClickLis
     // start the signal strength listener
     signalStrengthListener = new SignalStrengthListener();
     ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(signalStrengthListener,
-        PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-    // Setting the GUI listeners.
-    TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_getBatteryStatus);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.button_getReceptionStatus);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    mHandler = new Handler();
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.settings_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
-    home.setOnClickListener(this);
-    home.setOnTouchListener(this);
+        PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);  
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {

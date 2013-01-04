@@ -9,18 +9,15 @@ import java.util.Calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.format.Time;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AnalogClock;
 import android.widget.TextView;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class SpeakingClockActivity extends BlindroidActivity implements OnClickListener {
+public class SpeakingClockActivity extends BlindroidActivity {
   /**
    * transform the system current date to string
    * 
@@ -76,19 +73,6 @@ public class SpeakingClockActivity extends BlindroidActivity implements OnClickL
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
-    mHandler = new Handler();
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.settings_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
-    home.setOnClickListener(this);
-    home.setOnTouchListener(this);
     Time today = new Time(Time.getCurrentTimezone());
     today.setToNow();
     TextView tvh = (TextView) findViewById(R.id.textView1);

@@ -12,15 +12,12 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class AlarmActivity extends BlindroidActivity implements OnClickListener {
+public class AlarmActivity extends BlindroidActivity {
   public static PendingIntent pendingIntent;
   public static boolean alarmIsSet = false;
   public int lastHour = -1;
@@ -83,6 +80,35 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   
   @Override public void onClick(View v) {
     switch (v.getId()) {
+      case R.id.statusButton:
+        String s;
+        if (alarmTime == null)
+          s = getString(R.string.noAlarm);
+        else {
+          if (alarmIsSet)
+            s = "Alarm is On at ";
+          else
+            s = "Alarm is Off at ";
+          s = s + SpeakingClockActivity.parseTime(alarmTime);
+        }
+        speakOut(s);
+        break;
+      case R.id.setButton:
+        callSetClock(false);
+        break;
+      case R.id.startalarm:
+        setAlarm();
+        break;
+      case R.id.cancelalarm:
+        if (!alarmIsSet)
+          return;
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+        if (AlarmService.mp != null)
+          AlarmService.mp.stop();
+        alarmIsSet = false;
+        speakOut("Alarm is Canceled");
+        break;
       case R.id.back_button:
         speakOut("Previous screen");
         mHandler.postDelayed(mLaunchTask, 1000);
@@ -108,64 +134,6 @@ public class AlarmActivity extends BlindroidActivity implements OnClickListener 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
-    mHandler = new Handler();
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.settings_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
-    home.setOnClickListener(this);
-    home.setOnTouchListener(this);
-    TalkingButton buttonStart = (TalkingButton) findViewById(R.id.startalarm);
-    TalkingButton buttonCancel = (TalkingButton) findViewById(R.id.cancelalarm);
-    TalkingButton buttonSet = (TalkingButton) findViewById(R.id.setButton);
-    TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
-    buttonStatus.setOnTouchListener(this);
-    buttonStatus.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override public void onClick(View v) {
-        String s;
-        if (alarmTime == null)
-          s = getString(R.string.noAlarm);
-        else {
-          if (alarmIsSet)
-            s = "Alarm is On at ";
-          else
-            s = "Alarm is Off at ";
-          s = s + SpeakingClockActivity.parseTime(alarmTime);
-        }
-        speakOut(s);
-      }
-    });
-    buttonSet.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override public void onClick(View v) {
-        callSetClock(false);
-      }
-    });
-    buttonSet.setOnTouchListener(this);
-    buttonStart.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override public void onClick(View arg0) {
-        setAlarm();
-      }
-    });
-    buttonStart.setOnTouchListener(this);
-    buttonCancel.setOnClickListener(new TalkingButton.OnClickListener() {
-      @Override public void onClick(View arg0) {
-        if (!alarmIsSet)
-          return;
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.cancel(pendingIntent);
-        if (AlarmService.mp != null)
-          AlarmService.mp.stop();
-        alarmIsSet = false;
-        speakOut("Alarm is Canceled");
-      }
-    });
-    buttonCancel.setOnTouchListener(this);
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {

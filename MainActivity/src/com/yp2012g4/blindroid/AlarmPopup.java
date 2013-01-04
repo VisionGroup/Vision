@@ -28,7 +28,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
    */
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    tts = new TextToSpeech(this, this);
+//    tts = new TextToSpeech(this, this);
     soundAlarm();
   }
   

@@ -13,9 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.blindroid.MainActivity;
 import com.yp2012g4.blindroid.ThemeSettingsActivity;
-import com.yp2012g4.blindroid.R;
 
 /**
  * Tests for ThemeSettingsActivity

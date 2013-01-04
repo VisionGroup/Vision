@@ -8,14 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.LocationFinder;
 import com.yp2012g4.blindroid.tools.LocationHandler;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
@@ -26,7 +23,7 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * @author Olivier Hofman
  * @version 1.0
  */
-public class WhereAmIActivity extends BlindroidActivity implements OnClickListener {
+public class WhereAmIActivity extends BlindroidActivity {
   private static void log(String s) {
     Log.d("WhereAmIActivity", s);
   }
@@ -101,19 +98,6 @@ public class WhereAmIActivity extends BlindroidActivity implements OnClickListen
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
-    mHandler = new Handler();
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.settings_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
-    home.setOnClickListener(this);
-    home.setOnTouchListener(this);
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();
   }

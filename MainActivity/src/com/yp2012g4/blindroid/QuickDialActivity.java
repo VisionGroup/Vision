@@ -7,12 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -25,7 +23,7 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * @author Amir
  * @version 1.0
  */
-public class QuickDialActivity extends BlindroidActivity implements OnClickListener {
+public class QuickDialActivity extends BlindroidActivity {
   protected List<String> list_of_phone_numbers = new ArrayList<String>();
   
   @Override public int getViewId() {
@@ -113,47 +111,6 @@ public class QuickDialActivity extends BlindroidActivity implements OnClickListe
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.activity_quick_dial);
-    mHandler = new Handler();
-    TalkingButton b = (TalkingButton) findViewById(R.id.Contact_number_1);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_2);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_3);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_4);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_5);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_6);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_7);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_8);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.Contact_number_9);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
-    home = (TalkingImageButton) findViewById(R.id.home_button);
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {

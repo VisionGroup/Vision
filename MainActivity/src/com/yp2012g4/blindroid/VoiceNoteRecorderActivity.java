@@ -7,14 +7,13 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.fileUtils;
 import com.yp2012g4.blindroid.tools.fileUtils.TYPES;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnClickListener {
+public class VoiceNoteRecorderActivity extends BlindroidActivity {
   private final android.media.MediaRecorder _recorder = new android.media.MediaRecorder();
   @SuppressWarnings("unused") private final android.media.MediaPlayer _player = new android.media.MediaPlayer();
   @SuppressWarnings("unused") private final int _currentNote = 0;
@@ -27,29 +26,8 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity implements OnCl
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_voice_note_recorder);
-    // tts = new TextToSpeech(this, this);
     _setAudio();
-    TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_prevNote);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.button_nextNote);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.button_playStop);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.button_recordStop);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    TalkingImageButton ib = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    ib.setOnClickListener(this);
-    ib.setOnTouchListener(this);
-    ib = (TalkingImageButton) findViewById(R.id.settings_button);
-    ib.setOnClickListener(this);
-    ib.setOnTouchListener(this);
-    ib = (TalkingImageButton) findViewById(R.id.back_button);
-    ib.setOnClickListener(this);
-    ib.setOnTouchListener(this);
+ 
   }
   
   private void _setAudio() {

@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -11,6 +12,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AnalogClock;
@@ -28,7 +30,7 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amir
  * @version 1.0
  */
-public abstract class onTouchEventClass extends Activity implements OnTouchListener, TextToSpeech.OnInitListener {
+public abstract class onTouchEventClass extends Activity implements OnTouchListener, OnClickListener, TextToSpeech.OnInitListener {
   /**
    * Stores the dimensions of a button
    */
@@ -88,6 +90,14 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     ViewGroup mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(mainView);
     DisplaySettings.applyButtonSettings(imageButton_to_rect.keySet(), mainView);
+    for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
+      entry.getKey().setOnClickListener(this);
+      entry.getKey().setOnTouchListener(this);
+    }
+    for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
+      entry.getKey().setOnClickListener(this);
+      entry.getKey().setOnTouchListener(this);
+    }
   }
   
   /**
@@ -190,6 +200,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
       Log.e("onTouchEventClass", "tts init error");
     DisplaySettings.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
+    mHandler = new Handler();
   }
   
   /**

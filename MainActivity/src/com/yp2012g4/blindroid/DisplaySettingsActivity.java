@@ -6,14 +6,12 @@ package com.yp2012g4.blindroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class DisplaySettingsActivity extends BlindroidActivity implements OnClickListener {
+public class DisplaySettingsActivity extends BlindroidActivity {
   
   /**
    * get the activity's main view ID
@@ -76,25 +74,6 @@ public class DisplaySettingsActivity extends BlindroidActivity implements OnClic
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
-    mHandler = new Handler();
-    TalkingImageButton b = (TalkingImageButton) findViewById(R.id.button_set_colors);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.button_set_theme);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
   }
   
   /**

@@ -1,15 +1,12 @@
 package com.yp2012g4.blindroid;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
-public class MainActivity extends BlindroidActivity implements OnClickListener {
+public class MainActivity extends BlindroidActivity {
   /*
    * @Override public void onRestart() { super.onRestart();
    * 
@@ -103,51 +100,9 @@ public class MainActivity extends BlindroidActivity implements OnClickListener {
   }
   
   /** Called when the activity is first created. */
-  // private TextToSpeech tts;
-  // private Rect rect;
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    // TODO: Add to every activity!! or to the new Activity intrerface Yaron
-    // is making
-    setVolumeControlStream(AudioManager.STREAM_MUSIC);
-    // tts = new TextToSpeech(this, this);
-    TalkingImageButton b = (TalkingImageButton) findViewById(R.id.sos_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.time_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.where_am_i_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.phone_status_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.alarm_clock_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.quick_dial_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.quick_sms_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingImageButton) findViewById(R.id.read_sms_button);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
-    wai = (TalkingImageButton) findViewById(R.id.current_menu_button);
-    wai.setOnClickListener(this);
-    wai.setOnTouchListener(this);
+    setContentView(R.layout.activity_main);   
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {

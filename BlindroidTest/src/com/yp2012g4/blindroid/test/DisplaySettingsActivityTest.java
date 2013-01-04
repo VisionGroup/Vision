@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ImageButton;
-import com.yp2012g4.blindroid.R;
+
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.ColorSettingsActivity;
 import com.yp2012g4.blindroid.DisplaySettings;
 import com.yp2012g4.blindroid.DisplaySettingsActivity;
-import com.yp2012g4.blindroid.MainActivity;
+import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.ThemeSettingsActivity;
 
 public class DisplaySettingsActivityTest extends

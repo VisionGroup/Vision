@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -20,7 +19,7 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * @author Amir
  * @version 1.0
  */
-public class QuickSMSActivity extends BlindroidActivity implements OnClickListener {
+public class QuickSMSActivity extends BlindroidActivity {
   TalkingButton b;
   
   @Override public int getViewId() {
@@ -81,42 +80,6 @@ public class QuickSMSActivity extends BlindroidActivity implements OnClickListen
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
     mHandler = new Handler();
-    b = (TalkingButton) findViewById(R.id.SMS_number_1);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_2);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_3);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_4);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_5);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_6);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_7);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_8);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    b = (TalkingButton) findViewById(R.id.SMS_number_9);
-    b.setOnClickListener(this);
-    b.setOnTouchListener(this);
-    back = (TalkingImageButton) findViewById(R.id.back_button);
-    back.setOnClickListener(this);
-    back.setOnTouchListener(this);
-    next = (TalkingImageButton) findViewById(R.id.settings_button);
-    next.setOnClickListener(this);
-    next.setOnTouchListener(this);
-    settings = (TalkingImageButton) findViewById(R.id.home_button);
-    settings.setOnClickListener(this);
-    settings.setOnTouchListener(this);
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {

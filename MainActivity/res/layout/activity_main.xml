@@ -3,6 +3,7 @@
     android:id="@+id/MainActivityView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:contentDescription="Main screen"
     android:orientation="vertical" >
 
     <LinearLayout

@@ -13,6 +13,7 @@
     <string name="quick_dial_button">Quick dial</string>
     <string name="quick_sms_button">Quick SMS</string>
     <string name="title_activity_quick_sms">QuickSMSActivity</string>
+    <string name="title_dial_screen">DialScreen</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
     <string name="send_SOS_message">Send SOS</string>
@@ -99,4 +100,19 @@
     <string name="color_settings_button">Color Settings</string>
     <string name="theme_settings_button">Text Size Settings</string>
     <string name="title_activity_display_settings">Display Settings</string>
+    <string name="digit1">1</string>
+    <string name="digit2">2</string>
+    <string name="digit3">3</string>
+    <string name="digit4">4</string>
+    <string name="digit5">5</string>
+    <string name="digit6">6</string>
+    <string name="digit7">7</string>
+    <string name="digit8">8</string>
+    <string name="digit9">9</string>
+    <string name="digit0">0</string>
+    <string name="asterisk">*</string>
+    <string name="number_sign">#</string>
+    <string name="dial_screen">Dial Screen</string>
+    <string name="OK_button">OK</string>
+    <string name="delete_button_read">undo</string>
 </resources>

@@ -4,8 +4,10 @@ package com.yp2012g4.blindroid;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 
 public class DialScreen extends BlindroidActivity {
@@ -19,6 +21,12 @@ public class DialScreen extends BlindroidActivity {
   }
   
   @Override public void onActionUp(View v) {
+    // Get instance of Vibrator from current Context
+    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+     
+    // Vibrate for 300 milliseconds
+    vb.vibrate(300);
+
     if (v.getId() == R.id.OK_button) {
       Intent returnIntent = new Intent();
       returnIntent.putExtra("result", dialed_number);

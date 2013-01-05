@@ -17,6 +17,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener {
   static public MediaPlayer mp = null;
@@ -26,13 +28,21 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
   /***
    * On the creation of the class we display the dialog and sound the alarm
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-//    tts = new TextToSpeech(this, this);
+    // hide titlebar of application
+    // must be before setting the layout
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    // hide statusbar of Android
+    // could also be done later
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    tts = new TextToSpeech(this, this);
     soundAlarm();
   }
   
-  @Override public void onDestroy() {
+  @Override
+  public void onDestroy() {
     if (tts != null) {
       speakOut("stop");
       tts.stop();
@@ -41,7 +51,8 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     super.onDestroy();
   }
   
-  @Override public void onInit(int status) {
+  @Override
+  public void onInit(int status) {
     if (status == TextToSpeech.SUCCESS) {
       int r = tts.setLanguage(Locale.US);
       if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
@@ -56,7 +67,8 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
   /**
    * on any button press or screen touch we turn the snooze off
    */
-  @Override public void onUserInteraction() {
+  @Override
+  public void onUserInteraction() {
     if (left)
       return;
     left = true;
@@ -77,7 +89,8 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     mp = MediaPlayer.create(getApplicationContext(), R.raw.alarm);
     mp.start();
     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-      @Override public void onCompletion(MediaPlayer mpc) {
+      @Override
+      public void onCompletion(MediaPlayer mpc) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent myIntent = new Intent(AlarmPopup.this, AlarmService.class);
         AlarmActivity.pendingIntent = PendingIntent.getService(AlarmPopup.this, 0, myIntent, 0);

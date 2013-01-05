@@ -7,31 +7,7 @@ import android.view.View;
 import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 public class MainActivity extends BlindroidActivity {
-  /*
-   * @Override public void onRestart() { super.onRestart();
-   * 
-   * DisplaySettingsApplication appState = ((DisplaySettingsApplication)
-   * getApplication());
-   * appState.settings.applyButtonSettings(findViewById(R.id.sos_button));
-   * appState.settings
-   * .applyButtonSettings(findViewById(R.id.alarm_clock_button));
-   * appState.settings.applyButtonSettings(findViewById(R.id.back_button));
-   * appState.settings.applyButtonSettings(findViewById(R.id.time_button));
-   * appState
-   * .settings.applyButtonSettings(findViewById(R.id.phone_status_button));
-   * appState.settings
-   * .applyButtonSettings(findViewById(R.id.phone_status_button));
-   * appState.settings.applyButtonSettings(findViewById(R.id.next_button));
-   * appState.settings .applyButtonSettings(findViewById(R.id.settings_button));
-   * appState.settings
-   * .applyButtonSettings(findViewById(R.id.where_am_i_button));
-   * appState.settings
-   * .applyButtonSettings(findViewById(R.id.quick_dial_button));
-   * appState.settings
-   * .applyButtonSettings(findViewById(R.id.quick_sms_button));
-   * 
-   * }
-   */
+  
   @Override public int getViewId() {
     return R.id.MainActivityView;
   }
@@ -85,7 +61,8 @@ public class MainActivity extends BlindroidActivity {
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
+        //intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
+        intent = new Intent(MainActivity.this, DialScreen.class);
         startActivity(intent);
         break;
       case R.id.home_button:
@@ -105,10 +82,5 @@ public class MainActivity extends BlindroidActivity {
     setContentView(R.layout.activity_main);   
   }
   
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Main screen");
-    }
-  }
+
 }

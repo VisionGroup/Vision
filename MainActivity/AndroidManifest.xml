@@ -119,6 +119,12 @@
             android:label="@string/title_activity_set_clock" 
             android:screenOrientation="portrait" >
         </activity>
+        
+       <activity
+            android:name="com.yp2012g4.blindroid.DialScreen"
+            android:label="@string/title_dial_screen" 
+            android:screenOrientation="portrait" >
+        </activity>
 
         <activity
             android:name="com.yp2012g4.blindroid.ContactsListActivity"

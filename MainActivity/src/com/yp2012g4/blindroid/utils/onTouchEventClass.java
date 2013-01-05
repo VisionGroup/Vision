@@ -98,6 +98,9 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
       entry.getKey().setOnClickListener(this);
       entry.getKey().setOnTouchListener(this);
     }
+    //reads layout description out loud
+    if (hasFocus && findViewById(getViewId()).getContentDescription() != null)
+      speakOut(findViewById(getViewId()).getContentDescription().toString());
   }
   
   /**
@@ -117,8 +120,10 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
         // in different view
         last_view.setPressed(false);
       if (v instanceof TalkingButton) {
-        Log.i("MyLog", "DOWN in Button");
-        speakOut(((TalkingButton) v).getText().toString());
+        if (((TalkingButton) v).getContentDescription() == null)
+          speakOut(((TalkingButton) v).getText().toString());
+        else
+          speakOut(((TalkingButton) v).getContentDescription().toString());
       }
       if (v instanceof TalkingImageButton) {
         Log.i("MyLog", "DOWN in ImageButton");
@@ -160,18 +165,24 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
         prev_view = getView(accurateX, accurateY);
     }
     if (event.getAction() == MotionEvent.ACTION_UP) {
+      Log.i("MyLog", "ACTION UP");
       last_view = getView(accurateX, accurateY);
       if (last_view instanceof TalkingImageButton)
         ((TalkingImageButton) last_view).setColorFilter(Color.argb(0, 255, 165, 0));
-      if (last_view instanceof TalkingButton) {
-//				((TalkingButton)last_view).getBackground().setAlpha((int)( 1.0 * 255));
-//				((TalkingButton)last_view).setPressed(false);
-      }
+      onActionUp(last_view);
     }
     // gestureDetector.setOnDoubleTapListener(this);
     // return gestureDetector.onTouchEvent(event);
     return false;
   }
+  
+  /**
+   * This method defined the behavior when the user stops touching the screen
+   * 
+   * @param v - last view being touched
+   * 
+   */
+  public void onActionUp(View v) {/*to be overridden*/}
   
   /**
    * This method speaks out a given string

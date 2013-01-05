@@ -43,11 +43,13 @@ public class SpeakingClockActivity extends BlindroidActivity {
     return s;
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.SpeakingClockSctivity;
   }
   
-  @Override public void onClick(View v) {
+  @Override
+  public void onClick(View v) {
     switch (v.getId()) {
       case R.id.back_button:
         speakOut("Previous screen");
@@ -70,7 +72,8 @@ public class SpeakingClockActivity extends BlindroidActivity {
     }
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     Time today = new Time(Time.getCurrentTimezone());
@@ -79,21 +82,24 @@ public class SpeakingClockActivity extends BlindroidActivity {
     String date = getDateFormat();
     tvh.setText(date);
     tvh.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         String d = getDateFormat();
         speakOut(d);
       }
     });
     AnalogClock ac = (AnalogClock) findViewById(R.id.analogClock1);
     ac.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         Calendar cal = Calendar.getInstance();
         speakOut(parseTime(cal));
       }
     });
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_main, menu);
     return true;
@@ -103,11 +109,12 @@ public class SpeakingClockActivity extends BlindroidActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current time
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       Calendar cal = Calendar.getInstance();
       speakOut(parseTime(cal));
     }
-    super.onWindowFocusChanged(hasFocus);
   }
 }

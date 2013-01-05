@@ -3,6 +3,7 @@
     android:id="@+id/AlarmActivity"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:contentDescription="@string/title_activity_alarm"
     android:orientation="vertical"
     tools:context=".AlarmActivity"
     style="?backgroundColor"  >

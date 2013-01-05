@@ -4,8 +4,8 @@
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:contentDescription="Dial Screen"
-    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
+    android:contentDescription="@string/dial_screen"
+    android:orientation="vertical" >
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -212,17 +212,28 @@
             android:src="@drawable/delete_button"
             android:contentDescription="@string/delete_button_read" />
         
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/button_reset"
+            android:layout_width="0dip"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/reset_button"
+            android:contentDescription="@string/reset_button_read" />
+        
          <com.yp2012g4.blindroid.customUI.TalkingButton
-             android:id="@+id/Contact_number_8"
+             android:id="@+id/OK_button"
              style="?textAppearance"
              android:layout_width="0dip"
              android:layout_height="62dp"
              android:layout_weight="1"
              android:background="@android:color/transparent"
-             android:textSize="56sp"
-             android:textStyle="bold"
              android:scaleType="fitCenter"
-             android:text="@string/OK_button" />
+             android:text="@string/OK_button"
+             android:textSize="56sp"
+             android:textStyle="bold" />
 
     </LinearLayout>
 

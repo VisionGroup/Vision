@@ -10,7 +10,7 @@ import android.view.View;
 
 public class DialScreen extends BlindroidActivity {
   
-  private static int MAX_LENGTH = 25;
+  final static int MAX_LENGTH = 25;
   private String dialed_number = "";
   private String read_number = "";
   
@@ -23,7 +23,7 @@ public class DialScreen extends BlindroidActivity {
       Intent returnIntent = new Intent();
       returnIntent.putExtra("result", dialed_number);
       setResult(RESULT_OK,returnIntent);     
-      mHandler.postDelayed(mLaunchTask, 1000);
+      finish();
     }
     if ( v.getId() == R.id.button_reset) {
       dialed_number = "";

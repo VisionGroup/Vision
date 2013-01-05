@@ -41,14 +41,16 @@ public class AlarmActivity extends BlindroidActivity {
     startActivityForResult(i, REQUEST_CODE);
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.AlarmActivity;
   }
   
   /**
    * This will be called when the result from the set clock activity returnes
    */
-  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == REQUEST_CODE) {
       // if user pressed back
@@ -78,7 +80,8 @@ public class AlarmActivity extends BlindroidActivity {
     }
   }
   
-  @Override public void onClick(View v) {
+  @Override
+  public void onClick(View v) {
     switch (v.getId()) {
       case R.id.statusButton:
         String s;
@@ -131,16 +134,10 @@ public class AlarmActivity extends BlindroidActivity {
   }
   
   /** Called when the activity is first created. */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
-  }
-  
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Alarm screen");
-    }
   }
   
   /**

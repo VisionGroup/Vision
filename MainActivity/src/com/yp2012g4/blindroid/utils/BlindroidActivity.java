@@ -7,6 +7,9 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.view.Window;
 import android.view.WindowManager;
 
+/*
+ * TODO: Code review More documentation
+ */
 public abstract class BlindroidActivity extends onTouchEventClass {
   private int _icon;
   private String _name;
@@ -40,9 +43,5 @@ public abstract class BlindroidActivity extends onTouchEventClass {
     // could also be done later
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
-  }
-  
-  @Override public void onDestroy() {
-    super.onDestroy();
   }
 }

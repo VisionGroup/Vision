@@ -22,6 +22,7 @@ public class LocationFinder {
   List<LocationListener> listeners = null;
   LocationManager locationManager;
   LocationHandler handler;
+  boolean running = false; // to ensure we don't stop it twice
   
   public LocationFinder(LocationManager newLocationManager) {
     locationManager = newLocationManager;
@@ -42,6 +43,8 @@ public class LocationFinder {
    */
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork) {
     log("run");
+    if (running)
+      stop();
     if (!useGPS && !useNetwork)
       Log.e("LocationFinder", "both useGPS and useNetwork are false");
     listeners = new ArrayList<LocationListener>();
@@ -65,6 +68,7 @@ public class LocationFinder {
         locationManager.requestLocationUpdates(p, 0, 0, l);
       } else
         log("Could not use Network location because it is disabled");
+    running = true;
   }
   
   void makeUseOfNewLocation(Location location, String provider) {
@@ -147,13 +151,17 @@ public class LocationFinder {
    * Stop the service
    */
   public void stop() {
+    if (!running)
+      return;
     log("stopped");
-    for (LocationListener l : listeners) {
-      log("removed a listener");
-      locationManager.removeUpdates(l);
+    if (listeners != null) {
+      for (LocationListener l : listeners) {
+        log("removed a listener");
+        locationManager.removeUpdates(l);
+      }
+      listeners.clear();
+      listeners = null;
     }
-    listeners.clear();
-    listeners = null;
     log("end of stop");
   }
 }

@@ -60,7 +60,8 @@ public class SOSActivity extends BlindroidActivity {
   @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.Send_SOS_Message:
-        sendSOSMessage.run();
+        speakOut("Sending SOS message");
+        mHandler.postDelayed(sendSOSMessage, 5000);
         break;
       case R.id.back_button:
         speakOut("Previous screen");

@@ -19,7 +19,9 @@ public class TTS {
   
   public TTS(Context context, TextToSpeech.OnInitListener listener) {
     Log.e("TTS", "Constractor");
-    _tts.shutdown();
+    // ?
+    if (_tts != null)
+      _tts.shutdown();
     _tts = new TextToSpeech(context, listener);
     // TODO: check this: _language == null ??
     _tts.setLanguage(_language);

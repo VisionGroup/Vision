@@ -26,20 +26,41 @@ public class SOSActivity extends BlindroidActivity {
   LocationFinder f;
   Lock l = null;
   String lastProvider = "", address = "";
-  double latitude, longitude;
+  // these are non-initialized values
+  double latitude = 10000, longitude = 10000;
+  final int maxLengthOfAddress = 100;
   
   @Override public int getViewId() {
     return R.id.SOS_textview;
   }
   
+  /**
+   * Send an SOS message
+   */
+  public Runnable sendSOSMessage = new Runnable() {
+    @Override public void run() {
+      String messageToSend = "I need your help!";
+      l.lock();
+      if (latitude != 10000) {
+        messageToSend += "\nMy location is: latitude = " + latitude + "; longitude = " + longitude + ";\nMy address is ";
+        if (address.length() > maxLengthOfAddress)
+          messageToSend += address.substring(0, maxLengthOfAddress);
+        else
+          messageToSend += address;
+      }
+      l.unlock();
+      String number = "0529240424";
+      // String number = "0543064260"; // Olivier's number
+      SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
+      speakOut("SOS message has been sent");
+      mHandler.postDelayed(mLaunchTask, 1300);
+    }
+  };
+  
   @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.Send_SOS_Message:
-        String messageToSend = "I need your help!";
-        String number = "0529240424";
-        SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
-        speakOut("SOS message has been sent");
-        mHandler.postDelayed(mLaunchTask, 1300);
+        sendSOSMessage.run();
         break;
       case R.id.back_button:
         speakOut("Previous screen");
@@ -81,8 +102,7 @@ public class SOSActivity extends BlindroidActivity {
   }
   
   void makeUseOfNewLocation(double lon, double lat, String provider, String addr) {
-    if (provider == LocationManager.NETWORK_PROVIDER && lastProvider == LocationManager.GPS_PROVIDER)
-      return;
+    f.stop();
     l.lock();
     address = addr;
     lastProvider = provider;
@@ -92,6 +112,7 @@ public class SOSActivity extends BlindroidActivity {
   }
   
   @Override protected void onStart() {
+    super.onStart();
     LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     f = new LocationFinder(manager);
     LocationHandler h = new LocationHandler() {
@@ -99,8 +120,7 @@ public class SOSActivity extends BlindroidActivity {
         makeUseOfNewLocation(lon, lat, provider, addr);
       }
     };
-    f.run(h, true, true);
-    super.onStart();
+    f.run(h, true, false);
   }
   
   @Override protected void onStop() {

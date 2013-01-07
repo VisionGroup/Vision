@@ -39,6 +39,7 @@ public class WhereAmIActivity extends BlindroidActivity {
   }
   
   void makeUseOfNewLocation(double longitude, double latitude, String provider, String address) {
+    f.stop(); // we got our location: now, stop the finder.
     log("longitude = " + longitude + "\n");
     log("latitude = " + latitude + "\n");
     log("provider = " + provider + "\n");
@@ -91,7 +92,7 @@ public class WhereAmIActivity extends BlindroidActivity {
       }
     };
     log("Got location handler");
-    f.run(h, true, true);
+    f.run(h, true, false);
     log("Now running");
   }
   

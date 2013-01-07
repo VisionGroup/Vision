@@ -38,8 +38,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
     protected SignalStrengthListener() {
     }
     
-    @Override
-    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
       // get the signal strength (a value between 0 and 31)
       _signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
@@ -101,8 +100,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
     return "You have " + unreadMessagesCount + " unread SMS";
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -111,8 +109,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
@@ -152,16 +149,14 @@ public class PhoneStatusActivity extends BlindroidActivity {
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
         getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
     // Battery Broadcast receiver.
     BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-      @Override
-      public void onReceive(Context context, Intent intent) {
+      @Override public void onReceive(Context context, Intent intent) {
         _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
       }
@@ -172,13 +167,6 @@ public class PhoneStatusActivity extends BlindroidActivity {
     signalStrengthListener = new SignalStrengthListener();
     ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(signalStrengthListener,
         PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-  }
-  
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus)
-      speakOut("Phone status screen");
   }
   
   /**

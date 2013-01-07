@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 import com.yp2012g4.blindroid.tools.LocationFinder;
 import com.yp2012g4.blindroid.tools.LocationHandler;
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 /**
  * An activity which will reads to the user his current location.
@@ -111,13 +111,8 @@ public class WhereAmIActivity extends BlindroidActivity {
   @Override protected void onStop() {
     log("onstop");
     f.stop();
-    log("f stopped");
+    log("Location finder stopped");
     super.onStop();
-  }
-  
-  @Override protected void onPause() {
-    log("onpause");
-    super.onPause();
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

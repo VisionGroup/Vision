@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class MainActivity extends BlindroidActivity {
   

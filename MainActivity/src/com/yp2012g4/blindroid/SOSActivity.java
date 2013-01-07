@@ -1,12 +1,19 @@
 package com.yp2012g4.blindroid;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
 
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.LocationFinder;
+import com.yp2012g4.blindroid.tools.LocationHandler;
 
 /**
  * This class is an activity which sends a pre-defined SOS message to a
@@ -16,6 +23,11 @@ import com.yp2012g4.blindroid.utils.BlindroidActivity;
  * @version 1.0
  */
 public class SOSActivity extends BlindroidActivity {
+  LocationFinder f;
+  Lock l = null;
+  String lastProvider = "", address = "";
+  double latitude, longitude;
+  
   @Override public int getViewId() {
     return R.id.SOS_textview;
   }
@@ -53,18 +65,46 @@ public class SOSActivity extends BlindroidActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sos);
+    l = new ReentrantLock();
   }
   
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
+    if (hasFocus)
       speakOut("SOS screen");
-    }
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_sos, menu);
     return true;
+  }
+  
+  void makeUseOfNewLocation(double lon, double lat, String provider, String addr) {
+    if (provider == LocationManager.NETWORK_PROVIDER && lastProvider == LocationManager.GPS_PROVIDER)
+      return;
+    l.lock();
+    address = addr;
+    lastProvider = provider;
+    latitude = lat;
+    longitude = lon;
+    l.unlock();
+  }
+  
+  @Override protected void onStart() {
+    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    f = new LocationFinder(manager);
+    LocationHandler h = new LocationHandler() {
+      @Override public void handleLocation(double lon, double lat, String provider, String addr) {
+        makeUseOfNewLocation(lon, lat, provider, addr);
+      }
+    };
+    f.run(h, true, true);
+    super.onStart();
+  }
+  
+  @Override protected void onStop() {
+    f.stop();
+    super.onStop();
   }
 }

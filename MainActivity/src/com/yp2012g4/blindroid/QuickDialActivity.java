@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
  * This class is an activity that quickly dials to a pre-defined limited number

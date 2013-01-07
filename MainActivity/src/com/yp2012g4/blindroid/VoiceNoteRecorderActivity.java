@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 import com.yp2012g4.blindroid.tools.fileUtils;
 import com.yp2012g4.blindroid.tools.fileUtils.TYPES;
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
 
 public class VoiceNoteRecorderActivity extends BlindroidActivity {
   private final android.media.MediaRecorder _recorder = new android.media.MediaRecorder();

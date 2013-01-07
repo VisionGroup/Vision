@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class ThemeSettingsActivity extends BlindroidActivity {
   

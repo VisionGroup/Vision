@@ -1,4 +1,4 @@
-package com.yp2012g4.blindroid.utils;
+package com.yp2012g4.blindroid.tools;
 
 import java.util.Locale;
 

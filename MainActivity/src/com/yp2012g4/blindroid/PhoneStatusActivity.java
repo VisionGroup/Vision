@@ -17,7 +17,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
  * This is the activity for viewing and hearing phone status (currently battery,

@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class SetClockActivity extends BlindroidActivity implements OnGestureListener {
   public final static int HOUR_CODE = 0;

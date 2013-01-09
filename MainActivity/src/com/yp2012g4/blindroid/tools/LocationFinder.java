@@ -22,6 +22,7 @@ public class LocationFinder {
   List<LocationListener> listeners = null;
   LocationManager locationManager;
   LocationHandler handler;
+  boolean running = false; // to ensure we don't stop it twice
   
   public LocationFinder(LocationManager newLocationManager) {
     locationManager = newLocationManager;
@@ -36,16 +37,22 @@ public class LocationFinder {
    * @param useGPS
    *          Do we try to use the GPS
    * @param useNetwork
-   *          Do we try to use the Network based location
+   *          Do we try to use the Network based location. Note: if this is set
+   *          to false, but we couldn't use the GPS, we will still use the
+   *          network.
    */
   public void run(LocationHandler h, boolean useGPS, boolean useNetwork) {
     log("run");
+    if (running)
+      stop();
+    if (!useGPS && !useNetwork)
+      Log.e("LocationFinder", "both useGPS and useNetwork are false");
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
-    if (useGPS)
+    boolean GPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    if (useGPS && GPSenabled) {
       p = LocationManager.GPS_PROVIDER;
-    if (locationManager.isProviderEnabled(p)) {
       log("enabling GPS");
       LocationListener l = createLocationListener(p);
       listeners.add(l);
@@ -53,7 +60,7 @@ public class LocationFinder {
     } else
       log("Could not use GPS because it is disabled");
     p = LocationManager.NETWORK_PROVIDER;
-    if (useNetwork)
+    if (useNetwork || !GPSenabled)
       if (locationManager.isProviderEnabled(p)) {
         log("enabling Network location");
         LocationListener l = createLocationListener(p);
@@ -61,6 +68,7 @@ public class LocationFinder {
         locationManager.requestLocationUpdates(p, 0, 0, l);
       } else
         log("Could not use Network location because it is disabled");
+    running = true;
   }
   
   void makeUseOfNewLocation(Location location, String provider) {
@@ -143,13 +151,17 @@ public class LocationFinder {
    * Stop the service
    */
   public void stop() {
+    if (!running)
+      return;
     log("stopped");
-    for (LocationListener l : listeners) {
-      log("removed a listener");
-      locationManager.removeUpdates(l);
+    if (listeners != null) {
+      for (LocationListener l : listeners) {
+        log("removed a listener");
+        locationManager.removeUpdates(l);
+      }
+      listeners.clear();
+      listeners = null;
     }
-    listeners.clear();
-    listeners = null;
     log("end of stop");
   }
 }

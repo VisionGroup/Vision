@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.AnalogClock;
 import android.widget.TextView;
 
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class SpeakingClockActivity extends BlindroidActivity {
   /**

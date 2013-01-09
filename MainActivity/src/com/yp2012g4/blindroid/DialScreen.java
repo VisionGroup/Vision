@@ -2,7 +2,7 @@ package com.yp2012g4.blindroid;
 
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
-import com.yp2012g4.blindroid.utils.BlindroidActivity;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 import android.content.Context;
 import android.content.Intent;

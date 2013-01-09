@@ -1,5 +1,8 @@
 package com.yp2012g4.blindroid.customUI.lists;
 
+import com.yp2012g4.blindroid.tools.MultiFingerGestureDetector;
+import com.yp2012g4.blindroid.tools.MultiTouchRun;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -21,10 +24,21 @@ import android.widget.ListView;
  */
 public class TalkingListView extends ListView implements OnScrollListener, OnItemClickListener, OnTouchListener, OnGestureListener {
   private ViewListRun run = null;
-  private GestureDetector gDetector = new GestureDetector(this);
+  private MultiFingerGestureDetector gDetector = new MultiFingerGestureDetector(this);
   private int selectedItem = 0;
   private boolean isInit = false;
   
+  
+  
+  
+  /**
+   * set custom gesture detector
+   * @param gDetector
+   */
+  public synchronized void setGestureDetectorRun(MultiTouchRun run) {
+    gDetector.setMultiTouchRun(run);
+  }
+
   /**
    * get selected item number
    */

@@ -10,7 +10,7 @@ import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.SOSActivity;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
-import com.yp2012g4.blindroid.utils.onTouchEventClass;
+import com.yp2012g4.blindroid.tools.onTouchEventClass;
 
 /**
  * Tests for SOSActivity

@@ -45,6 +45,10 @@
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="phoneStatus_message_charging_read">Charging</string>
+   	<string name="IncomingCall_whereami">Incoming Call Menu</string>
+   	<string name="IncomingCall_button_Answer_read">Answer</string>
+   	<string name="IncomingCall_button_Reject_read">Reject</string>
+   	<string name="IncomingCall_help">You can either reject or answer the call.</string>
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     <string name="ClockTitle">Speaking clock</string>
     <string name="emptyHour">hh:mm:ss</string>
@@ -92,7 +96,6 @@
     <string name="title_activity_set_clock">Set Clock</string>
     <string name="setAlarmButton">Set Alarm</string>
     <string name="alarmStatus">Alarm Status</string>
-
     <string name="normal_text_size_button">Normal Text Size</string>
     <string name="large_text_size_button">Large Text Size</string>
     <string name="small_text_size_button">Small Text Size</string>
@@ -116,4 +119,6 @@
     <string name="OK_button">OK</string>
     <string name="delete_button_read">undo</string>
     <string name="reset_button_read">reset</string>
+    <string name="title_activity_incoming_call">IncomingCallActivity</string>
+
 </resources>

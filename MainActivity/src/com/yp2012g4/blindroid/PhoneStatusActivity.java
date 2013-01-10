@@ -28,6 +28,8 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * 
  */
 public class PhoneStatusActivity extends BlindroidActivity {
+  private static final String TAG = "bd:PhoneStatusActivity";
+  
   /**
    * A signal strength listener. Updates _signal between 0-31.
    * 
@@ -73,13 +75,13 @@ public class PhoneStatusActivity extends BlindroidActivity {
   }
   
   public String getMissedCalls() {
-    String[] projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.TYPE };
-    String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-    Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, projection, where, null, null);
+    final String[] projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.TYPE };
+    final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
+    final Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, projection, where, null, null);
     String s = "";
     boolean b = true;
     while (c.moveToNext()) {
-      String name = c.getString(1);
+      final String name = c.getString(1);
       if (!b)
         s += " And from ";
       else
@@ -93,8 +95,8 @@ public class PhoneStatusActivity extends BlindroidActivity {
   
   public String getUnreadSMS() {
     final Uri SMS_INBOX = Uri.parse("content://sms/inbox");
-    Cursor c = managedQuery(SMS_INBOX, null, "read = 0", null, null);
-    int unreadMessagesCount = c.getCount();
+    final Cursor c = managedQuery(SMS_INBOX, null, "read = 0", null, null);
+    final int unreadMessagesCount = c.getCount();
     if (unreadMessagesCount == 0)
       return "There are no unread SMS messages";
     return "You have " + unreadMessagesCount + " unread SMS";
@@ -110,7 +112,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
   @Override public void onClick(View v) {
-    Resources res = getResources();
+    final Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
         speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(_battery),
@@ -131,7 +133,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        final Intent intent = new Intent(this, DisplaySettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:
@@ -151,17 +153,18 @@ public class PhoneStatusActivity extends BlindroidActivity {
    */
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Log.d(TAG, "IncomingCAllActivity starting");
     init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
         getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
     // Battery Broadcast receiver.
-    BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
+    final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
       @Override public void onReceive(Context context, Intent intent) {
         _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
       }
     };
-    IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    final IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     registerReceiver(batteryReceiver, filter);
     // start the signal strength listener
     signalStrengthListener = new SignalStrengthListener();
@@ -176,7 +179,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * @return
    */
   public String signalToString(int signal) {
-    Log.d("Signal", String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
+    Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);
     else if (signal >= 12)

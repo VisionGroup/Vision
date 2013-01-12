@@ -17,6 +17,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
+import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -133,7 +134,9 @@ public class PhoneStatusActivity extends BlindroidActivity {
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        final Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        // final Intent intent = new Intent(this,
+        // DisplaySettingsActivity.class);
+        final Intent intent = new Intent(this, IncomingCallActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:

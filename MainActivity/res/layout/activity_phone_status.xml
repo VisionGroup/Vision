@@ -6,7 +6,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     style="?backgroundColor"
-    tools:context=".PhoneStatus" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
+    tools:context=".PhoneStatus" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    android:contentDescription="@string/phoneStatus_whereami">
 
     <LinearLayout
         android:layout_width="match_parent"

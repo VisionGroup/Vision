@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.yp2012g4.blindroid.PhoneNotifications.CallData;
+import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -26,6 +27,8 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * 
  */
 public class PhoneStatusActivity extends BlindroidActivity {
+  private static final String TAG = "bd:PhoneStatusActivity";
+  
   /**
    * A signal strength listener. Updates _signal between 0-31.
    * 
@@ -36,8 +39,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
     protected SignalStrengthListener() {
     }
     
-    @Override
-    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
       // get the signal strength (a value between 0 and 31)
       _signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
@@ -95,8 +97,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
 //    return "You have " + c.getCount() + " missed calls from " + s;
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -105,9 +106,8 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override
-  public void onClick(View v) {
-    Resources res = getResources();
+  @Override public void onClick(View v) {
+    final Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
         speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(_battery),
@@ -125,7 +125,9 @@ public class PhoneStatusActivity extends BlindroidActivity {
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        // final Intent intent = new Intent(this,
+        // DisplaySettingsActivity.class);
+        final Intent intent = new Intent(this, IncomingCallActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:
@@ -143,33 +145,25 @@ public class PhoneStatusActivity extends BlindroidActivity {
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Log.d(TAG, "IncomingCAllActivity starting");
     init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
         getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
     // Battery Broadcast receiver.
-    BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-      @Override
-      public void onReceive(Context context, Intent intent) {
+    final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
+      @Override public void onReceive(Context context, Intent intent) {
         _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
       }
     };
-    IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    final IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     registerReceiver(batteryReceiver, filter);
     // start the signal strength listener
     signalStrengthListener = new SignalStrengthListener();
     ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(signalStrengthListener,
         PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-  }
-  
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus)
-      speakOut("Phone status screen");
   }
   
   /**
@@ -179,7 +173,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * @return
    */
   public String signalToString(int signal) {
-    Log.d("Signal", String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
+    Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);
     else if (signal >= 12)

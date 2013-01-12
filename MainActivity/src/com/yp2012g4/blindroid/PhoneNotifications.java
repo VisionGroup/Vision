@@ -87,6 +87,10 @@ public class PhoneNotifications {
     return cur.getCount();
   }
   
+//  public float getSignalStrength() {
+//    SignalStrength ss;
+//    return ss.getGsmSignalStrength();
+//  }
   public int getUnreadSMS() {
     final Uri SMS_INBOX = Uri.parse("content://sms/inbox");
     Cursor cur = c.getContentResolver().query(SMS_INBOX, null, "read = 0", null, null);

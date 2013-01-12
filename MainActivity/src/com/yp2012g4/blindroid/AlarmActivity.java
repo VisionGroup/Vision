@@ -70,7 +70,7 @@ public class AlarmActivity extends BlindroidActivity {
         TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
         buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
         speakOut(s);
-        while (_t.isSpeaking() == Boolean.TRUE) {
+        while (_t.isSpeaking() == true) {
           // Wait for message to finish playing and then finish the activity
         }
       } else {
@@ -151,7 +151,7 @@ public class AlarmActivity extends BlindroidActivity {
   public void setAlarm() {
     if (alarmTime == null) {
       speakOut("You need to set the alarm first ");
-      while (_t.isSpeaking() == Boolean.TRUE) {
+      while (_t.isSpeaking() == true) {
         // Wait for message to finish playing and then finish the activity
       }
       return;
@@ -167,7 +167,7 @@ public class AlarmActivity extends BlindroidActivity {
     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
     speakOut("Alarm is activated ");
-    while (_t.isSpeaking() == Boolean.TRUE) {
+    while (_t.isSpeaking() == true) {
       // Wait for message to finish playing and then finish the activity
     }
   }

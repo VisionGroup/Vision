@@ -10,6 +10,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.provider.CallLog;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 
 /**
  * 
@@ -28,6 +30,11 @@ public class PhoneNotifications {
       this.date = date;
     }
     
+    /**
+     * Get the formated hour of the call in a string
+     * 
+     * @return the call hour string
+     */
     public String getHour() {
       Calendar calendar = Calendar.getInstance();
       calendar.setTimeInMillis(date);
@@ -35,7 +42,37 @@ public class PhoneNotifications {
     }
   }
   
+  /**
+   * This listener class allow us to update the signal member, and this is the
+   * only way android allow us to check the signal
+   * 
+   * @author amir b
+   * 
+   */
+  private class SignalStrengthListener extends PhoneStateListener {
+    protected SignalStrengthListener() {
+    }
+    
+    @Override
+    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+      // get the signal strength (a value between 0 and 31)
+      signal = signalStrength.getGsmSignalStrength();
+      super.onSignalStrengthsChanged(signalStrength);
+    }
+  }
+  
+  /**
+   * Getter for the signal static member
+   * 
+   * @return
+   */
+  public static int getSignalStrength() {
+    return signal;
+  }
+  
   private final Context c;
+  public static int signal = -1;
+  SignalStrengthListener signalStrengthListener;
   
   public PhoneNotifications(Context c) {
     this.c = c;
@@ -69,6 +106,12 @@ public class PhoneNotifications {
     return isCharging;
   }
   
+  /**
+   * Get a list of all the missed calls with the date, name and phone number of
+   * each
+   * 
+   * @return list of missed calls
+   */
   public ArrayList<CallData> getMissedCallsList() {
     String[] projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
     String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
@@ -81,19 +124,33 @@ public class PhoneNotifications {
     return al;
   }
   
+  /**
+   * Get the number of missed calls
+   * 
+   * @return the missed calls number
+   */
   public int getMissedCallsNum() {
     String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, where, null, null);
     return cur.getCount();
   }
   
-//  public float getSignalStrength() {
-//    SignalStrength ss;
-//    return ss.getGsmSignalStrength();
-//  }
+  /**
+   * Get the number of SMS messages the user didn't read yet
+   * 
+   * @return the unread SMS number
+   */
   public int getUnreadSMS() {
     final Uri SMS_INBOX = Uri.parse("content://sms/inbox");
     Cursor cur = c.getContentResolver().query(SMS_INBOX, null, "read = 0", null, null);
     return cur.getCount();
+  }
+  
+  /**
+   * start the listener for the signal strength
+   */
+  public void startSignalLisener() {
+    signalStrengthListener = new SignalStrengthListener();
+    ((TelephonyManager) c.getSystemService("phone")).listen(signalStrengthListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
   }
 }

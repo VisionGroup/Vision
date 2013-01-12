@@ -37,11 +37,11 @@
     <string name="phoneStatus_help">You can press one of two buttons to get Battery level and charge status and to get Reception status.</string>
     <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
     <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
-    <string name="phoneStatus_message_noSignal_read">No Signal.</string>
-    <string name="phoneStatus_message_veryGoodSignal_read">Signal is very good.</string>
-    <string name="phoneStatus_message_goodSignal_read">Signal is good.</string>
-    <string name="phoneStatus_message_poorSignal_read">Signal is poor.</string>
-    <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor.</string>
+    <string name="phoneStatus_message_noSignal_read">No Signal</string>
+    <string name="phoneStatus_message_veryGoodSignal_read">Signal is very good</string>
+    <string name="phoneStatus_message_goodSignal_read">Signal is good</string>
+    <string name="phoneStatus_message_poorSignal_read">Signal is poor</string>
+    <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor</string>
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="phoneStatus_message_charging_read">Charging</string>

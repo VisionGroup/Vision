@@ -51,19 +51,19 @@ public class PhoneStatusActivityTest extends
 
     }
 
-    public void test_getChargeStatus() {
-	solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
-
-	assertEquals(
-		getActivity().getChargeStatus(
-			BatteryManager.BATTERY_STATUS_CHARGING), "Charging");
-	assertEquals(
-		getActivity().getChargeStatus(
-			BatteryManager.BATTERY_STATUS_FULL), "Charging");
-	assertEquals(
-		getActivity().getChargeStatus(
-			BatteryManager.BATTERY_STATUS_NOT_CHARGING), "");
-    }
+//    public void test_getChargeStatus() {
+//	solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+//
+//	assertEquals(
+//		getActivity().getChargeStatus(
+//			BatteryManager.BATTERY_STATUS_CHARGING), "Charging");
+//	assertEquals(
+//		getActivity().getChargeStatus(
+//			BatteryManager.BATTERY_STATUS_FULL), "Charging");
+//	assertEquals(
+//		getActivity().getChargeStatus(
+//			BatteryManager.BATTERY_STATUS_NOT_CHARGING), "");
+//    }
 
     public void test_TalkingImageButton() {
 	TalkingImageButton tlkbtn = (TalkingImageButton) solo

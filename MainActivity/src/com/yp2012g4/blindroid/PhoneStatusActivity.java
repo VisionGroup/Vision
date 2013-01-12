@@ -7,16 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.provider.CallLog;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
+import com.yp2012g4.blindroid.PhoneNotifications.CallData;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -73,32 +71,28 @@ public class PhoneStatusActivity extends BlindroidActivity {
     }
   }
   
-  public String getMissedCalls() {
-    String[] projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.TYPE };
-    String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-    Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, projection, where, null, null);
-    String s = "";
-    boolean b = true;
-    while (c.moveToNext()) {
-      String name = c.getString(1);
-      if (!b)
-        s += " And from ";
-      else
-        b = false;
-      s += name;
+  public void getMissedCalls() {
+    PhoneNotifications pn = new PhoneNotifications(this);
+    ArrayList<CallData> calls = pn.getMissedCallsList();
+    for (CallData c : calls) {
+      speakOut(" called At: " + c.getHour() + " ,From: " + c.number);
+      while (_t.isSpeaking()) {
+        // Wait for message to finish playing and then finish the activity
+      }
     }
-    if (c.getCount() == 0)
-      return "There are no missed calls";
-    return "You have " + c.getCount() + " missed calls from " + s;
-  }
-  
-  public String getUnreadSMS() {
-    final Uri SMS_INBOX = Uri.parse("content://sms/inbox");
-    Cursor c = managedQuery(SMS_INBOX, null, "read = 0", null, null);
-    int unreadMessagesCount = c.getCount();
-    if (unreadMessagesCount == 0)
-      return "There are no unread SMS messages";
-    return "You have " + unreadMessagesCount + " unread SMS";
+//    String s = "";
+//    boolean b = true;
+//    while (c.moveToNext()) {
+//      String name = c.getString(1);
+//      if (!b)
+//        s += " And from ";
+//      else
+//        b = false;
+//      s += name;
+//    }
+//    if (c.getCount() == 0)
+//      return "There are no missed calls";
+//    return "You have " + c.getCount() + " missed calls from " + s;
   }
   
   @Override
@@ -123,10 +117,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
         speakOut(signalToString(_signal));
         break;
       case R.id.button_getMissedCalls:
-        speakOut(getMissedCalls());
-        break;
-      case R.id.button_getUnreadSMS:
-        speakOut(getUnreadSMS());
+        getMissedCalls();
         break;
       case R.id.back_button:
         speakOut("Previous screen");

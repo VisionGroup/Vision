@@ -80,8 +80,8 @@
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
     <string name="noAlarm">No alarm</string>
-    <string name="setHour">Set Hour</string>
-    <string name="setMinutes">Set Minutes</string>
+    <string name="setHour">Hours</string>
+    <string name="setMinutes">Minutes</string>
     <string name="read_sms_button">Read SMS</string>
     <string name="title_activity_talking_sms">TalkingSMS</string>
     <string name="title_activity_talking_list">TalkingList</string>

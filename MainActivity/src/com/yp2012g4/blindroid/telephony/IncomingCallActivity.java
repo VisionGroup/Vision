@@ -10,14 +10,17 @@ import android.view.View;
 
 import com.yp2012g4.blindroid.DisplaySettingsActivity;
 import com.yp2012g4.blindroid.R;
+import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 import com.yp2012g4.blindroid.tools.CallUtils;
 
 public class IncomingCallActivity extends BlindroidActivity {
   private static final String TAG = "bd:IncomingCallActivity";
-  CallUtils callUtils = new CallUtils();
+  CallUtils callUtils;
   private ListenToPhoneState listener;
   Boolean rang = Boolean.valueOf(false);
+  String incomingNumber;
+  TelephonyManager tManager;
   
   /**
    * Adds onClick events to buttons in this view.
@@ -25,6 +28,7 @@ public class IncomingCallActivity extends BlindroidActivity {
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
   @Override public void onClick(View v) {
+    callUtils.silenceRinger();
     switch (v.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -59,14 +63,18 @@ public class IncomingCallActivity extends BlindroidActivity {
       CallUtils.answerPhoneHeadsethook(this);
       Log.d(TAG, "Answered call");
     } catch (final Exception e) {
-      // TODO Auto-generated catch block
       Log.e(TAG, "Error answering call", e);
     }
   }
   
   void endCall() {
-    callUtils.endCall(this);
+    callUtils.endCall();
     Log.d(TAG, "Rejected call");
+  }
+  
+  void updateNumberButton(String number) {
+    ((TalkingButton) findViewById(R.id.number)).setText(number.toCharArray(), 0, number.length());
+    ((TalkingButton) findViewById(R.id.number)).setContentDescription(number);
   }
   
   /**
@@ -74,18 +82,30 @@ public class IncomingCallActivity extends BlindroidActivity {
    */
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    callUtils = new CallUtils(this);
     Log.d(TAG, "onCreate Incoming call activity");
-    init(this, 0/* TODO Check what icon goes here */, getString(R.string.IncomingCall_whereami),
-        getString(R.string.IncomingCall_help));
+    init(0/* TODO Check what icon goes here */, getString(R.string.IncomingCall_whereami), getString(R.string.IncomingCall_help));
     setContentView(R.layout.activity_incoming_call);
     setPhoneStateListener();
     final Bundle extras = getIntent().getExtras();
-    if (extras != null)
+    if (extras != null) {
       try {
-        rang = Boolean.valueOf(extras.getBoolean("rang"));
+        rang = Boolean.valueOf(extras.getBoolean(CallUtils.RANG_KEY));
       } catch (final Exception e) {
         rang = Boolean.FALSE;
       }
+      try {
+        incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
+      } catch (final Exception e) {
+        incomingNumber = new String("");
+      }
+    }
+    updateNumberButton(incomingNumber);
+  }
+  
+  @Override public void onDestroy() {
+    super.onDestroy();
+    callUtils.restoreRinger();
   }
   
   @Override public int getViewId() {
@@ -93,7 +113,7 @@ public class IncomingCallActivity extends BlindroidActivity {
   }
   
   private void setPhoneStateListener() {
-    final TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     listener = new ListenToPhoneState();
     tManager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
   }
@@ -103,12 +123,11 @@ public class IncomingCallActivity extends BlindroidActivity {
       // TODO Auto-generated constructor stub
     }
     
-    @Override public void onCallStateChanged(int state, String incomingNumber) {
-      Log.i("telephony-example", "State changed: " + stateName(state));
+    @SuppressWarnings("synthetic-access") @Override public void onCallStateChanged(int state, String inNumber) {
       if (state == TelephonyManager.CALL_STATE_IDLE && rang == Boolean.TRUE) {
         Log.d(TAG, "Ending Activity because " + stateName(state));
         rang = Boolean.FALSE;
-        finish();
+        mHandler.postDelayed(mLaunchTask, 1000);
       }
     }
     

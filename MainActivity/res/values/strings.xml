@@ -27,6 +27,8 @@
     <string name="Contact_number_7">Maytal Messing</string>
     <string name="Contact_number_8">Yossi Gil</string>
     <string name="Contact_number_9">Sabih Egbaria</string>
+    <string name="MainActivity_wai">Main Menu</string>
+    <string name="MainActivity_help">Select one of eight options.</string>
     <string name="phoneStatus_button_getBatteryStatus">Battery Level</string>
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
     <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>

@@ -28,7 +28,7 @@ public class IncomingCallActivity extends BlindroidActivity {
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
   @Override public void onClick(View v) {
-    callUtils.silenceRinger();
+    // callUtils.silenceRinger();
     switch (v.getId()) {
       case R.id.button_answer:
         answerCall();

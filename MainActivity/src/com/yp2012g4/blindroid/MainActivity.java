@@ -7,7 +7,6 @@ import android.view.View;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class MainActivity extends BlindroidActivity {
-  
   @Override public int getViewId() {
     return R.id.MainActivityView;
   }
@@ -53,7 +52,8 @@ public class MainActivity extends BlindroidActivity {
       case R.id.back_button:
         break;
       case R.id.settings_button:
-        //intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
+        // intent = new Intent(MainActivity.this,
+        // DisplaySettingsActivity.class);
         intent = new Intent(MainActivity.this, DialScreen.class);
         startActivity(intent);
         break;
@@ -70,8 +70,7 @@ public class MainActivity extends BlindroidActivity {
   /** Called when the activity is first created. */
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);   
+    setContentView(R.layout.activity_main);
+    init(0, getString(R.string.MainActivity_wai), getString(R.string.MainActivity_help));
   }
-  
-
 }

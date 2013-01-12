@@ -33,7 +33,7 @@ public class CallUtils {
     audioManager.setSpeakerphoneOn(true);
   }
   
-  public void answerCall() throws Exception {
+  @Deprecated public void answerCall() throws Exception {
     // Silence the ringer and answer the call!
     try {
       telephonyService.silenceRinger();

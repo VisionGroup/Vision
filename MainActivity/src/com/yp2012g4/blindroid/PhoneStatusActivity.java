@@ -54,6 +54,13 @@ public class PhoneStatusActivity extends BlindroidActivity {
   int _status = -1; // Charging Status
   int _signal = -1; // Reception status
   SignalStrengthListener signalStrengthListener;
+//Battery Broadcast receiver.
+  final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
+    @Override public void onReceive(Context context, Intent intent) {
+      _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+      _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+    }
+  };
   final ArrayList<String> contacts = new ArrayList<String>();
   
   /**
@@ -142,22 +149,19 @@ public class PhoneStatusActivity extends BlindroidActivity {
     }
   }
   
+  @Override public void onDestroy() {
+    super.onDestroy();
+    unregisterReceiver(batteryReceiver);
+  }
+  
   /**
    * onCreate method.
    */
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
-    init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
-        getString(R.string.phoneStatus_help));
+    init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
-    // Battery Broadcast receiver.
-    final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-      @Override public void onReceive(Context context, Intent intent) {
-        _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-      }
-    };
     final IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     registerReceiver(batteryReceiver, filter);
     // start the signal strength listener

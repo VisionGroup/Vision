@@ -19,7 +19,13 @@ import com.android.internal.telephony.ITelephony;
  * 
  */
 public class CallUtils {
+  // Used by Log
   private static String TAG = "bd.CallUtils";
+  // Used by the Incoming call receiver to transfer data to the activity.
+  public static final String RANG_KEY = "rang";
+  public static final String INCOING_NUMBER_KEY = "iNumber";
+  private com.android.internal.telephony.ITelephony telephonyService;
+  AudioManager audioManager;
   
   // ListenToPhoneState listener;
   public static void enableSpeakerPhone(Context context) {
@@ -27,18 +33,28 @@ public class CallUtils {
     audioManager.setSpeakerphoneOn(true);
   }
   
-  public static void answerCall(Context context) throws Exception {
-    // Set up communication with the telephony service (thanks to Tedd's Droid
-    // Tools!)
-    final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-    final Class<?> c = Class.forName(tm.getClass().getName());
-    final Method m = c.getDeclaredMethod("getITelephony");
-    m.setAccessible(true);
-    ITelephony telephonyService;
-    telephonyService = (ITelephony) m.invoke(tm);
+  public void answerCall() throws Exception {
     // Silence the ringer and answer the call!
-    telephonyService.silenceRinger();
-    telephonyService.answerRingingCall();
+    try {
+      telephonyService.silenceRinger();
+      telephonyService.answerRingingCall();
+    } catch (final Exception e) {
+      Log.e(TAG, "Error answerig calls", e);
+    }
+  }
+  
+  public CallUtils(Context context) {
+    super();
+    try {
+      final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+      final Class<?> c = Class.forName(tm.getClass().getName());
+      final Method m = c.getDeclaredMethod("getITelephony");
+      m.setAccessible(true);
+      telephonyService = (ITelephony) m.invoke(tm);
+      audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    } catch (final Exception e) {
+      Log.e(TAG, "Error starting CallUtils", e);
+    }
   }
   
   public static void answerPhoneHeadsethook(Context context) {
@@ -53,15 +69,10 @@ public class CallUtils {
     context.sendOrderedBroadcast(buttonUp, "android.permission.CALL_PRIVILEGED");
   }
   
-  public static void endCall(Context context) {
+  public void endCall() {
     try {
       // Java reflection to gain access to TelephonyManager's
       // ITelephony getter
-      final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-      final Class<?> r = Class.forName(tm.getClass().getName());
-      final Method m = r.getDeclaredMethod("getITelephony");
-      m.setAccessible(true);
-      final com.android.internal.telephony.ITelephony telephonyService = (ITelephony) m.invoke(tm);
       telephonyService.endCall();
       Thread.sleep(1000); // TODO: What for?
     } catch (final Exception e) {
@@ -70,6 +81,7 @@ public class CallUtils {
       Log.e(TAG, "Exception object: " + e);
     }// end catch*/
   }
+  
   /*
    * @SuppressWarnings("rawtypes") private void call(Context context, String
    * number) { try { final TelephonyManager tm = (TelephonyManager)
@@ -117,4 +129,21 @@ public class CallUtils {
    * ((TextView)findViewById(R.id.Progress)).setText("ringing"); return
    * "ringing"; } return Integer.toString(state); } }
    */
+  public void silenceRinger() {
+    try {
+      // telephonyService.silenceRinger();
+      audioManager.setStreamMute(AudioManager.STREAM_RING, true);
+    } catch (final Exception e) {
+      Log.e(TAG, "Error silencing Ringer", e);
+    }
+  }
+  
+  public void restoreRinger() {
+    try {
+      // telephonyService.silenceRinger();
+      audioManager.setStreamMute(AudioManager.STREAM_RING, false);
+    } catch (final Exception e) {
+      Log.e(TAG, "Error silencing Ringer", e);
+    }
+  }
 }

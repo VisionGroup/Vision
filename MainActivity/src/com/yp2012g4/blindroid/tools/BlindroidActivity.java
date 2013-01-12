@@ -3,7 +3,7 @@ package com.yp2012g4.blindroid.tools;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech.OnInitListener;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -27,11 +27,34 @@ public abstract class BlindroidActivity extends onTouchEventClass {
     return _toolTip;
   }
   
-  public void init(Activity activity, int icon, String name, String toolTip) {
-    _t = new TTS(activity, (OnInitListener) activity);
+  /**
+   * replaced by void init(int icon, String name, String toolTip)
+   * 
+   * @param activity
+   * @param icon
+   * @param name
+   * @param toolTip
+   */
+  @Deprecated public void init(Activity activity, int icon, String name, String toolTip) {
+    // _t = new TTS(activity, (OnInitListener) activity);
     _icon = icon;
     _name = name;
     _toolTip = toolTip;
+  }
+  
+  public void init(int icon, String name, String toolTip) {
+    _icon = icon;
+    _name = name;
+    _toolTip = toolTip;
+  }
+  
+  @Override public void onClick(View arg0) {
+    // TODO Auto-generated method stub
+  }
+  
+  @Override public int getViewId() {
+    // TODO Auto-generated method stub
+    return 0;
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {

@@ -37,11 +37,11 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
       // rang = true;
-      processIncomingCall(context);
+      processIncomingCall(context, phonenumber);
     }
   }
   
-  @SuppressWarnings("static-method") private void processIncomingCall(Context context) {
+  @SuppressWarnings("static-method") private void processIncomingCall(Context context, String phonenumber) {
     // final TelephonyManager telMan = (TelephonyManager)
     // context.getSystemService(Context.TELEPHONY_SERVICE);
     try {
@@ -55,7 +55,8 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 //      telephonyService.endCall();
       Log.d(TAG, "Creatin IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);
-      i.putExtra("rang", true);
+      i.putExtra(CallUtils.RANG_KEY, true);
+      i.putExtra(CallUtils.INCOING_NUMBER_KEY, phonenumber);
       i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       Log.d(TAG, "Starting IncomingCAllActivity");
       context.startActivity(i);

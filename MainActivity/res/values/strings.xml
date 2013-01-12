@@ -4,7 +4,7 @@
     <string name="app_name">Blindroid</string>
     <string name="welcome_message">Welcome to </string>
     <string name="menu_settings">Settings</string>
-    <string name="sos_button">SOS</string>
+    <string name="sos_button">S O S</string>
     <string name="time_button">Time</string>
     <string name="where_am_i_button">Where am i</string>
     <string name="phone_status_button">Phone status</string>
@@ -16,7 +16,7 @@
     <string name="title_dial_screen">DialScreen</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
-    <string name="send_SOS_message">Send SOS</string>
+    <string name="send_SOS_message">Send S O S</string>
     <string name="title_activity_quick_dial">QuickDialActivity</string>
     <string name="Contact_number_1">Amit Yaffe</string>
     <string name="Contact_number_2">Yaron Auster</string>
@@ -86,7 +86,7 @@
     <string name="noAlarm">No alarm</string>
     <string name="setHour">Hours</string>
     <string name="setMinutes">Minutes</string>
-    <string name="read_sms_button">Read SMS</string>
+    <string name="read_sms_button">Read SMS.</string>
     <string name="title_activity_talking_sms">TalkingSMS</string>
     <string name="title_activity_talking_list">TalkingList</string>
     <string name="title_activity_where_am_i">Where Am I</string>

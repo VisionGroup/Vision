@@ -48,7 +48,7 @@ public class MainActivity extends BlindroidActivity {
         startActivity(intent);
         break;
       case R.id.read_sms_button:
-        intent = new Intent(MainActivity.this, TalkingSmsList.class);
+        intent = new Intent(MainActivity.this, ReadSmsActivity.class);
         startActivity(intent);
         break;
       case R.id.back_button:
@@ -74,6 +74,8 @@ public class MainActivity extends BlindroidActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    PhoneNotifications pn = new PhoneNotifications(this);
+    pn.startSignalLisener();
   }
   
   /**
@@ -88,7 +90,7 @@ public class MainActivity extends BlindroidActivity {
     }
     if (!hasFocus)
       return;
-    VoiceNotify();
+    //VoiceNotify();
   }
   
   public void VoiceNotify() {
@@ -96,8 +98,13 @@ public class MainActivity extends BlindroidActivity {
     PhoneNotifications pn = new PhoneNotifications(this);
     float batteryLevel = pn.getBatteryLevel();
     boolean isCharging = pn.getChargerStatus();
-    if (!isCharging && batteryLevel < 0.25)
+    if (!isCharging && batteryLevel < 0.3)
       s += " Low Battery! \n";
+    int signalS = PhoneNotifications.getSignalStrength();
+    if (signalS < 2)
+      s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
+    else if (signalS < 5)
+      s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     int numOfMissedCalls = pn.getMissedCallsNum();
     if (numOfMissedCalls > 0) {
       s += numOfMissedCalls + " missed call";
@@ -111,5 +118,9 @@ public class MainActivity extends BlindroidActivity {
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
+  }
+  
+  @Override public void onBackPressed() {
+    //do nothing
   }
 }

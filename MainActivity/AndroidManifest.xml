@@ -30,12 +30,18 @@
         <activity
             android:name="com.yp2012g4.blindroid.MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -145,6 +151,14 @@
         <activity
             android:name="com.yp2012g4.blindroid.telephony.IncomingCallActivity"
             android:label="@string/title_activity_incoming_call" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.ReadSmsActivity"
+            android:label="@string/title_activity_read_sms"
+            android:launchMode="singleInstance" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yp2012g4.blindroid.MainActivity" />
         </activity>
     </application>
 

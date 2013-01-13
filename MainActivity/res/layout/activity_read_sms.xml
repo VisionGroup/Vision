@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ReadSmsActivity"
+    style="?backgroundColor"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yp2012g4.blindroid.customUI.TalkingButton
+            android:id="@+id/sms_from"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"            
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yp2012g4.blindroid.customUI.TalkingButton
+            android:id="@+id/sms_body"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="196dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:textSize="35sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yp2012g4.blindroid.customUI.TalkingButton
+            android:id="@+id/sms_date"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/sms_prev"
+            android:layout_width="0dip"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/previous_message"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back_button" />
+
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/sms_next"
+            android:layout_width="0dip"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/next_message"
+            android:scaleType="fitCenter"
+            android:src="@drawable/next_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -194,6 +196,8 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    *          the string to speak out
    */
   public void speakOut(String s) {
+    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    vb.vibrate(20);
     if (_t == null) {
       Log.e("onTouchEventClass", "TTS is null");
       return;

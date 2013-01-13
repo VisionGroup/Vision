@@ -48,7 +48,7 @@ public class MainActivity extends BlindroidActivity {
         startActivity(intent);
         break;
       case R.id.read_sms_button:
-        intent = new Intent(MainActivity.this, TalkingSmsList.class);
+        intent = new Intent(MainActivity.this, ReadSmsActivity.class);
         startActivity(intent);
         break;
       case R.id.back_button:
@@ -90,7 +90,7 @@ public class MainActivity extends BlindroidActivity {
     }
     if (!hasFocus)
       return;
-    VoiceNotify();
+    //VoiceNotify();
   }
   
   public void VoiceNotify() {
@@ -118,5 +118,9 @@ public class MainActivity extends BlindroidActivity {
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
+  }
+  
+  @Override public void onBackPressed() {
+    //do nothing
   }
 }

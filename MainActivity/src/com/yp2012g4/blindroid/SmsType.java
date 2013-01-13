@@ -13,7 +13,7 @@ import android.text.format.DateFormat;
  * 
  */
 public class SmsType {
-  private String address = "123";
+  private String address = "";
   private String person = "";
   private String date = "";
   private String protocol = "";
@@ -34,7 +34,9 @@ public class SmsType {
     String mili = cur.getString(cur.getColumnIndexOrThrow("date")).toString();
     Long m = Long.valueOf(mili);
     date = (String) DateFormat.format("dd/MM/yy", m.longValue());
-    // protocol = cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can cause exception
+    // protocol =
+    // cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can
+    // cause exception
     read = cur.getString(cur.getColumnIndexOrThrow("read")).toString();
     status = cur.getString(cur.getColumnIndexOrThrow("status")).toString();
     type = cur.getString(cur.getColumnIndexOrThrow("type")).toString();
@@ -46,6 +48,9 @@ public class SmsType {
     if (cs.getCount() > 0) {
       cs.moveToFirst();
       person = cs.getString(cs.getColumnIndex(PhoneLookup.DISPLAY_NAME));
+    }
+    if (person == "") {
+      person = address;
     }
   }
   

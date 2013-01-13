@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid;
 
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 import android.content.Context;
@@ -58,5 +59,27 @@ public class DialScreen extends BlindroidActivity {
     setContentView(R.layout.dial_screen);   
   }
 
-  @Override public void onClick(View v) {/**/}
+  @Override
+  public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.settings_button:
+        speakOut("Settings");
+        final Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.home_button:
+        speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + getString(R.string.dial_screen));
+        break;
+      default:
+        break;
+    }
+  }
 }

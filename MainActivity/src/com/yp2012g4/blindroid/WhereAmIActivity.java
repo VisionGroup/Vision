@@ -24,8 +24,10 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
  * @version 1.0
  */
 public class WhereAmIActivity extends BlindroidActivity {
+  private static String TAG = "bd.BlindroidActivity";
+
   private static void log(String s) {
-    Log.d("WhereAmIActivity", s);
+    Log.d(TAG, s);
   }
   
   Lock l = null;
@@ -81,7 +83,7 @@ public class WhereAmIActivity extends BlindroidActivity {
     }
   }
   
-  private void init() {
+  private void initialize() {
     LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     log("Got location manager");
     f = new LocationFinder(manager);
@@ -97,15 +99,16 @@ public class WhereAmIActivity extends BlindroidActivity {
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();
+    init(0/* TODO Check what icon goes here */, getString(R.string.whereami_whereami), getString(R.string.whereami_help));
   }
   
   @Override protected void onStart() {
     log("onStart");
-    init();
+    initialize();
     super.onStart();
   }
   

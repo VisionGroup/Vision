@@ -1,6 +1,5 @@
 package com.yp2012g4.blindroid;
 
-import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,16 +23,14 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
  * @version 1.0
  */
 public class WhereAmIActivity extends BlindroidActivity {
-  private static String TAG = "bd.BlindroidActivity";
-
+  private static String TAG = "bd.WhereAmIActivity";
+  
+  // TODO: add a button to know the current status
   private static void log(String s) {
     Log.d(TAG, s);
   }
   
   Lock l = null;
-  String lastProvider = "";
-  Date lastUpdate = null;
-  long updateTimeOut = 60 * 1000; // 1 minute
   LocationFinder f;
   
   @Override public int getViewId() {
@@ -46,14 +43,6 @@ public class WhereAmIActivity extends BlindroidActivity {
     log("latitude = " + latitude + "\n");
     log("provider = " + provider + "\n");
     log("address: " + address);
-    Date d = new Date();
-    l.lock();
-    if (lastUpdate == null || d.getTime() - lastUpdate.getTime() > updateTimeOut
-        || lastProvider == LocationManager.NETWORK_PROVIDER && provider == LocationManager.GPS_PROVIDER) {
-      lastUpdate = d;
-      lastProvider = provider;
-    }
-    l.unlock();
     String toSpeak = "Your Location is: " + address;
     log("speaking out location: " + toSpeak + "\n");
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(toSpeak);
@@ -99,7 +88,7 @@ public class WhereAmIActivity extends BlindroidActivity {
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -29,6 +30,9 @@ public class SOSActivity extends BlindroidActivity {
   // these are non-initialized values
   double latitude = 10000, longitude = 10000;
   final int maxLengthOfAddress = 100;
+  
+  static final String TAG = "bd.SOSActivity";
+
   
   @Override public int getViewId() {
     return R.id.SOS_textview;
@@ -52,6 +56,7 @@ public class SOSActivity extends BlindroidActivity {
       String number = "0529240424";
       // String number = "0543064260"; // Olivier's number
       SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
+      Log.d(TAG, "Sending SOS : " + messageToSend);
       speakOut("SOS message has been sent");
       mHandler.postDelayed(mLaunchTask, 1300);
     }

@@ -7,12 +7,13 @@ import android.view.View;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class MainActivity extends BlindroidActivity {
-  
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.MainActivityView;
   }
   
-  @Override public void onClick(View v) {
+  @Override
+  public void onClick(View v) {
     Intent intent;
     // speakOut(((Button) v).getText().toString());
     switch (v.getId()) {
@@ -47,13 +48,14 @@ public class MainActivity extends BlindroidActivity {
         startActivity(intent);
         break;
       case R.id.read_sms_button:
-        intent = new Intent(MainActivity.this, TalkingSmsList.class);
+        intent = new Intent(MainActivity.this, ReadSmsActivity.class);
         startActivity(intent);
         break;
       case R.id.back_button:
         break;
       case R.id.settings_button:
-        //intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
+        // intent = new Intent(MainActivity.this,
+        // DisplaySettingsActivity.class);
         intent = new Intent(MainActivity.this, DialScreen.class);
         startActivity(intent);
         break;
@@ -68,10 +70,57 @@ public class MainActivity extends BlindroidActivity {
   }
   
   /** Called when the activity is first created. */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);   
+    setContentView(R.layout.activity_main);
+    PhoneNotifications pn = new PhoneNotifications(this);
+    pn.startSignalLisener();
   }
   
-
+  /**
+   * Perform actions when the window get into focus we start the activity by
+   * reading out loud the current title
+   */
+  @Override
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    while (_t.isSpeaking()) {
+      // Wait for message to finish playing and then finish the activity
+    }
+    if (!hasFocus)
+      return;
+    //VoiceNotify();
+  }
+  
+  public void VoiceNotify() {
+    String s = "";
+    PhoneNotifications pn = new PhoneNotifications(this);
+    float batteryLevel = pn.getBatteryLevel();
+    boolean isCharging = pn.getChargerStatus();
+    if (!isCharging && batteryLevel < 0.3)
+      s += " Low Battery! \n";
+    int signalS = PhoneNotifications.getSignalStrength();
+    if (signalS < 2)
+      s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
+    else if (signalS < 5)
+      s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
+    int numOfMissedCalls = pn.getMissedCallsNum();
+    if (numOfMissedCalls > 0) {
+      s += numOfMissedCalls + " missed call";
+      if (numOfMissedCalls > 1)
+        s += "s";
+    }
+    int numOfSms = pn.getUnreadSMS();
+    if (numOfSms > 0)
+      s += numOfSms + " new S M S\n";
+    speakOut(s);
+    while (_t.isSpeaking()) {
+      // Wait for message to finish playing and then finish the activity
+    }
+  }
+  
+  @Override public void onBackPressed() {
+    //do nothing
+  }
 }

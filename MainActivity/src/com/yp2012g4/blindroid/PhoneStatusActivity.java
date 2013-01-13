@@ -2,21 +2,14 @@ package com.yp2012g4.blindroid;
 
 import java.util.ArrayList;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.BatteryManager;
 import android.os.Bundle;
-import android.provider.CallLog;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
+import com.yp2012g4.blindroid.PhoneNotifications.CallData;
+import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -26,83 +19,65 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * @version 1.0
  * @author Amit Yaffe
  * 
+ * @version 1.1
+ * @author Amir Blumental
+ * 
  */
 public class PhoneStatusActivity extends BlindroidActivity {
-  private static final String TAG = "bd:PhoneStatusActivity";
-  
   /**
    * A signal strength listener. Updates _signal between 0-31.
    * 
    * @author Dell
    * 
    */
-  private class SignalStrengthListener extends PhoneStateListener {
-    protected SignalStrengthListener() {
-    }
-    
-    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
-      // get the signal strength (a value between 0 and 31)
-      _signal = signalStrength.getGsmSignalStrength();
-      super.onSignalStrengthsChanged(signalStrength);
-    }
-  }
-  
+  private static final String TAG = "bd:PhoneStatusActivity";
   /**
    * Used to activate the onTouch button reading function.
    */
   static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
-  int _battery = -1; // Battery status
-  int _status = -1; // Charging Status
-  int _signal = -1; // Reception status
-  SignalStrengthListener signalStrengthListener;
+  PhoneNotifications pn;
   final ArrayList<String> contacts = new ArrayList<String>();
+  
+  /**
+   * format the current battery level
+   * 
+   * @return the percentage of the battery
+   */
+  public int getBatteryLevel() {
+    return Float.valueOf(pn.getBatteryLevel() * (float) 100.0).intValue();
+  }
   
   /**
    * Returns the chargeStatus String according to charge status param. Empty
    * string if not charging.
    * 
-   * @param status
    * @return
    */
-  public String getChargeStatus(int status) {
-    switch (status) {
-      case BatteryManager.BATTERY_STATUS_CHARGING:
-      case BatteryManager.BATTERY_STATUS_FULL:
-        return getString(R.string.phoneStatus_message_charging_read);
-      default:
-        return "";
-    }
+  public String getChargeStatus() {
+    if (pn.getChargerStatus())
+      return getString(R.string.phoneStatus_message_charging_read);
+    return "";
   }
   
-  public String getMissedCalls() {
-    final String[] projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.TYPE };
-    final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-    final Cursor c = managedQuery(CallLog.Calls.CONTENT_URI, projection, where, null, null);
+  /**
+   * read the call log of the missed calls
+   */
+  public void getMissedCalls() {
+    ArrayList<CallData> calls = pn.getMissedCallsList();
     String s = "";
-    boolean b = true;
-    while (c.moveToNext()) {
-      final String name = c.getString(1);
-      if (!b)
-        s += " And from ";
-      else
-        b = false;
-      s += name;
+    if (calls.isEmpty())
+      s = "There are no missed calles";
+    else
+      for (CallData c : calls)
+        s += " called At: " + c.getHour() + " ,From: " + c.number + "\n";
+    speakOut(s);
+    while (_t.isSpeaking()) {
+      // Wait for message to finish playing and then finish the activity
     }
-    if (c.getCount() == 0)
-      return "There are no missed calls";
-    return "You have " + c.getCount() + " missed calls from " + s;
   }
   
-  public String getUnreadSMS() {
-    final Uri SMS_INBOX = Uri.parse("content://sms/inbox");
-    final Cursor c = managedQuery(SMS_INBOX, null, "read = 0", null, null);
-    final int unreadMessagesCount = c.getCount();
-    if (unreadMessagesCount == 0)
-      return "There are no unread SMS messages";
-    return "You have " + unreadMessagesCount + " unread SMS";
-  }
-  
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -111,21 +86,19 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public void onClick(View v) {
+  @Override
+  public void onClick(View v) {
     final Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
-        speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(_battery),
-            getChargeStatus(_status)));
+        speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
+            getChargeStatus()));
         break;
       case R.id.button_getReceptionStatus:
-        speakOut(signalToString(_signal));
+        speakOut(signalToString());
         break;
       case R.id.button_getMissedCalls:
-        speakOut(getMissedCalls());
-        break;
-      case R.id.button_getUnreadSMS:
-        speakOut(getUnreadSMS());
+        getMissedCalls();
         break;
       case R.id.back_button:
         speakOut("Previous screen");
@@ -133,7 +106,9 @@ public class PhoneStatusActivity extends BlindroidActivity {
         break;
       case R.id.settings_button:
         speakOut("Settings");
-        final Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        // final Intent intent = new Intent(this,
+        // DisplaySettingsActivity.class);
+        final Intent intent = new Intent(this, IncomingCallActivity.class);
         startActivity(intent);
         break;
       case R.id.home_button:
@@ -151,34 +126,22 @@ public class PhoneStatusActivity extends BlindroidActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
-    init(this, 0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami),
-        getString(R.string.phoneStatus_help));
+    init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
-    // Battery Broadcast receiver.
-    final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-      @Override public void onReceive(Context context, Intent intent) {
-        _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-      }
-    };
-    final IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-    registerReceiver(batteryReceiver, filter);
-    // start the signal strength listener
-    signalStrengthListener = new SignalStrengthListener();
-    ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(signalStrengthListener,
-        PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+    pn = new PhoneNotifications(this);
   }
   
   /**
    * Returns the signal strength in percentage.
    * 
-   * @param signal
    * @return
    */
-  public String signalToString(int signal) {
+  public String signalToString() {
+    int signal = PhoneNotifications.getSignalStrength();
     Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);

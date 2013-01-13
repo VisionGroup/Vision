@@ -7,11 +7,19 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.android.internal.telephony.ITelephony;
 import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
 
+/**
+ * This receiver will activate the IncomingCallActivity when an incoming call
+ * has been detected.
+ * 
+ * @author Amit Yaffe
+ * @version 1.1
+ * 
+ */
 public class IncomingCallReceiver extends BroadcastReceiver {
-  private ITelephony telephonyService;
+  // private ITelephony telephonyService;
+  // private static boolean rang = false;
   /*
    * private ArrayList<String> blackList = new ArrayList<String>(); private
    * DBAdapter dbHelper; private Context ct; private boolean reject = false;
@@ -28,11 +36,12 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
-      // processIncomingCall(intent, context);
+      // rang = true;
+      processIncomingCall(context, phonenumber);
     }
   }
   
-  private void processIncomingCall(Intent intent, Context context) {
+  @SuppressWarnings("static-method") private void processIncomingCall(Context context, String phonenumber) {
     // final TelephonyManager telMan = (TelephonyManager)
     // context.getSystemService(Context.TELEPHONY_SERVICE);
     try {
@@ -46,6 +55,8 @@ public class IncomingCallReceiver extends BroadcastReceiver {
 //      telephonyService.endCall();
       Log.d(TAG, "Creatin IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);
+      i.putExtra(CallUtils.RANG_KEY, true);
+      i.putExtra(CallUtils.INCOING_NUMBER_KEY, phonenumber);
       i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       Log.d(TAG, "Starting IncomingCAllActivity");
       context.startActivity(i);

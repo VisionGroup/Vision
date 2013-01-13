@@ -30,9 +30,9 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     final Bundle bundle = intent.getExtras();
     if (null == bundle)
       return;
-    Log.i("IncomingCallReceiver", bundle.toString());
+    Log.d(TAG, bundle.toString());
     final String state = bundle.getString(TelephonyManager.EXTRA_STATE);
-    Log.i("IncomingCallReceiver", "State: " + state);
+    Log.d(TAG, "State: " + state);
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);

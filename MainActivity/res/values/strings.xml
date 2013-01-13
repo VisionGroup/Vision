@@ -39,18 +39,18 @@
     <string name="phoneStatus_help">You can press one of two buttons to get Battery level and charge status and to get Reception status.</string>
     <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
     <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
-    <string name="phoneStatus_message_noSignal_read">No Signal.</string>
-    <string name="phoneStatus_message_veryGoodSignal_read">Signal is very good.</string>
-    <string name="phoneStatus_message_goodSignal_read">Signal is good.</string>
-    <string name="phoneStatus_message_poorSignal_read">Signal is poor.</string>
-    <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor.</string>
+    <string name="phoneStatus_message_noSignal_read">No Signal</string>
+    <string name="phoneStatus_message_veryGoodSignal_read">Signal is very good</string>
+    <string name="phoneStatus_message_goodSignal_read">Signal is good</string>
+    <string name="phoneStatus_message_poorSignal_read">Signal is poor</string>
+    <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor</string>
     <string name="phoneStatus_wai_Main">Phone Status</string>
     <string name="phoneStatus_help_Main">Press Battery for battery status. Press Reception for reception status.</string>
     <string name="phoneStatus_message_charging_read">Charging</string>
-   	<string name="IncomingCall_whereami">Incoming Call Menu</string>
-   	<string name="IncomingCall_button_Answer_read">Answer</string>
-   	<string name="IncomingCall_button_Reject_read">Reject</string>
-   	<string name="IncomingCall_help">You can either reject or answer the call.</string>
+    <string name="IncomingCall_whereami">Incoming Call Menu</string>
+    <string name="IncomingCall_button_Answer_read">Answer</string>
+    <string name="IncomingCall_button_Reject_read">Reject</string>
+    <string name="IncomingCall_help">You can either reject or answer the call.</string>
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     <string name="ClockTitle">Speaking clock</string>
     <string name="emptyHour">hh:mm:ss</string>
@@ -122,5 +122,8 @@
     <string name="delete_button_read">undo</string>
     <string name="reset_button_read">reset</string>
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
+    <string name="title_activity_read_sms">ReadSmsActivity</string>
+    <string name="next_message">Next message</string>
+    <string name="previous_message">previous message</string>
 
 </resources>

@@ -1,15 +1,14 @@
 package com.yp2012g4.blindroid;
 
 
-import com.yp2012g4.blindroid.customUI.TalkingButton;
-import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
-import com.yp2012g4.blindroid.tools.BlindroidActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
+
+import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class DialScreen extends BlindroidActivity {
   
@@ -45,8 +44,8 @@ public class DialScreen extends BlindroidActivity {
       read_number = read_number.substring(0, Math.max(0,read_number.length()-2));
     }
     if (((View)(v.getParent().getParent())).getId() == R.id.DialScreenNumbers) {
-      dialed_number += ((TalkingButton)v).getText().toString();
-      read_number = read_number + ((TalkingButton)v).getText().toString() + " ";
+      dialed_number += ((TalkingButton)v).getReadText();
+      read_number = read_number + ((TalkingButton)v).getReadText() + " ";
     }
     ((TalkingButton)findViewById(R.id.number)).setText(
         dialed_number.toCharArray(), 0, dialed_number.length());

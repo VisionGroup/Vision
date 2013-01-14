@@ -34,7 +34,7 @@ public class ThemeSettingsActivity extends BlindroidActivity {
   @Override public void onClick(View v) {
     Intent intent = new Intent(ThemeSettingsActivity.this, MainActivity.class);
     if (v instanceof TalkingButton)
-      speakOut(((TalkingButton) v).getText().toString());
+      speakOut(((TalkingButton) v).getReadText());
     switch (v.getId()) {
       case R.id.Small_text_size_button:
         DisplaySettings.THEME = "SMALL";

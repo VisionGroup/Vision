@@ -123,7 +123,7 @@ public class IncomingCallActivity extends BlindroidActivity {
       // TODO Auto-generated constructor stub
     }
     
-    @SuppressWarnings("synthetic-access") @Override public void onCallStateChanged(int state, String inNumber) {
+    @Override public void onCallStateChanged(int state, String inNumber) {
       if (state == TelephonyManager.CALL_STATE_IDLE && rang == Boolean.TRUE) {
         Log.d(TAG, "Ending Activity because " + stateName(state));
         rang = Boolean.FALSE;

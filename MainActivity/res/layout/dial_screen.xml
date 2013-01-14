@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/DialScreen"
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:contentDescription="@string/dial_screen"
     android:orientation="vertical" >
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -23,181 +24,192 @@
             android:paddingLeft="40dp"
             android:paddingTop="20dp"
             android:textStyle="bold" />
-        
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/DialScreenNumbers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/DialScreenNumbers" >
-        
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:orientation="vertical" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit1"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/digit1"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
-        
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit2"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            android:text="@string/digit2"
-            style="?textAppearance"  />
-         
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit3"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/digit3"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit1"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit1"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit1" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit2"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit2"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit2" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit3"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit3"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit4"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit4"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit4" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit5"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit5"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit5" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit6"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit6"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit7"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit7"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit7" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit8"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit8"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit8" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit9"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit9"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit9" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/asterisk"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/asterisk"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/asterisk" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/digit0"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/digit0"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/digit0" />
+
+            <com.yp2012g4.blindroid.customUI.TalkingButton
+                android:id="@+id/numberSign"
+                style="?textAppearance"
+                android:layout_width="0dip"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:text="@string/number_sign"
+                android:textSize="56sp"
+                android:textStyle="bold"
+                app:ReadText="@string/number_sign" />
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit4"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/digit4"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
-        
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit5"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            android:text="@string/digit5"
-            style="?textAppearance"  />
-         
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit6"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/digit6"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit7"
-            style="?textAppearance"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/digit7"
-            android:textSize="56sp"
-            android:textStyle="bold" />
-        
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit8"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            android:text="@string/digit8"
-            style="?textAppearance"  />
-         
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit9"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/digit9"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/asterisk"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/asterisk"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
-        
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/digit0"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            android:text="@string/digit0"
-            style="?textAppearance"  />
-         
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/numberSign"
-            android:layout_width="0dip"
-            android:layout_height="62dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/number_sign"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            style="?textAppearance"  />
-    </LinearLayout>
-     </LinearLayout>
-
-    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -210,8 +222,8 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_button"
-            android:contentDescription="@string/delete_button_read" />
-        
+            app:ReadText="@string/delete_button_read" />
+
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_reset"
@@ -221,28 +233,29 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/reset_button"
-            android:contentDescription="@string/reset_button_read" />
-        
-         <com.yp2012g4.blindroid.customUI.TalkingButton
-             android:id="@+id/OK_button"
-             style="?textAppearance"
-             android:layout_width="0dip"
-             android:layout_height="62dp"
-             android:layout_weight="1"
-             android:background="@android:color/transparent"
-             android:scaleType="fitCenter"
-             android:text="@string/OK_button"
-             android:textSize="56sp"
-             android:textStyle="bold" />
+            app:ReadText="@string/reset_button_read" />
 
+        <com.yp2012g4.blindroid.customUI.TalkingButton
+            android:id="@+id/OK_button"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/OK_button"
+            android:textSize="56sp"
+            android:textStyle="bold"
+            app:ReadText="@string/OK_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom" >
-		<include layout="@layout/control_bar_view"/>
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
     </LinearLayout>
 
 </LinearLayout>

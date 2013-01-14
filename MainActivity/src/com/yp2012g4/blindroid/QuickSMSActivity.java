@@ -20,13 +20,12 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * @version 1.0
  */
 public class QuickSMSActivity extends BlindroidActivity {
-  TalkingButton b;
   
   @Override public int getViewId() {
     return R.id.QuickSMSActivity;
   }
   
-  @SuppressWarnings("boxing") @Override public void onClick(View v) {
+  @Override public void onClick(View v) {
     final View view = v;
     if (v instanceof TalkingButton) {
       final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -35,7 +34,7 @@ public class QuickSMSActivity extends BlindroidActivity {
       alertDialog.setMessage("will send the SMS to the chosen contact");
       alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
         @Override public void onClick(DialogInterface dialog, int which) {
-          String messageToSend = ((TalkingButton) view).getText().toString();
+          String messageToSend = ((TalkingButton) view).getReadText();
           String number = "0544457141";
           SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
           speakOut("Message has been sent");
@@ -47,7 +46,7 @@ public class QuickSMSActivity extends BlindroidActivity {
           alertDialog.dismiss();
         }
       });
-      speakOut("Sending" + ((TalkingButton) v).getText().toString());
+      speakOut("Sending" + ((TalkingButton) v).getReadText());
       while (_t.isSpeaking()) {
         // wait...
       }
@@ -82,12 +81,6 @@ public class QuickSMSActivity extends BlindroidActivity {
     mHandler = new Handler();
   }
   
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Quick SMS screen");
-    }
-  }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.

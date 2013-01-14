@@ -47,7 +47,7 @@ public class ColorSettingsActivity extends BlindroidActivity {
   @Override public void onClick(View v) {
     Intent intent = new Intent(ColorSettingsActivity.this, MainActivity.class);
     if (v instanceof TalkingButton)
-      speakOut(((TalkingButton) v).getText().toString());
+      speakOut(((TalkingButton) v).getReadText());
     switch (v.getId()) {
       case R.id.WhiteBlack:
         changeSettings(R.color.WHITE, R.color.BLACK);

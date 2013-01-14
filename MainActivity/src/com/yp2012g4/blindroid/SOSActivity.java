@@ -90,11 +90,6 @@ public class SOSActivity extends BlindroidActivity {
     l = new ReentrantLock();
   }
   
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus)
-      speakOut("SOS screen");
-  }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.

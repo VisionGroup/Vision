@@ -1,6 +1,5 @@
 package com.yp2012g4.blindroid.tools;
 
-import java.util.Calendar;
 import android.content.Context;
 import android.os.Handler;
 import android.view.GestureDetector;

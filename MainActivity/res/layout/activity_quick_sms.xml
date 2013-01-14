@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/QuickSMSActivity"
+    style="?backgroundColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    style="?backgroundColor" >
+    android:contentDescription="@string/quick_sms_screen"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +14,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_1"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_1"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_1" />
     </LinearLayout>
 
     <LinearLayout
@@ -27,13 +30,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_2"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_2"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_2" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,13 +46,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_3"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_3"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_3" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,13 +62,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_4"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_4"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_4" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,13 +78,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_5"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_5"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_5" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,13 +94,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_6"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_6"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_6" />
     </LinearLayout>
 
     <LinearLayout
@@ -102,13 +110,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_7"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_7"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_7" />
     </LinearLayout>
 
     <LinearLayout
@@ -117,13 +126,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_8"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_8"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_8" />
     </LinearLayout>
 
     <LinearLayout
@@ -132,21 +142,23 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_9"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_9"
-            style="?textAppearance" />
+            app:ReadText="@string/SMS_number_9" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom" >
-		<include layout="@layout/control_bar_view"/>
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
     </LinearLayout>
 
 </LinearLayout>

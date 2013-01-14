@@ -37,7 +37,7 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    */
   @Override public void onClick(View v) {
     if (v instanceof TalkingImageButton)
-      speakOut(((TalkingImageButton) v).getContentDescription().toString());
+      speakOut(((TalkingImageButton) v).getReadText());
     Intent intent = new Intent(DisplaySettingsActivity.this, MainActivity.class);
     switch (v.getId()) {
       case R.id.button_set_colors:

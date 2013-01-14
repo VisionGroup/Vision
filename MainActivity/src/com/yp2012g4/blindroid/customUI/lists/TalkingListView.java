@@ -1,11 +1,7 @@
 package com.yp2012g4.blindroid.customUI.lists;
 
-import com.yp2012g4.blindroid.tools.MultiFingerGestureDetector;
-import com.yp2012g4.blindroid.tools.MultiTouchRun;
-
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +11,9 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import com.yp2012g4.blindroid.tools.MultiFingerGestureDetector;
+import com.yp2012g4.blindroid.tools.MultiTouchRun;
 
 /**
  * Extension of ListView with different gestures

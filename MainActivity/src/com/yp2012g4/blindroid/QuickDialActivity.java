@@ -30,6 +30,7 @@ public class QuickDialActivity extends BlindroidActivity {
     return R.id.QuickDialActivity;
   }
   
+  @SuppressWarnings("boxing")
   @Override public void onClick(View v) {
     if (v instanceof TalkingButton) {
       speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
@@ -111,13 +112,6 @@ public class QuickDialActivity extends BlindroidActivity {
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.activity_quick_dial);
-  }
-  
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Quick dial screen");
-    }
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

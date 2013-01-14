@@ -30,10 +30,9 @@ public class QuickDialActivity extends BlindroidActivity {
     return R.id.QuickDialActivity;
   }
   
-  @SuppressWarnings("boxing")
-  @Override public void onClick(View v) {
+  @SuppressWarnings("boxing") @Override public void onClick(View v) {
     if (v instanceof TalkingButton) {
-      speakOut("Dialing to" + ((TalkingButton) v).getText().toString());
+      speakOut("Dialing to" + ((TalkingButton) v).getReadText());
       while (_t.isSpeaking() == Boolean.TRUE) {
         // Wait...
       }
@@ -64,47 +63,10 @@ public class QuickDialActivity extends BlindroidActivity {
           break;
         case R.id.Contact_number_9:
           break;
-        case R.id.settings_button:
-          speakOut("Settings");
-          Intent intent = new Intent(this, ThemeSettingsActivity.class);
-          startActivity(intent);
-          break;
-        case R.id.back_button:
-          speakOut("Previous screen");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.home_button:
-          speakOut("Home");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.current_menu_button:
-          speakOut("This is " + getString(R.string.title_activity_quick_dial));
-          break;
-        default:
-          break;
       }
     }
     if (v instanceof TalkingImageButton)
-      switch (v.getId()) {
-        case R.id.back_button:
-          speakOut("Previous screen");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.settings_button:
-          speakOut("Settings");
-          Intent intent = new Intent(this, DisplaySettingsActivity.class);
-          startActivity(intent);
-          break;
-        case R.id.home_button:
-          speakOut("Home");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.current_menu_button:
-          speakOut("This is " + getString(R.string.title_activity_quick_dial));
-          break;
-        default:
-          break;
-      }
+      super.onClick(v);
   }
   
   // private static final int NUM_OF_QUICK_DIALS = 9;

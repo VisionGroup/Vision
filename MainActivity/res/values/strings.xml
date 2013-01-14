@@ -124,6 +124,10 @@
     <string name="quick_sms_screen">Quick SMS screen</string>
     <string name="quick_dial_screen">Quick dial screen</string>
     <string name="sos_screen">SOS screen</string>
+    <string name="color_settings_screen">Color settings screen</string>
+    <string name="display_settings_screen">Display settings screen</string>
+    <string name="theme_settings_screen">Theme settings screen</string>
+    <string name="read_sms_screen">Read sms screen</string>
     <string name="whereami_whereami">Where Am I</string>
     <string name="whereami_help">You will be told your location.</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>

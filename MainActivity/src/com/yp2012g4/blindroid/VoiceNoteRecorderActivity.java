@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 import com.yp2012g4.blindroid.tools.fileUtils;
 import com.yp2012g4.blindroid.tools.fileUtils.TYPES;
@@ -27,7 +26,6 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_voice_note_recorder);
     _setAudio();
- 
   }
   
   private void _setAudio() {
@@ -45,35 +43,21 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity {
   }
   
   @Override public void onClick(View v) {
-    if (v instanceof TalkingImageButton)
-      // speakOut("Dialing to" + ((TalkingButton)
-      // v).getText().toString());
-      switch (v.getId()) {
-        case R.id.button_prevNote:
-          _prevNote();
-          break;
-        case R.id.button_nextNote:
-          _nextNote();
-          break;
-        case R.id.button_playStop:
-          _playStop();
-          break;
-        case R.id.button_recordStop:
-          _recordStop();
-          break;
-        case R.id.current_menu_button:
-          speakOut("Next");
-          break;
-        case R.id.settings_button:
-          speakOut("Settings");
-          break;
-        case R.id.back_button:
-          speakOut("Back");
-          finish();
-          break;
-        default:
-          break;
-      }
+    super.onClick(v);
+    switch (v.getId()) {
+      case R.id.button_prevNote:
+        _prevNote();
+        break;
+      case R.id.button_nextNote:
+        _nextNote();
+        break;
+      case R.id.button_playStop:
+        _playStop();
+        break;
+      case R.id.button_recordStop:
+        _recordStop();
+        break;
+    }
   }
   
   @SuppressWarnings("unused") private void _loadNoteList() {

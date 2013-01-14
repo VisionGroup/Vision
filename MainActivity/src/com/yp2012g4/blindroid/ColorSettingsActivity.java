@@ -14,7 +14,6 @@ import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class ColorSettingsActivity extends BlindroidActivity {
-  
   /**
    * set the text and background colors for the entire application
    * 
@@ -35,12 +34,11 @@ public class ColorSettingsActivity extends BlindroidActivity {
     return R.id.ColorSettingsActivity;
   }
   
-  
   /**
    * Adds onClick events to buttons in this view.
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
-   *
+   * 
    * @param v
    *          - a View object on the screen
    */
@@ -86,7 +84,7 @@ public class ColorSettingsActivity extends BlindroidActivity {
         speakOut("This is " + getString(R.string.title_activity_color_settings));
         return;
       default:
-        break;
+        super.onClick(v);
     }
     mHandler.postDelayed(mLaunchTask, 1000);
   }
@@ -97,15 +95,5 @@ public class ColorSettingsActivity extends BlindroidActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
-  }
-  
-  /**
-   * Read the activity's name when activity becomes visible.
-   */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Color Settings screen");
-    }
   }
 }

@@ -14,7 +14,6 @@ import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class ThemeSettingsActivity extends BlindroidActivity {
-  
   /**
    * get the activity's main view ID
    * 
@@ -22,12 +21,12 @@ public class ThemeSettingsActivity extends BlindroidActivity {
   @Override public int getViewId() {
     return R.id.ThemeSettingsActivity;
   }
- 
+  
   /**
    * Adds onClick events to buttons in this view.
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
-   *
+   * 
    * @param v
    *          - a View object on the screen
    */
@@ -67,7 +66,7 @@ public class ThemeSettingsActivity extends BlindroidActivity {
         speakOut("This is " + getString(R.string.title_activity_theme_settings));
         break;
       default:
-        break;
+        super.onClick(v);
     }
   }
   
@@ -77,15 +76,5 @@ public class ThemeSettingsActivity extends BlindroidActivity {
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
-  }
-  
-  /**
-   * Read the activity's name when activity becomes visible.
-   */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Theme settings screen");
-    }
   }
 }

@@ -2,7 +2,6 @@ package com.yp2012g4.blindroid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsManager;
@@ -20,7 +19,6 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * @version 1.0
  */
 public class QuickSMSActivity extends BlindroidActivity {
-  
   @Override public int getViewId() {
     return R.id.QuickSMSActivity;
   }
@@ -53,26 +51,7 @@ public class QuickSMSActivity extends BlindroidActivity {
       alertDialog.show();
     }
     if (v instanceof TalkingImageButton)
-      switch (v.getId()) {
-        case R.id.settings_button:
-          speakOut("Settings");
-          Intent intent = new Intent(this, DisplaySettingsActivity.class);
-          startActivity(intent);
-          break;
-        case R.id.back_button:
-          speakOut("Previous screen");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.home_button:
-          speakOut("Home");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.current_menu_button:
-          speakOut("This is " + getString(R.string.title_activity_quick_sms));
-          break;
-        default:
-          break;
-      }
+      super.onClick(v);
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +59,6 @@ public class QuickSMSActivity extends BlindroidActivity {
     setContentView(R.layout.activity_quick_sms);
     mHandler = new Handler();
   }
-  
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.

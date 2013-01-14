@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,49 +29,42 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amir
  * @version 1.0
  */
-public abstract class onTouchEventClass extends Activity implements OnTouchListener, OnClickListener, TextToSpeech.OnInitListener/*, OnGestureListener*/ {
-  
+public abstract class onTouchEventClass extends Activity implements OnTouchListener, OnClickListener, TextToSpeech.OnInitListener/*
+                                                                                                                                  * ,
+                                                                                                                                  * OnGestureListener
+                                                                                                                                  */{
   float accurateX;
   float accurateY;
   
-/*  @Override public boolean onDown(MotionEvent e) {
-   
-    return true;
-  }
+  /*
+   * @Override public boolean onDown(MotionEvent e) {
+   * 
+   * return true; }
+   * 
+   * @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float
+   * velocityX, float velocityY) { // TODO Auto-generated method stub return
+   * false; }
+   * 
+   * @Override public void onLongPress(MotionEvent e) { // TODO Auto-generated
+   * method stub
+   * 
+   * }
+   * 
+   * @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float
+   * distanceX, float distanceY) { // TODO Auto-generated method stub return
+   * false; }
+   * 
+   * @Override public void onShowPress(MotionEvent e) { // TODO Auto-generated
+   * method stub
+   * 
+   * }
+   * 
+   * @Override public boolean onSingleTapUp(MotionEvent e) { // TODO
+   * Auto-generated method stub Log.i("MyLog" , "ENTERED!!!!!!!!!!!!!!!!!!!");
+   * //onClick(last_view); return true; }
+   */
 
-  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override public void onLongPress(MotionEvent e) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override public void onShowPress(MotionEvent e) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    // TODO Auto-generated method stub
-    Log.i("MyLog" , "ENTERED!!!!!!!!!!!!!!!!!!!");
-    //onClick(last_view);
-    return true;
-  }*/
-
-
-  @Override public void onClick(View arg0) {
-    // TODO Auto-generated method stub
-    
-  }
-
+  
   /**
    * Stores the dimensions of a button
    */
@@ -90,7 +82,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    */
   protected View last_view;
   public boolean flag = true;
-  
   /**
    * Stores the view we have moved to
    */
@@ -107,35 +98,31 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   protected TalkingImageButton settings;
   protected TalkingImageButton wai;
   protected TalkingImageButton home;
-  
-  GestureDetector gestureDetector;
+//  GestureDetector gestureDetector;
   /**
    * Mapping from buttons to their locations on screen
    */
   private Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
   private Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
-  private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
   
-  public Map<TalkingButton, Rect> getButton_to_rect() {
-    return button_to_rect;
-  }
-  
-  public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
-    return imageButton_to_rect;
-  }
-  
+//  private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+  /**
+   * In this overridden function we gather the buttons positions of the current
+   * activity and make them all listen to onTouch and onClick.
+   * 
+   * @param hasFocus
+   *          indicates whether a window has the focus
+   */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     ViewGroup mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(mainView);
     DisplaySettings.applyButtonSettings(imageButton_to_rect.keySet(), mainView);
-    for (Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
-      entry.getKey().setOnClickListener(this);
-      entry.getKey().setOnTouchListener(this);
-    }
-    for (Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
-      entry.getKey().setOnClickListener(this);
-      entry.getKey().setOnTouchListener(this);
+    for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
+      if (entry.getKey() instanceof TalkingButton || entry.getKey() instanceof TalkingImageButton) {
+        entry.getKey().setOnClickListener(this);
+        entry.getKey().setOnTouchListener(this);
+      }
     }
     // reads layout description out loud
     if (hasFocus && findViewById(getViewId()).getContentDescription() != null)
@@ -143,7 +130,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   }
   
   /**
-   * This method returns the Id of a view
+   * This is an abstract method which returns the Id of a view
    * 
    * @return Id of the current view
    */
@@ -174,7 +161,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     if (event.getAction() == MotionEvent.ACTION_UP) {
       Log.i("MyLog", "ACTION UP");
       last_view = getView(accurateX, accurateY);
-//      flag = false;
       onActionUp(last_view);
     }
     // gestureDetector.setOnDoubleTapListener(this);
@@ -182,10 +168,18 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     return false;
   }
   
+  /**
+   * return a button text (after upcasting the given view to the appropriate
+   * button type)
+   * 
+   * @param v
+   *          the view which is upcasted to one of the buttons types (if it's a
+   *          button)
+   * @return the button text to be read
+   */
   public static String textToRead(View v) {
     return ((v instanceof TalkingButton) ? ((TalkingButton) v).getReadText() : ((TalkingImageButton) v).getReadText());
   }
-  
   
   /**
    * This method defined the behavior when the user stops touching the screen
@@ -225,8 +219,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     DisplaySettings.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     mHandler = new Handler();
-
-   // gestureDetector = new GestureDetector(this);
+    // gestureDetector = new GestureDetector(this);
   }
   
   /**
@@ -238,7 +231,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   public void getButtonsPosition(View v) {
     rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
     if (v instanceof TalkingButton) {
-      button_to_rect.put((TalkingButton) v, rect);
       view_to_rect.put(v, rect);
       return;
     }
@@ -250,8 +242,9 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
       // ignoring these view types
       return;
     ViewGroup vg = (ViewGroup) v;
-    for (int i = 0; i < vg.getChildCount(); i++)
+    for (int i = 0; i < vg.getChildCount(); i++) {
       getButtonsPosition(vg.getChildAt(i));
+    }
     return;
   }
   
@@ -297,7 +290,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    */
   private View getView(float x, float y) {
     for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
-//      Log.i("MyLog", "Button:     Left = " + entry.getValue().left + "  ;  Top = " + entry.getValue().top);
       if (entry.getValue().contains((int) x, (int) y))
         return (entry.getKey());
     }

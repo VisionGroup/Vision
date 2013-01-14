@@ -4,7 +4,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -58,28 +57,11 @@ public class SOSActivity extends BlindroidActivity {
   };
   
   @Override public void onClick(View v) {
+    super.onClick(v);
     switch (v.getId()) {
       case R.id.Send_SOS_Message:
         speakOut("Sending SOS message");
         mHandler.postDelayed(sendSOSMessage, 5000);
-        break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        Intent intent = new Intent(this, DisplaySettingsActivity.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_sos));
-        break;
-      default:
         break;
     }
   }
@@ -89,7 +71,6 @@ public class SOSActivity extends BlindroidActivity {
     setContentView(R.layout.activity_sos);
     l = new ReentrantLock();
   }
-  
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.

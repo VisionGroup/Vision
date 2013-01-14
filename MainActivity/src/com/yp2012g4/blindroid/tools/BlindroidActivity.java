@@ -1,11 +1,15 @@
 package com.yp2012g4.blindroid.tools;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.yp2012g4.blindroid.DisplaySettingsActivity;
+import com.yp2012g4.blindroid.R;
 
 /*
  * TODO: Code review More documentation
@@ -48,8 +52,44 @@ public abstract class BlindroidActivity extends onTouchEventClass {
     _toolTip = toolTip;
   }
   
-  @Override public void onClick(View arg0) {
-    // TODO Auto-generated method stub
+  /**
+   * Dealing control bar on clicks
+   */
+  @Override public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.settings_button:
+        speakOut("Settings");
+//        Log.i("MyLog",findViewById(getViewId()).getContentDescription().toString());
+        if (isSettingsScreen()) {
+          speakOut("you are in settings screen");
+          break;
+        }
+        Intent intent = new Intent(this, DisplaySettingsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.home_button:
+        speakOut("Home");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      case R.id.current_menu_button:
+        speakOut("This is " + findViewById(getViewId()).getContentDescription().toString());
+        break;
+      default:
+        break;
+    }
+  }
+  
+  private boolean isSettingsScreen() {
+    String s = findViewById(getViewId()).getContentDescription().toString();
+    
+    if (s.equals("Color settings screen") || s.equals("Display settings screen") || s.equals("Theme settings screen")) {
+      return true;
+    }
+    return false;
   }
   
   @Override public int getViewId() {

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/ColorSettingsActivity"
     style="?backgroundColor"
+    android:contentDescription="@string/color_settings_screen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >

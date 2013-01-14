@@ -5,6 +5,7 @@
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:contentDescription="@string/read_sms_screen"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -62,9 +63,9 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            app:ReadText="@string/previous_message"
             android:scaleType="fitCenter"
-            android:src="@drawable/back_button" />
+            android:src="@drawable/back_button"
+            app:ReadText="@string/previous_message" />
 
         <com.yp2012g4.blindroid.customUI.TalkingImageButton
             android:id="@+id/sms_next"
@@ -72,9 +73,9 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            app:ReadText="@string/next_message"
             android:scaleType="fitCenter"
-            android:src="@drawable/next_button" />
+            android:src="@drawable/next_button"
+            app:ReadText="@string/next_message" />
     </LinearLayout>
 
     <LinearLayout

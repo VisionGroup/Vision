@@ -3,15 +3,12 @@ package com.yp2012g4.blindroid;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.view.Menu;
 import android.view.View;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -31,13 +28,14 @@ public class ReadSmsActivity extends BlindroidActivity {
   
   @Override public void onClick(View v) {
     Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    super.onClick(v);
     switch (v.getId()) {
       case R.id.sms_next:
         if (currentMessage < messages.size()) {
           currentMessage++;
           setMessage();
           speakOut("message number " + (currentMessage + 1));
-        }else{
+        } else {
           speakOut("no more messages");
         }
         vb.vibrate(150);
@@ -47,49 +45,21 @@ public class ReadSmsActivity extends BlindroidActivity {
           currentMessage--;
           setMessage();
           speakOut("message number " + (currentMessage + 1));
-        }else{       
+        } else {
           speakOut("no more messages");
         }
         vb.vibrate(150);
         break;
     }
-    if (v instanceof TalkingImageButton)
-      switch (v.getId()) {
-        case R.id.settings_button:
-          speakOut("Settings");
-          Intent intent = new Intent(this, DisplaySettingsActivity.class);
-          startActivity(intent);
-          break;
-        case R.id.back_button:
-          speakOut("Previous screen");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.home_button:
-          speakOut("Home");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.current_menu_button:
-          speakOut("This is " + getString(R.string.title_activity_read_sms));
-          break;
-        default:
-          break;
-      }
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
-    mHandler = new Handler();
+//    mHandler = new Handler();
     SmsReader smsReader = new SmsReader(getApplicationContext());
     messages = smsReader.getIncomingMessages();
     setMessage();
-  }
-  
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Read sms screen");
-    }
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,6 +82,6 @@ public class ReadSmsActivity extends BlindroidActivity {
   }
   
   @Override public void onBackPressed() {
-    //do nothing
+    // do nothing
   }
 }

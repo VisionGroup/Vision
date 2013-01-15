@@ -51,6 +51,7 @@
     <string name="IncomingCall_help">You can either reject or answer the call.</string>
     <string name="title_activity_phone_status">PhoneStatusActivity</string>
     <string name="ClockTitle">Speaking clock</string>
+    <string name="MainTitle">Main screen</string>
     <string name="emptyHour">hh:mm:ss</string>
     <string name="back_button">Back</string>
     <string name="home_button">Home</string>
@@ -115,14 +116,22 @@
     <string name="digit0">0</string>
     <string name="asterisk">*</string>
     <string name="number_sign">#</string>
-    <string name="dial_screen">Dial Screen</string> 
+    <string name="dial_screen">Dial Screen</string>
     <string name="OK_button">OK</string>
     <string name="delete_button_read">undo</string>
     <string name="reset_button_read">reset</string>
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
+    <string name="quick_sms_screen">Quick SMS screen</string>
+    <string name="quick_dial_screen">Quick dial screen</string>
+    <string name="sos_screen">SOS screen</string>
+    <string name="color_settings_screen">Color settings screen</string>
+    <string name="display_settings_screen">Display settings screen</string>
+    <string name="theme_settings_screen">Theme settings screen</string>
+    <string name="read_sms_screen">Read sms screen</string>
     <string name="whereami_whereami">Where Am I</string>
     <string name="whereami_help">You will be told your location.</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>
     <string name="next_message">Next message</string>
     <string name="previous_message">previous message</string>
+
 </resources>

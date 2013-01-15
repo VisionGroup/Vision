@@ -76,8 +76,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
     }
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -86,8 +85,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     final Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
@@ -100,34 +98,25 @@ public class PhoneStatusActivity extends BlindroidActivity {
       case R.id.button_getMissedCalls:
         getMissedCalls();
         break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
       case R.id.settings_button:
         speakOut("Settings");
         // final Intent intent = new Intent(this,
         // DisplaySettingsActivity.class);
         final Intent intent = new Intent(this, IncomingCallActivity.class);
         startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.phoneStatus_whereami));
+        // TODO the settings button should call DisplaySettingsActivity. Need to
+        // delete these lines (already in super class) after changing back to
+        // DisplaySettingsActivity
         break;
       default:
-        break;
+        super.onClick(v);
     }
   }
   
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));

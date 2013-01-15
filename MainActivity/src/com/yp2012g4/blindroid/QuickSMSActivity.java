@@ -2,7 +2,6 @@ package com.yp2012g4.blindroid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsManager;
@@ -20,13 +19,11 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * @version 1.0
  */
 public class QuickSMSActivity extends BlindroidActivity {
-  TalkingButton b;
-  
   @Override public int getViewId() {
     return R.id.QuickSMSActivity;
   }
   
-  @SuppressWarnings("boxing") @Override public void onClick(View v) {
+  @Override public void onClick(View v) {
     final View view = v;
     if (v instanceof TalkingButton) {
       final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -35,7 +32,7 @@ public class QuickSMSActivity extends BlindroidActivity {
       alertDialog.setMessage("will send the SMS to the chosen contact");
       alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
         @Override public void onClick(DialogInterface dialog, int which) {
-          String messageToSend = ((TalkingButton) view).getText().toString();
+          String messageToSend = ((TalkingButton) view).getReadText();
           String number = "0544457141";
           SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
           speakOut("Message has been sent");
@@ -47,46 +44,20 @@ public class QuickSMSActivity extends BlindroidActivity {
           alertDialog.dismiss();
         }
       });
-      speakOut("Sending" + ((TalkingButton) v).getText().toString());
+      speakOut("Sending" + ((TalkingButton) v).getReadText());
       while (_t.isSpeaking()) {
         // wait...
       }
       alertDialog.show();
     }
     if (v instanceof TalkingImageButton)
-      switch (v.getId()) {
-        case R.id.settings_button:
-          speakOut("Settings");
-          Intent intent = new Intent(this, DisplaySettingsActivity.class);
-          startActivity(intent);
-          break;
-        case R.id.back_button:
-          speakOut("Previous screen");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.home_button:
-          speakOut("Home");
-          mHandler.postDelayed(mLaunchTask, 1000);
-          break;
-        case R.id.current_menu_button:
-          speakOut("This is " + getString(R.string.title_activity_quick_sms));
-          break;
-        default:
-          break;
-      }
+      super.onClick(v);
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
     mHandler = new Handler();
-  }
-  
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Quick SMS screen");
-    }
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

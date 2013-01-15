@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -32,7 +29,42 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * @author Amir
  * @version 1.0
  */
-public abstract class onTouchEventClass extends Activity implements OnTouchListener, OnClickListener, TextToSpeech.OnInitListener {
+public abstract class onTouchEventClass extends Activity implements OnTouchListener, OnClickListener, TextToSpeech.OnInitListener/*
+                                                                                                                                  * ,
+                                                                                                                                  * OnGestureListener
+                                                                                                                                  */{
+  float accurateX;
+  float accurateY;
+  
+  /*
+   * @Override public boolean onDown(MotionEvent e) {
+   * 
+   * return true; }
+   * 
+   * @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float
+   * velocityX, float velocityY) { // TODO Auto-generated method stub return
+   * false; }
+   * 
+   * @Override public void onLongPress(MotionEvent e) { // TODO Auto-generated
+   * method stub
+   * 
+   * }
+   * 
+   * @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float
+   * distanceX, float distanceY) { // TODO Auto-generated method stub return
+   * false; }
+   * 
+   * @Override public void onShowPress(MotionEvent e) { // TODO Auto-generated
+   * method stub
+   * 
+   * }
+   * 
+   * @Override public boolean onSingleTapUp(MotionEvent e) { // TODO
+   * Auto-generated method stub Log.i("MyLog" , "ENTERED!!!!!!!!!!!!!!!!!!!");
+   * //onClick(last_view); return true; }
+   */
+
+  
   /**
    * Stores the dimensions of a button
    */
@@ -49,6 +81,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    * Stores last view when ACTION_UP
    */
   protected View last_view;
+  public boolean flag = true;
   /**
    * Stores the view we have moved to
    */
@@ -56,7 +89,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   /**
    * For inserting delays...
    */
-  protected Handler mHandler;
+  public Handler mHandler;
   /**
    * Back button in each activity
    */
@@ -65,42 +98,31 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   protected TalkingImageButton settings;
   protected TalkingImageButton wai;
   protected TalkingImageButton home;
+//  GestureDetector gestureDetector;
   /**
    * Mapping from buttons to their locations on screen
    */
+  private Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
   private Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
-  private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
   
-  public Map<TalkingButton, Rect> getButton_to_rect() {
-    return button_to_rect;
-  }
-  
-  public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
-    return imageButton_to_rect;
-  }
-  
-  private static final String TAG = "bd:onTouchEventClass";
-  
-  // protected Map<Button, Intent> button_to_intent = new HashMap<Button,
-  // Intent>();
-  // protected GestureDetector gestureDetector = new GestureDetector(this);
-  /*
-   * new GestureDetector . SimpleOnGestureListener () { public boolean
-   * onDoubleTap ( MotionEvent e) { Log .i( "MyLog" , "Open new activty here" );
-   * startActivity (( button_to_intent .get( last_view ))); return false ; } });
+//  private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+  /**
+   * In this overridden function we gather the buttons positions of the current
+   * activity and make them all listen to onTouch and onClick.
+   * 
+   * @param hasFocus
+   *          indicates whether a window has the focus
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    final ViewGroup mainView = (ViewGroup) findViewById(getViewId());
+    ViewGroup mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(mainView);
     DisplaySettings.applyButtonSettings(imageButton_to_rect.keySet(), mainView);
-    for (final Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
-      entry.getKey().setOnClickListener(this);
-      entry.getKey().setOnTouchListener(this);
-    }
-    for (final Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
-      entry.getKey().setOnClickListener(this);
-      entry.getKey().setOnTouchListener(this);
+    for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
+      if (entry.getKey() instanceof TalkingButton || entry.getKey() instanceof TalkingImageButton) {
+        entry.getKey().setOnClickListener(this);
+        entry.getKey().setOnTouchListener(this);
+      }
     }
     // reads layout description out loud
     if (hasFocus && findViewById(getViewId()).getContentDescription() != null)
@@ -108,75 +130,55 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   }
   
   /**
-   * This method returns the Id of a view
+   * This is an abstract method which returns the Id of a view
    * 
    * @return Id of the current view
    */
   public abstract int getViewId();
   
   @Override public boolean onTouch(View v, MotionEvent event) {
-    final float accurateX = getRelativeLeft(v) + event.getX();
-    final float accurateY = getRelativeTop(v) + event.getY();
+    accurateX = getRelativeLeft(v) + event.getX();
+    accurateY = getRelativeTop(v) + event.getY();
     if (event.getAction() == MotionEvent.ACTION_DOWN) {
+      Log.i("MyLog", "ACTION DOWN:  x = " + accurateX + " ---- y = " + accurateY);
       prev_view = getView(accurateX, accurateY);
-      if (last_view != null && prev_view != last_view)
-        // activity and touching
-        // in different view
-        last_view.setPressed(false);
-      if (v instanceof TalkingButton)
-        if (((TalkingButton) v).getContentDescription() == null)
-          speakOut(((TalkingButton) v).getText().toString());
-        else
-          speakOut(((TalkingButton) v).getContentDescription().toString());
+      if (v instanceof TalkingButton) {
+        speakOut(((TalkingButton) v).getReadText());
+      }
       if (v instanceof TalkingImageButton) {
-        Log.i("MyLog", "DOWN in ImageButton");
-        ((TalkingImageButton) v).setColorFilter(Color.argb(150, 255, 165, 0));
-        speakOut(((TalkingImageButton) v).getContentDescription().toString());
-      } else
-        Log.i("MyLog", "NOT IMAGEBUTTON AMD NOT BUTTON");
+        speakOut(((TalkingImageButton) v).getReadText());
+      }
     }
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
-      movedTo = getView(accurateX, accurateY);
-      if (movedTo instanceof TalkingButton) {
-        Log.i("MyLog", "ON ACTION MOVE BUTTON");
-        for (final Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet())
-          if (entry.getValue().contains((int) accurateX, (int) accurateY))
-            if (prev_view != entry.getKey()) {
-              if (prev_view instanceof TalkingImageButton)
-                ((TalkingImageButton) prev_view).setColorFilter(Color.argb(0, 255, 165, 0));
-              if (prev_view instanceof TalkingButton)
-                ((TalkingButton) prev_view).setPressed(false);
-              speakOut(entry.getKey().getText().toString());
-              entry.getKey().getBackground().setAlpha((int) (0.8 * 255));
-              entry.getKey().setPressed(true);
-              prev_view = entry.getKey();
-            }
-      }
-      if (movedTo instanceof TalkingImageButton) {
-        for (final Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet())
-          if (entry.getValue().contains((int) accurateX, (int) accurateY))
-            if (prev_view != entry.getKey()) {
-              if (prev_view instanceof TalkingButton)
-                ((TalkingButton) prev_view).setPressed(false);
-              if (prev_view instanceof TalkingImageButton)
-                ((TalkingImageButton) prev_view).setColorFilter(Color.argb(0, 255, 165, 0));
-              speakOut(entry.getKey().getContentDescription().toString());
-              entry.getKey().setColorFilter(Color.argb(150, 255, 165, 0));
-              prev_view = entry.getKey();
-            }
-      } else
-        prev_view = getView(accurateX, accurateY);
+      for (Map.Entry<View, Rect> entry : view_to_rect.entrySet())
+        if (entry.getValue().contains((int) accurateX, (int) accurateY))
+          if (prev_view != entry.getKey()) {
+            speakOut(textToRead(entry.getKey()));
+            prev_view = entry.getKey();
+          } else
+            prev_view = getView(accurateX, accurateY);
     }
     if (event.getAction() == MotionEvent.ACTION_UP) {
       Log.i("MyLog", "ACTION UP");
       last_view = getView(accurateX, accurateY);
-      if (last_view instanceof TalkingImageButton)
-        ((TalkingImageButton) last_view).setColorFilter(Color.argb(0, 255, 165, 0));
       onActionUp(last_view);
     }
     // gestureDetector.setOnDoubleTapListener(this);
     // return gestureDetector.onTouchEvent(event);
     return false;
+  }
+  
+  /**
+   * return a button text (after upcasting the given view to the appropriate
+   * button type)
+   * 
+   * @param v
+   *          the view which is upcasted to one of the buttons types (if it's a
+   *          button)
+   * @return the button text to be read
+   */
+  public static String textToRead(View v) {
+    return ((v instanceof TalkingButton) ? ((TalkingButton) v).getReadText() : ((TalkingImageButton) v).getReadText());
   }
   
   /**
@@ -196,8 +198,6 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    *          the string to speak out
    */
   public void speakOut(String s) {
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    vb.vibrate(20);
     if (_t == null) {
       Log.e("onTouchEventClass", "TTS is null");
       return;
@@ -219,6 +219,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
     DisplaySettings.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     mHandler = new Handler();
+    // gestureDetector = new GestureDetector(this);
   }
   
   /**
@@ -228,25 +229,22 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    *          the view from which to get buttons positions
    */
   public void getButtonsPosition(View v) {
-    if (v == null) {
-      Log.d(TAG, "v == null");
-      return;
-    }
     rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
     if (v instanceof TalkingButton) {
-      // Construct a rect of the view's bounds
-      button_to_rect.put((TalkingButton) v, rect);
+      view_to_rect.put(v, rect);
       return;
     }
     if (v instanceof TalkingImageButton) {
       imageButton_to_rect.put((TalkingImageButton) v, rect);
+      view_to_rect.put(v, rect);
       return;
     } else if (v instanceof TimePicker || v instanceof AnalogClock || v instanceof TextView)
       // ignoring these view types
       return;
-    final ViewGroup vg = (ViewGroup) v;
-    for (int i = 0; i < vg.getChildCount(); i++)
+    ViewGroup vg = (ViewGroup) v;
+    for (int i = 0; i < vg.getChildCount(); i++) {
       getButtonsPosition(vg.getChildAt(i));
+    }
     return;
   }
   
@@ -291,15 +289,7 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
    *         - if the coordinates are out of any button
    */
   private View getView(float x, float y) {
-    for (final Map.Entry<TalkingButton, Rect> entry : button_to_rect.entrySet()) {
-      Log.i("MyLog", "Button:     Left = " + entry.getValue().left + "  ;  Top = " + entry.getValue().top);
-      if (entry.getValue().contains((int) x, (int) y))
-        return (entry.getKey());
-    }
-    for (final Map.Entry<TalkingImageButton, Rect> entry : imageButton_to_rect.entrySet()) {
-      Log.i("MyLog", "ImageButton:     Left = " + entry.getValue().left + "  ;  Top = " + entry.getValue().top + "  ;  Right = "
-          + entry.getValue().right);
-      Log.i("MyLog", "x = " + (int) x + "y = " + (int) y);
+    for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
       if (entry.getValue().contains((int) x, (int) y))
         return (entry.getKey());
     }

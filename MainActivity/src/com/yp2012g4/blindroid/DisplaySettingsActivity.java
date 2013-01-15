@@ -12,7 +12,6 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class DisplaySettingsActivity extends BlindroidActivity {
-  
   /**
    * get the activity's main view ID
    * 
@@ -31,13 +30,13 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    * Adds onClick events to buttons in this view.
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
-   *
+   * 
    * @param v
    *          - a View object on the screen
    */
   @Override public void onClick(View v) {
     if (v instanceof TalkingImageButton)
-      speakOut(((TalkingImageButton) v).getContentDescription().toString());
+      speakOut(((TalkingImageButton) v).getReadText());
     Intent intent = new Intent(DisplaySettingsActivity.this, MainActivity.class);
     switch (v.getId()) {
       case R.id.button_set_colors:
@@ -50,6 +49,7 @@ public class DisplaySettingsActivity extends BlindroidActivity {
         break;
       case R.id.settings_button:
         speakOut("Settings");
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.back_button:
         speakOut("Previous screen");
@@ -63,26 +63,17 @@ public class DisplaySettingsActivity extends BlindroidActivity {
         speakOut("This is " + getString(R.string.title_activity_display_settings));
         break;
       default:
-        break;
+        super.onClick(v);
     }
+//    super.onClick(v);
   }
   
   /**
-   *  Called when the activity is first created.
+   * Called when the activity is first created.
    */
   /** */
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
-  }
-  
-  /**
-   * Read the activity's name when activity becomes visible.
-   */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      speakOut("Display Settings screen");
-    }
   }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/MainActivityView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:contentDescription="Main screen"
+    android:contentDescription="@string/MainTitle"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/sos_button"
+            custom:ReadText="@string/sos_button"
             android:scaleType="fitCenter"
             android:src="@drawable/sos_button" />
 
@@ -26,7 +27,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/time_button"
+            custom:ReadText="@string/time_button"
             android:scaleType="fitCenter"
             android:src="@drawable/time_button" />
     </LinearLayout>
@@ -42,7 +43,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/where_am_i_button"
+            custom:ReadText="@string/where_am_i_button"
             android:scaleType="fitCenter"
             android:src="@drawable/compass_button" />
 
@@ -52,7 +53,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/read_sms_button"
+            custom:ReadText="@string/read_sms_button"
             android:scaleType="fitCenter"
             android:src="@drawable/read_sms_button" />
     </LinearLayout>
@@ -67,7 +68,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/phone_status_button"
+            custom:ReadText="@string/phone_status_button"
             android:scaleType="fitCenter"
             android:src="@drawable/phone_status_button" />
 
@@ -77,7 +78,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/alarm_clock_button"
+            custom:ReadText="@string/alarm_clock_button"
             android:scaleType="fitCenter"
             android:src="@drawable/alarm_clock_button" />
     </LinearLayout>
@@ -92,7 +93,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/quick_dial_button"
+            custom:ReadText="@string/quick_dial_button"
             android:scaleType="fitCenter"
             android:src="@drawable/quick_dial_button" />
 
@@ -102,7 +103,7 @@
             android:layout_height="105dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/quick_sms_button"
+            custom:ReadText="@string/quick_sms_button"
             android:scaleType="fitCenter"
             android:src="@drawable/quick_sms_button" />
     </LinearLayout>

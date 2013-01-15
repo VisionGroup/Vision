@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/ColorSettingsActivity"
+    style="?backgroundColor"
+    android:contentDescription="@string/color_settings_screen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    style="?backgroundColor" >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +14,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteBlack"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
             android:textColor="@color/WHITE"
-            style="?textAppearance" />
+            app:ReadText="@string/WhiteBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -27,13 +30,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteRed"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/RED"
             android:text="@string/WhiteRed"
             android:textColor="@color/WHITE"
-            style="?textAppearance" />
+            app:ReadText="@string/WhiteRed" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,13 +46,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/RedBlack"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
             android:textColor="@color/RED"
-            style="?textAppearance" />
+            app:ReadText="@string/RedBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,13 +62,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteGreen"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
             android:textColor="@color/WHITE"
-            style="?textAppearance" />
+            app:ReadText="@string/WhiteGreen" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,13 +78,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/GreenBlack"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
             android:textColor="@color/GREEN"
-            style="?textAppearance" />
+            app:ReadText="@string/GreenBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,13 +94,14 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/WhiteBlue"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
             android:textColor="@color/WHITE"
-            style="?textAppearance" />
+            app:ReadText="@string/WhiteBlue" />
     </LinearLayout>
 
     <LinearLayout
@@ -102,21 +110,23 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/BlueBlack"
+            style="?textAppearance"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"
             android:textColor="@color/BLUE"
-            style="?textAppearance" />
+            app:ReadText="@string/BlueBlack" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom" >
-		<include layout="@layout/control_bar_view"/>
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
     </LinearLayout>
 
 </LinearLayout>

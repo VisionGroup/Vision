@@ -105,7 +105,11 @@ public abstract class onTouchEventClass extends Activity implements OnTouchListe
   private Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
   private Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
   
-//  private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
+public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
+    return imageButton_to_rect;
+  }
+
+  //  private Map<TalkingButton, Rect> button_to_rect = new HashMap<TalkingButton, Rect>();
   /**
    * In this overridden function we gather the buttons positions of the current
    * activity and make them all listen to onTouch and onClick.

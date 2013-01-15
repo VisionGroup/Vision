@@ -1,5 +1,6 @@
 package com.yp2012g4.blindroid;
 
+import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -29,9 +30,7 @@ public class SOSActivity extends BlindroidActivity {
   // these are non-initialized values
   double latitude = 10000, longitude = 10000;
   final int maxLengthOfAddress = 100;
-  
   static final String TAG = "bd.SOSActivity";
-
   
   @Override public int getViewId() {
     return R.id.SOS_textview;
@@ -54,10 +53,23 @@ public class SOSActivity extends BlindroidActivity {
       l.unlock();
       String number = "0529240424";
       // String number = "0543064260"; // Olivier's number
-      SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
       Log.d(TAG, "Sending SOS : " + messageToSend);
-      speakOut("SOS message has been sent");
-      mHandler.postDelayed(mLaunchTask, 1300);
+      Log.d(TAG, "number : " + number);
+      Log.d(TAG, "latitude =  " + latitude);
+      Log.d(TAG, "longitude =  " + longitude);
+      if (SmsManager.getDefault() == null)
+        Log.e(TAG, "SMS Manager is null! Not sending the message");
+      else {
+        Log.d(TAG, "SMS Manager is not null! Sending the message");
+        SmsManager sms = SmsManager.getDefault();
+        ArrayList<String> parts = sms.divideMessage(messageToSend);
+        sms.sendMultipartTextMessage(number, null, parts, null, null);
+        speakOut("SOS message has been sent");
+        // version using sendTextMessage:
+        // SmsManager.getDefault().sendTextMessage(number, null, messageToSend,
+        // null, null);
+      }
+      mHandler.postDelayed(mLaunchTask, 1500);
     }
   };
   

@@ -57,11 +57,11 @@ public class SOSActivity extends BlindroidActivity {
       Log.d(TAG, "number : " + number);
       Log.d(TAG, "latitude =  " + latitude);
       Log.d(TAG, "longitude =  " + longitude);
-      if (SmsManager.getDefault() == null)
+      SmsManager sms = SmsManager.getDefault();
+      if (sms == null)
         Log.e(TAG, "SMS Manager is null! Not sending the message");
       else {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
-        SmsManager sms = SmsManager.getDefault();
         ArrayList<String> parts = sms.divideMessage(messageToSend);
         sms.sendMultipartTextMessage(number, null, parts, null, null);
         speakOut("SOS message has been sent");

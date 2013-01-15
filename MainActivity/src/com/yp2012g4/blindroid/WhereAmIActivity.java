@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.widget.TextView;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -48,10 +47,6 @@ public class WhereAmIActivity extends BlindroidActivity {
     speakOut(toSpeak);
   }
   
-  @Override public void onClick(View v) {
-    super.onClick(v);
-  }
-  
   private void initialize() {
     LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     log("Got location manager");
@@ -82,7 +77,7 @@ public class WhereAmIActivity extends BlindroidActivity {
   }
   
   @Override protected void onStop() {
-    log("onstop");
+    log("onStop");
     f.stop();
     log("Location finder stopped");
     super.onStop();

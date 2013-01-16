@@ -82,6 +82,7 @@ public class AlarmActivity extends BlindroidActivity {
   
   @Override
   public void onClick(View v) {
+    super.onClick(v);
     switch (v.getId()) {
       case R.id.statusButton:
         String s;
@@ -111,24 +112,6 @@ public class AlarmActivity extends BlindroidActivity {
           AlarmService.mp.stop();
         alarmIsSet = false;
         speakOut("Alarm is Canceled");
-        break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        Intent intent = new Intent(this, DisplaySettingsActivity.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_alarm));
-        break;
-      default:
         break;
     }
   }

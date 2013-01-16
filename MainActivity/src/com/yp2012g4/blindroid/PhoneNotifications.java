@@ -15,7 +15,7 @@ import android.telephony.TelephonyManager;
 
 /**
  * 
- * @author amir b
+ * @author Amir Blumental
  * @version 1.1
  */
 public class PhoneNotifications {
@@ -46,7 +46,7 @@ public class PhoneNotifications {
    * This listener class allow us to update the signal member, and this is the
    * only way android allow us to check the signal
    * 
-   * @author amir b
+   * @author Amit Yaffe
    * 
    */
   private class SignalStrengthListener extends PhoneStateListener {

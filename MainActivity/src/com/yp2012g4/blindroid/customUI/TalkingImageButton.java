@@ -1,8 +1,11 @@
 package com.yp2012g4.blindroid.customUI;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
+
+import com.yp2012g4.blindroid.R;
 
 /**
  * This is a Talking ImageButton used in a TTS project to provide the additional
@@ -15,7 +18,8 @@ import android.widget.ImageButton;
 public class TalkingImageButton extends ImageButton {
   public TalkingImageButton(Context context, AttributeSet attrs) {
     super(context, attrs);
-    // TODO Auto-generated constructor stub
+    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TalkingImageButton, 0, 0);
+    ReadText = a.getString(R.styleable.TalkingImageButton_ReadText);
   }
   
   /**
@@ -54,7 +58,7 @@ public class TalkingImageButton extends ImageButton {
     ReadToolTip = readToolTip;
   }
   
-  private String ReadText = "";
-  private String ReadToolTip = "";
+  private String ReadText="";
+  private String ReadToolTip="";
   // TODO: Check How to connect to foreground and background color settings
 }

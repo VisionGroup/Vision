@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +10,11 @@ import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.yp2012g4.blindroid.customUI.lists.SmsAdapter;
 import com.yp2012g4.blindroid.customUI.lists.TalkingListView;
 import com.yp2012g4.blindroid.customUI.lists.ViewListRun;
-import com.yp2012g4.blindroid.tools.MultiFingerGestureDetector;
 import com.yp2012g4.blindroid.tools.MultiTouchRun;
 
 /**

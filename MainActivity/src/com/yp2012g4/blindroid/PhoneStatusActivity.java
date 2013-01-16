@@ -2,15 +2,9 @@ package com.yp2012g4.blindroid;
 
 import java.util.ArrayList;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.os.BatteryManager;
 import android.os.Bundle;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
@@ -25,6 +19,9 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * @version 1.0
  * @author Amit Yaffe
  * 
+ * @version 1.1
+ * @author Amir Blumental
+ * 
  */
 public class PhoneStatusActivity extends BlindroidActivity {
   /**
@@ -33,36 +30,12 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * @author Dell
    * 
    */
-  private class SignalStrengthListener extends PhoneStateListener {
-    protected SignalStrengthListener() {
-    }
-    
-    @Override
-    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
-      // get the signal strength (a value between 0 and 31)
-      _signal = signalStrength.getGsmSignalStrength();
-      super.onSignalStrengthsChanged(signalStrength);
-    }
-  }
-  
   private static final String TAG = "bd:PhoneStatusActivity";
   /**
    * Used to activate the onTouch button reading function.
    */
   static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
   PhoneNotifications pn;
-  int _battery = -1; // Battery status
-  int _status = -1; // Charging Status
-  int _signal = -1; // Reception status
-  SignalStrengthListener signalStrengthListener;
-//Battery Broadcast receiver.
-  final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-      _battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-      _status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-    }
-  };
   final ArrayList<String> contacts = new ArrayList<String>();
   
   /**
@@ -103,8 +76,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
     }
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -113,8 +85,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override
-  public void onClick(View v) {
+  @Override public void onClick(View v) {
     final Resources res = getResources();
     switch (v.getId()) {
       case R.id.button_getBatteryStatus:
@@ -122,14 +93,10 @@ public class PhoneStatusActivity extends BlindroidActivity {
             getChargeStatus()));
         break;
       case R.id.button_getReceptionStatus:
-        speakOut(signalToString(_signal));
+        speakOut(signalToString());
         break;
       case R.id.button_getMissedCalls:
         getMissedCalls();
-        break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.settings_button:
         speakOut("Settings");
@@ -137,50 +104,33 @@ public class PhoneStatusActivity extends BlindroidActivity {
         // DisplaySettingsActivity.class);
         final Intent intent = new Intent(this, IncomingCallActivity.class);
         startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.phoneStatus_whereami));
+        // TODO the settings button should call DisplaySettingsActivity. Need to
+        // delete these lines (already in super class) after changing back to
+        // DisplaySettingsActivity
         break;
       default:
-        break;
+        super.onClick(v);
     }
   }
   
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
-    final IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     pn = new PhoneNotifications(this);
-    registerReceiver(batteryReceiver, filter);
-    // start the signal strength listener
-    signalStrengthListener = new SignalStrengthListener();
-    ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(signalStrengthListener,
-        PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-  }
-  
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    unregisterReceiver(batteryReceiver);
   }
   
   /**
    * Returns the signal strength in percentage.
    * 
-   * @param signal
    * @return
    */
-  public String signalToString(int signal) {
+  public String signalToString() {
+    int signal = PhoneNotifications.getSignalStrength();
     Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);

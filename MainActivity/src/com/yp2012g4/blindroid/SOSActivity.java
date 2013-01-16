@@ -1,13 +1,14 @@
 package com.yp2012g4.blindroid;
 
+import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -29,6 +30,7 @@ public class SOSActivity extends BlindroidActivity {
   // these are non-initialized values
   double latitude = 10000, longitude = 10000;
   final int maxLengthOfAddress = 100;
+  static final String TAG = "bd.SOSActivity";
   
   @Override public int getViewId() {
     return R.id.SOS_textview;
@@ -51,35 +53,32 @@ public class SOSActivity extends BlindroidActivity {
       l.unlock();
       String number = "0529240424";
       // String number = "0543064260"; // Olivier's number
-      SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
-      speakOut("SOS message has been sent");
-      mHandler.postDelayed(mLaunchTask, 1300);
+      Log.d(TAG, "Sending SOS : " + messageToSend);
+      Log.d(TAG, "number : " + number);
+      Log.d(TAG, "latitude =  " + latitude);
+      Log.d(TAG, "longitude =  " + longitude);
+      SmsManager sms = SmsManager.getDefault();
+      if (sms == null)
+        Log.e(TAG, "SMS Manager is null! Not sending the message");
+      else {
+        Log.d(TAG, "SMS Manager is not null! Sending the message");
+        ArrayList<String> parts = sms.divideMessage(messageToSend);
+        sms.sendMultipartTextMessage(number, null, parts, null, null);
+        speakOut("SOS message has been sent");
+        // version using sendTextMessage:
+        // SmsManager.getDefault().sendTextMessage(number, null, messageToSend,
+        // null, null);
+      }
+      mHandler.postDelayed(mLaunchTask, 1500);
     }
   };
   
   @Override public void onClick(View v) {
+    super.onClick(v);
     switch (v.getId()) {
       case R.id.Send_SOS_Message:
         speakOut("Sending SOS message");
         mHandler.postDelayed(sendSOSMessage, 5000);
-        break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        Intent intent = new Intent(this, DisplaySettingsActivity.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_sos));
-        break;
-      default:
         break;
     }
   }
@@ -88,12 +87,6 @@ public class SOSActivity extends BlindroidActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sos);
     l = new ReentrantLock();
-  }
-  
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus)
-      speakOut("SOS screen");
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

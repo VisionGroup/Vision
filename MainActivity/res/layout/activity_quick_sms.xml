@@ -16,7 +16,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_1"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -33,7 +32,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_2"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -50,7 +48,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_3"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -67,7 +64,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_4"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -84,7 +80,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_5"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -101,7 +96,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_6"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -118,7 +112,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_7"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -135,7 +128,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_8"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"
@@ -152,7 +144,6 @@
 
         <com.yp2012g4.blindroid.customUI.TalkingButton
             android:id="@+id/SMS_number_9"
-            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="46dp"
             android:layout_weight="1"

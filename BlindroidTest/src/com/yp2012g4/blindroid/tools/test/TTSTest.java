@@ -20,38 +20,6 @@ public class TTSTest extends TestCase {
 	super.tearDown();
     }
 
-    public void testTTS() {
-	fail("Not yet implemented");
-    }
-
-    public void testIsRuning() {
-	fail("Not yet implemented");
-    }
-
-    public void testSetQueueMode() {
-	fail("Not yet implemented");
-    }
-
-    public void testSetLanguage() {
-	fail("Not yet implemented");
-    }
-
-    public void testSpeak() {
-	fail("Not yet implemented");
-    }
-
-    public void testStop() {
-	fail("Not yet implemented");
-    }
-
-    public void testShutdown() {
-	fail("Not yet implemented");
-    }
-
-    public void testIsSpeaking() {
-	fail("Not yet implemented");
-    }
-
     public void testIsPureEnglise() {
 	assertTrue(TTS.isPureEnglise("Abcdefghijklmnopqrstuvwxyz"));
 	assertTrue(TTS

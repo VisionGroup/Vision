@@ -1,54 +1,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/AlarmActivity"
+    style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:contentDescription="@string/title_activity_alarm"
     android:orientation="vertical"
-    tools:context=".AlarmActivity"
-    style="?backgroundColor"  >
+    tools:context=".AlarmActivity" >
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/statusButton"
+        style="?textAppearance"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/alarmStatus"
-        android:background="@android:color/transparent"
-        style="?textAppearance"  />
+        custom:ReadText="@string/alarmStatus" />
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/setButton"
+        style="?textAppearance"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/setAlarmButton"
-        android:background="@android:color/transparent"
-        style="?textAppearance"  />
+        custom:ReadText="@string/setAlarmButton" />
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/startalarm"
+        style="?textAppearance"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/startAlarm"
-        android:background="@android:color/transparent"
-        style="?textAppearance"  />
+        custom:ReadText="@string/startAlarm" />
 
     <com.yp2012g4.blindroid.customUI.TalkingButton
         android:id="@+id/cancelalarm"
+        style="?textAppearance"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/stopAlarm"
-        android:background="@android:color/transparent"
-        style="?textAppearance"  />
-    
-     <LinearLayout
+        custom:ReadText="@string/stopAlarm" />
+
+    <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

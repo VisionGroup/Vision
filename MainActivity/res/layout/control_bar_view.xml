@@ -1,48 +1,48 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid" >
+<merge xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
 
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/back_button"
-        style="?backgroundColor"
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/back_button"
-        app:ReadText="@string/back_button" />
+        android:background="@android:color/transparent"
+        custom:ReadText="@string/back_button"
+        style="?backgroundColor"  />
 
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/settings_button"
-        style="?backgroundColor"
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
+        custom:ReadText="@string/settings_button"
         android:scaleType="fitCenter"
         android:src="@drawable/settings_button"
-        app:ReadText="@string/settings_button" />
+        android:background="@android:color/transparent"
+        style="?backgroundColor" />
 
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/current_menu_button"
-        style="?backgroundColor"
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
+        custom:ReadText = "@string/current_menu_button"
         android:scaleType="fitCenter"
         android:src="@drawable/current_menu_button"
-        app:ReadText="@string/current_menu_button" />
-
+        android:background="@android:color/transparent"
+        style="?backgroundColor"  />
+    
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/home_button"
-        style="?backgroundColor"
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
+        custom:ReadText="@string/home_button"
         android:scaleType="fitCenter"
         android:src="@drawable/home_button"
-        app:ReadText="@string/home_button" />
+        android:background="@android:color/transparent"
+        style="?backgroundColor" />
 
 </merge>

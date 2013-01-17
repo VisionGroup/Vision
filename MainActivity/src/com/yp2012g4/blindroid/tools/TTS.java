@@ -1,6 +1,7 @@
 package com.yp2012g4.blindroid.tools;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
@@ -47,7 +48,12 @@ public class TTS {
   
   public void speak(String s) {
     Log.e("TTS", "speak : " + s);
-    _tts.speak(s, _qm, null);
+    if (null == s)
+      return;
+    if (!isPureEnglise(s))
+      _tts.speak("Hebrew.", _qm, null);
+    else
+      _tts.speak(s, _qm, null);
   }
   
   public void stop() {
@@ -64,5 +70,21 @@ public class TTS {
   
   public boolean isSpeaking() {
     return _tts.isSpeaking();
+  }
+  
+  /**
+   * Returns true if s does not contain any hebrew charachters.
+   * 
+   * @param s
+   * @return
+   */
+  public static boolean isPureEnglise(String s) {
+    if (s == null)
+      return true;
+//    if (s == "")
+//      return true;
+//    final String tmp = new String(s);
+    return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
+//    return true;
   }
 }

@@ -24,12 +24,6 @@ import com.yp2012g4.blindroid.tools.BlindroidActivity;
  * 
  */
 public class PhoneStatusActivity extends BlindroidActivity {
-  /**
-   * A signal strength listener. Updates _signal between 0-31.
-   * 
-   * @author Dell
-   * 
-   */
   private static final String TAG = "bd:PhoneStatusActivity";
   /**
    * Used to activate the onTouch button reading function.
@@ -63,12 +57,12 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * read the call log of the missed calls
    */
   public void getMissedCalls() {
-    ArrayList<CallData> calls = pn.getMissedCallsList();
+    final ArrayList<CallData> calls = pn.getMissedCallsList();
     String s = "";
     if (calls.isEmpty())
-      s = "There are no missed calles";
+      s = "There are no missed calls";
     else
-      for (CallData c : calls)
+      for (final CallData c : calls)
         s += " called At: " + c.getHour() + " ,From: " + c.number + "\n";
     speakOut(s);
     while (_t.isSpeaking()) {
@@ -130,7 +124,7 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * @return
    */
   public String signalToString() {
-    int signal = PhoneNotifications.getSignalStrength();
+    final int signal = PhoneNotifications.getSignalStrength();
     Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);

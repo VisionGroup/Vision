@@ -125,5 +125,7 @@
     <string name="title_activity_read_sms">ReadSmsActivity</string>
     <string name="next_message">Next message</string>
     <string name="previous_message">previous message</string>
+    <string name="whereami_whereami">Where Am I</string>
+    <string name="whereami_help">Receive information on your location in the world.</string>
 
 </resources>

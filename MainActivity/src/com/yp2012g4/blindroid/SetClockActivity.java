@@ -8,13 +8,11 @@ package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TextView;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -44,36 +42,10 @@ public class SetClockActivity extends BlindroidActivity implements OnGestureList
   }
   
   @Override
-  public void onClick(View v) {
-    Intent intent = new Intent(SetClockActivity.this, MainActivity.class);
-    switch (v.getId()) {
-      case R.id.back_button:
-        speakOut("Previous screen");
-        setResult(-1);
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        intent = new Intent(this, DisplaySettingsActivity.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        setResult(-2);
-        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_set_clock));
-        break;
-      default:
-        break;
-    }
-  }
-  
-  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_set_clock);
+    init(0, getString(R.string.title_activity_set_clock), getString(R.string.set_clock_help));
     gestureScanner = new GestureDetector(this);
     Bundle b = getIntent().getExtras();
     type = b.getInt("type");

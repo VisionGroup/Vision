@@ -11,6 +11,10 @@ import android.app.Application;
 
 public class DisplaySettingsApplication extends Application {
 	
+  static final float SMALL=20;
+  static final float NORMAL=26;
+  static final float LARGE=32;
+  
 	/**
 	 * singelton holding display preferences
 	 */

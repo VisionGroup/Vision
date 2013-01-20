@@ -7,7 +7,6 @@ package com.yp2012g4.blindroid.test;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.DialScreen;

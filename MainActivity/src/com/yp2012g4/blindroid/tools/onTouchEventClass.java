@@ -121,7 +121,6 @@ public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
     super.onWindowFocusChanged(hasFocus);
     ViewGroup mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(mainView);
-    DisplaySettings.applyButtonSettings(imageButton_to_rect.keySet(), mainView);
     for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
       if (entry.getKey() instanceof TalkingButton || entry.getKey() instanceof TalkingImageButton) {
         entry.getKey().setOnClickListener(this);
@@ -129,8 +128,11 @@ public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
       }
     }
     // reads layout description out loud
-    if (hasFocus && findViewById(getViewId()).getContentDescription() != null)
+    if (hasFocus && findViewById(getViewId()).getContentDescription() != null) {
+      DisplaySettings.applyButtonSettings(view_to_rect.keySet());
       speakOut(findViewById(getViewId()).getContentDescription().toString());
+    }
+      
   }
   
   /**
@@ -245,6 +247,7 @@ public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
     } else if (v instanceof TimePicker || v instanceof AnalogClock || v instanceof TextView)
       // ignoring these view types
       return;
+    view_to_rect.put(v, rect);
     ViewGroup vg = (ViewGroup) v;
     for (int i = 0; i < vg.getChildCount(); i++) {
       getButtonsPosition(vg.getChildAt(i));

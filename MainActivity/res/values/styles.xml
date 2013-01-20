@@ -5,42 +5,52 @@
     <color name="GREEN">#04B431</color>
     <color name="BLUE">#2E9AFE</color>
 
-   <style name="small_white_text" parent="@android:style/TextAppearance.Small">
+   <style name="small_text">
+      <item name="android:textSize">20sp</item>
+   </style>
+   <style name="normal_text">
+      <item name="android:textSize">26sp</item>
+   </style>
+   <style name="large_text">
+      <item name="android:textSize">32sp</item>
+   </style>
+   
+   <style name="small_white_text" parent="@style/small_text">
       <item name="android:textColor">@color/WHITE</item>
    </style>
-   <style name="small_red_text" parent="@android:style/TextAppearance.Small">
+   <style name="small_red_text" parent="@style/small_text">
       <item name="android:textColor">@color/RED</item>
    </style>
-   <style name="small_green_text" parent="@android:style/TextAppearance.Small">
+   <style name="small_green_text" parent="@style/small_text">
       <item name="android:textColor">@color/GREEN</item>
    </style>
-   <style name="small_blue_text" parent="@android:style/TextAppearance.Small">
+   <style name="small_blue_text" parent="@style/small_text">
       <item name="android:textColor">@color/BLUE</item>
    </style>
    
-   <style name="normal_white_text" parent="@android:style/TextAppearance.Medium">
+   <style name="normal_white_text" parent="@style/normal_text">
       <item name="android:textColor">@color/WHITE</item>
    </style>
-   <style name="normal_red_text" parent="@android:style/TextAppearance.Medium">
+   <style name="normal_red_text" parent="@style/normal_text">
       <item name="android:textColor">@color/RED</item>
    </style>
-   <style name="normal_green_text" parent="@android:style/TextAppearance.Medium">
+   <style name="normal_green_text" parent="@style/normal_text">
       <item name="android:textColor">@color/GREEN</item>
    </style>
-   <style name="normal_blue_text" parent="@android:style/TextAppearance.Medium">
+   <style name="normal_blue_text" parent="@style/normal_text">
       <item name="android:textColor">@color/BLUE</item>
    </style>
    
-   <style name="large_white_text" parent="@android:style/TextAppearance.Large">
+   <style name="large_white_text" parent="@style/large_text">
       <item name="android:textColor">@color/WHITE</item>
    </style>
-   <style name="large_red_text" parent="@android:style/TextAppearance.Large">
+   <style name="large_red_text" parent="@style/large_text">
       <item name="android:textColor">@color/RED</item>
    </style>
-   <style name="large_green_text" parent="@android:style/TextAppearance.Large">
+   <style name="large_green_text" parent="@style/large_text">
       <item name="android:textColor">@color/GREEN</item>
    </style>
-   <style name="large_blue_text" parent="@android:style/TextAppearance.Large">
+   <style name="large_blue_text" parent="@style/large_text">
       <item name="android:textColor">@color/BLUE</item>
    </style>
 

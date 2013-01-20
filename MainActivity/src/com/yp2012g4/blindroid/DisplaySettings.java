@@ -10,11 +10,12 @@ import java.util.Set;
 
 import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
-
 import android.graphics.PorterDuff.Mode;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.graphics.Color;
 
 import android.app.Activity;
@@ -22,7 +23,7 @@ import android.app.Activity;
 public class DisplaySettings {
 	
 	private static SparseIntArray color_to_string = new SparseIntArray();
-	public static String SIZE="NORMAL";
+	public static float textSize = DisplaySettingsApplication.NORMAL;
   static String THEME="";
 	private static int textColor = R.color.WHITE;
 	private static int backgroundColor = R.color.BLACK;
@@ -76,14 +77,20 @@ public class DisplaySettings {
    * @param v
    *          - main view of an activity
    */
-	public static void applyButtonSettings (Set<TalkingImageButton> buttons, View v) {
-	  v.setBackgroundColor(color_to_string.get(backgroundColor));
-		if (textColor == R.color.WHITE)
-		  for (TalkingImageButton b : buttons)
-		    ((ImageView)b).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
-		else
-		  for (TalkingImageButton b : buttons)
-		    ((ImageView)b).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
+	public static void applyButtonSettings (Set<View> vs) {
+	  for (View v : vs) {
+	    if (v instanceof LinearLayout)
+	      v.setBackgroundColor(color_to_string.get(backgroundColor));
+	    else if (v instanceof TalkingImageButton) {
+	      if (textColor == R.color.WHITE)
+	        ((ImageView)v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
+	      else
+	        ((ImageView)v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
+	    }
+	    else
+	      ((Button)v).setTextSize(textSize);
+	  }
+	      
 	}
 
 
@@ -96,7 +103,7 @@ public class DisplaySettings {
  public static void setThemeToActivity(Activity act)
   {
   
-   if (DisplaySettings.SIZE.equalsIgnoreCase("LARGE")) {
+   if (DisplaySettings.textSize == DisplaySettingsApplication.LARGE) {
      if (backgroundColor == R.color.BLUE)
        act.setTheme(R.style.Theme_LargeWhiteBlue);
      else if (backgroundColor == R.color.GREEN)
@@ -112,7 +119,7 @@ public class DisplaySettings {
      else
        act.setTheme(R.style.Theme_LargeGreenBlack);
    }
-   else if (DisplaySettings.SIZE.equalsIgnoreCase("SMALL"))
+   else if (DisplaySettings.textSize == DisplaySettingsApplication.SMALL)
      if (backgroundColor == R.color.BLUE)
        act.setTheme(R.style.Theme_SmallWhiteBlue);
      else if (backgroundColor == R.color.GREEN)

@@ -8,7 +8,7 @@ package com.yp2012g4.blindroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -42,11 +42,11 @@ public class ColorSettingsActivity extends BlindroidActivity {
    * @param v
    *          - a View object on the screen
    */
-  @Override public void onClick(View v) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     Intent intent = new Intent(ColorSettingsActivity.this, MainActivity.class);
-    if (v instanceof TalkingButton)
-      speakOut(((TalkingButton) v).getReadText());
-    switch (v.getId()) {
+    if (curr_view instanceof TalkingButton)
+      speakOut(((TalkingButton) curr_view).getReadText());
+    switch (curr_view.getId()) {
       case R.id.WhiteBlack:
         changeSettings(R.color.WHITE, R.color.BLACK);
         break;
@@ -82,11 +82,12 @@ public class ColorSettingsActivity extends BlindroidActivity {
         break;
       case R.id.current_menu_button:
         speakOut("This is " + getString(R.string.title_activity_color_settings));
-        return;
+        return false;
       default:
-        super.onClick(v);
+        super.onSingleTapUp(e);
     }
     mHandler.postDelayed(mLaunchTask, 1000);
+    return false;
   }
   
   /**

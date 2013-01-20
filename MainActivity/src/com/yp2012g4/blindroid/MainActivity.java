@@ -2,7 +2,7 @@ package com.yp2012g4.blindroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
@@ -12,11 +12,10 @@ public class MainActivity extends BlindroidActivity {
     return R.id.MainActivityView;
   }
   
-  @Override
-  public void onClick(View v) {
+  
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     Intent intent;
-    // speakOut(((Button) v).getText().toString());
-    switch (v.getId()) {
+    switch (curr_view.getId()) {
       case R.id.sos_button:
         intent = new Intent(MainActivity.this, SOSActivity.class);
         startActivity(intent);
@@ -67,6 +66,7 @@ public class MainActivity extends BlindroidActivity {
       default:
         break;
     }
+    return false;
   }
   
   /** Called when the activity is first created. */

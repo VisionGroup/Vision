@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 import com.yp2012g4.blindroid.tools.LocationFinder;
@@ -73,14 +73,15 @@ public class SOSActivity extends BlindroidActivity {
     }
   };
   
-  @Override public void onClick(View v) {
-    super.onClick(v);
-    switch (v.getId()) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
+    switch (curr_view.getId()) {
       case R.id.Send_SOS_Message:
         speakOut("Sending SOS message");
         mHandler.postDelayed(sendSOSMessage, 5000);
         break;
     }
+    return false;
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {

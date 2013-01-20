@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
     android:id="@+id/SpeakingClockSctivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,10 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        app:ReadText="Clock" />
 
     <TextView
         android:id="@+id/textView1"
+        style="?textAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/analogClock1"
@@ -23,10 +26,11 @@
         android:text="@string/emptyHour"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
-        style="?textAppearance" />
+        app:ReadText="Date" />
 
     <TextView
         android:id="@+id/textView2"
+        style="?textAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,8 +38,7 @@
         android:layout_marginTop="18dp"
         android:text="@string/ClockTitle"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40sp"
-        style="?textAppearance" />
+        android:textSize="40sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

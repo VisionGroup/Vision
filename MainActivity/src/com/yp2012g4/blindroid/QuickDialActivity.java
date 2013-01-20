@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
@@ -30,13 +30,13 @@ public class QuickDialActivity extends BlindroidActivity {
     return R.id.QuickDialActivity;
   }
   
-  @SuppressWarnings("boxing") @Override public void onClick(View v) {
-    if (v instanceof TalkingButton) {
-      speakOut("Dialing to" + ((TalkingButton) v).getReadText());
+  @SuppressWarnings("boxing") @Override public boolean onSingleTapUp(MotionEvent e) {
+    if (curr_view instanceof TalkingButton) {
+      speakOut("Dialing to" + ((TalkingButton) curr_view).getReadText());
       while (_t.isSpeaking() == Boolean.TRUE) {
         // Wait...
       }
-      switch (v.getId()) {
+      switch (curr_view.getId()) {
         case R.id.Contact_number_1:
           phoneCall("0529240424");
           break;
@@ -65,8 +65,10 @@ public class QuickDialActivity extends BlindroidActivity {
           break;
       }
     }
-    if (v instanceof TalkingImageButton)
-      super.onClick(v);
+    if (curr_view instanceof TalkingImageButton) {
+      super.onSingleTapUp(e);
+    }
+    return false;
   }
   
   // private static final int NUM_OF_QUICK_DIALS = 9;

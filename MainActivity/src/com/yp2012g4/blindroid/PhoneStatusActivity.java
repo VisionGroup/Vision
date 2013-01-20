@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.PhoneNotifications.CallData;
 import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
@@ -79,9 +79,9 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public void onClick(View v) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     final Resources res = getResources();
-    switch (v.getId()) {
+    switch (curr_view.getId()) {
       case R.id.button_getBatteryStatus:
         speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
             getChargeStatus()));
@@ -103,8 +103,9 @@ public class PhoneStatusActivity extends BlindroidActivity {
         // DisplaySettingsActivity
         break;
       default:
-        super.onClick(v);
+        super.onSingleTapUp(e);
     }
+    return false;
   }
   
   /**

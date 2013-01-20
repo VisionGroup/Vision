@@ -8,7 +8,7 @@ package com.yp2012g4.blindroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -30,11 +30,11 @@ public class ThemeSettingsActivity extends BlindroidActivity {
    * @param v
    *          - a View object on the screen
    */
-  @Override public void onClick(View v) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     Intent intent = new Intent(ThemeSettingsActivity.this, MainActivity.class);
-    if (v instanceof TalkingButton)
-      speakOut(((TalkingButton) v).getReadText());
-    switch (v.getId()) {
+    if (curr_view instanceof TalkingButton)
+      speakOut(((TalkingButton) curr_view).getReadText());
+    switch (curr_view.getId()) {
       case R.id.Small_text_size_button:
         DisplaySettings.THEME = "SMALL";
         DisplaySettings.SIZE = "SMALL";
@@ -66,8 +66,9 @@ public class ThemeSettingsActivity extends BlindroidActivity {
         speakOut("This is " + getString(R.string.title_activity_theme_settings));
         break;
       default:
-        super.onClick(v);
+        super.onSingleTapUp(e);
     }
+    return false;
   }
   
   /**

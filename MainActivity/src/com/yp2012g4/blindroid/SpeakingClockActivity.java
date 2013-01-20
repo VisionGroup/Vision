@@ -9,7 +9,9 @@ import java.util.Calendar;
 
 import android.os.Bundle;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AnalogClock;
 import android.widget.TextView;
@@ -46,8 +48,9 @@ public class SpeakingClockActivity extends BlindroidActivity {
     return R.id.SpeakingClockSctivity;
   }
   
-  @Override public void onClick(View v) {
-    super.onClick(v);
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
+    return false;
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class SpeakingClockActivity extends BlindroidActivity {
     tvh.setText(date);
     tvh.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
+        Log.i("MyLog", "DATEEEEEEEE");
         String d = getDateFormat();
         speakOut(d);
       }
@@ -67,6 +71,7 @@ public class SpeakingClockActivity extends BlindroidActivity {
     AnalogClock ac = (AnalogClock) findViewById(R.id.analogClock1);
     ac.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
+        Log.i("MyLog", "TIMEEEEEEEEE");
         Calendar cal = Calendar.getInstance();
         speakOut(parseTime(cal));
       }

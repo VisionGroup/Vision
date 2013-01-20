@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsManager;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
@@ -23,9 +24,9 @@ public class QuickSMSActivity extends BlindroidActivity {
     return R.id.QuickSMSActivity;
   }
   
-  @Override public void onClick(View v) {
-    final View view = v;
-    if (v instanceof TalkingButton) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    final View view = curr_view;
+    if (curr_view instanceof TalkingButton) {
       final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
       alertDialog.setTitle("Choose contact");
       alertDialog.setCancelable(false);
@@ -44,14 +45,16 @@ public class QuickSMSActivity extends BlindroidActivity {
           alertDialog.dismiss();
         }
       });
-      speakOut("Sending" + ((TalkingButton) v).getReadText());
+      speakOut("Sending" + ((TalkingButton) curr_view).getReadText());
       while (_t.isSpeaking()) {
         // wait...
       }
       alertDialog.show();
     }
-    if (v instanceof TalkingImageButton)
-      super.onClick(v);
+    if (curr_view instanceof TalkingImageButton) {
+      super.onSingleTapUp(e);
+    }
+    return false;
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {

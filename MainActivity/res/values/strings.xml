@@ -10,7 +10,6 @@
     <string name="phone_status_button">Phone status</string>
     <string name="signal_button">Signal</string>
     <string name="alarm_clock_button">Alarm clock</string>
-    <string name="quick_dial_button">Quick dial</string>
     <string name="quick_sms_button">Quick SMS</string>
     <string name="title_activity_quick_sms">QuickSMSActivity</string>
     <string name="title_dial_screen">DialScreen</string>
@@ -36,7 +35,15 @@
     <string name="phoneStatus_button_getMissedCalls_read">Missed calls</string>
     <string name="phoneStatus_button_getUnreadSMS_read">unread SMS</string>
     <string name="phoneStatus_whereami">Phone Status Menu</string>
-    <string name="phoneStatus_help">You can press one of two buttons to get Battery level and charge status and to get Reception status.</string>
+    <string name="phoneStatus_help">You can press one of three buttons. \n1) to get Battery level and charger status \n2)to get Reception status. \n3)to get missed calles list</string>
+    <string name="alarm_clock_help">You can press one of 4 buttons. \n1) to get alarm status \n2) to set the alarm time. \n3) to activate the alarm clock \n4) to cancel the alarm clock</string>
+    <string name="speaking_clock_help">press the middle of the screen to hear the time. \n press the upper part of the screen to hear the date</string>
+    <string name="set_clock_help">fling your finger up to increase the time and down to decrease the time\n tap the screen to confirm </string>
+    <string name="sos_help">tap screen to send a S O S message with your location </string>
+    <string name="contacts_help">You can press one of three buttons. \n1) to go to your full contacts list \n2)to go to the dialer screen \n3)to go to your quick dial list</string>
+    <string name="settings_help">You can press one of two buttons. \n1) to go to the color setting screen \n2)to go the text size setting screen</string>
+    <string name="color_setting_help">You can press one of 7 buttons. each button is a different color setting for the system</string>
+    <string name="size_setting_help">You can press one of 3 buttons. each button is different text size for the system\n the upper button is the smallest size and the bottom button is the largest</string>
     <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
     <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
     <string name="phoneStatus_message_noSignal_read">No Signal</string>
@@ -58,6 +65,7 @@
     <string name="back_button">Back</string>
     <string name="home_button">Home</string>
     <string name="settings_button">Settings</string>
+    <string name="Tool_tip_button">screen info</string>
     <string name="WhiteBlack">White &amp; Black</string>
     <string name="WhiteRed">White &amp; Red</string>
     <string name="RedBlack">Red &amp; Black</string>
@@ -135,5 +143,10 @@
     <string name="previous_message">previous message</string>
     <string name="whereami_whereami">Where Am I</string>
     <string name="whereami_help">Receive information on your location in the world.</string>
+    <string name="title_activity_contacts_menu">Contacts menu</string>
+    <string name="contactsList">contacts List</string>
+    <string name="Dialer">Dialer</string>
+     <string name="quick_dial_button">Quick dial</string>
+    <string name="contacts_button">Contacts</string>
 
 </resources>

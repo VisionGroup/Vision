@@ -122,6 +122,7 @@ public class AlarmActivity extends BlindroidActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
+    init(0, getString(R.string.title_activity_alarm), getString(R.string.alarm_clock_help));
   }
   
   /**

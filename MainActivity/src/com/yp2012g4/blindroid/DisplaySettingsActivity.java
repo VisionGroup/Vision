@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class DisplaySettingsActivity extends BlindroidActivity {
@@ -16,11 +15,13 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    * get the activity's main view ID
    * 
    */
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.displaySettingsActivity;
   }
   
-  @Override public void onBackPressed() {
+  @Override
+  public void onBackPressed() {
     // TODO Auto-generated method stub
     super.onBackPressed();
     DisplaySettingsActivity.this.finish();
@@ -34,10 +35,12 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    * @param v
    *          - a View object on the screen
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    if (curr_view instanceof TalkingImageButton)
-      speakOut(((TalkingImageButton) curr_view).getReadText());
-    Intent intent = new Intent(DisplaySettingsActivity.this, MainActivity.class);
+@Override public boolean onSingleTapUp(MotionEvent e) {
+super.onSingleTapUp(e);
+    Intent intent;
+//    if (v instanceof TalkingImageButton)
+//      speakOut(((TalkingImageButton) v).getReadText());
+//    Intent intent = new Intent(DisplaySettingsActivity.this, MainActivity.class);
     switch (curr_view.getId()) {
       case R.id.button_set_colors:
         intent = new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class);
@@ -47,23 +50,8 @@ public class DisplaySettingsActivity extends BlindroidActivity {
         intent = new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class);
         startActivity(intent);
         break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_display_settings));
-        break;
       default:
-        super.onSingleTapUp(e);
+        break;
     }
     return false;
   }
@@ -72,8 +60,10 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    * Called when the activity is first created.
    */
   /** */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
+    init(0, getString(R.string.display_settings_screen), getString(R.string.settings_help));
   }
 }

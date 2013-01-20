@@ -160,6 +160,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.blindroid.MainActivity" />
         </activity>
+        <activity
+            android:name="com.yp2012g4.blindroid.ContactsMenuActivity"
+            android:label="@string/title_activity_contacts_menu" >
+        </activity>
     </application>
 
 </manifest>

@@ -37,9 +37,12 @@ public class SetClockActivity extends BlindroidActivity {
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_set_clock);
+    init(0, getString(R.string.title_activity_set_clock), getString(R.string.set_clock_help));
+//    gestureScanner = new GestureDetector(this);
     Bundle b = getIntent().getExtras();
     type = b.getInt("type");
     cal = Calendar.getInstance();
@@ -86,7 +89,7 @@ public class SetClockActivity extends BlindroidActivity {
         setResult(-1);
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
-      case R.id.settings_button:
+      case R.id.tool_tip_button:
         speakOut("Settings");
         intent = new Intent(this, DisplaySettingsActivity.class);
         startActivity(intent);

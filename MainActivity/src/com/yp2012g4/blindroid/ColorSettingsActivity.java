@@ -6,7 +6,6 @@
  */
 package com.yp2012g4.blindroid;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
@@ -30,7 +29,8 @@ public class ColorSettingsActivity extends BlindroidActivity {
    * get the activity's main view ID
    * 
    */
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.ColorSettingsActivity;
   }
   
@@ -43,58 +43,51 @@ public class ColorSettingsActivity extends BlindroidActivity {
    *          - a View object on the screen
    */
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    Intent intent = new Intent(ColorSettingsActivity.this, MainActivity.class);
+    super.onSingleTapUp(e);
     if (curr_view instanceof TalkingButton)
       speakOut(((TalkingButton) curr_view).getReadText());
     switch (curr_view.getId()) {
       case R.id.WhiteBlack:
         changeSettings(R.color.WHITE, R.color.BLACK);
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.WhiteRed:
         changeSettings(R.color.WHITE, R.color.RED);
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.RedBlack:
         changeSettings(R.color.RED, R.color.BLACK);
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.WhiteGreen:
         changeSettings(R.color.WHITE, R.color.GREEN);
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.GreenBlack:
         changeSettings(R.color.GREEN, R.color.BLACK);
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.WhiteBlue:
         changeSettings(R.color.WHITE, R.color.BLUE);
+        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.BlueBlack:
         changeSettings(R.color.BLUE, R.color.BLACK);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
-      case R.id.back_button:
-        speakOut("Previous screen");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_color_settings));
-        return false;
       default:
         super.onSingleTapUp(e);
     }
-    mHandler.postDelayed(mLaunchTask, 1000);
     return false;
   }
   
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
+    init(0, getString(R.string.color_settings_screen), getString(R.string.color_setting_help));
   }
 }

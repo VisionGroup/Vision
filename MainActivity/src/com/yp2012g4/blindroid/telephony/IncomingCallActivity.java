@@ -1,14 +1,12 @@
 package com.yp2012g4.blindroid.telephony;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
-import com.yp2012g4.blindroid.DisplaySettingsActivity;
 import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -29,6 +27,7 @@ public class IncomingCallActivity extends BlindroidActivity {
    */
   @Override public void onClick(View v) {
     // callUtils.silenceRinger();
+    super.onClick(v);
     switch (v.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -39,18 +38,6 @@ public class IncomingCallActivity extends BlindroidActivity {
       case R.id.back_button:
         speakOut("Previous screen");
         mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        final Intent intent = new Intent(this, DisplaySettingsActivity.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        speakOut("Home");
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.phoneStatus_whereami));
         break;
       default:
         break;

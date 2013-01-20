@@ -12,7 +12,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -80,10 +80,10 @@ public class AlarmActivity extends BlindroidActivity {
     }
   }
   
-  @Override
-  public void onClick(View v) {
-    super.onClick(v);
-    switch (v.getId()) {
+  
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
+    switch (curr_view.getId()) {
       case R.id.statusButton:
         String s;
         if (alarmTime == null)
@@ -105,7 +105,7 @@ public class AlarmActivity extends BlindroidActivity {
         break;
       case R.id.cancelalarm:
         if (!alarmIsSet)
-          return;
+          return false;
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
         if (AlarmService.mp != null)
@@ -114,6 +114,7 @@ public class AlarmActivity extends BlindroidActivity {
         speakOut("Alarm is Canceled");
         break;
     }
+    return false;
   }
   
   /** Called when the activity is first created. */
@@ -121,6 +122,7 @@ public class AlarmActivity extends BlindroidActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
+    init(0, getString(R.string.title_activity_alarm), getString(R.string.alarm_clock_help));
   }
   
   /**

@@ -2,21 +2,19 @@ package com.yp2012g4.blindroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class MainActivity extends BlindroidActivity {
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.MainActivityView;
   }
   
-  @Override
-  public void onClick(View v) {
+@Override public boolean onSingleTapUp(MotionEvent e){
+    super.onSingleTapUp(e);
     Intent intent;
-    // speakOut(((Button) v).getText().toString());
-    switch (v.getId()) {
+    switch (curr_view.getId()) {
       case R.id.sos_button:
         intent = new Intent(MainActivity.this, SOSActivity.class);
         startActivity(intent);
@@ -35,43 +33,28 @@ public class MainActivity extends BlindroidActivity {
         break;
       case R.id.alarm_clock_button:
         intent = new Intent(MainActivity.this, AlarmActivity.class);
-        startActivity(intent);
+        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
-      case R.id.quick_dial_button:
-        speakOut("Quick dial");
-        intent = new Intent(MainActivity.this, QuickDialActivity.class);
-        startActivity(intent);
+      case R.id.contacts_button:
+        intent = new Intent(MainActivity.this, ContactsMenuActivity.class);
+        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
-      case R.id.quick_sms_button:
-        speakOut("Quick SMS");
-        intent = new Intent(MainActivity.this, QuickSMSActivity.class);
-        startActivity(intent);
+      case R.id.setting_button:
+        intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
+        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.read_sms_button:
         intent = new Intent(MainActivity.this, ReadSmsActivity.class);
         startActivity(intent);
         break;
-      case R.id.back_button:
-        break;
-      case R.id.settings_button:
-        // intent = new Intent(MainActivity.this,
-        // DisplaySettingsActivity.class);
-        intent = new Intent(MainActivity.this, DialScreen.class);
-        startActivity(intent);
-        break;
-      case R.id.home_button:
-        break;
-      case R.id.current_menu_button:
-        speakOut("This is " + "the home screen");
-        break;
       default:
         break;
     }
+    return false;
   }
   
   /** Called when the activity is first created. */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     PhoneNotifications pn = new PhoneNotifications(this);
@@ -83,15 +66,15 @@ public class MainActivity extends BlindroidActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current title
    */
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
     if (!hasFocus)
       return;
-    //VoiceNotify();
+    //TODO return this line when running on samsung...
+//     VoiceNotify();
   }
   
   public void VoiceNotify() {
@@ -122,6 +105,6 @@ public class MainActivity extends BlindroidActivity {
   }
   
   @Override public void onBackPressed() {
-    //do nothing
+    // do nothing
   }
 }

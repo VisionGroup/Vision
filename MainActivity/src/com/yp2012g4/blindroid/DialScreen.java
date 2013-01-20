@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
@@ -53,7 +54,8 @@ public class DialScreen extends BlindroidActivity {
     setContentView(R.layout.dial_screen);
   }
   
-  @Override public void onClick(View v) {
-    super.onClick(v);
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
+    return false;
   }
 }

@@ -34,7 +34,8 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
 		solo.assertCurrentActivity("wrong activity", SpeakingClockActivity.class);
 		Calendar cal = Calendar.getInstance();
 		String date = DateFormat.getDateInstance().format(cal.getTime());
-		assertTrue(solo.getText(1).getText().equals(date));
+		String text = solo.getText(0).getText().toString();
+		assertTrue(text.equals(date));
 		solo.clickOnText(date);
 		//TODO check if the time and date speaking is OK 
 	}

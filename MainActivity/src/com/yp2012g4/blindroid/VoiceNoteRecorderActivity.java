@@ -6,7 +6,7 @@ import java.util.HashSet;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 import com.yp2012g4.blindroid.tools.fileUtils;
@@ -42,9 +42,9 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity {
       _usingExternal = false;
   }
   
-  @Override public void onClick(View v) {
-    super.onClick(v);
-    switch (v.getId()) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
+    switch (curr_view.getId()) {
       case R.id.button_prevNote:
         _prevNote();
         break;
@@ -58,6 +58,7 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity {
         _recordStop();
         break;
     }
+    return false;
   }
   
   @SuppressWarnings("unused") private void _loadNoteList() {

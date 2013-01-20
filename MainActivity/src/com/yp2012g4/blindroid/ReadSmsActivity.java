@@ -6,7 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -26,10 +26,10 @@ public class ReadSmsActivity extends BlindroidActivity {
     return R.id.ReadSmsActivity;
   }
   
-  @Override public void onClick(View v) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    super.onClick(v);
-    switch (v.getId()) {
+    super.onSingleTapUp(e);
+    switch (curr_view.getId()) {
       case R.id.sms_next:
         if (currentMessage < messages.size()) {
           currentMessage++;
@@ -51,6 +51,7 @@ public class ReadSmsActivity extends BlindroidActivity {
         vb.vibrate(150);
         break;
     }
+    return false;
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {

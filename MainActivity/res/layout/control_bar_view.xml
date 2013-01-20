@@ -13,13 +13,13 @@
         style="?backgroundColor"  />
 
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
-        android:id="@+id/settings_button"
+        android:id="@+id/tool_tip_button"
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        custom:ReadText="@string/settings_button"
+        custom:ReadText="@string/Tool_tip_button"
         android:scaleType="fitCenter"
-        android:src="@drawable/settings_button"
+        android:src="@drawable/current_menu_button"
         android:background="@android:color/transparent"
         style="?backgroundColor" />
 
@@ -30,7 +30,7 @@
         android:layout_weight="1"
         custom:ReadText = "@string/current_menu_button"
         android:scaleType="fitCenter"
-        android:src="@drawable/current_menu_button"
+        android:src="@drawable/compass"
         android:background="@android:color/transparent"
         style="?backgroundColor"  />
     

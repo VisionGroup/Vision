@@ -2,14 +2,12 @@ package com.yp2012g4.blindroid;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.PhoneNotifications.CallData;
-import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -79,9 +77,10 @@ public class PhoneStatusActivity extends BlindroidActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public void onClick(View v) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
     final Resources res = getResources();
-    switch (v.getId()) {
+    switch (curr_view.getId()) {
       case R.id.button_getBatteryStatus:
         speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
             getChargeStatus()));
@@ -92,19 +91,10 @@ public class PhoneStatusActivity extends BlindroidActivity {
       case R.id.button_getMissedCalls:
         getMissedCalls();
         break;
-      case R.id.settings_button:
-        speakOut("Settings");
-        // final Intent intent = new Intent(this,
-        // DisplaySettingsActivity.class);
-        final Intent intent = new Intent(this, IncomingCallActivity.class);
-        startActivity(intent);
-        // TODO the settings button should call DisplaySettingsActivity. Need to
-        // delete these lines (already in super class) after changing back to
-        // DisplaySettingsActivity
-        break;
       default:
-        super.onClick(v);
+        break;
     }
+    return false;
   }
   
   /**

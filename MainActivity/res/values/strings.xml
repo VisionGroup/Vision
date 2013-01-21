@@ -6,6 +6,7 @@
     <string name="menu_settings">Settings</string>
     <string name="sos_button">S O S</string>
     <string name="time_button">Time</string>
+    <string name="date_button">Date</string>
     <string name="where_am_i_button">Where am i</string>
     <string name="phone_status_button">Phone status</string>
     <string name="signal_button">Signal</string>
@@ -37,7 +38,7 @@
     <string name="phoneStatus_whereami">Phone Status Menu</string>
     <string name="phoneStatus_help">You can press one of three buttons. \n1) to get Battery level and charger status \n2)to get Reception status. \n3)to get missed calles list</string>
     <string name="alarm_clock_help">You can press one of 4 buttons. \n1) to get alarm status \n2) to set the alarm time. \n3) to activate the alarm clock \n4) to cancel the alarm clock</string>
-    <string name="speaking_clock_help">press the middle of the screen to hear the time. \n press the upper part of the screen to hear the date</string>
+    <string name="speaking_clock_help">You can press one of 2 buttons. \n1) to hear the time \n2) to hear the date.</string>
     <string name="set_clock_help">fling your finger up to increase the time and down to decrease the time\n tap the screen to confirm </string>
     <string name="sos_help">tap screen to send a S O S message with your location </string>
     <string name="contacts_help">You can press one of three buttons. \n1) to go to your full contacts list \n2)to go to the dialer screen \n3)to go to your quick dial list</string>

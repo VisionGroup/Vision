@@ -9,7 +9,19 @@
     android:orientation="vertical"
    	tools:context=".ContactsMenuActivity" >
 	
-        
+     <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        android:id="@+id/quickDialButton"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/quick_dial_button"
+        android:scaleType="fitCenter"
+        android:text="@string/quick_dial_button"
+        android:src="@drawable/star"
+        custom:ReadText="@string/quick_dial_button" />
+     
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/contactsListButton"
         style="?textAppearance"
@@ -36,18 +48,7 @@
         android:src="@drawable/dialer"
         custom:ReadText="@string/Dialer" />
 
-    <com.yp2012g4.blindroid.customUI.TalkingImageButton
-        android:id="@+id/quickDialButton"
-        style="?textAppearance"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/quick_dial_button"
-        android:scaleType="fitCenter"
-        android:text="@string/quick_dial_button"
-        android:src="@drawable/star"
-        custom:ReadText="@string/quick_dial_button" />
+    
 
     <LinearLayout
         android:id="@+id/LinearLayout1"

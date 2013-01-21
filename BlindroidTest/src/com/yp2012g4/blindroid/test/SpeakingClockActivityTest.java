@@ -34,7 +34,7 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
 		solo.assertCurrentActivity("wrong activity", SpeakingClockActivity.class);
 		Calendar cal = Calendar.getInstance();
 		String date = DateFormat.getDateInstance().format(cal.getTime());
-		String text = solo.getText(0).getText().toString();
+		String text = solo.getText(1).getText().toString();
 		assertTrue(text.equals(date));
 		solo.clickOnText(date);
 		//TODO check if the time and date speaking is OK 
@@ -42,8 +42,13 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
 	
 	public void testCheckTime(){
 		solo.assertCurrentActivity("wrong activity", SpeakingClockActivity.class);
-		AnalogClock ac = (AnalogClock)activity.findViewById(R.id.analogClock1);
-		assertTrue(ac.isShown());
+		Calendar cal = Calendar.getInstance();
+		String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+        int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
+        String s = h + " : " + cal.get(Calendar.MINUTE) + " " + ampm;
+		String text = solo.getText(0).getText().toString();
+		assertTrue(text.equals(s));
+		solo.clickOnText(s);
 	}
 	
 	

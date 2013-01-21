@@ -6,19 +6,20 @@ package com.yp2012g4.blindroid;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.os.Bundle;
-import android.text.format.Time;
-import android.util.Log;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.AnalogClock;
-import android.widget.TextView;
 
+import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class SpeakingClockActivity extends BlindroidActivity {
+  final Handler handler = new Handler();
+  
   /**
    * transform the system current date to string
    * 
@@ -49,8 +50,21 @@ public class SpeakingClockActivity extends BlindroidActivity {
     return R.id.SpeakingClockSctivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
+    switch (curr_view.getId()) {
+      case R.id.TimeButton:
+        Calendar cal = Calendar.getInstance();
+        speakOut(parseTime(cal));
+        break;
+      case R.id.DateButton:
+        String d = getDateFormat();
+        speakOut(d);
+        break;
+      default:
+        break;
+    }
     return false;
   }
   
@@ -59,28 +73,28 @@ public class SpeakingClockActivity extends BlindroidActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
-    Time today = new Time(Time.getCurrentTimezone());
-    today.setToNow();
-    TextView tvh = (TextView) findViewById(R.id.textView1);
-    String date = getDateFormat();
-    tvh.setText(date);
-    tvh.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Log.i("MyLog", "DATEEEEEEEE");
-        String d = getDateFormat();
-        speakOut(d);
-      }
-    });
-    AnalogClock ac = (AnalogClock) findViewById(R.id.analogClock1);
-    ac.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Log.i("MyLog", "TIMEEEEEEEEE");
-        Calendar cal = Calendar.getInstance();
-        speakOut(parseTime(cal));
-      }
-    });
+    TalkingButton dateButton = (TalkingButton) findViewById(R.id.DateButton);
+    dateButton.setText(getDateFormat());
+    MyTimerTask myTask = new MyTimerTask();
+    Timer myTimer = new Timer();
+    myTimer.schedule(myTask, 100, 1000);
+  }
+  
+  class MyTimerTask extends TimerTask {
+    @Override
+    public void run() {
+      handler.post(new Runnable() {
+        @Override
+        public void run() {
+          TalkingButton timeButton = (TalkingButton) findViewById(R.id.TimeButton);
+          Calendar cal = Calendar.getInstance();
+          String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+          int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
+          String s = h + " : " + cal.get(Calendar.MINUTE) + " " + ampm;
+          timeButton.setText(s);
+        }
+      });
+    }
   }
   
   @Override

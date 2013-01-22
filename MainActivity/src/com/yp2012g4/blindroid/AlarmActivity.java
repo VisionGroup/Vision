@@ -80,8 +80,8 @@ public class AlarmActivity extends BlindroidActivity {
     }
   }
   
-  
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.statusButton:
@@ -112,6 +112,8 @@ public class AlarmActivity extends BlindroidActivity {
           AlarmService.mp.stop();
         alarmIsSet = false;
         speakOut("Alarm is Canceled");
+        break;
+      default:
         break;
     }
     return false;

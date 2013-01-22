@@ -62,8 +62,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * Mapping from buttons to their locations on screen
    */
-  private final Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
-  private final Map<TalkingImageButton, Rect> imageButton_to_rect = new HashMap<TalkingImageButton, Rect>();
+  protected final Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
   
   // ==================================================================
   // ===========================METHODS================================
@@ -121,10 +120,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return false;
   }
   
-  public Map<TalkingImageButton, Rect> getImageButton_to_rect() {
-    return imageButton_to_rect;
-  }
-  
   /**
    * In this overridden function we gather the buttons positions of the current
    * activity and make them all listen to onTouch and onClick.
@@ -135,16 +130,17 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   @Override
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    ViewGroup mainView = (ViewGroup) findViewById(getViewId());
+    View mainView = findViewById(getViewId());
     getButtonsPosition(mainView);
     for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
       entry.getKey().setOnClickListener(this);
       entry.getKey().setOnTouchListener(this);
     }
     // reads layout description out loud
-    if (hasFocus && findViewById(getViewId()).getContentDescription() != null) {
-      DisplaySettings.applyButtonSettings(view_to_rect.keySet());
-      speakOut(findViewById(getViewId()).getContentDescription().toString());
+    if (hasFocus) {
+      DisplaySettings.applyButtonSettings(view_to_rect.keySet(), mainView);
+      if (findViewById(getViewId()).getContentDescription() != null)
+        speakOut(findViewById(getViewId()).getContentDescription().toString());
     }
   }
   
@@ -220,7 +216,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       speakOut("start");
     else
       Log.e("onTouchEventClass", "tts init error");
-    DisplaySettings.setThemeToActivity(this);
+    //DisplaySettings.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     mHandler = new Handler();
     gestureDetector = new GestureDetector(this);
@@ -239,7 +235,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       return;
     }
     if (v instanceof TalkingImageButton) {
-      imageButton_to_rect.put((TalkingImageButton) v, rect);
       view_to_rect.put(v, rect);
       return;
     }

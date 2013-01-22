@@ -8,7 +8,6 @@ package com.yp2012g4.blindroid;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
-
 import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
@@ -90,4 +89,5 @@ public class ColorSettingsActivity extends BlindroidActivity {
     setContentView(R.layout.activity_color_settings);
     init(0, getString(R.string.color_settings_screen), getString(R.string.color_setting_help));
   }
+  
 }

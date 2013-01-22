@@ -23,7 +23,7 @@ public class DialScreen extends BlindroidActivity {
     // Get instance of Vibrator from current Context
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // Vibrate for 300 milliseconds
-    vb.vibrate(300);
+    vb.vibrate(100);
     if (v.getId() == R.id.OK_button) {
       final Intent returnIntent = new Intent();
       returnIntent.putExtra("result", dialed_number);
@@ -45,7 +45,7 @@ public class DialScreen extends BlindroidActivity {
       read_number = read_number + ((TalkingButton) v).getText() + " ";
     }
     ((TalkingButton) findViewById(R.id.number)).setText(dialed_number.toCharArray(), 0, dialed_number.length());
-    ((TalkingButton) findViewById(R.id.number)).setContentDescription(read_number);
+    ((TalkingButton) findViewById(R.id.number)).setReadText(read_number);
   }
   
   /** Called when the activity is first created. */

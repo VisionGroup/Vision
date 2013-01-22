@@ -9,13 +9,13 @@ package com.yp2012g4.blindroid;
 import java.util.Set;
 
 import com.yp2012g4.blindroid.R;
+import com.yp2012g4.blindroid.customUI.TalkingButton;
 import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 import android.graphics.PorterDuff.Mode;
 import android.util.SparseIntArray;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.graphics.Color;
 
 import android.app.Activity;
@@ -77,18 +77,21 @@ public class DisplaySettings {
    * @param v
    *          - main view of an activity
    */
-	public static void applyButtonSettings (Set<View> vs) {
+	public static void applyButtonSettings (Set<View> vs, View mainView) {
+	  mainView.setBackgroundColor(color_to_string.get(backgroundColor));
 	  for (View v : vs) {
-	    if (v instanceof LinearLayout)
-	      v.setBackgroundColor(color_to_string.get(backgroundColor));
-	    else if (v instanceof TalkingImageButton) {
+	    if (v instanceof TalkingImageButton) {
 	      if (textColor == R.color.WHITE)
 	        ((ImageView)v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
 	      else
 	        ((ImageView)v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
 	    }
-	    else
-	      ((Button)v).setTextSize(textSize);
+	    else if (v instanceof TextView){
+	      if (mainView.getId() != R.id.ColorSettingsActivity)
+          ((TextView)v).setTextColor(color_to_string.get(textColor));
+	      if (mainView.getId() != R.id.ThemeSettingsActivity)
+	        ((TextView)v).setTextSize(textSize);
+	    }
 	  }
 	      
 	}

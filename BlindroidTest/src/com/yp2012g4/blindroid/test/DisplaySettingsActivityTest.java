@@ -12,7 +12,6 @@ import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.ColorSettingsActivity;
 import com.yp2012g4.blindroid.DisplaySettings;
 import com.yp2012g4.blindroid.DisplaySettingsActivity;
-import com.yp2012g4.blindroid.DisplaySettingsApplication;
 import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.ThemeSettingsActivity;
 

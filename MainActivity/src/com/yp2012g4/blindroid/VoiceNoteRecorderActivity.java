@@ -57,6 +57,8 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity {
       case R.id.button_recordStop:
         _recordStop();
         break;
+      default:
+        break;
     }
     return false;
   }
@@ -69,21 +71,21 @@ public class VoiceNoteRecorderActivity extends BlindroidActivity {
         // TODO add better error handling!
         return;
       }
-      File[] files = _notesDir.listFiles();
+      final File[] files = _notesDir.listFiles();
       if (files == null) {
         Log.e(LOG_TAG, "Unable to list files in directory");
         // TODO add better error handling!
         return;
       }
-      HashSet<Integer> notesAvailable = new HashSet<Integer>();
-      for (File file : files)
+      final HashSet<Integer> notesAvailable = new HashSet<Integer>();
+      for (final File file : files)
         if (file.getName().length() > 0)
           if (fileUtils.getFileExtension(file.getName()) == TYPES.THREE_GPP) {
-            String fileName = fileUtils.getFileNameOnly(file.getName());
+            final String fileName = fileUtils.getFileNameOnly(file.getName());
             if (fileName != null)
               try {
                 notesAvailable.add(Integer.valueOf(fileName));
-              } catch (Exception e) {
+              } catch (final Exception e) {
                 Log.e(LOG_TAG, "Failed to convert filename to int");
               }
           }

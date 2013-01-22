@@ -1,10 +1,11 @@
 package com.yp2012g4.blindroid.test;
 
-import java.util.Map;
+import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.graphics.Rect;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.blindroid.R;
@@ -39,8 +40,8 @@ public class SOSActivityTest extends
 	final TalkingImageButton sos = (TalkingImageButton) activity
 		.findViewById(R.id.Send_SOS_Message);
 	assertTrue(sos.isShown());
-	for (final Map.Entry<TalkingImageButton, Rect> entry : ((VisionGestureDetector) activity)
-		.getImageButton_to_rect().entrySet())
+	for (final Entry<View, Rect> entry : ((VisionGestureDetector) activity)
+		.getView_to_rect().entrySet())
 	    if (entry.getKey().equals(sos))
 		assertEquals(entry.getKey(), sos);
 	    else

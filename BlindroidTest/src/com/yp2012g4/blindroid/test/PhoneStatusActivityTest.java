@@ -4,7 +4,6 @@
 package com.yp2012g4.blindroid.test;
 
 import android.content.res.Resources;
-import android.os.BatteryManager;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;

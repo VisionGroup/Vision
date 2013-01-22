@@ -38,21 +38,19 @@ public class ThemeSettingsActivity extends BlindroidActivity {
       case R.id.Small_text_size_button:
         DisplaySettings.THEME = "SMALL";
         DisplaySettings.textSize = DisplaySettingsApplication.SMALL;
-        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.Normal_text_size_button:
         DisplaySettings.THEME = "DEFAULT";
         DisplaySettings.textSize = DisplaySettingsApplication.NORMAL;
-        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.Large_text_size_button:
         DisplaySettings.THEME = "LARGE";
         DisplaySettings.textSize = DisplaySettingsApplication.LARGE;
-        mHandler.postDelayed(mLaunchTask, 1000);
         break;
       default:
         break;
     }
+    mHandler.postDelayed(mLaunchTask, 1000);
     return false;
   }
   

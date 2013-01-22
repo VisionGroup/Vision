@@ -29,7 +29,7 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  * the (blind) user
  * 
  * @author Amir
- * @version 1.0
+ * @version 1.1
  */
 public abstract class VisionGestureDetector extends Activity implements OnClickListener, TextToSpeech.OnInitListener,
     OnGestureListener, OnTouchListener {
@@ -155,12 +155,13 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return gestureDetector.onTouchEvent(event);
   }
   
- /**
-  * Checking whether a given has a button type
-  * 
-  * @param v the view to to be checked against a button type 
-  * @return true if the given view has a button type 
-  */
+  /**
+   * Checking whether a given has a button type
+   * 
+   * @param v
+   *          the view to to be checked against a button type
+   * @return true if the given view has a button type
+   */
   private static boolean isButtonType(View v) {
     return (v instanceof TalkingButton || v instanceof TalkingImageButton);
   }

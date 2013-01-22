@@ -179,7 +179,7 @@
                 android:text="@string/asterisk"
                 android:textSize="56sp"
                 android:textStyle="bold"
-                app:ReadText="@string/asterisk" />
+                app:ReadText="@string/asterisk_ReadText" />
 
             <com.yp2012g4.blindroid.customUI.TalkingButton
                 android:id="@+id/digit0"

@@ -20,7 +20,8 @@ public class PhoneStatusActivityTest extends
 	ActivityInstrumentationTestCase2<PhoneStatusActivity> {
     Resources res;
     private Solo solo;
-    private PhoneNotifications pn;
+
+    // private PhoneNotifications pn;
 
     public PhoneStatusActivityTest() {
 	super("com.yp2012g4.blindroid", PhoneStatusActivity.class);
@@ -36,12 +37,12 @@ public class PhoneStatusActivityTest extends
 	super.setUp();
 	solo = new Solo(getInstrumentation(), getActivity());
 	res = getInstrumentation().getContext().getResources();
-	pn = new PhoneNotifications(getActivity());
+	// pn = new PhoneNotifications(getActivity());
     }
 
     public void test_signalToPercent() {
 	solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
-	
+
 	PhoneNotifications.signal = 99;
 	assertEquals(getActivity().signalToString(), "No Signal");
 	PhoneNotifications.signal = 28;
@@ -56,7 +57,7 @@ public class PhoneStatusActivityTest extends
     }
 
     public void test_TalkingImageButton() {
-	TalkingImageButton tlkbtn = (TalkingImageButton) solo
+	final TalkingImageButton tlkbtn = (TalkingImageButton) solo
 		.getView(R.id.button_getBatteryStatus);
 	tlkbtn.setReadText("Test String");
 	assertEquals(tlkbtn.getReadText(), "Test String");

@@ -18,12 +18,6 @@ import com.yp2012g4.blindroid.telephony.IncomingCallActivity;
  * 
  */
 public class IncomingCallReceiver extends BroadcastReceiver {
-  // private ITelephony telephonyService;
-  // private static boolean rang = false;
-  /*
-   * private ArrayList<String> blackList = new ArrayList<String>(); private
-   * DBAdapter dbHelper; private Context ct; private boolean reject = false;
-   */
   private final static String TAG = "bd:IncomingCallReceiver";
   
   @Override public void onReceive(Context context, Intent intent) {
@@ -36,23 +30,12 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
-      // rang = true;
-      processIncomingCall(context, phonenumber);
+      // processIncomingCall(context, phonenumber);
     }
   }
   
-  @SuppressWarnings("static-method") private void processIncomingCall(Context context, String phonenumber) {
-    // final TelephonyManager telMan = (TelephonyManager)
-    // context.getSystemService(Context.TELEPHONY_SERVICE);
+  @SuppressWarnings({ "static-method", "unused" }) private void processIncomingCall(Context context, String phonenumber) {
     try {
-//      final Class classTemp = Class.forName(telMan.getClass().getName());
-//      final Method methodTemp = classTemp.getDeclaredMethod("getITelephony");
-//      methodTemp.setAccessible(true);
-//      telephonyService = (ITelephony) methodTemp.invoke(telMan);
-//      final Bundle bundle = intent.getExtras();
-//      final String phoneNumber = bundle.getString("incoming_number");
-//      Log.v(TAG, "Incomig call " + phoneNumber);
-//      telephonyService.endCall();
       Log.d(TAG, "Creatin IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);
       i.putExtra(CallUtils.RANG_KEY, true);

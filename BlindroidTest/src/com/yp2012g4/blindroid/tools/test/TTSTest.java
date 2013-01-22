@@ -20,6 +20,7 @@ public class TTSTest extends TestCase {
 	super.tearDown();
     }
 
+    @SuppressWarnings("static-method")
     public void testIsPureEnglise() {
 	assertTrue(TTS.isPureEnglise("Abcdefghijklmnopqrstuvwxyz"));
 	assertTrue(TTS

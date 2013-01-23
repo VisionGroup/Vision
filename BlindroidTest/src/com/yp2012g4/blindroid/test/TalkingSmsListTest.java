@@ -11,9 +11,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.blindroid.SmsReader;
-import com.yp2012g4.blindroid.SmsType;
 import com.yp2012g4.blindroid.TalkingSmsList;
+import com.yp2012g4.blindroid.managers.SmsManager;
+import com.yp2012g4.blindroid.managers.SmsType;
 
 public class TalkingSmsListTest extends
 		ActivityInstrumentationTestCase2<TalkingSmsList> {
@@ -35,7 +35,7 @@ public class TalkingSmsListTest extends
 		solo.assertCurrentActivity("wrong activity", TalkingSmsList.class);
 		TalkingSmsList tsl = (TalkingSmsList) activity;
 
-		SmsReader smsReader = new SmsReader(tsl.getApplicationContext());
+		SmsManager smsReader = new SmsManager(tsl.getApplicationContext());
 		ArrayList<SmsType> originalSmsList = smsReader.getIncomingMessages();
 		ArrayList<SmsType> fromActivityList = tsl.getDetails();
 

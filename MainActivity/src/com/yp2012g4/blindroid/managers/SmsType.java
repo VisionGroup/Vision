@@ -1,9 +1,7 @@
-package com.yp2012g4.blindroid;
+package com.yp2012g4.blindroid.managers;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract.PhoneLookup;
 import android.text.format.DateFormat;
 
 /**
@@ -42,16 +40,9 @@ public class SmsType {
     type = cur.getString(cur.getColumnIndexOrThrow("type")).toString();
     // subject = c.getString(c.getColumnIndexOrThrow("subject")).toString();
     body = cur.getString(cur.getColumnIndexOrThrow("body")).toString();
-    Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(address));
-    Cursor cs = context.getContentResolver().query(uri, new String[] { PhoneLookup.DISPLAY_NAME },
-        PhoneLookup.NUMBER + "='" + address + "'", null, null);
-    if (cs.getCount() > 0) {
-      cs.moveToFirst();
-      person = cs.getString(cs.getColumnIndex(PhoneLookup.DISPLAY_NAME));
-    }
-    if (person == "") {
-      person = address;
-    }
+    
+    ContactManager cm = new ContactManager(context);
+    person = cm.getNameFromPhone(address);
   }
   
   public synchronized String getAddress() {

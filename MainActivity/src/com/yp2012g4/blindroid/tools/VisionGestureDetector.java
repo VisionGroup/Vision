@@ -4,15 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
@@ -33,6 +36,13 @@ import com.yp2012g4.blindroid.customUI.TalkingImageButton;
  */
 public abstract class VisionGestureDetector extends Activity implements OnClickListener, TextToSpeech.OnInitListener,
     OnGestureListener, OnTouchListener {
+  /**
+   * for multitouch gesture detection
+   */
+  private static final int TIMEOUT = ViewConfiguration.getDoubleTapTimeout() + 100;
+  private long mFirstDownTime = 0;
+  private boolean mSeparateTouches = false;
+  private byte mTwoFingerTapCount = 0;
   /**
    * Stores the dimensions of a button
    */
@@ -112,6 +122,40 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return false;
   }
   
+  private void reset(long time) {
+    mFirstDownTime = time;
+    mSeparateTouches = false;
+    mTwoFingerTapCount = 0;
+  }
+  
+  public boolean onTwoFingerDoubleTap(MotionEvent event) {
+    switch (event.getActionMasked()) {
+      case MotionEvent.ACTION_DOWN:
+        if (mFirstDownTime == 0 || event.getEventTime() - mFirstDownTime > TIMEOUT)
+          reset(event.getDownTime());
+        break;
+      case MotionEvent.ACTION_POINTER_UP:
+        if (event.getPointerCount() == 2)
+          mTwoFingerTapCount++;
+        else
+          mFirstDownTime = 0;
+        break;
+      case MotionEvent.ACTION_UP:
+        if (!mSeparateTouches)
+          mSeparateTouches = true;
+        else if (mTwoFingerTapCount == 2 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
+          // open back door to tools.
+          Intent intent = new Intent(Settings.ACTION_SETTINGS);
+          intent.addCategory(Intent.CATEGORY_LAUNCHER);
+          startActivity(intent);
+          mFirstDownTime = 0;
+          return true;
+        }
+    }
+    return false;
+  }
+  
+ 
   public Map<View, Rect> getView_to_rect() {
     return view_to_rect;
   }
@@ -152,6 +196,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       onActionUp(last_button_view);
     }
     gestureDetector.setIsLongpressEnabled(false);
+    onTwoFingerDoubleTap(event);
     return gestureDetector.onTouchEvent(event);
   }
   

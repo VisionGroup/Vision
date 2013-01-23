@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MotionEvent;
 
 import com.yp2012g4.blindroid.customUI.TalkingButton;
+import com.yp2012g4.blindroid.managers.SmsManager;
+import com.yp2012g4.blindroid.managers.SmsType;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 /**
@@ -31,7 +33,7 @@ public class ReadSmsActivity extends BlindroidActivity {
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.sms_next:
-        if (currentMessage < messages.size()) {
+        if (currentMessage < messages.size()-1) {
           currentMessage++;
           setMessage();
           speakOut("message number " + (currentMessage + 1));
@@ -58,7 +60,7 @@ public class ReadSmsActivity extends BlindroidActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
-    SmsReader smsReader = new SmsReader(getApplicationContext());
+    SmsManager smsReader = new SmsManager(getApplicationContext());
     messages = smsReader.getIncomingMessages();
     setMessage();
   }

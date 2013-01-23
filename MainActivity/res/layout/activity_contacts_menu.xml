@@ -16,11 +16,11 @@
         android:layout_height="140dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/quick_dial_button"
+        android:contentDescription="@string/favorit_contacts_list"
         android:scaleType="fitCenter"
-        android:text="@string/quick_dial_button"
+        android:text="@string/favorit_contacts_list"
         android:src="@drawable/star"
-        custom:ReadText="@string/quick_dial_button" />
+        custom:ReadText="@string/favorit_contacts_list" />
      
     <com.yp2012g4.blindroid.customUI.TalkingImageButton
         android:id="@+id/contactsListButton"

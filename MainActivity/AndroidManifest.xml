@@ -105,15 +105,6 @@
             android:theme="@android:style/Theme.Translucent" >
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.TalkingSmsList"
-            android:label="@string/title_activity_talking_sms_list"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.blindroid.MainActivity" />
-        </activity>
-        <activity
             android:name="com.yp2012g4.blindroid.WhereAmIActivity"
             android:label="@string/title_activity_where_am_i"
             android:screenOrientation="portrait" >

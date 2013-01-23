@@ -53,8 +53,7 @@ public class PhoneNotifications {
     protected SignalStrengthListener() {
     }
     
-    @Override
-    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
       // get the signal strength (a value between 0 and 31)
       signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
@@ -115,7 +114,12 @@ public class PhoneNotifications {
   public ArrayList<CallData> getMissedCallsList() {
     String[] projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
     String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-    Cursor cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, projection, where, null, null);
+    Cursor cur;
+    try {
+      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, projection, where, null, null);
+    } catch (Exception e) {
+      return new ArrayList<CallData>();
+    }
     ArrayList<CallData> al = new ArrayList<CallData>();
     while (cur.moveToNext()) {
       CallData call = new CallData(cur.getString(0), cur.getString(1), cur.getLong(2));
@@ -131,7 +135,12 @@ public class PhoneNotifications {
    */
   public int getMissedCallsNum() {
     String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-    Cursor cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, where, null, null);
+    Cursor cur;
+    try {
+      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, where, null, null);
+    } catch (Exception e) {
+      return 0;
+    }
     return cur.getCount();
   }
   

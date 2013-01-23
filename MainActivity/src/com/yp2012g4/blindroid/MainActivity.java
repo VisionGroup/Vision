@@ -72,7 +72,7 @@ public class MainActivity extends BlindroidActivity {
       return;
     // TODO next line crashes emulator...so return it if you run on your
     // smartphone!
-//    VoiceNotify();
+    VoiceNotify();
   }
   
   public void VoiceNotify() {
@@ -103,6 +103,6 @@ public class MainActivity extends BlindroidActivity {
   }
   
   @Override public void onBackPressed() {
-    // do nothing
+    speakOut("In main screen");
   }
 }

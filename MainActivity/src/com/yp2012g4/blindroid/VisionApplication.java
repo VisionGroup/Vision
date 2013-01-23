@@ -6,18 +6,17 @@
  */
 package com.yp2012g4.blindroid;
 
-import android.app.Activity;
-import android.app.Application;
 import java.util.Set;
 
-import com.yp2012g4.blindroid.R;
-import com.yp2012g4.blindroid.customUI.TalkingImageButton;
+import android.app.Activity;
+import android.app.Application;
+import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.graphics.Color;
+
+import com.yp2012g4.blindroid.customUI.TalkingImageButton;
 
 public class VisionApplication extends Application {
 	

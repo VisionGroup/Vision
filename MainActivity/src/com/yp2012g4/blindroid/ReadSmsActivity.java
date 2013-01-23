@@ -86,8 +86,4 @@ public class ReadSmsActivity extends BlindroidActivity {
       speakOut("No messages");
     }
   }
-  
-  @Override public void onBackPressed() {
-    // do nothing
-  }
 }

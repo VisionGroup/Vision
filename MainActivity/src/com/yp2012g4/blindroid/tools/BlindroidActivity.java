@@ -103,4 +103,9 @@ public abstract class BlindroidActivity extends VisionGestureDetector {
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
   }
+  
+  @Override public void onBackPressed() {
+    speakOut("Previous screen");
+    mHandler.postDelayed(mLaunchTask, 1000);
+  }
 }

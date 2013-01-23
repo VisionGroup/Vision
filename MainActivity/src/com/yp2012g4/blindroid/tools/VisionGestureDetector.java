@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -43,6 +45,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private long mFirstDownTime = 0;
   private boolean mSeparateTouches = false;
   private byte mTwoFingerTapCount = 0;
+  
+  
   /**
    * Stores the dimensions of a button
    */
@@ -84,10 +88,14 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   @Override public boolean onDown(MotionEvent e) {
     Log.i("MyLog", "onDown");
     last_button_view = getView(e.getRawX(), e.getRawY());
-    if (last_button_view instanceof TalkingButton)
+    if (last_button_view instanceof TalkingButton){
+      hapticFeedback();
       speakOut(((TalkingButton) last_button_view).getReadText());
-    if (last_button_view instanceof TalkingImageButton)
+    }
+    if (last_button_view instanceof TalkingImageButton){
+      hapticFeedback();
       speakOut(((TalkingImageButton) last_button_view).getReadText());
+    }
     return true;
   }
   
@@ -102,11 +110,13 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 //    Log.i("MyLog", "onScroll");
+    
     if (e2.getAction() == MotionEvent.ACTION_MOVE)
       for (Map.Entry<View, Rect> entry : view_to_rect.entrySet())
         if (isButtonType(entry.getKey()))
           if (entry.getValue().contains((int) e2.getRawX(), (int) e2.getRawY()))
             if (last_button_view != entry.getKey()) {
+              hapticFeedback();
               speakOut(textToRead(entry.getKey()));
               last_button_view = entry.getKey();
             } else
@@ -355,4 +365,12 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       finish();
     }
   };
+  /**
+   * vibration during touch.
+   */
+  private void hapticFeedback(){
+    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    vb.vibrate(20);
+  }
+  
 }

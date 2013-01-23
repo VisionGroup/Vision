@@ -79,6 +79,9 @@ public class ReadSmsActivity extends BlindroidActivity {
       fromButton.setText(messages.get(currentMessage).getPerson());
       bodyButton.setText(messages.get(currentMessage).getBody());
       dateButton.setText(messages.get(currentMessage).getDate());
+      fromButton.setReadText(messages.get(currentMessage).getPerson());
+      bodyButton.setReadText(messages.get(currentMessage).getBody());
+      dateButton.setReadText(messages.get(currentMessage).getDate());
     } else {
       speakOut("No messages");
     }

@@ -17,13 +17,17 @@ public class ContactsMenuActivity extends BlindroidActivity {
     Intent intent;
     switch (curr_view.getId()) {
       case R.id.contactsListButton:
+        intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
+        intent.putExtra(ContactsActivity.LIST_TYPE, "all");
+        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.dialerButton:
         intent = new Intent(ContactsMenuActivity.this, DialScreen.class);
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.quickDialButton:
-        intent = new Intent(ContactsMenuActivity.this, QuickDialActivity.class);
+        intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
+        intent.putExtra(ContactsActivity.LIST_TYPE, "favorits");
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
     }

@@ -1,16 +1,17 @@
-package com.yp2012g4.blindroid;
+package com.yp2012g4.blindroid.managers;
 
 import java.util.ArrayList;
+
 
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-public class SmsReader {
+public class SmsManager {
 
 	Context c;
 
-	public SmsReader(Context c) {
+	public SmsManager(Context c) {
 		this.c = c;
 	}
 

@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yp2012g4.blindroid.R;
-import com.yp2012g4.blindroid.SmsType;
+import com.yp2012g4.blindroid.managers.SmsType;
 
 public class SmsAdapter extends BaseAdapter {
 

@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import com.yp2012g4.blindroid.customUI.lists.SmsAdapter;
 import com.yp2012g4.blindroid.customUI.lists.TalkingListView;
 import com.yp2012g4.blindroid.customUI.lists.ViewListRun;
+import com.yp2012g4.blindroid.managers.SmsManager;
+import com.yp2012g4.blindroid.managers.SmsType;
 import com.yp2012g4.blindroid.tools.MultiTouchRun;
 
 /**
@@ -63,7 +65,7 @@ public class TalkingSmsList extends Activity implements OnInitListener {
     setContentView(R.layout.activity_talking_sms_list);
     viewList = (TalkingListView) findViewById(R.id.TalkingSmsListView);
     tts = new TextToSpeech(getApplicationContext(), this);
-    SmsReader smsReader = new SmsReader(getApplicationContext());
+    SmsManager smsReader = new SmsManager(getApplicationContext());
     details = smsReader.getIncomingMessages();
     viewList.setAdapter(new SmsAdapter(details, this));
     viewList.setRun(new ViewListRun() {

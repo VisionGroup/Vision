@@ -74,6 +74,7 @@ public class ContactsActivity extends BlindroidActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts);
+    init(0,"Contacts screen","Touch on screen to select contact with next and previous buttons... Call or send message to current contact");
     ContactManager contactManager = new ContactManager(getApplicationContext());
     final Bundle extras = getIntent().getExtras();
     String listType = "all";

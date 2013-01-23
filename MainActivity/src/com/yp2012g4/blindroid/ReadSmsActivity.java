@@ -60,6 +60,7 @@ public class ReadSmsActivity extends BlindroidActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
+    init(0,"Read SMS screen","Touch on screen to read messages, press next or previous message");
     SmsManager smsReader = new SmsManager(getApplicationContext());
     messages = smsReader.getIncomingMessages();
     setMessage();

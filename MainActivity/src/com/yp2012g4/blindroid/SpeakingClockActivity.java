@@ -4,7 +4,7 @@
  */
 package com.yp2012g4.blindroid;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,7 +27,9 @@ public class SpeakingClockActivity extends BlindroidActivity {
    */
   public static String getDateFormat() {
     Calendar cal = Calendar.getInstance();
-    String date = DateFormat.getDateInstance().format(cal.getTime());
+    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+    String date = df.format(cal.getTime());
+    // String date = DateFormat.getDateInstance().format(cal.getTime());
     return date;
   }
   

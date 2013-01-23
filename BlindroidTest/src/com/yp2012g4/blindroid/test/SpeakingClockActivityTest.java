@@ -9,10 +9,8 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.AnalogClock;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.blindroid.R;
 import com.yp2012g4.blindroid.SpeakingClockActivity;
 
 public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<SpeakingClockActivity> {

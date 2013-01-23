@@ -2,6 +2,7 @@ package com.yp2012g4.blindroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
@@ -24,10 +25,19 @@ public class DialScreen extends BlindroidActivity {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // Vibrate for 300 milliseconds
     vb.vibrate(100);
-    if (v.getId() == R.id.OK_button) {
-      final Intent returnIntent = new Intent();
-      returnIntent.putExtra("result", dialed_number);
-      setResult(RESULT_OK, returnIntent);
+    if (v.getId() == R.id.dialer_dial_button) {
+      //final Intent returnIntent = new Intent();
+      //returnIntent.putExtra("result", dialed_number);
+      //setResult(RESULT_OK, returnIntent);
+      Intent call = new Intent(Intent.ACTION_CALL);
+      call.setData(Uri.parse("tel:" + dialed_number));
+      startActivity(call);
+      finish();
+    }
+    if (v.getId() == R.id.dialer_sms_button) {
+      Intent i = new Intent(getApplicationContext(), QuickSMSActivity.class);
+      i.putExtra("number", dialed_number);
+      startActivity(i);
       finish();
     }
     if (v.getId() == R.id.button_reset) {

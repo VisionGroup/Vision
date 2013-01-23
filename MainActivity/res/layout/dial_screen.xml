@@ -235,18 +235,25 @@
             android:src="@drawable/reset_button"
             app:ReadText="@string/reset_button_read" />
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
-            android:id="@+id/OK_button"
-            style="?textAppearance"
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/dialer_dial_button"
             android:layout_width="0dip"
             android:layout_height="62dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            android:text="@string/OK_button"
-            android:textSize="56sp"
-            android:textStyle="bold"
-            app:ReadText="@string/OK_button" />
+            android:src="@drawable/quick_dial_button"
+            app:ReadText="@string/quick_dial_button" />
+        
+        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+            android:id="@+id/dialer_sms_button"
+            android:layout_width="0dip"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/quick_sms_button"
+            app:ReadText="@string/quick_sms_button" />
     </LinearLayout>
 
     <LinearLayout

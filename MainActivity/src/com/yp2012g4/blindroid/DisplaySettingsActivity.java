@@ -15,13 +15,11 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    * get the activity's main view ID
    * 
    */
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.displaySettingsActivity;
   }
   
-  @Override
-  public void onBackPressed() {
+  @Override public void onBackPressed() {
     // TODO Auto-generated method stub
     super.onBackPressed();
     DisplaySettingsActivity.this.finish();
@@ -35,12 +33,9 @@ public class DisplaySettingsActivity extends BlindroidActivity {
    * @param v
    *          - a View object on the screen
    */
-@Override public boolean onSingleTapUp(MotionEvent e) {
-super.onSingleTapUp(e);
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
     Intent intent;
-//    if (v instanceof TalkingImageButton)
-//      speakOut(((TalkingImageButton) v).getReadText());
-//    Intent intent = new Intent(DisplaySettingsActivity.this, MainActivity.class);
     switch (curr_view.getId()) {
       case R.id.button_set_colors:
         intent = new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class);
@@ -60,8 +55,7 @@ super.onSingleTapUp(e);
    * Called when the activity is first created.
    */
   /** */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
     init(0, getString(R.string.display_settings_screen), getString(R.string.settings_help));

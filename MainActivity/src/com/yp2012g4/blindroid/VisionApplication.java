@@ -89,12 +89,12 @@ public class VisionApplication extends Application {
         else
           ((ImageView)v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
       }
-      else if (v instanceof TextView){
+      /*else if (v instanceof TextView){
         if (mainView.getId() != R.id.ColorSettingsActivity)
           ((TextView)v).setTextColor(color_to_string.get(textColor));
         if (mainView.getId() != R.id.ThemeSettingsActivity)
           ((TextView)v).setTextSize(textSize);
-      }
+      }*/
     }
         
   }

@@ -79,14 +79,14 @@ public class ContactsActivity extends BlindroidActivity {
     String listType = "all";
     if (extras != null)
       try {
-        listType = extras.getString(LIST_TYPE);
+        listType = extras.getString(ContactsActivity.LIST_TYPE);
       } catch (final Exception e) {
         listType = "all";
       }
-    if (listType == "all") {
+    if (listType.equalsIgnoreCase("all")) {
       contacts = contactManager.getAllContacts();
       findViewById(getViewId()).setContentDescription("Contact list screen");
-    } else {
+    } else if (listType.equalsIgnoreCase("favorits")){
       contacts = contactManager.getFavoriteContacts();
       findViewById(getViewId()).setContentDescription("Favorit contacts screen");
     }

@@ -26,7 +26,7 @@ public class ContactsMenuActivity extends BlindroidActivity {
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.quickDialButton:
-        intent = new Intent(ContactsMenuActivity.this, QuickDialActivity.class);
+        intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
         intent.putExtra(ContactsActivity.LIST_TYPE, "favorits");
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;

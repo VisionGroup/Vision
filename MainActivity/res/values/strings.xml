@@ -41,7 +41,7 @@
     <string name="speaking_clock_help">You can press one of 2 buttons. \n1) to hear the time \n2) to hear the date.</string>
     <string name="set_clock_help">fling your finger up to increase the time and down to decrease the time\n tap the screen to confirm </string>
     <string name="sos_help">tap screen to send a S O S message with your location </string>
-    <string name="contacts_help">You can press one of three buttons. \n1) to go to your full contacts list \n2)to go to the dialer screen \n3)to go to your quick dial list</string>
+    <string name="contacts_help">You can press one of three buttons. \n1) to go to your Favorite contacts screen \n2)to go to your full contacts screen \n3) to go to the dialer screen</string>
     <string name="settings_help">You can press one of two buttons. \n1) to go to the color setting screen. \n2) to go the text size setting screen</string>
     <string name="color_setting_help">You can press one of 7 buttons. each button is a different color setting for the system</string>
     <string name="size_setting_help">You can press one of 3 buttons. each button is different text size for the system\n the upper button is the smallest size and the bottom button is the largest</string>
@@ -156,6 +156,6 @@
     <string name="previous_contact">Previous contact</string>
     <string name="call_contact">Call contact</string>
     <string name="send_quick_sms">send quick sms</string>
-    <string name="favorit_contacts_list">favorit contacts</string>
+    <string name="favorit_contacts_list">Favorite contacts</string>
 
 </resources>

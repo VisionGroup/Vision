@@ -8,9 +8,7 @@ package com.yp2012g4.blindroid;
 
 import java.util.Calendar;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
@@ -24,15 +22,16 @@ public class SetClockActivity extends BlindroidActivity {
   // Can be either HOUR_CODE or MIN_CODE
   private int type;
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.set_alarm_view;
   }
   
   /**
    * In order that the back key will be the same as the control bar's back
    */
-  @Override public void onBackPressed() {
-    speakOut("Previous screen");
+  @Override
+  public void onBackPressed() {
     setResult(-1);
     mHandler.postDelayed(mLaunchTask, 1000);
   }
@@ -62,16 +61,11 @@ public class SetClockActivity extends BlindroidActivity {
     tvTitle.setText(t);
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.activity_set_clock, menu);
-    return true;
-  }
-  
   /**
    * change the displayed time when user fling the screen
    */
-  @Override public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
+  @Override
+  public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
     int change = start.getRawY() < finish.getRawY() ? -1 : 1;
     int field = type == HOUR_CODE ? Calendar.HOUR_OF_DAY : Calendar.MINUTE;
     cal.roll(field, change);
@@ -81,40 +75,31 @@ public class SetClockActivity extends BlindroidActivity {
     return true;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    Intent intent = new Intent(SetClockActivity.this, MainActivity.class);
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.back_button:
-        speakOut("Previous screen");
         setResult(-1);
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
+        //$FALL-THROUGH$
       case R.id.tool_tip_button:
-        speakOut("Settings");
-        intent = new Intent(this, DisplaySettingsActivity.class);
-        startActivity(intent);
-        break;
       case R.id.home_button:
-        speakOut("Home");
-        setResult(-2);
-        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        break;
       case R.id.current_menu_button:
-        speakOut("This is " + getString(R.string.title_activity_set_clock));
         break;
       default:
         int result = Integer.valueOf(tvNum.getText().toString()).intValue();
         setResult(result);
         finish();
     }
-    return true;
+    return false;
   }
   
   /**
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current title
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override
+  public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity

@@ -7,12 +7,15 @@ import android.view.MotionEvent;
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
 
 public class ContactsMenuActivity extends BlindroidActivity {
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts_menu);
+    init(0, getString(R.string.title_activity_contacts_menu), getString(R.string.contacts_help));
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     Intent intent;
     switch (curr_view.getId()) {
@@ -30,11 +33,14 @@ public class ContactsMenuActivity extends BlindroidActivity {
         intent.putExtra(ContactsActivity.LIST_TYPE, "favorits");
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
+      default:
+        break;
     }
     return false;
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.ContactsMenuActivity;
   }
 }

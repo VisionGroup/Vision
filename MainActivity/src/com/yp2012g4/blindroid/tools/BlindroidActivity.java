@@ -66,7 +66,6 @@ public abstract class BlindroidActivity extends VisionGestureDetector {
           speakOut("In main screen");
           break;
         }
-        speakOut("Previous screen");
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.tool_tip_button:
@@ -75,7 +74,6 @@ public abstract class BlindroidActivity extends VisionGestureDetector {
         break;
       case R.id.home_button:
         clickFlag = true;
-        speakOut("Home");
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.current_menu_button:

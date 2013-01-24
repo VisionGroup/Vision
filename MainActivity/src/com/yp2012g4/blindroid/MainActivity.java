@@ -11,7 +11,7 @@ public class MainActivity extends BlindroidActivity {
     return R.id.MainActivityView;
   }
   
-  @SuppressWarnings("null") @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     if (clickFlag) {
       clickFlag = false;
@@ -46,7 +46,9 @@ public class MainActivity extends BlindroidActivity {
       default:
         break;
     }
-    startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    if (intent != null) { //if tapping outside of any button
+      startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    }
     return false;
   }
   
@@ -72,7 +74,7 @@ public class MainActivity extends BlindroidActivity {
       return;
     // TODO next line crashes emulator...so return it if you run on your
     // smartphone!
-    VoiceNotify();
+//    VoiceNotify();
   }
   
   public void VoiceNotify() {

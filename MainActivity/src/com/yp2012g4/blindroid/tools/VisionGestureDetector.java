@@ -45,8 +45,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private long mFirstDownTime = 0;
   private boolean mSeparateTouches = false;
   private byte mTwoFingerTapCount = 0;
-  
-  
   /**
    * Stores the dimensions of a button
    */
@@ -72,7 +70,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * Flag indicating a click on control bar button
    */
   protected boolean clickFlag;
-
   /**
    * Mapping from views to their locations on screen
    */
@@ -87,15 +84,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onDown(MotionEvent e) {
     Log.i("MyLog", "onDown");
-    last_button_view = getView(e.getRawX(), e.getRawY());
-    if (last_button_view instanceof TalkingButton){
-      hapticFeedback();
-      speakOut(((TalkingButton) last_button_view).getReadText());
-    }
-    if (last_button_view instanceof TalkingImageButton){
-      hapticFeedback();
-      speakOut(((TalkingImageButton) last_button_view).getReadText());
-    }
+    last_button_view = getView(e.getRawX(), e.getRawY()); // updating curr_view (inside getView())
     return true;
   }
   
@@ -109,8 +98,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   }
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//    Log.i("MyLog", "onScroll");
-    
     if (e2.getAction() == MotionEvent.ACTION_MOVE)
       for (Map.Entry<View, Rect> entry : view_to_rect.entrySet())
         if (isButtonType(entry.getKey()))
@@ -126,6 +113,14 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public void onShowPress(MotionEvent e) {
     Log.i("MyLog", "onShowPress");
+    if (last_button_view instanceof TalkingButton) {
+      hapticFeedback();
+      speakOut(((TalkingButton) last_button_view).getReadText());
+    }
+    if (last_button_view instanceof TalkingImageButton) {
+      hapticFeedback();
+      speakOut(((TalkingImageButton) last_button_view).getReadText());
+    }
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
@@ -166,7 +161,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return false;
   }
   
- 
   public Map<View, Rect> getView_to_rect() {
     return view_to_rect;
   }
@@ -187,7 +181,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       entry.getKey().setOnTouchListener(this);
     }
     // reads layout description out loud
-    if (hasFocus)  {
+    if (hasFocus) {
       VisionApplication.applyButtonSettings(view_to_rect.keySet(), mainView);
       if (findViewById(getViewId()).getContentDescription() != null)
         speakOut(findViewById(getViewId()).getContentDescription().toString());
@@ -365,12 +359,12 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       finish();
     }
   };
+  
   /**
    * vibration during touch.
    */
-  private void hapticFeedback(){
+  private void hapticFeedback() {
     Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     vb.vibrate(20);
   }
-  
 }

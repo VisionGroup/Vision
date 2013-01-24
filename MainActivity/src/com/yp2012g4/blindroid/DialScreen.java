@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -61,11 +63,19 @@ public class DialScreen extends BlindroidActivity {
   /** Called when the activity is first created. */
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    telephone();
     setContentView(R.layout.dial_screen);
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     return false;
+  }
+  
+  public void telephone() {
+    TelephonyManager telephonyManager;
+    EndCallListener callListener = new EndCallListener(getApplicationContext());
+    telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    telephonyManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE);
   }
 }

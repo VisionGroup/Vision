@@ -14,13 +14,13 @@
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Small_text_size_button"
+            style="?textAppearance"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/small_text_size_button"
             android:textSize="20sp"
-            android:textColor="@color/WHITE"
             app:ReadText="@string/small_text_size_button" />
     </LinearLayout>
 
@@ -30,13 +30,13 @@
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Normal_text_size_button"
+            style="?textAppearance"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/normal_text_size_button"
             android:textSize="26sp"
-            android:textColor="@color/WHITE"
             app:ReadText="@string/normal_text_size_button" />
     </LinearLayout>
 
@@ -46,13 +46,13 @@
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Large_text_size_button"
+            style="?textAppearance"
             android:layout_width="0dip"
             android:layout_height="120dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/large_text_size_button"
             android:textSize="32sp"
-            android:textColor="@color/WHITE"
             app:ReadText="@string/large_text_size_button" />
     </LinearLayout>
 

@@ -81,6 +81,7 @@ public class TTS {
   public static boolean isPureEnglise(String s) {
     if (s == null)
       return true;
-    return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
+    return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();
+    //return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
   }
 }

@@ -26,7 +26,6 @@ public class VisionApplication extends Application {
   
   private static SparseIntArray color_to_string = new SparseIntArray();
   public static float textSize = VisionApplication.NORMAL;
-  static String THEME="";
   private static int textColor = R.color.WHITE;
   private static int backgroundColor = R.color.BLACK;
   
@@ -108,7 +107,7 @@ public class VisionApplication extends Application {
  public static void setThemeToActivity(Activity act)
   {
   
-   if (DisplaySettings.textSize == VisionApplication.LARGE) {
+   if (textSize == VisionApplication.LARGE) {
      if (backgroundColor == R.color.BLUE)
        act.setTheme(R.style.Theme_LargeWhiteBlue);
      else if (backgroundColor == R.color.GREEN)
@@ -124,7 +123,7 @@ public class VisionApplication extends Application {
      else
        act.setTheme(R.style.Theme_LargeGreenBlack);
    }
-   else if (DisplaySettings.textSize == VisionApplication.SMALL)
+   else if (textSize == VisionApplication.SMALL)
      if (backgroundColor == R.color.BLUE)
        act.setTheme(R.style.Theme_SmallWhiteBlue);
      else if (backgroundColor == R.color.GREEN)

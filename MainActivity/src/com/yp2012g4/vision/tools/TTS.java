@@ -73,10 +73,10 @@ public class TTS {
   }
   
   /**
-   * Returns true if s does not contain any hebrew charachters.
+   * Check if the string contaion pure Englise.
    * 
-   * @param s
-   * @return
+   * @param s string to check.
+   * @return true if only Englise letters.
    */
   public static boolean isPureEnglise(String s) {
     if (s == null)

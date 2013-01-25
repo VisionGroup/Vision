@@ -78,11 +78,11 @@ public class QuickDialActivity extends VisionActivity {
     setContentView(R.layout.activity_quick_dial);
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.activity_quick_dial, menu);
-    return true;
-  }
+//  @Override public boolean onCreateOptionsMenu(Menu menu) {
+//    // Inflate the menu; this adds items to the action bar if it is present.
+//    getMenuInflater().inflate(R.menu.activity_quick_dial, menu);
+//    return true;
+//  }
   
   /**
    * Activating the Android phone app

@@ -66,11 +66,11 @@ public class ReadSmsActivity extends VisionActivity {
     setMessage();
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.activity_read_sms, menu);
-    return true;
-  }
+//  @Override public boolean onCreateOptionsMenu(Menu menu) {
+//    // Inflate the menu; this adds items to the action bar if it is present.
+//    getMenuInflater().inflate(R.menu.activity_read_sms, menu);
+//    return true;
+//  }
   
   private void setMessage() {
     TalkingButton fromButton = (TalkingButton) findViewById(R.id.sms_from);

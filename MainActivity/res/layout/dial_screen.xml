@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/DialScreen"
     style="?backgroundColor"
     android:layout_width="fill_parent"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/number"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit1"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -49,7 +49,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit1" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit2"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -62,7 +62,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit2" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit3"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit4"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -93,7 +93,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit4" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit5"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -106,7 +106,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit5" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit6"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -124,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit7"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -137,7 +137,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit7" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit8"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -150,7 +150,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit8" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit9"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -168,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/asterisk"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -181,7 +181,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/asterisk_ReadText" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit0"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -194,7 +194,7 @@
                 android:textStyle="bold"
                 app:ReadText="@string/digit0" />
 
-            <com.yp2012g4.blindroid.customUI.TalkingButton
+            <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/numberSign"
                 style="?textAppearance"
                 android:layout_width="0dip"
@@ -213,7 +213,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_delete"
             android:layout_width="0dip"
@@ -224,7 +224,7 @@
             android:src="@drawable/delete_button"
             app:ReadText="@string/delete_button_read" />
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_reset"
             android:layout_width="0dip"
@@ -235,7 +235,7 @@
             android:src="@drawable/reset_button"
             app:ReadText="@string/reset_button_read" />
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_dial_button"
             android:layout_width="0dip"
             android:layout_height="62dp"
@@ -245,7 +245,7 @@
             android:src="@drawable/quick_dial_button"
             app:ReadText="@string/quick_dial_button" />
         
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_sms_button"
             android:layout_width="0dip"
             android:layout_height="62dp"

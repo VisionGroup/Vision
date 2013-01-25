@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yp2012g4.blindroid.test"
+    package="com.yp2012g4.vision.test"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -8,7 +8,7 @@
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.yp2012g4.blindroid" />
+        android:targetPackage="com.yp2012g4.vision" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -16,7 +16,7 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
-            android:name="com.yp2012g4.blindroid.test.ButtonTestingActivity"
+            android:name="com.yp2012g4.vision.test.ButtonTestingActivity"
             android:label="@string/title_activity_button_testing" >
         </activity>
     </application>

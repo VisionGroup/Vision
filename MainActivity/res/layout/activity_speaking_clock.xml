@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/SpeakingClockSctivity"
     style="?backgroundColor"
     android:layout_width="fill_parent"
@@ -10,7 +10,7 @@
     tools:context=".MainActivity" >
     
     
-	<com.yp2012g4.blindroid.customUI.TalkingButton
+	<com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/TimeButton"
         style="?textAppearance"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         android:text="@string/time_button"
         custom:ReadText="@string/time_button" />
 	
-	<com.yp2012g4.blindroid.customUI.TalkingButton
+	<com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/DateButton"
         style="?textAppearance"
         android:layout_width="match_parent"

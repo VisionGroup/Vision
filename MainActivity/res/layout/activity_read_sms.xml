@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/ReadSmsActivity"
     style="?backgroundColor"
     android:layout_width="fill_parent"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/sms_from"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/sms_body"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/sms_date"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_prev"
             android:layout_width="0dip"
             android:layout_height="100dp"
@@ -67,7 +67,7 @@
             android:src="@drawable/back_button"
             app:ReadText="@string/previous_message" />
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_next"
             android:layout_width="0dip"
             android:layout_height="100dp"

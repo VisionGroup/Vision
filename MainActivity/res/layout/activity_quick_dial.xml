@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/QuickDialActivity"
     style="?backgroundColor"
     android:layout_width="fill_parent"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_1"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_2"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_3"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_4"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_5"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_6"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_7"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_8"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -140,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Contact_number_9"
             style="?textAppearance"
             android:layout_width="0dip"

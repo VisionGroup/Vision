@@ -1,7 +1,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android" 
-    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.blindroid">
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision">
 
-    <com.yp2012g4.blindroid.customUI.TalkingImageButton
+    <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/back_button"
         android:layout_width="0dip"
         android:layout_height="60dp"
@@ -12,7 +12,7 @@
         custom:ReadText="@string/back_button"
         style="?backgroundColor"  />
 
-    <com.yp2012g4.blindroid.customUI.TalkingImageButton
+    <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/tool_tip_button"
         android:layout_width="0dip"
         android:layout_height="60dp"
@@ -23,7 +23,7 @@
         android:background="@android:color/transparent"
         style="?backgroundColor" />
 
-    <com.yp2012g4.blindroid.customUI.TalkingImageButton
+    <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/current_menu_button"
         android:layout_width="0dip"
         android:layout_height="60dp"
@@ -34,7 +34,7 @@
         android:background="@android:color/transparent"
         style="?backgroundColor"  />
     
-    <com.yp2012g4.blindroid.customUI.TalkingImageButton
+    <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/home_button"
         android:layout_width="0dip"
         android:layout_height="60dp"

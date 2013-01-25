@@ -16,13 +16,14 @@
             android:id="@+id/number"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="62dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="left"
             android:paddingBottom="20dp"
-            android:paddingLeft="40dp"
-            android:paddingTop="20dp"
+            android:paddingLeft="32dp"
+            android:paddingTop="15dp"
+             android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -45,7 +46,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit1"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit1" />
 
@@ -58,7 +59,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit2"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit2" />
 
@@ -71,7 +72,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit3"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit3" />
         </LinearLayout>
@@ -89,7 +90,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit4"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit4" />
 
@@ -102,7 +103,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit5"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit5" />
 
@@ -115,7 +116,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit6"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit6" />
         </LinearLayout>
@@ -133,7 +134,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit7"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit7" />
 
@@ -146,7 +147,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit8"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit8" />
 
@@ -159,7 +160,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit9"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit9" />
         </LinearLayout>
@@ -177,7 +178,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/asterisk"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/asterisk_ReadText" />
 
@@ -190,7 +191,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit0"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit0" />
 
@@ -203,7 +204,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/number_sign"
-                android:textSize="50sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 app:ReadText="@string/number_sign" />
         </LinearLayout>
@@ -217,10 +218,10 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_delete"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/delete_button"
             app:ReadText="@string/delete_button_read" />
 
@@ -228,30 +229,30 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_reset"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/reset_button"
             app:ReadText="@string/reset_button_read" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_dial_button"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/quick_dial_button"
             app:ReadText="@string/quick_dial_button" />
         
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_sms_button"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/quick_sms_button"
             app:ReadText="@string/quick_sms_button" />
     </LinearLayout>

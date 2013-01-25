@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -53,11 +52,19 @@ public class DialScreen extends VisionActivity {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     
     if (v.getId() == R.id.dialer_dial_button) {
+      if (dialed_number == "") {
+        speakOut("Please dial a number first!");
+        return;
+      }
       Intent call = new Intent(Intent.ACTION_CALL);
       call.setData(Uri.parse("tel:" + dialed_number));
       startActivity(call);
     }
     if (v.getId() == R.id.dialer_sms_button) {
+      if (dialed_number == "") {
+        speakOut("Please dial a number first!");
+        return;
+      }
       Intent i = new Intent(getApplicationContext(), QuickSMSActivity.class);
       i.putExtra("number", dialed_number);
       startActivity(i);
@@ -70,17 +77,22 @@ public class DialScreen extends VisionActivity {
       read_number = "";
     }
     //undo
-    else if (dialed_number.length() == MAX_LENGTH || v.getId() == R.id.button_delete) {
-      dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
-      read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
+    else {
+      int flag = 0;
+      if (dialed_number.length() == MAX_LENGTH || v.getId() == R.id.button_delete) {
+        dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
+        read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
+        flag = 1;
+      }
+      //a number or sign has been chosen
+      if (((View) (v.getParent().getParent())).getId() == R.id.DialScreenNumbers) {
+        dialed_number += ((TalkingButton) v).getText();
+        read_number = read_number + ((TalkingButton) v).getText() + " ";
+        flag = 1;
+      }
+      if (flag == 0)
+        return;
     }
-    //a number or sign has been chosen
-    else if (((View) (v.getParent().getParent())).getId() == R.id.DialScreenNumbers) {
-      dialed_number += ((TalkingButton) v).getText();
-      read_number = read_number + ((TalkingButton) v).getText() + " ";
-    }
-    else
-      return;
     // Vibrate for 150 milliseconds
     vb.vibrate(150);
     ((TalkingButton) findViewById(R.id.number)).setText(dialed_number.toCharArray(), 0, dialed_number.length());
@@ -91,35 +103,6 @@ public class DialScreen extends VisionActivity {
     super.onShowPress(e);
     ++buttonPressed;
   }
-  
-    /*
-    @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-      if (clickFlag || curr_view.getId() == R.id.dialer_sms_button) {
-        clickFlag = false;
-        return false;
-      }
-      if (e2.getAction() == MotionEvent.ACTION_UP) {
-        for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-          if (isButtonType(entry.getKey()) &&
-          (entry.getValue().contains((int) e2.getRawX(), (int) e2.getRawY())) &&
-          (last_button_view != entry.getKey() || buttonPressed == 1))
-            speakOut(textToRead(entry.getKey()));
-        buttonPressed = 0;
-      }
-      else if (e2.getAction() == MotionEvent.ACTION_MOVE) {
-        for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-          if (isButtonType(entry.getKey()))
-            if (entry.getValue().contains((int) e2.getRawX(), (int) e2.getRawY()))
-              if (last_button_view != entry.getKey()) {
-                hapticFeedback();
-                speakOut(textToRead(entry.getKey()));
-                last_button_view = entry.getKey();
-              } else
-                  last_button_view = getView(e2.getRawX(), e2.getRawY());
-        ++buttonPressed;
-      }
-      return true;
-    }*/
   
   /** Called when the activity is first created. */
   @Override public void onCreate(Bundle savedInstanceState) {

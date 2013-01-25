@@ -11,7 +11,6 @@ import java.util.TimerTask;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.customUI.TalkingButton;

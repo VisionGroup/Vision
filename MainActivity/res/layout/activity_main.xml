@@ -14,7 +14,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sos_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/sos_button"
@@ -24,7 +24,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/time_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/time_button"
@@ -40,7 +40,7 @@
             android:id="@+id/where_am_i_button"
             style="android:ButtonStyle"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/where_am_i_button"
@@ -50,7 +50,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/read_sms_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/read_sms_button"
@@ -65,7 +65,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/phone_status_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/phone_status_button"
@@ -75,7 +75,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/alarm_clock_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/alarm_clock_button"
@@ -90,7 +90,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contacts_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -100,7 +100,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/setting_button"
             android:layout_width="0dip"
-            android:layout_height="105dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             custom:ReadText="@string/settings_button"

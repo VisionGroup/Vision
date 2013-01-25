@@ -16,7 +16,7 @@
             android:id="@+id/number"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="left"
@@ -40,12 +40,12 @@
                 android:id="@+id/digit1"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit1"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit1" />
 
@@ -53,12 +53,12 @@
                 android:id="@+id/digit2"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit2"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit2" />
 
@@ -66,12 +66,12 @@
                 android:id="@+id/digit3"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit3"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit3" />
         </LinearLayout>
@@ -84,12 +84,12 @@
                 android:id="@+id/digit4"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit4"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit4" />
 
@@ -97,12 +97,12 @@
                 android:id="@+id/digit5"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit5"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit5" />
 
@@ -110,12 +110,12 @@
                 android:id="@+id/digit6"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit6"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit6" />
         </LinearLayout>
@@ -128,12 +128,12 @@
                 android:id="@+id/digit7"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit7"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit7" />
 
@@ -141,12 +141,12 @@
                 android:id="@+id/digit8"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit8"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit8" />
 
@@ -154,12 +154,12 @@
                 android:id="@+id/digit9"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit9"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit9" />
         </LinearLayout>
@@ -172,12 +172,12 @@
                 android:id="@+id/asterisk"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/asterisk"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/asterisk_ReadText" />
 
@@ -185,12 +185,12 @@
                 android:id="@+id/digit0"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/digit0"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/digit0" />
 
@@ -198,12 +198,12 @@
                 android:id="@+id/numberSign"
                 style="?textAppearance"
                 android:layout_width="0dip"
-                android:layout_height="62dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:text="@string/number_sign"
-                android:textSize="56sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:ReadText="@string/number_sign" />
         </LinearLayout>
@@ -217,7 +217,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_delete"
             android:layout_width="0dip"
-            android:layout_height="62dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -228,7 +228,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/button_reset"
             android:layout_width="0dip"
-            android:layout_height="62dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -238,7 +238,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_dial_button"
             android:layout_width="0dip"
-            android:layout_height="62dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -248,7 +248,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_sms_button"
             android:layout_width="0dip"
-            android:layout_height="62dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -257,6 +257,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/DialScreenBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"

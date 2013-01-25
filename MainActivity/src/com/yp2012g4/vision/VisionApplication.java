@@ -21,8 +21,8 @@ import com.yp2012g4.vision.customUI.TalkingImageButton;
 public class VisionApplication extends Application {
 	
   static final float SMALL=20;
-  static final float NORMAL=26;
-  static final float LARGE=32;
+  static final float NORMAL=25;
+  static final float LARGE=30;
   
   private static SparseIntArray color_to_string = new SparseIntArray();
   public static float textSize = VisionApplication.NORMAL;

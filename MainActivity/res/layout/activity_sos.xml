@@ -16,7 +16,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/Send_SOS_Message"
             android:layout_width="0dip"
-            android:layout_height="420dp"
+            android:layout_height="360dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="center"

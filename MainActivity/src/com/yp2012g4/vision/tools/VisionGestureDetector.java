@@ -56,7 +56,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * Stores the last view
    */
-  protected View last_button_view;
+  protected View last_button_view = null;
   protected View curr_view;
   /**
    * For inserting delays...
@@ -213,7 +213,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          the view to to be checked against a button type
    * @return true if the given view has a button type
    */
-  private static boolean isButtonType(View v) {
+  protected static boolean isButtonType(View v) {
     return (v instanceof TalkingButton || v instanceof TalkingImageButton);
   }
   
@@ -335,7 +335,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return the view (button) for which the given coordinates belongs to. Null
    *         - if the coordinates are out of any button
    */
-  private View getView(float x, float y) {
+  protected View getView(float x, float y) {
     for (Map.Entry<View, Rect> entry : view_to_rect.entrySet())
       if (entry.getValue().contains((int) x, (int) y)) {
         curr_view = entry.getKey();
@@ -363,7 +363,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * vibration during touch.
    */
-  private void hapticFeedback() {
+  protected void hapticFeedback() {
     Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     vb.vibrate(20);
   }

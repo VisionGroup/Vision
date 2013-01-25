@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.tools.VisionActivity;

@@ -61,8 +61,8 @@ public abstract class BlindroidActivity extends VisionGestureDetector {
     switch (curr_view.getId()) {
       case R.id.back_button:
         clickFlag = true;
-        Log.i("MyLog", findViewById(getViewId()).getContentDescription().toString());
-        if (findViewById(getViewId()).getContentDescription().toString().equals("Main screen")) {
+        Log.i("MyLog", _name);
+        if (_name.equals("Main screen")) {
           speakOut("In main screen");
           break;
         }
@@ -78,7 +78,7 @@ public abstract class BlindroidActivity extends VisionGestureDetector {
         break;
       case R.id.current_menu_button:
         clickFlag = true;
-        speakOut("This is " + findViewById(getViewId()).getContentDescription().toString());
+        speakOut("This is " + _name);
         break;
       default:
         break;

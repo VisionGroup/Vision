@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.yp2012g4.blindroid.tools.BlindroidActivity;
@@ -21,7 +22,7 @@ import com.yp2012g4.blindroid.tools.LocationHandler;
  * @version 1.0
  */
 public class WhereAmIActivity extends BlindroidActivity {
-  private static String TAG = "bd.WhereAmIActivity";
+  private static String TAG = "vision.WhereAmIActivity";
   
   // TODO: add a button to know the current status
   private static void log(String s) {
@@ -30,20 +31,24 @@ public class WhereAmIActivity extends BlindroidActivity {
   
   Lock l = null;
   LocationFinder f;
+  String provider;
+  String text;
   
   @Override public int getViewId() {
     return R.id.where_am_i_Activity;
   }
   
-  void makeUseOfNewLocation(double longitude, double latitude, String provider, String address) {
+  void makeUseOfNewLocation(double longitude, double latitude, String prov, String address) {
     f.stop(); // we got our location: now, stop the finder.
+    l.lock();
     log("longitude = " + longitude + "\n");
     log("latitude = " + latitude + "\n");
-    log("provider = " + provider + "\n");
+    log("provider = " + prov + "\n");
     log("address: " + address);
     String toSpeak = "Your Location is: " + address;
+    setText(toSpeak);
     log("speaking out location: " + toSpeak + "\n");
-    ((TextView) findViewById(R.id.where_am_i_textview)).setText(toSpeak);
+    l.unlock();
     speakOut(toSpeak);
   }
   
@@ -52,22 +57,38 @@ public class WhereAmIActivity extends BlindroidActivity {
     log("Got location manager");
     f = new LocationFinder(manager);
     log("Got location finder");
-    LocationHandler h = new LocationHandler() {
-      @Override public void handleLocation(double longitude, double latitude, String provider, String address) {
-        makeUseOfNewLocation(longitude, latitude, provider, address);
+    provider = f.run(new LocationHandler() {
+      @Override public void handleLocation(double longitude, double latitude, String prov, String address) {
+        makeUseOfNewLocation(longitude, latitude, prov, address);
       }
-    };
-    log("Got location handler");
-    f.run(h, true, false);
+    });
     log("Now running");
+    l.lock();
+    if (provider.equals("")) {
+      String s = "Could not find a location.";
+      setText(s);
+      speakOut(s);
+    } else if (provider.equals(LocationManager.GPS_PROVIDER))
+      setText("Trying to find a location using the GPS.");
+    else if (provider.equals(LocationManager.NETWORK_PROVIDER))
+      setText("Trying to find a location using the Network.");
+    l.unlock();
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
+    init(0, "Where Am I Screen", "Touch on screen to find your current location");
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();
-    init(0/* TODO Check what icon goes here */, getString(R.string.whereami_whereami), getString(R.string.whereami_help));
+    l.lock();
+    setText("Initializing...");
+    l.unlock();
+  }
+  
+  private void setText(String s) {
+    text = s;
+    ((TextView) findViewById(R.id.where_am_i_textview)).setText(s);
   }
   
   @Override protected void onStart() {
@@ -81,6 +102,18 @@ public class WhereAmIActivity extends BlindroidActivity {
     f.stop();
     log("Location finder stopped");
     super.onStop();
+  }
+  
+  @Override public boolean onSingleTapUp(MotionEvent e) {
+    int id = curr_view.getId();
+    if (id == -1 || id == R.id.where_am_i_Activity || id == R.id.where_am_i_textview) {
+      l.lock();
+      speakOut(text);
+      l.unlock();
+      return false;
+    }
+    super.onSingleTapUp(e);
+    return false;
   }
   
   @Override public boolean onCreateOptionsMenu(Menu menu) {

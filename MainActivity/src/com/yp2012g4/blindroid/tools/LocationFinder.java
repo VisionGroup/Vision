@@ -34,41 +34,37 @@ public class LocationFinder {
    * 
    * @param h
    *          the handler to call when getting location update
-   * @param useGPS
-   *          Do we try to use the GPS
-   * @param useNetwork
-   *          Do we try to use the Network based location. Note: if this is set
-   *          to false, but we couldn't use the GPS, we will still use the
-   *          network.
+   * @return the provider used, or an empty string if no provider could be used
    */
-  public void run(LocationHandler h, boolean useGPS, boolean useNetwork) {
+  public String run(LocationHandler h) {
     log("run");
     if (running)
       stop();
-    if (!useGPS && !useNetwork)
-      Log.e("LocationFinder", "both useGPS and useNetwork are false");
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
     boolean GPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-    if (useGPS && GPSenabled) {
+    if (GPSenabled) {
       p = LocationManager.GPS_PROVIDER;
       log("enabling GPS");
       LocationListener l = createLocationListener(p);
       listeners.add(l);
       locationManager.requestLocationUpdates(p, 0, 0, l);
-    } else
+    } else {
       log("Could not use GPS because it is disabled");
-    p = LocationManager.NETWORK_PROVIDER;
-    if (useNetwork || !GPSenabled)
+      p = LocationManager.NETWORK_PROVIDER;
       if (locationManager.isProviderEnabled(p)) {
         log("enabling Network location");
         LocationListener l = createLocationListener(p);
         listeners.add(l);
         locationManager.requestLocationUpdates(p, 0, 0, l);
-      } else
+      } else {
         log("Could not use Network location because it is disabled");
+        return "";
+      }
+    }
     running = true;
+    return p;
   }
   
   void makeUseOfNewLocation(Location location, String provider) {

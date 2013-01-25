@@ -91,11 +91,11 @@ public class SOSActivity extends VisionActivity {
     l = new ReentrantLock();
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.activity_sos, menu);
-    return true;
-  }
+//  @Override public boolean onCreateOptionsMenu(Menu menu) {
+//    // Inflate the menu; this adds items to the action bar if it is present.
+//    getMenuInflater().inflate(R.menu.activity_sos, menu);
+//    return true;
+//  }
   
   void makeUseOfNewLocation(double lon, double lat, String provider, String addr) {
     f.stop();

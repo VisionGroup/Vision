@@ -42,6 +42,8 @@ public class QuickSMSActivity extends VisionActivity {
       final String messageToSend = ((TalkingButton) view).getReadText();
       SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
       speakOut("Message has been sent");
+      mHandler.postDelayed(mLaunchTask, 1500);
+      finish();
 //      final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 //      alertDialog.setTitle("Choose contact");
 //      alertDialog.setCancelable(false);
@@ -73,6 +75,8 @@ public class QuickSMSActivity extends VisionActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
+    init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_screen));
+    //TODO: create help string
     mHandler = new Handler();
     final Bundle extras = getIntent().getExtras();
     if (extras != null)

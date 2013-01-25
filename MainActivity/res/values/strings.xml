@@ -27,7 +27,7 @@
     <string name="Contact_number_7">Maytal Messing</string>
     <string name="Contact_number_8">Yossi Gil</string>
     <string name="Contact_number_9">Sabih Egbaria</string>
-    <string name="MainActivity_wai">Main Menu</string>
+    <string name="MainActivity_wai">Main screen</string>
     <string name="MainActivity_help">Select one of eight options.</string>
     <string name="phoneStatus_button_getBatteryStatus">Battery Level</string>
     <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
@@ -133,13 +133,13 @@
     <string name="delete_button_read">undo</string>
     <string name="reset_button_read">reset</string>
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
-    <string name="quick_sms_screen">Quick SMS screen</string>
+    <string name="quick_sms_screen">Quick S M S screen</string>
     <string name="quick_dial_screen">Quick dial screen</string>
     <string name="sos_screen">SOS screen</string>
     <string name="color_settings_screen">Color settings screen</string>
     <string name="display_settings_screen">Display settings screen</string>
     <string name="theme_settings_screen">Theme settings screen</string>
-    <string name="read_sms_screen">Read sms screen</string>
+    <string name="read_sms_screen">Read S M S screen</string>
     <string name="contact_list_screen">Contact list screen</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>
     <string name="next_message">Next message</string>
@@ -149,7 +149,7 @@
     <string name="title_activity_contacts_menu">Contacts menu</string>
     <string name="contactsList">contacts</string>
     <string name="Dialer">Dialer</string>
-    <string name="quick_dial_button">Quick dial</string>
+    <string name="quick_dial_button">Dial</string>
     <string name="contacts_button">Contacts</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="next_contact">Next contact</string>

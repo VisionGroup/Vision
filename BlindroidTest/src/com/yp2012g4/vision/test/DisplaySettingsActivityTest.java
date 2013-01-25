@@ -10,11 +10,10 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.ColorSettingsActivity;
-import com.yp2012g4.vision.DisplaySettings;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.DisplaySettingsActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.ThemeSettingsActivity;
-import com.yp2012g4.blindroid.VisionApplication;
 
 public class DisplaySettingsActivityTest extends
 		ActivityInstrumentationTestCase2<DisplaySettingsActivity> {

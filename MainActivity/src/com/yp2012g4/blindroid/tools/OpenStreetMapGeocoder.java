@@ -39,10 +39,4 @@ public class OpenStreetMapGeocoder {
     }
     return r;
   }
-//  void test() {
-//    assertTrue(OpenStreetMapGeocoder.GetAddress(32.8, 35).equals("Hana Senesh, Ramat Hadar, Haifa, Haifa District, 34454, Israel"));
-//    assertTrue(OpenStreetMapGeocoder.GetAddress(33, 34.992203).equals("Shave Ziyyon, North District, Israel"));
-//    assertTrue(OpenStreetMapGeocoder.GetAddress(32.8155, 34.979564).equals(
-//        "Yefe Nof, Carmel Zarphati (French Carmel), Haifa, Haifa District, 31064, Israel"));
-//  }
 }

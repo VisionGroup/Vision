@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/displaySettingsActivity"
     style="?backgroundColor"
     android:layout_width="fill_parent"
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/button_set_colors"
             android:layout_width="0dip"
             android:layout_height="180dp"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingImageButton
+        <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/button_set_theme"
             style="android:ButtonStyle"
             android:layout_width="0dip"

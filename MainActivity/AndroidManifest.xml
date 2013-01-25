@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yp2012g4.blindroid"
+    package="com.yp2012g4.vision"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -23,13 +23,13 @@
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <application
-        android:name="com.yp2012g4.blindroid.VisionApplication"
+        android:name="com.yp2012g4.vision.VisionApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme" >
         <activity
-            android:name="com.yp2012g4.blindroid.MainActivity"
+            android:name="com.yp2012g4.vision.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
@@ -47,119 +47,131 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.SOSActivity"
+            android:name="com.yp2012g4.vision.SOSActivity"
             android:label="@string/title_activity_sos"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.QuickDialActivity"
+            android:name="com.yp2012g4.vision.QuickDialActivity"
             android:label="@string/title_activity_quick_dial"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.DisplaySettingsActivity"
+            android:name="com.yp2012g4.vision.DisplaySettingsActivity"
             android:label="@string/title_activity_display_settings"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.ThemeSettingsActivity"
+            android:name="com.yp2012g4.vision.ThemeSettingsActivity"
             android:label="@string/title_activity_theme_settings"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.PhoneStatusActivity"
+            android:name="com.yp2012g4.vision.PhoneStatusActivity"
             android:label="@string/title_activity_phone_status"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.SpeakingClockActivity"
+            android:name="com.yp2012g4.vision.SpeakingClockActivity"
             android:label="@string/ClockTitle"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.ColorSettingsActivity"
+            android:name="com.yp2012g4.vision.ColorSettingsActivity"
             android:label="@string/title_activity_color_settings"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.VoiceNoteRecorderActivity"
+            android:name="com.yp2012g4.vision.VoiceNoteRecorderActivity"
             android:label="@string/title_activity_voice_note_recorder"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.blindroid.MainActivity" />
+                android:value="com.yp2012g4.vision.MainActivity" />
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.QuickSMSActivity"
+            android:name="com.yp2012g4.vision.QuickSMSActivity"
             android:label="@string/title_activity_quick_sms"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.AlarmActivity"
+            android:name="com.yp2012g4.vision.AlarmActivity"
             android:label="@string/title_activity_alarm"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.AlarmPopup"
+            android:name="com.yp2012g4.vision.AlarmPopup"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" >
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.TalkingSmsList"
-            android:label="@string/title_activity_talking_sms_list"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.blindroid.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.yp2012g4.blindroid.WhereAmIActivity"
+            android:name="com.yp2012g4.vision.WhereAmIActivity"
             android:label="@string/title_activity_where_am_i"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
 
-        <service android:name="com.yp2012g4.blindroid.AlarmService" >
+        <service android:name="com.yp2012g4.vision.AlarmService" >
         </service>
-        <service android:name="com.yp2012g4.blindroid.AlarmService" >
+        <service android:name="com.yp2012g4.vision.AlarmService" >
         </service>
 
         <activity
-            android:name="com.yp2012g4.blindroid.SetClockActivity"
+            android:name="com.yp2012g4.vision.SetClockActivity"
             android:label="@string/title_activity_set_clock"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.DialScreen"
+            android:name="com.yp2012g4.vision.DialScreen"
             android:label="@string/title_dial_screen"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
 
-        <receiver android:name="com.yp2012g4.blindroid.tools.IncomingCallReceiver" >
+        <receiver android:name="com.yp2012g4.vision.tools.IncomingCallReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="com.yp2012g4.blindroid.telephony.IncomingCallActivity"
-            android:label="@string/title_activity_incoming_call" >
+            android:name="com.yp2012g4.vision.telephony.IncomingCallActivity"
+            android:label="@string/title_activity_incoming_call" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.ReadSmsActivity"
+            android:name="com.yp2012g4.vision.ReadSmsActivity"
             android:label="@string/title_activity_read_sms"
-            android:launchMode="singleInstance" >
+            android:launchMode="singleInstance" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.blindroid.MainActivity" />
+                android:value="com.yp2012g4.vision.MainActivity" />
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.ContactsMenuActivity"
-            android:label="@string/title_activity_contacts_menu" >
+            android:name="com.yp2012g4.vision.ContactsMenuActivity"
+            android:label="@string/title_activity_contacts_menu" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
-            android:name="com.yp2012g4.blindroid.ContactsActivity"
-            android:label="@string/title_activity_contacts" >
+            android:name="com.yp2012g4.vision.ContactsActivity"
+            android:label="@string/title_activity_contacts" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
     </application>
 

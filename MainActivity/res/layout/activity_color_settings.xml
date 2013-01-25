@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.blindroid"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/ColorSettingsActivity"
     style="?backgroundColor"
     android:contentDescription="@string/color_settings_screen"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteBlack"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteRed"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/RedBlack"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteGreen"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/GreenBlack"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteBlue"
             style="?textAppearance"
             android:layout_width="0dip"
@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.yp2012g4.blindroid.customUI.TalkingButton
+        <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/BlueBlack"
             style="?textAppearance"
             android:layout_width="0dp"

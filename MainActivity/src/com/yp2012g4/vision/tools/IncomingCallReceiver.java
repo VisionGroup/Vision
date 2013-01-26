@@ -34,7 +34,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     }
   }
   
-  @SuppressWarnings({ "static-method", "unused" }) private void processIncomingCall(Context context, String phonenumber) {
+  @SuppressWarnings({ "static-method" }) private void processIncomingCall(Context context, String phonenumber) {
     try {
       Log.d(TAG, "Creatin IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);

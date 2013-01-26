@@ -366,6 +366,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * vibration during touch.
    */
   protected void hapticFeedback() {
+    @SuppressWarnings("unused")
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
   }
   

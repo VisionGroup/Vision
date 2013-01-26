@@ -104,7 +104,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
         if (isButtonType(entry.getKey()))
           if (entry.getValue().contains((int) e2.getRawX(), (int) e2.getRawY()))
             if (last_button_view != entry.getKey()) {
-              hapticFeedback();
+              VisionApplication.restoreColors(last_button_view);
+              hapticFeedback(entry.getKey());
               speakOut(textToRead(entry.getKey()));
               last_button_view = entry.getKey();
             } else
@@ -114,13 +115,9 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public void onShowPress(MotionEvent e) {
     Log.i("MyLog", "onShowPress");
-    if (last_button_view instanceof TalkingButton) {
-      hapticFeedback();
-      speakOut(((TalkingButton) last_button_view).getReadText());
-    }
-    if (last_button_view instanceof TalkingImageButton) {
-      hapticFeedback();
-      speakOut(((TalkingImageButton) last_button_view).getReadText());
+    if (isButtonType(last_button_view)) {
+      hapticFeedback(last_button_view);
+      speakOut(textToRead(last_button_view));
     }
   }
   
@@ -203,6 +200,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     // remember the last view when finger is up
     if (event.getAction() == MotionEvent.ACTION_UP) {
       Log.i("MyLog", "ACTION UP");
+      VisionApplication.restoreColors(last_button_view);
       onActionUp(last_button_view);
     }
     gestureDetector.setIsLongpressEnabled(false);
@@ -366,8 +364,14 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * vibration during touch.
    */
+<<<<<<< HEAD
   protected void hapticFeedback() {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+=======
+  protected void hapticFeedback(View v) {
+    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+>>>>>>> e144a35195047be38443bb0d3213389d04d9b4ac
     vb.vibrate(20);
+    VisionApplication.visualFeedback(v);
   }
 }

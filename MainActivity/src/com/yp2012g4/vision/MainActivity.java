@@ -7,11 +7,13 @@ import android.view.MotionEvent;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.MainActivityView;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     if (clickFlag) {
       clickFlag = false;
@@ -46,14 +48,14 @@ public class MainActivity extends VisionActivity {
       default:
         break;
     }
-    if (intent != null) { //if tapping outside of any button
+    if (intent != null)
       startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-    }
     return false;
   }
   
   /** Called when the activity is first created. */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     PhoneNotifications pn = new PhoneNotifications(this);
@@ -65,16 +67,15 @@ public class MainActivity extends VisionActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current title
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override
+  public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
     if (!hasFocus)
       return;
-    // TODO next line crashes emulator...so return it if you run on your
-    // smartphone!
-//    VoiceNotify();
+    VoiceNotify();
   }
   
   public void VoiceNotify() {
@@ -104,7 +105,8 @@ public class MainActivity extends VisionActivity {
     }
   }
   
-  @Override public void onBackPressed() {
+  @Override
+  public void onBackPressed() {
     speakOut("In main screen");
   }
 }

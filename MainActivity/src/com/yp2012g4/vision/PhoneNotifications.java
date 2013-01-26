@@ -53,7 +53,8 @@ public class PhoneNotifications {
     protected SignalStrengthListener() {
     }
     
-    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+    @Override
+    public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
       // get the signal strength (a value between 0 and 31)
       signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
@@ -63,7 +64,7 @@ public class PhoneNotifications {
   /**
    * Getter for the signal static member
    * 
-   * @return
+   * @return the signal strength
    */
   public static int getSignalStrength() {
     return signal;

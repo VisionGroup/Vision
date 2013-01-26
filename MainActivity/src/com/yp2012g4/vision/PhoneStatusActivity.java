@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.PhoneNotifications.CallData;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -60,15 +61,21 @@ public class PhoneStatusActivity extends VisionActivity {
     if (calls.isEmpty())
       s = "There are no missed calls";
     else
-      for (final CallData c : calls)
-        s += " called At: " + c.getHour() + " ,From: " + c.number + "\n";
+      for (final CallData c : calls) {
+        s += " called At: " + c.getHour() + " ,From: ";
+        if (TTS.isPureEnglise(c.name))
+          s += c.name + "\n";
+        else
+          s += c.number + "\n";
+      }
     speakOut(s);
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -77,7 +84,8 @@ public class PhoneStatusActivity extends VisionActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     final Resources res = getResources();
     switch (curr_view.getId()) {
@@ -100,7 +108,8 @@ public class PhoneStatusActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));

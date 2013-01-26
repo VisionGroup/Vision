@@ -1,11 +1,15 @@
 /***
+ * This Activity display the time and date to the user and allow him to get read
+ * this values aloud
+ * 
  * @author Amir Blumental
- * @version 1.0
+ * @version 1.1
  */
 package com.yp2012g4.vision;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,9 +30,7 @@ public class SpeakingClockActivity extends VisionActivity {
    */
   public static String getDateFormat() {
     Calendar cal = Calendar.getInstance();
-    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-    String date = df.format(cal.getTime());
-    // String date = DateFormat.getDateInstance().format(cal.getTime());
+    String date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(cal.getTime());
     return date;
   }
   
@@ -81,6 +83,11 @@ public class SpeakingClockActivity extends VisionActivity {
     myTimer.schedule(myTask, 100, 1000);
   }
   
+  /***
+   * Handle the clock display
+   * 
+   * @author Amir B
+   */
   class MyTimerTask extends TimerTask {
     @Override
     public void run() {
@@ -97,13 +104,6 @@ public class SpeakingClockActivity extends VisionActivity {
       });
     }
   }
-  
-//  @Override
-//  public boolean onCreateOptionsMenu(Menu menu) {
-//    // Inflate the menu; this adds items to the action bar if it is present.
-//    getMenuInflater().inflate(R.menu.activity_main, menu);
-//    return true;
-//  }
   
   /**
    * Perform actions when the window get into focus we start the activity by

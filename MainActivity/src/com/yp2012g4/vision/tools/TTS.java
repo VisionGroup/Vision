@@ -2,52 +2,68 @@ package com.yp2012g4.vision.tools;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
-
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
-// TODO: Code review 
-// More documentation 
-// Why use log::error?
-// About language: there are some problems: 1) it's not global on a application level 2) other things ...
-// Check if it's possible to spell strings instead of reading it, (phone numbers, etc...)
-// Add javadoc
+/**
+ * 
+ * @author Auster Yaron
+ * 
+ * The TTS is make an handle to use the TTS class in android.
+ *
+ */
+
 public class TTS {
   private TextToSpeech _tts;
   private int _qm;
   private Locale _language;
   
+  /**
+   * 
+   * 
+   * @param context the context that running the class.
+   * @param listener the listener that connected from the activity.
+   */
   public TTS(Context context, TextToSpeech.OnInitListener listener) {
-    Log.e("TTS", "Constractor");
-    // ?
-    if (_tts != null)
-      _tts.shutdown();
     _tts = new TextToSpeech(context, listener);
-    // TODO: check this: _language == null ??
-    _tts.setLanguage(_language);
     setQueueMode(TextToSpeech.QUEUE_FLUSH);
     setLanguage(Locale.US);
   }
-  
-  // TODO: is this needed? do this works? what should it do exactly?
+   
+  /**
+   * change is the TTS is working well.
+   */
   public boolean isRuning() {
     return _tts == null ? false : true;
   }
-  
+  /**
+   * change the queue mode.
+   * 
+   * @param queueMode the new queue mode.
+   */
   public void setQueueMode(int queueMode) {
-    Log.e("TTS", "setQueueMode");
+    Log.i("TTS", "setQueueMode");
     _qm = queueMode;
   }
   
-  public void setLanguage(Locale l) {
-    Log.e("TTS", "setLanguage");
-    _language = l;
-    // TODO: here, we need _tts.setLanguage()
+  /**
+   * change the language.
+   * 
+   * @param languag the new language.
+   */
+  public void setLanguage(Locale languag) {
+    Log.i("TTS", "setLanguage");
+    _tts.setLanguage(_language);
   }
   
+  /**
+   * speak the given string.
+   * 
+   * @param s string to speak.
+   */
   public void speak(String s) {
-    Log.e("TTS", "speak : " + s);
+    Log.i("TTS", "speak : " + s);
     if (null == s)
       return;
     if (!isPureEnglise(s))
@@ -56,18 +72,47 @@ public class TTS {
       _tts.speak(s, _qm, null);
   }
   
+
+  /**
+   * speak the given string, in synchronous mode.
+   * 
+   * @param s string to speak.
+   */
+  public void syncSpeak(String s){
+    speak(s);
+    while (isSpeaking()){
+      try {
+        Thread.sleep(1000);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  
+  /**
+   * Stop speak!.
+   * 
+   */
   public void stop() {
-    Log.e("TTS", "stop");
+    Log.i("TTS", "stop");
     _tts.stop();
   }
   
+  /**
+   * Close the TTS engine.
+   * 
+   */
   public void shutdown() {
-    Log.e("TTS", "shutdown");
     stop();
     _tts.shutdown();
     _tts = null;
   }
   
+  /**
+   * Check if speaking now.
+   * 
+   * @return true if speaking.
+   */
   public boolean isSpeaking() {
     return _tts.isSpeaking();
   }

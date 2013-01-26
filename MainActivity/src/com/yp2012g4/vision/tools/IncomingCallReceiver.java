@@ -42,6 +42,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       i.putExtra(CallUtils.INCOING_NUMBER_KEY, phonenumber);
       i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       Log.d(TAG, "Starting IncomingCAllActivity");
+      Thread.sleep(1000);
       context.startActivity(i);
     } catch (final Exception e) {
       // e.printStackTrace();

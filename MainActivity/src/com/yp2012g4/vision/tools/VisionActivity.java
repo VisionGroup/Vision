@@ -19,6 +19,7 @@ import com.yp2012g4.vision.R;
  * it's give extra functionality to this app.
  */
 public abstract class VisionActivity extends VisionGestureDetector {
+  private static final String TAG = "vision:VisionActivity";
   private int _icon;
   private String _name;
   private String _toolTip;
@@ -67,11 +68,11 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * Dealing control bar on clicks
    */
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    Intent intent = new Intent(this, MainActivity.class);
+    final Intent intent = new Intent(this, MainActivity.class);
     switch (curr_view.getId()) {
       case R.id.back_button:
         clickFlag = true;
-        Log.i("MyLog", _name);
+        Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
           speakOut("In main screen");
           break;

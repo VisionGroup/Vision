@@ -28,13 +28,12 @@ public class EndCallListener extends PhoneStateListener {
     this.context = context;
   }
   
-  @Override
-  public void onCallStateChanged(int state, String incomingNumber) {
+  @Override public void onCallStateChanged(int state, String incomingNumber) {
     switch (state) {
       case TelephonyManager.CALL_STATE_IDLE:// phone hang-up
         if (flag) {
           // restart app
-          Intent i = context.getApplicationContext().getPackageManager()
+          final Intent i = context.getApplicationContext().getPackageManager()
               .getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
           i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
           context.startActivity(i);
@@ -45,6 +44,8 @@ public class EndCallListener extends PhoneStateListener {
         flag = true;
         break;
       case TelephonyManager.CALL_STATE_RINGING:
+        break;
+      default:
         break;
     }
   }

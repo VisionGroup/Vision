@@ -62,11 +62,12 @@ public class QuickDialActivity extends VisionActivity {
           break;
         case R.id.Contact_number_9:
           break;
+        default:
+          break;
       }
     }
-    if (curr_view instanceof TalkingImageButton) {
+    if (curr_view instanceof TalkingImageButton)
       super.onSingleTapUp(e);
-    }
     return false;
   }
   
@@ -82,7 +83,6 @@ public class QuickDialActivity extends VisionActivity {
 //    getMenuInflater().inflate(R.menu.activity_quick_dial, menu);
 //    return true;
 //  }
-  
   /**
    * Activating the Android phone app
    * 
@@ -90,7 +90,7 @@ public class QuickDialActivity extends VisionActivity {
    *          the phone number to dial to (as a string)
    */
   public void phoneCall(String s) {
-    Intent call = new Intent(Intent.ACTION_CALL);
+    final Intent call = new Intent(Intent.ACTION_CALL);
     call.setData(Uri.parse("tel:" + s));
     startActivity(call);
   }
@@ -100,7 +100,7 @@ public class QuickDialActivity extends VisionActivity {
    */
   public void telephone() {
     TelephonyManager telephonyManager;
-    EndCallListener callListener = new EndCallListener(getApplicationContext());
+    final EndCallListener callListener = new EndCallListener(getApplicationContext());
     telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     telephonyManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE);
   }

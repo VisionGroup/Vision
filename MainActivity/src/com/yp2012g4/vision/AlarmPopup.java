@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener {
+  private static final String TAG = "vision:AlarmPopup";
   static public MediaPlayer mp = null;
   protected TextToSpeech tts;
   private boolean left = false;
@@ -28,8 +29,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
   /***
    * On the creation of the class we display the dialog and sound the alarm
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // hide titlebar of application
     // must be before setting the layout
@@ -41,8 +41,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     soundAlarm();
   }
   
-  @Override
-  public void onDestroy() {
+  @Override public void onDestroy() {
     if (tts != null) {
       speakOut("stop");
       tts.stop();
@@ -51,24 +50,22 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     super.onDestroy();
   }
   
-  @Override
-  public void onInit(int status) {
+  @Override public void onInit(int status) {
     if (status == TextToSpeech.SUCCESS) {
-      int r = tts.setLanguage(Locale.US);
+      final int r = tts.setLanguage(Locale.US);
       if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
-        Log.e("tts", "error setLanguage");
+        Log.e(TAG, "error setLanguage");
         return;
       }
       return;
     }
-    Log.e("tts", "error init language");
+    Log.e(TAG, "error init language");
   }
   
   /**
    * on any button press or screen touch we turn the snooze off
    */
-  @Override
-  public void onUserInteraction() {
+  @Override public void onUserInteraction() {
     if (left)
       return;
     left = true;
@@ -89,19 +86,18 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     mp = MediaPlayer.create(getApplicationContext(), R.raw.alarm);
     mp.start();
     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-      @Override
-      public void onCompletion(MediaPlayer mpc) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Intent myIntent = new Intent(AlarmPopup.this, AlarmService.class);
+      @Override public void onCompletion(MediaPlayer mpc) {
+        final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        final Intent myIntent = new Intent(AlarmPopup.this, AlarmService.class);
         AlarmActivity.pendingIntent = PendingIntent.getService(AlarmPopup.this, 0, myIntent, 0);
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        String snooze = getResources().getString(R.string.snooze_time);
+        final String snooze = getResources().getString(R.string.snooze_time);
         int snoozeTime = 5;
         try {
           snoozeTime = Integer.valueOf(snooze).intValue();
-        } catch (NumberFormatException e) {
-          Log.e("amir", "exception in parseInt!!! with " + snooze);
+        } catch (final NumberFormatException e) {
+          Log.e(TAG, "exception in parseInt!!! with " + snooze);
         }
         calendar.roll(Calendar.MINUTE, snoozeTime);
         calendar.set(Calendar.SECOND, 0);

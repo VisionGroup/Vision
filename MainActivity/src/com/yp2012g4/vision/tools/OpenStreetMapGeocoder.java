@@ -17,6 +17,8 @@ import android.util.Log;
  * @version 1.0
  */
 public class OpenStreetMapGeocoder {
+  private static final String TAG = "vison:OpenStreetMapGeocoder";
+  
   /**
    * Return an address.
    * 
@@ -28,14 +30,15 @@ public class OpenStreetMapGeocoder {
    */
   public static String GetAddress(final double latitude, final double longitude) {
     String r = "";
-    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     try {
-      URL sourceUrl = new URL("http://nominatim.openstreetmap.org/reverse?accept-language=en&lat=" + latitude + "&lon=" + longitude);
-      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-      Document d = dBuilder.parse(new InputSource(sourceUrl.openStream()));
+      final URL sourceUrl = new URL("http://nominatim.openstreetmap.org/reverse?accept-language=en&lat=" + latitude + "&lon="
+          + longitude);
+      final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      final Document d = dBuilder.parse(new InputSource(sourceUrl.openStream()));
       r = d.getElementsByTagName("result").item(0).getChildNodes().item(0).getNodeValue();
-    } catch (Exception e) {
-      Log.d("OpenStreetMapGeocoder", "Error: " + e.getMessage());
+    } catch (final Exception e) {
+      Log.d(TAG, "Error: " + e.getMessage());
     }
     return r;
   }

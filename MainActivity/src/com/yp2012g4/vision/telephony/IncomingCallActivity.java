@@ -9,11 +9,11 @@ import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.CallUtils;
+import com.yp2012g4.vision.tools.VisionActivity;
 
 public class IncomingCallActivity extends VisionActivity {
-  private static final String TAG = "bd:IncomingCallActivity";
+  private static final String TAG = "vision:IncomingCallActivity";
   CallUtils callUtils;
   private ListenToPhoneState listener;
   Boolean rang = Boolean.valueOf(false);

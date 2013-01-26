@@ -29,7 +29,7 @@ public class SOSActivity extends VisionActivity {
   // these are non-initialized values
   double latitude = 10000, longitude = 10000;
   final int maxLengthOfAddress = 100;
-  static final String TAG = "bd.SOSActivity";
+  static final String TAG = "vision:SOSActivity";
   
   @Override public int getViewId() {
     return R.id.SOS_textview;

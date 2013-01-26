@@ -20,7 +20,7 @@ import com.android.internal.telephony.ITelephony;
  */
 public class CallUtils {
   // Used by Log
-  private static String TAG = "bd.CallUtils";
+  private static String TAG = "vison:CallUtils";
   // Used by the Incoming call receiver to transfer data to the activity.
   public static final String RANG_KEY = "rang";
   public static final String INCOING_NUMBER_KEY = "iNumber";

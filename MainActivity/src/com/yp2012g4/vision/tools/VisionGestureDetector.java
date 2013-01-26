@@ -38,6 +38,7 @@ import com.yp2012g4.vision.customUI.TalkingImageButton;
  */
 public abstract class VisionGestureDetector extends Activity implements OnClickListener, TextToSpeech.OnInitListener,
     OnGestureListener, OnTouchListener {
+  private static final String TAG = "vision:VisionGestureDetector";
   /**
    * for multitouch gesture detection
    */
@@ -83,19 +84,19 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   }
   
   @Override public boolean onDown(MotionEvent e) {
-    Log.i("MyLog", "onDown");
+    Log.i(TAG, "onDown");
     last_button_view = getView(e.getRawX(), e.getRawY()); // updating curr_view
                                                           // (inside getView())
     return true;
   }
   
   @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-    Log.i("MyLog", "onFling");
+    Log.i(TAG, "onFling");
     return false;
   }
   
   @Override public void onLongPress(MotionEvent e) {
-    Log.i("MyLog", "onLongPress");
+    Log.i(TAG, "onLongPress");
   }
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
@@ -114,7 +115,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   }
   
   @Override public void onShowPress(MotionEvent e) {
-    Log.i("MyLog", "onShowPress");
+    Log.i(TAG, "onShowPress");
     if (isButtonType(last_button_view)) {
       hapticFeedback(last_button_view);
       speakOut(textToRead(last_button_view));
@@ -122,7 +123,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    Log.i("MyLog", "onSingleTapUp");
+    Log.i(TAG, "onSingleTapUp");
     return false;
   }
   
@@ -199,7 +200,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   @Override public boolean onTouch(View v, MotionEvent event) {
     // remember the last view when finger is up
     if (event.getAction() == MotionEvent.ACTION_UP) {
-      Log.i("MyLog", "ACTION UP");
+      Log.i(TAG, "ACTION UP");
       VisionApplication.restoreColors(last_button_view);
       onActionUp(last_button_view);
     }
@@ -250,7 +251,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    */
   public void speakOut(String s) {
     if (_t == null) {
-      Log.e("onTouchEventClass", "TTS is null");
+      Log.e(TAG, "TTS is null");
       return;
     }
     _t.speak(s);
@@ -266,7 +267,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     if (_t.isRuning())
       speakOut("start");
     else
-      Log.e("onTouchEventClass", "tts init error");
+      Log.e(TAG, "tts init error");
     VisionApplication.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     mHandler = new Handler();
@@ -364,13 +365,12 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * vibration during touch.
    */
-<<<<<<< HEAD
   protected void hapticFeedback() {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-=======
+  }
+  
   protected void hapticFeedback(View v) {
-    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
->>>>>>> e144a35195047be38443bb0d3213389d04d9b4ac
+    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     vb.vibrate(20);
     VisionApplication.visualFeedback(v);
   }

@@ -19,6 +19,7 @@ import android.util.Log;
  * @version 1.0
  */
 public class LocationFinder {
+  private static final String TAG = "vision:LocationFinder";
   List<LocationListener> listeners = null;
   LocationManager locationManager;
   LocationHandler handler;
@@ -43,11 +44,11 @@ public class LocationFinder {
     listeners = new ArrayList<LocationListener>();
     handler = h;
     String p = "";
-    boolean GPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    final boolean GPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     if (GPSenabled) {
       p = LocationManager.GPS_PROVIDER;
       log("enabling GPS");
-      LocationListener l = createLocationListener(p);
+      final LocationListener l = createLocationListener(p);
       listeners.add(l);
       locationManager.requestLocationUpdates(p, 0, 0, l);
     } else {
@@ -55,7 +56,7 @@ public class LocationFinder {
       p = LocationManager.NETWORK_PROVIDER;
       if (locationManager.isProviderEnabled(p)) {
         log("enabling Network location");
-        LocationListener l = createLocationListener(p);
+        final LocationListener l = createLocationListener(p);
         listeners.add(l);
         locationManager.requestLocationUpdates(p, 0, 0, l);
       } else {
@@ -69,8 +70,8 @@ public class LocationFinder {
   
   void makeUseOfNewLocation(Location location, String provider) {
     log("Making use of new location from provider");
-    double latitude = location.getLatitude();
-    double longitude = location.getLongitude();
+    final double latitude = location.getLatitude();
+    final double longitude = location.getLongitude();
     log("latitude = " + latitude + ", longitude = " + longitude);
     OpenStreetMapGeocoding(latitude, longitude, provider);
   }
@@ -82,7 +83,7 @@ public class LocationFinder {
    *          the message to log
    */
   static void log(String s) {
-    Log.d("LocationFinder", s);
+    Log.d(TAG, s);
   }
   
   /**
@@ -93,7 +94,7 @@ public class LocationFinder {
    * @return The listener
    */
   private LocationListener createLocationListener(final String Provider) {
-    LocationListener l = new LocationListener() {
+    final LocationListener l = new LocationListener() {
       @Override public void onLocationChanged(Location location) {
         log("listener of provider " + Provider + ": location changed");
         makeUseOfNewLocation(location, Provider);
@@ -125,7 +126,7 @@ public class LocationFinder {
    *          the provider of the current location
    */
   void OpenStreetMapGeocoding(final double latitude, final double longitude, final String provider) {
-    AsyncTask<Void, Void, String> downloader = new AsyncTask<Void, Void, String>() {
+    final AsyncTask<Void, Void, String> downloader = new AsyncTask<Void, Void, String>() {
       @Override protected String doInBackground(Void... params) {
         return OpenStreetMapGeocoder.GetAddress(latitude, longitude);
       }
@@ -138,7 +139,7 @@ public class LocationFinder {
     };
     try {
       downloader.execute();
-    } catch (Exception e) {
+    } catch (final Exception e) {
       log("Error: " + e.getMessage());
     }
   }
@@ -151,7 +152,7 @@ public class LocationFinder {
       return;
     log("stopped");
     if (listeners != null) {
-      for (LocationListener l : listeners) {
+      for (final LocationListener l : listeners) {
         log("removed a listener");
         locationManager.removeUpdates(l);
       }

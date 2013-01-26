@@ -10,13 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout1" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteBlack"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
@@ -26,13 +27,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout2" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteRed"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/RED"
             android:text="@string/WhiteRed"
@@ -42,13 +44,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout3" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/RedBlack"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
@@ -58,13 +61,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout4" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteGreen"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
@@ -74,13 +78,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:id="@+id/layout5">
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/GreenBlack"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
@@ -90,13 +95,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout6" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/WhiteBlue"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
@@ -106,13 +112,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout7" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/BlueBlack"
             style="?textAppearance"
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"

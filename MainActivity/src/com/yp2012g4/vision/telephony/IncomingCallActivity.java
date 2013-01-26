@@ -1,7 +1,6 @@
 package com.yp2012g4.vision.telephony;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -10,9 +9,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.SOSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;

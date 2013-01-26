@@ -111,6 +111,7 @@ public class PhoneStatusActivity extends VisionActivity {
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
+    adjustLayoutSize(3);
     pn = new PhoneNotifications(this);
   }
   

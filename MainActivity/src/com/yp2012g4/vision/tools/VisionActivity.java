@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
@@ -44,7 +46,8 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * @param name The name of the activity
    * @param toolTip The tool user manual 
    */
-  @Deprecated public void init(Activity activity, int icon, String name, String toolTip) {
+  @Deprecated
+  public void init(Activity activity, int icon, String name, String toolTip) {
     // _t = new TTS(activity, (OnInitListener) activity);
     _icon = icon;
     _name = name;
@@ -67,7 +70,8 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Dealing control bar on clicks
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     final Intent intent = new Intent(this, MainActivity.class);
     switch (curr_view.getId()) {
       case R.id.back_button:
@@ -97,12 +101,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return false;
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     // TODO Auto-generated method stub
     return 0;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // hide titlebar of application
     // must be before setting the layout
@@ -113,8 +119,27 @@ public abstract class VisionActivity extends VisionGestureDetector {
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
   }
   
-  @Override public void onBackPressed() {
+  @Override
+  public void onBackPressed() {
     speakOut("Previous screen");
     mHandler.postDelayed(mLaunchTask, 1000);
+  }
+  
+  /***
+   * 
+   * @param numOfLayouts
+   *          - the number of rows in the activity
+   */
+  public void adjustLayoutSize(int numOfLayouts) {
+    Display display = getWindowManager().getDefaultDisplay();
+    float density = getResources().getDisplayMetrics().density;
+    int height = display.getHeight() - (int) (60 * density);
+    for (int i = 1; i <= numOfLayouts; i++) {
+      int resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
+      LinearLayout ll = (LinearLayout) findViewById(resID);
+      LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ll.getLayoutParams());
+      params.height = height / numOfLayouts;
+      ll.setLayoutParams(params);
+    }
   }
 }

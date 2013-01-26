@@ -32,6 +32,12 @@ public class TTS {
   }
    
   /**
+   * change is the TTS is working well.
+   */
+  public boolean isRuning() {
+    return _tts == null ? false : true;
+  }
+  /**
    * change the queue mode.
    * 
    * @param queueMode the new queue mode.

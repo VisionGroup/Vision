@@ -1,10 +1,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="WHITE">#FFFFFF</color>
     <color name="BLACK">#000000</color>
-    <color name="RED">#FF0000</color>
-    <color name="GREEN">#04B431</color>
-    <color name="BLUE">#2E9AFE</color>
-
+    <color name="RED">#B40404</color>
+    <color name="GREEN">#088A29</color>
+    <color name="BLUE">#045FB4</color>
+    <color name="LIGHT_PURPLE">#A901DB</color>
+    
    <style name="small_text">
       <item name="android:textSize">20sp</item>
    </style>

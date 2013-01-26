@@ -14,7 +14,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 
@@ -36,9 +38,10 @@ public class VisionApplication extends Application {
   public VisionApplication() {
     color_to_string.append(R.color.BLACK, Color.parseColor("#000000"));
     color_to_string.append(R.color.WHITE, Color.parseColor("#FFFFFF"));
-    color_to_string.append(R.color.RED, Color.parseColor("#FF0000"));
-    color_to_string.append(R.color.GREEN, Color.parseColor("#04B431"));
-    color_to_string.append(R.color.BLUE, Color.parseColor("#2E9AFE"));
+    color_to_string.append(R.color.RED, Color.parseColor("#B40404"));
+    color_to_string.append(R.color.GREEN, Color.parseColor("#088A29"));
+    color_to_string.append(R.color.BLUE, Color.parseColor("#045FB4"));
+    color_to_string.append(R.color.LIGHT_PURPLE, Color.parseColor("#A901DB"));
   }
   
   /**
@@ -86,15 +89,47 @@ public class VisionApplication extends Application {
           ((ImageView)v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
         else
           ((ImageView)v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
+        ((TalkingImageButton)v).setBackgroundColor(color_to_string.get(backgroundColor));
       }
-      /*else if (v instanceof TextView){
-        if (mainView.getId() != R.id.ColorSettingsActivity)
-          ((TextView)v).setTextColor(color_to_string.get(textColor));
-        if (mainView.getId() != R.id.ThemeSettingsActivity)
-          ((TextView)v).setTextSize(textSize);
-      }*/
+    } 
+  }
+  
+  public static void visualFeedback (View v) {
+    if (v instanceof TalkingImageButton) {
+      if (textColor == R.color.WHITE) {
+        ((ImageView)v).setColorFilter(color_to_string.get(R.color.LIGHT_PURPLE), Mode.LIGHTEN);
+        ((TalkingImageButton)v).setBackgroundColor(color_to_string.get(R.color.LIGHT_PURPLE));
+      }
+      else
+        ((ImageView)v).setColorFilter(color_to_string.get(R.color.LIGHT_PURPLE), Mode.DARKEN);
+    } 
+    else if (v instanceof TextView){
+      ((TextView)v).setBackgroundColor(color_to_string.get(R.color.LIGHT_PURPLE));
     }
-        
+  }
+  
+  public static void restoreColors (View v) {
+    if (v instanceof TalkingImageButton) {
+      if (textColor == R.color.WHITE) {
+        ((ImageView)v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
+        ((TalkingImageButton)v).setBackgroundColor(color_to_string.get(backgroundColor));
+      }
+      else
+        ((ImageView)v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
+      
+    }
+    else if (v instanceof TextView){
+      int bg = backgroundColor;
+      if (v.getId() == R.id.WhiteRed)
+        bg = R.color.RED;
+      else if (v.getId() == R.id.WhiteGreen)
+        bg = R.color.GREEN;
+      else if (v.getId() == R.id.WhiteBlue)
+        bg = R.color.BLUE;
+      else if (((View)(v.getParent().getParent())).getId() == R.id.ColorSettingsActivity)
+        bg = R.color.BLACK;
+      ((Button)v).setBackgroundColor(color_to_string.get(bg));
+    }
   }
   
 

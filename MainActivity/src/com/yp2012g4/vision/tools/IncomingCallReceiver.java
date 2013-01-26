@@ -18,7 +18,7 @@ import com.yp2012g4.vision.telephony.IncomingCallActivity;
  * 
  */
 public class IncomingCallReceiver extends BroadcastReceiver {
-  private final static String TAG = "bd:IncomingCallReceiver";
+  private final static String TAG = "vision:IncomingCallReceiver";
   
   @Override public void onReceive(Context context, Intent intent) {
     final Bundle bundle = intent.getExtras();
@@ -30,7 +30,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
-      // processIncomingCall(context, phonenumber);
+      processIncomingCall(context, phonenumber);
     }
   }
   

@@ -85,6 +85,9 @@ public class MultiFingerGestureDetector extends GestureDetector {
           mFirstDownTime = 0;
           return true;
         }
+        break;
+      default:
+        break;
     }
     return false;
   }

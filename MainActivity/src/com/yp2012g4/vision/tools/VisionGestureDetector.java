@@ -17,9 +17,9 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AnalogClock;
 import android.widget.TextView;
@@ -84,7 +84,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onDown(MotionEvent e) {
     Log.i("MyLog", "onDown");
-    last_button_view = getView(e.getRawX(), e.getRawY()); // updating curr_view (inside getView())
+    last_button_view = getView(e.getRawX(), e.getRawY()); // updating curr_view
+                                                          // (inside getView())
     return true;
   }
   
@@ -99,7 +100,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
     if (e2.getAction() == MotionEvent.ACTION_MOVE)
-      for (Map.Entry<View, Rect> entry : view_to_rect.entrySet())
+      for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
         if (isButtonType(entry.getKey()))
           if (entry.getValue().contains((int) e2.getRawX(), (int) e2.getRawY()))
             if (last_button_view != entry.getKey()) {
@@ -151,12 +152,15 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
           mSeparateTouches = true;
         else if (mTwoFingerTapCount == 2 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
           // open back door to tools.
-          Intent intent = new Intent(Settings.ACTION_SETTINGS);
+          final Intent intent = new Intent(Settings.ACTION_SETTINGS);
           intent.addCategory(Intent.CATEGORY_LAUNCHER);
           startActivity(intent);
           mFirstDownTime = 0;
           return true;
         }
+        break;
+      default:
+        break;
     }
     return false;
   }
@@ -174,9 +178,9 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    ViewGroup mainView = (ViewGroup) findViewById(getViewId());
+    final ViewGroup mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(mainView);
-    for (Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
+    for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
       entry.getKey().setOnClickListener(this);
       entry.getKey().setOnTouchListener(this);
     }
@@ -281,14 +285,13 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    */
   public void getButtonsPosition(View v) {
     rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
-    if (v instanceof TimePicker || v instanceof AnalogClock) {
+    if (v instanceof TimePicker || v instanceof AnalogClock)
       return; // ignoring these view types
-    }
     if (isButtonType(v) || v instanceof TextView) {
       view_to_rect.put(v, rect);
       return;
     }
-    ViewGroup vg = (ViewGroup) v;
+    final ViewGroup vg = (ViewGroup) v;
     view_to_rect.put(v, rect);
     for (int i = 0; i < vg.getChildCount(); i++)
       getButtonsPosition(vg.getChildAt(i));
@@ -336,7 +339,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *         - if the coordinates are out of any button
    */
   protected View getView(float x, float y) {
-    for (Map.Entry<View, Rect> entry : view_to_rect.entrySet())
+    for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
       if (entry.getValue().contains((int) x, (int) y)) {
         curr_view = entry.getKey();
         if (isButtonType(entry.getKey()))
@@ -364,7 +367,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * vibration during touch.
    */
   protected void hapticFeedback() {
-    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     vb.vibrate(20);
   }
 }

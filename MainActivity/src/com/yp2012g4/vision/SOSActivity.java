@@ -11,9 +11,9 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.LocationFinder;
 import com.yp2012g4.vision.tools.LocationHandler;
+import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
  * This class is an activity which sends a pre-defined SOS message to a
@@ -50,18 +50,18 @@ public class SOSActivity extends VisionActivity {
           messageToSend += address;
       }
       l.unlock();
-      String number = "0529240424";
+      final String number = "0529240424";
       // String number = "0543064260"; // Olivier's number
       Log.d(TAG, "Sending SOS : " + messageToSend);
       Log.d(TAG, "number : " + number);
       Log.d(TAG, "latitude =  " + latitude);
       Log.d(TAG, "longitude =  " + longitude);
-      SmsManager sms = SmsManager.getDefault();
+      final SmsManager sms = SmsManager.getDefault();
       if (sms == null)
         Log.e(TAG, "SMS Manager is null! Not sending the message");
       else {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
-        ArrayList<String> parts = sms.divideMessage(messageToSend);
+        final ArrayList<String> parts = sms.divideMessage(messageToSend);
         sms.sendMultipartTextMessage(number, null, parts, null, null);
         speakOut("SOS message has been sent");
         // version using sendTextMessage:
@@ -79,6 +79,8 @@ public class SOSActivity extends VisionActivity {
         speakOut("Sending SOS message");
         mHandler.postDelayed(sendSOSMessage, 5000);
         break;
+      default:
+        break;
     }
     return false;
   }
@@ -95,7 +97,6 @@ public class SOSActivity extends VisionActivity {
 //    getMenuInflater().inflate(R.menu.activity_sos, menu);
 //    return true;
 //  }
-  
   void makeUseOfNewLocation(double lon, double lat, String provider, String addr) {
     f.stop();
     l.lock();
@@ -108,9 +109,9 @@ public class SOSActivity extends VisionActivity {
   
   @Override protected void onStart() {
     super.onStart();
-    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     f = new LocationFinder(manager);
-    LocationHandler h = new LocationHandler() {
+    final LocationHandler h = new LocationHandler() {
       @Override public void handleLocation(double lon, double lat, String provider, String addr) {
         makeUseOfNewLocation(lon, lat, provider, addr);
       }

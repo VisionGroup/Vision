@@ -57,7 +57,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * Dealing control bar on clicks
    */
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    Intent intent = new Intent(this, MainActivity.class);
+    final Intent intent = new Intent(this, MainActivity.class);
     switch (curr_view.getId()) {
       case R.id.back_button:
         clickFlag = true;

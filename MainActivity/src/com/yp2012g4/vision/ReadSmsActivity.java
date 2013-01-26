@@ -28,17 +28,16 @@ public class ReadSmsActivity extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.sms_next:
-        if (currentMessage < messages.size()-1) {
+        if (currentMessage < messages.size() - 1) {
           currentMessage++;
           setMessage();
           speakOut("message number " + (currentMessage + 1));
-        } else {
+        } else
           speakOut("no more messages");
-        }
         vb.vibrate(150);
         break;
       case R.id.sms_prev:
@@ -46,10 +45,11 @@ public class ReadSmsActivity extends VisionActivity {
           currentMessage--;
           setMessage();
           speakOut("message number " + (currentMessage + 1));
-        } else {
+        } else
           speakOut("no more messages");
-        }
         vb.vibrate(150);
+        break;
+      default:
         break;
     }
     return false;
@@ -59,8 +59,8 @@ public class ReadSmsActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
-    init(0,"Read SMS screen","Touch on screen to read messages, press next or previous message");
-    SmsManager smsReader = new SmsManager(getApplicationContext());
+    init(0, "Read SMS screen", "Touch on screen to read messages, press next or previous message");
+    final SmsManager smsReader = new SmsManager(getApplicationContext());
     messages = smsReader.getIncomingMessages();
     setMessage();
   }
@@ -70,11 +70,10 @@ public class ReadSmsActivity extends VisionActivity {
 //    getMenuInflater().inflate(R.menu.activity_read_sms, menu);
 //    return true;
 //  }
-  
   private void setMessage() {
-    TalkingButton fromButton = (TalkingButton) findViewById(R.id.sms_from);
-    TalkingButton bodyButton = (TalkingButton) findViewById(R.id.sms_body);
-    TalkingButton dateButton = (TalkingButton) findViewById(R.id.sms_date);
+    final TalkingButton fromButton = (TalkingButton) findViewById(R.id.sms_from);
+    final TalkingButton bodyButton = (TalkingButton) findViewById(R.id.sms_body);
+    final TalkingButton dateButton = (TalkingButton) findViewById(R.id.sms_date);
     if (messages.size() != 0) {
       fromButton.setText(messages.get(currentMessage).getPerson());
       bodyButton.setText(messages.get(currentMessage).getBody());
@@ -82,8 +81,7 @@ public class ReadSmsActivity extends VisionActivity {
       fromButton.setReadText(messages.get(currentMessage).getPerson());
       bodyButton.setReadText(messages.get(currentMessage).getBody());
       dateButton.setReadText(messages.get(currentMessage).getDate());
-    } else {
+    } else
       speakOut("No messages");
-    }
   }
 }

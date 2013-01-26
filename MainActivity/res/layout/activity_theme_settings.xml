@@ -10,13 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:id="@+id/layout1">
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Small_text_size_button"
             style="?textAppearance"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/small_text_size_button"
@@ -26,13 +27,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:id="@+id/layout2">
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Normal_text_size_button"
             style="?textAppearance"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/normal_text_size_button"
@@ -42,13 +44,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/layout3" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/Large_text_size_button"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="120dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="@string/large_text_size_button"

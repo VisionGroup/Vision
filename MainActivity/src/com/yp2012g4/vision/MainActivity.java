@@ -58,6 +58,7 @@ public class MainActivity extends VisionActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    adjustLayoutSize(4);
     PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();

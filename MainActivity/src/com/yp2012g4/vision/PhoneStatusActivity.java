@@ -23,7 +23,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * 
  */
 public class PhoneStatusActivity extends VisionActivity {
-  private static final String TAG = "bd:PhoneStatusActivity";
+  private static final String TAG = "vision:PhoneStatusActivity";
   /**
    * Used to activate the onTouch button reading function.
    */
@@ -74,8 +74,7 @@ public class PhoneStatusActivity extends VisionActivity {
     }
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -84,8 +83,7 @@ public class PhoneStatusActivity extends VisionActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     final Resources res = getResources();
     switch (curr_view.getId()) {
@@ -108,12 +106,12 @@ public class PhoneStatusActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
+    adjustLayoutSize(3);
     pn = new PhoneNotifications(this);
   }
   

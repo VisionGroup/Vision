@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.CallUtils;
+import com.yp2012g4.vision.tools.VisionActivity;
 
 public class IncomingCallActivity extends VisionActivity {
-  private static final String TAG = "bd:IncomingCallActivity";
+  private static final String TAG = "vision:IncomingCallActivity";
   CallUtils callUtils;
   private ListenToPhoneState listener;
   Boolean rang = Boolean.valueOf(false);
@@ -28,6 +30,7 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public void onClick(View v) {
     // callUtils.silenceRinger();
     super.onClick(v);
+    Log.d(TAG, v.toString());
     switch (v.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -44,6 +47,30 @@ public class IncomingCallActivity extends VisionActivity {
     }
   }
   
+  
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    super.onSingleTapUp(e);
+    if (clickFlag) {
+      clickFlag = false;
+      return false;
+    }
+    switch (curr_view.getId()) {
+      case R.id.button_answer:
+        answerCall();
+        break;
+      case R.id.button_reject:
+        endCall();
+        break;
+      case R.id.back_button:
+        speakOut("Previous screen");
+        mHandler.postDelayed(mLaunchTask, 1000);
+        break;
+      default:
+        return false;
+    }
+    return true;
+  }    
   private void answerCall() {
     try {
       // callUtils.answerCall(this);
@@ -64,16 +91,12 @@ public class IncomingCallActivity extends VisionActivity {
     ((TalkingButton) findViewById(R.id.number)).setContentDescription(number);
   }
   
-  /**
-   * onCreate method.
-   */
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    callUtils = new CallUtils(this);
-    Log.d(TAG, "onCreate Incoming call activity");
-    init(0/* TODO Check what icon goes here */, getString(R.string.IncomingCall_whereami), getString(R.string.IncomingCall_help));
+  @Override
+  protected void onResume() {
+    super.onResume();
     setContentView(R.layout.activity_incoming_call);
     setPhoneStateListener();
+    
     final Bundle extras = getIntent().getExtras();
     if (extras != null) {
       try {
@@ -88,6 +111,18 @@ public class IncomingCallActivity extends VisionActivity {
       }
     }
     updateNumberButton(incomingNumber);
+    
+  }
+  
+  /**
+   * onCreate method.
+   */
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    callUtils = new CallUtils(this);
+    Log.d(TAG, "onCreate Incoming call activity");
+    init(0/* TODO Check what icon goes here */, getString(R.string.IncomingCall_whereami), getString(R.string.IncomingCall_help));
+
   }
   
   @Override public void onDestroy() {
@@ -117,7 +152,6 @@ public class IncomingCallActivity extends VisionActivity {
         mHandler.postDelayed(mLaunchTask, 1000);
       }
     }
-    
     String stateName(int state) {
       switch (state) {
         case TelephonyManager.CALL_STATE_IDLE:
@@ -132,4 +166,21 @@ public class IncomingCallActivity extends VisionActivity {
       return Integer.toString(state);
     }
   }
+  
+  @Override
+  public boolean onKeyDown (int keyCode, KeyEvent event) {
+    Log.d(TAG, "onKeyDown " + keyCode);
+    switch (keyCode) {
+      case KeyEvent.KEYCODE_BACK:
+        endCall();
+        break;
+      case KeyEvent.KEYCODE_MENU:
+        answerCall();
+        break;
+      default:
+        return false;
+    }
+    return true;
+  }
+  
 }

@@ -5,17 +5,23 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
 
 /*
- * TODO: Code review More documentation
+ * write by Yaron Auster
+ * 
+ * The VisionActivity extend the normal activity.
+ * it's give extra functionality to this app.
  */
 public abstract class VisionActivity extends VisionGestureDetector {
+  private static final String TAG = "vision:VisionActivity";
   private int _icon;
   private String _name;
   private String _toolTip;
@@ -33,20 +39,28 @@ public abstract class VisionActivity extends VisionGestureDetector {
   }
   
   /**
-   * replaced by void init(int icon, String name, String toolTip)
+   * Initialization the class
    * 
-   * @param activity
-   * @param icon
-   * @param name
-   * @param toolTip
+   * @param activity The activity it's run
+   * @param icon The icon for this activity
+   * @param name The name of the activity
+   * @param toolTip The tool user manual 
    */
-  @Deprecated public void init(Activity activity, int icon, String name, String toolTip) {
+  @Deprecated
+  public void init(Activity activity, int icon, String name, String toolTip) {
     // _t = new TTS(activity, (OnInitListener) activity);
     _icon = icon;
     _name = name;
     _toolTip = toolTip;
   }
   
+  /**
+   * Initialization the class
+   * 
+   * @param icon The icon for this activity
+   * @param name The name of the activity
+   * @param toolTip The tool user manual 
+   */
   public void init(int icon, String name, String toolTip) {
     _icon = icon;
     _name = name;
@@ -56,12 +70,13 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Dealing control bar on clicks
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    Intent intent = new Intent(this, MainActivity.class);
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    final Intent intent = new Intent(this, MainActivity.class);
     switch (curr_view.getId()) {
       case R.id.back_button:
         clickFlag = true;
-        Log.i("MyLog", _name);
+        Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
           speakOut("In main screen");
           break;
@@ -86,12 +101,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return false;
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     // TODO Auto-generated method stub
     return 0;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // hide titlebar of application
     // must be before setting the layout
@@ -102,8 +119,27 @@ public abstract class VisionActivity extends VisionGestureDetector {
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
   }
   
-  @Override public void onBackPressed() {
+  @Override
+  public void onBackPressed() {
     speakOut("Previous screen");
     mHandler.postDelayed(mLaunchTask, 1000);
+  }
+  
+  /***
+   * 
+   * @param numOfLayouts
+   *          - the number of rows in the activity
+   */
+  public void adjustLayoutSize(int numOfLayouts) {
+    Display display = getWindowManager().getDefaultDisplay();
+    float density = getResources().getDisplayMetrics().density;
+    int height = display.getHeight() - (int) (60 * density);
+    for (int i = 1; i <= numOfLayouts; i++) {
+      int resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
+      LinearLayout ll = (LinearLayout) findViewById(resID);
+      LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ll.getLayoutParams());
+      params.height = height / numOfLayouts;
+      ll.setLayoutParams(params);
+    }
   }
 }

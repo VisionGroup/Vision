@@ -2,6 +2,7 @@ package com.yp2012g4.vision.tools;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
+
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -10,11 +11,11 @@ import android.util.Log;
  * 
  * @author Auster Yaron
  * 
- * The TTS is make an handle to use the TTS class in android.
- *
+ *         The TTS is make an handle to use the TTS class in android.
+ * 
  */
-
 public class TTS {
+  private static final String TAG = "vision:TTS";
   private TextToSpeech _tts;
   private int _qm;
   private Locale _language;
@@ -22,48 +23,54 @@ public class TTS {
   /**
    * 
    * 
-   * @param context the context that running the class.
-   * @param listener the listener that connected from the activity.
+   * @param context
+   *          the context that running the class.
+   * @param listener
+   *          the listener that connected from the activity.
    */
   public TTS(Context context, TextToSpeech.OnInitListener listener) {
     _tts = new TextToSpeech(context, listener);
     setQueueMode(TextToSpeech.QUEUE_FLUSH);
     setLanguage(Locale.US);
   }
-   
+  
   /**
    * change is the TTS is working well.
    */
   public boolean isRuning() {
     return _tts == null ? false : true;
   }
+  
   /**
    * change the queue mode.
    * 
-   * @param queueMode the new queue mode.
+   * @param queueMode
+   *          the new queue mode.
    */
   public void setQueueMode(int queueMode) {
-    Log.i("TTS", "setQueueMode");
+    Log.i(TAG, "setQueueMode");
     _qm = queueMode;
   }
   
   /**
    * change the language.
    * 
-   * @param languag the new language.
+   * @param languag
+   *          the new language.
    */
   public void setLanguage(Locale languag) {
-    Log.i("TTS", "setLanguage");
+    Log.i(TAG, "setLanguage");
     _tts.setLanguage(_language);
   }
   
   /**
    * speak the given string.
    * 
-   * @param s string to speak.
+   * @param s
+   *          string to speak.
    */
   public void speak(String s) {
-    Log.i("TTS", "speak : " + s);
+    Log.i(TAG, "speak : " + s);
     if (null == s)
       return;
     if (!isPureEnglise(s))
@@ -72,21 +79,20 @@ public class TTS {
       _tts.speak(s, _qm, null);
   }
   
-
   /**
    * speak the given string, in synchronous mode.
    * 
-   * @param s string to speak.
+   * @param s
+   *          string to speak.
    */
-  public void syncSpeak(String s){
+  public void syncSpeak(String s) {
     speak(s);
-    while (isSpeaking()){
+    while (isSpeaking())
       try {
         Thread.sleep(1000);
-      } catch (Exception e) {
+      } catch (final Exception e) {
         e.printStackTrace();
       }
-    }
   }
   
   /**
@@ -94,7 +100,7 @@ public class TTS {
    * 
    */
   public void stop() {
-    Log.i("TTS", "stop");
+    Log.i(TAG, "stop");
     _tts.stop();
   }
   
@@ -120,13 +126,14 @@ public class TTS {
   /**
    * Check if the string contaion pure Englise.
    * 
-   * @param s string to check.
+   * @param s
+   *          string to check.
    * @return true if only Englise letters.
    */
   public static boolean isPureEnglise(String s) {
     if (s == null)
       return true;
     return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();
-    //return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
+    // return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
   }
 }

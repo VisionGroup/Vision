@@ -30,7 +30,8 @@ public class ThemeSettingsActivity extends VisionActivity {
    * @param v
    *          - a View object on the screen
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     if (curr_view instanceof TalkingButton)
       speakOut(((TalkingButton) curr_view).getReadText());
@@ -60,6 +61,7 @@ public class ThemeSettingsActivity extends VisionActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
+    adjustLayoutSize(3);
     init(0, getString(R.string.theme_settings_screen), getString(R.string.size_setting_help));
   }
 }

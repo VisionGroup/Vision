@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.LocationFinder;
 import com.yp2012g4.vision.tools.LocationHandler;
+import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
  * An activity which will reads to the user his current location.
@@ -21,7 +21,7 @@ import com.yp2012g4.vision.tools.LocationHandler;
  * @version 1.0
  */
 public class WhereAmIActivity extends VisionActivity {
-  private static String TAG = "vision.WhereAmIActivity";
+  private static String TAG = "vision:WhereAmIActivity";
   
   // TODO: add a button to know the current status
   private static void log(String s) {
@@ -44,7 +44,7 @@ public class WhereAmIActivity extends VisionActivity {
     log("latitude = " + latitude + "\n");
     log("provider = " + prov + "\n");
     log("address: " + address);
-    String toSpeak = "Your Location is: " + address;
+    final String toSpeak = "Your Location is: " + address;
     setText(toSpeak);
     log("speaking out location: " + toSpeak + "\n");
     l.unlock();
@@ -52,7 +52,7 @@ public class WhereAmIActivity extends VisionActivity {
   }
   
   private void initialize() {
-    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     log("Got location manager");
     f = new LocationFinder(manager);
     log("Got location finder");
@@ -64,7 +64,7 @@ public class WhereAmIActivity extends VisionActivity {
     log("Now running");
     l.lock();
     if (provider.equals("")) {
-      String s = "Could not find a location.";
+      final String s = "Could not find a location.";
       setText(s);
       speakOut(s);
     } else if (provider.equals(LocationManager.GPS_PROVIDER))
@@ -104,7 +104,7 @@ public class WhereAmIActivity extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    int id = curr_view.getId();
+    final int id = curr_view.getId();
     if (id == -1 || id == R.id.where_am_i_Activity || id == R.id.where_am_i_textview) {
       l.lock();
       speakOut(text);
@@ -114,7 +114,6 @@ public class WhereAmIActivity extends VisionActivity {
     super.onSingleTapUp(e);
     return false;
   }
-  
 //  @Override public boolean onCreateOptionsMenu(Menu menu) {
 //    // Inflate the menu; this adds items to the action bar if it is present.
 //    getMenuInflater().inflate(R.menu.activity_main, menu);

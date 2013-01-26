@@ -35,36 +35,36 @@ public class ContactsActivity extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.contact_next:
         if (currentContact < contacts.size() - 1) {
           currentContact++;
           setContact();
-        } else {
+        } else
           speakOut("no more contacts");
-        }
         vb.vibrate(VIBRATE_TIME);
         break;
       case R.id.contact_prev:
         if (currentContact > 0) {
           currentContact--;
           setContact();
-        } else {
+        } else
           speakOut("no more contacts");
-        }
         vb.vibrate(VIBRATE_TIME);
         break;
       case R.id.contacts_call:
-        Intent call = new Intent(Intent.ACTION_CALL);
+        final Intent call = new Intent(Intent.ACTION_CALL);
         call.setData(Uri.parse("tel:" + contacts.get(currentContact).getPhone()));
         startActivity(call);
         break;
       case R.id.contacts_sms:
-        Intent sms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
+        final Intent sms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
         sms.putExtra(QuickSMSActivity.NUMBER_KEY, contacts.get(currentContact).getPhone());
         startActivity(sms);
+        break;
+      default:
         break;
     }
     return false;
@@ -73,8 +73,9 @@ public class ContactsActivity extends VisionActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts);
-    init(0,"Contacts screen","Touch on screen to select contact with next and previous buttons... Call or send message to current contact");
-    ContactManager contactManager = new ContactManager(getApplicationContext());
+    init(0, "Contacts screen",
+        "Touch on screen to select contact with next and previous buttons... Call or send message to current contact");
+    final ContactManager contactManager = new ContactManager(getApplicationContext());
     final Bundle extras = getIntent().getExtras();
     String listType = "all";
     if (extras != null)
@@ -86,7 +87,7 @@ public class ContactsActivity extends VisionActivity {
     if (listType.equalsIgnoreCase("all")) {
       contacts = contactManager.getAllContacts();
       findViewById(getViewId()).setContentDescription("Contact list screen");
-    } else if (listType.equalsIgnoreCase("favorits")){
+    } else if (listType.equalsIgnoreCase("favorits")) {
       contacts = contactManager.getFavoriteContacts();
       findViewById(getViewId()).setContentDescription("Favorit contacts screen");
     }
@@ -98,12 +99,11 @@ public class ContactsActivity extends VisionActivity {
 //    getMenuInflater().inflate(R.menu.activity_read_sms, menu);
 //    return true;
 //  }
-  
   private void setContact() {
-    TalkingButton contactNameButton = (TalkingButton) findViewById(R.id.contact_name);
-    TalkingButton conactPhoneButton = (TalkingButton) findViewById(R.id.contact_phone);
-    TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
-    TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_sms);
+    final TalkingButton contactNameButton = (TalkingButton) findViewById(R.id.contact_name);
+    final TalkingButton conactPhoneButton = (TalkingButton) findViewById(R.id.contact_phone);
+    final TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
+    final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_sms);
     if (contacts.size() != 0) {
       currentName = contacts.get(currentContact).getContactName();
       currentPhone = contacts.get(currentContact).getPhone();
@@ -114,8 +114,7 @@ public class ContactsActivity extends VisionActivity {
       conactPhoneButton.setText(currentPhone);
       conactPhoneButton.setReadText(currentPhone);
       speakOut(currentName);
-    } else {
+    } else
       speakOut("No messages");
-    }
   }
 }

@@ -22,9 +22,9 @@ import com.yp2012g4.vision.customUI.TalkingImageButton;
 
 public class VisionApplication extends Application {
 	
-  static final float SMALL=20;
-  static final float NORMAL=25;
-  static final float LARGE=30;
+  public static final float SMALL=20;
+  public static final float NORMAL=25;
+  public static final float LARGE=30;
   
   private static SparseIntArray color_to_string = new SparseIntArray();
   public static float textSize = VisionApplication.NORMAL;
@@ -39,8 +39,8 @@ public class VisionApplication extends Application {
     color_to_string.append(R.color.BLACK, Color.parseColor("#000000"));
     color_to_string.append(R.color.WHITE, Color.parseColor("#FFFFFF"));
     color_to_string.append(R.color.RED, Color.parseColor("#B40404"));
-    color_to_string.append(R.color.GREEN, Color.parseColor("#088A29"));
-    color_to_string.append(R.color.BLUE, Color.parseColor("#045FB4"));
+    color_to_string.append(R.color.GREEN, Color.parseColor("#04B45F"));
+    color_to_string.append(R.color.BLUE, Color.parseColor("#0489B1"));
     color_to_string.append(R.color.LIGHT_PURPLE, Color.parseColor("#A901DB"));
   }
   

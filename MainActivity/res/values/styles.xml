@@ -2,18 +2,18 @@
     <color name="WHITE">#FFFFFF</color>
     <color name="BLACK">#000000</color>
     <color name="RED">#B40404</color>
-    <color name="GREEN">#088A29</color>
-    <color name="BLUE">#045FB4</color>
+    <color name="GREEN">#04B45F</color>
+    <color name="BLUE">#0489B1</color>
     <color name="LIGHT_PURPLE">#A901DB</color>
     
    <style name="small_text">
-      <item name="android:textSize">20sp</item>
+      <item name="android:textSize">20dp</item>
    </style>
    <style name="normal_text">
-      <item name="android:textSize">25sp</item>
+      <item name="android:textSize">25dp</item>
    </style>
    <style name="large_text">
-      <item name="android:textSize">30sp</item>
+      <item name="android:textSize">30dp</item>
    </style>
    
    <style name="small_white_text" parent="@style/small_text">

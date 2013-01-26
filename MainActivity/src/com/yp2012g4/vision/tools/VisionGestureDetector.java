@@ -259,11 +259,11 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     _t = new TTS(this, this);
+    VisionApplication.setThemeToActivity(this);
     if (_t.isRuning())
       speakOut("start");
     else
       Log.e("onTouchEventClass", "tts init error");
-    VisionApplication.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     mHandler = new Handler();
     gestureDetector = new GestureDetector(this);

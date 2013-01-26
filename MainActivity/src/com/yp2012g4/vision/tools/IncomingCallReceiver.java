@@ -30,7 +30,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
-      // processIncomingCall(context, phonenumber);
+      processIncomingCall(context, phonenumber);
     }
   }
   

@@ -13,7 +13,10 @@ import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
 
 /*
- * TODO: Code review More documentation
+ * write by Yaron Auster
+ * 
+ * The VisionActivity extend the normal activity.
+ * it's give extra functionality to this app.
  */
 public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
@@ -33,12 +36,12 @@ public abstract class VisionActivity extends VisionGestureDetector {
   }
   
   /**
-   * replaced by void init(int icon, String name, String toolTip)
+   * Initialization the class
    * 
-   * @param activity
-   * @param icon
-   * @param name
-   * @param toolTip
+   * @param activity The activity it's run
+   * @param icon The icon for this activity
+   * @param name The name of the activity
+   * @param toolTip The tool user manual 
    */
   @Deprecated public void init(Activity activity, int icon, String name, String toolTip) {
     // _t = new TTS(activity, (OnInitListener) activity);
@@ -47,6 +50,13 @@ public abstract class VisionActivity extends VisionGestureDetector {
     _toolTip = toolTip;
   }
   
+  /**
+   * Initialization the class
+   * 
+   * @param icon The icon for this activity
+   * @param name The name of the activity
+   * @param toolTip The tool user manual 
+   */
   public void init(int icon, String name, String toolTip) {
     _icon = icon;
     _name = name;

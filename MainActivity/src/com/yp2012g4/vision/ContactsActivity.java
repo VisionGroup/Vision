@@ -90,6 +90,9 @@ public class ContactsActivity extends VisionActivity {
     } else if (listType.equalsIgnoreCase("favorits")) {
       contacts = contactManager.getFavoriteContacts();
       findViewById(getViewId()).setContentDescription("Favorit contacts screen");
+    } else if (listType.equalsIgnoreCase("test")) {
+      findViewById(getViewId()).setContentDescription("Test contacts screen");
+      contacts = ContactManager.getTestContacts();
     }
     setContact();
   }

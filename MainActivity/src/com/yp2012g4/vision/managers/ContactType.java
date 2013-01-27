@@ -13,6 +13,7 @@ import android.provider.ContactsContract;
 public class ContactType {
   private String phone = "";
   private String contactName = "";
+  private String lookUpKey = "";
   
   /**
    * constructor with Cursor
@@ -23,8 +24,19 @@ public class ContactType {
   public ContactType(Cursor cur, Context context) {
     contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME)).toString();
     ContactManager cm = new ContactManager(context);
-    String lookup = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY)).toString();
-    phone = cm.lookupPhoneNumbers(lookup);
+    lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY)).toString();
+    phone = cm.lookupPhoneNumbers(lookUpKey);
+  }
+  
+  /**
+   * constructor with fields
+   * 
+   * @param phone
+   * @param contactName
+   */
+  public ContactType(String phone, String contactName) {
+    this.phone = phone;
+    this.contactName = contactName;
   }
   
   public synchronized String getPhone() {
@@ -33,5 +45,9 @@ public class ContactType {
   
   public synchronized String getContactName() {
     return contactName;
+  }
+  
+  public synchronized String getLookUpKey() {
+    return lookUpKey;
   }
 }

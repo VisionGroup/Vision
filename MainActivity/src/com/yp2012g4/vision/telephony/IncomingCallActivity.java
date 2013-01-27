@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -46,6 +48,19 @@ public class IncomingCallActivity extends VisionActivity {
         break;
     }
   }
+  
+
+  
+  
+  @Override
+  public void onAttachedToWindow() {
+    //make the activity show even the screen is locked.
+    Window window = getWindow();
+    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+            + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+            + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+}
   
   
   @Override

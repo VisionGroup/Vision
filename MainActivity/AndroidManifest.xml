@@ -115,7 +115,6 @@
         <activity
             android:name="com.yp2012g4.vision.AlarmActivity"
             android:label="@string/title_activity_alarm"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
@@ -141,7 +140,6 @@
         <activity
             android:name="com.yp2012g4.vision.SetClockActivity"
             android:label="@string/title_activity_set_clock"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>

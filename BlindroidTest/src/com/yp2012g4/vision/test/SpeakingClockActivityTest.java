@@ -6,6 +6,7 @@ package com.yp2012g4.vision.test;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
@@ -31,7 +32,7 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
 	public void testCheckDate(){
 		solo.assertCurrentActivity("wrong activity", SpeakingClockActivity.class);
 		Calendar cal = Calendar.getInstance();
-		String date = DateFormat.getDateInstance().format(cal.getTime());
+		String date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(cal.getTime());
 		String text = solo.getText(1).getText().toString();
 		assertTrue(text.equals(date));
 		solo.clickOnText(date);

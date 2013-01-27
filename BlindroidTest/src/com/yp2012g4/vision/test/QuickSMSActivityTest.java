@@ -41,7 +41,7 @@ public class QuickSMSActivityTest extends
 	solo.assertCurrentActivity("Check on first activity",
 		QuickSMSActivity.class);
 	final ArrayList<Button> btnList = solo.getCurrentButtons();
-	assertEquals(9, btnList.size());
+	assertEquals(8, btnList.size());
     }
 
     public void testNumOfImageButtons() {

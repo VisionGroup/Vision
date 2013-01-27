@@ -362,17 +362,23 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     }
   };
   
+  @Override public void startActivity(Intent intent) {
+    vibrate(200);
+    super.startActivity(intent);
+  }
+  
   /**
    * vibration during touch.
+   * 
+   * @param i
    */
-  protected void hapticFeedback() {
-    @SuppressWarnings("unused")
+  protected void vibrate(int duration) {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    vb.vibrate(duration);
   }
   
   protected void hapticFeedback(View v) {
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    vb.vibrate(20);
+    vibrate(20);
     VisionApplication.visualFeedback(v);
   }
 }

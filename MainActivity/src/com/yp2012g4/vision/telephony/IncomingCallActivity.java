@@ -87,8 +87,10 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   void updateNumberButton(String number) {
-    ((TalkingButton) findViewById(R.id.number)).setText(number.toCharArray(), 0, number.length());
-    ((TalkingButton) findViewById(R.id.number)).setContentDescription(number);
+    TalkingButton tB =  ((TalkingButton) findViewById(R.id.number));
+    tB.setText(number.toCharArray(), 0, number.length());
+    tB.setReadText(number);
+    tB.setContentDescription(number);
   }
   
   @Override

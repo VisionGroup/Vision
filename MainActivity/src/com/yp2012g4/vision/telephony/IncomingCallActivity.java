@@ -30,7 +30,7 @@ public class IncomingCallActivity extends VisionActivity {
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
   @Override public void onClick(View v) {
-    // callUtils.silenceRinger();
+    callUtils.silenceRinger();
     super.onClick(v);
     Log.d(TAG, v.toString());
     switch (v.getId()) {
@@ -49,9 +49,6 @@ public class IncomingCallActivity extends VisionActivity {
     }
   }
   
-
-  
-  
   @Override
   public void onAttachedToWindow() {
     //make the activity show even the screen is locked.
@@ -62,10 +59,14 @@ public class IncomingCallActivity extends VisionActivity {
             + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 }
   
-  
+  @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+    callUtils.silenceRinger();
+    return super.onScroll(e1, e2, distanceX, distanceY);
+  }
   @Override
   public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
+    callUtils.silenceRinger();
     if (clickFlag) {
       clickFlag = false;
       return false;
@@ -95,13 +96,14 @@ public class IncomingCallActivity extends VisionActivity {
       Log.e(TAG, "Error answering call", e);
     }
   }
-  
-  void endCall() {
+  private void endCall() {
     callUtils.endCall();
     Log.d(TAG, "Rejected call");
   }
   
   void updateNumberButton(String number) {
+    Log.d(TAG, number);
+    Log.d(TAG, "updateNumberButton Incoming call activity ");
     TalkingButton tB =  ((TalkingButton) findViewById(R.id.number));
     tB.setText(number.toCharArray(), 0, number.length());
     tB.setReadText(number);
@@ -110,6 +112,7 @@ public class IncomingCallActivity extends VisionActivity {
   
   @Override
   protected void onResume() {
+    Log.d(TAG, "onResume Incoming call activity");
     super.onResume();
     setContentView(R.layout.activity_incoming_call);
     setPhoneStateListener();
@@ -127,6 +130,8 @@ public class IncomingCallActivity extends VisionActivity {
         incomingNumber = new String("");
       }
     }
+    if (incomingNumber == null)
+      incomingNumber="";
     updateNumberButton(incomingNumber);
     
   }

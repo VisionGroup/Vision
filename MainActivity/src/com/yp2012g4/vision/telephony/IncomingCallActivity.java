@@ -51,7 +51,7 @@ public class IncomingCallActivity extends VisionActivity {
   
   @Override public void onAttachedToWindow() {
     // make the activity show even the screen is locked.
-    Window window = getWindow();
+    final Window window = getWindow();
     window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
         + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
   }
@@ -85,9 +85,11 @@ public class IncomingCallActivity extends VisionActivity {
     return true;
   }
   
+  /**
+   * Answers the present phone call.
+   */
   private void answerCall() {
     try {
-      // callUtils.answerCall(this);
       CallUtils.answerPhoneHeadsethook(this);
       Log.d(TAG, "Answered call");
     } catch (final Exception e) {
@@ -95,15 +97,23 @@ public class IncomingCallActivity extends VisionActivity {
     }
   }
   
+  /**
+   * Terminate the present phone call.
+   */
   private void endCall() {
     callUtils.endCall();
     Log.d(TAG, "Rejected call");
   }
   
+  /**
+   * Updates the phone number on the number label.
+   * 
+   * @param number
+   */
   void updateNumberButton(String number) {
     Log.d(TAG, number);
     Log.d(TAG, "updateNumberButton Incoming call activity ");
-    TalkingButton tB = ((TalkingButton) findViewById(R.id.number));
+    final TalkingButton tB = ((TalkingButton) findViewById(R.id.number));
     tB.setText(number.toCharArray(), 0, number.length());
     tB.setReadText(number);
     tB.setContentDescription(number);
@@ -151,6 +161,9 @@ public class IncomingCallActivity extends VisionActivity {
     return R.id.incomingCallActivity;
   }
   
+  /**
+   * Sets the listener to the change in the phone's telephony status.
+   */
   private void setPhoneStateListener() {
     tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     listener = new ListenToPhoneState();

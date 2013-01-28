@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -20,8 +21,9 @@ public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
   CallUtils callUtils;
   private ListenToPhoneState listener;
+  private ContactManager contact = new ContactManager(this);
   Boolean rang = Boolean.valueOf(false);
-  String incomingNumber;
+  
   TelephonyManager tManager;
   
   /**
@@ -124,6 +126,7 @@ public class IncomingCallActivity extends VisionActivity {
     super.onResume();
     setContentView(R.layout.activity_incoming_call);
     setPhoneStateListener();
+    String incomingNumber="",incomingName="",displayText;
     final Bundle extras = getIntent().getExtras();
     if (extras != null) {
       try {
@@ -137,9 +140,16 @@ public class IncomingCallActivity extends VisionActivity {
         incomingNumber = new String("");
       }
     }
+    displayText="";
     if (incomingNumber == null)
       incomingNumber = "";
-    updateNumberButton(incomingNumber);
+    else{
+      incomingName = contact.getNameFromPhone(incomingNumber);
+      if (!incomingName.equals(incomingNumber))
+        displayText=incomingName;
+    }
+    displayText += " " +incomingNumber;
+    updateNumberButton(displayText);
   }
   
   /**

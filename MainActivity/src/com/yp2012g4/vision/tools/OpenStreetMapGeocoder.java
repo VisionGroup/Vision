@@ -38,7 +38,7 @@ public class OpenStreetMapGeocoder {
       final Document d = dBuilder.parse(new InputSource(sourceUrl.openStream()));
       r = d.getElementsByTagName("result").item(0).getChildNodes().item(0).getNodeValue();
     } catch (final Exception e) {
-      Log.d(TAG, "Error: " + e.getMessage());
+      Log.e(TAG, "Error: " + e.getMessage());
     }
     return r;
   }

@@ -1,4 +1,4 @@
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.contacts;
 
 import java.util.ArrayList;
 
@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
+import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -73,8 +75,8 @@ public class ContactsActivity extends VisionActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts);
-    init(0, "Contacts screen",
-        "Touch on screen to select contact with next and previous buttons... Call or send message to current contact");
+    init(0, getString(R.string.contacts_screen),
+        getString(R.string.contacts_screen_help));
     final ContactManager contactManager = new ContactManager(getApplicationContext());
     final Bundle extras = getIntent().getExtras();
     String listType = "all";
@@ -90,6 +92,9 @@ public class ContactsActivity extends VisionActivity {
     } else if (listType.equalsIgnoreCase("favorits")) {
       contacts = contactManager.getFavoriteContacts();
       findViewById(getViewId()).setContentDescription("Favorit contacts screen");
+    } else if (listType.equalsIgnoreCase("test")) {
+      findViewById(getViewId()).setContentDescription("Test contacts screen");
+      contacts = ContactManager.getTestContacts();
     }
     setContact();
   }

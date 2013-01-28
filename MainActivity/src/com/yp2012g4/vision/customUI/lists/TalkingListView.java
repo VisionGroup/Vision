@@ -27,17 +27,15 @@ public class TalkingListView extends ListView implements OnScrollListener, OnIte
   private int selectedItem = 0;
   private boolean isInit = false;
   
-  
-  
-  
   /**
    * set custom gesture detector
+   * 
    * @param gDetector
    */
   public synchronized void setGestureDetectorRun(MultiTouchRun run) {
     gDetector.setMultiTouchRun(run);
   }
-
+  
   /**
    * get selected item number
    */

@@ -1,21 +1,21 @@
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.contacts;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.DialScreen;
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class ContactsMenuActivity extends VisionActivity {
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts_menu);
     init(0, getString(R.string.title_activity_contacts_menu), getString(R.string.contacts_help));
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     Intent intent;
     switch (curr_view.getId()) {
@@ -39,8 +39,7 @@ public class ContactsMenuActivity extends VisionActivity {
     return false;
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.ContactsMenuActivity;
   }
 }

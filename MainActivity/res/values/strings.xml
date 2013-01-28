@@ -11,10 +11,9 @@
     <string name="phone_status_button">Phone status</string>
     <string name="signal_button">Signal</string>
     <string name="alarm_clock_button">Alarm clock</string>
-    <string name="quick_sms_button">Quick SMS</string>
+    <string name="quick_sms_button">Quick S M S</string>
     <string name="title_activity_quick_sms">QuickSMSActivity</string>
     <string name="title_dial_screen">DialScreen</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_sos">SOSActivity</string>
     <string name="send_SOS_message">Send S O S</string>
     <string name="title_activity_quick_dial">QuickDialActivity</string>
@@ -34,8 +33,9 @@
     <string name="phoneStatus_button_getReceptionStatus">Reception Status</string>
     <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
     <string name="phoneStatus_button_getMissedCalls_read">Missed calls</string>
-    <string name="phoneStatus_button_getUnreadSMS_read">unread SMS</string>
+    <string name="phoneStatus_button_getUnreadSMS_read">unread S M S</string>
     <string name="phoneStatus_whereami">Phone Status Menu</string>
+    <string name="contacts_screen">Contacts screen.</string>
     <string name="phoneStatus_help">You can press one of three buttons. \n1) to get Battery level and charger status. \n2)to get Reception status. \n3)to get missed calles list.</string>
     <string name="alarm_clock_help">You can press one of 4 buttons. \n1) to get alarm status. \n2) to set the alarm time. \n3) to activate the alarm clock. \n4) to cancel the alarm clock.</string>
     <string name="speaking_clock_help">You can press one of 2 buttons. \n1) to hear the time. \n2) to hear the date.</string>
@@ -45,6 +45,10 @@
     <string name="settings_help">You can press one of two buttons. \n1) to go to the color setting screen. \n2) to go the text size setting screen.</string>
     <string name="color_setting_help">You can press one of 7 buttons. each button is a different color setting for the system</string>
     <string name="size_setting_help">You can press one of 3 buttons. Each button is different text size for the system.\n the upper button is the smallest size and the bottom button is the largest.</string>
+    <string name="where_am_i_help">Touch on screen to find your current location.</string>
+    <string name="contacts_screen_help">Touch on screen to select contact with next and previous buttons \n. Call or send message to current contact.</string>
+    <string name="quick_sms_help">Choose quick S M S message from the list above.</string>
+    <string name="read_sms_help">Touch on screen to read messages, press next or previous message</string>
     <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
     <string name="phoneStatus_message_receptionStatus_read">Signal Strentgh is %1$d%%.</string>
     <string name="phoneStatus_message_noSignal_read">No Signal</string>
@@ -98,7 +102,7 @@
     <string name="noAlarm">No alarm</string>
     <string name="setHour">Hours</string>
     <string name="setMinutes">Minutes</string>
-    <string name="read_sms_button">Read SMS.</string>
+    <string name="read_sms_button">Read S M S.</string>
     <string name="title_activity_talking_sms">TalkingSMS</string>
     <string name="title_activity_talking_list">TalkingList</string>
     <string name="title_activity_where_am_i">Where Am I</string>
@@ -135,12 +139,13 @@
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
     <string name="quick_sms_screen">Quick S M S screen</string>
     <string name="quick_dial_screen">Quick dial screen</string>
-    <string name="sos_screen">SOS screen</string>
+    <string name="sos_screen">S O S screen</string>
     <string name="color_settings_screen">Color settings screen</string>
     <string name="display_settings_screen">Display settings screen</string>
     <string name="theme_settings_screen">Theme settings screen</string>
     <string name="read_sms_screen">Read S M S screen</string>
     <string name="contact_list_screen">Contact list screen</string>
+    <string name="where_am_i_screen">Where Am I screen</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>
     <string name="next_message">Next message</string>
     <string name="previous_message">previous message</string>
@@ -155,7 +160,16 @@
     <string name="next_contact">Next contact</string>
     <string name="previous_contact">Previous contact</string>
     <string name="call_contact">Call contact</string>
-    <string name="send_quick_sms">send quick sms</string>
+    <string name="send_quick_sms">send quick S M S</string>
     <string name="favorit_contacts_list">Favorite contacts</string>
+    <string name="dial_number">Please dial a number first!</string>
+    <string name="low_battery">Low Battery! \n.</string>
+    <string name="no_missed_calls">There are no missed calls</string>
+    <string name="find_location_with_GPS">Trying to find a location using the GPS.</string>
+    <string name="find_location_with_network">Trying to find a location using the Network.</string>
+    <string name="alarm_is_off">Alarm is turned Off.</string>
+    <string name="no_messages">No messages.</string>
+    <string name="SOS_message_has_been_sent">S O S message has been sent.</string>
+    <string name="sending_SOS_message">Sending S O S message.</string>
 
 </resources>

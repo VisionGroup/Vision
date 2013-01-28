@@ -68,16 +68,16 @@ public class WhereAmIActivity extends VisionActivity {
       setText(s);
       speakOut(s);
     } else if (provider.equals(LocationManager.GPS_PROVIDER))
-      setText("Trying to find a location using the GPS.");
+      setText(getString(R.string.find_location_with_GPS));
     else if (provider.equals(LocationManager.NETWORK_PROVIDER))
-      setText("Trying to find a location using the Network.");
+      setText(getString(R.string.find_location_with_network));
     l.unlock();
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
-    init(0, "Where Am I Screen", "Touch on screen to find your current location");
+    init(0, getString(R.string.where_am_i_screen), getString(R.string.where_am_i_help));
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();
     l.lock();
@@ -114,9 +114,4 @@ public class WhereAmIActivity extends VisionActivity {
     super.onSingleTapUp(e);
     return false;
   }
-//  @Override public boolean onCreateOptionsMenu(Menu menu) {
-//    // Inflate the menu; this adds items to the action bar if it is present.
-//    getMenuInflater().inflate(R.menu.activity_main, menu);
-//    return true;
-//  }
 }

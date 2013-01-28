@@ -4,6 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.alarm.AlarmActivity;
+import com.yp2012g4.vision.clock.SpeakingClockActivity;
+import com.yp2012g4.vision.contacts.ContactsMenuActivity;
+import com.yp2012g4.vision.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.sms.ReadSmsActivity;
+import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {
@@ -85,7 +91,7 @@ public class MainActivity extends VisionActivity {
     float batteryLevel = pn.getBatteryLevel();
     boolean isCharging = pn.getChargerStatus();
     if (!isCharging && batteryLevel < 0.3)
-      s += " Low Battery! \n";
+      s += getString(R.string.low_battery);
     int signalS = PhoneNotifications.getSignalStrength();
     if (signalS < 2)
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";

@@ -14,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.sms.QuickSMSActivity;
+import com.yp2012g4.vision.telephony.EndCallListener;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DialScreen extends VisionActivity {
@@ -53,7 +55,7 @@ public class DialScreen extends VisionActivity {
     
     if (v.getId() == R.id.dialer_dial_button) {
       if (dialed_number == "") {
-        speakOut("Please dial a number first!");
+        speakOut(getString(R.string.dial_number));
         return;
       }
       Intent call = new Intent(Intent.ACTION_CALL);
@@ -62,7 +64,7 @@ public class DialScreen extends VisionActivity {
     }
     if (v.getId() == R.id.dialer_sms_button) {
       if (dialed_number == "") {
-        speakOut("Please dial a number first!");
+        speakOut(getString(R.string.dial_number));
         return;
       }
       Intent i = new Intent(getApplicationContext(), QuickSMSActivity.class);

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.ColorSettingsActivity;
+import com.yp2012g4.vision.settings.ColorSettingsActivity;
 
 /**
  * Tests for ColorSettingsActivity
@@ -28,7 +28,7 @@ public class ColorSettingsActivityTest extends
 
 	
 	public ColorSettingsActivityTest() {
-		super("com.yp2012g4.vision", ColorSettingsActivity.class);
+		super("com.yp2012g4.vision.settings", ColorSettingsActivity.class);
 	}
 
 	@Override

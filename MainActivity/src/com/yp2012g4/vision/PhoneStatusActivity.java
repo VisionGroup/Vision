@@ -59,7 +59,7 @@ public class PhoneStatusActivity extends VisionActivity {
     final ArrayList<CallData> calls = pn.getMissedCallsList();
     String s = "";
     if (calls.isEmpty())
-      s = "There are no missed calls";
+      s = getString(R.string.no_missed_calls);
     else
       for (final CallData c : calls) {
         s += " called At: " + c.getHour() + " ,From: ";

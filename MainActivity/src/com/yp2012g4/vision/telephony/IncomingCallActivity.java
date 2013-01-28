@@ -49,22 +49,19 @@ public class IncomingCallActivity extends VisionActivity {
     }
   }
   
-  @Override
-  public void onAttachedToWindow() {
-    //make the activity show even the screen is locked.
-    Window window = getWindow();
-    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-            + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-            + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-            + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-}
+  @Override public void onAttachedToWindow() {
+    // make the activity show even the screen is locked.
+    final Window window = getWindow();
+    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+        + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+  }
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
     callUtils.silenceRinger();
     return super.onScroll(e1, e2, distanceX, distanceY);
   }
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     callUtils.silenceRinger();
     if (clickFlag) {
@@ -86,37 +83,47 @@ public class IncomingCallActivity extends VisionActivity {
         return false;
     }
     return true;
-  }    
+  }
+  
+  /**
+   * Answers the present phone call.
+   */
   private void answerCall() {
     try {
-      // callUtils.answerCall(this);
       CallUtils.answerPhoneHeadsethook(this);
       Log.d(TAG, "Answered call");
     } catch (final Exception e) {
       Log.e(TAG, "Error answering call", e);
     }
   }
+  
+  /**
+   * Terminate the present phone call.
+   */
   private void endCall() {
     callUtils.endCall();
     Log.d(TAG, "Rejected call");
   }
   
+  /**
+   * Updates the phone number on the number label.
+   * 
+   * @param number
+   */
   void updateNumberButton(String number) {
     Log.d(TAG, number);
     Log.d(TAG, "updateNumberButton Incoming call activity ");
-    TalkingButton tB =  ((TalkingButton) findViewById(R.id.number));
+    final TalkingButton tB = ((TalkingButton) findViewById(R.id.number));
     tB.setText(number.toCharArray(), 0, number.length());
     tB.setReadText(number);
     tB.setContentDescription(number);
   }
   
-  @Override
-  protected void onResume() {
+  @Override protected void onResume() {
     Log.d(TAG, "onResume Incoming call activity");
     super.onResume();
     setContentView(R.layout.activity_incoming_call);
     setPhoneStateListener();
-    
     final Bundle extras = getIntent().getExtras();
     if (extras != null) {
       try {
@@ -131,9 +138,8 @@ public class IncomingCallActivity extends VisionActivity {
       }
     }
     if (incomingNumber == null)
-      incomingNumber="";
+      incomingNumber = "";
     updateNumberButton(incomingNumber);
-    
   }
   
   /**
@@ -144,7 +150,6 @@ public class IncomingCallActivity extends VisionActivity {
     callUtils = new CallUtils(this);
     Log.d(TAG, "onCreate Incoming call activity");
     init(0/* TODO Check what icon goes here */, getString(R.string.IncomingCall_whereami), getString(R.string.IncomingCall_help));
-
   }
   
   @Override public void onDestroy() {
@@ -156,6 +161,9 @@ public class IncomingCallActivity extends VisionActivity {
     return R.id.incomingCallActivity;
   }
   
+  /**
+   * Sets the listener to the change in the phone's telephony status.
+   */
   private void setPhoneStateListener() {
     tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     listener = new ListenToPhoneState();
@@ -174,6 +182,7 @@ public class IncomingCallActivity extends VisionActivity {
         mHandler.postDelayed(mLaunchTask, 1000);
       }
     }
+    
     String stateName(int state) {
       switch (state) {
         case TelephonyManager.CALL_STATE_IDLE:
@@ -189,8 +198,7 @@ public class IncomingCallActivity extends VisionActivity {
     }
   }
   
-  @Override
-  public boolean onKeyDown (int keyCode, KeyEvent event) {
+  @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
     Log.d(TAG, "onKeyDown " + keyCode);
     switch (keyCode) {
       case KeyEvent.KEYCODE_BACK:
@@ -204,5 +212,4 @@ public class IncomingCallActivity extends VisionActivity {
     }
     return true;
   }
-  
 }

@@ -4,7 +4,7 @@
  * @author Amir Blumental
  * @version 1.0
  */
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.clock;
 
 import java.util.Calendar;
 
@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SetClockActivity extends VisionActivity {
@@ -22,22 +23,19 @@ public class SetClockActivity extends VisionActivity {
   // Can be either HOUR_CODE or MIN_CODE
   private int type;
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.set_alarm_view;
   }
   
   /**
    * In order that the back key will be the same as the control bar's back
    */
-  @Override
-  public void onBackPressed() {
+  @Override public void onBackPressed() {
     setResult(-1);
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_set_clock);
     init(0, getString(R.string.title_activity_set_clock), getString(R.string.set_clock_help));
@@ -64,8 +62,7 @@ public class SetClockActivity extends VisionActivity {
   /**
    * change the displayed time when user fling the screen
    */
-  @Override
-  public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
+  @Override public boolean onFling(MotionEvent start, MotionEvent finish, float velocityX, float velocityY) {
     int change = start.getRawY() < finish.getRawY() ? -1 : 1;
     int field = type == HOUR_CODE ? Calendar.HOUR_OF_DAY : Calendar.MINUTE;
     cal.roll(field, change);
@@ -75,8 +72,7 @@ public class SetClockActivity extends VisionActivity {
     return true;
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.back_button:
@@ -98,8 +94,7 @@ public class SetClockActivity extends VisionActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current title
    */
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity

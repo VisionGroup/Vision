@@ -4,7 +4,7 @@
  * @author Amir Blumental
  * @version 1.0
  */
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.alarm;
 
 import java.util.Calendar;
 
@@ -14,6 +14,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.SetClockActivity;
+import com.yp2012g4.vision.SpeakingClockActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 

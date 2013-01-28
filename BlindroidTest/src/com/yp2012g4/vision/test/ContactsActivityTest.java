@@ -9,8 +9,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.ContactsActivity;
-import com.yp2012g4.vision.ContactsMenuActivity;
-import com.yp2012g4.vision.DialScreen;
 import com.yp2012g4.vision.QuickSMSActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;

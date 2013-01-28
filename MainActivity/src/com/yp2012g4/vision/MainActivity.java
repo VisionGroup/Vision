@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.alarm.AlarmActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {

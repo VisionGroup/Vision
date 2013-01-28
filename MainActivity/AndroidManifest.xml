@@ -113,7 +113,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.AlarmActivity"
+            android:name="com.yp2012g4.vision.alarm.AlarmActivity"
             android:label="@string/title_activity_alarm"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >

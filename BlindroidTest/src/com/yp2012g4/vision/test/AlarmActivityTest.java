@@ -12,8 +12,8 @@ import android.test.TouchUtils;
 import android.widget.Button;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.AlarmActivity;
 import com.yp2012g4.vision.SetClockActivity;
+import com.yp2012g4.vision.alarm.AlarmActivity;
 
 public class AlarmActivityTest extends ActivityInstrumentationTestCase2<AlarmActivity> {
 	private Solo solo;

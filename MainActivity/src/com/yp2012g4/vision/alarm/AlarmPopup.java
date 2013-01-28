@@ -73,7 +73,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     left = true;
     mp.stop();
     AlarmActivity.alarmIsSet = false;
-    speakOut("Alarm is turned Off");
+    speakOut(getString(R.string.alarm_is_off));
     while (tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }

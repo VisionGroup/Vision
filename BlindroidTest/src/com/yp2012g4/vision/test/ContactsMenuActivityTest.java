@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.ContactsActivity;
-import com.yp2012g4.vision.ContactsMenuActivity;
 import com.yp2012g4.vision.DialScreen;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.contacts.ContactsActivity;
+import com.yp2012g4.vision.contacts.ContactsMenuActivity;
 
 public class ContactsMenuActivityTest extends
 		ActivityInstrumentationTestCase2<ContactsMenuActivity> {
@@ -16,7 +16,7 @@ public class ContactsMenuActivityTest extends
 	private Activity activity;
 
 	public ContactsMenuActivityTest() {
-		super("com.yp2012g4.vision", ContactsMenuActivity.class);
+		super("com.yp2012g4.vision.contacts", ContactsMenuActivity.class);
 	}
 
 	@Override

@@ -10,11 +10,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.ColorSettingsActivity;
-import com.yp2012g4.vision.VisionApplication;
-import com.yp2012g4.vision.DisplaySettingsActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.ThemeSettingsActivity;
+import com.yp2012g4.vision.settings.ColorSettingsActivity;
+import com.yp2012g4.vision.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.settings.ThemeSettingsActivity;
+import com.yp2012g4.vision.settings.VisionApplication;
 
 public class VisionApplicationTest extends
 		ActivityInstrumentationTestCase2<DisplaySettingsActivity> {
@@ -23,7 +23,7 @@ public class VisionApplicationTest extends
 
 	
 	public VisionApplicationTest() {
-		super("com.yp2012g4.vision", DisplaySettingsActivity.class);
+		super("com.yp2012g4.vision.settings", DisplaySettingsActivity.class);
 	}
 
 	@Override
@@ -33,16 +33,16 @@ public class VisionApplicationTest extends
 		solo = new Solo(getInstrumentation(), activity);
 	}
 	
-	public void testGetBackgroundColor() {
+	public static void testGetBackgroundColor() {
 		assertEquals(VisionApplication.getBackgroundColor(), R.color.BLACK);
 	}
 	
-	public void testGetTextColor() {
+	public static void testGetTextColor() {
 		VisionApplication.setColors(R.color.RED, R.color.GREEN);
 		assertEquals(VisionApplication.getTextColor(), R.color.RED);
 	}
 	
-	public void testSetColors() {
+	public static void testSetColors() {
 		VisionApplication.setColors(R.color.BLUE, R.color.RED);
 		assertEquals(VisionApplication.getBackgroundColor(), R.color.RED);
 		assertEquals(VisionApplication.getTextColor(), R.color.BLUE);
@@ -51,6 +51,7 @@ public class VisionApplicationTest extends
 	
 	///////////////////////////////SYSTEM TESTS//////////////////////////////////
 	
+	@SuppressWarnings("boxing")
 	public void testSetFontSizeToLarge() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
@@ -68,6 +69,7 @@ public class VisionApplicationTest extends
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() > size);
 	}
 	
+	@SuppressWarnings("boxing")
 	public void testSetFontSizeToNormal() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
@@ -85,6 +87,7 @@ public class VisionApplicationTest extends
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() == size);
 	}
 	
+	@SuppressWarnings("boxing")
 	public void testSetFontSizeToSmall() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 		solo.clickOnView(solo.getView(R.id.button_set_colors));

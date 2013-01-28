@@ -25,9 +25,9 @@ import android.widget.AnalogClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.settings.VisionApplication;
 
 /**
  * This super class is handling on touch events with text-to-speech feedback for

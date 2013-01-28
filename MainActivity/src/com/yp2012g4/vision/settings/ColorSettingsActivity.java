@@ -4,11 +4,12 @@
  * @author Maytal
  * 
  */
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.settings;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -29,8 +30,7 @@ public class ColorSettingsActivity extends VisionActivity {
    * get the activity's main view ID
    * 
    */
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.ColorSettingsActivity;
   }
   
@@ -42,8 +42,7 @@ public class ColorSettingsActivity extends VisionActivity {
    * @param v
    *          - a View object on the screen
    */
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     if (clickFlag) {
       clickFlag = false;
@@ -51,6 +50,9 @@ public class ColorSettingsActivity extends VisionActivity {
     }
     if (curr_view instanceof TalkingButton)
       speakOut(((TalkingButton) curr_view).getReadText());
+    while (_t.isSpeaking() == true) {
+      // Wait for message to finish playing and then finish the activity
+    }
     switch (curr_view.getId()) {
       case R.id.WhiteBlack:
         changeSettings(R.color.WHITE, R.color.BLACK);
@@ -83,8 +85,7 @@ public class ColorSettingsActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
     adjustLayoutSize(7);

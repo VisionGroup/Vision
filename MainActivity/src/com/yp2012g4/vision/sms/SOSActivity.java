@@ -1,4 +1,4 @@
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.sms;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
@@ -11,6 +11,7 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.tools.LocationFinder;
 import com.yp2012g4.vision.tools.LocationHandler;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -63,10 +64,7 @@ public class SOSActivity extends VisionActivity {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
         final ArrayList<String> parts = sms.divideMessage(messageToSend);
         sms.sendMultipartTextMessage(number, null, parts, null, null);
-        speakOut("SOS message has been sent");
-        // version using sendTextMessage:
-        // SmsManager.getDefault().sendTextMessage(number, null, messageToSend,
-        // null, null);
+        speakOut(getString(R.string.SOS_message_has_been_sent));
       }
       mHandler.postDelayed(mLaunchTask, 1500);
     }
@@ -76,7 +74,7 @@ public class SOSActivity extends VisionActivity {
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
       case R.id.Send_SOS_Message:
-        speakOut("Sending SOS message");
+        speakOut(getString(R.string.sending_SOS_message));
         mHandler.postDelayed(sendSOSMessage, 5000);
         break;
       default:
@@ -92,11 +90,6 @@ public class SOSActivity extends VisionActivity {
     l = new ReentrantLock();
   }
   
-//  @Override public boolean onCreateOptionsMenu(Menu menu) {
-//    // Inflate the menu; this adds items to the action bar if it is present.
-//    getMenuInflater().inflate(R.menu.activity_sos, menu);
-//    return true;
-//  }
   void makeUseOfNewLocation(double lon, double lat, String provider, String addr) {
     f.stop();
     l.lock();

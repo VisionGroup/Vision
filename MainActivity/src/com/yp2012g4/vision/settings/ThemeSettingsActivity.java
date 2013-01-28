@@ -4,11 +4,12 @@
  * @author Maytal
  * 
  */
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.settings;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -17,8 +18,7 @@ public class ThemeSettingsActivity extends VisionActivity {
    * get the activity's main view ID
    * 
    */
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.ThemeSettingsActivity;
   }
   
@@ -30,11 +30,13 @@ public class ThemeSettingsActivity extends VisionActivity {
    * @param v
    *          - a View object on the screen
    */
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     if (curr_view instanceof TalkingButton)
       speakOut(((TalkingButton) curr_view).getReadText());
+    while (_t.isSpeaking() == true) {
+      // Wait for message to finish playing and then finish the activity
+    }
     switch (curr_view.getId()) {
       case R.id.Small_text_size_button:
         VisionApplication.textSize = VisionApplication.SMALL;
@@ -57,8 +59,7 @@ public class ThemeSettingsActivity extends VisionActivity {
   /**
    * Called when the activity is first created.
    * */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
     adjustLayoutSize(3);

@@ -99,7 +99,6 @@ public class ContactManager {
     return "No phone number";
   }
   
-  
   static public ArrayList<ContactType> getTestContacts() {
     ArrayList<ContactType> slist = new ArrayList<ContactType>();
     slist.add(new ContactType("0544457141", "Roman Gurevitch"));

@@ -40,7 +40,6 @@ public class SmsType {
     type = cur.getString(cur.getColumnIndexOrThrow("type")).toString();
     // subject = c.getString(c.getColumnIndexOrThrow("subject")).toString();
     body = cur.getString(cur.getColumnIndexOrThrow("body")).toString();
-    
     ContactManager cm = new ContactManager(context);
     person = cm.getNameFromPhone(address);
   }

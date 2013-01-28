@@ -12,15 +12,15 @@ import android.test.TouchUtils;
 import android.widget.Button;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.SetClockActivity;
 import com.yp2012g4.vision.alarm.AlarmActivity;
+import com.yp2012g4.vision.clock.SetClockActivity;
 
 public class AlarmActivityTest extends ActivityInstrumentationTestCase2<AlarmActivity> {
 	private Solo solo;
 	private Activity activity;
 	
 	public AlarmActivityTest() {
-		super("com.yp2012g4.vision", AlarmActivity.class);
+		super("com.yp2012g4.vision.alarm", AlarmActivity.class);
 	}
 
 	@Override

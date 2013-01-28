@@ -8,7 +8,6 @@ package com.yp2012g4.vision.alarm;
 
 import java.util.Calendar;
 
-
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;

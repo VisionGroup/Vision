@@ -1,4 +1,4 @@
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.sms;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -6,6 +6,7 @@ import android.telephony.SmsManager;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -43,28 +44,6 @@ public class QuickSMSActivity extends VisionActivity {
       speakOut("Message has been sent");
       mHandler.postDelayed(mLaunchTask, 1500);
       finish();
-//      final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//      alertDialog.setTitle("Choose contact");
-//      alertDialog.setCancelable(false);
-//      alertDialog.setMessage("will send the SMS to the chosen contact");
-//      alertDialog.setButton("Send..", new DialogInterface.OnClickListener() {
-//        @Override public void onClick(DialogInterface dialog, int which) {
-//          final String messageToSend = ((TalkingButton) view).getReadText();
-//          SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
-//          speakOut("Message has been sent");
-//        }
-//      });
-//      alertDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
-//        @Override public void onClick(DialogInterface dialog, int which) {
-//          speakOut("Cancel");
-//          alertDialog.dismiss();
-//        }
-//      });
-//      speakOut("Sending" + ((TalkingButton) curr_view).getReadText());
-//      while (_t.isSpeaking()) {
-//        // wait...
-//      }
-//      alertDialog.show();
     }
     if (curr_view instanceof TalkingImageButton)
       super.onSingleTapUp(e);
@@ -74,8 +53,8 @@ public class QuickSMSActivity extends VisionActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
-    init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_screen));
-    //TODO: create help string
+    init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_help));
+    // TODO: create help string
     mHandler = new Handler();
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
@@ -85,10 +64,4 @@ public class QuickSMSActivity extends VisionActivity {
         number = "";
       }
   }
-  
-//  @Override public boolean onCreateOptionsMenu(Menu menu) {
-//    // Inflate the menu; this adds items to the action bar if it is present.
-//    getMenuInflater().inflate(R.menu.activity_quick_sms, menu);
-//    return true;
-//  }
 }

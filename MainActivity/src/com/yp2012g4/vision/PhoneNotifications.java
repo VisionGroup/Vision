@@ -3,6 +3,8 @@ package com.yp2012g4.vision;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.yp2012g4.vision.clock.SpeakingClockActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;

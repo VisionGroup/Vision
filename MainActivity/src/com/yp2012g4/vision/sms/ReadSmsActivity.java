@@ -1,4 +1,4 @@
-package com.yp2012g4.vision;
+package com.yp2012g4.vision.sms;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 
+import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.managers.SmsType;
@@ -59,7 +60,7 @@ public class ReadSmsActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
-    init(0, "Read SMS screen", "Touch on screen to read messages, press next or previous message");
+    init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
     final SmsManager smsReader = new SmsManager(getApplicationContext());
     messages = smsReader.getIncomingMessages();
     setMessage();
@@ -82,6 +83,6 @@ public class ReadSmsActivity extends VisionActivity {
       bodyButton.setReadText(messages.get(currentMessage).getBody());
       dateButton.setReadText(messages.get(currentMessage).getDate());
     } else
-      speakOut("No messages");
+      speakOut(getString(R.string.no_messages));
   }
 }

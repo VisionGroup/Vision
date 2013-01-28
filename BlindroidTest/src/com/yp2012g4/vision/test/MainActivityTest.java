@@ -11,15 +11,16 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.AlarmActivity;
-import com.yp2012g4.vision.ContactsMenuActivity;
-import com.yp2012g4.vision.DisplaySettingsActivity;
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.PhoneStatusActivity;
-import com.yp2012g4.vision.ReadSmsActivity;
-import com.yp2012g4.vision.SOSActivity;
 import com.yp2012g4.vision.WhereAmIActivity;
+import com.yp2012g4.vision.alarm.AlarmActivity;
+import com.yp2012g4.vision.clock.SpeakingClockActivity;
+import com.yp2012g4.vision.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.sms.ReadSmsActivity;
+import com.yp2012g4.vision.sms.SOSActivity;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
   private Solo solo;
@@ -46,9 +47,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     checkBackAndHome(com.yp2012g4.vision.R.id.sos_button, SOSActivity.class);
   }
   
-//  public void testSpeakingClock() {
-//    checkBackAndHome(com.yp2012g4.vision.R.id.time_button, SpeakingClockActivity.class);
-//  }
+  public void testSpeakingClock() {
+    checkBackAndHome(com.yp2012g4.vision.R.id.time_button, SpeakingClockActivity.class);
+  }
+  
   public void testWhereAmI() {
     checkBackAndHome(com.yp2012g4.vision.R.id.where_am_i_button, WhereAmIActivity.class);
   }

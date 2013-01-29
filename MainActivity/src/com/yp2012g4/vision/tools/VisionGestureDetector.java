@@ -185,7 +185,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     // reads layout description out loud
     if (hasFocus) {
       VisionApplication.applyButtonSettings(view_to_rect.keySet(), mainView);
-      if (findViewById(getViewId()).getContentDescription() != null)
+      if (mainView.getContentDescription() != null)
         speakOut(findViewById(getViewId()).getContentDescription().toString());
     }
   }
@@ -306,7 +306,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          position on screen
    * @return exact left position on screen
    */
-  private int getRelativeLeft(View myView) {
+  public static int getRelativeLeft(View myView) {
     if (myView.getParent() == myView.getRootView())
       return myView.getLeft();
     return myView.getLeft() + getRelativeLeft((View) myView.getParent());
@@ -321,7 +321,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          position on screen
    * @return exact top position on screen
    */
-  private int getRelativeTop(View myView) {
+  public static int getRelativeTop(View myView) {
     if (myView.getParent() == myView.getRootView())
       return myView.getTop();
     return myView.getTop() + getRelativeTop((View) myView.getParent());

@@ -260,29 +260,4 @@ public class VisionApplicationTest extends
 		testSetColorsGreenBlack();
 	}
 	
-	/*
-	public void testClickOnBackButton() {
-		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-		solo.clickOnView(solo.getView(R.id.button_set_colors));
-		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
-		solo.clickOnView(solo.getView(R.id.back_button));
-		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-		
-		solo.clickOnView(solo.getView(R.id.button_set_theme));
-		solo.assertCurrentActivity("wrong activity",ThemeSettingsActivity.class);
-		solo.clickOnView(solo.getView(R.id.back_button));
-		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-	}*/
-	
-//	public void testClickOnHomeButton() {
-//		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-//		solo.clickOnView(solo.getView(R.id.home_button));
-//		solo.assertCurrentActivity("wrong activity",MainActivity.class);
-//	}
-	
-//	public void testClickOnSettingsButton() {
-//		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-//		solo.clickOnView(solo.getView(R.id.settings_button));
-//		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-//	}
 }

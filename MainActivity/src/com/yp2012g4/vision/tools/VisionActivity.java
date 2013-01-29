@@ -90,6 +90,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
       case R.id.home_button:
         clickFlag = true;
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        finish();
         break;
       case R.id.current_menu_button:
         clickFlag = true;

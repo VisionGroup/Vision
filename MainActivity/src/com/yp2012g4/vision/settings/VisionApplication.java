@@ -25,7 +25,7 @@ public class VisionApplication extends Application {
   public static final float SMALL = 20;
   public static final float NORMAL = 25;
   public static final float LARGE = 30;
-  private static SparseIntArray color_to_string = new SparseIntArray();
+  public static SparseIntArray color_to_string = new SparseIntArray();
   public static float textSize = VisionApplication.NORMAL;
   private static int textColor = R.color.WHITE;
   private static int backgroundColor = R.color.BLACK;
@@ -73,7 +73,7 @@ public class VisionApplication extends Application {
   }
   
   /**
-   * set color theme to image buttons and main view
+   * Apply color theme to image buttons and main view
    * 
    * @param buttons
    *          - list of image buttons

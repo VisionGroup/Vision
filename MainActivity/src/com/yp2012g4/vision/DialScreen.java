@@ -12,14 +12,22 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.telephony.EndCallListener;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * @author Maytal
+ * @version 1.1
+ */
 public class DialScreen extends VisionActivity {
-  final static int MAX_LENGTH = 20;
+  
+  /**
+   * max length of dialed number
+   */
+  public final static int MAX_LENGTH = 20;
   private String dialed_number = "";
   private String read_number = "";
   private int buttonPressed = 0;
@@ -112,8 +120,25 @@ public class DialScreen extends VisionActivity {
     telephone();
     setContentView(R.layout.dial_screen);
     init(0, getString(R.string.dial_screen), getString(R.string.dial_screen));
+    
     //TODO: create help string
   }
+  
+  /**
+   * In this overridden function we gather the buttons positions of the current
+   * activity and make them all listen to onTouch and onClick.
+   * 
+   * @param hasFocus
+   *          indicates whether a window has the focus
+   */
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      ((TalkingButton) findViewById(R.id.number)).setText("");
+      ((TalkingButton) findViewById(R.id.number)).setReadText("");
+    }
+  }
+  
   
   public void telephone() {
     TelephonyManager telephonyManager;

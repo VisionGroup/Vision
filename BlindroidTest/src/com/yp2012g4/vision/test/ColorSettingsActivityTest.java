@@ -1,6 +1,8 @@
-/***
+/**
+ * Tests for ColorSettingsActivity
+ * 
  * @author Maytal
- * @version 1.0 
+ * @version 1.0
  */
 
 package com.yp2012g4.vision.test;
@@ -15,12 +17,7 @@ import android.widget.ImageButton;
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.settings.ColorSettingsActivity;
 
-/**
- * Tests for ColorSettingsActivity
- * 
- * @author Maytal
- * @version 1.0
- */
+
 public class ColorSettingsActivityTest extends
 		ActivityInstrumentationTestCase2<ColorSettingsActivity> {
 	private Solo solo;
@@ -51,11 +48,5 @@ public class ColorSettingsActivityTest extends
 		ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
 		assertEquals(4, btnList.size());
 	}
-	
-//	public void testClickOnHomeButton() {
-//		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
-//		solo.clickOnView(solo.getView(R.id.home_button));
-//		solo.assertCurrentActivity("wrong activity",MainActivity.class);
-//	}
 	
 }

@@ -93,6 +93,11 @@ public class VisionApplication extends Application {
     }
   }
   
+  /**
+   * Highlighting buttons when pressed
+   * 
+   * @param v - current view being pressed
+   */
   public static void visualFeedback(View v) {
     if (v instanceof TalkingImageButton) {
       if (textColor == R.color.WHITE) {
@@ -105,6 +110,11 @@ public class VisionApplication extends Application {
     }
   }
   
+  /**
+   * Remove button highlight when the button is no longer pressed
+   * 
+   * @param v - last view pressed
+   */
   public static void restoreColors(View v) {
     if (v instanceof TalkingImageButton) {
       if (textColor == R.color.WHITE) {

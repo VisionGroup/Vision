@@ -20,6 +20,9 @@ public class DisplaySettingsActivity extends VisionActivity {
     return R.id.displaySettingsActivity;
   }
   
+  /**
+   * finish activity when back button pressed
+   */
   @Override public void onBackPressed() {
     // TODO Auto-generated method stub
     super.onBackPressed();
@@ -27,12 +30,10 @@ public class DisplaySettingsActivity extends VisionActivity {
   }
   
   /**
-   * Adds onClick events to buttons in this view.
+   * Adds onSingleTapUp events to buttons in this view.
    * 
-   * @see android.view.View.OnClickListener#onClick(android.view.View)
+   * @param e - motion event
    * 
-   * @param v
-   *          - a View object on the screen
    */
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);

@@ -23,12 +23,12 @@ public class ThemeSettingsActivity extends VisionActivity {
   }
   
   /**
-   * Adds onClick events to buttons in this view.
+   * Adds onSingleTapUp events to buttons in this view.
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    * 
-   * @param v
-   *          - a View object on the screen
+   * @param e - motion event
+   * 
    */
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);

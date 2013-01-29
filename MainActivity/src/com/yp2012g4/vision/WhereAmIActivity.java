@@ -111,7 +111,6 @@ public class WhereAmIActivity extends VisionActivity {
       l.unlock();
       return false;
     }
-    super.onSingleTapUp(e);
-    return false;
+    return super.onSingleTapUp(e);
   }
 }

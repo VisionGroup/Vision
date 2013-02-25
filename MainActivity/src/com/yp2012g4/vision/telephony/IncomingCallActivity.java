@@ -54,8 +54,10 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public void onAttachedToWindow() {
     // make the activity show even the screen is locked.
     final Window window = getWindow();
-    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-        + WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + 
+        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED + 
+        //WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON + 
+        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
   }
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {

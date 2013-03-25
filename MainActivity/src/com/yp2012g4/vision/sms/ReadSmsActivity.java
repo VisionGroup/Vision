@@ -24,11 +24,13 @@ public class ReadSmsActivity extends VisionActivity {
   private ArrayList<SmsType> messages;
   private int currentMessage = 0;
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.ReadSmsActivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     super.onSingleTapUp(e);
     switch (curr_view.getId()) {
@@ -56,7 +58,8 @@ public class ReadSmsActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
@@ -76,12 +79,14 @@ public class ReadSmsActivity extends VisionActivity {
     final TalkingButton bodyButton = (TalkingButton) findViewById(R.id.sms_body);
     final TalkingButton dateButton = (TalkingButton) findViewById(R.id.sms_date);
     if (messages.size() != 0) {
-      fromButton.setText(messages.get(currentMessage).getPerson());
-      bodyButton.setText(messages.get(currentMessage).getBody());
-      dateButton.setText(messages.get(currentMessage).getDate());
-      fromButton.setReadText(messages.get(currentMessage).getPerson());
-      bodyButton.setReadText(messages.get(currentMessage).getBody());
-      dateButton.setReadText(messages.get(currentMessage).getDate());
+      SmsType currMsg = messages.get(currentMessage);
+      fromButton.setText(currMsg.getPerson());
+      bodyButton.setText(currMsg.getBody());
+      dateButton.setText(currMsg.getDate());
+      fromButton.setReadText(currMsg.getPerson());
+      bodyButton.setReadText(currMsg.getBody());
+      dateButton.setReadText(currMsg.getDate());
+      SmsManager.markMessageRead(this, currMsg.getAddress(), currMsg.getBody());
     } else
       speakOut(getString(R.string.no_messages));
   }

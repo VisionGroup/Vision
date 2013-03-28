@@ -99,13 +99,13 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     int numOfMissedCalls = pn.getMissedCallsNum();
     if (numOfMissedCalls > 0) {
-      s += numOfMissedCalls + " missed call";
+      s += numOfMissedCalls + getString(R.string.missed_call);
       if (numOfMissedCalls > 1)
         s += "s";
     }
     int numOfSms = pn.getUnreadSMS();
     if (numOfSms > 0)
-      s += numOfSms + " new S M S\n";
+      s += numOfSms + getString(R.string.new_sms);
     speakOut(s);
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
@@ -114,6 +114,6 @@ public class MainActivity extends VisionActivity {
   
   @Override
   public void onBackPressed() {
-    speakOut("In main screen");
+    speakOut(getString(R.string.in_main_screen));
   }
 }

@@ -62,7 +62,7 @@ public class PhoneStatusActivity extends VisionActivity {
       s = getString(R.string.no_missed_calls);
     else
       for (final CallData c : calls) {
-        s += " called At: " + c.getHour() + " ,From: ";
+        s += getString(R.string.called_at) + ": " + c.getHour() + " ," + getString(R.string.from) + ": ";
         if (TTS.isPureEnglise(c.name))
           s += c.name + "\n";
         else

@@ -78,7 +78,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
         clickFlag = true;
         Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
-          speakOut("In main screen");
+          speakOut(getString(R.string.in_main_screen));
           break;
         }
         mHandler.postDelayed(mLaunchTask, 1000);
@@ -94,7 +94,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
         break;
       case R.id.current_menu_button:
         clickFlag = true;
-        speakOut("This is " + _name);
+        speakOut(getString(R.string.this_is) + " " + _name);
         break;
       default:
         break;
@@ -122,7 +122,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   
   @Override
   public void onBackPressed() {
-    speakOut("Previous screen");
+    speakOut(getString(R.string.previous_screen));
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   

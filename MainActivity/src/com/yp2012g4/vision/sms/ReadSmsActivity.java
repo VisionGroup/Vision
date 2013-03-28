@@ -36,18 +36,18 @@ public class ReadSmsActivity extends VisionActivity {
         if (currentMessage < messages.size() - 1) {
           currentMessage++;
           setMessage();
-          speakOut("message number " + (currentMessage + 1));
+          speakOut(getString(R.string.message_number) + " " + (currentMessage + 1));
         } else
-          speakOut("no more messages");
+          speakOut(getString(R.string.no_more_messages));
         vb.vibrate(150);
         break;
       case R.id.sms_prev:
         if (currentMessage > 0) {
           currentMessage--;
           setMessage();
-          speakOut("message number " + (currentMessage + 1));
+          speakOut(getString(R.string.message_number) + " " + (currentMessage + 1));
         } else
-          speakOut("no more messages");
+          speakOut(getString(R.string.no_more_messages));
         vb.vibrate(150);
         break;
       default:

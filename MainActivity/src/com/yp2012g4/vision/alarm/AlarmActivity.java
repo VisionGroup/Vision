@@ -67,7 +67,7 @@ public class AlarmActivity extends VisionActivity {
         alarmTime.setTimeInMillis(System.currentTimeMillis());
         alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
         alarmTime.set(Calendar.MINUTE, resultCode);
-        String s = "Alarm is set to  " + SpeakingClockActivity.parseTime(alarmTime);
+        String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
         TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
         buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
         speakOut(s);
@@ -90,10 +90,10 @@ public class AlarmActivity extends VisionActivity {
           s = getString(R.string.noAlarm);
         else {
           if (alarmIsSet)
-            s = "Alarm is On at ";
+            s = getString(R.string.alarm_is_on_at);
           else
-            s = "Alarm is Off at ";
-          s = s + SpeakingClockActivity.parseTime(alarmTime);
+            s = getString(R.string.alarm_is_off_at);
+          s = s + " " + SpeakingClockActivity.parseTime(alarmTime);
         }
         speakOut(s);
         break;
@@ -111,7 +111,7 @@ public class AlarmActivity extends VisionActivity {
         if (AlarmService.mp != null)
           AlarmService.mp.stop();
         alarmIsSet = false;
-        speakOut("Alarm is Canceled");
+        speakOut(getString(R.string.alarm_is_canceled));
         break;
       default:
         break;
@@ -136,7 +136,7 @@ public class AlarmActivity extends VisionActivity {
    */
   public void setAlarm() {
     if (alarmTime == null) {
-      speakOut("You need to set the alarm first ");
+      speakOut(getString(R.string.you_need_to_set_ther_alarm_first));
       while (_t.isSpeaking() == true) {
         // Wait for message to finish playing and then finish the activity
       }
@@ -152,7 +152,7 @@ public class AlarmActivity extends VisionActivity {
       alarmTime.roll(Calendar.DAY_OF_MONTH, true);
     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
-    speakOut("Alarm is activated ");
+    speakOut(getString(R.string.alarm_is_activated));
     while (_t.isSpeaking() == true) {
       // Wait for message to finish playing and then finish the activity
     }

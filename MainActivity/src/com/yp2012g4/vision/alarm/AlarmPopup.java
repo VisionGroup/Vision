@@ -106,7 +106,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmActivity.pendingIntent);
         AlarmActivity.alarmIsSet = true;
         AlarmActivity.alarmTime = calendar;
-        speakOut("snooze for " + snooze + "minutes");
+        speakOut(getString(R.string.snooze_for) + " " + snooze + getString(R.string.minutes));
         while (tts.isSpeaking()) {
           // Wait for message to finish playing and then finish the activity
         }

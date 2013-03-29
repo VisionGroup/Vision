@@ -229,7 +229,7 @@
     <string name="sending_SOS_message">Sending S O S message.</string>
 
     <!-- IncomingCallActivity -->
-    <string name="IncomingCall_whereami">Incoming Call Menu</string>
+    <string name="IncomingCall_whereami">Incoming Call</string>
     <string name="IncomingCall_help">You can either reject or answer the call.</string>
 
     <!-- VisionActivity -->

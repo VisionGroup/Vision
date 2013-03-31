@@ -106,8 +106,8 @@
 
 
     <!-- DialScreen -->
-    <string name="dial_screen">Dial Screen</string>
-    <string name="dial_number">Please dial a number first!</string>
+    <string name="dial_screen">מסך חיוג</string>
+    <string name="dial_number">ראשית, יש להקיש מספר לחיוג</string>
 
     <!-- MainActivity -->
     <string name="MainActivity_wai">Main screen</string>

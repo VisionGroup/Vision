@@ -27,11 +27,17 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     Log.d(TAG, bundle.toString());
     final String state = bundle.getString(TelephonyManager.EXTRA_STATE);
     Log.d(TAG, "State: " + state);
-    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)
-        || state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
       processIncomingCall(context, phonenumber);
+      return;
+    }
+    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+      final String phonenumber = bundle.getString(TelephonyManager.EXTRA_STATE_OFFHOOK);
+      Log.i(TAG, "Call to:" + phonenumber);
+      processIncomingCall(context, phonenumber);
+      return;
     }
   }
   

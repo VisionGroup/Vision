@@ -35,13 +35,13 @@ public class QuickSMSActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     final View view = curr_view;
     if (curr_view instanceof TalkingButton) {
-      speakOut("Sending" + ((TalkingButton) curr_view).getReadText());
+      speakOut(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText());
       while (_t.isSpeaking()) {
         // wait...
       }
       final String messageToSend = ((TalkingButton) view).getReadText();
       SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
-      speakOut("Message has been sent");
+      speakOut(getString(R.string.message_has_been_sent));
       mHandler.postDelayed(mLaunchTask, 1500);
       finish();
     }

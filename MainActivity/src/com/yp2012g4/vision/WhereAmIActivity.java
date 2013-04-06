@@ -44,7 +44,7 @@ public class WhereAmIActivity extends VisionActivity {
     log("latitude = " + latitude + "\n");
     log("provider = " + prov + "\n");
     log("address: " + address);
-    final String toSpeak = "Your Location is: " + address;
+    final String toSpeak = getString(R.string.your_location_is) + ": " + address;
     setText(toSpeak);
     log("speaking out location: " + toSpeak + "\n");
     l.unlock();
@@ -64,7 +64,7 @@ public class WhereAmIActivity extends VisionActivity {
     log("Now running");
     l.lock();
     if (provider.equals("")) {
-      final String s = "Could not find a location.";
+      final String s = getString(R.string.could_not_find_a_location);
       setText(s);
       speakOut(s);
     } else if (provider.equals(LocationManager.GPS_PROVIDER))
@@ -81,7 +81,7 @@ public class WhereAmIActivity extends VisionActivity {
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();
     l.lock();
-    setText("Initializing...");
+    setText(getString(R.string.initializing));
     l.unlock();
   }
   

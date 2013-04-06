@@ -3,8 +3,6 @@ package com.yp2012g4.vision;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import com.yp2012g4.vision.clock.SpeakingClockActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,6 +12,8 @@ import android.os.BatteryManager;
 import android.provider.CallLog;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+
+import com.yp2012g4.vision.clock.SpeakingClockActivity;
 
 /**
  * 
@@ -164,5 +164,21 @@ public class PhoneNotifications {
   public void startSignalLisener() {
     signalStrengthListener = new SignalStrengthListener();
     ((TelephonyManager) c.getSystemService("phone")).listen(signalStrengthListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+  }
+  
+  /**
+   * Delete all the entries of a number from the missed call list - require
+   * WRITE_CONTACTS permission
+   * 
+   * @param context
+   * @param number
+   *          - string of the phone number in the call log
+   */
+  static public void DeleteCallLogByNumber(Context context, String number) {
+    try {
+      context.getContentResolver().delete(CallLog.Calls.CONTENT_URI, CallLog.Calls.NUMBER + "=?", new String[] { number });
+    } catch (Exception e) {
+      e.getMessage();
+    }
   }
 }

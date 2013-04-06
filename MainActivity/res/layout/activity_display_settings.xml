@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
@@ -10,45 +9,44 @@
     android:orientation="vertical"
     tools:context=".DisplaySettings" >
 
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/button_set_colors"
+        style="android:ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/color_settings_button"
+        app:ReadText="@string/color_settings_button" />
+
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/button_set_theme"
+        style="android:ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/theme_settings_button"
+        app:ReadText="@string/theme_settings_button" />
+
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/button_exit_launcher"
+        style="android:ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home_button"
+        app:ReadText="@string/clear_launcher_defaults" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout1" >
-
-        <com.yp2012g4.vision.customUI.TalkingImageButton
-            android:id="@+id/button_set_colors"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/color_settings_button"
-            app:ReadText="@string/color_settings_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout2" >
-
-        <com.yp2012g4.vision.customUI.TalkingImageButton
-            android:id="@+id/button_set_theme"
-            style="android:ButtonStyle"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/theme_settings_button"
-            app:ReadText="@string/theme_settings_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="horizontal" >
-
         <include layout="@layout/control_bar_view" />
     </LinearLayout>
 

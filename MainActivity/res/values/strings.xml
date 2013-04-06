@@ -88,6 +88,7 @@
     <string name="title_activity_theme_settings">Theme Settings</string>
     <string name="color_settings_button">Color Settings</string>
     <string name="theme_settings_button">Text Size Settings</string>
+    <string name="clear_launcher_defaults">Clear Launcher Defaults</string>
     <string name="title_activity_display_settings">Display Settings</string>
     <string name="digit1">1</string>
     <string name="digit2">2</string>

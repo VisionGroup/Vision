@@ -160,8 +160,7 @@
     <string name="where_am_i_help">Touch on screen to find your current location.</string>
     <string name="your_location_is">Your Location is</string>
     <string name="could_not_find_a_location">Could not find a location</string>
-    <string name="find_location_with_GPS">Trying to find a location using the GPS.</string>
-    <string name="find_location_with_network">Trying to find a location using the Network.</string>
+    <string name="finding_location">Trying to find a location.</string>
     <string name="initializing">Initializing&#8230; </string>
 
     <!-- AlarmActivity -->

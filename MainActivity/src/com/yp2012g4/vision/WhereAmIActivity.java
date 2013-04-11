@@ -1,5 +1,7 @@
 package com.yp2012g4.vision;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -30,16 +32,21 @@ public class WhereAmIActivity extends VisionActivity {
   
   Lock l = null;
   LocationFinder f;
-  String provider;
+  boolean providerRunning;
   String text;
+  Date lastUpdate;
   
   @Override public int getViewId() {
     return R.id.where_am_i_Activity;
   }
   
   void makeUseOfNewLocation(double longitude, double latitude, String prov, String address) {
-    f.stop(); // we got our location: now, stop the finder.
     l.lock();
+    if (new Date().getTime() - lastUpdate.getTime() < 60000) {
+      l.unlock();
+      return;
+    }
+    lastUpdate = new Date();
     log("longitude = " + longitude + "\n");
     log("latitude = " + latitude + "\n");
     log("provider = " + prov + "\n");
@@ -56,21 +63,19 @@ public class WhereAmIActivity extends VisionActivity {
     log("Got location manager");
     f = new LocationFinder(manager);
     log("Got location finder");
-    provider = f.run(new LocationHandler() {
+    providerRunning = f.run(new LocationHandler() {
       @Override public void handleLocation(double longitude, double latitude, String prov, String address) {
         makeUseOfNewLocation(longitude, latitude, prov, address);
       }
     });
     log("Now running");
     l.lock();
-    if (provider.equals("")) {
+    if (!providerRunning) {
       final String s = getString(R.string.could_not_find_a_location);
       setText(s);
       speakOut(s);
-    } else if (provider.equals(LocationManager.GPS_PROVIDER))
-      setText(getString(R.string.find_location_with_GPS));
-    else if (provider.equals(LocationManager.NETWORK_PROVIDER))
-      setText(getString(R.string.find_location_with_network));
+    } else
+      setText(getString(R.string.finding_location));
     l.unlock();
   }
   
@@ -81,6 +86,7 @@ public class WhereAmIActivity extends VisionActivity {
     log("WhereAmIActivity::onCreate");
     l = new ReentrantLock();
     l.lock();
+    lastUpdate = new GregorianCalendar(1800, 1, 1).getTime();
     setText(getString(R.string.initializing));
     l.unlock();
   }
@@ -90,17 +96,17 @@ public class WhereAmIActivity extends VisionActivity {
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(s);
   }
   
-  @Override protected void onStart() {
-    log("onStart");
+  @Override protected void onResume() {
+    log("onResume");
     initialize();
-    super.onStart();
+    super.onResume();
   }
   
-  @Override protected void onStop() {
-    log("onStop");
+  @Override protected void onPause() {
+    log("onPause");
     f.stop();
     log("Location finder stopped");
-    super.onStop();
+    super.onPause();
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {

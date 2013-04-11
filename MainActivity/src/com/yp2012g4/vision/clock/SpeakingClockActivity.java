@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -43,9 +44,9 @@ public class SpeakingClockActivity extends VisionActivity {
    * @return string to speak
    */
   public static String parseTime(Calendar cal) {
-    String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+    String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM":"PM";//Resources.getSystem().getString(R.string.am) : Resources.getSystem().getString(R.string.pm);
     int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-    String s = h + " " + " and " + cal.get(Calendar.MINUTE) + " minutes " + ampm;
+    String s = h + " " + " and "/*Resources.getSystem().getString(R.string.and)*/ + " " + cal.get(Calendar.MINUTE) + " " + " minutes "/*Resources.getSystem().getString(R.string.minutes)*/+ ampm;
     return s;
   }
   

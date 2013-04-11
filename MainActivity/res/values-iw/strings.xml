@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Vision</string>
+    <string name="menu_settings">הגדרות</string>
+    <string name="sos_button">S O S</string>
+    <string name="time_button">שעון</string>
+    <string name="date_button">תאריך</string>
+    <string name="where_am_i_button">מיקום</string>
+    <string name="phone_status_button">מצב הטלפון</string>
+    <string name="signal_button">קליטה</string>
+    <string name="alarm_clock_button">שעון מעורר</string>
+    <string name="quick_sms_button">S M S מהיר</string>
+    <string name="title_activity_quick_sms">QuickSMSActivity</string>
+    <string name="title_dial_screen">DialScreen</string>
+    <string name="title_activity_sos">SOSActivity</string>
+    <string name="title_activity_quick_dial">QuickDialActivity</string>
+    <string name="title_activity_phone_status">PhoneStatusActivity</string>
+    <string name="title_activity_talking_sms">TalkingSMS</string>
+    <string name="title_activity_talking_list">TalkingList</string>
+    <string name="title_activity_where_am_i">Where Am I</string>
+    <string name="title_activity_talking_sms_list">TalkingSmsList</string>
+    <string name="title_activity_contacts_list">ContactsListActivity</string>
+    <string name="title_activity_theme_settings">Theme Settings</string>
+    <string name="title_activity_display_settings">Display Settings</string>
+    <string name="title_activity_incoming_call">IncomingCallActivity</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_read_sms">ReadSmsActivity</string>
+    <string name="MainTitle">מסך ראשי</string>
+    <string name="send_SOS_message">Send S O S</string>
+    <string name="phoneStatus_button_getBatteryStatus_read">סוללה</string>
+    <string name="phoneStatus_button_getReceptionStatus_read">קליטה</string>
+    <string name="phoneStatus_button_getMissedCalls_read">שיחות שלא נענו</string>
+    <string name="IncomingCall_button_Answer_read">מענה</string>
+    <string name="IncomingCall_button_Reject_read">ניתוק</string>
+    <string name="emptyHour">hh:mm:ss</string>
+    <string name="back_button">חזרה</string>
+    <string name="home_button">בית</string>
+    <string name="settings_button">הגדרות</string>
+    <string name="Tool_tip_button">מידע</string>
+    <string name="WhiteBlack">שחור ולבן</string>
+    <string name="WhiteRed">אדום ולבן</string>
+    <string name="RedBlack">שחור ואדום</string>
+    <string name="GreenBlack">שחור וירוק</string>
+    <string name="WhiteGreen">לבן וירוק</string>
+    <string name="BlueBlack">שחור וכחול</string>
+    <string name="WhiteBlue">לבן וכחול</string>
+    <string name="SMS_number_1">אחתקשר מאוחר יותר</string>
+    <string name="SMS_number_2">מה נשמע?</string>
+    <string name="SMS_number_3">איפה היית?</string>
+    <string name="SMS_number_4">אני הולך לישון</string>
+    <string name="SMS_number_5">נתראה מחר</string>
+    <string name="SMS_number_6">תאכיל את הכלב שלי, בבקשה</string>
+    <string name="SMS_number_7">איפה אתה?</string>
+    <string name="SMS_number_8">Do not have any more ideas</string>
+    <string name="SMS_number_9">יום הולדת שמח</string>
+    <string name="turn_off">turn off</string>
+    <string name="snooze_time">1</string>
+    <string name="read_sms_button">קריאת SMS</string>
+    <string name="current_menu_button">מסך נוכחי</string>
+    <string name="normal_text_size_button">גודל טקסט נורמלי</string>
+    <string name="large_text_size_button">גודל טקסט גדול</string>
+    <string name="small_text_size_button">גודל טקסט קטן</string>
+    <string name="color_settings_button">הגדרת צבע</string>
+    <string name="theme_settings_button">הגדרת גודל טקסט</string>
+    <string name="digit1">1</string>
+    <string name="digit2">2</string>
+    <string name="digit3">3</string>
+    <string name="digit4">4</string>
+    <string name="digit5">5</string>
+    <string name="digit6">6</string>
+    <string name="digit7">7</string>
+    <string name="digit8">8</string>
+    <string name="digit9">9</string>
+    <string name="digit0">0</string>
+    <string name="asterisk">*</string>
+    <string name="asterisk_ReadText">כוכבית</string>
+    <string name="number_sign">#</string>
+    <string name="OK_button">אישור</string>
+    <string name="delete_button_read">ביטול</string>
+    <string name="reset_button_read">איפוס</string>
+    <string name="quick_dial_screen">מסך חיוג מהיר</string>
+    <string name="contact_list_screen">מסך אנשי קשר</string>
+    <string name="next_message">Next message</string>
+    <string name="previous_message">previous message</string>
+    <string name="contactsList">אנשי קשר</string>
+    <string name="Dialer">חייגן</string>
+    <string name="quick_dial_button">חייג</string>
+    <string name="contacts_button">אנשי קשר</string>
+    <string name="next_contact">Next contact</string>
+    <string name="previous_contact">Previous contact</string>
+    <string name="call_contact">Call contact</string>
+    <string name="send_quick_sms">send quick S M S</string>
+    <string name="favorit_contacts_list">Favorite contacts</string>
+
+    <!-- ====================== -->
+    <!-- Text To Speech strings -->
+    <!-- ====================== -->
+
+
+    <!-- DialScreen -->
+    <string name="dial_screen">מסך חיוג</string>
+    <string name="dial_number">ראשית, יש להקיש מספר לחיוג</string>
+
+    <!-- MainActivity -->
+    <string name="MainActivity_wai">מסך ראשי</string>
+    <string name="MainActivity_help">בחר אחת משמונה אפשרויות</string>
+    <string name="low_battery">סוללה חלשה</string>
+    <string name="phoneStatus_message_veryPoorSignal_read">קליטה חלשה</string>
+    <string name="missed_call">שיחה שלא נענתה</string>
+    <string name="new_sms">הודעת SMS חדשה \n</string>
+    <string name="in_main_screen">במסך ראשי</string>
+
+    <!-- PhoneStatusActivity -->
+    <string name="phoneStatus_whereami">תפריט מצב הטלפון</string>
+    <string name="phoneStatus_help">ניתן לבחור באחת מהאפשרויות הבאות: 1) מצב הסוללה ומצב הטעינה. 2) מצב קליטת הטלפון. 3) רשימת שיחות שלא נענו</string>
+    <string name="no_missed_calls">אין שיחות שלא נענו</string>
+    <string name="called_at">התקשר ב</string>
+    <string name="from">מ</string>
+    <string name="phoneStatus_message_batteryStatus_read">מצב הסוללה %1$d %% %2$s</string>
+    <string name="phoneStatus_message_veryGoodSignal_read">קליטה טובה מאוד</string>
+    <string name="phoneStatus_message_goodSignal_read">קליטה טובה</string>
+    <string name="phoneStatus_message_poorSignal_read">קליטה חלשה</string>
+    <string name="phoneStatus_message_noSignal_read">אין קליטה</string>
+    <string name="phoneStatus_message_charging_read">בטעינה</string>
+
+    <!-- WhereAmIActivity -->
+    <string name="where_am_i_screen">מסך המיקום שלי</string>
+    <string name="where_am_i_help">לחץ על המסך כדי לקבל את מיקומך</string>
+    <string name="your_location_is">מיקומך הוא</string>
+    <string name="could_not_find_a_location">לא ניתן למצוא מיקום</string>
+    <string name="find_location_with_GPS">מנסה למצוא מיקום באמצעות ה-GPS</string>
+    <string name="find_location_with_network">מנסה למצוא מיקום באמצעות הרשת</string>
+    <string name="initializing">מאתחל&#8230;</string>
+
+    <!-- AlarmActivity -->
+    <string name="title_activity_alarm">מסך שעון מעורר</string>
+    <string name="alarm_clock_help">ניתן לבחור אחת מ-4 אפשרויות:\n 1) מצב שעון מעורר. 2) הגדרת שעון מעורר. 3) הפעלת שעון מעורר. 4) ביטול שעון מעורר.</string>
+    <string name="alarm_is_set_to">השעון המעורר נקבע ל</string>
+    <string name="alarm_is_on_at">השעון המעורר פועל ב</string>
+    <string name="alarm_is_off_at">השעון המעורר כבוי ב</string>
+    <string name="alarm_is_canceled">השעון המעורר מבוטל</string>
+    <string name="you_need_to_set_ther_alarm_first">ראשית, יש לקבוע שעון מעורר</string>
+    <string name="alarm_is_activated">השעון המעורר פועל</string>
+    <string name="noAlarm">השעון המעורר כבוי</string>
+    <string name="alarmStatus">מצב שעון מעורר</string>
+    <string name="setAlarmButton">קביעת שעון מעורר</string>
+    <string name="startAlarm">הפעל שעון מעורר</string>
+    <string name="stopAlarm">הפסק שעון מעורר</string>
+    <string name="setHour">שעה</string>
+    <string name="setMinutes">דקה</string>
+    <string name="am"></string>
+    <string name="pm"></string>
+    <string name="and">ו</string>
+
+    <!-- AlarmPopup -->
+    <string name="alarm_is_off">השעון המעורר כבוי</string>
+    <string name="snooze_for">נדנד בעוד</string>
+    <string name="minutes">דקות</string>
+
+    <!-- SetClockActivity -->
+    <string name="title_activity_set_clock">קביעת שעון מעורר</string>
+    <string name="set_clock_help">החלק את האצבע כלפי מעלה או כלפי מטה על המסך בכדי לקבוע שעה. לאישור - הקש על המסך</string>
+
+    <!-- SpeakingClockActivity -->
+    <string name="speaking_clock_help">בחר אחת מ-2 אפשרויות: 1) שמיעת השעה. 2) שמיעת התאריך</string>
+    <string name="ClockTitle">מסך שעון</string>
+
+    <!-- ContactsActivity -->
+    <string name="contacts_screen">מסך אנשי קשר</string>
+    <string name="contacts_screen_help">החלק אצבע כלפי מעלה או כלפי מטה על גבי המסך בכדי לעבור בין אנשי הקשר. באפשרותך להתקשר או לשלוח הודעה לאיש הקשר</string>
+    <string name="no_more_contacts">אין יותר אנשי קשר</string>
+    <string name="no_messages">אין הודעות</string>
+
+    <!-- ContactsMenuActivity -->
+    <string name="title_activity_contacts_menu">מסך תפריט אנשי קשר</string>
+    <string name="contacts_help">בחר אחת מ-3 אפשרויות: 1) מעבר למסך אנשי הקשר המועדפים. 2)מעבר למסך כל אנשי הקשר. 3) מעבר לחייגן</string>
+
+    <!-- ColorSettingsActivity -->
+    <string name="color_settings_screen">מסך הגדרות צבע המסך</string>
+    <string name="color_setting_help">באפשרותך לבחור באחת מ-8 אפשרויות. כל בחירה קובעת את צבע מסך הטלפון</string>
+
+    <!-- DisplaySettingsActivity -->
+    <string name="display_settings_screen">מסך הגדרות תצוגה</string>
+    <string name="settings_help">בחר אחת מ-2 אפשרויות: 1) מעבר למסך הגדרות צבע המסך. 2) מעבר למסך הגדרות גודל הטקסט</string>
+    <string name="title_activity_color_settings">הגדרות צבע מסך</string>
+
+    <!-- ThemeSettingsActivity -->
+    <string name="theme_settings_screen">מסך הגדרות נושא</string>
+    <string name="size_setting_help">באפשרותך לבחור באחת מ-3 אפשרויות. כל אפשרות קובעת גודל טקסט שונה, כאשר האפשרות העליונה קובעת גודל טקסט קטן והאפשרות התחתונה קובעת גודל טקסט גדול  </string>
+
+    <!-- QuickSMSActivity -->
+    <string name="quick_sms_screen">מסך SMS מהיר</string>
+    <string name="quick_sms_help">בחר הודעת SMS מהיר מהרשימה שלמעלה</string>
+    <string name="sending">שולח</string>
+    <string name="message_has_been_sent">ההודעה נשלחה</string>
+
+    <!-- ReadSMSActivity -->
+    <string name="read_sms_screen">מסך קריאת SMS</string>
+    <string name="read_sms_help">לחץ על המסך לשמוע את ההודעה. באפשרותך לעבור בין ההודעות</string>
+    <string name="message_number">הודעה מספר</string>
+    <string name="no_more_messages">אין יותר הודעות</string>
+
+    <!-- SOSActivity -->
+    <string name="sos_screen">מסך SOS</string>
+    <string name="sos_help">באפשרותך לשלוח הודעת SMS עם מיקומך הנוכחי</string>
+    <string name="SOS_message_has_been_sent">הודעת SOS נשלחה</string>
+    <string name="sending_SOS_message">שולח הודעת SOS</string>
+
+    <!-- IncomingCallActivity -->
+    <string name="IncomingCall_whereami">מסך שיחה נכנסת</string>
+    <string name="IncomingCall_help">באפשרותך לענות או לדחות שיחה</string>
+
+    <!-- VisionActivity -->
+    <string name="this_is">זהו</string>
+    <string name="previous_screen">מסך קודם</string>
+
+</resources>

@@ -15,125 +15,125 @@ import android.util.Log;
  * 
  */
 public class TTS {
-  private static final String TAG = "vision:TTS";
-  private TextToSpeech _tts;
-  private int _qm;
-  private Locale _language;
-  
-  /**
-   * 
-   * 
-   * @param context
-   *          the context that running the class.
-   * @param listener
-   *          the listener that connected from the activity.
-   */
-  public TTS(Context context, TextToSpeech.OnInitListener listener) {
-    _tts = new TextToSpeech(context, listener);
-    setQueueMode(TextToSpeech.QUEUE_FLUSH);
-    setLanguage(Locale.US);
-  }
-  
-  /**
-   * change is the TTS is working well.
-   */
-  public boolean isRuning() {
-    return _tts == null ? false : true;
-  }
-  
-  /**
-   * change the queue mode.
-   * 
-   * @param queueMode
-   *          the new queue mode.
-   */
-  public void setQueueMode(int queueMode) {
-    Log.i(TAG, "setQueueMode");
-    _qm = queueMode;
-  }
-  
-  /**
-   * change the language.
-   * 
-   * @param languag
-   *          the new language.
-   */
-  public void setLanguage(Locale languag) {
-    Log.i(TAG, "setLanguage");
-    _tts.setLanguage(_language);
-  }
-  
-  /**
-   * speak the given string.
-   * 
-   * @param s
-   *          string to speak.
-   */
-  public void speak(String s) {
-    Log.i(TAG, "speak : " + s);
-    if (null == s)
-      return;
-    if (!isPureEnglise(s))
-      _tts.speak("Hebrew.", _qm, null);
-    else
-      _tts.speak(s, _qm, null);
-  }
-  
-  /**
-   * speak the given string, in synchronous mode.
-   * 
-   * @param s
-   *          string to speak.
-   */
-  public void syncSpeak(String s) {
-    speak(s);
-    while (isSpeaking())
-      try {
-        Thread.sleep(1000);
-      } catch (final Exception e) {
-        e.printStackTrace();
-      }
-  }
-  
-  /**
-   * Stop speak!.
-   * 
-   */
-  public void stop() {
-    Log.i(TAG, "stop");
-    _tts.stop();
-  }
-  
-  /**
-   * Close the TTS engine.
-   * 
-   */
-  public void shutdown() {
-    stop();
-    _tts.shutdown();
-    _tts = null;
-  }
-  
-  /**
-   * Check if speaking now.
-   * 
-   * @return true if speaking.
-   */
-  public boolean isSpeaking() {
-    return _tts.isSpeaking();
-  }
-  
-  /**
-   * Check if the string contaion pure Englise.
-   * 
-   * @param s
-   *          string to check.
-   * @return true if only Englise letters.
-   */
-  public static boolean isPureEnglise(String s) {
-    if (s == null)
-      return true;
-    return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();
-    // return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
-  }
+	private static final String TAG = "vision:TTS";
+	private TextToSpeech _tts;
+	private int _qm;
+	private Locale _language;
+
+	/**
+	 * 
+	 * 
+	 * @param context
+	 *            the context that running the class.
+	 * @param listener
+	 *            the listener that connected from the activity.
+	 */
+	public TTS(Context context, TextToSpeech.OnInitListener listener) {
+		_tts = new TextToSpeech(context, listener);
+		setQueueMode(TextToSpeech.QUEUE_FLUSH);
+		setLanguage(Locale.US);
+	}
+
+	/**
+	 * change is the TTS is working well.
+	 */
+	public boolean isRuning() {
+		return _tts == null ? false : true;
+	}
+
+	/**
+	 * change the queue mode.
+	 * 
+	 * @param queueMode
+	 *            the new queue mode.
+	 */
+	public void setQueueMode(int queueMode) {
+		Log.i(TAG, "setQueueMode");
+		_qm = queueMode;
+	}
+
+	/**
+	 * change the language.
+	 * 
+	 * @param languag
+	 *            the new language.
+	 */
+	public void setLanguage(Locale languag) {
+		Log.i(TAG, "setLanguage");
+		_tts.setLanguage(_language);
+	}
+
+	/**
+	 * speak the given string.
+	 * 
+	 * @param s
+	 *            string to speak.
+	 */
+	public void speak(String s) {
+		Log.i(TAG, "speak : " + s);
+		if (null == s)
+			return;
+		// if (!isPureEnglise(s))
+		// _tts.speak("Hebrew.", _qm, null);
+		// else
+		_tts.speak(s, _qm, null);
+	}
+
+	/**
+	 * speak the given string, in synchronous mode.
+	 * 
+	 * @param s
+	 *            string to speak.
+	 */
+	public void syncSpeak(String s) {
+		speak(s);
+		while (isSpeaking())
+			try {
+				Thread.sleep(1000);
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+	}
+
+	/**
+	 * Stop speak!.
+	 * 
+	 */
+	public void stop() {
+		Log.i(TAG, "stop");
+		_tts.stop();
+	}
+
+	/**
+	 * Close the TTS engine.
+	 * 
+	 */
+	public void shutdown() {
+		stop();
+		_tts.shutdown();
+		_tts = null;
+	}
+
+	/**
+	 * Check if speaking now.
+	 * 
+	 * @return true if speaking.
+	 */
+	public boolean isSpeaking() {
+		return _tts.isSpeaking();
+	}
+
+	/**
+	 * Check if the string contaion pure Englise.
+	 * 
+	 * @param s
+	 *            string to check.
+	 * @return true if only Englise letters.
+	 */
+	public static boolean isPureEnglise(String s) {
+		if (s == null)
+			return true;
+		return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();
+		// return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
+	}
 }

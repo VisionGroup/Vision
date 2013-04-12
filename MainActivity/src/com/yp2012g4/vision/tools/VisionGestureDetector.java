@@ -1,11 +1,13 @@
 package com.yp2012g4.vision.tools;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -76,6 +78,8 @@ public abstract class VisionGestureDetector extends Activity implements
 	 * Mapping from views to their locations on screen
 	 */
 	private final Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
+
+	protected Locale myLocale;
 
 	// ==================================================================
 	// ===========================METHODS================================
@@ -216,13 +220,28 @@ public abstract class VisionGestureDetector extends Activity implements
 	 */
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
+		Log.i("MyLog", "onWindowFocusChanged");
 		super.onWindowFocusChanged(hasFocus);
 		final ViewGroup mainView = (ViewGroup) findViewById(getViewId());
 		getButtonsPosition(mainView);
+		setLocaleToActivity(this);
 		for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
 			entry.getKey().setOnClickListener(this);
 			entry.getKey().setOnTouchListener(this);
 		}
+		// changing locale (language) for all activities
+//		if (myLocale != null) {
+//			Log.i("MyLog", "INN");
+//			Log.i("MyLog", myLocale.toString());
+//
+//			Locale.setDefault(myLocale);
+//			Configuration config = new Configuration();
+//			config.locale = myLocale;
+//			getBaseContext().getResources().updateConfiguration(config,
+//					getBaseContext().getResources().getDisplayMetrics());
+//			// refresh();
+//		}
+
 		// reads layout description out loud
 		if (hasFocus) {
 			VisionApplication.applyButtonSettings(view_to_rect.keySet(),
@@ -230,6 +249,16 @@ public abstract class VisionGestureDetector extends Activity implements
 			if (mainView.getContentDescription() != null)
 				speakOut(findViewById(getViewId()).getContentDescription()
 						.toString());
+		}
+	}
+
+	public void setLocaleToActivity(Activity activity) {
+		if (myLocale != null) {
+			Configuration config = new Configuration();
+			config.locale = myLocale;
+			Locale.setDefault(myLocale);
+			activity.getResources().updateConfiguration(config,
+					activity.getResources().getDisplayMetrics());
 		}
 	}
 

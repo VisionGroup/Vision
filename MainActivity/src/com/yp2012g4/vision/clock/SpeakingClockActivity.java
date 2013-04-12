@@ -13,7 +13,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;

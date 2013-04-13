@@ -37,21 +37,11 @@ public class ThemeSettingsActivity extends VisionActivity {
     while (_t.isSpeaking() == true) {
       // Wait for message to finish playing and then finish the activity
     }
-    switch (curr_view.getId()) {
-      case R.id.Small_text_size_button:
-        VisionApplication.textSize = VisionApplication.SMALL;
+    if (curr_view.getId() == R.id.Small_text_size_button ||
+    	curr_view.getId() == R.id.Normal_text_size_button ||
+    	curr_view.getId() == R.id.Large_text_size_button) {
+    	VisionApplication.savePrefs("TEXT_SIZE", ((TalkingButton) curr_view).getReadText(), this);
         mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.Normal_text_size_button:
-        VisionApplication.textSize = VisionApplication.NORMAL;
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      case R.id.Large_text_size_button:
-        VisionApplication.textSize = VisionApplication.LARGE;
-        mHandler.postDelayed(mLaunchTask, 1000);
-        break;
-      default:
-        break;
     }
     return false;
   }

@@ -42,11 +42,23 @@
         android:src="@drawable/home_button"
         app:ReadText="@string/clear_launcher_defaults" />
 
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/locale"
+        style="android:ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/globe"
+        app:ReadText="@string/language" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal" >
+
         <include layout="@layout/control_bar_view" />
     </LinearLayout>
 

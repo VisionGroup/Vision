@@ -35,7 +35,6 @@ public class DisplaySettingsActivity extends VisionActivity {
 		DisplaySettingsActivity.this.finish();
 	}
 
-	
 	/**
 	 * Adds onSingleTapUp events to buttons in this view.
 	 * 

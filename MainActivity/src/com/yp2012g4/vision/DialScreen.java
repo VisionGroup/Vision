@@ -1,7 +1,9 @@
 package com.yp2012g4.vision;
 
+import java.util.Calendar;
 import java.util.Map;
 
+import android.R.string;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -12,6 +14,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
 import android.view.View;
+
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.telephony.EndCallListener;
@@ -137,12 +140,12 @@ public class DialScreen extends VisionActivity {
     super.onShowPress(e);
     ++buttonPressed;
   }
-  
   /** 
    * Called when the activity is first created. 
    * */
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    
     telephone();
     setContentView(R.layout.dial_screen);
     init(0, getString(R.string.dial_screen), getString(R.string.dial_screen));

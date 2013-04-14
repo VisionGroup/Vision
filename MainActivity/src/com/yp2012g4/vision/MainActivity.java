@@ -10,6 +10,7 @@ import com.yp2012g4.vision.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
+import com.yp2012g4.vision.telephony.callLog;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {
@@ -68,6 +69,9 @@ public class MainActivity extends VisionActivity {
     PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
+     
+    callLog a = new callLog(this);
+    a.dood();
   }
   
   /**

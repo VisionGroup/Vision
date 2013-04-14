@@ -1,9 +1,7 @@
 package com.yp2012g4.vision;
 
-import java.util.Calendar;
 import java.util.Map;
 
-import android.R.string;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;

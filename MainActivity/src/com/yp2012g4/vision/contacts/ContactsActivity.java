@@ -149,7 +149,7 @@ public class ContactsActivity extends VisionActivity {
 	 */
 	private void listenToSpeech() {
 	    //start the speech recognition intent passing required data
-		Intent listenIntent = new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
+		Intent listenIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
 		//indicate package
 //	    listenIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getClass().getPackage().getName());

@@ -119,13 +119,10 @@ public class IncomingCallActivity extends VisionActivity {
 	 * 
 	 * @param number
 	 */
-	void updateNumberButton(String number) {
-		Log.d(TAG, number);
-		Log.d(TAG, "updateNumberButton Incoming call activity ");
-		final TalkingButton tB = ((TalkingButton) findViewById(R.id.number));
-		tB.setText(number.toCharArray(), 0, number.length());
-		tB.setReadText(number);
-		tB.setContentDescription(number);
+	void updateNumberButton(TalkingButton tB, String s) {
+		tB.setText(s.toCharArray(), 0, s.length());
+		tB.setReadText(s);
+		tB.setContentDescription(s);
 	}
 
 	@Override
@@ -134,30 +131,30 @@ public class IncomingCallActivity extends VisionActivity {
 		super.onResume();
 		setContentView(R.layout.activity_incoming_call);
 		setPhoneStateListener();
-		String incomingNumber = "", incomingName = "", displayText;
+		String incomingNumber = "", incomingName = "";
 		final Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			try {
-				rang = Boolean.valueOf(extras.getBoolean(CallUtils.RANG_KEY));
-			} catch (final Exception e) {
-				rang = Boolean.FALSE;
-			}
-			try {
-				incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
-			} catch (final Exception e) {
-				incomingNumber = new String("");
-			}
+		if (extras == null) {
+			Log.d(TAG, "extras == null");
 		}
-		displayText = "";
-		if (incomingNumber == null)
-			incomingNumber = "";
-		else {
+		try {
+			rang = Boolean.valueOf(extras.getBoolean(CallUtils.RANG_KEY));
+		} catch (final Exception e) {
+			rang = Boolean.FALSE;
+		}
+		try {
+			incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
+			updateNumberButton((TalkingButton) findViewById(R.id.number),
+					incomingNumber);
 			incomingName = contact.getNameFromPhone(incomingNumber);
 			if (!incomingName.equals(incomingNumber))
-				displayText = incomingName;
+				updateNumberButton((TalkingButton) findViewById(R.id.name),
+						incomingName);
+		} catch (final Exception e) {
+			updateNumberButton((TalkingButton) findViewById(R.id.number), "");
+			updateNumberButton((TalkingButton) findViewById(R.id.name),
+					"שיחה נכנסת?");
 		}
-		displayText += " " + incomingNumber;
-		updateNumberButton(displayText);
+
 	}
 
 	/**

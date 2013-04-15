@@ -12,6 +12,7 @@ import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
+import com.yp2012g4.vision.tools.SpeechRepeatActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {
@@ -42,6 +43,7 @@ public class MainActivity extends VisionActivity {
 			intent = new Intent(MainActivity.this, PhoneStatusActivity.class);
 			break;
 		case R.id.alarm_clock_button:
+			
 			intent = new Intent(MainActivity.this, AlarmActivity.class);
 			break;
 		case R.id.contacts_button:

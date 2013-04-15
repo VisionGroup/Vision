@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ff330066"
+    android:orientation="vertical"
+    android:paddingBottom="5dp" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Press the button to speak!"
+        android:textColor="#ffffff33"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/speech_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Speak now!" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Suggested words"
+        android:textStyle="italic" />
+
+    <ListView
+        android:id="@+id/word_list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp" />
+
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:dither="true" >
+
+        <gradient
+            android:angle="180"
+            android:centerColor="#00000000"
+            android:endColor="#ff000000"
+            android:startColor="#ff000000" />
+
+        <corners android:radius="10dp" />
+
+        <stroke
+            android:width="2dp"
+            android:color="#66ffffff" />
+    </shape>
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="#ffffffff"
+        android:textSize="16dp" >
+    </TextView>
+
+</LinearLayout>

@@ -165,6 +165,9 @@
     <string name="language">שפה</string>
     <string name="switched_to_hebrew">הוחלף לעברית</string>
     <string name="switched_to_english">הוחלף לאנגלית</string>
+     <string name="buttons_mode">מצב מקשים</string>
+    <string name="sticky_buttons_mode">הוחלף למצב מקשים דביקים </string>
+    <string name="regular_buttons_mode">הוחלף למצב מקשים רגיל </string>
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">מסך הגדרות נושא</string>

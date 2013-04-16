@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.yp2012g4.vision.PhoneNotifications;
 import com.yp2012g4.vision.R;
@@ -41,8 +42,10 @@ public class ContactsActivity extends VisionActivity {
   @Override
   public boolean onSingleTapUp(MotionEvent e) {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    super.onSingleTapUp(e);
-    switch (curr_view.getId()) {
+    if (super.onSingleTapUp(e))
+      return true;
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.contact_next:
         if (currentContact < contacts.size() - 1) {
           currentContact++;

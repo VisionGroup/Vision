@@ -8,6 +8,7 @@ package com.yp2012g4.vision.settings;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -30,27 +31,32 @@ public class ColorSettingsActivity extends VisionActivity {
    * get the activity's main view ID
    * 
    */
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.ColorSettingsActivity;
   }
   
   /**
    * Adds onSingleTapUp events to buttons in this view.
    * 
-   * @param e - motion event
+   * @param e
+   *          - motion event
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    super.onSingleTapUp(e);
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    if (super.onSingleTapUp(e))
+      return true;
     if (clickFlag) {
       clickFlag = false;
       return false;
     }
-    if (curr_view instanceof TalkingButton)
-      speakOut(((TalkingButton) curr_view).getReadText());
+    View button = getButtonByMode();
+    if (button instanceof TalkingButton)
+      speakOut(((TalkingButton) button).getReadText());
     while (_t.isSpeaking() == true) {
       // Wait for message to finish playing and then finish the activity
     }
-    switch (curr_view.getId()) {
+    switch (button.getId()) {
       case R.id.WhiteBlack:
         changeSettings(R.color.WHITE, R.color.BLACK);
         break;
@@ -82,7 +88,8 @@ public class ColorSettingsActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
     adjustLayoutSize(7);

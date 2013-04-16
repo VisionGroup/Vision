@@ -16,6 +16,7 @@ import java.util.TimerTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -43,19 +44,26 @@ public class SpeakingClockActivity extends VisionActivity {
    * @return string to speak
    */
   public static String parseTime(Calendar cal) {
-    String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM":"PM";//Resources.getSystem().getString(R.string.am) : Resources.getSystem().getString(R.string.pm);
+    String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";// Resources.getSystem().getString(R.string.am)
+                                                                       // :
+                                                                       // Resources.getSystem().getString(R.string.pm);
     int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-    String s = h + " " + " and "/*Resources.getSystem().getString(R.string.and)*/ + " " + cal.get(Calendar.MINUTE) + " " + " minutes "/*Resources.getSystem().getString(R.string.minutes)*/+ ampm;
+    String s = h + " " + " and "/* Resources.getSystem().getString(R.string.and) */+ " " + cal.get(Calendar.MINUTE) + " "
+        + " minutes "/* Resources.getSystem().getString(R.string.minutes) */+ ampm;
     return s;
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.SpeakingClockSctivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    super.onSingleTapUp(e);
-    switch (curr_view.getId()) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    if (super.onSingleTapUp(e))
+      return true;
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.TimeButton:
         Calendar cal = Calendar.getInstance();
         speakOut(parseTime(cal));
@@ -70,7 +78,8 @@ public class SpeakingClockActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
@@ -87,9 +96,11 @@ public class SpeakingClockActivity extends VisionActivity {
    * @author Amir B
    */
   class MyTimerTask extends TimerTask {
-    @Override public void run() {
+    @Override
+    public void run() {
       handler.post(new Runnable() {
-        @Override public void run() {
+        @Override
+        public void run() {
           TalkingButton timeButton = (TalkingButton) findViewById(R.id.TimeButton);
           Calendar cal = Calendar.getInstance();
           String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
@@ -105,7 +116,8 @@ public class SpeakingClockActivity extends VisionActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current time
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override
+  public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       Calendar cal = Calendar.getInstance();

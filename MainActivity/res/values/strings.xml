@@ -165,6 +165,9 @@
     <string name="language">Language</string>
     <string name="switched_to_hebrew">Switched to hebrew</string>
     <string name="switched_to_english">Switched to english</string>
+    <string name="buttons_mode"> buttons mode </string>
+    <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
+    <string name="regular_buttons_mode">Switched to regular buttons mode </string>
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">Theme settings screen</string>

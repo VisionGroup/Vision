@@ -3,6 +3,7 @@ package com.yp2012g4.vision;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.yp2012g4.vision.alarm.AlarmActivity;
 import com.yp2012g4.vision.clock.SpeakingClockActivity;
@@ -21,13 +22,15 @@ public class MainActivity extends VisionActivity {
   
   @Override
   public boolean onSingleTapUp(MotionEvent e) {
-    super.onSingleTapUp(e);
+    if (super.onSingleTapUp(e))
+      return true;
     if (clickFlag) {
       clickFlag = false;
       return false;
     }
     Intent intent = null;
-    switch (curr_view.getId()) {
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.sos_button:
         intent = new Intent(MainActivity.this, SOSActivity.class);
         break;
@@ -69,7 +72,6 @@ public class MainActivity extends VisionActivity {
     PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
-     
     callLog a = new callLog(this);
     a.dood();
   }

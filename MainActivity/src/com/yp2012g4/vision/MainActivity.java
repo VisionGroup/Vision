@@ -13,7 +13,6 @@ import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
-import com.yp2012g4.vision.tools.SpeechRepeatActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {
@@ -74,8 +73,6 @@ public class MainActivity extends VisionActivity {
     PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
-    callLog a = new callLog(this);
-    a.dood();
   }
   
   /**
@@ -105,13 +102,13 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS < 5)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
-    int numOfMissedCalls = pn.getMissedCallsNum();
+    int numOfMissedCalls = CallManager.getMissedCallsNum(this); // pn.getMissedCallsNum();
     if (numOfMissedCalls > 0) {
       s += numOfMissedCalls + getString(R.string.missed_call);
       if (numOfMissedCalls > 1)
         s += "s";
     }
-    int numOfSms = pn.getUnreadSMS();
+    int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
     speakOut(s);

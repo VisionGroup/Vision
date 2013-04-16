@@ -8,10 +8,12 @@ import android.view.View;
 import com.yp2012g4.vision.alarm.AlarmActivity;
 import com.yp2012g4.vision.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.contacts.ContactsMenuActivity;
+import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
-import com.yp2012g4.vision.telephony.callLog;
+import com.yp2012g4.vision.tools.SpeechRepeatActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {

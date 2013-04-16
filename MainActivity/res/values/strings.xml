@@ -18,6 +18,7 @@
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>
+    <string name="title_activity_voice_note_recorder">voice note recorder</string>
     <string name="MainTitle">Main screen</string>
     <string name="emptyHour">hh:mm:ss</string>
     <string name="next_message">Next message</string>
@@ -218,5 +219,9 @@
     <string name="home_button">Home</string>
     <string name="Tool_tip_button">screen info</string>
     <string name="current_menu_button">Current menu</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- ActivityVoiceInput -->
+    <string name="title_activity_activity_voice_input">ActivityVoiceInput</string>
 
 </resources>

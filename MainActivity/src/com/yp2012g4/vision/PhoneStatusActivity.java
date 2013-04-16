@@ -8,7 +8,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.yp2012g4.vision.PhoneNotifications.CallData;
+import com.yp2012g4.vision.managers.CallType;
+import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -57,19 +58,21 @@ public class PhoneStatusActivity extends VisionActivity {
    * read the call log of the missed calls
    */
   public void getMissedCalls() {
-    final ArrayList<CallData> calls = pn.getMissedCallsList();
+    final ArrayList<CallType> calls = CallManager.getMissedCallsList(this);
     String s = "";
     if (calls.isEmpty())
       s = getString(R.string.no_missed_calls);
     else
-      for (final CallData c : calls) {
-        s += getString(R.string.called_at) + ": " + c.getHour() + " ," + getString(R.string.from) + ": ";
-        if (TTS.isPureEnglise(c.name))
-          s += c.name + "\n";
+      for (final CallType c : calls) {
+        s += getString(R.string.called_at) + ": " + c.getDate() //c.getHour()
+        		+ " ," + getString(R.string.from) + ": ";
+        if (TTS.isPureEnglise(c.getName()))
+          s += c.getName() + "\n";
         else
-          s += c.number + "\n";
+          s += c.getNumber() + "\n";
       }
     speakOut(s);
+    
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }

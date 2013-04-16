@@ -67,8 +67,8 @@ public class ReadSmsActivity extends VisionActivity {
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
-    final SmsManager smsReader = new SmsManager(getApplicationContext());
-    messages = smsReader.getIncomingMessages();
+    //final SmsManager smsReader = new SmsManager(getApplicationContext());
+    messages = SmsManager.getIncomingMessages(this);
     setMessage();
   }
   

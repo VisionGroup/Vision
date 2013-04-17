@@ -3,10 +3,13 @@ package com.yp2012g4.vision;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.yp2012g4.vision.alarm.AlarmActivity;
 import com.yp2012g4.vision.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.contacts.ContactsMenuActivity;
+import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
@@ -20,13 +23,15 @@ public class MainActivity extends VisionActivity {
   
   @Override
   public boolean onSingleTapUp(MotionEvent e) {
-    super.onSingleTapUp(e);
+    if (super.onSingleTapUp(e))
+      return true;
     if (clickFlag) {
       clickFlag = false;
       return false;
     }
     Intent intent = null;
-    switch (curr_view.getId()) {
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.sos_button:
         intent = new Intent(MainActivity.this, SOSActivity.class);
         break;
@@ -97,13 +102,13 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS < 5)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
-    int numOfMissedCalls = pn.getMissedCallsNum();
+    int numOfMissedCalls = CallManager.getMissedCallsNum(this); // pn.getMissedCallsNum();
     if (numOfMissedCalls > 0) {
       s += numOfMissedCalls + getString(R.string.missed_call);
       if (numOfMissedCalls > 1)
         s += "s";
     }
-    int numOfSms = pn.getUnreadSMS();
+    int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
     speakOut(s);

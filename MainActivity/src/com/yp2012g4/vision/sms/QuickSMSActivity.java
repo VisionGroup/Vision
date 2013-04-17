@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -28,13 +27,18 @@ public class QuickSMSActivity extends VisionActivity {
   public static final String NUMBER_KEY = "number";
   public String number;
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.QuickSMSActivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    final View view = curr_view;
-    if (curr_view instanceof TalkingButton) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    if (super.onSingleTapUp(e))
+      return true;
+    final View view = getButtonByMode();
+    ;
+    if (view instanceof TalkingButton) {
       speakOut(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText());
       while (_t.isSpeaking()) {
         // wait...
@@ -45,12 +49,11 @@ public class QuickSMSActivity extends VisionActivity {
       mHandler.postDelayed(mLaunchTask, 1500);
       finish();
     }
-    if (curr_view instanceof TalkingImageButton)
-      super.onSingleTapUp(e);
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_quick_sms);
     init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_help));

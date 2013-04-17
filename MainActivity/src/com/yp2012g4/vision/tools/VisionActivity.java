@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -17,8 +18,8 @@ import com.yp2012g4.vision.R;
 /*
  * write by Yaron Auster
  * 
- * The VisionActivity extend the normal activity.
- * it's give extra functionality to this app.
+ * The VisionActivity extend the normal activity. it's give extra functionality
+ * to this app.
  */
 public abstract class VisionActivity extends VisionGestureDetector {
   private static final String TAG = "vision:VisionActivity";
@@ -41,10 +42,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Initialization the class
    * 
-   * @param activity The activity it's run
-   * @param icon The icon for this activity
-   * @param name The name of the activity
-   * @param toolTip The tool user manual 
+   * @param activity
+   *          The activity it's run
+   * @param icon
+   *          The icon for this activity
+   * @param name
+   *          The name of the activity
+   * @param toolTip
+   *          The tool user manual
    */
   @Deprecated
   public void init(Activity activity, int icon, String name, String toolTip) {
@@ -57,9 +62,12 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Initialization the class
    * 
-   * @param icon The icon for this activity
-   * @param name The name of the activity
-   * @param toolTip The tool user manual 
+   * @param icon
+   *          The icon for this activity
+   * @param name
+   *          The name of the activity
+   * @param toolTip
+   *          The tool user manual
    */
   public void init(int icon, String name, String toolTip) {
     _icon = icon;
@@ -73,7 +81,9 @@ public abstract class VisionActivity extends VisionGestureDetector {
   @Override
   public boolean onSingleTapUp(MotionEvent e) {
     final Intent intent = new Intent(this, MainActivity.class);
-    switch (curr_view.getId()) {
+    View tempLast = last_button_view;
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.back_button:
         clickFlag = true;
         Log.i(TAG, _name);
@@ -97,9 +107,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
         speakOut(getString(R.string.this_is) + " " + _name);
         break;
       default:
-        break;
+        last_button_view = tempLast;
+        return false;
     }
-    return false;
+    return true;
   }
   
   @Override
@@ -142,5 +153,20 @@ public abstract class VisionActivity extends VisionGestureDetector {
       params.height = height / numOfLayouts;
       ll.setLayoutParams(params);
     }
+  }
+  
+  public View getButtonByMode() {
+    View returnButton = curr_view;
+    switch (selectButtonMode) {
+      case 1:
+        if (last_button_view != null) {
+          returnButton = last_button_view;
+          last_button_view = null;
+        }
+        break;
+      default:
+        break;
+    }
+    return returnButton;
   }
 }

@@ -6,8 +6,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
-import com.yp2012g4.vision.PhoneNotifications.CallData;
+import com.yp2012g4.vision.managers.CallType;
+import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -56,25 +58,28 @@ public class PhoneStatusActivity extends VisionActivity {
    * read the call log of the missed calls
    */
   public void getMissedCalls() {
-    final ArrayList<CallData> calls = pn.getMissedCallsList();
+    final ArrayList<CallType> calls = CallManager.getMissedCallsList(this);
     String s = "";
     if (calls.isEmpty())
       s = getString(R.string.no_missed_calls);
     else
-      for (final CallData c : calls) {
-        s += getString(R.string.called_at) + ": " + c.getHour() + " ," + getString(R.string.from) + ": ";
-        if (TTS.isPureEnglise(c.name))
-          s += c.name + "\n";
+      for (final CallType c : calls) {
+        s += getString(R.string.called_at) + ": " + c.getDate() //c.getHour()
+        		+ " ," + getString(R.string.from) + ": ";
+        if (TTS.isPureEnglise(c.getName()))
+          s += c.getName() + "\n";
         else
-          s += c.number + "\n";
+          s += c.getNumber() + "\n";
       }
     speakOut(s);
+    
     while (_t.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.phoneStatusActivity;
   }
   
@@ -83,10 +88,13 @@ public class PhoneStatusActivity extends VisionActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    super.onSingleTapUp(e);
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
+    if (super.onSingleTapUp(e))
+      return true;
     final Resources res = getResources();
-    switch (curr_view.getId()) {
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.button_getBatteryStatus:
         speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
             getChargeStatus()));
@@ -106,7 +114,8 @@ public class PhoneStatusActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));

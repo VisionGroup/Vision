@@ -11,9 +11,6 @@ import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.WhereAmIActivity;
-import com.yp2012g4.vision.settings.ColorSettingsActivity;
-import com.yp2012g4.vision.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.settings.VisionApplication;
 
 public class WhereAmITest extends
 ActivityInstrumentationTestCase2<WhereAmIActivity>{

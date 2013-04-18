@@ -10,8 +10,11 @@ import java.util.Set;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
+import android.preference.PreferenceManager;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +29,8 @@ public class VisionApplication extends Application {
   public static final float NORMAL = 25;
   public static final float LARGE = 30;
   public static SparseIntArray color_to_string = new SparseIntArray();
-  public static float textSize = VisionApplication.NORMAL;
+  public static String textSize = "Normal Text Size";
+  //public static float textSize = VisionApplication.NORMAL;
   private static int textColor = R.color.WHITE;
   private static int backgroundColor = R.color.BLACK;
   
@@ -41,6 +45,18 @@ public class VisionApplication extends Application {
     color_to_string.append(R.color.GREEN, Color.parseColor("#04B45F"));
     color_to_string.append(R.color.BLUE, Color.parseColor("#0489B1"));
     color_to_string.append(R.color.LIGHT_PURPLE, Color.parseColor("#A901DB"));
+  }
+  
+  public static void loadPrefs(Activity act) {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
+		textSize = sp.getString("TEXT_SIZE", textSize);
+  }
+  
+  public static void savePrefs(String key, String value, Activity act) {
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
+		Editor edit = sp.edit();
+		edit.putString(key, value);
+		edit.commit();
   }
   
   /**
@@ -142,8 +158,9 @@ public class VisionApplication extends Application {
    * @param act
    *          - current activity
    */
-  public static void setThemeToActivity(Activity act) {
-    if (textSize == VisionApplication.LARGE) {
+  public static void setThemeToActivity(Activity act) { 
+	loadPrefs(act);
+    if (textSize.equals("Large Text Size")) {
       if (backgroundColor == R.color.BLUE)
         act.setTheme(R.style.Theme_LargeWhiteBlue);
       else if (backgroundColor == R.color.GREEN)
@@ -158,7 +175,7 @@ public class VisionApplication extends Application {
         act.setTheme(R.style.Theme_LargeRedBlack);
       else
         act.setTheme(R.style.Theme_LargeGreenBlack);
-    } else if (textSize == VisionApplication.SMALL)
+    } else if (textSize.equals("Small Text Size"))
       if (backgroundColor == R.color.BLUE)
         act.setTheme(R.style.Theme_SmallWhiteBlue);
       else if (backgroundColor == R.color.GREEN)

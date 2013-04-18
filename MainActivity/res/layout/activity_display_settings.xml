@@ -13,7 +13,7 @@
         android:id="@+id/button_set_colors"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="112dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -24,7 +24,7 @@
         android:id="@+id/button_set_theme"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="112dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -35,7 +35,7 @@
         android:id="@+id/button_exit_launcher"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="112dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -46,12 +46,23 @@
         android:id="@+id/locale"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="112dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/globe"
         app:ReadText="@string/language" />
+    
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/button_selecting_mode"
+        style="android:ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/buttons_settings_button"
+        app:ReadText="@string/buttons_mode" />
 
     <LinearLayout
         android:layout_width="match_parent"

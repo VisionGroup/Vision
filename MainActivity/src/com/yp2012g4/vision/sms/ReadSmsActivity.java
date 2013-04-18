@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -32,8 +33,10 @@ public class ReadSmsActivity extends VisionActivity {
   @Override
   public boolean onSingleTapUp(MotionEvent e) {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    super.onSingleTapUp(e);
-    switch (curr_view.getId()) {
+    if (super.onSingleTapUp(e))
+      return true;
+    View button = getButtonByMode();
+    switch (button.getId()) {
       case R.id.sms_next:
         if (currentMessage < messages.size() - 1) {
           currentMessage++;
@@ -64,8 +67,8 @@ public class ReadSmsActivity extends VisionActivity {
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
-    final SmsManager smsReader = new SmsManager(getApplicationContext());
-    messages = smsReader.getIncomingMessages();
+    //final SmsManager smsReader = new SmsManager(getApplicationContext());
+    messages = SmsManager.getIncomingMessages(this);
     setMessage();
   }
   

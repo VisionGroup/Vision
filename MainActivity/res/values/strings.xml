@@ -18,6 +18,7 @@
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>
+    <string name="title_activity_voice_note_recorder">voice note recorder</string>
     <string name="MainTitle">Main screen</string>
     <string name="emptyHour">hh:mm:ss</string>
     <string name="next_message">Next message</string>
@@ -165,6 +166,9 @@
     <string name="language">Language</string>
     <string name="switched_to_hebrew">Switched to hebrew</string>
     <string name="switched_to_english">Switched to english</string>
+    <string name="buttons_mode"> buttons mode </string>
+    <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
+    <string name="regular_buttons_mode">Switched to regular buttons mode </string>
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">Theme settings screen</string>
@@ -215,5 +219,9 @@
     <string name="home_button">Home</string>
     <string name="Tool_tip_button">screen info</string>
     <string name="current_menu_button">Current menu</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- ActivityVoiceInput -->
+    <string name="title_activity_activity_voice_input">ActivityVoiceInput</string>
 
 </resources>

@@ -239,7 +239,6 @@ public abstract class VisionGestureDetector extends Activity implements
 //			config.locale = myLocale;
 //			getBaseContext().getResources().updateConfiguration(config,
 //					getBaseContext().getResources().getDisplayMetrics());
-//			// refresh();
 //		}
 
 		// reads layout description out loud

@@ -220,7 +220,7 @@
     <string name="Tool_tip_button">screen info</string>
     <string name="current_menu_button">Current menu</string>
     <string name="hello_world">Hello world!</string>
-    
+
     <!-- ActivityVoiceInput -->
     <string name="title_activity_activity_voice_input">ActivityVoiceInput</string>
 

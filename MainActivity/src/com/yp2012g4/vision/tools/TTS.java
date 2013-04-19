@@ -17,7 +17,7 @@ import android.util.Log;
  */
 public class TTS implements OnInitListener {
     private static final String TAG = "vision:TTS";
-    private TextToSpeech _tts;
+    public TextToSpeech _tts;
     private int _qm;
     private Locale _language;
     private boolean _init = false;

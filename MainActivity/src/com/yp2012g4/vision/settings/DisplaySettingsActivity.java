@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yp2012g4.vision.CalcActivity;
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -106,7 +107,9 @@ public class DisplaySettingsActivity extends VisionActivity {
 				break;
 			}
 			break;
-
+		case R.id.calculator:
+			intent = new Intent(this, CalcActivity.class);
+			startActivity(intent/* .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) */);
 		default:
 			break;
 		}

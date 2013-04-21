@@ -52,7 +52,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/globe"
         app:ReadText="@string/language" />
-    
+
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/button_selecting_mode"
         style="android:ButtonStyle"
@@ -63,6 +63,17 @@
         android:scaleType="fitCenter"
         android:src="@drawable/buttons_settings_button"
         app:ReadText="@string/buttons_mode" />
+    
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/calculator"
+        style="android:ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/calc"
+        app:ReadText="@string/calculator" />
 
     <LinearLayout
         android:layout_width="match_parent"

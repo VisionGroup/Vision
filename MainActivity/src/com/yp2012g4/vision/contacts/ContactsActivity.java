@@ -14,9 +14,9 @@ import android.view.View;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
-import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="2dp" >
 
     <com.yp2012g4.vision.customUI.lists.TalkingListView
+        custom:Cols="2"
+        custom:Rows="4"
         android:id="@+id/TalkingSmsListView"
         android:layout_width="match_parent"
         android:layout_height="0dip"

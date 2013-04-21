@@ -40,7 +40,7 @@ public class CallManager {
 
 
 
-	public ArrayList<CallType> dood(Context c) {
+	public static ArrayList<CallType> dood(Context c) {
 		String[] strFields = { CallLog.Calls.NUMBER, CallLog.Calls.TYPE,
 				CallLog.Calls.CACHED_NAME, CallLog.Calls.CACHED_NUMBER_TYPE,
 				CallLog.Calls.DATE };

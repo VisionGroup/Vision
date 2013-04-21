@@ -57,7 +57,7 @@ public class MainActivity extends VisionActivity {
 					DisplaySettingsActivity.class);
 			break;
 		case R.id.read_sms_button:
-			intent = new Intent(MainActivity.this, ReadSmsTest.class);
+			intent = new Intent(MainActivity.this, ReadSmsActivity.class);
 			break;
 		default:
 			break;

@@ -56,7 +56,8 @@ public class SoftKeyboard extends InputMethodService implements
      */
     static final boolean PROCESS_HARD_KEYS = true;
 
-    private KeyboardView mInputView;
+    // private KeyboardView mInputView;
+    private CircleGestureView mInputView;
 
     private CandidateView mCandidateView;
 
@@ -85,6 +86,8 @@ public class SoftKeyboard extends InputMethodService implements
     private LatinKeyboard mCurKeyboard;
 
     private String mWordSeparators;
+
+    private static final String TAG = "vision:SoftKeyboard";
 
     // public TextToSpeechBeta mTts;
 
@@ -137,10 +140,11 @@ public class SoftKeyboard extends InputMethodService implements
      */
     @Override
     public View onCreateInputView() {
-	mInputView = (KeyboardView) getLayoutInflater().inflate(R.layout.input,
-		null);
+	mInputView = (CircleGestureView) getLayoutInflater().inflate(
+		R.layout.input, null);
 	mInputView.setOnKeyboardActionListener(this);
 	mInputView.setKeyboard(mQwertyKeyboard);
+	Log.d(TAG, "mInputView = " + mInputView.toString());
 	return mInputView;
     }
 
@@ -378,7 +382,8 @@ public class SoftKeyboard extends InputMethodService implements
 	    // TODO: Use menu as a "safer" way to dismiss the IME
 	case KeyEvent.KEYCODE_MENU:
 	    Log.e("menu hit", "0");
-	    return true;
+	    mInputView.changeLang();
+	    return false; // TODO: Changed by the Vision project.
 
 	case KeyEvent.KEYCODE_BACK:
 	    // The InputMethodService already takes care of the back

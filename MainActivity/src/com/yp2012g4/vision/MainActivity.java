@@ -13,6 +13,7 @@ import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.sms.ReadSmsActivity;
+import com.yp2012g4.vision.sms.ReadSmsTest;
 import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -56,7 +57,7 @@ public class MainActivity extends VisionActivity {
 					DisplaySettingsActivity.class);
 			break;
 		case R.id.read_sms_button:
-			intent = new Intent(MainActivity.this, ReadSmsActivity.class);
+			intent = new Intent(MainActivity.this, ReadSmsTest.class);
 			break;
 		default:
 			break;

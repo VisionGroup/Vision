@@ -195,6 +195,14 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
+            android:name="com.yp2012g4.vision.CalcActivity"
+            android:configChanges="locale"
+            android:label="@string/title_activity_calc"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
             android:name="com.yp2012g4.vision.sms.ReadSmsTest"
             android:label="@string/title_activity_read_sms_test" >
             <meta-data

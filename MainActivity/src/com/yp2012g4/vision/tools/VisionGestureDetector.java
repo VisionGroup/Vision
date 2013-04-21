@@ -225,7 +225,7 @@ public abstract class VisionGestureDetector extends Activity implements
 		super.onWindowFocusChanged(hasFocus);
 		final ViewGroup mainView = (ViewGroup) findViewById(getViewId());
 		getButtonsPosition(mainView);
-		setLocaleToActivity(this);
+		// setLocaleToActivity(this);
 		for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
 			entry.getKey().setOnClickListener(this);
 			entry.getKey().setOnTouchListener(this);
@@ -240,15 +240,15 @@ public abstract class VisionGestureDetector extends Activity implements
 		}
 	}
 
-	public void setLocaleToActivity(Activity activity) {
-		if (myLocale != null) {
-			final Configuration config = new Configuration();
-			config.locale = myLocale;
-			Locale.setDefault(myLocale);
-			activity.getResources().updateConfiguration(config,
-					activity.getResources().getDisplayMetrics());
-		}
-	}
+	// public void setLocaleToActivity(Activity activity) {
+	// if (myLocale != null) {
+	// final Configuration config = new Configuration();
+	// config.locale = myLocale;
+	// Locale.setDefault(myLocale);
+	// activity.getResources().updateConfiguration(config,
+	// activity.getResources().getDisplayMetrics());
+	// }
+	// }
 
 	/**
 	 * This is an abstract method which returns the Id of a view
@@ -395,9 +395,10 @@ public abstract class VisionGestureDetector extends Activity implements
 		for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
 			if (entry.getValue().contains((int) x, (int) y)) {
 				curr_view = entry.getKey();
-				if (isButtonType(entry.getKey()))
+				if (isButtonType(entry.getKey())) {
 					// get view of buttons only
 					return entry.getKey();
+				}
 			}
 		return null;
 	}

@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Amit: This is the place to declare the new attributes for a new view you 
-have created. -->
+<!--
+Amit: This is the place to declare the new attributes for a new view you 
+have created.
+-->
 
 <resources>
-  <declare-styleable name="TalkingImageButton">
-    <attr name="ReadText" format="string" />
-    <attr name="ReadToolTip" format="string" />
-  </declare-styleable>
-  <declare-styleable name="TalkingButton">
-    <attr name="ReadText" />
-    <attr name="ReadToolTip" />
-  </declare-styleable>
-  
-  <!-- View styles -->
-  <attr name="textAppearance" format="reference" />
-  <attr name="backgroundColor" format="reference" />
- 
+
+    <!-- Talking image button -->
+    <declare-styleable name="TalkingImageButton">
+        <attr name="ReadText" format="string" />
+        <attr name="ReadToolTip" format="string" />
+    </declare-styleable>
+
+    <!-- Talking button -->
+    <declare-styleable name="TalkingButton">
+        <attr name="ReadText" />
+        <attr name="ReadToolTip" />
+    </declare-styleable>
+
+    <!-- Talking list view -->
+    <declare-styleable name="TalkingListView">
+        <attr name="Cols" format="integer" />
+        <attr name="Rows" format="integer" />
+    </declare-styleable>
+
+    <!-- View styles -->
+    <attr name="textAppearance" format="reference" />
+    <attr name="backgroundColor" format="reference" />
+
+
 </resources>

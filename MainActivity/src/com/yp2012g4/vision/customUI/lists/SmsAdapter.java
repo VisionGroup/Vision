@@ -45,7 +45,13 @@ public class SmsAdapter extends BaseAdapter {
     TextView fromView = (TextView) v.findViewById(R.id.sms_from);
     TextView bodyView = (TextView) v.findViewById(R.id.sms_body);
     TextView timeView = (TextView) v.findViewById(R.id.sms_time);
-    SmsType msg = _data.get(position);
+    SmsType msg ;
+    if (position >= _data.size()){
+    	msg = _data.get(0);
+    }else {
+    	msg = _data.get(position);
+    }   	
+     
     String person = msg.getPerson();
     if (person == "") {
       person = msg.getAddress();

@@ -223,5 +223,6 @@
 
     <!-- ActivityVoiceInput -->
     <string name="title_activity_activity_voice_input">ActivityVoiceInput</string>
+    <string name="title_activity_read_sms_test">ReadSmsTest</string>
 
 </resources>

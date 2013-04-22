@@ -252,5 +252,9 @@
     <string name="bad_action">פעולה שגויה</string>
     <string name="division_by_zero">חלוקה באפס</string>
     <string name="result">תוצאה</string>
+    
+    <!-- CallListActivity -->
+    <string name="Call_sceen">רשימת שיחות</string>
+    <string name="Call">חייג</string>
 
 </resources>

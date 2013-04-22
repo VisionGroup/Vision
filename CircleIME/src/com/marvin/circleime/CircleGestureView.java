@@ -10,7 +10,6 @@ import android.inputmethodservice.KeyboardView;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.utils.TTS;
@@ -80,7 +79,7 @@ public class CircleGestureView extends KeyboardView {
 
     private static final String TAG = "vision:CircleIME";
 
-    private static final long[] PATTERN = { 0, 1, 40, 41 };
+    private static final long[] PATTERN = { 0, 1, 40, 41 }; // For Vibration
 
     private static final int AE = 0;
 
@@ -701,7 +700,10 @@ public class CircleGestureView extends KeyboardView {
 
     private int keyboardMode = 0;
 
-    private void toggleKeyboardMode() {
+    /**
+     * Changes between Alpha and numeric layouts.
+     */
+    public void toggleKeyboardMode() {
 	if (keyboardMode == 0) {
 	    keyboardMode = 1;
 	    _tts.speak("Numbers");
@@ -711,20 +713,20 @@ public class CircleGestureView extends KeyboardView {
 	}
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-	final String input = "";
-	Log.i(TAG, "Keycode_Menu.");
-	switch (keyCode) {
-	case KeyEvent.KEYCODE_MENU:
-	    toggleKeyboardMode();
-	    Log.i(TAG, "Keycode_Menu.");
-	    return false;
-	default:
-	    break;
-	}
-	return false;
-    }
+    // @Override
+    // public boolean onKeyDown(int keyCode, KeyEvent event) {
+    // final String input = "";
+    // Log.i(TAG, "Keycode_Menu.");
+    // switch (keyCode) {
+    // case KeyEvent.KEYCODE_MENU:
+    // toggleKeyboardMode();
+    // Log.i(TAG, "Keycode_Menu.");
+    // return false;
+    // default:
+    // break;
+    // }
+    // return false;
+    // }
 
     /**
      * Change the language of the input.

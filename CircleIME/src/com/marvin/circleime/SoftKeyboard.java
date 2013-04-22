@@ -182,7 +182,7 @@ public class SoftKeyboard extends InputMethodService implements
 	mCompletions = null;
 
 	// We are now going to initialize our state based on the type of
-	// text being edited.
+	// text being edited. //TODO move input type to CircleGestureView
 	switch (attribute.inputType & InputType.TYPE_MASK_CLASS) {
 	case InputType.TYPE_CLASS_NUMBER:
 	case InputType.TYPE_CLASS_DATETIME:

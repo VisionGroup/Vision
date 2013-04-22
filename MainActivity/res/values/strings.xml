@@ -257,5 +257,9 @@
     <string name="bad_action">Bad action</string>
     <string name="division_by_zero">Division by zero</string>
     <string name="result">Result</string>
+    
+    <!-- CallListActivity -->
+    <string name="Call_sceen">Call list Screen</string>
+    <string name="Call">Call</string>
 
 </resources>

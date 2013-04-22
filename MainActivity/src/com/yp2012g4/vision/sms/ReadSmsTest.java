@@ -2,20 +2,14 @@ package com.yp2012g4.vision.sms;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.R.layout;
-import com.yp2012g4.vision.R.menu;
 import com.yp2012g4.vision.customUI.lists.SmsAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.managers.SmsType;
 import com.yp2012g4.vision.tools.VisionActivity;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 
 public class ReadSmsTest extends VisionActivity {
 

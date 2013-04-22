@@ -7,8 +7,8 @@
     android:padding="2dp" >
 
     <com.yp2012g4.vision.customUI.lists.TalkingListView
-        custom:Cols="2"
-        custom:Rows="4"
+        custom:cols="2"
+        custom:rows="4"
         android:id="@+id/TalkingSmsListView"
         android:layout_width="match_parent"
         android:layout_height="0dip"

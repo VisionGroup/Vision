@@ -20,8 +20,8 @@ have created.
 
     <!-- Talking list view -->
     <declare-styleable name="TalkingListView">
-        <attr name="Cols" format="integer" />
-        <attr name="Rows" format="integer" />
+        <attr name="cols" format="integer" />
+        <attr name="rows" format="integer" />
     </declare-styleable>
 
     <!-- View styles -->

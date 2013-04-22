@@ -1,5 +1,7 @@
 package com.yp2012g4.vision.managers;
 
+import java.util.Date;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
@@ -15,7 +17,7 @@ public class CallType {
 	private String number = "";
 	private String type = "";
 	private String name = "";
-	private String date = "";
+	private Date date;
 	private String numberType = "";
 
 	/**
@@ -32,8 +34,17 @@ public class CallType {
 		String mili = cur.getString(
 				cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))
 				.toString();
+		Date q;
+		try {
+				q =new Date(cur.getLong(4));
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		Long m = Long.valueOf(mili);
-		date = (String) DateFormat.format("dd/MM/yy", m.longValue());
+		
+		date = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m.longValue()));
 		// protocol =
 		// cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can
 		// cause exception
@@ -54,13 +65,14 @@ public class CallType {
 			numberType = "";
 		}
 		try {
-			type = cur.getString(
-					cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE))
+			type = cur
+					.getString(
+							cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE))
 					.toString();
 		} catch (Exception e) {
-			type ="";
+			type = "";
 		}
-		
+
 		// subject = c.getString(c.getColumnIndexOrThrow("subject")).toString();
 		// ContactManager cm = new ContactManager(context);
 
@@ -74,7 +86,7 @@ public class CallType {
 		return numberType;
 	}
 
-	public synchronized String getDate() {
+	public synchronized Date getDate() {
 		return date;
 	}
 

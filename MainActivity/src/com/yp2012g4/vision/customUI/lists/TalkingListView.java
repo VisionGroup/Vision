@@ -5,9 +5,11 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -27,18 +29,29 @@ public class TalkingListView extends RelativeLayout {
 	private int _page = 0;
 	private int _numOfPages = 0;
 
-	private int _h = 0;
-	private int _w = 0;
-
 	private Adapter _adapter;
-	private boolean _init = false;
-	private boolean _initDisp = false;
+	private View[] _dispView;
 
 	private Context _context;
+	private boolean _init = false;
 
 	public TalkingListView(Context context) {
 		super(context);
 		_context = context;
+	}
+
+	public TalkingListView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		_context = context;
+		getAttr(context, attrs);
+
+	}
+
+	public TalkingListView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		_context = context;
+		getAttr(context, attrs);
+
 	}
 
 	private void getAttr(Context context, AttributeSet attrs) {
@@ -50,117 +63,138 @@ public class TalkingListView extends RelativeLayout {
 					.getInteger(R.styleable.TalkingListView_rows, DEFAULT_ROWS);
 			_cols = a
 					.getInteger(R.styleable.TalkingListView_cols, DEFAULT_COLS);
+			_dispView = new View[_rows * _cols];
 		} finally {
 			a.recycle();
 		}
 	}
 
 	/**
-	 * Initiate the layout, create initial view with the adopter. View ID will
-	 * be set here once and be reused in setPage.
+	 * Set new view array to be displayed.
+	 * 
+	 * @param pageNum
 	 */
-	private void initView() {
-
-		assert (_page == 0);
-
+	private void setNewViewArr(int pageNum) {
 		for (int i = 0; i < _rows; i++) {
 			for (int j = 0; j < _cols; j++) {
-				int itemId = _cols * i + j;
-				View v = _adapter.getView(itemId, null, this);
-				if (v == null) {
-					return;
-				}
 
-				LayoutParams params = new RelativeLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				int pos = pageNum * _rows * _cols + i * _cols + j;
+				int vp = i * _cols + j;
+				View oldV = _dispView[vp];
 
-				if (_h != 0 && _w != 0) {
-					params.height = _h / _rows;
-					params.width = _w / _cols;
-					_initDisp = true;
-				}
-
-				if (i == 0 && j == 0) {
-					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
-							RelativeLayout.TRUE);
-				} else if (j != 0) {
-					params.addRule(RelativeLayout.RIGHT_OF, itemId);
-					params.addRule(RelativeLayout.BELOW, itemId - _cols + 1);
+				if (pos < _adapter.getCount()) {
+					_dispView[vp] = _adapter.getView(pos, oldV, this);
+					if (_dispView[vp].getId() == NO_ID) {
+						_dispView[vp].setId(vp + 1);
+					}
 				} else {
-					params.addRule(RelativeLayout.BELOW, itemId - _cols + 1);
+					_dispView[vp] = null;
 				}
-				v.setId(itemId + 1);
-				this.addView(v, params);
+
+			}
+		}
+	}
+
+	/**
+	 * Remove old view's. Set new view's parameters and add it to the view.
+	 */
+	private void setNewViewDisp() {
+
+		removeAllViews();
+
+		LayoutParams params = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+
+		setViewSize(_dispView[0], params);
+		addView(_dispView[0], params);
+
+		for (int i = 1; i < _rows * _cols; i++) {
+			params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT);
+
+			if (_dispView[i] == null) {
+				break;
+			}
+			int colPos = i % _cols;
+			int rowPos = i / _cols;
+			if (colPos != 0) {
+				params.addRule(RelativeLayout.RIGHT_OF,
+						_dispView[i - 1].getId());
+			}
+			if (rowPos > 0) {
+				params.addRule(RelativeLayout.BELOW,
+						_dispView[i - _cols].getId());
 			}
 
+			setViewSize(_dispView[i], params);
+			addView(_dispView[i], params);
+			_dispView[i].invalidate();
+		}
+		invalidate();
+
+	}
+
+	/**
+	 * sets view size according to the actual screen size.
+	 * 
+	 * @param v
+	 * @param params
+	 */
+	private void setViewSize(View v, LayoutParams params) {
+		int h = getHeight() / _rows;
+		int w = getWidth() / _cols;
+		if (params != null) {
+			params.height = h;
+			params.width = w;
 		}
 
 	}
 
 	/**
-	 * create dynamic view.
+	 * Set page number "pageNum" to be shown If page doesn't exist the view will
+	 * not change.
 	 * 
 	 * @param
 	 */
-	private void setPage(int delta) {
+	private void setPage(int pageNum) {
 
 		if (_adapter == null) {
 			return;
 		}
 
-		if (_init == false) {
-			 initView();
-			_init = true;
+		if (pageNum < 0) {
 			return;
 		}
 
-		if (_page + delta < 0)
+		if (pageNum >= _numOfPages) {
 			return;
-		if (_page + delta >= _numOfPages)
-			return;
-
-		for (int i = 0; i < _rows; i++) {
-			for (int j = 0; j < _cols; j++) {
-				int itemId = (_page + delta) * _rows * _cols + _cols * i + j;
-				int replacingId = _page * _rows * _cols + _cols * i + j;
-				// replacing the old view fields no need to add it to _view.
-				View v = _adapter.getView(itemId,
-						this.findViewById(replacingId + 1), this);
-				if (v != null) {
-					this.findViewById(replacingId + 1).setId(itemId + 1);
-				}
-			}
 		}
 
-		_page += delta;
-	}
+		setNewViewArr(pageNum);
+		setNewViewDisp();
 
-	public TalkingListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		_context = context;
-		getAttr(context, attrs);
-		initDisplayParams();
-	}
-
-	public TalkingListView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		_context = context;
-		getAttr(context, attrs);
-		initDisplayParams();
+		_page = pageNum;
 	}
 
 	/**
-	 * get layout display information. If the data exists means that list layout
-	 * hight and width is hard coded.
+	 * Initialize the layout.
 	 */
-	private void initDisplayParams() {
+	@Override
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+		// TODO Auto-generated method stub
+		super.onLayout(changed, l, t, r, b);
 
-		_h = getHeight();
-		_w = getWidth();
-
-		if (_h != 0 && _w != 0) {
-			_initDisp = true;
+		if (_adapter != null && _init != true) {
+			setPage(_page);
+			_init = true;
 		}
+
+		/**
+		 * to update key's position
+		 */
+		VisionActivity host = (VisionActivity) this.getContext();
+		host.getButtonsPosition(this);
 	}
 
 	/**
@@ -190,23 +224,20 @@ public class TalkingListView extends RelativeLayout {
 		} else {
 			_numOfPages = mod;
 		}
-		setPage(0);
 	}
 
 	/**
 	 * sets the next page to be displayed on the screen
 	 */
 	public void nextPage() {
-		setPage(1);
-		//this.invalidate();
+		setPage(_page + 1);
 	}
 
 	/**
 	 * sets the previous page to be displayed on the screen
 	 */
 	public void prevPage() {
-		setPage(-1);
-		//this.invalidate();
+		setPage(_page - 1);
 	}
 
 	/**
@@ -224,47 +255,24 @@ public class TalkingListView extends RelativeLayout {
 
 	/**
 	 * 
-	 * @param position
+	 * @param pos
 	 *            item position in the list
 	 * @return true if the item currently displayed.
 	 */
-	public boolean isItemDisplayed(int position) {
-		if (position < _page * _rows * _cols)
+	public boolean isItemDisplayed(int pos) {
+		if (pos < _page * _rows * _cols)
 			return false;
-		if (position >= _page * _rows * _cols + _rows * _cols)
+		if (pos >= _page * _rows * _cols + _rows * _cols)
 			return false;
 		return true;
 	}
 
-	@Override
-	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		// TODO Auto-generated method stub
-		// at this point the height and width should be known.
-		super.onLayout(changed, l, t, r, b);
-		// initView();
-
-		if (_initDisp != true) {
-			int h = getHeight() / _rows;
-			int w = getWidth() / _cols;
-
-			for (int i = 1; i <= _rows * _cols; i++) {
-				View v = this.findViewById(i);
-				android.view.ViewGroup.LayoutParams lp = v.getLayoutParams();
-
-				lp.height = h;
-				lp.width = w;
-				v.setLayoutParams(lp);
-				v.invalidate();
-				v.dispatchWindowFocusChanged(true);
-			}
-			_initDisp = true;
-
-		}
-		/**
-		 * to update key's position
-		 */
-		VisionActivity host = (VisionActivity) this.getContext();
-		host.getButtonsPosition(this);
+	/**
+	 * 
+	 * @return current page number
+	 */
+	public int getPage() {
+		return _page;
 	}
 
 }

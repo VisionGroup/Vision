@@ -15,50 +15,74 @@ import android.widget.Button;
  * @author Amit Yaffe
  * 
  */
-public class TalkingButton extends Button {
-  public TalkingButton(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TalkingButton, 0, 0);
-    ReadText = a.getString(R.styleable.TalkingButton_ReadText);
-  }
-  
-  /**
-   * Returns the short button text that should be used for TTS.
-   * 
-   * @return String ReadText
-   */
-  public String getReadText() {
-    return ReadText;
-  }
-  
-  /**
-   * Set the short button text that should be used for TTS.
-   * 
-   * @param readText
-   */
-  public void setReadText(String readText) {
-    ReadText = readText;
-  }
-  
-  /**
-   * Returns the tool tip text that should be used for TTS.
-   * 
-   * @return String ReadToolTip
-   */
-  public String getReadToolTip() {
-    return ReadToolTip;
-  }
-  
-  /**
-   * Set the tool tip text that should be used for TTS.
-   * 
-   * @param readToolTip
-   */
-  public void setReadToolTip(String readToolTip) {
-    ReadToolTip = readToolTip;
-  }
-  
-  private String ReadText="";
-  private String ReadToolTip="";
-  // TODO: Check How to connect to foreground and background color settings
+public class TalkingButton extends Button implements Runnable {
+
+	Runnable _r = null;
+
+	public TalkingButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		TypedArray a = context.obtainStyledAttributes(attrs,
+				R.styleable.TalkingButton, 0, 0);
+		ReadText = a.getString(R.styleable.TalkingButton_ReadText);
+	}
+
+	/**
+	 * Returns the short button text that should be used for TTS.
+	 * 
+	 * @return String ReadText
+	 */
+	public String getReadText() {
+		return ReadText;
+	}
+
+	/**
+	 * Set the short button text that should be used for TTS.
+	 * 
+	 * @param readText
+	 */
+	public void setReadText(String readText) {
+		ReadText = readText;
+	}
+
+	/**
+	 * Returns the tool tip text that should be used for TTS.
+	 * 
+	 * @return String ReadToolTip
+	 */
+	public String getReadToolTip() {
+		return ReadToolTip;
+	}
+
+	/**
+	 * Set the tool tip text that should be used for TTS.
+	 * 
+	 * @param readToolTip
+	 */
+	public void setReadToolTip(String readToolTip) {
+		ReadToolTip = readToolTip;
+	}
+
+	private String ReadText = "";
+	private String ReadToolTip = "";
+
+	// TODO: Check How to connect to foreground and background color settings
+
+	/**
+	 * 
+	 * @param r
+	 *            set runnable function to button.
+	 */
+	public void setRun(Runnable r) {
+		_r = r;
+	}
+
+	/**
+	 * Implemented run function for button.
+	 */
+	@Override
+	public void run() {
+		if (_r != null) {
+			_r.run();
+		}
+	}
 }

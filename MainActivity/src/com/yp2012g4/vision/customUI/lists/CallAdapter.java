@@ -55,7 +55,7 @@ public class CallAdapter extends BaseAdapter {
 
 	nameView.setText(call.getName());
 	numberView.setText(call.getNumber());
-	timeView.setText(call.getDate());
+	timeView.setText(call.getDate().toString());
 	return v;
     }
 }

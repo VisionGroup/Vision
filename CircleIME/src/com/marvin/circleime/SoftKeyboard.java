@@ -89,6 +89,8 @@ public class SoftKeyboard extends InputMethodService implements
 
     private static final String TAG = "vision:SoftKeyboard";
 
+    private static boolean lorm = false;
+
     // public TextToSpeechBeta mTts;
 
     /**
@@ -381,8 +383,13 @@ public class SoftKeyboard extends InputMethodService implements
 
 	    // TODO: Use menu as a "safer" way to dismiss the IME
 	case KeyEvent.KEYCODE_MENU:
-	    Log.e("menu hit", "0");
-	    mInputView.changeLang();
+	    // Log.e("menu hit", "0");
+	    //
+	    if (lorm)
+		mInputView.toggleKeyboardMode();
+	    else
+		mInputView.changeLang();
+	    lorm = !lorm;
 	    return false; // TODO: Changed by the Vision project.
 
 	case KeyEvent.KEYCODE_BACK:

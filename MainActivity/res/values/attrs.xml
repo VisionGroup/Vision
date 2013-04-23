@@ -10,12 +10,14 @@ have created.
     <declare-styleable name="TalkingImageButton">
         <attr name="ReadText" format="string" />
         <attr name="ReadToolTip" format="string" />
+        <attr name="PrefsValue" format="string"/>
     </declare-styleable>
 
     <!-- Talking button -->
     <declare-styleable name="TalkingButton">
         <attr name="ReadText" />
         <attr name="ReadToolTip" />
+        <attr name="PrefsValue"/>
     </declare-styleable>
 
     <!-- Talking list view -->

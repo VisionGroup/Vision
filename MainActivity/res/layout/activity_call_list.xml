@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        custom:Cols="1"
-        custom:Rows="2" >
+        custom:cols="1"
+        custom:rows="2" >
     </com.yp2012g4.vision.customUI.lists.TalkingListView>
 
     <LinearLayout

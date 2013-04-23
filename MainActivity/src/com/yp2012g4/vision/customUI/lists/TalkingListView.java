@@ -8,6 +8,7 @@ import android.widget.Adapter;
 import android.widget.RelativeLayout;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
  * List container for views. building static view, which contains grid of
@@ -24,6 +25,7 @@ public class TalkingListView extends RelativeLayout {
 	private int _rows;
 	private int _cols;
 	private int _page = 0;
+	private int _numOfPages = 0;
 
 	private int _h = 0;
 	private int _w = 0;
@@ -65,9 +67,18 @@ public class TalkingListView extends RelativeLayout {
 			for (int j = 0; j < _cols; j++) {
 				int itemId = _cols * i + j;
 				View v = _adapter.getView(itemId, null, this);
+				if (v == null) {
+					return;
+				}
 
 				LayoutParams params = new RelativeLayout.LayoutParams(
 						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+				if (_h != 0 && _w != 0) {
+					params.height = _h / _rows;
+					params.width = _w / _cols;
+					_initDisp = true;
+				}
 
 				if (i == 0 && j == 0) {
 					params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
@@ -88,35 +99,47 @@ public class TalkingListView extends RelativeLayout {
 
 	/**
 	 * create dynamic view.
+	 * 
+	 * @param
 	 */
-	private void setPage(int num) {
+	private void setPage(int delta) {
 
 		if (_adapter == null) {
 			return;
 		}
 
 		if (_init == false) {
-			initView();
+			 initView();
 			_init = true;
 			return;
 		}
 
+		if (_page + delta < 0)
+			return;
+		if (_page + delta >= _numOfPages)
+			return;
+
 		for (int i = 0; i < _rows; i++) {
 			for (int j = 0; j < _cols; j++) {
-				int itemId = _page * _rows * _cols + _cols * i + j;
-				int replacingId = _cols * i + j;
+				int itemId = (_page + delta) * _rows * _cols + _cols * i + j;
+				int replacingId = _page * _rows * _cols + _cols * i + j;
 				// replacing the old view fields no need to add it to _view.
-				_adapter.getView(itemId, this.findViewById(replacingId), this);
+				View v = _adapter.getView(itemId,
+						this.findViewById(replacingId + 1), this);
+				if (v != null) {
+					this.findViewById(replacingId + 1).setId(itemId + 1);
+				}
 			}
 		}
 
+		_page += delta;
 	}
 
 	public TalkingListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		_context = context;
 		getAttr(context, attrs);
-
+		initDisplayParams();
 	}
 
 	public TalkingListView(Context context, AttributeSet attrs, int defStyle) {
@@ -131,30 +154,11 @@ public class TalkingListView extends RelativeLayout {
 	 * hight and width is hard coded.
 	 */
 	private void initDisplayParams() {
-		/*
-		 * WindowManager wm = (WindowManager) _context
-		 * .getSystemService(Context.WINDOW_SERVICE); Display display =
-		 * wm.getDefaultDisplay(); DisplayMetrics dm = new DisplayMetrics();
-		 * display.getMetrics(dm);
-		 * 
-		 * int dispW = 0; int dispH = 0; if (dm != null) { dispW =
-		 * dm.widthPixels; dispH = dm.heightPixels; }
-		 */
-		int layH = getHeight();
-		int layW = getWidth();
 
-		if (layW != 0) {
-			_w = layW / _cols;
-		} else {
-			_w = 0;// dispW / _cols;
-		}
-		if (layH != 0) {
-			_h = layH / _rows;
-		} else {
-			_h = 0;// dispH / _rows;
-		}
+		_h = getHeight();
+		_w = getWidth();
 
-		if (layH != 0 && layW != 0) {
+		if (_h != 0 && _w != 0) {
 			_initDisp = true;
 		}
 	}
@@ -180,25 +184,29 @@ public class TalkingListView extends RelativeLayout {
 	 */
 	public void setAdapter(Adapter adapter) {
 		_adapter = adapter;
-		setPage(_page);
+		int mod = _adapter.getCount() / (_cols * _rows);
+		if (_adapter.getCount() % (_cols * _rows) != 0) {
+			_numOfPages = mod + 1;
+		} else {
+			_numOfPages = mod;
+		}
+		setPage(0);
 	}
 
 	/**
 	 * sets the next page to be displayed on the screen
 	 */
 	public void nextPage() {
-		_page++;
-		setPage(_page);
-		this.invalidate();
+		setPage(1);
+		//this.invalidate();
 	}
 
 	/**
 	 * sets the previous page to be displayed on the screen
 	 */
 	public void prevPage() {
-		_page--;
-		setPage(_page);
-		this.invalidate();
+		setPage(-1);
+		//this.invalidate();
 	}
 
 	/**
@@ -231,8 +239,10 @@ public class TalkingListView extends RelativeLayout {
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
-		super.onLayout(changed, l, t, r, b);
 		// at this point the height and width should be known.
+		super.onLayout(changed, l, t, r, b);
+		// initView();
+
 		if (_initDisp != true) {
 			int h = getHeight() / _rows;
 			int w = getWidth() / _cols;
@@ -240,17 +250,21 @@ public class TalkingListView extends RelativeLayout {
 			for (int i = 1; i <= _rows * _cols; i++) {
 				View v = this.findViewById(i);
 				android.view.ViewGroup.LayoutParams lp = v.getLayoutParams();
-				
+
 				lp.height = h;
 				lp.width = w;
 				v.setLayoutParams(lp);
 				v.invalidate();
+				v.dispatchWindowFocusChanged(true);
 			}
-
 			_initDisp = true;
 
 		}
-
+		/**
+		 * to update key's position
+		 */
+		VisionActivity host = (VisionActivity) this.getContext();
+		host.getButtonsPosition(this);
 	}
 
 }

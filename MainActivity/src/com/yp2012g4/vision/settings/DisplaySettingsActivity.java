@@ -128,6 +128,9 @@ public class DisplaySettingsActivity extends VisionActivity {
 		// adjustLayoutSize(3);
 		init(0, getString(R.string.display_settings_screen),
 				getString(R.string.settings_help));
+		
+		
+		
 	}
 
 }

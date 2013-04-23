@@ -15,60 +15,79 @@ import com.yp2012g4.vision.R;
  * @author Amit Yaffe
  * 
  */
-public class TalkingImageButton extends ImageButton {
-    public TalkingImageButton(Context context, AttributeSet attrs) {
-	super(context, attrs);
-	final TypedArray a = context.obtainStyledAttributes(attrs,
-		R.styleable.TalkingImageButton, 0, 0);
-	ReadText = a.getString(R.styleable.TalkingImageButton_ReadText);
-    }
+public class TalkingImageButton extends ImageButton implements Runnable {
 
-    /**
-     * Returns the short button text that should be used for TTS.
-     * 
-     * @return String ReadText
-     */
-    public String getReadText() {
-	return ReadText;
-    }
+	private Runnable _run;
 
-    /**
-     * Set the short button text that should be used for TTS.
-     * 
-     * @param readText
-     */
-    public void setReadText(String readText) {
-	ReadText = readText;
-    }
+	public TalkingImageButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		final TypedArray a = context.obtainStyledAttributes(attrs,
+				R.styleable.TalkingImageButton, 0, 0);
+		ReadText = a.getString(R.styleable.TalkingImageButton_ReadText);
+	}
 
-    /**
-     * Returns the tool tip text that should be used for TTS.
-     * 
-     * @return String ReadToolTip
-     */
-    public String getReadToolTip() {
-	return ReadToolTip;
-    }
+	/**
+	 * Returns the short button text that should be used for TTS.
+	 * 
+	 * @return String ReadText
+	 */
+	public String getReadText() {
+		return ReadText;
+	}
 
-    /**
-     * Set the tool tip text that should be used for TTS.
-     * 
-     * @param readToolTip
-     */
-    public void setReadToolTip(String readToolTip) {
-	ReadToolTip = readToolTip;
-    }
+	/**
+	 * Set the short button text that should be used for TTS.
+	 * 
+	 * @param readText
+	 */
+	public void setReadText(String readText) {
+		ReadText = readText;
+	}
 
-    private String ReadText = "";
-    private String ReadToolTip = "";
-    private String PrefsValue = "";
+	/**
+	 * Returns the tool tip text that should be used for TTS.
+	 * 
+	 * @return String ReadToolTip
+	 */
+	public String getReadToolTip() {
+		return ReadToolTip;
+	}
 
-    // TODO: Check How to connect to foreground and background color settings
-    public String getPrefsValue() {
-	return PrefsValue;
-    }
+	/**
+	 * Set the tool tip text that should be used for TTS.
+	 * 
+	 * @param readToolTip
+	 */
+	public void setReadToolTip(String readToolTip) {
+		ReadToolTip = readToolTip;
+	}
 
-    public void setPrefsValue(String prefsValue) {
-	PrefsValue = prefsValue;
-    }
+	private String ReadText = "";
+	private String ReadToolTip = "";
+	private String PrefsValue = "";
+
+	// TODO: Check How to connect to foreground and background color settings
+	public String getPrefsValue() {
+		return PrefsValue;
+	}
+
+	public void setPrefsValue(String prefsValue) {
+		PrefsValue = prefsValue;
+	}
+
+	/**
+	 * set runnable class to button.
+	 * 
+	 * @param run
+	 */
+	public void setRun(Runnable run) {
+		_run = run;
+	}
+
+	@Override
+	public void run() {
+		if (_run != null) {
+			_run.run();
+		}
+	}
 }

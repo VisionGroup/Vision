@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="2dp" >
+    android:padding="1dp" >
 
-    <TextView
+    <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/sms_from"
+        style="?textAppearance"
         android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#003366" />
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
+    <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/sms_body"
+        style="?textAppearance"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:gravity="bottom" />
+        android:background="@android:color/transparent"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
+    <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/sms_time"
+        style="?textAppearance"
         android:layout_width="fill_parent"
-        android:layout_height="25dp"
-        android:gravity="right" />
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent"
+        android:gravity="bottom|right"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

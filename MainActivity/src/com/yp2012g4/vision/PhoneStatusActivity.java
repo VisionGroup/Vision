@@ -66,7 +66,7 @@ public class PhoneStatusActivity extends VisionActivity {
       for (final CallType c : calls) {
         s += getString(R.string.called_at) + ": " + c.getDate() //c.getHour()
         		+ " ," + getString(R.string.from) + ": ";
-        if (TTS.isPureEnglise(c.getName()))
+        if (TTS.isPureEnglish(c.getName()))
           s += c.getName() + "\n";
         else
           s += c.getNumber() + "\n";

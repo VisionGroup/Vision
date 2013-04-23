@@ -10,7 +10,6 @@ import android.inputmethodservice.KeyboardView;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.utils.TTS;
@@ -46,29 +45,37 @@ public class CircleGestureView extends KeyboardView {
 		    { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
 			    "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
 			    "v", "w", "x", "y", "z", ",", ".", " ", "?", "!",
-			    "" },
+			    "BS", "0", "1", "2", "3", "4", "5", "6", "7", "8",
+			    "9", "*", "@", "&", "#", "$", "%" },
 		    { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
 			    "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
 			    "v", "w", "x", "y", "z", "comma", "dot", "space",
-			    "Question Mark", "Exclamation Mark", "Backspace" },
-		    { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-			    "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
-			    "v", "w", "x", "y", "z", ",", ".", "Sp", "?", "!",
-			    "<-" } },
+			    "Question Mark", "Exclamation Mark", "Backspace",
+			    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			    "*", "At", "And", "Pound", "Dollar", "Percent" },
+		    { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+			    "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
+			    "V", "W", "X", "Y", "Z", ",", ".", "Sp", "?", "!",
+			    "<-", "0", "1", "2", "3", "4", "5", "6", "7", "8",
+			    "9", "*", "@", "&", "#", "$", "%" } },
 	    {
 
 		    { "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "כ",
 			    "ל", "מ", "נ", "ס", "ע", "פ", "צ", "ק", "ר", "ש",
 			    "ת", "ך", "ן", "ף", "ץ", ",", ".", " ", "?", "!",
-			    "" },
+			    "BS", "0", "1", "2", "3", "4", "5", "6", "7", "8",
+			    "9", "*", "@", "&", "#", "$", "%" },
 		    { "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "כ",
 			    "ל", "מ", "נ", "ס", "ע", "פ", "צ", "ק", "ר", "ש",
 			    "ת", "ך", "ן", "ף", "ץ", "פסיק", "נקודה", "רווח",
-			    "סימן שאלה", "סימן קריאה", "מחק" },
+			    "סימן שאלה", "סימן קריאה", "מחק", "0", "1", "2",
+			    "3", "4", "5", "6", "7", "8", "9", "*", "כרוכית",
+			    "וגם", "סולמית", "דולר", "אחוז" },
 		    { "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "כ",
 			    "ל", "מ", "נ", "ס", "ע", "פ", "צ", "ק", "ר", "ש",
 			    "ת", "ך", "ן", "ף", "ץ", ",", ".", "רווח", "?",
-			    "!", "<-" } } };
+			    "!", "<-", "0", "1", "2", "3", "4", "5", "6", "7",
+			    "8", "9", "*", "@", "&", "#", "$", "%" } } };
 
     public enum languages {
 	EN, HE
@@ -78,9 +85,37 @@ public class CircleGestureView extends KeyboardView {
 	WRITTEN, READ, DISPLAYED
     }
 
+    private enum KeyboardMode {
+	ALPHA, NUMERIC
+    }
+
+    private enum Dir {
+	NW, N, NE, E, SE, S, SW, W, C, NONE
+    }
+
+    private static class Loc {
+	public int x;
+	public int y;
+
+	Loc(int _x, int _y) {
+	    x = _x;
+	    y = _y;
+	}
+
+	@Override
+	public String toString() {
+	    // TODO Auto-generated method stub
+	    return "X: " + x + " Y: " + y;
+	}
+    }
+
+    private static final int numOfDir = 9;
+    private static final int X = 0;
+    private static final int Y = 1;
+
     private static final String TAG = "vision:CircleIME";
 
-    private static final long[] PATTERN = { 0, 1, 40, 41 };
+    private static final long[] PATTERN = { 0, 1, 40, 41 }; // For Vibration
 
     private static final int AE = 0;
 
@@ -88,9 +123,10 @@ public class CircleGestureView extends KeyboardView {
 
     private static final int QU = 2;
 
-    private static final int Y = 4;
+    private static final int BSY = 4;
 
-    private static final int NONE = 5;
+    private static final int ALPHA = 5;
+    private static final int NUMERIC = 8;
 
     private static final int NUM0 = 6;
 
@@ -118,9 +154,11 @@ public class CircleGestureView extends KeyboardView {
 
     private double downY;
 
-    private int currentWheel = 5;
+    private int currentWheel = ALPHA;
 
     private String currentCharacter = "";// Using the READ abc
+
+    private int currentCharOrdinal = -1;
 
     private String currentString = "";
 
@@ -128,7 +166,7 @@ public class CircleGestureView extends KeyboardView {
 
     private double lastY;
 
-    private int currentValue;
+    private Dir currentDir;
 
     private boolean screenIsBeingTouched;
 
@@ -139,6 +177,8 @@ public class CircleGestureView extends KeyboardView {
     private TTS _tts;
 
     private int lang = languages.EN.ordinal();
+
+    private KeyboardMode keyboardMode = KeyboardMode.ALPHA; // Alpha or Numeric
 
     public CircleGestureView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -162,24 +202,24 @@ public class CircleGestureView extends KeyboardView {
 	    screenIsBeingTouched = true;
 	    lastX = x;
 	    lastY = y;
-	    final int prevVal = currentValue;
-	    currentValue = evalMotion(x, y);
+	    final Dir prevVal = currentDir;
+	    currentDir = evalMotion(x, y);
 	    // Do nothing since we want a deadzone here;
 	    // restore the state to the previous value.
-	    if (currentValue == -1) {
-		currentValue = prevVal;
+	    if (currentDir == Dir.NONE) {
+		currentDir = prevVal;
 		return true;
 	    }
 	    // There is a wheel that is active
-	    if (currentValue != 5) {
-		if (currentWheel == NONE)
-		    currentWheel = getWheel(currentValue);
-		currentCharacter = getCharacter(currentWheel, currentValue,
+	    if (currentDir != Dir.C) {
+		if ((currentWheel == ALPHA) || (currentWheel == NUMERIC))
+		    currentWheel = getWheel(currentDir, keyboardMode);
+		currentCharacter = getCharacter(currentWheel, currentDir,
 			ABCType.READ);
 	    } else
 		currentCharacter = "";
 	    invalidate();
-	    if (prevVal != currentValue) {
+	    if (prevVal != currentDir) {
 		// parent.mTts.playEarcon("[tock]", 2, null);
 		if (currentCharacter.equals("")) {
 		    // parent.tts.playEarcon(TTSEarcon.TOCK.toString(), 0,
@@ -195,171 +235,194 @@ public class CircleGestureView extends KeyboardView {
 	return true;
     }
 
-    public int getWheel(int value) {
+    public static int getWheel(Dir value, KeyboardMode km) {
+	if (km == KeyboardMode.ALPHA)
+	    switch (value) {
+	    case NW:
+		return AE;
+	    case N:
+		return IM;
+	    case NE:
+		return QU;
+	    case W:
+		return BSY;
+	    case C:
+		return ALPHA;
+	    case E:
+		return BSY;
+	    case SW:
+		return QU;
+	    case S:
+		return IM;
+	    case SE:
+		return AE;
+	    default:
+		return ALPHA;
+	    }
 	switch (value) {
-	case 1:
-	    return AE;
-	case 2:
-	    return IM;
-	case 3:
-	    return QU;
-	case 4:
-	    return Y;
-	case 5:
-	    return NONE;
-	case 6:
-	    return Y;
-	case 7:
-	    return QU;
-	case 8:
-	    return IM;
-	case 9:
-	    return AE;
+	case NW:
+	    return NUM0;
+	case N:
+	    return NUM0;
+	case NE:
+	    return NUM0;
+	case W:
+	    return NUM1;
+	case C:
+	    return NUMERIC;
+	case E:
+	    return NUM0;
+	case SW:
+	    return NUM1;
+	case S:
+	    return NUM1;
+	case SE:
+	    return NUM1;
 	default:
-	    return NONE;
+	    return NUMERIC;
 	}
     }
 
-    public String getCharacter(int wheel, int value, ABCType type) {
+    public String getCharacter(int wheel, Dir value, ABCType type) {
 	final int t = type.ordinal();
 	switch (wheel) {
 	case AE:
 	    switch (value) {
-	    case 1:
+	    case NW:
 		return abc[lang][t][0];
-	    case 2:
+	    case N:
 		return abc[lang][t][1];
-	    case 3:
+	    case NE:
 		return abc[lang][t][2];
-	    case 4:
+	    case W:
 		return abc[lang][t][7];
-	    case 5:
+	    case C:
 		return "";
-	    case 6:
+	    case E:
 		return abc[lang][t][3];
-	    case 7:
+	    case SW:
 		return abc[lang][t][6];
-	    case 8:
+	    case S:
 		return abc[lang][t][5];
-	    case 9:
+	    case SE:
 		return abc[lang][t][4];
 	    default:
 		return "";
 	    }
 	case IM:
 	    switch (value) {
-	    case 1:
+	    case NW:
 		return abc[lang][t][15];
-	    case 2:
+	    case N:
 		return abc[lang][t][8];
-	    case 3:
+	    case NE:
 		return abc[lang][t][9];
-	    case 4:
+	    case W:
 		return abc[lang][t][14];
-	    case 5:
+	    case C:
 		return "";
-	    case 6:
+	    case E:
 		return abc[lang][t][10];
-	    case 7:
+	    case SW:
 		return abc[lang][t][13];
-	    case 8:
+	    case S:
 		return abc[lang][t][12];
-	    case 9:
+	    case SE:
 		return abc[lang][t][11];
 	    default:
 		return "";
 	    }
 	case QU:
 	    switch (value) {
-	    case 1:
+	    case NW:
 		return abc[lang][t][22];
-	    case 2:
+	    case N:
 		return abc[lang][t][23];
-	    case 3:
+	    case NE:
 		return abc[lang][t][16];
-	    case 4:
+	    case W:
 		return abc[lang][t][21];
-	    case 5:
+	    case C:
 		return "";
-	    case 6:
+	    case E:
 		return abc[lang][t][17];
-	    case 7:
+	    case SW:
 		return abc[lang][t][20];
-	    case 8:
+	    case S:
 		return abc[lang][t][19];
-	    case 9:
+	    case SE:
 		return abc[lang][t][18];
 	    default:
 		return "";
 	    }
-	case Y:
+	case BSY:
 	    switch (value) {
-	    case 1:
+	    case NW:
 		return abc[lang][t][26];
-	    case 2:
+	    case N:
 		return abc[lang][t][30];
-	    case 3:
+	    case NE:
 		return abc[lang][t][28]; // return "MODE";
-	    case 4:
+	    case W:
 		return abc[lang][t][31];
-	    case 5:
+	    case C:
 		return "";
-	    case 6:
+	    case E:
 		return abc[lang][t][24];
-	    case 7:
+	    case SW:
 		return abc[lang][t][27];
-	    case 8:
+	    case S:
 		return abc[lang][t][29];
-	    case 9:
+	    case SE:
 		return abc[lang][t][25];
 	    default:
 		return "";
 	    }
 	case NUM0:
 	    switch (value) {
-	    case 1:
-		return "0";
-	    case 2:
-		return "1";
-	    case 3:
-		return "2"; // return "MODE";
-	    case 4:
-		return "3";
-	    case 5:
+	    case NW:
+		return abc[lang][t][32];
+	    case N:
+		return abc[lang][t][33];
+	    case NE:
+		return abc[lang][t][34]; // return "MODE";
+	    case E:
+		return abc[lang][t][35];
+	    case C:
 		return "";
-	    case 6:
-		return "4";
-	    case 7:
-		return "5";
-	    case 8:
-		return "6";
-	    case 9:
-		return "7";
+	    case SE:
+		return abc[lang][t][36];
+	    case S:
+		return abc[lang][t][37];
+	    case SW:
+		return abc[lang][t][38];
+	    case W:
+		return abc[lang][t][39];
 	    default:
 		return "";
 	    }
 	case NUM1:
 	    switch (value) {
-	    case 1:
-		return "8";
-	    case 2:
-		return "9";
-	    case 3:
-		return "Backspace";
-	    case 4:
-		return "Asteriks";
-	    case 5:
+	    case NW:
+		return abc[lang][t][40];
+	    case N:
+		return abc[lang][t][41];
+	    case NE:
+		return abc[lang][t][42];
+	    case E:
+		return abc[lang][t][45];
+	    case C:
 		return "";
-	    case 6:
-		return "At";
-	    case 7:
-		return "And";
-	    case 8:
-		return "Pound";
-	    case 9:
-		return "Dollar";
+	    case SE:
+		return abc[lang][t][44];
+	    case S:
+		return abc[lang][t][43];
+	    case SW:
+		return abc[lang][t][47];
+	    case W:
+		return abc[lang][t][31];
 	    default:
-		return "Percent";
+		return "";
 	    }
 	default:
 	    return "";
@@ -368,16 +431,16 @@ public class CircleGestureView extends KeyboardView {
 
     private void confirmEntry() {
 	screenIsBeingTouched = false;
-	final int prevVal = currentValue;
-	currentValue = evalMotion(lastX, lastY);
+	final Dir prevVal = currentDir;
+	currentDir = evalMotion(lastX, lastY);
 	// Do some correction if the user lifts up on deadspace
-	if (currentValue == -1)
-	    currentValue = prevVal;
+	if (currentDir == Dir.NONE)
+	    currentDir = prevVal;
 	// The user never got a number that wasn't deadspace,
 	// so assume 5.
-	if (currentValue == -1)
-	    currentValue = 5;
-	String c = getCharacter(currentWheel, currentValue, ABCType.WRITTEN);
+	if (currentDir == Dir.NONE)
+	    currentDir = Dir.C;
+	String c = getCharacter(currentWheel, currentDir, ABCType.WRITTEN);
 	Log.i(TAG, "Character entered: " + c);
 	if (c.equals(abc[lang][ABCType.WRITTEN.ordinal()][31])) {
 	    // BackSpace
@@ -401,8 +464,8 @@ public class CircleGestureView extends KeyboardView {
 	downY = y;
 	lastX = x;
 	lastY = y;
-	currentValue = -1;
-	currentWheel = NONE;
+	currentDir = Dir.NONE;
+	currentWheel = (keyboardMode == KeyboardMode.ALPHA) ? ALPHA : NUMERIC;
 	currentCharacter = "";
     }
 
@@ -423,7 +486,7 @@ public class CircleGestureView extends KeyboardView {
 	final int startY = 0;
 
 	canvas.drawRect(0, startY, getWidth(), startY + fudgeFactor, imeBgPaint);
-	canvas.drawText("IME Active", 10, startY + 13, imeStatusPaint);
+	canvas.drawText("CircleIME Active", 10, startY + 13, imeStatusPaint);
 
 	final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	paint.setColor(Color.WHITE);
@@ -444,192 +507,298 @@ public class CircleGestureView extends KeyboardView {
 	    paint.setTextSize(20);
 	    paint.setTextAlign(Paint.Align.LEFT);
 	    y -= paint.ascent() / 2;
-	    // canvas.drawText("Scroll apps with trackball.", x, y, paint);
 
 	    x = 5;
 	    y = getHeight() - 20;
 	    paint.setTextSize(20);
 	    paint.setTextAlign(Paint.Align.LEFT);
 	    y -= paint.ascent() / 2;
-	    // canvas.drawText("Press CALL to launch app.", x, y, paint);
 	} else {
-	    final int offset = 90;
+	    final int offset = 90; // TODO : CHange According to screen size
+	    final Loc[] xy = new Loc[numOfDir];
+	    xy[Dir.NW.ordinal()] = new Loc((int) downX - offset, (int) (downY
+		    - offset - (paint.ascent() / 2)));
 
-	    final int x1 = (int) downX - offset;
-	    int y1 = (int) downY - offset;
-	    final int x2 = (int) downX;
-	    int y2 = (int) downY - offset;
-	    final int x3 = (int) downX + offset;
-	    int y3 = (int) downY - offset;
-	    final int x4 = (int) downX - offset;
-	    int y4 = (int) downY;
-	    final int x6 = (int) downX + offset;
-	    int y6 = (int) downY;
-	    final int x7 = (int) downX - offset;
-	    int y7 = (int) downY + offset;
-	    final int x8 = (int) downX;
-	    int y8 = (int) downY + offset;
-	    final int x9 = (int) downX + offset;
-	    int y9 = (int) downY + offset;
+	    xy[Dir.N.ordinal()] = new Loc((int) downX,
+		    (int) (downY - offset - (paint.ascent() / 2)));
 
-	    y1 -= paint.ascent() / 2;
-	    y2 -= paint.ascent() / 2;
-	    y3 -= paint.ascent() / 2;
-	    y4 -= paint.ascent() / 2;
-	    y6 -= paint.ascent() / 2;
-	    y7 -= paint.ascent() / 2;
-	    y8 -= paint.ascent() / 2;
-	    y9 -= paint.ascent() / 2;
+	    xy[Dir.NE.ordinal()] = new Loc((int) downX + offset, (int) (downY
+		    - offset - (paint.ascent() / 2)));
+
+	    xy[Dir.W.ordinal()] = new Loc((int) downX - offset,
+		    (int) (downY - (paint.ascent() / 2)));
+
+	    xy[Dir.E.ordinal()] = new Loc((int) downX + offset,
+		    (int) (downY - (paint.ascent() / 2)));
+
+	    xy[Dir.SW.ordinal()] = new Loc((int) downX - offset, (int) (downY
+		    + offset - (paint.ascent() / 2)));
+
+	    xy[Dir.S.ordinal()] = new Loc((int) downX,
+		    (int) (downY + offset - (paint.ascent() / 2)));
+
+	    xy[Dir.SE.ordinal()] = new Loc((int) downX + offset, (int) (downY
+		    + offset - (paint.ascent() / 2)));
 
 	    switch (currentWheel) {
 	    case AE:
 		paint.setColor(Color.RED);
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][0], x1,
-			y1, canvas, paint,
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][0],
+			xy[Dir.NW.ordinal()], canvas, paint,
 			currentCharacter.equals(abc[lang][ABCType.READ
-				.ordinal()][0].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][1], x2,
-			y2, canvas, paint,
+				.ordinal()][0]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][1],
+			xy[Dir.N.ordinal()], canvas, paint,
 			currentCharacter.equals(abc[lang][ABCType.READ
-				.ordinal()][1].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][2], x3,
-			y3, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][2].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][7], x4,
-			y4, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][7].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][3], x6,
-			y6, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][3].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][6], x7,
-			y7, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][6].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][5], x8,
-			y8, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][5].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][4], x9,
-			y9, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][4].toUpperCase()));
+				.ordinal()][1]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][2],
+			xy[Dir.NE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][2]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][7],
+			xy[Dir.W.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][7]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][3],
+			xy[Dir.E.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][3]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][6],
+			xy[Dir.SW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][6]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][5],
+			xy[Dir.S.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][5]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][4],
+			xy[Dir.SE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][4]));
 		break;
 	    case IM:
 		paint.setColor(Color.BLUE);
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][15], x1,
-			y1, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][15].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][8], x2,
-			y2, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][8].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][9], x3,
-			y3, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][9].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][14], x4,
-			y4, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][14].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][10], x6,
-			y6, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][10].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][13], x7,
-			y7, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][13].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][12], x8,
-			y8, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][12].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][11], x9,
-			y9, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][11].toUpperCase()));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][15],
+			xy[Dir.NW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][15]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][8],
+			xy[Dir.N.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][8]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][9],
+			xy[Dir.NE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][9]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][14],
+			xy[Dir.W.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][14]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][10],
+			xy[Dir.E.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][10]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][13],
+			xy[Dir.SW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][13]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][12],
+			xy[Dir.S.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][12]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][11],
+			xy[Dir.SE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][11]));
 		break;
 	    case QU:
 		paint.setColor(Color.GREEN);
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][22], x1,
-			y1, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][22].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][23], x2,
-			y2, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][23].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][16], x3,
-			y3, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][16].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][21], x4,
-			y4, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][21].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][17], x6,
-			y6, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][17].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][20], x7,
-			y7, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][20].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][19], x8,
-			y8, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][19].toUpperCase()));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][18], x9,
-			y9, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][18].toUpperCase()));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][22],
+			xy[Dir.NW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][22]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][23],
+			xy[Dir.N.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][23]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][16],
+			xy[Dir.NE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][16]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][21],
+			xy[Dir.W.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][21]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][17],
+			xy[Dir.E.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][17]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][20],
+			xy[Dir.SW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][20]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][19],
+			xy[Dir.S.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][19]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][18],
+			xy[Dir.SE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][18]));
 		break;
-	    case Y:
+	    case BSY:
 		paint.setColor(Color.YELLOW);
-		drawCharacter(",", x1, y1, canvas, paint,
-			currentCharacter.equals(","));
-		drawCharacter("!", x2, y2, canvas, paint,
-			currentCharacter.equals("!"));
-		drawCharacter("SPACE", x3, y3, canvas, paint,
-			currentCharacter.equals("SPACE"));
-		drawCharacter("<-", x4, y4, canvas, paint,
-			currentCharacter.equals("<-"));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][24], x6,
-			y6, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][24].toUpperCase()));
-		drawCharacter(".", x7, y7, canvas, paint,
-			currentCharacter.equals("."));
-		drawCharacter("?", x8, y8, canvas, paint,
-			currentCharacter.equals("?"));
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][25], x9,
-			y9, canvas, paint,
-			currentCharacter.equals(abc[lang][ABCType.DISPLAYED
-				.ordinal()][25].toUpperCase()));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][26],
+			xy[Dir.NW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][26]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][30],
+			xy[Dir.N.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][30]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][28],
+			xy[Dir.NE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][28]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][31],
+			xy[Dir.W.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][31]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][24],
+			xy[Dir.E.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][24]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][27],
+			xy[Dir.SW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][27]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][29],
+			xy[Dir.S.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][29]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][25],
+			xy[Dir.SE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][25]));
 		break;
-	    default:
-		paint.setColor(Color.RED);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][0], x1,
-			y1, paint);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][4], x9,
-			y9, paint);
+	    case NUM0:
+		paint.setColor(Color.YELLOW);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][32],
+			xy[Dir.NW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][32]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][33],
+			xy[Dir.N.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][33]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][34],
+			xy[Dir.NE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][34]));
+
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][39],
+			xy[Dir.W.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][39]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][35],
+			xy[Dir.E.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][35]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][38],
+			xy[Dir.SW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][38]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][37],
+			xy[Dir.S.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][37]));
+
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][36],
+			xy[Dir.SE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][36]));
+		break;
+	    case NUM1:
 		paint.setColor(Color.BLUE);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][8], x2,
-			y2, paint);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][12], x8,
-			y8, paint);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][40],
+			xy[Dir.NW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][40]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][41],
+			xy[Dir.N.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][41]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][42],
+			xy[Dir.NE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][42]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][45],
+			xy[Dir.E.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][45]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][44],
+			xy[Dir.SE.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][44]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][43],
+			xy[Dir.S.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][43]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][47],
+			xy[Dir.SW.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][47]));
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][31],
+			xy[Dir.W.ordinal()], canvas, paint,
+			currentCharacter.equals(abc[lang][ABCType.READ
+				.ordinal()][31]));
+
+		break;
+	    case ALPHA:
+		paint.setColor(Color.RED);
+
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][0],
+			xy[Dir.NW.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][4],
+			xy[Dir.SE.ordinal()], canvas, paint, false);
+		paint.setColor(Color.BLUE);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][8],
+			xy[Dir.N.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][12],
+			xy[Dir.S.ordinal()], canvas, paint, false);
 		paint.setColor(Color.GREEN);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][16], x3,
-			y3, paint);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][20], x7,
-			y7, paint);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][16],
+			xy[Dir.NE.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][20],
+			xy[Dir.SW.ordinal()], canvas, paint, false);
 		paint.setColor(Color.YELLOW);
-		canvas.drawText(abc[lang][ABCType.DISPLAYED.ordinal()][24], x6,
-			y6, paint);
-		canvas.drawText("<-", x4, y4, paint);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][24],
+			xy[Dir.W.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][31],
+			xy[Dir.E.ordinal()], canvas, paint, false);
+		break;
+	    case NUMERIC:
+		paint.setColor(Color.YELLOW);
+
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][32],
+			xy[Dir.NW.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][33],
+			xy[Dir.N.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][34],
+			xy[Dir.NE.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][35],
+			xy[Dir.E.ordinal()], canvas, paint, false);
+
+		paint.setColor(Color.BLUE);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][44],
+			xy[Dir.SE.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][43],
+			xy[Dir.S.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][47],
+			xy[Dir.SW.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][31],
+			xy[Dir.W.ordinal()], canvas, paint, false);
+
 		break;
 	    }
 	}
@@ -654,7 +823,8 @@ public class CircleGestureView extends KeyboardView {
 	invalidate();
     }
 
-    private void drawCharacter(String character, int x, int y, Canvas canvas,
+    @SuppressWarnings("static-method")
+    private void drawCharacter(String character, Loc xy, Canvas canvas,
 	    Paint paint, boolean isSelected) {
 	final int regSize = 50;
 	final int selectedSize = regSize * 2;
@@ -662,10 +832,10 @@ public class CircleGestureView extends KeyboardView {
 	    paint.setTextSize(selectedSize);
 	else
 	    paint.setTextSize(regSize);
-	canvas.drawText(character, x, y, paint);
+	canvas.drawText(character, xy.x, xy.y, paint);
     }
 
-    public int evalMotion(double x, double y) {
+    public Dir evalMotion(double x, double y) {
 	final float rTolerance = 25;
 	final double thetaTolerance = (Math.PI / 16);
 
@@ -673,58 +843,61 @@ public class CircleGestureView extends KeyboardView {
 		+ ((downY - y) * (downY - y)));
 
 	if (r < rTolerance)
-	    return 5;
+	    return Dir.C;
 
 	final double theta = Math.atan2(downY - y, downX - x);
 
 	if (Math.abs(theta - left) < thetaTolerance)
-	    return 4;
+	    return Dir.W;
 	else if (Math.abs(theta - upleft) < thetaTolerance)
-	    return 1;
+	    return Dir.NW;
 	else if (Math.abs(theta - up) < thetaTolerance)
-	    return 2;
+	    return Dir.N;
 	else if (Math.abs(theta - upright) < thetaTolerance)
-	    return 3;
+	    return Dir.NE;
 	else if (Math.abs(theta - downright) < thetaTolerance)
-	    return 9;
+	    return Dir.SE;
 	else if (Math.abs(theta - down) < thetaTolerance)
-	    return 8;
+	    return Dir.S;
 	else if (Math.abs(theta - downleft) < thetaTolerance)
-	    return 7;
+	    return Dir.SW;
 	else if ((theta > right - thetaTolerance)
 		|| (theta < rightWrap + thetaTolerance))
-	    return 6;
+	    return Dir.E;
 
 	// Off by more than the threshold, so it doesn't count
-	return -1;
+	return Dir.NONE;
     }
 
-    private int keyboardMode = 0;
-
-    private void toggleKeyboardMode() {
-	if (keyboardMode == 0) {
-	    keyboardMode = 1;
+    /**
+     * Changes between Alpha and numeric layouts.
+     */
+    public void toggleKeyboardMode() {
+	if (keyboardMode == KeyboardMode.ALPHA) {
+	    keyboardMode = KeyboardMode.NUMERIC;
+	    currentWheel = NUMERIC;
 	    _tts.speak("Numbers");
 	} else {
-	    keyboardMode = 0;
+	    keyboardMode = KeyboardMode.ALPHA;
+	    currentWheel = ALPHA;
 	    _tts.speak("Alpha");
 	}
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-	final String input = "";
-	Log.i(TAG, "Keycode_Menu.");
-	switch (keyCode) {
-	case KeyEvent.KEYCODE_MENU:
-	    toggleKeyboardMode();
-	    Log.i(TAG, "Keycode_Menu.");
-	    return false;
-	default:
-	    break;
-	}
-	return false;
-    }
+    // @Override
+    // public boolean onKeyDown(int keyCode, KeyEvent event) {
+    // final String input = "";
+    // Log.i(TAG, "Keycode_Menu.");
+    // switch (keyCode) {
+    // case KeyEvent.KEYCODE_MENU:
+    // toggleKeyboardMode();
+    // Log.i(TAG, "Keycode_Menu.");
+    // return false;
+    // default:
+    // break;
+    // }
+    // return false;
+    // }
 
     /**
      * Change the language of the input.
@@ -732,10 +905,13 @@ public class CircleGestureView extends KeyboardView {
      * @param l
      */
     public void changeLang() {
-	if (lang == languages.EN.ordinal())
+	if (lang == languages.EN.ordinal()) {
 	    lang = languages.HE.ordinal();
-	else
+	    _tts.speak("עברית");
+	} else {
 	    lang = languages.EN.ordinal();
+	    _tts.speak("english");
+	}
 	invalidate();
     }
 

@@ -149,7 +149,7 @@ public class TTS implements OnInitListener {
      *            string to check.
      * @return true if only Englise letters.
      */
-    public static boolean isPureEnglise(String s) {
+    public static boolean isPureEnglish(String s) {
 	if (s == null)
 	    return true;
 	return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();

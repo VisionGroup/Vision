@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.SmsType;
 
 public class SmsAdapter extends BaseAdapter {
@@ -42,12 +43,12 @@ public class SmsAdapter extends BaseAdapter {
       LayoutInflater vi = (LayoutInflater) _c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
       v = vi.inflate(R.layout.sms_view, null);
     }
-    TextView fromView = (TextView) v.findViewById(R.id.sms_from);
-    TextView bodyView = (TextView) v.findViewById(R.id.sms_body);
-    TextView timeView = (TextView) v.findViewById(R.id.sms_time);
+    TalkingButton fromView = (TalkingButton) v.findViewById(R.id.sms_from);
+    TalkingButton bodyView = (TalkingButton) v.findViewById(R.id.sms_body);
+    TalkingButton timeView = (TalkingButton) v.findViewById(R.id.sms_time);
     SmsType msg ;
     if (position >= _data.size()){
-    	msg = _data.get(0);
+    	return null;
     }else {
     	msg = _data.get(position);
     }   	
@@ -59,6 +60,10 @@ public class SmsAdapter extends BaseAdapter {
     fromView.setText(person);
     bodyView.setText(msg.getBody());
     timeView.setText(msg.getDate());
+    
+    fromView.setReadText(person);
+    bodyView.setReadText(msg.getBody());
+    timeView.setReadText(msg.getDate());
     return v;
   }
 }

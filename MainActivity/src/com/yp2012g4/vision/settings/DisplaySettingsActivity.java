@@ -7,9 +7,11 @@ package com.yp2012g4.vision.settings;
 import java.util.Locale;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.view.View;
 import com.yp2012g4.vision.CalcActivity;
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DisplaySettingsActivity extends VisionActivity {
@@ -69,10 +72,10 @@ public class DisplaySettingsActivity extends VisionActivity {
 			vibrate(300);
 			break;
 		case R.id.locale:
-			myLocale = Locale.getDefault();
+			myLocale = Locale.getDefault(); //get xml strings file
 			config = new Configuration();
 			if (myLocale.equals(Locale.US)) {
-				Locale locale = new Locale("iw");
+				Locale locale = new Locale("iw"); 
 				Locale.setDefault(locale);
 				config.locale = locale;
 				// _t._tts.setEngineByPackageName("il.co.aharontts.android");
@@ -89,22 +92,20 @@ public class DisplaySettingsActivity extends VisionActivity {
 			myLocale = Locale.getDefault();
 			intent = new Intent(this, MainActivity.class);
 			// setResult(RESULT_OK, null);
-			startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+			startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); //empty activity stack
 			finish();
 
 			break;
 		case R.id.button_selecting_mode:
-			switch (selectButtonMode) {
-			case 0:
-				selectButtonMode = 1;
+			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			String buttonMode = sp.getString("BUTTON MODE", "regular");
+			if (buttonMode.equals("regular")) {
+				VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
 				speakOut(getString(R.string.sticky_buttons_mode));
-				break;
-			case 1:
-				selectButtonMode = 0;
+			}
+			else {
+				VisionApplication.savePrefs("BUTTON MODE", "regular", this);
 				speakOut(getString(R.string.regular_buttons_mode));
-				break;
-			default:
-				break;
 			}
 			break;
 		case R.id.calculator:

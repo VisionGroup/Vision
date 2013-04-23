@@ -16,6 +16,7 @@ have created.
     <declare-styleable name="TalkingButton">
         <attr name="ReadText" />
         <attr name="ReadToolTip" />
+    
     </declare-styleable>
 
     <!-- Talking list view -->

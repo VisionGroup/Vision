@@ -7,11 +7,13 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -48,7 +50,7 @@ public abstract class VisionGestureDetector extends Activity implements
 	private long mFirstDownTime = 0;
 	private boolean mSeparateTouches = false;
 	private byte mTwoFingerTapCount = 0;
-	public static int selectButtonMode = 1;
+	public static int selectButtonMode = "0";
 	/**
 	 * Stores the dimensions of a button
 	 */
@@ -92,7 +94,9 @@ public abstract class VisionGestureDetector extends Activity implements
 	@Override
 	public boolean onDown(MotionEvent e) {
 		Log.i(TAG, "onDown");
-		if (selectButtonMode == 0)
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		String buttonMode = sp.getString("BUTTON MODE", "regular");
+		if (buttonMode.equals("regular"))
 			last_button_view = getView(e.getRawX(), e.getRawY()); // updating
 		else
 			getView(e.getRawX(), e.getRawY());
@@ -135,13 +139,15 @@ public abstract class VisionGestureDetector extends Activity implements
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		final int action = event.getAction() & MotionEvent.ACTION_MASK;
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		String buttonMode = sp.getString("BUTTON MODE", "regular");
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 			Log.i("MyLog", "onTouch: ACTION_DOWN");
 			// resetting to false when touching screen
 			// updating curr_view (inside getView())
-			VisionApplication.restoreColors(last_button_view);
-			if (selectButtonMode == 0)
+			VisionApplication.restoreColors(last_button_view, this);
+			if (buttonMode.equals("regular"))
 				last_button_view = getView(event.getRawX(), event.getRawY());
 			break;
 		case MotionEvent.ACTION_MOVE:
@@ -151,7 +157,7 @@ public abstract class VisionGestureDetector extends Activity implements
 					if (entry.getValue().contains((int) event.getRawX(),
 							(int) event.getRawY()))
 						if (last_button_view != entry.getKey()) {
-							VisionApplication.restoreColors(last_button_view);
+							VisionApplication.restoreColors(last_button_view, this);
 							hapticFeedback(entry.getKey());
 							speakOut(textToRead(entry.getKey()));
 							last_button_view = entry.getKey();
@@ -161,8 +167,8 @@ public abstract class VisionGestureDetector extends Activity implements
 			break;
 		case MotionEvent.ACTION_UP:
 			Log.i(TAG, "ACTION UP");
-			if (selectButtonMode == 0)
-				VisionApplication.restoreColors(last_button_view);
+			if (buttonMode.equals("regular"))
+				VisionApplication.restoreColors(last_button_view, this);
 			onActionUp(last_button_view);
 			break;
 		}
@@ -233,7 +239,7 @@ public abstract class VisionGestureDetector extends Activity implements
 		// reads layout description out loud
 		if (hasFocus) {
 			VisionApplication.applyButtonSettings(view_to_rect.keySet(),
-					mainView);
+					mainView, this);
 			if (mainView.getContentDescription() != null)
 				speakOut(findViewById(getViewId()).getContentDescription()
 						.toString());
@@ -437,6 +443,6 @@ public abstract class VisionGestureDetector extends Activity implements
 
 	protected void hapticFeedback(View v) {
 		vibrate(20);
-		VisionApplication.visualFeedback(v);
+		VisionApplication.visualFeedback(v, this);
 	}
 }

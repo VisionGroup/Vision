@@ -20,8 +20,26 @@ public class TalkingButton extends Button {
     super(context, attrs);
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TalkingButton, 0, 0);
     ReadText = a.getString(R.styleable.TalkingButton_ReadText);
+    Value = a.getString(R.styleable.TalkingButton_ReadText);
   }
   
+  /**
+   * Returns the short button text that should be used for TTS.
+   * 
+   * @return String ReadText
+   */
+  public String getValue() {
+    return Value;
+  }
+  
+  /**
+   * Set the short button text that should be used for TTS.
+   * 
+   * @param readText
+   */
+  public void setValue(String s) {
+    Value = s;
+  }
   /**
    * Returns the short button text that should be used for TTS.
    * 
@@ -36,8 +54,8 @@ public class TalkingButton extends Button {
    * 
    * @param readText
    */
-  public void setReadText(String readText) {
-    ReadText = readText;
+  public void setReadText(String s) {
+    ReadText = s;
   }
   
   /**
@@ -54,10 +72,11 @@ public class TalkingButton extends Button {
    * 
    * @param readToolTip
    */
-  public void setReadToolTip(String readToolTip) {
-    ReadToolTip = readToolTip;
+  public void setReadToolTip(String s) {
+    ReadToolTip = s;
   }
   
+  private String Value="";
   private String ReadText="";
   private String ReadToolTip="";
   // TODO: Check How to connect to foreground and background color settings

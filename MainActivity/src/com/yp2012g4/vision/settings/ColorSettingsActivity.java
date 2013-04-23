@@ -23,8 +23,10 @@ public class ColorSettingsActivity extends VisionActivity {
    * @param int2
    *          - background Color
    */
-  private static void changeSettings(int int1, int int2) {
-    VisionApplication.setColors(int1, int2);
+  private void changeSettings(String s1, String s2) {
+    VisionApplication.savePrefs("TEXT COLOR", s1, this);
+    VisionApplication.savePrefs("BG COLOR", s2, this);
+    VisionApplication.loadPrefs(this);
   }
   
   /**
@@ -58,25 +60,25 @@ public class ColorSettingsActivity extends VisionActivity {
     }
     switch (button.getId()) {
       case R.id.WhiteBlack:
-        changeSettings(R.color.WHITE, R.color.BLACK);
+        changeSettings("WHITE", "BLACK");
         break;
       case R.id.WhiteRed:
-        changeSettings(R.color.WHITE, R.color.RED);
+        changeSettings("WHITE", "RED");
         break;
       case R.id.RedBlack:
-        changeSettings(R.color.RED, R.color.BLACK);
+        changeSettings("RED", "BLACK");
         break;
       case R.id.WhiteGreen:
-        changeSettings(R.color.WHITE, R.color.GREEN);
+        changeSettings("WHITE", "GREEN");
         break;
       case R.id.GreenBlack:
-        changeSettings(R.color.GREEN, R.color.BLACK);
+        changeSettings("GREEN", "BLACK");
         break;
       case R.id.WhiteBlue:
-        changeSettings(R.color.WHITE, R.color.BLUE);
+        changeSettings("WHITE", "BLUE");
         break;
       case R.id.BlueBlack:
-        changeSettings(R.color.BLUE, R.color.BLACK);
+        changeSettings("BLUE", "BLACK");
         break;
       default:
         break;

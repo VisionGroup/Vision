@@ -1,25 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    android:id="@+id/CallListActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:contentDescription="@string/call_list_screen"
     android:padding="2dp" >
 
     <com.yp2012g4.vision.customUI.lists.TalkingListView
         android:id="@+id/TalkingCallListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        custom:cols="1"
+        custom:cols="2"
         custom:rows="2" >
     </com.yp2012g4.vision.customUI.lists.TalkingListView>
 
-    <LinearLayout
+    <!-- <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
+    </LinearLayout> -->
+
+</LinearLayout>
+<!-- <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    android:id="@+id/CallListActivity"
+    style="?backgroundColor"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:contentDescription="@string/call_list_screen"
+    android:orientation="vertical" >
+
+	<com.yp2012g4.vision.customUI.lists.TalkingListView
+        
+        android:id="@+id/TalkingCallListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        custom:cols="2"
+        custom:rows="4" />
+   
+
+   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-      <!--  <com.yp2012g4.vision.customUI.TalkingImageButton
+
+       <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_prev"
             android:layout_width="0dip"
             android:layout_height="60dp"
@@ -27,9 +61,10 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/answer"
-            app:ReadText="@string/Call" />-->
+            app:ReadText="@string/Call" />
   
         
+
     </LinearLayout>
 
     <LinearLayout
@@ -40,5 +75,5 @@
 
         <include layout="@layout/control_bar_view" />
     </LinearLayout>
-
-</LinearLayout>
+    
+</LinearLayout> -->

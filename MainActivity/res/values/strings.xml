@@ -258,9 +258,12 @@
     <string name="bad_action">Bad action</string>
     <string name="division_by_zero">Division by zero</string>
     <string name="result">Result</string>
-    
+
     <!-- CallListActivity -->
     <string name="Call_sceen">Call list Screen</string>
     <string name="Call">Call</string>
+    <string name="title_activity_call_list">CallList</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="call_list_screen">Call List Screen</string>
 
 </resources>

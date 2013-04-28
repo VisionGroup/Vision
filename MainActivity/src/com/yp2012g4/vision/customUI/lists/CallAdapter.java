@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.CallType;
 
 public class CallAdapter extends BaseAdapter {
@@ -44,9 +44,12 @@ public class CallAdapter extends BaseAdapter {
 		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    v = vi.inflate(R.layout.call_view, null);
 	}
-	final TextView numberView = (TextView) v.findViewById(R.id.call_number);
-	final TextView nameView = (TextView) v.findViewById(R.id.call_name);
-	final TextView timeView = (TextView) v.findViewById(R.id.call_time);
+	final TalkingButton numberView = (TalkingButton) v
+		.findViewById(R.id.call_number);
+	final TalkingButton nameView = (TalkingButton) v
+		.findViewById(R.id.call_name);
+	final TalkingButton timeView = (TalkingButton) v
+		.findViewById(R.id.call_time);
 	CallType call;
 	if (position >= _data.size())
 	    call = _data.get(0);

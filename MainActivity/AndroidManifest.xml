@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
-    
+
     <application
         android:name="com.yp2012g4.vision.settings.VisionApplication"
         android:allowBackup="true"
@@ -210,6 +210,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.yp2012g4.vision.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.yp2012g4.vision.CallList"
+            android:label="@string/title_activity_call_list" >
         </activity>
     </application>
 

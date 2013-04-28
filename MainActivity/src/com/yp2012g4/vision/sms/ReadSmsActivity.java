@@ -3,11 +3,8 @@ package com.yp2012g4.vision.sms;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -28,28 +25,13 @@ public class ReadSmsActivity extends VisionActivity {
   private ArrayList<SmsType> messages;
   private int currentMessage = 0;
   
-  @Override public int getViewId() {
+  @Override
+  public int getViewId() {
     return R.id.ReadSmsActivity;
   }
   
-  private void deleteSMS(String msgBody, String msgAddr) {
-    try {
-      Uri uriSms = Uri.parse("content://sms/inbox");
-      Cursor c = getContentResolver().query(uriSms, new String[] { "_id", "thread_id", "address", "person", "date", "body" }, null,
-          null, null);
-      if (c != null && c.moveToFirst())
-        do {
-          String address = c.getString(2);
-          String body = c.getString(5);
-          if (msgBody.equals(body) && address.equals(msgAddr))
-            getContentResolver().delete(Uri.parse("content://sms/" + c.getLong(0)), null, null);
-        } while (c.moveToNext());
-    } catch (Exception e) {
-      Log.e("ReadSmsActivity", "Could not delete SMS from inbox: " + e.getMessage());
-    }
-  }
-  
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override
+  public boolean onSingleTapUp(MotionEvent e) {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     if (super.onSingleTapUp(e))
       return true;
@@ -75,7 +57,7 @@ public class ReadSmsActivity extends VisionActivity {
         break;
       case R.id.sms_remove:
         SmsType msg = messages.get(currentMessage);
-        deleteSMS(msg.getBody(), msg.getAddress());
+        SmsManager.deleteSMS(this, msg.getBody(), msg.getAddress());
         messages.remove(currentMessage);
         if (currentMessage == messages.size())
           currentMessage--;
@@ -87,7 +69,8 @@ public class ReadSmsActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
 //    mHandler = new Handler();

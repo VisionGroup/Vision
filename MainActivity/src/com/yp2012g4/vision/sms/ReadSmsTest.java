@@ -61,21 +61,22 @@ public class ReadSmsTest extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     Intent i = null;
+    SmsType currMsg = getCurrentSms();
     View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.sms_send_sms:
         i = new Intent(getApplicationContext(), QuickSMSActivity.class);
-        i.putExtra("number", getCurrentSms().getAddress());
+        i.putExtra("number", currMsg.getAddress());
         startActivity(i);
         break;
       case R.id.sms_call_sender:
         i = new Intent(Intent.ACTION_CALL);
-        i.setData(Uri.parse("tel:" + getCurrentSms().getAddress()));
+        i.setData(Uri.parse("tel:" + currMsg.getAddress()));
         startActivity(i);
         break;
       case R.id.sms_remove:
         // first we remove the SMS from the phone DB
-        SmsManager.deleteSMS(this, getCurrentSms().getBody(), getCurrentSms().getAddress());
+        SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
         // then we remove the SMS from the displayed list
         int smsId = (int) listView.getDisplayedItemIds()[0];
         adapter.removeItemFromList(smsId);
@@ -87,6 +88,7 @@ public class ReadSmsTest extends VisionActivity {
       default:
         break;
     }
+    SmsManager.markMessageRead(this, currMsg.getAddress(), currMsg.getBody());
     return false;
   }
   

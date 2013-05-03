@@ -33,8 +33,10 @@ public class SmsManager {
     Uri uri = Uri.parse("content://sms/inbox");
     Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
     try {
-      while (cursor.moveToNext())
-        if (cursor.getString(cursor.getColumnIndex("address")).equals(number) && cursor.getInt(cursor.getColumnIndex("read")) == 0)
+      while (cursor.moveToNext()) {
+        String address = cursor.getString(cursor.getColumnIndex("address"));
+        int nRead = cursor.getInt(cursor.getColumnIndex("read"));
+        if (address.equals(number) && nRead == 0)
           if (cursor.getString(cursor.getColumnIndex("body")).startsWith(body)) {
             String SmsMessageId = cursor.getString(cursor.getColumnIndex("_id"));
             ContentValues values = new ContentValues();
@@ -42,6 +44,7 @@ public class SmsManager {
             context.getContentResolver().update(Uri.parse("content://sms/inbox"), values, "_id=" + SmsMessageId, null);
             return;
           }
+      }
     } catch (Exception e) {
       Log.e("Mark Read", "Error in Read: " + e.toString());
     }

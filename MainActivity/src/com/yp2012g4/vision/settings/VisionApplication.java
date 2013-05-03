@@ -16,7 +16,6 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.preference.PreferenceManager;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,8 +29,7 @@ public class VisionApplication extends Application {
   public static final float NORMAL = 25;
   public static final float LARGE = 30;
   public static HashMap<String, Integer> color_to_string = new HashMap<String, Integer>();
-  public static String textSize = "Normal Text Size";
-  //public static float textSize = VisionApplication.NORMAL;
+  public static String textSize = "NORMAL";
   private static String textColor = "WHITE";
   private static String backgroundColor = "BLACK";
   
@@ -50,7 +48,7 @@ public class VisionApplication extends Application {
   
   public static void loadPrefs(Activity act) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
-		textSize = sp.getString("TEXT_SIZE", textSize);
+		textSize = sp.getString("TEXT SIZE", textSize);
 		textColor = sp.getString("TEXT COLOR", textColor);
 		backgroundColor = sp.getString("BG COLOR", backgroundColor);
   }
@@ -166,7 +164,7 @@ public class VisionApplication extends Application {
    */
   public static void setThemeToActivity(Activity act) { 
 	loadPrefs(act);
-    if (textSize.equals("Large Text Size")) {
+    if (textSize.equals("LARGE")) {
       if (backgroundColor.equals("BLUE"))
         act.setTheme(R.style.Theme_LargeWhiteBlue);
       else if (backgroundColor.equals("GREEN"))
@@ -181,7 +179,7 @@ public class VisionApplication extends Application {
         act.setTheme(R.style.Theme_LargeRedBlack);
       else
         act.setTheme(R.style.Theme_LargeGreenBlack);
-    } else if (textSize.equals("Small Text Size"))
+    } else if (textSize.equals("SMALL"))
       if (backgroundColor.equals("BLUE"))
         act.setTheme(R.style.Theme_SmallWhiteBlue);
       else if (backgroundColor.equals("GREEN"))

@@ -21,6 +21,7 @@ public class TalkingButton extends Button {
 	final TypedArray a = context.obtainStyledAttributes(attrs,
 		R.styleable.TalkingButton, 0, 0);
 	ReadText = a.getString(R.styleable.TalkingButton_ReadText);
+	PrefsValue = a.getString(R.styleable.TalkingButton_PrefsValue);
     }
 
     /**

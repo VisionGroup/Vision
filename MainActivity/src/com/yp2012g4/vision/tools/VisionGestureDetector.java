@@ -50,7 +50,6 @@ public abstract class VisionGestureDetector extends Activity implements
 	private long mFirstDownTime = 0;
 	private boolean mSeparateTouches = false;
 	private byte mTwoFingerTapCount = 0;
-	public static int selectButtonMode = "0";
 	/**
 	 * Stores the dimensions of a button
 	 */
@@ -327,6 +326,21 @@ public abstract class VisionGestureDetector extends Activity implements
 			Log.e(TAG, "tts init error");
 		VisionApplication.setThemeToActivity(this);
 		super.onCreate(savedInstanceState);
+		
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		String language = sp.getString("LANGUAGE", "ENGLISH");
+		config = new Configuration();
+		if (language.equals("ENGLISH")) {
+			Locale locale = new Locale("iw"); 
+			Locale.setDefault(locale);
+			config.locale = locale;
+		} else if (language.equals("HEBREW")) { // Hebrew
+			Locale.setDefault(Locale.US);
+			config.locale = Locale.US;
+		}
+		getBaseContext().getResources().updateConfiguration(config,
+				getBaseContext().getResources().getDisplayMetrics());
+		
 		mHandler = new Handler();
 		gestureDetector = new GestureDetector(this);
 		clickFlag = false;

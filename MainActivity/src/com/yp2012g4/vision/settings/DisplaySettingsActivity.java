@@ -19,7 +19,6 @@ import android.view.View;
 import com.yp2012g4.vision.CalcActivity;
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DisplaySettingsActivity extends VisionActivity {
@@ -55,6 +54,7 @@ public class DisplaySettingsActivity extends VisionActivity {
 			return true;
 		Intent intent;
 		View button = getButtonByMode();
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		switch (button.getId()) {
 		case R.id.button_set_colors:
 			intent = new Intent(DisplaySettingsActivity.this,
@@ -72,24 +72,16 @@ public class DisplaySettingsActivity extends VisionActivity {
 			vibrate(300);
 			break;
 		case R.id.locale:
-			myLocale = Locale.getDefault(); //get xml strings file
-			config = new Configuration();
-			if (myLocale.equals(Locale.US)) {
-				Locale locale = new Locale("iw"); 
-				Locale.setDefault(locale);
-				config.locale = locale;
-				// _t._tts.setEngineByPackageName("il.co.aharontts.android");
+			String language = sp.getString("LANGUAGE", "ENGLISH");
+			if (language.equals("ENGLISH")) {
+				VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
 				speakOut(getString(R.string.switched_to_hebrew));
-			} else if (myLocale.toString().equals("iw_IL")
-					|| myLocale.toString().equals("iw")) { // Hebrew
-				Locale.setDefault(Locale.US);
-				config.locale = Locale.US;
-				// _t._tts.setEngineByPackageName("com.ivona.tts");
+			}
+			else {
+				VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
 				speakOut(getString(R.string.switched_to_english));
 			}
-			getBaseContext().getResources().updateConfiguration(config,
-					getBaseContext().getResources().getDisplayMetrics());
-			myLocale = Locale.getDefault();
+
 			intent = new Intent(this, MainActivity.class);
 			// setResult(RESULT_OK, null);
 			startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); //empty activity stack
@@ -97,7 +89,6 @@ public class DisplaySettingsActivity extends VisionActivity {
 
 			break;
 		case R.id.button_selecting_mode:
-			SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 			String buttonMode = sp.getString("BUTTON MODE", "regular");
 			if (buttonMode.equals("regular")) {
 				VisionApplication.savePrefs("BUTTON MODE", "sticky", this);

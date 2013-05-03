@@ -47,7 +47,7 @@ public class ThemeSettingsActivity extends VisionActivity {
       case R.id.Small_text_size_button:
       case R.id.Normal_text_size_button:
       case R.id.Large_text_size_button:
-        VisionApplication.savePrefs("TEXT_SIZE", ((TalkingButton) button).getReadText(), this);
+        VisionApplication.savePrefs("TEXT SIZE", ((TalkingButton) button).getPrefsValue(), this);
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
       default:

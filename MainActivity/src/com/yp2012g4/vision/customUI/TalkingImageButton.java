@@ -16,15 +16,16 @@ import com.yp2012g4.vision.R;
  * 
  */
 public class TalkingImageButton extends ImageButton implements Runnable {
+    public TalkingImageButton(Context context, AttributeSet attrs) {
+	super(context, attrs);
+	final TypedArray a = context.obtainStyledAttributes(attrs,
+		R.styleable.TalkingImageButton, 0, 0);
+	ReadText = a.getString(R.styleable.TalkingImageButton_ReadText);
+	PrefsValue = a.getString(R.styleable.TalkingButton_PrefsValue);
+    }
 
 	private Runnable _run;
 
-	public TalkingImageButton(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		final TypedArray a = context.obtainStyledAttributes(attrs,
-				R.styleable.TalkingImageButton, 0, 0);
-		ReadText = a.getString(R.styleable.TalkingImageButton_ReadText);
-	}
 
 	/**
 	 * Returns the short button text that should be used for TTS.

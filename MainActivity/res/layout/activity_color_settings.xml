@@ -22,6 +22,7 @@
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
             android:textColor="@color/WHITE"
+            app:PrefsValue="WHITE-BLACK"
             app:ReadText="@string/WhiteBlack" />
     </LinearLayout>
 
@@ -39,6 +40,7 @@
             android:background="@color/RED"
             android:text="@string/WhiteRed"
             android:textColor="@color/WHITE"
+            app:PrefsValue="WHITE-RED"
             app:ReadText="@string/WhiteRed" />
     </LinearLayout>
 
@@ -56,6 +58,7 @@
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
             android:textColor="@color/RED"
+            app:PrefsValue="RED-BLACK"
             app:ReadText="@string/RedBlack" />
     </LinearLayout>
 
@@ -73,6 +76,7 @@
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
             android:textColor="@color/WHITE"
+            app:PrefsValue="WHITE-GREEN"
             app:ReadText="@string/WhiteGreen" />
     </LinearLayout>
 
@@ -90,6 +94,7 @@
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
             android:textColor="@color/GREEN"
+            app:PrefsValue="GREEN-BLACK"
             app:ReadText="@string/GreenBlack" />
     </LinearLayout>
 
@@ -107,6 +112,7 @@
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
             android:textColor="@color/WHITE"
+            app:PrefsValue="WHITE-BLUE"
             app:ReadText="@string/WhiteBlue" />
     </LinearLayout>
 
@@ -124,6 +130,7 @@
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"
             android:textColor="@color/BLUE"
+            app:PrefsValue="BLUE-BLACK"
             app:ReadText="@string/BlueBlack" />
     </LinearLayout>
 

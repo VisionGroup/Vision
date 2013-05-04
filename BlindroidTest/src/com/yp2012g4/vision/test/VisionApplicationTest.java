@@ -38,12 +38,12 @@ public class VisionApplicationTest extends
 	}
 	
 	public static void testGetTextColor() {
-		VisionApplication.setColors(R.color.RED, R.color.GREEN);
-		assertEquals(VisionApplication.getTextColor(), R.color.RED);
+		VisionApplication.setColors("RED", "GREEN");
+		assertEquals(VisionApplication.getTextColor(), "RED");
 	}
 	
 	public static void testSetColors() {
-		VisionApplication.setColors(R.color.BLUE, R.color.RED);
+		VisionApplication.setColors("BLUE", "RED");
 		assertEquals(VisionApplication.getBackgroundColor(), R.color.RED);
 		assertEquals(VisionApplication.getTextColor(), R.color.BLUE);
 	}

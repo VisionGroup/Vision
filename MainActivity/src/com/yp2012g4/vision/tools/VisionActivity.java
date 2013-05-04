@@ -2,8 +2,10 @@ package com.yp2012g4.vision.tools;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -157,16 +159,12 @@ public abstract class VisionActivity extends VisionGestureDetector {
   
   public View getButtonByMode() {
     View returnButton = curr_view;
-    switch (selectButtonMode) {
-      case 1:
-        if (last_button_view != null) {
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    String buttonMode = sp.getString("BUTTON MODE", "regular");
+	if (buttonMode.equals("sticky") && last_button_view != null) {
           returnButton = last_button_view;
           last_button_view = null;
-        }
-        break;
-      default:
-        break;
-    }
+	}
     return returnButton;
   }
 }

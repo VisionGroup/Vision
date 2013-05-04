@@ -61,4 +61,10 @@ public class CallAdapter extends BaseAdapter {
 	timeView.setText(call.getDate().toString());
 	return v;
     }
+
+    public void removeItemFromList(int position) {
+	if (position < 0 || position > _data.size())
+	    return;
+	_data.remove(position);
+    }
 }

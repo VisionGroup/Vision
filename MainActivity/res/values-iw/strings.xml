@@ -258,5 +258,8 @@
     <string name="Call_sceen">רשימת שיחות</string>
     <string name="Call">חייג</string>
     <string name="call_list_screen">רשימת שיחות</string>
-
+    <string name="noCalls">אין שיחות ברשימה</string>
+    <string name="delete_call">מחק שיחה</string>
+    
+    
 </resources>

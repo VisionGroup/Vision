@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yp2012g4.vision"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" android:installLocation="auto">
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -212,7 +212,7 @@
                 android:value="com.yp2012g4.vision.MainActivity" />
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.CallList"
+            android:name="com.yp2012g4.vision.CallListActivity"
             android:label="@string/title_activity_call_list" >
         </activity>
     </application>

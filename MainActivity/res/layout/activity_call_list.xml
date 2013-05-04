@@ -13,10 +13,50 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        custom:cols="2"
-        custom:rows="2" >
+        custom:cols="1"
+        custom:rows="1" >
     </com.yp2012g4.vision.customUI.lists.TalkingListView>
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/calllist_call_sender"
+            android:layout_width="0dip"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/quick_dial_button"
+            custom:ReadText="@string/quick_dial_button" />
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/calllist_send_sms"
+            android:layout_width="0dip"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/quick_sms_button"
+            custom:ReadText="@string/quick_sms_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/calllist_remove"
+            android:layout_width="0dip"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_button_round"
+            custom:ReadText="@string/delete_message" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

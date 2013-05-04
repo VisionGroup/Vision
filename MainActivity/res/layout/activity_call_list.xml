@@ -17,14 +17,14 @@
         custom:rows="2" >
     </com.yp2012g4.vision.customUI.lists.TalkingListView>
 
-    <!-- <LinearLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal" >
 
         <include layout="@layout/control_bar_view" />
-    </LinearLayout> -->
+    </LinearLayout>
 
 </LinearLayout>
 <!-- <?xml version="1.0" encoding="utf-8"?>

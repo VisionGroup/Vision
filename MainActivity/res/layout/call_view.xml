@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="75dp"
-    android:layout_height="50dp"
-    android:orientation="vertical" >
+     style="?backgroundColor"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="1dp" xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision" >
 
 
     <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/call_number"
         style="?textAppearance"
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/call_name"
         style="?textAppearance"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:background="@android:color/transparent"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -26,9 +30,10 @@
         android:id="@+id/call_time"
         style="?textAppearance"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:gravity="bottom|right"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

@@ -32,7 +32,7 @@ public class CallList extends VisionActivity {
 
     @Override
     public int getViewId() {
-	return R.id.ReadSmsTest;
+	return R.id.CallListActivity;
     }
 
     @Override

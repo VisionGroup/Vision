@@ -44,15 +44,30 @@ public class PhoneStatusActivityTest extends
 	solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
 
 	PhoneNotifications.signal = 99;
-	assertEquals(getActivity().signalToString(), "No Signal");
+	assertEquals(
+		getActivity().signalToString(),
+		getActivity().getString(
+			R.string.phoneStatus_message_noSignal_read));
 	PhoneNotifications.signal = 28;
-	assertEquals(getActivity().signalToString(), "Signal is very good");
+	assertEquals(
+		getActivity().signalToString(),
+		getActivity().getString(
+			R.string.phoneStatus_message_veryGoodSignal_read));
 	PhoneNotifications.signal = 10;
-	assertEquals(getActivity().signalToString(), "Signal is good");
+	assertEquals(
+		getActivity().signalToString(),
+		getActivity().getString(
+			R.string.phoneStatus_message_goodSignal_read));
 	PhoneNotifications.signal = 6;
-	assertEquals(getActivity().signalToString(), "Signal is poor");
+	assertEquals(
+		getActivity().signalToString(),
+		getActivity().getString(
+			R.string.phoneStatus_message_poorSignal_read));
 	PhoneNotifications.signal = 3;
-	assertEquals(getActivity().signalToString(), "Signal is very poor");
+	assertEquals(
+		getActivity().signalToString(),
+		getActivity().getString(
+			R.string.phoneStatus_message_veryPoorSignal_read));
 
     }
 

@@ -180,8 +180,8 @@ public class ContactsActivity extends VisionActivity {
 		// check speech recognition result
 		if (requestCode == VR_REQUEST && resultCode == RESULT_OK) {
 			// store the returned word list as an ArrayList
-			ArrayList<String> suggestedWords = data
-					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			//ArrayList<String> suggestedWords = data
+				//	.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 			// set the retrieved list to display in the ListView using an
 			// ArrayAdapter
 			// wordList.setAdapter(new ArrayAdapter<String> (this,

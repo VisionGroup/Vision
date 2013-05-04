@@ -1,7 +1,5 @@
 package com.yp2012g4.vision.telephony;
 
-import java.lang.reflect.Method;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -157,7 +155,7 @@ public class IncomingCallActivity extends VisionActivity {
 		try {
 			incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
 			if (incomingNumber == null)
-				incomingNumber = ( (new CallManager()).getLastOutgoingCall(this))
+				incomingNumber = ((new CallManager()).getLastOutgoingCall(this))
 						.getNumber();
 		} catch (Exception e) {
 
@@ -169,12 +167,6 @@ public class IncomingCallActivity extends VisionActivity {
 		if (!incomingName.equals(incomingNumber))
 			updateNumberButton((TalkingButton) findViewById(R.id.name),
 					incomingName);
-		// } catch (final Exception e) {
-		// updateNumberButton((TalkingButton) findViewById(R.id.number), "");
-		// updateNumberButton((TalkingButton) findViewById(R.id.name),
-		// "שיחה נכנסת?");
-		// }
-
 	}
 
 	/**

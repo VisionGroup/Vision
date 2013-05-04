@@ -208,9 +208,10 @@
 
     <!-- ReadSMSActivity -->
     <string name="read_sms_screen">מסך קריאת SMS</string>
-    <string name="read_sms_help">לחץ על המסך לשמוע את ההודעה. באפשרותך לעבור בין ההודעות</string>
+    <string name="read_sms_help">לחץ על המסך לשמוע את ההודעה. באפשרותך לעבור בין ההודעות על ידי החלקת האצבע  ימינה ושמאלה.ניתן להשיב להודעה או למחוק אותה </string>
     <string name="message_number">הודעה מספר</string>
     <string name="no_more_messages">אין יותר הודעות</string>
+     <string name="delete_message">מחיקת הודעה</string>
 
     <!-- SOSActivity -->
     <string name="sos_screen">מסך SOS</string>
@@ -256,5 +257,9 @@
     <!-- CallListActivity -->
     <string name="Call_sceen">רשימת שיחות</string>
     <string name="Call">חייג</string>
-
+    <string name="call_list_screen">רשימת שיחות</string>
+    <string name="noCalls">אין שיחות ברשימה</string>
+    <string name="delete_call">מחק שיחה</string>
+    
+    
 </resources>

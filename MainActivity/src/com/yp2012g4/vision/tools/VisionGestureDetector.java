@@ -7,11 +7,13 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -48,7 +50,6 @@ public abstract class VisionGestureDetector extends Activity implements
 	private long mFirstDownTime = 0;
 	private boolean mSeparateTouches = false;
 	private byte mTwoFingerTapCount = 0;
-	public static int selectButtonMode = 1;
 	/**
 	 * Stores the dimensions of a button
 	 */
@@ -80,6 +81,10 @@ public abstract class VisionGestureDetector extends Activity implements
 	private final Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
 	protected Locale myLocale;
 	protected Configuration config;
+	/**
+	 * Holds the current spoken string
+	 */
+	public static String spokenString;
 
 	// ==================================================================
 	// ===========================METHODS================================
@@ -92,7 +97,10 @@ public abstract class VisionGestureDetector extends Activity implements
 	@Override
 	public boolean onDown(MotionEvent e) {
 		Log.i(TAG, "onDown");
-		if (selectButtonMode == 0)
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		String buttonMode = sp.getString("BUTTON MODE", "regular");
+		if (buttonMode.equals("regular"))
 			last_button_view = getView(e.getRawX(), e.getRawY()); // updating
 		else
 			getView(e.getRawX(), e.getRawY());
@@ -120,10 +128,11 @@ public abstract class VisionGestureDetector extends Activity implements
 	@Override
 	public void onShowPress(MotionEvent e) {
 		Log.i(TAG, "onShowPress");
-		if (isButtonType(last_button_view)) {
-			hapticFeedback(last_button_view);
-			speakOut(textToRead(last_button_view));
-		}
+		if (isButtonType(last_button_view))
+			// changeButton();
+			VisionApplication.restoreColors(last_button_view, this);
+		hapticFeedback(last_button_view);
+		speakOut(textToRead(last_button_view));
 	}
 
 	@Override
@@ -135,13 +144,16 @@ public abstract class VisionGestureDetector extends Activity implements
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		final int action = event.getAction() & MotionEvent.ACTION_MASK;
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+		String buttonMode = sp.getString("BUTTON MODE", "regular");
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 			Log.i("MyLog", "onTouch: ACTION_DOWN");
 			// resetting to false when touching screen
 			// updating curr_view (inside getView())
-			VisionApplication.restoreColors(last_button_view);
-			if (selectButtonMode == 0)
+			VisionApplication.restoreColors(last_button_view, this);
+			if (buttonMode.equals("regular"))
 				last_button_view = getView(event.getRawX(), event.getRawY());
 			break;
 		case MotionEvent.ACTION_MOVE:
@@ -149,26 +161,38 @@ public abstract class VisionGestureDetector extends Activity implements
 			for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
 				if (isButtonType(entry.getKey()))
 					if (entry.getValue().contains((int) event.getRawX(),
-							(int) event.getRawY()))
+							(int) event.getRawY())) {
+						Log.i("MyLog", "onTouch: ACTION_MOVE");
 						if (last_button_view != entry.getKey()) {
-							VisionApplication.restoreColors(last_button_view);
-							hapticFeedback(entry.getKey());
+							VisionApplication.restoreColors(entry.getKey(),
+									this);
 							speakOut(textToRead(entry.getKey()));
-							last_button_view = entry.getKey();
+							changeButton(entry.getKey());
 						} else
 							last_button_view = getView(event.getRawX(),
 									event.getRawY());
+					}
 			break;
+
 		case MotionEvent.ACTION_UP:
 			Log.i(TAG, "ACTION UP");
-			if (selectButtonMode == 0)
-				VisionApplication.restoreColors(last_button_view);
+			if (buttonMode.equals("regular"))
+				VisionApplication.restoreColors(last_button_view, this);
 			onActionUp(last_button_view);
 			break;
 		}
-		gestureDetector.setIsLongpressEnabled(false);
-		onTwoFingerDoubleTap(event);
+		// gestureDetector.setIsLongpressEnabled(false);
+		// onTwoFingerDoubleTap(event);
 		return gestureDetector.onTouchEvent(event);
+	}
+
+	/**
+	 * @param entry
+	 */
+	private void changeButton(View curr) {
+		VisionApplication.restoreColors(last_button_view, this);
+		last_button_view = curr;
+		hapticFeedback(last_button_view);
 	}
 
 	private void reset(long time) {
@@ -180,17 +204,20 @@ public abstract class VisionGestureDetector extends Activity implements
 	public boolean onTwoFingerDoubleTap(MotionEvent event) {
 		switch (event.getActionMasked()) {
 		case MotionEvent.ACTION_DOWN:
+			Log.i(TAG, "onTwoFingerDoubleTap:ACTION_DOWN");
 			if (mFirstDownTime == 0
 					|| event.getEventTime() - mFirstDownTime > TIMEOUT)
 				reset(event.getDownTime());
 			break;
 		case MotionEvent.ACTION_POINTER_UP:
+			Log.i(TAG, "onTwoFingerDoubleTap:ACTION_POINTER_UP");
 			if (event.getPointerCount() == 2)
 				mTwoFingerTapCount++;
 			else
 				mFirstDownTime = 0;
 			break;
 		case MotionEvent.ACTION_UP:
+			Log.i(TAG, "onTwoFingerDoubleTap:ACTION_UP");
 			if (!mSeparateTouches)
 				mSeparateTouches = true;
 			else if (mTwoFingerTapCount == 2
@@ -233,22 +260,12 @@ public abstract class VisionGestureDetector extends Activity implements
 		// reads layout description out loud
 		if (hasFocus) {
 			VisionApplication.applyButtonSettings(view_to_rect.keySet(),
-					mainView);
+					mainView, this);
 			if (mainView.getContentDescription() != null)
 				speakOut(findViewById(getViewId()).getContentDescription()
 						.toString());
 		}
 	}
-
-	// public void setLocaleToActivity(Activity activity) {
-	// if (myLocale != null) {
-	// final Configuration config = new Configuration();
-	// config.locale = myLocale;
-	// Locale.setDefault(myLocale);
-	// activity.getResources().updateConfiguration(config,
-	// activity.getResources().getDisplayMetrics());
-	// }
-	// }
 
 	/**
 	 * This is an abstract method which returns the Id of a view
@@ -303,6 +320,7 @@ public abstract class VisionGestureDetector extends Activity implements
 			Log.e(TAG, "TTS is null");
 			return;
 		}
+		spokenString = s;
 		_t.speak(s);
 	}
 
@@ -395,10 +413,9 @@ public abstract class VisionGestureDetector extends Activity implements
 		for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
 			if (entry.getValue().contains((int) x, (int) y)) {
 				curr_view = entry.getKey();
-				if (isButtonType(entry.getKey())) {
+				if (isButtonType(entry.getKey()))
 					// get view of buttons only
 					return entry.getKey();
-				}
 			}
 		return null;
 	}
@@ -408,7 +425,6 @@ public abstract class VisionGestureDetector extends Activity implements
 	// if (!_t.isRuning())
 	// _t = new TTS(this, this);
 	// }
-
 	/**
 	 * Finishes the activity after some delay
 	 */
@@ -436,7 +452,7 @@ public abstract class VisionGestureDetector extends Activity implements
 	}
 
 	protected void hapticFeedback(View v) {
+		VisionApplication.visualFeedback(v, this);
 		vibrate(20);
-		VisionApplication.visualFeedback(v);
 	}
 }

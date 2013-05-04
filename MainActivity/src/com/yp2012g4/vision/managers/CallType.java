@@ -12,6 +12,9 @@ import android.text.format.DateFormat;
  * @author Yaron
  * 
  */
+
+
+
 public class CallType {
 
 	private String mNumber = "";
@@ -43,20 +46,9 @@ public class CallType {
 		String mili = cur.getString(
 				cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))
 				.toString();
-//		Date q;
-//		try {
-//				q =new Date(cur.getLong(4));
-//				
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-
 		Long m = Long.valueOf(mili);
 		
 		mDate = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m.longValue()));
-		// protocol =
-		// cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can
-		// cause exception
 		try {
 			mName = cur
 					.getString(

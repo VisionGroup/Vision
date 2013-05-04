@@ -14,12 +14,21 @@ import android.text.format.DateFormat;
  */
 public class CallType {
 
-	private String number = "";
-	private String type = "";
-	private String name = "";
-	private Date date;
-	private String numberType = "";
+	private String mNumber = "";
+	private String mType = "";
+	private String mName = "";
+	private Date mDate;
+	private String mNumberType = "";
 
+	public CallType(String number,String type,String name,Date date,String numberType){
+		mNumber=number;
+		mType=type;
+		mName=name;
+		mDate=date;
+		mNumberType = numberType;
+	}
+	
+	
 	/**
 	 * constructor with Cursor
 	 * 
@@ -27,75 +36,71 @@ public class CallType {
 	 * @param context
 	 */
 	public CallType(Cursor cur, Context context) {
-		number = cur
+		mNumber = cur
 				.getString(
 						cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER))
 				.toString();
 		String mili = cur.getString(
 				cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))
 				.toString();
-		Date q;
-		try {
-				q =new Date(cur.getLong(4));
-				
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		Date q;
+//		try {
+//				q =new Date(cur.getLong(4));
+//				
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		Long m = Long.valueOf(mili);
 		
-		date = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m.longValue()));
+		mDate = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m.longValue()));
 		// protocol =
 		// cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can
 		// cause exception
 		try {
-			name = cur
+			mName = cur
 					.getString(
 							cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME))
 					.toString();
 		} catch (Exception e) {
-			name = "";
+			mName = "";
 		}
 		try {
-			numberType = cur
+			mNumberType = cur
 					.getString(
 							cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE))
 					.toString();
 		} catch (Exception e) {
-			numberType = "";
+			mNumberType = "";
 		}
 		try {
-			type = cur
+			mType = cur
 					.getString(
 							cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE))
 					.toString();
 		} catch (Exception e) {
-			type = "";
+			mType = "";
 		}
-
-		// subject = c.getString(c.getColumnIndexOrThrow("subject")).toString();
-		// ContactManager cm = new ContactManager(context);
-
 	}
 
 	public synchronized String getNumber() {
-		return number;
+		return mNumber;
 	}
 
 	public synchronized String getNumberType() {
-		return numberType;
+		return mNumberType;
 	}
 
 	public synchronized Date getDate() {
-		return date;
+		return mDate;
 	}
 
 	public synchronized String getType() {
-		return type;
+		return mType;
 	}
 
 	public synchronized String getName() {
-		return name;
+		return mName;
 	}
 
 }

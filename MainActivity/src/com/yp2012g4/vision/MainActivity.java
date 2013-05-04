@@ -79,7 +79,6 @@ public class MainActivity extends VisionActivity {
 		init(0, getString(R.string.MainActivity_wai),
 				getString(R.string.MainActivity_help));
 		pn.startSignalLisener();
-		CallManager.dood(this);
 	}
 
 	/**

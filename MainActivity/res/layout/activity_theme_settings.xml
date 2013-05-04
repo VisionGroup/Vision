@@ -22,6 +22,7 @@
             android:background="@android:color/transparent"
             android:text="@string/small_text_size_button"
             android:textSize="20sp"
+            app:PrefsValue="SMALL"
             app:ReadText="@string/small_text_size_button" />
     </LinearLayout>
 
@@ -39,6 +40,7 @@
             android:background="@android:color/transparent"
             android:text="@string/normal_text_size_button"
             android:textSize="26sp"
+            app:PrefsValue="NORMAL"
             app:ReadText="@string/normal_text_size_button" />
     </LinearLayout>
 
@@ -56,6 +58,7 @@
             android:background="@android:color/transparent"
             android:text="@string/large_text_size_button"
             android:textSize="32sp"
+            app:PrefsValue="LARGE"
             app:ReadText="@string/large_text_size_button" />
     </LinearLayout>
 

@@ -209,7 +209,7 @@
 
     <!-- ReadSMSActivity -->
     <string name="read_sms_screen">Read S M S screen</string>
-    <string name="read_sms_help">Touch on screen to read messages, press next or previous message</string>
+    <string name="read_sms_help"> touch screen to read message, slide your finger right or left to move to the next or previous message, you can reply to the message or delete it</string>
     <string name="message_number">Message number</string>
     <string name="no_more_messages">No more messages</string>
 

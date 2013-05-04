@@ -24,6 +24,19 @@ public class MainActivity extends VisionActivity {
 	return R.id.MainActivityView;
     }
 
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Log.i("MyLog", "MainActivity:: onCreate");
+		setContentView(R.layout.activity_main);
+		adjustLayoutSize(4);
+		PhoneNotifications pn = new PhoneNotifications(this);
+		init(0, getString(R.string.MainActivity_wai),
+				getString(R.string.MainActivity_help));
+		pn.startSignalLisener();
+	}
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
 	if (super.onSingleTapUp(e))
@@ -31,6 +44,7 @@ public class MainActivity extends VisionActivity {
 	if (clickFlag) {
 	    clickFlag = false;
 	    return false;
+
 	}
 	Intent intent = null;
 	final View button = getButtonByMode();
@@ -69,19 +83,6 @@ public class MainActivity extends VisionActivity {
 	return false;
     }
 
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	Log.i(TAG, "onCreate");
-	setContentView(R.layout.activity_main);
-	adjustLayoutSize(4);
-	final PhoneNotifications pn = new PhoneNotifications(this);
-	init(0, getString(R.string.MainActivity_wai),
-		getString(R.string.MainActivity_help));
-	pn.startSignalLisener();
-	// CallManager.dood(this);
-    }
 
     /**
      * Perform actions when the window get into focus we start the activity by

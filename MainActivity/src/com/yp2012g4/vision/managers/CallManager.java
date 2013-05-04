@@ -13,107 +13,122 @@ import android.provider.CallLog;
  * 
  */
 
-// public class CallData {
-// String name;
-// String number;
-// long date;
-//
-// public CallData(String name, String number, long date) {
-// this.name = name;
-// this.number = number;
-// this.date = date;
-// }
-//
-// /**
-// * Get the formated hour of the call in a string
-// *
-// * @return the call hour string
-// */
-// public String getHour() {
-// Calendar calendar = Calendar.getInstance();
-// calendar.setTimeInMillis(date);
-// return SpeakingClockActivity.parseTime(calendar);
-// }
-// }
-
 public class CallManager {
 
-    // TODO: WHAT THE FUCK IS dood???????
-    public static ArrayList<CallType> dood(Context c) {
-	final String[] strFields = { CallLog.Calls.NUMBER, CallLog.Calls.TYPE,
-		CallLog.Calls.CACHED_NAME, CallLog.Calls.CACHED_NUMBER_TYPE,
-		CallLog.Calls.DATE };
-	final String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
+	private Cursor cur = null;
 
-	final Cursor mCallCursor = c.getContentResolver().query(
-		android.provider.CallLog.Calls.CONTENT_URI, strFields, null,
-		null, strOrder);
-	final ArrayList<CallType> list = new ArrayList<CallType>();
-	if (mCallCursor.moveToFirst())
-	    // loop through cursor
-	    do
-		list.add(new CallType(mCallCursor, c));
-	    while (mCallCursor.moveToNext());
-	return list;
-    }
-
-    /**
-     * Get a list of all the missed calls with the date, name and phone number
-     * of each
-     * 
-     * @return list of missed calls
-     */
-    public static ArrayList<CallType> getMissedCallsList(Context c) {
-	final String[] projection = { CallLog.Calls.CACHED_NAME,
-		CallLog.Calls.NUMBER, CallLog.Calls.DATE };
-	final String where = CallLog.Calls.TYPE + "="
-		+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-	Cursor cur;
-	try {
-	    cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
-		    projection, where, null, null);
-	} catch (final Exception e) {
-	    return new ArrayList<CallType>();
+	/**
+	 * Get a list of all the missed calls with the date, name and phone number
+	 * of each
+	 * 
+	 * @return list of missed calls
+	 */
+	public static ArrayList<CallType> getMissedCallsList(Context c) {
+		final String[] projection = { CallLog.Calls.CACHED_NAME,
+				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+		final String where = CallLog.Calls.TYPE + "="
+				+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
+		Cursor cur;
+		try {
+			cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
+					projection, where, null, null);
+		} catch (final Exception e) {
+			return new ArrayList<CallType>();
+		}
+		final ArrayList<CallType> al = new ArrayList<CallType>();
+		while (cur.moveToNext())
+			al.add(new CallType(cur, c));
+		return al;
 	}
-	final ArrayList<CallType> al = new ArrayList<CallType>();
-	while (cur.moveToNext())
-	    al.add(new CallType(cur, c));
-	return al;
-    }
 
-    /**
-     * Delete all the entries of a number from the missed call list - require
-     * WRITE_CONTACTS permission
-     * 
-     * @param c
-     * @param number
-     *            - string of the phone number in the call log
-     */
-    static public void DeleteCallLogByNumber(Context c, String number) {
-	try {
-	    c.getContentResolver().delete(CallLog.Calls.CONTENT_URI,
-		    CallLog.Calls.NUMBER + "=?", new String[] { number });
-	} catch (final Exception e) {
-	    e.getMessage();
+	/**
+	 * Delete all the entries of a number from the missed call list - require
+	 * WRITE_CONTACTS permission
+	 * 
+	 * @param c
+	 * @param number - string of the phone number in the call log
+	 */
+	static public void DeleteCallLogByNumber(Context c, String number) {
+		try {
+			c.getContentResolver().delete(CallLog.Calls.CONTENT_URI,
+					CallLog.Calls.NUMBER + "=?", new String[] { number });
+		} catch (final Exception e) {
+			e.getMessage();
+		}
 	}
-    }
 
-    /**
-     * Get the number of missed calls
-     * 
-     * @return the missed calls number
-     */
-    public static int getMissedCallsNum(Context c) {
-	final String where = CallLog.Calls.TYPE + "="
-		+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
-	Cursor cur;
-	try {
-	    cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null,
-		    where, null, null);
-	} catch (final Exception e) {
-	    return 0;
+	/**
+	 * Get a list of all the missed calls with the date, name and phone number
+	 * of each
+	 * 
+	 * @param c
+	 *            Context
+	 * @param number
+	 *            how may call to get back
+	 * @return list of missed calls
+	 */
+	public CallType getLastOutgoingCall(Context c) {
+		String[] projection = { CallLog.Calls.CACHED_NAME,
+				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+
+		try {
+			cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
+					projection, null, null, null);
+		} catch (Exception e) {
+			return null;
+		}
+
+		if (cur.moveToNext())
+			return new CallType(cur, c);
+		else
+			return null;
 	}
-	return cur.getCount();
-    }
+
+	/**
+	 * Get a list of all the missed calls with the date, name and phone number
+	 * of each
+	 * 
+	 * @param c Context
+	 * @param number how may call to get back
+	 * @return list of missed calls
+	 */
+	public ArrayList<CallType> getNextMissedCallsList(Context c, int number) {
+		String[] projection = { CallLog.Calls.CACHED_NAME,
+				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+		String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE
+				+ " AND NEW = 1";
+
+		try {
+			cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
+					projection, where, null, null);
+		} catch (Exception e) {
+			return new ArrayList<CallType>();
+		}
+		ArrayList<CallType> al = new ArrayList<CallType>();
+		for (int i = 0; (i < number) && (cur.moveToNext()); i++) {
+			al.add(new CallType(cur, c));
+		}
+		return al;
+	}
+
+	/**
+	 * Get the number of missed calls
+	 * 
+	 * @return the missed calls number
+	 */
+	public static int getMissedCallsNum(Context c) {
+		final String where = CallLog.Calls.TYPE + "="
+				+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
+		Cursor cur;
+		try {
+			cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null,
+					where, null, null);
+		} catch (final Exception e) {
+			return 0;
+
+		}
+		return cur.getCount();
+	}
+
 
 }

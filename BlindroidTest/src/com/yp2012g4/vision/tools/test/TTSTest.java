@@ -21,18 +21,18 @@ public class TTSTest extends TestCase {
     }
 
     @SuppressWarnings("static-method")
-    public void testIsPureEnglise() {
-	assertTrue(TTS.isPureEnglise("Abcdefghijklmnopqrstuvwxyz"));
+    public void testisPureEnglish() {
+	assertTrue(TTS.isPureEnglish("Abcdefghijklmnopqrstuvwxyz"));
 	assertTrue(TTS
-		.isPureEnglise("Aabnhdkkmoolelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
-	assertTrue(TTS.isPureEnglise(""));
-	assertTrue(TTS.isPureEnglise("111111"));
-	assertTrue(TTS.isPureEnglise(".,"));
-	assertFalse(TTS.isPureEnglise("ò"));
+		.isPureEnglish("Aabnhdkkmoolelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
+	assertTrue(TTS.isPureEnglish(""));
+	assertTrue(TTS.isPureEnglish("111111"));
+	assertTrue(TTS.isPureEnglish(".,"));
+	assertFalse(TTS.isPureEnglish("ò"));
 	assertFalse(TTS
-		.isPureEnglise("òAabnhdkkmoolîéúòelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
+		.isPureEnglish("òAabnhdkkmoolîéúòelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
 
-	assertFalse(TTS.isPureEnglise("kkkkkkò"));
+	assertFalse(TTS.isPureEnglish("kkkkkkò"));
     }
 
 }

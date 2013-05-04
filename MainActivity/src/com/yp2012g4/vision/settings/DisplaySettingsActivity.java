@@ -72,16 +72,28 @@ public class DisplaySettingsActivity extends VisionActivity {
 			vibrate(300);
 			break;
 		case R.id.locale:
-			String language = sp.getString("LANGUAGE", "ENGLISH");
+			myLocale = Locale.getDefault(); //get xml strings file
+			config = new Configuration();
+			String defaultLang = "HEBREW";
+			if (myLocale.equals(Locale.US))
+				defaultLang = "ENGLISH";
+				
+			String language = sp.getString("LANGUAGE", defaultLang);
 			if (language.equals("ENGLISH")) {
 				VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
+				Locale locale = new Locale("iw"); 
+				Locale.setDefault(locale);
+				config.locale = locale;
 				speakOut(getString(R.string.switched_to_hebrew));
 			}
 			else {
 				VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
+				Locale.setDefault(Locale.US);
+				config.locale = Locale.US;
 				speakOut(getString(R.string.switched_to_english));
 			}
-
+			getBaseContext().getResources().updateConfiguration(config,
+					getBaseContext().getResources().getDisplayMetrics());
 			intent = new Intent(this, MainActivity.class);
 			// setResult(RESULT_OK, null);
 			startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); //empty activity stack
@@ -120,6 +132,9 @@ public class DisplaySettingsActivity extends VisionActivity {
 		// adjustLayoutSize(3);
 		init(0, getString(R.string.display_settings_screen),
 				getString(R.string.settings_help));
+		
+		
+		
 	}
 
 }

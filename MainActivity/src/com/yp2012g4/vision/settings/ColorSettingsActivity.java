@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import static java.lang.System.out;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -26,7 +25,6 @@ public class ColorSettingsActivity extends VisionActivity {
    */
   private void changeSettings(String s) {
 	  Log.i("MyLog", s);
-	  boolean a = s.equals("");
 	  String[] colors = s.split("-");
 	  VisionApplication.savePrefs("TEXT COLOR", colors[0], this);
 	  Log.i("MyLog", colors[0]);

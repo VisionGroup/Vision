@@ -6,9 +6,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.settings.VisionApplication;
-
-import android.widget.TextView;;
 
 /**
  * How to reproduce the following bug: when changing the color theme, the text color in the

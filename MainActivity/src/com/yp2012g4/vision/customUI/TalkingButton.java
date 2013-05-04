@@ -15,7 +15,10 @@ import com.yp2012g4.vision.R;
  * @author Amit Yaffe
  * 
  */
-public class TalkingButton extends Button {
+public class TalkingButton extends Button implements Runnable {
+	
+	private Runnable _run;
+	
     public TalkingButton(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -72,4 +75,20 @@ public class TalkingButton extends Button {
     public void setPrefsValue(String prefsValue) {
 	PrefsValue = prefsValue;
     }
+
+    /**
+     * set runnable class to button.
+     * @param run
+     */
+    public void setRun(Runnable run){
+    	_run = run;
+    }
+    
+        
+	@Override
+	public void run() {
+		if (_run != null){
+			_run.run();
+		}
+	}
 }

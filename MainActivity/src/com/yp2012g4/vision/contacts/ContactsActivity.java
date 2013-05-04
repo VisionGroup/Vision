@@ -119,8 +119,6 @@ public class ContactsActivity extends VisionActivity {
     }
     setContact();
 
-		listenToSpeech();
-
   }
 
   // @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,29 +145,6 @@ public class ContactsActivity extends VisionActivity {
       speakOut(getString(R.string.no_messages));
   }
 
-	/**
-	 * Instruct the app to listen for user speech input
-	 */
-	private void listenToSpeech() {
-	    //start the speech recognition intent passing required data
-		Intent listenIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-
-		//indicate package
-//	    listenIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getClass().getPackage().getName());
-//	    //message to display while listening
-//	    listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say a word!");
-//	    //set speech model
-//	    listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-//	    //specify number of results to retrieve
-//	    listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 10);
-	    //start listening
-		try {
-			startActivityForResult(listenIntent, VR_REQUEST);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	    
-	}
 
 	/**
 	 * onActivityResults handles: - retrieving results of speech recognition

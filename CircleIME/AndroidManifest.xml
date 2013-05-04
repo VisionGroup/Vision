@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.marvin.circleime">
+  package="com.marvin.circleime" android:installLocation="preferExternal">
   <uses-permission android:name="android.permission.VIBRATE" />
   <application android:label="@string/ime_name">
     <service android:name="SoftKeyboard" 

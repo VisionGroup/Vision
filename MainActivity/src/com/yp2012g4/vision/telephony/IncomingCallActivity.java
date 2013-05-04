@@ -1,6 +1,7 @@
 package com.yp2012g4.vision.telephony;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -86,7 +88,7 @@ public class IncomingCallActivity extends VisionActivity {
 			break;
 		case R.id.back_button:
 			speakOut(getString(R.string.previous_screen));
-			mHandler.postDelayed(mLaunchTask, 1000);
+			mHandler.postDelayed(mLaunchTask, 100);
 			break;
 		default:
 			return false;
@@ -98,6 +100,15 @@ public class IncomingCallActivity extends VisionActivity {
 	 * Answers the present phone call.
 	 */
 	private void answerCall() {
+
+		AudioManager manager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+		manager.setWiredHeadsetOn(false);
+		manager.setSpeakerphoneOn(true);
+		manager.setRouting(AudioManager.MODE_CURRENT,
+				AudioManager.ROUTE_SPEAKER, AudioManager.ROUTE_ALL);
+		manager.setMode(AudioManager.MODE_CURRENT);
+
 		try {
 			CallUtils.answerPhoneHeadsethook(this);
 			Log.d(TAG, "Answered call");
@@ -143,18 +154,19 @@ public class IncomingCallActivity extends VisionActivity {
 		}
 		try {
 			incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
-			updateNumberButton((TalkingButton) findViewById(R.id.number),
-					incomingNumber);
-			incomingName = contact.getNameFromPhone(incomingNumber);
-			if (!incomingName.equals(incomingNumber))
-				updateNumberButton((TalkingButton) findViewById(R.id.name),
-						incomingName);
-		} catch (final Exception e) {
-			updateNumberButton((TalkingButton) findViewById(R.id.number), "");
-			updateNumberButton((TalkingButton) findViewById(R.id.name),
-					"שיחה נכנסת?");
+			if (incomingNumber == null)
+				incomingNumber = ((new CallManager()).getLastOutgoingCall(this))
+						.getNumber();
+		} catch (Exception e) {
+
 		}
 
+		updateNumberButton((TalkingButton) findViewById(R.id.number),
+				incomingNumber);
+		incomingName = contact.getNameFromPhone(incomingNumber);
+		if (!incomingName.equals(incomingNumber))
+			updateNumberButton((TalkingButton) findViewById(R.id.name),
+					incomingName);
 	}
 
 	/**
@@ -201,7 +213,7 @@ public class IncomingCallActivity extends VisionActivity {
 					&& rang == Boolean.TRUE) {
 				Log.d(TAG, "Ending Activity because " + stateName(state));
 				rang = Boolean.FALSE;
-				mHandler.postDelayed(mLaunchTask, 1000);
+				mHandler.postDelayed(mLaunchTask, 100);
 			}
 		}
 

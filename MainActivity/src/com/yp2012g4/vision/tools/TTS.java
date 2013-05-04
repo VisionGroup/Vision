@@ -99,6 +99,26 @@ public class TTS implements OnInitListener {
     }
 
     /**
+     * speak the given string and halts the program until speak finished.
+     * 
+     * @param s
+     *            string to speak.
+     */
+    public void speakSync(String s) {
+	Log.i(TAG, "speak : " + s);
+	if (null == s)
+	    return;
+	// if (!isPureEnglise(s))
+	// _tts.speak("Hebrew.", _qm, null);
+	// else
+	_tts.speak(s, _qm, null);
+	while (_tts.isSpeaking()) {
+	    // Wait for the end of speak
+	}
+
+    }
+
+    /**
      * speak the given string, in synchronous mode.
      * 
      * @param s

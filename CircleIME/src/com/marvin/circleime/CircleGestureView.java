@@ -104,7 +104,6 @@ public class CircleGestureView extends KeyboardView {
 
 	@Override
 	public String toString() {
-	    // TODO Auto-generated method stub
 	    return "X: " + x + " Y: " + y;
 	}
     }

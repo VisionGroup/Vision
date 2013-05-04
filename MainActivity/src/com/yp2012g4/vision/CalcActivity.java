@@ -8,23 +8,28 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * @author Amir
+ * @version 2 This class represents a basic calculator
+ */
 public class CalcActivity extends VisionActivity {
 	private String calculated_number = "";
-	private String lhs_number = "";
-	private String rhs_number = "";
+	private String lhs_number = ""; // Left-Hand-Side of a calculated number
+	private String rhs_number = ""; // Right-Hand-Side of a calculated number
 	private Sign sign = Sign.NO_SIGN;
-	private String sign_to_read = "";
 	private boolean equalsPressed = false;
-	private boolean divisionByZero = true;
 	private boolean lhsDone = false;
-	private int buttonPressed = 0;
+	private static Double ERROR = 0.00001; // delta for identifying a zero FP
+											// number
+	private boolean isBadAction = false; // checks if a wrong operation has been
+											// made
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,6 @@ public class CalcActivity extends VisionActivity {
 	@Override
 	public void onShowPress(MotionEvent e) {
 		super.onShowPress(e);
-		++buttonPressed;
 	}
 
 	@Override
@@ -50,16 +54,18 @@ public class CalcActivity extends VisionActivity {
 			clickFlag = false;
 			return false;
 		}
+		if (isBadAction) { // if bad action, we do not want the tts to speak
+							// also the touched button text
+			isBadAction = false;
+			return false;
+		}
 		if (e.getAction() == MotionEvent.ACTION_UP) {
 			for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
 				if (isButtonType(entry.getKey())
 						&& (entry.getValue().contains((int) e.getRawX(),
-								(int) e.getRawY()))
-						&& (last_button_view != entry.getKey() || buttonPressed == 0)) {
+								(int) e.getRawY()))) {
 					speakOut(textToRead(entry.getKey()));
 				}
-			buttonPressed = 0;
-
 		}
 		return true;
 	}
@@ -74,6 +80,9 @@ public class CalcActivity extends VisionActivity {
 		return R.id.CalcScreen;
 	}
 
+	/**
+	 * Overridden method which implements the action triggered by a button lift
+	 */
 	@Override
 	public void onActionUp(View v) {
 		List<Integer> digits = Arrays.asList(R.id.digit0, R.id.digit1,
@@ -90,29 +99,26 @@ public class CalcActivity extends VisionActivity {
 			if (!equalsPressed) {
 				if (sign == Sign.NO_SIGN) { // in case no sign yet
 					lhs_number += ((TalkingButton) v).getText();
-				} else if (sign == Sign.DIV && v.getId() == R.id.digit0
-						&& divisionByZero) {
-					speakOut(getString(R.string.division_by_zero));
-					return;
 				} else {
 					rhs_number += ((TalkingButton) v).getText();
-					divisionByZero = false;
-
 				}
 				calculated_number += ((TalkingButton) v).getText();
 			} else {
 				speakOut(getString(R.string.bad_action));
+				isBadAction = true;
 			}
 		}
 		// it's a sign
 		if (signs.contains(v.getId())) {
-			if (lhs_number != "" && sign == Sign.NO_SIGN) {
+			if (lhs_number != "" && !lhs_number.endsWith(".")
+					&& sign == Sign.NO_SIGN) {
 				getSign(v.getId()); // updates sign to its corresponding enum
 									// number
 				calculated_number += ((TalkingButton) v).getText();
 				equalsPressed = false;
 			} else {
 				speakOut(getString(R.string.bad_action));
+				isBadAction = true;
 			}
 			lhsDone = true;
 		}
@@ -135,12 +141,15 @@ public class CalcActivity extends VisionActivity {
 
 			else {
 				speakOut(getString(R.string.bad_action));
+				isBadAction = true;
 			}
 			break;
 		case R.id.equals:
 			if (lhs_number != "" && rhs_number != "" && sign != Sign.NO_SIGN) {
-				Log.i("MyLog", lhs_number + "   " + rhs_number);
 				Double res = parseResult(lhs_number, rhs_number, sign);
+				if (res == null) { // in case of division by zero
+					return;
+				}
 				if (IsIntResult(res.toString())) {
 					calculated_number = ((Integer) res.intValue()).toString();
 				} else {
@@ -151,17 +160,12 @@ public class CalcActivity extends VisionActivity {
 				rhs_number = "";
 				sign = Sign.NO_SIGN;
 				equalsPressed = true;
-				divisionByZero = true;
 				lhsDone = false;
 				speakOut(calculated_number);
 			} else {
 				speakOut(getString(R.string.bad_action));
+				isBadAction = true;
 			}
-			break;
-		case R.id.result:
-			String s = (sign != Sign.NO_SIGN ? (lhs_number + " " + sign_to_read
-					+ " " + rhs_number) : (lhs_number));
-			speakOut(s);
 			break;
 		default:
 			break;
@@ -170,29 +174,46 @@ public class CalcActivity extends VisionActivity {
 		vb.vibrate(150);
 		((TalkingButton) findViewById(R.id.result)).setText(
 				calculated_number.toCharArray(), 0, calculated_number.length());
+		((TalkingButton) findViewById(R.id.result))
+				.setReadText(calculated_number);
 	}
 
+	/**
+	 * Updates sign to its corresponding enum number
+	 * 
+	 * @param id
+	 *            The sign button id, on which we clicked
+	 */
 	private void getSign(int id) {
 		switch (id) {
 		case R.id.plus:
 			sign = Sign.PLUS;
-			sign_to_read = getString(R.string.ReadPlus);
 			break;
 		case R.id.minus:
 			sign = Sign.MINUS;
-			sign_to_read = getString(R.string.ReadMinus);
 			break;
 		case R.id.multiplicity:
 			sign = Sign.TIMES;
-			sign_to_read = getString(R.string.ReadTimes);
 			break;
 		case R.id.div:
 			sign = Sign.DIV;
-			sign_to_read = getString(R.string.ReadDiv);
 			break;
 		}
 	}
 
+	/**
+	 * Parsing a calculation string and returning the result
+	 * 
+	 * @param lhs_number
+	 *            A string representing the Left-Hand-Side number of a
+	 *            calculation
+	 * @param rhs_number
+	 *            A string representing the Right-Hand-Side number of a
+	 *            calculation
+	 * @param sign
+	 *            The sign between the 2 numbers
+	 * @return The result (as a double) of the parsed string
+	 */
 	private Double parseResult(String lhs_number, String rhs_number, Sign sign) {
 		Double result = null;
 		Double lhs = Double.parseDouble(lhs_number);
@@ -208,6 +229,10 @@ public class CalcActivity extends VisionActivity {
 			result = lhs * rhs;
 			break;
 		case DIV:
+			if (Math.abs(rhs) < ERROR) {
+				speakOut(getString(R.string.division_by_zero));
+				break;
+			}
 			result = lhs / rhs;
 			break;
 		}
@@ -215,10 +240,22 @@ public class CalcActivity extends VisionActivity {
 
 	}
 
+	/**
+	 * Checks whether the calculated number is an integer or double
+	 * 
+	 * @param calculated_number
+	 *            The calculated number as a string
+	 * @return True if the calculated number is an integer. Else - false.
+	 */
 	private boolean IsIntResult(String calculated_number) {
 		return (calculated_number.endsWith(".0") ? true : false);
 	}
 
+	/**
+	 * 
+	 * Enum class representing the different signs in a calculation
+	 * 
+	 */
 	public enum Sign {
 		NO_SIGN, PLUS, MINUS, TIMES, DIV;
 

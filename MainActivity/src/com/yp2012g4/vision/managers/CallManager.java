@@ -16,7 +16,37 @@ import android.provider.CallLog;
 public class CallManager {
 
 	private Cursor cur = null;
+	private static final String[] projection = { CallLog.Calls.CACHED_NAME,
+				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+	
+	/**
+	 * Get a list of all the calls with the date, name and phone number
+	 * of each
+	 * 
+	 * @return list of all calls
+	 */
+	public static ArrayList<CallType> getAllCallsList(Context c) {
+		
+//		final String where = CallLog.Calls.TYPE + "="
+//				+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
+		Cursor cur;
+		try {
+			cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
+					projection, null, null, null);
+		} catch (final Exception e) {
+			return new ArrayList<CallType>();
+		}
+		final ArrayList<CallType> al = new ArrayList<CallType>();
+		return copyToList(c, cur, al);
+	}
 
+	private static ArrayList<CallType> copyToList(Context c, Cursor cur,
+			final ArrayList<CallType> al) {
+		while (cur.moveToNext())
+			al.add(new CallType(cur, c));
+		return al;
+	}
+	
 	/**
 	 * Get a list of all the missed calls with the date, name and phone number
 	 * of each
@@ -24,8 +54,6 @@ public class CallManager {
 	 * @return list of missed calls
 	 */
 	public static ArrayList<CallType> getMissedCallsList(Context c) {
-		final String[] projection = { CallLog.Calls.CACHED_NAME,
-				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
 		final String where = CallLog.Calls.TYPE + "="
 				+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
 		Cursor cur;
@@ -36,9 +64,7 @@ public class CallManager {
 			return new ArrayList<CallType>();
 		}
 		final ArrayList<CallType> al = new ArrayList<CallType>();
-		while (cur.moveToNext())
-			al.add(new CallType(cur, c));
-		return al;
+		return copyToList(c, cur, al);
 	}
 
 	/**
@@ -68,16 +94,12 @@ public class CallManager {
 	 * @return list of missed calls
 	 */
 	public CallType getLastOutgoingCall(Context c) {
-		String[] projection = { CallLog.Calls.CACHED_NAME,
-				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
-
 		try {
 			cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
 					projection, null, null, null);
 		} catch (Exception e) {
 			return null;
 		}
-
 		if (cur.moveToNext())
 			return new CallType(cur, c);
 		else
@@ -93,8 +115,6 @@ public class CallManager {
 	 * @return list of missed calls
 	 */
 	public ArrayList<CallType> getNextMissedCallsList(Context c, int number) {
-		String[] projection = { CallLog.Calls.CACHED_NAME,
-				CallLog.Calls.NUMBER, CallLog.Calls.DATE };
 		String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE
 				+ " AND NEW = 1";
 

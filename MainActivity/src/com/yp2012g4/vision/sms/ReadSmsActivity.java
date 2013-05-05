@@ -17,6 +17,11 @@ import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.managers.SmsType;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * @author Amir Blumental
+ * @version 2
+ */
 public class ReadSmsActivity extends VisionActivity {
   TalkingListView listView;
   SmsAdapter adapter;

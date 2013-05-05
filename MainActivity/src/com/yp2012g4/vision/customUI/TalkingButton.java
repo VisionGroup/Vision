@@ -68,10 +68,21 @@ public class TalkingButton extends Button implements Runnable {
     private String PrefsValue = "";
 
     // TODO: Check How to connect to foreground and background color settings
+    
+    /**
+     * Returns the value linked with the preference represented by the button.
+     * 
+     * @return String PrefsValue
+     */
     public String getPrefsValue() {
 	return PrefsValue;
     }
-
+    
+    /**
+     * Set the value linked with the preference represented by the button.
+     * 
+     * @param prefsValue
+     */
     public void setPrefsValue(String prefsValue) {
 	PrefsValue = prefsValue;
     }

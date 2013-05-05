@@ -37,7 +37,7 @@ public class VisionApplication extends Application {
    * c'tor. initialize color mapping.
    * 
    */
-  public VisionApplication() {
+  @SuppressWarnings("boxing") public VisionApplication() {
     color_to_string.put("BLACK", Color.parseColor("#000000"));
     color_to_string.put("WHITE", Color.parseColor("#FFFFFF"));
     color_to_string.put("RED", Color.parseColor("#B40404"));
@@ -115,7 +115,7 @@ public class VisionApplication extends Application {
    * @param v
    *          - main view of an activity
    */
-  public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
+  @SuppressWarnings("boxing") public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
     loadPrefs(act);
     mainView.setBackgroundColor(color_to_string.get(backgroundColor));
     for (View v : vs)
@@ -134,7 +134,7 @@ public class VisionApplication extends Application {
    * @param v
    *          - current view being pressed
    */
-  public static void visualFeedback(View v, Activity act) {
+  @SuppressWarnings("boxing") public static void visualFeedback(View v, Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
       if (textColor.equals("WHITE")) {
@@ -152,7 +152,7 @@ public class VisionApplication extends Application {
    * @param v
    *          - last view pressed
    */
-  public static void restoreColors(View v, Activity act) {
+  @SuppressWarnings("boxing") public static void restoreColors(View v, Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
       if (textColor.equals("WHITE")) {

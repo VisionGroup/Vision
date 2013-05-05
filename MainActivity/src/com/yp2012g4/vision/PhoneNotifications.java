@@ -44,8 +44,8 @@ public class PhoneNotifications {
   public static int signal = -1;
   SignalStrengthListener signalStrengthListener;
   
-  public PhoneNotifications(Context c) {
-    this.c = c;
+  public PhoneNotifications(Context c1) {
+    c = c1;
   }
   
   /**

@@ -52,7 +52,6 @@ public class VisionApplicationTest extends
 	
 	///////////////////////////////SYSTEM TESTS//////////////////////////////////
 	
-	@SuppressWarnings("boxing")
 	public void testSetFontSizeToLarge() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
@@ -70,7 +69,6 @@ public class VisionApplicationTest extends
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() > size);
 	}
 	
-	@SuppressWarnings("boxing")
 	public void testSetFontSizeToNormal() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
@@ -88,7 +86,6 @@ public class VisionApplicationTest extends
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() == size);
 	}
 	
-	@SuppressWarnings("boxing")
 	public void testSetFontSizeToSmall() {
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
 		solo.clickOnView(solo.getView(R.id.button_set_colors));

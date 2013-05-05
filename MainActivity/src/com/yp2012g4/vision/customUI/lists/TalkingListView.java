@@ -26,23 +26,23 @@ public class TalkingListView extends RelativeLayout {
   private int _numOfPages = 0;
   private Adapter _adapter;
   private View[] _dispView;
-  private final Context _context;
+//  private final Context _context;
   private boolean _init = false;
   
   public TalkingListView(Context context) {
     super(context);
-    _context = context;
+//    _context = context;
   }
   
   public TalkingListView(Context context, AttributeSet attrs) {
     super(context, attrs);
-    _context = context;
+//    _context = context;
     getAttr(context, attrs);
   }
   
   public TalkingListView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-    _context = context;
+//    _context = context;
     getAttr(context, attrs);
   }
   

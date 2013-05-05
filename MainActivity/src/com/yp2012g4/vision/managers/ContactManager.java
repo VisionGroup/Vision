@@ -15,8 +15,8 @@ public class ContactManager {
   String[] projection = new String[] { BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME,
       ContactsContract.Data.TIMES_CONTACTED, ContactsContract.Contacts.HAS_PHONE_NUMBER, ContactsContract.Contacts.LOOKUP_KEY };
   
-  public ContactManager(Context c) {
-    this.c = c;
+  public ContactManager(Context c1) {
+    c = c1;
   }
   
   /**
@@ -31,15 +31,14 @@ public class ContactManager {
         + " COLLATE LOCALIZED ASC LIMIT 10";
     Cursor cur = c.getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);
     ArrayList<ContactType> slist = new ArrayList<ContactType>();
-    if (cur.moveToFirst()) {
-      do {
+    if (cur.moveToFirst())
+      do
         try {
           slist.add(new ContactType(cur, c));
         } catch (IllegalArgumentException e) {
           // Ignore and go next
         }
-      } while (cur.moveToNext());
-    }
+      while (cur.moveToNext());
     return slist;
   }
   
@@ -54,15 +53,14 @@ public class ContactManager {
     String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
     Cursor cur = c.getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);
     ArrayList<ContactType> slist = new ArrayList<ContactType>();
-    if (cur.moveToFirst()) {
-      do {
+    if (cur.moveToFirst())
+      do
         try {
           slist.add(new ContactType(cur, c));
         } catch (IllegalArgumentException e) {
           // Ignore and go next
         }
-      } while (cur.moveToNext());
-    }
+      while (cur.moveToNext());
     return slist;
   }
   

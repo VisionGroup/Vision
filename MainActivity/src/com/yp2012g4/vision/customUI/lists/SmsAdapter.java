@@ -54,8 +54,8 @@ public class SmsAdapter extends BaseAdapter {
       bodyView.setReadText("");
       timeView.setReadText("");
       return v;
-    } else
-      msg = _data.get(position);
+    }
+    msg = _data.get(position);
     String person = msg.getPerson();
     if (person == "")
       person = msg.getAddress();

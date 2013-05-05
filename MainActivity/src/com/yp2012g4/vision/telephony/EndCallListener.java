@@ -24,8 +24,8 @@ public class EndCallListener extends PhoneStateListener {
    * @param context
    *          the application to return to when the phone call finishes
    */
-  public EndCallListener(Context context) {
-    this.context = context;
+  public EndCallListener(Context c) {
+    context = c;
   }
   
   @Override public void onCallStateChanged(int state, String incomingNumber) {

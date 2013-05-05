@@ -84,7 +84,7 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
 		assertEquals(((TalkingButton)solo.getView(R.id.number)).getText().toString(), "4");
 	}
 	
-	public void testGetViewId() {
+	public static void testGetViewId() {
 		VisionActivity screen = new DialScreen();
 		assertEquals(screen.getViewId(), R.id.DialScreen);
 	}

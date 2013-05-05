@@ -92,8 +92,7 @@ public class CallManager {
     }
     if (cur.moveToNext())
       return new CallType(cur, c);
-    else
-      return null;
+    return null;
   }
   
   /**
@@ -114,9 +113,8 @@ public class CallManager {
       return new ArrayList<CallType>();
     }
     ArrayList<CallType> al = new ArrayList<CallType>();
-    for (int i = 0; (i < number) && (cur.moveToNext()); i++) {
+    for (int i = 0; i < number && cur.moveToNext(); i++)
       al.add(new CallType(cur, c));
-    }
     return al;
   }
   

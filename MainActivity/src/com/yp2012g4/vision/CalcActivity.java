@@ -186,11 +186,11 @@ public class CalcActivity extends VisionActivity {
    *          The sign between the 2 numbers
    * @return The result (as a double) of the parsed string
    */
-  private Double parseResult(String lhs_number, String rhs_number, Sign sign) {
+  private Double parseResult(String lhs_num, String rhs_num, Sign s) {
     Double result = null;
-    Double lhs = Double.parseDouble(lhs_number);
-    Double rhs = Double.parseDouble(rhs_number);
-    switch (sign) {
+    Double lhs = Double.parseDouble(lhs_num);
+    Double rhs = Double.parseDouble(rhs_num);
+    switch (s) {
       case PLUS:
         result = lhs + rhs;
         break;
@@ -206,6 +206,8 @@ public class CalcActivity extends VisionActivity {
           break;
         }
         result = lhs / rhs;
+        break;
+      default:
         break;
     }
     return result;

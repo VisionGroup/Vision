@@ -31,12 +31,12 @@ public class ContactType {
   /**
    * constructor with fields
    * 
-   * @param phone
-   * @param contactName
+   * @param phone1
+   * @param contactName1
    */
-  public ContactType(String phone, String contactName) {
-    this.phone = phone;
-    this.contactName = contactName;
+  public ContactType(String phone1, String contactName1) {
+    phone = phone1;
+    contactName = contactName1;
   }
   
   public synchronized String getPhone() {

@@ -23,10 +23,10 @@ public class MultiFingerGestureDetector extends GestureDetector {
   /**
    * set multi touch run class
    * 
-   * @param multiTouchRun
+   * @param multiTouchRun1
    */
-  public synchronized void setMultiTouchRun(MultiTouchRun multiTouchRun) {
-    this.multiTouchRun = multiTouchRun;
+  public synchronized void setMultiTouchRun(MultiTouchRun multiTouchRun1) {
+    multiTouchRun = multiTouchRun1;
   }
   
   public MultiFingerGestureDetector(Context context, OnGestureListener listener, Handler handler, boolean unused) {

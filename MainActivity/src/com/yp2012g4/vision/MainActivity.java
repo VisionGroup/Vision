@@ -16,8 +16,7 @@ import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class MainActivity extends VisionActivity {
-  private static String TAG = "vision:MainActivity";
-  
+//  private static String TAG = "vision:MainActivity";
   @Override public int getViewId() {
     return R.id.MainActivityView;
   }

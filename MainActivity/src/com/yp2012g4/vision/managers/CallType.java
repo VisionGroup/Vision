@@ -16,7 +16,7 @@ public class CallType {
   private String mNumber = "";
   private String mType = "";
   private String mName = "";
-  private Date mDate;
+  private final Date mDate;
   private String mNumberType = "";
   
   public CallType(String number, String type, String name, Date date, String numberType) {

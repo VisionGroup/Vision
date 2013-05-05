@@ -106,6 +106,7 @@ public class DisplaySettingsActivity extends VisionActivity {
       case R.id.calculator:
         intent = new Intent(this, CalcActivity.class);
         startActivity(intent/* .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) */);
+        break;
       default:
         break;
     }

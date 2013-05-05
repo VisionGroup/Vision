@@ -23,7 +23,7 @@ public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
   CallUtils callUtils;
   private ListenToPhoneState listener;
-  private ContactManager contact = new ContactManager(this);
+  private final ContactManager contact = new ContactManager(this);
   Boolean rang = Boolean.valueOf(false);
   TelephonyManager tManager;
   
@@ -119,22 +119,21 @@ public class IncomingCallActivity extends VisionActivity {
    * 
    * @param number
    */
-  void updateNumberButton(TalkingButton tB, String s) {
+  static void updateNumberButton(TalkingButton tB, String s) {
     tB.setText(s.toCharArray(), 0, s.length());
     tB.setReadText(s);
     tB.setContentDescription(s);
   }
   
-  @Override protected void onResume() {
+  @SuppressWarnings("null") @Override protected void onResume() {
     Log.d(TAG, "onResume Incoming call activity");
     super.onResume();
     setContentView(R.layout.activity_incoming_call);
     setPhoneStateListener();
     String incomingNumber = "", incomingName = "";
     final Bundle extras = getIntent().getExtras();
-    if (extras == null) {
+    if (extras == null)
       Log.d(TAG, "extras == null");
-    }
     try {
       rang = Boolean.valueOf(extras.getBoolean(CallUtils.RANG_KEY));
     } catch (final Exception e) {
@@ -143,8 +142,9 @@ public class IncomingCallActivity extends VisionActivity {
     try {
       incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
       if (incomingNumber == null)
-        incomingNumber = ((new CallManager()).getLastOutgoingCall(this)).getNumber();
+        incomingNumber = new CallManager().getLastOutgoingCall(this).getNumber();
     } catch (Exception e) {
+      // catching all the rest
     }
     updateNumberButton((TalkingButton) findViewById(R.id.number), incomingNumber);
     incomingName = contact.getNameFromPhone(incomingNumber);

@@ -118,7 +118,7 @@ public class VisionApplication extends Application {
   public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
     loadPrefs(act);
     mainView.setBackgroundColor(color_to_string.get(backgroundColor));
-    for (View v : vs) {
+    for (View v : vs)
       if (v instanceof TalkingImageButton) {
         if (textColor.equals("WHITE"))
           ((ImageView) v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
@@ -126,7 +126,6 @@ public class VisionApplication extends Application {
           ((ImageView) v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
         ((TalkingImageButton) v).setBackgroundColor(color_to_string.get(backgroundColor));
       }
-    }
   }
   
   /**
@@ -143,9 +142,8 @@ public class VisionApplication extends Application {
         ((TalkingImageButton) v).setBackgroundColor(color_to_string.get("LIGHT_PURPLE"));
       } else
         ((ImageView) v).setColorFilter(color_to_string.get("LIGHT_PURPLE"), Mode.DARKEN);
-    } else if (v instanceof TextView) {
+    } else if (v instanceof TextView)
       ((TextView) v).setBackgroundColor(color_to_string.get("LIGHT_PURPLE"));
-    }
   }
   
   /**
@@ -164,13 +162,14 @@ public class VisionApplication extends Application {
         ((ImageView) v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
     } else if (v instanceof TextView) {
       String bg = backgroundColor;
+      // TODO sparta
       if (v.getId() == R.id.WhiteRed)
         bg = "RED";
       else if (v.getId() == R.id.WhiteGreen)
         bg = "GREEN";
       else if (v.getId() == R.id.WhiteBlue)
         bg = "BLUE";
-      else if (((View) (v.getParent().getParent())).getId() == R.id.ColorSettingsActivity)
+      else if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
         bg = "BLACK";
       ((Button) v).setBackgroundColor(color_to_string.get(bg));
     }

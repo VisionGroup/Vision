@@ -129,15 +129,15 @@ public class PhoneStatusActivity extends VisionActivity {
   public String signalToString() {
     final int signal = PhoneNotifications.getSignalStrength();
     Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
+    // TODO sparta constants
     if (signal <= 2 || signal == 99)
       return getString(R.string.phoneStatus_message_noSignal_read);
-    else if (signal >= 12)
+    if (signal >= 12)
       return getString(R.string.phoneStatus_message_veryGoodSignal_read);
-    else if (signal >= 8)
+    if (signal >= 8)
       return getString(R.string.phoneStatus_message_goodSignal_read);
-    else if (signal >= 5)
+    if (signal >= 5)
       return getString(R.string.phoneStatus_message_poorSignal_read);
-    else
-      return getString(R.string.phoneStatus_message_veryPoorSignal_read);
+    return getString(R.string.phoneStatus_message_veryPoorSignal_read);
   }
 }

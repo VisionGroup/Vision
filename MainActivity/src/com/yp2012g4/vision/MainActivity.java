@@ -98,6 +98,7 @@ public class MainActivity extends VisionActivity {
     if (!isCharging && batteryLevel < 0.3)
       s += getString(R.string.low_battery);
     final int signalS = PhoneNotifications.getSignalStrength();
+    // TODO sparta constants
     if (signalS < 2)
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS < 5)

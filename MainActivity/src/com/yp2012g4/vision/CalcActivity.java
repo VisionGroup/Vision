@@ -218,7 +218,7 @@ public class CalcActivity extends VisionActivity {
    *          The calculated number as a string
    * @return True if the calculated number is an integer. Else - false.
    */
-  private boolean IsIntResult(String calculated_number) {
+  private static boolean IsIntResult(String calculated_number) {
     return calculated_number.endsWith(".0") ? true : false;
   }
   

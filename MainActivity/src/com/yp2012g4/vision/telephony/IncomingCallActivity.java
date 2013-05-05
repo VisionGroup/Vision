@@ -142,6 +142,7 @@ public class IncomingCallActivity extends VisionActivity {
       if (incomingNumber == null)
         incomingNumber = new CallManager().getLastOutgoingCall(this).getNumber();
     } catch (Exception e) {
+      // Silent exception is OK
     }
     updateNumberButton((TalkingButton) findViewById(R.id.number), incomingNumber);
     incomingName = contact.getNameFromPhone(incomingNumber);

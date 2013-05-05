@@ -36,10 +36,8 @@ public class MainActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (clickFlag) {
-      clickFlag = false;
-      return false;
-    }
+    if (clickFlag)
+      return clickFlag = false;
     Intent intent = null;
     final View button = getButtonByMode();
     switch (button.getId()) {

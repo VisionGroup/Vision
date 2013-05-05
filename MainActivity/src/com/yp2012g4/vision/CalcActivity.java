@@ -46,10 +46,8 @@ public class CalcActivity extends VisionActivity {
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
-    if (clickFlag) {
-      clickFlag = false;
-      return false;
-    }
+    if (clickFlag)
+      return clickFlag = false;
     if (isBadAction) { // if bad action, we do not want the tts to speak
       // also the touched button text
       isBadAction = false;

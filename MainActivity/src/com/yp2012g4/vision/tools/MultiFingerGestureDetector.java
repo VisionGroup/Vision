@@ -86,8 +86,6 @@ public class MultiFingerGestureDetector extends GestureDetector {
           return true;
         }
         break;
-      default:
-        break;
     }
     return false;
   }

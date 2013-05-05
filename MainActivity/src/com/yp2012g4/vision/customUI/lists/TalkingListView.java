@@ -216,9 +216,7 @@ public class TalkingListView extends RelativeLayout {
    * @return true if the item currently displayed.
    */
   public boolean isItemDisplayed(int pos) {
-    if (pos < _page * _rows * _cols)
-      return false;
-    if (pos >= _page * _rows * _cols + _rows * _cols)
+    if (pos < _page * _rows * _cols || pos >= _page * _rows * _cols + _rows * _cols)
       return false;
     return true;
   }

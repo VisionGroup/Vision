@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -49,15 +50,13 @@ public class ColorSettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (clickFlag) {
-      clickFlag = false;
-      return false;
-    }
+    if (clickFlag)
+      return clickFlag = false;
     View button = getButtonByMode();
     if (button instanceof TalkingButton) {
       speakOut(((TalkingButton) button).getReadText());
       String val = ((TalkingButton) button).getPrefsValue();
-      if (!(val.equals("")))
+      if (!val.equals(""))
         changeSettings(val);
     }
     while (_t.isSpeaking() == true) {

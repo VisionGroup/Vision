@@ -52,16 +52,13 @@ public class DialScreen extends VisionActivity {
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
-    if (clickFlag || curr_view.getId() == R.id.dialer_sms_button) {
-      clickFlag = false;
-      return false;
-    }
+    if (clickFlag || curr_view.getId() == R.id.dialer_sms_button)
+      return clickFlag = false;
     if (e.getAction() == MotionEvent.ACTION_UP) {
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-        if (isButtonType(entry.getKey()) && (entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
-            && (last_button_view != entry.getKey() || buttonPressed == 0)) {
+        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())
+            && (last_button_view != entry.getKey() || buttonPressed == 0))
           speakOut(textToRead(entry.getKey()));
-        }
       buttonPressed = 0;
     }
     return true;
@@ -115,7 +112,7 @@ public class DialScreen extends VisionActivity {
         flag = 1;
       }
       // a number or sign has been chosen
-      if (((View) (v.getParent().getParent())).getId() == R.id.DialScreenNumbers) {
+      if (((View) v.getParent().getParent()).getId() == R.id.DialScreenNumbers) {
         dialed_number += ((TalkingButton) v).getText();
         read_number = read_number + ((TalkingButton) v).getText() + " ";
         flag = 1;

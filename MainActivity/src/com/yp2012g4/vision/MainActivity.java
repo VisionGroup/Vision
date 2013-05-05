@@ -12,6 +12,7 @@ import com.yp2012g4.vision.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -35,10 +36,8 @@ public class MainActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (clickFlag) {
-      clickFlag = false;
-      return false;
-    }
+    if (clickFlag)
+      return clickFlag = false;
     Intent intent = null;
     final View button = getButtonByMode();
     switch (button.getId()) {
@@ -64,8 +63,8 @@ public class MainActivity extends VisionActivity {
         intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
         break;
       case R.id.read_sms_button:
-        // intent = new Intent(MainActivity.this, ReadSmsActivity.class);
-        intent = new Intent(MainActivity.this, CallListActivity.class);
+        intent = new Intent(MainActivity.this, ReadSmsActivity.class);
+        // intent = new Intent(MainActivity.this, CallListActivity.class);
         break;
       default:
         break;

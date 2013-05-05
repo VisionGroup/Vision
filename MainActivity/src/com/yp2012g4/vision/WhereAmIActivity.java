@@ -122,8 +122,6 @@ public class WhereAmIActivity extends VisionActivity {
         speakOut(text);
         l.unlock();
         break;
-      default:
-        break;
     }
     return false;
   }

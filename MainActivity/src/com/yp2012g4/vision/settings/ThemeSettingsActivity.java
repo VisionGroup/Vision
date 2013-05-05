@@ -48,8 +48,6 @@ public class ThemeSettingsActivity extends VisionActivity {
         VisionApplication.savePrefs("TEXT SIZE", ((TalkingButton) button).getPrefsValue(), this);
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
-      default:
-        break;
     }
     return false;
   }

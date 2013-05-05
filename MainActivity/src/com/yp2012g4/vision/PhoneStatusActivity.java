@@ -103,8 +103,6 @@ public class PhoneStatusActivity extends VisionActivity {
       case R.id.button_getMissedCalls:
         getMissedCalls();
         break;
-      default:
-        break;
     }
     return false;
   }

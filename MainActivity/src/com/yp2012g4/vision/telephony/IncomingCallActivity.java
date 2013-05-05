@@ -68,10 +68,8 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     callUtils.silenceRinger();
-    if (clickFlag) {
-      clickFlag = false;
-      return false;
-    }
+    if (clickFlag)
+      return clickFlag = false;
     switch (curr_view.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -119,13 +117,13 @@ public class IncomingCallActivity extends VisionActivity {
    * 
    * @param number
    */
-  static void updateNumberButton(TalkingButton tB, String s) {
+  void updateNumberButton(TalkingButton tB, String s) {
     tB.setText(s.toCharArray(), 0, s.length());
     tB.setReadText(s);
     tB.setContentDescription(s);
   }
   
-  @SuppressWarnings("null") @Override protected void onResume() {
+  @Override protected void onResume() {
     Log.d(TAG, "onResume Incoming call activity");
     super.onResume();
     setContentView(R.layout.activity_incoming_call);
@@ -144,7 +142,7 @@ public class IncomingCallActivity extends VisionActivity {
       if (incomingNumber == null)
         incomingNumber = new CallManager().getLastOutgoingCall(this).getNumber();
     } catch (Exception e) {
-      // catching all the rest
+      // Silent exception is OK
     }
     updateNumberButton((TalkingButton) findViewById(R.id.number), incomingNumber);
     incomingName = contact.getNameFromPhone(incomingNumber);

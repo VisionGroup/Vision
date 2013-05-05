@@ -204,9 +204,11 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
         break;
       case MotionEvent.ACTION_UP:
         Log.i(TAG, "onTwoFingerDoubleTap:ACTION_UP");
-        if (!mSeparateTouches)
+        if (!mSeparateTouches) {
           mSeparateTouches = true;
-        else if (mTwoFingerTapCount == 2 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
+          break;
+        }
+        if (mTwoFingerTapCount == 2 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
           // open back door to tools.
           final Intent intent = new Intent(Settings.ACTION_SETTINGS);
           intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -214,9 +216,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
           mFirstDownTime = 0;
           return true;
         }
-        break;
-      default:
-        break;
     }
     return false;
   }

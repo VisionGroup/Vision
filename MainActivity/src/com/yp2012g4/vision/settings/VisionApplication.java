@@ -46,13 +46,31 @@ public class VisionApplication extends Application {
     color_to_string.put("LIGHT_PURPLE", Color.parseColor("#A901DB"));
   }
   
+  /**
+   * load the text size, text color and bg color from xml file
+   * 
+   * @param act
+   *          - current activity
+   * 
+   */  
   public static void loadPrefs(Activity act) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
 		textSize = sp.getString("TEXT SIZE", textSize);
 		textColor = sp.getString("TEXT COLOR", textColor);
 		backgroundColor = sp.getString("BG COLOR", backgroundColor);
   }
-  
+
+  /**
+   * save a certain preference to the xml file
+   * 
+   * @param key
+   *          - preference name
+   * @param value
+   *          - value to be saved
+   * @param act
+   *          - current activity
+   * 
+   */  
   public static void savePrefs(String key, String value, Activity act) {
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
 		Editor edit = sp.edit();

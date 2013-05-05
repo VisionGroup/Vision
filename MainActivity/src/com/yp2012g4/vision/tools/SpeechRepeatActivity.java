@@ -1,6 +1,5 @@
 package com.yp2012g4.vision.tools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.view.View;
@@ -35,9 +33,9 @@ public class SpeechRepeatActivity extends Activity implements OnClickListener,
 															// tag here***
 	// TTS variables
 	// variable for checking TTS engine data on user device
-	private int MY_DATA_CHECK_CODE = 0;
+	//private int MY_DATA_CHECK_CODE = 0;
 	// Text To Speech instance
-	private TextToSpeech repeatTTS;
+	//private TextToSpeech repeatTTS;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,13 +124,13 @@ public class SpeechRepeatActivity extends Activity implements OnClickListener,
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    //check speech recognition result
-	    if (requestCode == VR_REQUEST && resultCode == RESULT_OK)
+	    /*if (requestCode == VR_REQUEST && resultCode == RESULT_OK)
 	    {
 	        //store the returned word list as an ArrayList
-	        ArrayList<String> suggestedWords = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+	        //ArrayList<String> suggestedWords = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 	        //set the retrieved list to display in the ListView using an ArrayAdapter
 	        //wordList.setAdapter(new ArrayAdapter<String> (this, R.layout.word, suggestedWords));
-	    }
+	    }*/
 	    //tss code here
 	    //call superclass method
 	    super.onActivityResult(requestCode, resultCode, data);

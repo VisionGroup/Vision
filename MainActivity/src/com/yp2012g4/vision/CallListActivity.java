@@ -34,9 +34,7 @@ public class CallListActivity extends VisionActivity {
 
 	listView = (TalkingListView) findViewById(R.id.TalkingCallListView);
 	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-	// final ArrayList<CallType> data =
-	// CallManager.getMissedCallsList(this);
-	final ArrayList<CallType> data = CallManager.dood(this);
+	final ArrayList<CallType> data = CallManager.getAllCallsList(this);
 	Log.d(TAG, "Received " + data.size() + " Calls from CallManager.");
 	adapter = new CallAdapter(data, this);
 	listView.setAdapter(adapter);

@@ -141,8 +141,7 @@ public class TalkingListView extends RelativeLayout {
   /**
    * Initialize the layout.
    */
-  @Override
-  protected void onLayout(boolean changed, int l, int t, int r, int b) {
+  @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
     // TODO Auto-generated method stub
     super.onLayout(changed, l, t, r, b);
     if (_adapter != null && _init != true) {

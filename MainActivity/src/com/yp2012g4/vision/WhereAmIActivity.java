@@ -37,8 +37,7 @@ public class WhereAmIActivity extends VisionActivity {
   String text;
   Date lastUpdate;
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.where_am_i_Activity;
   }
   
@@ -66,8 +65,7 @@ public class WhereAmIActivity extends VisionActivity {
     f = new LocationFinder(manager);
     log("Got location finder");
     providerRunning = f.run(new LocationHandler() {
-      @Override
-      public void handleLocation(double longitude, double latitude, String prov, String address) {
+      @Override public void handleLocation(double longitude, double latitude, String prov, String address) {
         makeUseOfNewLocation(longitude, latitude, prov, address);
       }
     });
@@ -82,8 +80,7 @@ public class WhereAmIActivity extends VisionActivity {
     l.unlock();
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
     init(0, getString(R.string.where_am_i_screen), getString(R.string.where_am_i_help));
@@ -100,23 +97,20 @@ public class WhereAmIActivity extends VisionActivity {
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(s);
   }
   
-  @Override
-  protected void onResume() {
+  @Override protected void onResume() {
     log("onResume");
     initialize();
     super.onResume();
   }
   
-  @Override
-  protected void onPause() {
+  @Override protected void onPause() {
     log("onPause");
     f.stop();
     log("Location finder stopped");
     super.onPause();
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     View button = getButtonByMode();

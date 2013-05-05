@@ -52,14 +52,14 @@ public class VisionApplication extends Application {
    * @param act
    *          - current activity
    * 
-   */  
+   */
   public static void loadPrefs(Activity act) {
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
-		textSize = sp.getString("TEXT SIZE", textSize);
-		textColor = sp.getString("TEXT COLOR", textColor);
-		backgroundColor = sp.getString("BG COLOR", backgroundColor);
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
+    textSize = sp.getString("TEXT SIZE", textSize);
+    textColor = sp.getString("TEXT COLOR", textColor);
+    backgroundColor = sp.getString("BG COLOR", backgroundColor);
   }
-
+  
   /**
    * save a certain preference to the xml file
    * 
@@ -70,12 +70,12 @@ public class VisionApplication extends Application {
    * @param act
    *          - current activity
    * 
-   */  
+   */
   public static void savePrefs(String key, String value, Activity act) {
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
-		Editor edit = sp.edit();
-		edit.putString(key, value);
-		edit.commit();
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
+    Editor edit = sp.edit();
+    edit.putString(key, value);
+    edit.commit();
   }
   
   /**
@@ -116,7 +116,7 @@ public class VisionApplication extends Application {
    *          - main view of an activity
    */
   public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
-	loadPrefs(act);
+    loadPrefs(act);
     mainView.setBackgroundColor(color_to_string.get(backgroundColor));
     for (View v : vs) {
       if (v instanceof TalkingImageButton) {
@@ -132,10 +132,11 @@ public class VisionApplication extends Application {
   /**
    * Highlighting buttons when pressed
    * 
-   * @param v - current view being pressed
+   * @param v
+   *          - current view being pressed
    */
   public static void visualFeedback(View v, Activity act) {
-	loadPrefs(act);
+    loadPrefs(act);
     if (v instanceof TalkingImageButton) {
       if (textColor.equals("WHITE")) {
         ((ImageView) v).setColorFilter(color_to_string.get("LIGHT_PURPLE"), Mode.LIGHTEN);
@@ -150,10 +151,11 @@ public class VisionApplication extends Application {
   /**
    * Remove button highlight when the button is no longer pressed
    * 
-   * @param v - last view pressed
+   * @param v
+   *          - last view pressed
    */
   public static void restoreColors(View v, Activity act) {
-	loadPrefs(act);
+    loadPrefs(act);
     if (v instanceof TalkingImageButton) {
       if (textColor.equals("WHITE")) {
         ((ImageView) v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
@@ -180,8 +182,8 @@ public class VisionApplication extends Application {
    * @param act
    *          - current activity
    */
-  public static void setThemeToActivity(Activity act) { 
-	loadPrefs(act);
+  public static void setThemeToActivity(Activity act) {
+    loadPrefs(act);
     if (textSize.equals("LARGE")) {
       if (backgroundColor.equals("BLUE"))
         act.setTheme(R.style.Theme_LargeWhiteBlue);

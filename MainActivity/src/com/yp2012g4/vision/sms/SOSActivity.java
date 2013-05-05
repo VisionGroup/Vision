@@ -33,8 +33,7 @@ public class SOSActivity extends VisionActivity {
   final int maxLengthOfAddress = 100;
   static final String TAG = "vision:SOSActivity";
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.SOS_textview;
   }
   
@@ -42,8 +41,7 @@ public class SOSActivity extends VisionActivity {
    * Send an SOS message
    */
   public Runnable sendSOSMessage = new Runnable() {
-    @Override
-    public void run() {
+    @Override public void run() {
       String messageToSend = "I need your help!";
       l.lock();
       if (latitude != 10000) {
@@ -73,8 +71,7 @@ public class SOSActivity extends VisionActivity {
     }
   };
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     View button = getButtonByMode();
@@ -89,8 +86,7 @@ public class SOSActivity extends VisionActivity {
     return false;
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sos);
     init(0, getString(R.string.sos_screen), getString(R.string.sos_help));
@@ -107,22 +103,19 @@ public class SOSActivity extends VisionActivity {
     l.unlock();
   }
   
-  @Override
-  protected void onStart() {
+  @Override protected void onStart() {
     super.onStart();
     final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     f = new LocationFinder(manager);
     final LocationHandler h = new LocationHandler() {
-      @Override
-      public void handleLocation(double lon, double lat, String provider, String addr) {
+      @Override public void handleLocation(double lon, double lat, String provider, String addr) {
         makeUseOfNewLocation(lon, lat, provider, addr);
       }
     };
     f.run(h);
   }
   
-  @Override
-  protected void onStop() {
+  @Override protected void onStop() {
     f.stop();
     super.onStop();
   }

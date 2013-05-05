@@ -53,8 +53,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * @param toolTip
    *          The tool user manual
    */
-  @Deprecated
-  public void init(Activity activity, int icon, String name, String toolTip) {
+  @Deprecated public void init(Activity activity, int icon, String name, String toolTip) {
     // _t = new TTS(activity, (OnInitListener) activity);
     _icon = icon;
     _name = name;
@@ -80,8 +79,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Dealing control bar on clicks
    */
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     final Intent intent = new Intent(this, MainActivity.class);
     View tempLast = last_button_view;
     View button = getButtonByMode();
@@ -115,14 +113,12 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return true;
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     // TODO Auto-generated method stub
     return 0;
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // hide titlebar of application
     // must be before setting the layout
@@ -133,8 +129,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
   }
   
-  @Override
-  public void onBackPressed() {
+  @Override public void onBackPressed() {
     speakOut(getString(R.string.previous_screen));
     mHandler.postDelayed(mLaunchTask, 1000);
   }
@@ -161,10 +156,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
     View returnButton = curr_view;
     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     String buttonMode = sp.getString("BUTTON MODE", "regular");
-	if (buttonMode.equals("sticky") && last_button_view != null) {
-          returnButton = last_button_view;
-          last_button_view = null;
-	}
+    if (buttonMode.equals("sticky") && last_button_view != null) {
+      returnButton = last_button_view;
+      last_button_view = null;
+    }
     return returnButton;
   }
 }

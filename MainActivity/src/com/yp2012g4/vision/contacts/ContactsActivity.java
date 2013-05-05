@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.speech.RecognizerIntent;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -34,16 +33,13 @@ public class ContactsActivity extends VisionActivity {
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
-
-	private static final int VR_REQUEST = 999;
-
-  @Override
-  public int getViewId() {
+  private static final int VR_REQUEST = 999;
+  
+  @Override public int getViewId() {
     return R.id.ContactsActivity;
   }
-
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     if (super.onSingleTapUp(e))
       return true;
@@ -67,19 +63,15 @@ public class ContactsActivity extends VisionActivity {
         break;
       case R.id.contacts_call:
         final Intent call = new Intent(Intent.ACTION_CALL);
-			call.setData(Uri.parse("tel:"
-					+ contacts.get(currentContact).getPhone()));
+        call.setData(Uri.parse("tel:" + contacts.get(currentContact).getPhone()));
         startActivity(call);
-			// PhoneNotifications.DeleteCallLogByNumber(this,
-			// contacts.get(currentContact).getPhone());
-			CallManager.DeleteCallLogByNumber(this, contacts
-					.get(currentContact).getPhone());
+        // PhoneNotifications.DeleteCallLogByNumber(this,
+        // contacts.get(currentContact).getPhone());
+        CallManager.DeleteCallLogByNumber(this, contacts.get(currentContact).getPhone());
         break;
       case R.id.contacts_sms:
-			final Intent sms = new Intent(ContactsActivity.this,
-					QuickSMSActivity.class);
-			sms.putExtra(QuickSMSActivity.NUMBER_KEY,
-					contacts.get(currentContact).getPhone());
+        final Intent sms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
+        sms.putExtra(QuickSMSActivity.NUMBER_KEY, contacts.get(currentContact).getPhone());
         startActivity(sms);
         break;
       default:
@@ -87,15 +79,12 @@ public class ContactsActivity extends VisionActivity {
     }
     return false;
   }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts);
-		init(0, getString(R.string.contacts_screen),
-				getString(R.string.contacts_screen_help));
-		final ContactManager contactManager = new ContactManager(
-				getApplicationContext());
+    init(0, getString(R.string.contacts_screen), getString(R.string.contacts_screen_help));
+    final ContactManager contactManager = new ContactManager(getApplicationContext());
     final Bundle extras = getIntent().getExtras();
     String listType = "all";
     if (extras != null)
@@ -106,21 +95,17 @@ public class ContactsActivity extends VisionActivity {
       }
     if (listType.equalsIgnoreCase("all")) {
       contacts = contactManager.getAllContacts();
-			findViewById(getViewId()).setContentDescription(
-					"Contact list screen");
+      findViewById(getViewId()).setContentDescription("Contact list screen");
     } else if (listType.equalsIgnoreCase("favorits")) {
       contacts = contactManager.getFavoriteContacts();
-			findViewById(getViewId()).setContentDescription(
-					"Favorit contacts screen");
+      findViewById(getViewId()).setContentDescription("Favorit contacts screen");
     } else if (listType.equalsIgnoreCase("test")) {
-			findViewById(getViewId()).setContentDescription(
-					"Test contacts screen");
+      findViewById(getViewId()).setContentDescription("Test contacts screen");
       contacts = ContactManager.getTestContacts();
     }
     setContact();
-
   }
-
+  
   // @Override public boolean onCreateOptionsMenu(Menu menu) {
   // // Inflate the menu; this adds items to the action bar if it is present.
   // getMenuInflater().inflate(R.menu.activity_read_sms, menu);
@@ -144,26 +129,24 @@ public class ContactsActivity extends VisionActivity {
     } else
       speakOut(getString(R.string.no_messages));
   }
-
-
-	/**
-	 * onActivityResults handles: - retrieving results of speech recognition
-	 * listening - retrieving result of TTS data check
-	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// check speech recognition result
-		if (requestCode == VR_REQUEST && resultCode == RESULT_OK) {
-			// store the returned word list as an ArrayList
-			//ArrayList<String> suggestedWords = data
-				//	.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-			// set the retrieved list to display in the ListView using an
-			// ArrayAdapter
-			// wordList.setAdapter(new ArrayAdapter<String> (this,
-			// R.layout.word, suggestedWords));
-		}
-		// tss code here
-		// call superclass method super.onActivityResult(requestCode,
-		// resultCode, data);
-	}
+  
+  /**
+   * onActivityResults handles: - retrieving results of speech recognition
+   * listening - retrieving result of TTS data check
+   */
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    // check speech recognition result
+    if (requestCode == VR_REQUEST && resultCode == RESULT_OK) {
+      // store the returned word list as an ArrayList
+      // ArrayList<String> suggestedWords = data
+      // .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+      // set the retrieved list to display in the ListView using an
+      // ArrayAdapter
+      // wordList.setAdapter(new ArrayAdapter<String> (this,
+      // R.layout.word, suggestedWords));
+    }
+    // tss code here
+    // call superclass method super.onActivityResult(requestCode,
+    // resultCode, data);
+  }
 }

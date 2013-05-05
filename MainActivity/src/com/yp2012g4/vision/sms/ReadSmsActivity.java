@@ -29,8 +29,7 @@ public class ReadSmsActivity extends VisionActivity {
   private static final int SWIPE_THRESHOLD = 100;
   private static final int SWIPE_VELOCITY_THRESHOLD = 100;
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_read_sms);
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
@@ -41,13 +40,11 @@ public class ReadSmsActivity extends VisionActivity {
     listView.setAdapter(adapter);
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.ReadSmsScreen;
   }
   
-  @Override
-  public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
     float diffY = e2.getY() - e1.getY();
     float diffX = e2.getX() - e1.getX();
     if (Math.abs(diffX) > Math.abs(diffY))
@@ -61,8 +58,7 @@ public class ReadSmsActivity extends VisionActivity {
     return super.onFling(e1, e2, velocityX, velocityY);
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     Intent i = null;

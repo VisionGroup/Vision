@@ -45,16 +45,14 @@ public class AlarmActivity extends VisionActivity {
     startActivityForResult(i, REQUEST_CODE);
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.AlarmActivity;
   }
   
   /**
    * This will be called when the result from the set clock activity returnes
    */
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == REQUEST_CODE) {
       // if user pressed back
@@ -84,8 +82,7 @@ public class AlarmActivity extends VisionActivity {
     }
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     View button = getButtonByMode();
@@ -126,8 +123,7 @@ public class AlarmActivity extends VisionActivity {
   }
   
   /** Called when the activity is first created. */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
     init(0, getString(R.string.title_activity_alarm), getString(R.string.alarm_clock_help));

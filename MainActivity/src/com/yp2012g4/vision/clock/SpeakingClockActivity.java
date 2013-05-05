@@ -51,13 +51,11 @@ public class SpeakingClockActivity extends VisionActivity {
     return s;
   }
   
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.SpeakingClockSctivity;
   }
   
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     View button = getButtonByMode();
@@ -76,8 +74,7 @@ public class SpeakingClockActivity extends VisionActivity {
     return false;
   }
   
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
@@ -94,11 +91,9 @@ public class SpeakingClockActivity extends VisionActivity {
    * @author Amir B
    */
   class MyTimerTask extends TimerTask {
-    @Override
-    public void run() {
+    @Override public void run() {
       handler.post(new Runnable() {
-        @Override
-        public void run() {
+        @Override public void run() {
           TalkingButton timeButton = (TalkingButton) findViewById(R.id.TimeButton);
           Calendar cal = Calendar.getInstance();
           String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
@@ -114,8 +109,7 @@ public class SpeakingClockActivity extends VisionActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current time
    */
-  @Override
-  public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       Calendar cal = Calendar.getInstance();

@@ -19,8 +19,7 @@ public class ThemeSettingsActivity extends VisionActivity {
    * get the activity's main view ID
    * 
    */
-  @Override
-  public int getViewId() {
+  @Override public int getViewId() {
     return R.id.ThemeSettingsActivity;
   }
   
@@ -33,8 +32,7 @@ public class ThemeSettingsActivity extends VisionActivity {
    *          - motion event
    * 
    */
-  @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     View button = getButtonByMode();
@@ -59,8 +57,7 @@ public class ThemeSettingsActivity extends VisionActivity {
   /**
    * Called when the activity is first created.
    * */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
     adjustLayoutSize(3);

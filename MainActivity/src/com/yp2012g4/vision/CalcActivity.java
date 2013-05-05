@@ -26,7 +26,7 @@ public class CalcActivity extends VisionActivity {
   private Sign sign = Sign.NO_SIGN;
   private boolean equalsPressed = false;
   private boolean lhsDone = false;
-  private static Double ERROR = 0.00001; // delta for identifying a zero FP
+  private static double ERROR = 0.00001; // delta for identifying a zero FP
   // number
   private boolean isBadAction = false; // checks if a wrong operation has been
   
@@ -71,7 +71,7 @@ public class CalcActivity extends VisionActivity {
   /**
    * Overridden method which implements the action triggered by a button lift
    */
-  @Override public void onActionUp(View v) {
+  @SuppressWarnings("boxing") @Override public void onActionUp(View v) {
     List<Integer> digits = Arrays.asList(R.id.digit0, R.id.digit1, R.id.digit2, R.id.digit3, R.id.digit4, R.id.digit5, R.id.digit6,
         R.id.digit7, R.id.digit8, R.id.digit9);
     List<Integer> signs = Arrays.asList(R.id.plus, R.id.minus, R.id.multiplicity, R.id.div);
@@ -184,7 +184,7 @@ public class CalcActivity extends VisionActivity {
    *          The sign between the 2 numbers
    * @return The result (as a double) of the parsed string
    */
-  private Double parseResult(String lhs_num, String rhs_num, Sign s) {
+  @SuppressWarnings("boxing") private Double parseResult(String lhs_num, String rhs_num, Sign s) {
     Double result = null;
     Double lhs = Double.parseDouble(lhs_num);
     Double rhs = Double.parseDouble(rhs_num);

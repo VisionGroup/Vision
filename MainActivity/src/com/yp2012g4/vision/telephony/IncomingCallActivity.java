@@ -117,13 +117,13 @@ public class IncomingCallActivity extends VisionActivity {
    * 
    * @param number
    */
-  void updateNumberButton(TalkingButton tB, String s) {
+  static void updateNumberButton(TalkingButton tB, String s) {
     tB.setText(s.toCharArray(), 0, s.length());
     tB.setReadText(s);
     tB.setContentDescription(s);
   }
   
-  @Override protected void onResume() {
+  @SuppressWarnings("null") @Override protected void onResume() {
     Log.d(TAG, "onResume Incoming call activity");
     super.onResume();
     setContentView(R.layout.activity_incoming_call);

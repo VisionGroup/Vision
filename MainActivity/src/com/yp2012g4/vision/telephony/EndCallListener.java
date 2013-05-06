@@ -16,9 +16,9 @@ public class EndCallListener extends PhoneStateListener {
   TelephonyManager telephonyManager;
   Context context;
   /**
-   * flag returns true if phone hang-up, else - false
+   * isHangUp is true if phone hang-up, else - false
    */
-  boolean flag = false;
+  boolean isHangUp = false;
   
   /**
    * @param context
@@ -31,19 +31,17 @@ public class EndCallListener extends PhoneStateListener {
   @Override public void onCallStateChanged(int state, String incomingNumber) {
     switch (state) {
       case TelephonyManager.CALL_STATE_IDLE:// phone hang-up
-        if (flag) {
+        if (isHangUp) {
           // restart app
           final Intent i = context.getApplicationContext().getPackageManager()
               .getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
           i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
           context.startActivity(i);
-          flag = false;
+          isHangUp = false;
         }
         break;
       case TelephonyManager.CALL_STATE_OFFHOOK:
-        flag = true;
-        break;
-      case TelephonyManager.CALL_STATE_RINGING:
+        isHangUp = true;
         break;
       default:
         break;

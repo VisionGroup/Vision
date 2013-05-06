@@ -70,7 +70,7 @@ public class CallUtils {
   }
   
   /**
-   * Answer phonecall.
+   * Answer phone call.
    * 
    * @param context
    */

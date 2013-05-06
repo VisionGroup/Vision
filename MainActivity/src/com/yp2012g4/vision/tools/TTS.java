@@ -47,8 +47,8 @@ public class TTS implements OnInitListener {
    */
   public TTS(Context context) {
     _tts = new TextToSpeech(context, this);
-    setQueueMode(TextToSpeech.QUEUE_FLUSH); // TODO check if to move to
-    // onInit - Amit
+    // TODO check if to move to onInit - Amit
+    setQueueMode(TextToSpeech.QUEUE_FLUSH);
     setLanguage(Locale.US); // TODO check if to move to onInit - AMIT
   }
   
@@ -89,12 +89,12 @@ public class TTS implements OnInitListener {
    */
   public void speak(String s) {
     Log.i(TAG, "speak : " + s);
-    if (null == s)
-      return;
-    // if (!isPureEnglise(s))
-    // _tts.speak("Hebrew.", _qm, null);
-    // else
-    _tts.speak(s, _qm, null);
+    if (null != s)
+      _tts.speak(s, _qm, null);
+    /*
+     * // if (!isPureEnglise(s)) // _tts.speak("Hebrew.", _qm, null); // else
+     * _tts.speak(s, _qm, null);
+     */
   }
   
   /**

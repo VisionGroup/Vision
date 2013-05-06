@@ -48,10 +48,10 @@ public class SpeechRepeatActivity extends Activity implements OnClickListener, O
     // find out whether speech recognition is supported
     PackageManager packManager = getPackageManager();
     List<ResolveInfo> intActivities = packManager.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-    if (intActivities.size() != 0) {
+    if (intActivities.size() != 0)
       // speech recognition is supported - detect user button clicks
       speechBtn.setOnClickListener(this);
-    } else {
+    else {
       // speech recognition not supported, disable button and output
       // message
       speechBtn.setEnabled(false);
@@ -68,27 +68,23 @@ public class SpeechRepeatActivity extends Activity implements OnClickListener, O
         // output for debugging
         Log.v(LOG_TAG, "chosen: " + wordChosen);
         // output Toast message
-        Toast.makeText(SpeechRepeatActivity.this, "You said: " + wordChosen, Toast.LENGTH_SHORT).show();// **alter
-                                                                                                        // for
-                                                                                                        // your
-                                                                                                        // Activity
-                                                                                                        // name***
+        // Alter for your activity name
+        Toast.makeText(SpeechRepeatActivity.this, "You said: " + wordChosen, Toast.LENGTH_SHORT).show();
       }
     });
   }
   
   @Override public void onInit(int arg0) {
-    // TODO Auto-generated method stub
+    // Auto-generated method stub
   }
   
   /**
    * Called when the user presses the speak button
    */
   @Override public void onClick(View v) {
-    if (v.getId() == R.id.speech_btn) {
+    if (v.getId() == R.id.speech_btn)
       // listen for results
       listenToSpeech();
-    }
   }
   
   /**

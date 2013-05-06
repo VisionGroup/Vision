@@ -31,17 +31,14 @@ public class MultiFingerGestureDetector extends GestureDetector {
   
   public MultiFingerGestureDetector(Context context, OnGestureListener listener, Handler handler, boolean unused) {
     super(context, listener, handler, unused);
-    // TODO Auto-generated constructor stub
   }
   
   public MultiFingerGestureDetector(Context context, OnGestureListener listener, Handler handler) {
     super(context, listener, handler);
-    // TODO Auto-generated constructor stub
   }
   
   public MultiFingerGestureDetector(OnGestureListener listener, Handler handler) {
     super(listener, handler);
-    // TODO Auto-generated constructor stub
   }
   
   public MultiFingerGestureDetector(OnGestureListener listener) {

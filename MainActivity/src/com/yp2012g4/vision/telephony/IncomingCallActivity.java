@@ -24,7 +24,7 @@ public class IncomingCallActivity extends VisionActivity {
   CallUtils callUtils;
   private ListenToPhoneState listener;
   private final ContactManager contact = new ContactManager(this);
-  Boolean rang = Boolean.valueOf(false);
+  boolean rang = false;
   TelephonyManager tManager;
   
   /**
@@ -133,9 +133,9 @@ public class IncomingCallActivity extends VisionActivity {
     if (extras == null)
       Log.d(TAG, "extras == null");
     try {
-      rang = Boolean.valueOf(extras.getBoolean(CallUtils.RANG_KEY));
+      rang = extras.getBoolean(CallUtils.RANG_KEY);
     } catch (final Exception e) {
-      rang = Boolean.FALSE;
+      rang = false;
     }
     try {
       incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
@@ -184,9 +184,9 @@ public class IncomingCallActivity extends VisionActivity {
     }
     
     @Override public void onCallStateChanged(int state, String inNumber) {
-      if (state == TelephonyManager.CALL_STATE_IDLE && rang == Boolean.TRUE) {
+      if (state == TelephonyManager.CALL_STATE_IDLE && rang) {
         Log.d(TAG, "Ending Activity because " + stateName(state));
-        rang = Boolean.FALSE;
+        rang = false;
         mHandler.postDelayed(mLaunchTask, 100);
       }
     }

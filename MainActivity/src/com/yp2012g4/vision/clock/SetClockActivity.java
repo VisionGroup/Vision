@@ -56,7 +56,7 @@ public class SetClockActivity extends VisionActivity {
       number = cal.get(Calendar.MINUTE);
       t = getString(R.string.setMinutes);
     }
-    tvNum.setText(Integer.valueOf(number).toString());
+    tvNum.setText(Integer.toString(number));
     tvTitle.setText(t);
   }
   
@@ -68,8 +68,8 @@ public class SetClockActivity extends VisionActivity {
     int field = type == HOUR_CODE ? Calendar.HOUR_OF_DAY : Calendar.MINUTE;
     cal.roll(field, change);
     int value = cal.get(field);
-    tvNum.setText(Integer.valueOf(value).toString());
-    speakOut(Integer.valueOf(value).toString());
+    tvNum.setText(Integer.toString(value));
+    speakOut(Integer.toString(value));
     return true;
   }
   
@@ -82,7 +82,7 @@ public class SetClockActivity extends VisionActivity {
         setResult(-1);
         break;
       default:
-        int result = Integer.valueOf(tvNum.getText().toString()).intValue();
+        int result = Integer.parseInt(tvNum.getText().toString());
         setResult(result);
         finish();
     }

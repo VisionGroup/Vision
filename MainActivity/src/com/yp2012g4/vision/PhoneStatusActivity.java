@@ -39,7 +39,7 @@ public class PhoneStatusActivity extends VisionActivity {
    * @return the percentage of the battery
    */
   public int getBatteryLevel() {
-    return Float.valueOf(pn.getBatteryLevel() * (float) 100.0).intValue();
+    return Double.valueOf(pn.getBatteryLevel() * 100.0).intValue();
   }
   
   /**

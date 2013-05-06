@@ -34,22 +34,22 @@ public class CallType {
    * @param context
    */
   public CallType(Cursor cur, Context context) {
-    mNumber = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER)).toString();
-    String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE)).toString();
-    Long m = Long.valueOf(mili);
-    mDate = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m.longValue()));
+    mNumber = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
+    String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
+    long m = Long.parseLong(mili);
+    mDate = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m));
     try {
-      mName = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME)).toString();
+      mName = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
     } catch (Exception e) {
       mName = "";
     }
     try {
-      mNumberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE)).toString();
+      mNumberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));
     } catch (Exception e) {
       mNumberType = "";
     }
     try {
-      mType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE)).toString();
+      mType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE));
     } catch (Exception e) {
       mType = "";
     }

@@ -14,11 +14,11 @@ public class SmsType {
   private String address = "";
   private String person = "";
   private String date = "";
-  private String protocol = "";
+  private final String protocol = "";
   private String read = "";
   private String status = "";
   private String type = "";
-  private String subject = "";
+  private final String subject = "";
   private String body = "";
   
   /**
@@ -28,18 +28,18 @@ public class SmsType {
    * @param context
    */
   public SmsType(Cursor cur, Context context) {
-    address = cur.getString(cur.getColumnIndexOrThrow("address")).toString();
-    String mili = cur.getString(cur.getColumnIndexOrThrow("date")).toString();
-    Long m = Long.valueOf(mili);
-    date = (String) DateFormat.format("dd/MM/yy", m.longValue());
+    address = cur.getString(cur.getColumnIndexOrThrow("address"));
+    String mili = cur.getString(cur.getColumnIndexOrThrow("date"));
+    long m = Long.parseLong(mili);
+    date = (String) DateFormat.format("dd/MM/yy", m);
     // protocol =
-    // cur.getString(cur.getColumnIndexOrThrow("protocol")).toString(); can
+    // cur.getString(cur.getColumnIndexOrThrow("protocol")); can
     // cause exception
-    read = cur.getString(cur.getColumnIndexOrThrow("read")).toString();
-    status = cur.getString(cur.getColumnIndexOrThrow("status")).toString();
-    type = cur.getString(cur.getColumnIndexOrThrow("type")).toString();
-    // subject = c.getString(c.getColumnIndexOrThrow("subject")).toString();
-    body = cur.getString(cur.getColumnIndexOrThrow("body")).toString();
+    read = cur.getString(cur.getColumnIndexOrThrow("read"));
+    status = cur.getString(cur.getColumnIndexOrThrow("status"));
+    type = cur.getString(cur.getColumnIndexOrThrow("type"));
+    // subject = c.getString(c.getColumnIndexOrThrow("subject"));
+    body = cur.getString(cur.getColumnIndexOrThrow("body"));
     ContactManager cm = new ContactManager(context);
     person = cm.getNameFromPhone(address);
   }

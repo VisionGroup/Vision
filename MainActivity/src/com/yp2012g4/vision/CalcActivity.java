@@ -125,7 +125,7 @@ public class CalcActivity extends VisionActivity {
           if (res == null)
             return;
           if (IsIntResult(res.toString()))
-            calculated_number = ((Integer) res.intValue()).toString();
+            calculated_number = Integer.toString(res.intValue());
           else
             calculated_number = res.toString();
           lhs_number = calculated_number; // now, the result of previous

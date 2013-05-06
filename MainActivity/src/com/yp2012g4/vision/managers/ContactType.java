@@ -22,9 +22,9 @@ public class ContactType {
    * @param context
    */
   public ContactType(Cursor cur, Context context) {
-    contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME)).toString();
+    contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
     ContactManager cm = new ContactManager(context);
-    lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY)).toString();
+    lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
     phone = cm.lookupPhoneNumbers(lookUpKey);
   }
   

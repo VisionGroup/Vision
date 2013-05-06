@@ -55,10 +55,8 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
   @Override public void onInit(int status) {
     if (status == TextToSpeech.SUCCESS) {
       final int r = tts.setLanguage(Locale.US);
-      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA) {
+      if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA)
         Log.e(TAG, "error setLanguage");
-        return;
-      }
       return;
     }
     Log.e(TAG, "error init language");
@@ -97,7 +95,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
         final String snooze = getResources().getString(R.string.snooze_time);
         int snoozeTime = 5;
         try {
-          snoozeTime = Integer.valueOf(snooze).intValue();
+          snoozeTime = Integer.parseInt(snooze);
         } catch (final NumberFormatException e) {
           Log.e(TAG, "exception in parseInt!!! with " + snooze);
         }

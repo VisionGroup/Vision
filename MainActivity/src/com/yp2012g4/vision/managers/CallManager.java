@@ -30,8 +30,7 @@ public class CallManager {
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    final ArrayList<CallType> al = new ArrayList<CallType>();
-    return copyToList(c, cur, al);
+    return copyToList(c, cur, new ArrayList<CallType>());
   }
   
   private static ArrayList<CallType> copyToList(Context c, Cursor cur, final ArrayList<CallType> al) {
@@ -54,8 +53,8 @@ public class CallManager {
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    final ArrayList<CallType> al = new ArrayList<CallType>();
-    return copyToList(c, cur, al);
+    // final ArrayList<CallType> al = ;
+    return copyToList(c, cur, new ArrayList<CallType>());
   }
   
   /**

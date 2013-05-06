@@ -63,21 +63,21 @@ public class AlarmActivity extends VisionActivity {
         mHandler.postDelayed(mLaunchTask, 10);
         return;
       }
-      if (waitForMinutes) {
-        alarmTime = Calendar.getInstance();
-        alarmTime.setTimeInMillis(System.currentTimeMillis());
-        alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
-        alarmTime.set(Calendar.MINUTE, resultCode);
-        String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
-        TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
-        buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
-        speakOut(s);
-        while (_t.isSpeaking() == true) {
-          // Wait for message to finish playing and then finish the activity
-        }
-      } else {
+      if (!waitForMinutes) {
         reqHour = resultCode;
         callSetClock(true);
+        return;
+      }
+      alarmTime = Calendar.getInstance();
+      alarmTime.setTimeInMillis(System.currentTimeMillis());
+      alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
+      alarmTime.set(Calendar.MINUTE, resultCode);
+      String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
+      TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
+      buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
+      speakOut(s);
+      while (_t.isSpeaking() == true) {
+        // Wait for message to finish playing and then finish the activity
       }
     }
   }

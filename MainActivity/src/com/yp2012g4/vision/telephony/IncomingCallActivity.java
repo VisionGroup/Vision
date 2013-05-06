@@ -174,8 +174,7 @@ public class IncomingCallActivity extends VisionActivity {
    */
   private void setPhoneStateListener() {
     tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    listener = new ListenToPhoneState();
-    tManager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
+    tManager.listen(listener = new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
   }
   
   class ListenToPhoneState extends PhoneStateListener {

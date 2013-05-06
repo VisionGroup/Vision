@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.yp2012g4.vision.alarm.AlarmActivity;
 import com.yp2012g4.vision.clock.SpeakingClockActivity;
@@ -38,40 +37,35 @@ public class MainActivity extends VisionActivity {
       return true;
     if (clickFlag)
       return clickFlag = false;
-    Intent intent = null;
-    final View button = getButtonByMode();
-    switch (button.getId()) {
-      case R.id.sos_button:
-        intent = new Intent(MainActivity.this, SOSActivity.class);
-        break;
-      case R.id.time_button:
-        intent = new Intent(MainActivity.this, SpeakingClockActivity.class);
-        break;
-      case R.id.where_am_i_button:
-        intent = new Intent(MainActivity.this, WhereAmIActivity.class);
-        break;
-      case R.id.phone_status_button:
-        intent = new Intent(MainActivity.this, PhoneStatusActivity.class);
-        break;
-      case R.id.alarm_clock_button:
-        intent = new Intent(MainActivity.this, AlarmActivity.class);
-        break;
-      case R.id.contacts_button:
-        intent = new Intent(MainActivity.this, ContactsMenuActivity.class);
-        break;
-      case R.id.setting_button:
-        intent = new Intent(MainActivity.this, DisplaySettingsActivity.class);
-        break;
-      case R.id.read_sms_button:
-        intent = new Intent(MainActivity.this, ReadSmsActivity.class);
-        // intent = new Intent(MainActivity.this, CallListActivity.class);
-        break;
-      default:
-        break;
-    }
+    Intent intent = getIntentByButtonId(getButtonByMode().getId());
     if (intent != null)
       startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     return false;
+  }
+  
+//Cannot be static because of MainActivity.this
+  @SuppressWarnings("static-method") private Intent getIntentByButtonId(int id) {
+    switch (id) {
+      case R.id.sos_button:
+        return new Intent(MainActivity.this, SOSActivity.class);
+      case R.id.time_button:
+        return new Intent(MainActivity.this, SpeakingClockActivity.class);
+      case R.id.where_am_i_button:
+        return new Intent(MainActivity.this, WhereAmIActivity.class);
+      case R.id.phone_status_button:
+        return new Intent(MainActivity.this, PhoneStatusActivity.class);
+      case R.id.alarm_clock_button:
+        return new Intent(MainActivity.this, AlarmActivity.class);
+      case R.id.contacts_button:
+        return new Intent(MainActivity.this, ContactsMenuActivity.class);
+      case R.id.setting_button:
+        return new Intent(MainActivity.this, DisplaySettingsActivity.class);
+      case R.id.read_sms_button:
+        return new Intent(MainActivity.this, ReadSmsActivity.class);
+        // intent = new Intent(MainActivity.this, CallListActivity.class);
+      default:
+        return null;
+    }
   }
   
   /**

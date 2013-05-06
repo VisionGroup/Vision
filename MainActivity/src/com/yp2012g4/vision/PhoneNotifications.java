@@ -56,9 +56,9 @@ public class PhoneNotifications {
   public float getBatteryLevel() {
     IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     Intent batteryStatus = c.registerReceiver(null, ifilter);
-    int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-    int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-    float batteryPct = level / (float) scale;
+    final int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+    final int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+    final float batteryPct = level / (float) scale;
     return batteryPct;
   }
   
@@ -71,8 +71,8 @@ public class PhoneNotifications {
     IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     Intent batteryStatus = c.registerReceiver(null, ifilter);
     // Are we charging / charged?
-    int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-    boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+    final int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+    final boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
     return isCharging;
   }
   

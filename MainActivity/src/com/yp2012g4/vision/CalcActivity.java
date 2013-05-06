@@ -48,11 +48,9 @@ public class CalcActivity extends VisionActivity {
     super.onSingleTapUp(e);
     if (clickFlag)
       return clickFlag = false;
-    if (isBadAction) { // if bad action, we do not want the tts to speak
+    if (isBadAction)
       // also the touched button text
-      isBadAction = false;
-      return false;
-    }
+      return isBadAction = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))

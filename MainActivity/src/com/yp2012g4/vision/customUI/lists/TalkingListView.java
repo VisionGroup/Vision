@@ -65,8 +65,8 @@ public class TalkingListView extends RelativeLayout {
   private void setNewViewArr(int pageNum) {
     for (int i = 0; i < _rows; i++)
       for (int j = 0; j < _cols; j++) {
-        int pos = pageNum * _rows * _cols + i * _cols + j;
-        int vp = i * _cols + j;
+        final int pos = pageNum * _rows * _cols + i * _cols + j;
+        final int vp = i * _cols + j;
         View oldV = _dispView[vp];
         if (pos < _adapter.getCount()) {
           _dispView[vp] = _adapter.getView(pos, oldV, this);
@@ -92,8 +92,7 @@ public class TalkingListView extends RelativeLayout {
           android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
       if (_dispView[i] == null)
         break;
-      int colPos = i % _cols;
-      int rowPos = i / _cols;
+      final int colPos = i % _cols, rowPos = i / _cols;
       if (colPos != 0)
         params.addRule(RelativeLayout.RIGHT_OF, _dispView[i - 1].getId());
       if (rowPos > 0)

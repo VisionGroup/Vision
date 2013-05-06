@@ -49,17 +49,14 @@ public class DisplaySettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    Intent intent;
     View button = getButtonByMode();
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     switch (button.getId()) {
       case R.id.button_set_colors:
-        intent = new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class));
         break;
       case R.id.button_set_theme:
-        intent = new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class));
         break;
       case R.id.button_exit_launcher:
         PackageManager pm = getPackageManager();
@@ -86,11 +83,9 @@ public class DisplaySettingsActivity extends VisionActivity {
           speakOut(getString(R.string.switched_to_english));
         }
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        intent = new Intent(this, MainActivity.class);
         // setResult(RESULT_OK, null);
-        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); // empty
-                                                                        // activity
-                                                                        // stack
+        // empty activity stack
+        startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
         break;
       case R.id.button_selecting_mode:
@@ -104,8 +99,8 @@ public class DisplaySettingsActivity extends VisionActivity {
         }
         break;
       case R.id.calculator:
-        intent = new Intent(this, CalcActivity.class);
-        startActivity(intent/* .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) */);
+        startActivity(new Intent(this, CalcActivity.class)
+        /* .setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP ) */);
         break;
       default:
         break;

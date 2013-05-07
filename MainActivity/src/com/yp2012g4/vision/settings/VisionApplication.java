@@ -29,7 +29,7 @@ public class VisionApplication extends Application {
   public static final float NORMAL = 25;
   public static final float LARGE = 30;
   private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
-  private static String _textSize = "NORMAL";
+  public static String _textSize = "NORMAL";
   private static String _textColor = "WHITE";
   private static String _backgroundColor = "BLACK";
   

@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
+/**
+ * @author Yaron
+ * @version 2
+ * 
+ *          Activity for voice input.
+ */
 public class ActivityVoiceInput extends Activity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

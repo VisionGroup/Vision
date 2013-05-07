@@ -19,10 +19,14 @@ import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * @author Yaron
+ * 
+ */
 public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
   CallUtils callUtils;
-  private ListenToPhoneState listener;
   private final ContactManager contact = new ContactManager(this);
   boolean rang = false;
   TelephonyManager tManager;
@@ -174,7 +178,7 @@ public class IncomingCallActivity extends VisionActivity {
    */
   private void setPhoneStateListener() {
     tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    tManager.listen(listener = new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
+    tManager.listen(new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
   }
   
   class ListenToPhoneState extends PhoneStateListener {

@@ -35,8 +35,8 @@ public class MainActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (clickFlag)
-      return clickFlag = false;
+    if (_navigationBar)
+      return _navigationBar = false;
     Intent intent = getIntentByButtonId(getButtonByMode().getId());
     if (intent != null)
       startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -74,7 +74,7 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    while (_t.isSpeaking()) {
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
     if (!hasFocus)
@@ -104,13 +104,13 @@ public class MainActivity extends VisionActivity {
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
-    speakOut(s);
-    while (_t.isSpeaking()) {
+    speakOutAsync(s);
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }
   
   @Override public void onBackPressed() {
-    speakOut(getString(R.string.in_main_screen));
+    speakOutAsync(getString(R.string.in_main_screen));
   }
 }

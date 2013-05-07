@@ -28,36 +28,36 @@ public class VisionApplication extends Application {
   public static final float SMALL = 20;
   public static final float NORMAL = 25;
   public static final float LARGE = 30;
-  public static HashMap<String, Integer> color_to_string = new HashMap<String, Integer>();
-  public static String textSize = "NORMAL";
-  private static String textColor = "WHITE";
-  private static String backgroundColor = "BLACK";
+  private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
+  private static String _textSize = "NORMAL";
+  private static String _textColor = "WHITE";
+  private static String _backgroundColor = "BLACK";
   
   /**
    * c'tor. initialize color mapping.
    * 
    */
-  @SuppressWarnings("boxing") public VisionApplication() {
-    color_to_string.put("BLACK", Color.parseColor("#000000"));
-    color_to_string.put("WHITE", Color.parseColor("#FFFFFF"));
-    color_to_string.put("RED", Color.parseColor("#B40404"));
-    color_to_string.put("GREEN", Color.parseColor("#04B45F"));
-    color_to_string.put("BLUE", Color.parseColor("#0489B1"));
-    color_to_string.put("LIGHT_PURPLE", Color.parseColor("#A901DB"));
+  public VisionApplication() {
+    _colorToString.put("BLACK", Integer.valueOf(Color.parseColor("#000000")));
+    _colorToString.put("WHITE", Integer.valueOf(Color.parseColor("#FFFFFF")));
+    _colorToString.put("RED", Integer.valueOf(Color.parseColor("#B40404")));
+    _colorToString.put("GREEN", Integer.valueOf(Color.parseColor("#04B45F")));
+    _colorToString.put("BLUE", Integer.valueOf(Color.parseColor("#0489B1")));
+    _colorToString.put("LIGHT_PURPLE", Integer.valueOf(Color.parseColor("#A901DB")));
   }
   
   /**
    * load the text size, text color and bg color from xml file
    * 
-   * @param act
+   * @param a
    *          - current activity
    * 
    */
-  public static void loadPrefs(Activity act) {
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
-    textSize = sp.getString("TEXT SIZE", textSize);
-    textColor = sp.getString("TEXT COLOR", textColor);
-    backgroundColor = sp.getString("BG COLOR", backgroundColor);
+  public static void loadPrefs(Activity a) {
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+    _textSize = sp.getString("TEXT SIZE", _textSize);
+    _textColor = sp.getString("TEXT COLOR", _textColor);
+    _backgroundColor = sp.getString("BG COLOR", _backgroundColor);
   }
   
   /**
@@ -65,17 +65,17 @@ public class VisionApplication extends Application {
    * 
    * @param key
    *          - preference name
-   * @param value
+   * @param val
    *          - value to be saved
-   * @param act
+   * @param a
    *          - current activity
    * 
    */
-  public static void savePrefs(String key, String value, Activity act) {
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(act.getApplicationContext());
-    Editor edit = sp.edit();
-    edit.putString(key, value);
-    edit.commit();
+  public static void savePrefs(String key, String val, Activity a) {
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+    Editor e = sp.edit();
+    e.putString(key, val);
+    e.commit();
   }
   
   /**
@@ -86,9 +86,9 @@ public class VisionApplication extends Application {
    * @param int2
    *          - background Color
    */
-  public static void setColors(String s1, String s2) {
-    textColor = s1;
-    backgroundColor = s2;
+  public static void setColors(String txtC, String backg) {
+    _textColor = txtC;
+    _backgroundColor = backg;
   }
   
   /**
@@ -96,7 +96,7 @@ public class VisionApplication extends Application {
    * 
    */
   public static String getTextColor() {
-    return textColor;
+    return _textColor;
   }
   
   /**
@@ -104,7 +104,7 @@ public class VisionApplication extends Application {
    * @return bg color
    */
   public static String getBackgroundColor() {
-    return backgroundColor;
+    return _backgroundColor;
   }
   
   /**
@@ -117,14 +117,14 @@ public class VisionApplication extends Application {
    */
   @SuppressWarnings("boxing") public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
     loadPrefs(act);
-    mainView.setBackgroundColor(color_to_string.get(backgroundColor));
+    mainView.setBackgroundColor(_colorToString.get(_backgroundColor));
     for (View v : vs)
       if (v instanceof TalkingImageButton) {
-        if (textColor.equals("WHITE"))
-          ((ImageView) v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
+        if (_textColor.equals("WHITE"))
+          ((ImageView) v).setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
         else
-          ((ImageView) v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
-        ((TalkingImageButton) v).setBackgroundColor(color_to_string.get(backgroundColor));
+          ((ImageView) v).setColorFilter(_colorToString.get(_textColor), Mode.DARKEN);
+        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get(_backgroundColor));
       }
   }
   
@@ -137,13 +137,13 @@ public class VisionApplication extends Application {
   @SuppressWarnings("boxing") public static void visualFeedback(View v, Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
-      if (textColor.equals("WHITE")) {
-        ((ImageView) v).setColorFilter(color_to_string.get("LIGHT_PURPLE"), Mode.LIGHTEN);
-        ((TalkingImageButton) v).setBackgroundColor(color_to_string.get("LIGHT_PURPLE"));
+      if (_textColor.equals("WHITE")) {
+        ((ImageView) v).setColorFilter(_colorToString.get("LIGHT_PURPLE"), Mode.LIGHTEN);
+        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get("LIGHT_PURPLE"));
       } else
-        ((ImageView) v).setColorFilter(color_to_string.get("LIGHT_PURPLE"), Mode.DARKEN);
+        ((ImageView) v).setColorFilter(_colorToString.get("LIGHT_PURPLE"), Mode.DARKEN);
     } else if (v instanceof TextView)
-      ((TextView) v).setBackgroundColor(color_to_string.get("LIGHT_PURPLE"));
+      ((TextView) v).setBackgroundColor(_colorToString.get("LIGHT_PURPLE"));
   }
   
   /**
@@ -155,13 +155,13 @@ public class VisionApplication extends Application {
   @SuppressWarnings("boxing") public static void restoreColors(View v, Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
-      if (textColor.equals("WHITE")) {
-        ((ImageView) v).setColorFilter(color_to_string.get(backgroundColor), Mode.LIGHTEN);
-        ((TalkingImageButton) v).setBackgroundColor(color_to_string.get(backgroundColor));
+      if (_textColor.equals("WHITE")) {
+        ((ImageView) v).setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
+        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get(_backgroundColor));
       } else
-        ((ImageView) v).setColorFilter(color_to_string.get(textColor), Mode.DARKEN);
+        ((ImageView) v).setColorFilter(_colorToString.get(_textColor), Mode.DARKEN);
     } else if (v instanceof TextView) {
-      String bg = backgroundColor;
+      String bg = _backgroundColor;
       // TODO sparta
       if (v.getId() == R.id.WhiteRed)
         bg = "RED";
@@ -171,7 +171,7 @@ public class VisionApplication extends Application {
         bg = "BLUE";
       else if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
         bg = "BLACK";
-      ((Button) v).setBackgroundColor(color_to_string.get(bg));
+      ((Button) v).setBackgroundColor(_colorToString.get(bg));
     }
   }
   
@@ -183,47 +183,47 @@ public class VisionApplication extends Application {
    */
   public static void setThemeToActivity(Activity act) {
     loadPrefs(act);
-    if (textSize.equals("LARGE")) {
-      if (backgroundColor.equals("BLUE"))
+    if (_textSize.equals("LARGE")) {
+      if (_backgroundColor.equals("BLUE"))
         act.setTheme(R.style.Theme_LargeWhiteBlue);
-      else if (backgroundColor.equals("GREEN"))
+      else if (_backgroundColor.equals("GREEN"))
         act.setTheme(R.style.Theme_LargeWhiteGreen);
-      else if (backgroundColor.equals("RED"))
+      else if (_backgroundColor.equals("RED"))
         act.setTheme(R.style.Theme_LargeWhiteRed);
-      else if (textColor.equals("WHITE"))
+      else if (_textColor.equals("WHITE"))
         act.setTheme(R.style.Theme_LargeWhiteBlack);
-      else if (textColor.equals("BLUE"))
+      else if (_textColor.equals("BLUE"))
         act.setTheme(R.style.Theme_LargeBlueBlack);
-      else if (textColor.equals("RED"))
+      else if (_textColor.equals("RED"))
         act.setTheme(R.style.Theme_LargeRedBlack);
       else
         act.setTheme(R.style.Theme_LargeGreenBlack);
-    } else if (textSize.equals("SMALL"))
-      if (backgroundColor.equals("BLUE"))
+    } else if (_textSize.equals("SMALL"))
+      if (_backgroundColor.equals("BLUE"))
         act.setTheme(R.style.Theme_SmallWhiteBlue);
-      else if (backgroundColor.equals("GREEN"))
+      else if (_backgroundColor.equals("GREEN"))
         act.setTheme(R.style.Theme_SmallWhiteGreen);
-      else if (backgroundColor.equals("RED"))
+      else if (_backgroundColor.equals("RED"))
         act.setTheme(R.style.Theme_SmallWhiteRed);
-      else if (textColor.equals("WHITE"))
+      else if (_textColor.equals("WHITE"))
         act.setTheme(R.style.Theme_SmallWhiteBlack);
-      else if (textColor.equals("BLUE"))
+      else if (_textColor.equals("BLUE"))
         act.setTheme(R.style.Theme_SmallBlueBlack);
-      else if (textColor.equals("RED"))
+      else if (_textColor.equals("RED"))
         act.setTheme(R.style.Theme_SmallRedBlack);
       else
         act.setTheme(R.style.Theme_SmallGreenBlack);
-    else if (backgroundColor.equals("BLUE"))
+    else if (_backgroundColor.equals("BLUE"))
       act.setTheme(R.style.Theme_NormalWhiteBlue);
-    else if (backgroundColor.equals("GREEN"))
+    else if (_backgroundColor.equals("GREEN"))
       act.setTheme(R.style.Theme_NormalWhiteGreen);
-    else if (backgroundColor.equals("RED"))
+    else if (_backgroundColor.equals("RED"))
       act.setTheme(R.style.Theme_NormalWhiteRed);
-    else if (textColor.equals("WHITE"))
+    else if (_textColor.equals("WHITE"))
       act.setTheme(R.style.Theme_NormalWhiteBlack);
-    else if (textColor.equals("BLUE"))
+    else if (_textColor.equals("BLUE"))
       act.setTheme(R.style.Theme_NormalBlueBlack);
-    else if (textColor.equals("RED"))
+    else if (_textColor.equals("RED"))
       act.setTheme(R.style.Theme_NormalRedBlack);
     else
       act.setTheme(R.style.Theme_NormalGreenBlack);

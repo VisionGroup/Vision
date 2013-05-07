@@ -56,7 +56,7 @@ public class WhereAmIActivity extends VisionActivity {
     setText(toSpeak);
     log("speaking out location: " + toSpeak + "\n");
     l.unlock();
-    speakOut(toSpeak);
+    speakOutAsync(toSpeak);
   }
   
   private void initialize() {
@@ -74,7 +74,7 @@ public class WhereAmIActivity extends VisionActivity {
     if (!providerRunning) {
       final String s = getString(R.string.could_not_find_a_location);
       setText(s);
-      speakOut(s);
+      speakOutAsync(s);
     } else
       setText(getString(R.string.finding_location));
     l.unlock();
@@ -119,7 +119,7 @@ public class WhereAmIActivity extends VisionActivity {
       case R.id.where_am_i_Activity:
       case R.id.where_am_i_textview:
         l.lock();
-        speakOut(text);
+        speakOutAsync(text);
         l.unlock();
         break;
     }

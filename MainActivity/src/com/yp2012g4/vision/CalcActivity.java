@@ -46,15 +46,15 @@ public class CalcActivity extends VisionActivity {
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
-    if (clickFlag)
-      return clickFlag = false;
+    if (_navigationBar)
+      return _navigationBar = false;
     if (isBadAction)
       // also the touched button text
       return isBadAction = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
-          speakOut(textToRead(entry.getKey()));
+          speakOutAsync(textToRead(entry.getKey()));
     return true;
   }
   
@@ -84,7 +84,7 @@ public class CalcActivity extends VisionActivity {
           rhs_number += ((TalkingButton) v).getText();
         calculated_number += ((TalkingButton) v).getText();
       } else {
-        speakOut(getString(R.string.bad_action));
+        speakOutAsync(getString(R.string.bad_action));
         isBadAction = true;
       }
     // it's a sign
@@ -95,7 +95,7 @@ public class CalcActivity extends VisionActivity {
         calculated_number += ((TalkingButton) v).getText();
         equalsPressed = false;
       } else {
-        speakOut(getString(R.string.bad_action));
+        speakOutAsync(getString(R.string.bad_action));
         isBadAction = true;
       }
       lhsDone = true;
@@ -115,7 +115,7 @@ public class CalcActivity extends VisionActivity {
           rhs_number += ((TalkingButton) v).getText();
           calculated_number += ((TalkingButton) v).getText();
         } else {
-          speakOut(getString(R.string.bad_action));
+          speakOutAsync(getString(R.string.bad_action));
           isBadAction = true;
         }
         break;
@@ -134,9 +134,9 @@ public class CalcActivity extends VisionActivity {
           sign = Sign.NO_SIGN;
           equalsPressed = true;
           lhsDone = false;
-          speakOut(calculated_number);
+          speakOutAsync(calculated_number);
         } else {
-          speakOut(getString(R.string.bad_action));
+          speakOutAsync(getString(R.string.bad_action));
           isBadAction = true;
         }
         break;
@@ -198,7 +198,7 @@ public class CalcActivity extends VisionActivity {
         break;
       case DIV:
         if (Math.abs(rhs) < ERROR) {
-          speakOut(getString(R.string.division_by_zero));
+          speakOutAsync(getString(R.string.division_by_zero));
           break;
         }
         result = lhs / rhs;

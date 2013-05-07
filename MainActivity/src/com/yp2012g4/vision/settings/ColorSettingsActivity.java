@@ -7,7 +7,6 @@
 package com.yp2012g4.vision.settings;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,6 +15,8 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class ColorSettingsActivity extends VisionActivity {
+  private final static int BUTTON_NUM = 7;
+  
   /**
    * set the text and background colors for the entire application
    * 
@@ -25,11 +26,9 @@ public class ColorSettingsActivity extends VisionActivity {
    *          - background Color
    */
   private void changeSettings(String s) {
-    Log.i("MyLog", s);
-    String[] colors = s.split("-");
-    VisionApplication.savePrefs("TEXT COLOR", colors[0], this);
-    Log.i("MyLog", colors[0]);
-    VisionApplication.savePrefs("BG COLOR", colors[1], this);
+    String[] c = s.split("-");
+    VisionApplication.savePrefs("TEXT COLOR", c[0], this);
+    VisionApplication.savePrefs("BG COLOR", c[1], this);
     VisionApplication.loadPrefs(this);
   }
   
@@ -50,19 +49,17 @@ public class ColorSettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (clickFlag)
-      return clickFlag = false;
-    View button = getButtonByMode();
-    if (button instanceof TalkingButton) {
-      speakOut(((TalkingButton) button).getReadText());
-      String val = ((TalkingButton) button).getPrefsValue();
-      if (!val.equals(""))
-        changeSettings(val);
+    if (_navigationBar)
+      return _navigationBar = false;
+    View v = getButtonByMode();
+    if (v instanceof TalkingButton) {
+      speakOutSync(((TalkingButton) v).getReadText());
+      String s = ((TalkingButton) v).getPrefsValue();
+      if (!s.equals(""))
+        changeSettings(s);
+      finish();
+      return true;
     }
-    while (_t.isSpeaking() == true) {
-      // Wait for message to finish playing and then finish the activity
-    }
-    mHandler.postDelayed(mLaunchTask, 1000);
     return false;
   }
   
@@ -72,7 +69,7 @@ public class ColorSettingsActivity extends VisionActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
-    adjustLayoutSize(7);
+    adjustLayoutSize(BUTTON_NUM);
     init(0, getString(R.string.color_settings_screen), getString(R.string.color_setting_help));
   }
 }

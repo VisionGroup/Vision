@@ -72,8 +72,8 @@ public class PhoneStatusActivity extends VisionActivity {
           s += c.getNumber() + "\n";// TODO: Remove when Hebrew is
         // detected.
       }
-    speakOut(s);
-    while (_t.isSpeaking()) {
+    speakOutAsync(s);
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }
@@ -94,11 +94,11 @@ public class PhoneStatusActivity extends VisionActivity {
     final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.button_getBatteryStatus:
-        speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
+        speakOutAsync(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
             getChargeStatus()));
         break;
       case R.id.button_getReceptionStatus:
-        speakOut(signalToString());
+        speakOutAsync(signalToString());
         break;
       case R.id.button_getMissedCalls:
         getMissedCalls();

@@ -83,7 +83,7 @@ public class ReadSmsActivity extends VisionActivity {
         adapter.removeItemFromList(smsId);
         listView.setAdapter(adapter);
         listView.prevPage();
-        speakOut(getString(R.string.delete_message));
+        speakOutAsync(getString(R.string.delete_message));
         vb.vibrate(150);
         break;
       default:

@@ -85,26 +85,26 @@ public abstract class VisionActivity extends VisionGestureDetector {
     View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.back_button:
-        clickFlag = true;
+        _navigationBar = true;
         Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
-          speakOut(getString(R.string.in_main_screen));
+          speakOutAsync(getString(R.string.in_main_screen));
           break;
         }
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.tool_tip_button:
-        clickFlag = true;
-        speakOut(getToolTip());
+        _navigationBar = true;
+        speakOutAsync(getToolTip());
         break;
       case R.id.home_button:
-        clickFlag = true;
+        _navigationBar = true;
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
         break;
       case R.id.current_menu_button:
-        clickFlag = true;
-        speakOut(getString(R.string.this_is) + " " + _name);
+        _navigationBar = true;
+        speakOutAsync(getString(R.string.this_is) + " " + _name);
         break;
       default:
         last_button_view = tempLast;
@@ -130,7 +130,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   }
   
   @Override public void onBackPressed() {
-    speakOut(getString(R.string.previous_screen));
+    speakOutAsync(getString(R.string.previous_screen));
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   

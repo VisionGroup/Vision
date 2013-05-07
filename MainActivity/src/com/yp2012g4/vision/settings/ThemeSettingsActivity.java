@@ -15,6 +15,8 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class ThemeSettingsActivity extends VisionActivity {
+  private final static int BUTTON_NUM = 3;
+  
   /**
    * get the activity's main view ID
    * 
@@ -35,18 +37,17 @@ public class ThemeSettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View button = getButtonByMode();
-    if (button instanceof TalkingButton)
-      speakOut(((TalkingButton) button).getReadText());
-    while (_t.isSpeaking() == true) {
-      // Wait for message to finish playing and then finish the activity
-    }
-    switch (button.getId()) {
+    View v = getButtonByMode();
+    if (v instanceof TalkingButton)
+      speakOutSync(((TalkingButton) v).getReadText());
+    switch (v.getId()) {
       case R.id.Small_text_size_button:
       case R.id.Normal_text_size_button:
       case R.id.Large_text_size_button:
-        VisionApplication.savePrefs("TEXT SIZE", ((TalkingButton) button).getPrefsValue(), this);
-        mHandler.postDelayed(mLaunchTask, 1000);
+        VisionApplication.savePrefs("TEXT SIZE", ((TalkingButton) v).getPrefsValue(), this);
+        finish();
+        break;
+      default:
         break;
     }
     return false;
@@ -58,7 +59,7 @@ public class ThemeSettingsActivity extends VisionActivity {
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
-    adjustLayoutSize(3);
+    adjustLayoutSize(BUTTON_NUM);
     init(0, getString(R.string.theme_settings_screen), getString(R.string.size_setting_help));
   }
 }

@@ -48,7 +48,7 @@ public class IncomingCallActivity extends VisionActivity {
         endCall();
         break;
       case R.id.back_button:
-        speakOut(getString(R.string.previous_screen));
+        speakOutAsync(getString(R.string.previous_screen));
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
       default:
@@ -72,8 +72,8 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     callUtils.silenceRinger();
-    if (clickFlag)
-      return clickFlag = false;
+    if (_navigationBar)
+      return _navigationBar = false;
     switch (curr_view.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -82,7 +82,7 @@ public class IncomingCallActivity extends VisionActivity {
         endCall();
         break;
       case R.id.back_button:
-        speakOut(getString(R.string.previous_screen));
+        speakOutAsync(getString(R.string.previous_screen));
         mHandler.postDelayed(mLaunchTask, 100);
         break;
       default:

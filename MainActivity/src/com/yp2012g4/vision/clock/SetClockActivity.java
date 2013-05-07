@@ -69,7 +69,7 @@ public class SetClockActivity extends VisionActivity {
     cal.roll(field, change);
     int value = cal.get(field);
     tvNum.setText(Integer.toString(value));
-    speakOut(Integer.toString(value));
+    speakOutAsync(Integer.toString(value));
     return true;
   }
   
@@ -95,14 +95,14 @@ public class SetClockActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    while (_t.isSpeaking()) {
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
     if (!hasFocus)
       return;
     TextView tvTitle = (TextView) findViewById(R.id.textView1);
-    speakOut(tvTitle.getText().toString());
-    while (_t.isSpeaking()) {
+    speakOutAsync(tvTitle.getText().toString());
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }

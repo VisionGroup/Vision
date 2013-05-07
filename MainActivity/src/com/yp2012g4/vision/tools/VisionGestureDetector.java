@@ -60,7 +60,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * For supporting Text-To-Speech
    */
-  public TTS _t;
+  public TTS _tts;
   /**
    * Stores the last view
    */
@@ -77,7 +77,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * Flag indicating a click on control bar button
    */
-  protected boolean clickFlag;
+  protected boolean _navigationBar;
   /**
    * Mapping from views to their locations on screen
    */
@@ -126,7 +126,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       // changeButton();
       VisionApplication.restoreColors(last_button_view, this);
     hapticFeedback(last_button_view);
-    speakOut(textToRead(last_button_view));
+    speakOutAsync(textToRead(last_button_view));
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
@@ -155,7 +155,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
               Log.i("MyLog", "onTouch: ACTION_MOVE");
               if (last_button_view != entry.getKey()) {
                 VisionApplication.restoreColors(entry.getKey(), this);
-                speakOut(textToRead(entry.getKey()));
+                speakOutAsync(textToRead(entry.getKey()));
                 changeButton(entry.getKey());
               } else
                 last_button_view = getView(event.getRawX(), event.getRawY());
@@ -166,6 +166,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
         if (buttonMode.equals("regular"))
           VisionApplication.restoreColors(last_button_view, this);
         onActionUp(last_button_view);
+        break;
+      default:
         break;
     }
     // gestureDetector.setIsLongpressEnabled(false);
@@ -216,6 +218,9 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
           mFirstDownTime = 0;
           return true;
         }
+        break;
+      default:
+        break;
     }
     return false;
   }
@@ -244,7 +249,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     if (hasFocus) {
       VisionApplication.applyButtonSettings(view_to_rect.keySet(), mainView, this);
       if (mainView.getContentDescription() != null)
-        speakOut(findViewById(getViewId()).getContentDescription().toString());
+        speakOutAsync(findViewById(getViewId()).getContentDescription().toString());
     }
   }
   
@@ -295,31 +300,38 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @param s
    *          the string to speak out
    */
-  public void speakOut(String s) {
-    if (_t == null) {
+  public void speakOutAsync(String s) {
+    if (_tts == null) {
       Log.e(TAG, "TTS is null");
       return;
     }
     spokenString = s;
-    _t.speak(s);
+    _tts.speak(s);
+  }
+  
+  public void speakOutSync(String s) {
+    speakOutAsync(s);
+    while (_tts.isSpeaking() == true) {
+      // Wait until finish talking.
+    }
   }
   
   @Override public void onDestroy() {
-    _t.shutdown();
+    _tts.shutdown();
     super.onDestroy();
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
-    _t = new TTS(this);
-    if (_t.isRuning())
-      speakOut("start");
+    _tts = new TTS(this);
+    if (_tts.isRuning())
+      speakOutAsync("start");
     else
       Log.e(TAG, "tts init error");
     VisionApplication.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     mHandler = new Handler();
     gestureDetector = new GestureDetector(this);
-    clickFlag = false;
+    _navigationBar = false;
   }
   
   /**

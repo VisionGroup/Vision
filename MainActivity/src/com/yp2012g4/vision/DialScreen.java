@@ -52,13 +52,13 @@ public class DialScreen extends VisionActivity {
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
-    if (clickFlag || curr_view.getId() == R.id.dialer_sms_button)
-      return clickFlag = false;
+    if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
+      return _navigationBar = false;
     if (e.getAction() == MotionEvent.ACTION_UP) {
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())
             && (last_button_view != entry.getKey() || buttonPressed == 0))
-          speakOut(textToRead(entry.getKey()));
+          speakOutAsync(textToRead(entry.getKey()));
       buttonPressed = 0;
     }
     return true;
@@ -77,7 +77,7 @@ public class DialScreen extends VisionActivity {
     if (v.getId() == R.id.dialer_dial_button) {
       // no number was dialed
       if (dialed_number == "") {
-        speakOut(getString(R.string.dial_number));
+        speakOutAsync(getString(R.string.dial_number));
         return;
       }
       Intent call = new Intent(Intent.ACTION_CALL);
@@ -88,7 +88,7 @@ public class DialScreen extends VisionActivity {
     if (v.getId() == R.id.dialer_sms_button) {
       // no number was dialed
       if (dialed_number == "") {
-        speakOut(getString(R.string.dial_number));
+        speakOutAsync(getString(R.string.dial_number));
         return;
       }
       Intent i = new Intent(getApplicationContext(), QuickSMSActivity.class);

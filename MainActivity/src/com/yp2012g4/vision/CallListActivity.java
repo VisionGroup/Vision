@@ -35,7 +35,7 @@ public class CallListActivity extends VisionActivity {
     adapter = new CallAdapter(data, this);
     listView.setAdapter(adapter);
     if (data.size() == 0)
-      _t.speak(getString(R.string.noCalls));
+      _tts.speak(getString(R.string.noCalls));
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
@@ -63,7 +63,7 @@ public class CallListActivity extends VisionActivity {
         adapter.removeItemFromList(callId);
         listView.setAdapter(adapter);
         listView.prevPage();
-        speakOut(getString(R.string.delete_call));
+        speakOutAsync(getString(R.string.delete_call));
         vb.vibrate(150);
         break;
       default:

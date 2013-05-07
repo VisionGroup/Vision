@@ -65,7 +65,7 @@ public class SOSActivity extends VisionActivity {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
         final ArrayList<String> parts = sms.divideMessage(messageToSend);
         sms.sendMultipartTextMessage(number, null, parts, null, null);
-        speakOut(getString(R.string.SOS_message_has_been_sent));
+        speakOutAsync(getString(R.string.SOS_message_has_been_sent));
       }
       mHandler.postDelayed(mLaunchTask, 1500);
     }
@@ -77,7 +77,7 @@ public class SOSActivity extends VisionActivity {
     View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.Send_SOS_Message:
-        speakOut(getString(R.string.sending_SOS_message));
+        speakOutAsync(getString(R.string.sending_SOS_message));
         mHandler.postDelayed(sendSOSMessage, 5000);
         break;
       default:

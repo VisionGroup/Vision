@@ -62,11 +62,11 @@ public class SpeakingClockActivity extends VisionActivity {
     switch (button.getId()) {
       case R.id.TimeButton:
         Calendar cal = Calendar.getInstance();
-        speakOut(parseTime(cal));
+        speakOutAsync(parseTime(cal));
         break;
       case R.id.DateButton:
         String d = getDateFormat();
-        speakOut(d);
+        speakOutAsync(d);
         break;
       default:
         break;
@@ -113,7 +113,7 @@ public class SpeakingClockActivity extends VisionActivity {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       Calendar cal = Calendar.getInstance();
-      speakOut(parseTime(cal));
+      speakOutAsync(parseTime(cal));
     }
   }
 }

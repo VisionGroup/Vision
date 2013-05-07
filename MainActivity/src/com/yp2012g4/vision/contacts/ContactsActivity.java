@@ -50,7 +50,7 @@ public class ContactsActivity extends VisionActivity {
           currentContact++;
           setContact();
         } else
-          speakOut(getString(R.string.no_more_contacts));
+          speakOutAsync(getString(R.string.no_more_contacts));
         vb.vibrate(VIBRATE_TIME);
         break;
       case R.id.contact_prev:
@@ -58,7 +58,7 @@ public class ContactsActivity extends VisionActivity {
           currentContact--;
           setContact();
         } else
-          speakOut(getString(R.string.no_more_contacts));
+          speakOutAsync(getString(R.string.no_more_contacts));
         vb.vibrate(VIBRATE_TIME);
         break;
       case R.id.contacts_call:
@@ -125,9 +125,9 @@ public class ContactsActivity extends VisionActivity {
       contactNameButton.setReadText(currentName);
       conactPhoneButton.setText(currentPhone);
       conactPhoneButton.setReadText(currentPhone);
-      speakOut(currentName);
+      speakOutAsync(currentName);
     } else
-      speakOut(getString(R.string.no_messages));
+      speakOutAsync(getString(R.string.no_messages));
   }
   
   /**

@@ -75,8 +75,8 @@ public class AlarmActivity extends VisionActivity {
       String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
       TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
       buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
-      speakOut(s);
-      while (_t.isSpeaking() == true) {
+      speakOutAsync(s);
+      while (_tts.isSpeaking() == true) {
         // Wait for message to finish playing and then finish the activity
       }
     }
@@ -98,7 +98,7 @@ public class AlarmActivity extends VisionActivity {
             s = getString(R.string.alarm_is_off_at);
           s = s + " " + SpeakingClockActivity.parseTime(alarmTime);
         }
-        speakOut(s);
+        speakOutAsync(s);
         break;
       case R.id.setButton:
         callSetClock(false);
@@ -114,7 +114,7 @@ public class AlarmActivity extends VisionActivity {
         if (AlarmService.mp != null)
           AlarmService.mp.stop();
         alarmIsSet = false;
-        speakOut(getString(R.string.alarm_is_canceled));
+        speakOutAsync(getString(R.string.alarm_is_canceled));
         break;
       default:
         break;
@@ -139,8 +139,8 @@ public class AlarmActivity extends VisionActivity {
    */
   public void setAlarm() {
     if (alarmTime == null) {
-      speakOut(getString(R.string.you_need_to_set_ther_alarm_first));
-      while (_t.isSpeaking() == true) {
+      speakOutAsync(getString(R.string.you_need_to_set_ther_alarm_first));
+      while (_tts.isSpeaking() == true) {
         // Wait for message to finish playing and then finish the activity
       }
       return;
@@ -155,8 +155,8 @@ public class AlarmActivity extends VisionActivity {
       alarmTime.roll(Calendar.DAY_OF_MONTH, true);
     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
-    speakOut(getString(R.string.alarm_is_activated));
-    while (_t.isSpeaking() == true) {
+    speakOutAsync(getString(R.string.alarm_is_activated));
+    while (_tts.isSpeaking() == true) {
       // Wait for message to finish playing and then finish the activity
     }
   }

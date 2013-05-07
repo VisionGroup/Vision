@@ -4,10 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,8 +14,10 @@ import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
  * 
- * @author Amir
- * @version 2 This class represents a basic calculator
+ * @author Amir Mizrachi
+ * @version 2
+ * 
+ *          This class represents a basic calculator
  */
 public class CalcActivity extends VisionActivity {
   private String calculated_number = "";
@@ -29,19 +29,15 @@ public class CalcActivity extends VisionActivity {
   private static double ERROR = 0.00001; // delta for identifying a zero FP
   // number
   private boolean isBadAction = false; // checks if a wrong operation has been
+  // id of views
+  @SuppressWarnings("boxing") final List<Integer> digits = Arrays.asList(R.id.digit0, R.id.digit1, R.id.digit2, R.id.digit3,
+      R.id.digit4, R.id.digit5, R.id.digit6, R.id.digit7, R.id.digit8, R.id.digit9);
   
   // made
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_calc);
     init(0, getString(R.string.calc_screen), getString(R.string.calc_screen));
-  }
-  
-  /**
-   * update the number of sequential buttons pressed
-   */
-  @Override public void onShowPress(MotionEvent e) {
-    super.onShowPress(e);
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
@@ -58,10 +54,6 @@ public class CalcActivity extends VisionActivity {
     return true;
   }
   
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-  }
-  
   @Override public int getViewId() {
     return R.id.CalcScreen;
   }
@@ -69,14 +61,10 @@ public class CalcActivity extends VisionActivity {
   /**
    * Overridden method which implements the action triggered by a button lift
    */
-  @SuppressWarnings("boxing") @Override public void onActionUp(View v) {
-    List<Integer> digits = Arrays.asList(R.id.digit0, R.id.digit1, R.id.digit2, R.id.digit3, R.id.digit4, R.id.digit5, R.id.digit6,
-        R.id.digit7, R.id.digit8, R.id.digit9);
-    List<Integer> signs = Arrays.asList(R.id.plus, R.id.minus, R.id.multiplicity, R.id.div);
-    // Get instance of Vibrator from current Context
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+  @Override public void onActionUp(View v) {
     // it's a digit
-    if (digits.contains(v.getId()))
+    final Integer buttonId = Integer.valueOf(v.getId());
+    if (digits.contains(buttonId))
       if (!equalsPressed) {
         if (sign == Sign.NO_SIGN)
           lhs_number += ((TalkingButton) v).getText();
@@ -88,9 +76,10 @@ public class CalcActivity extends VisionActivity {
         isBadAction = true;
       }
     // it's a sign
-    if (signs.contains(v.getId())) {
+    if (getSignFromId(buttonId.intValue()) != Sign.NO_SIGN) {
       if (lhs_number != "" && !lhs_number.endsWith(".") && sign == Sign.NO_SIGN) {
-        getSign(v.getId()); // updates sign to its corresponding enum
+        // updates sign to its corresponding enum
+        sign = getSignFromId(v.getId());
         // number
         calculated_number += ((TalkingButton) v).getText();
         equalsPressed = false;
@@ -100,7 +89,7 @@ public class CalcActivity extends VisionActivity {
       }
       lhsDone = true;
     }
-    switch (v.getId()) {
+    switch (buttonId.intValue()) {
       case R.id.clear:
         lhs_number = rhs_number = calculated_number = "";
         sign = Sign.NO_SIGN;
@@ -121,8 +110,8 @@ public class CalcActivity extends VisionActivity {
         break;
       case R.id.equals:
         if (lhs_number != "" && rhs_number != "" && sign != Sign.NO_SIGN) {
-          Double res = parseResult(lhs_number, rhs_number, sign);
-          if (res == null)
+          Double res = Double.valueOf(parseResult(lhs_number, rhs_number, sign));
+          if (res.doubleValue() == Double.NaN)
             return;
           if (IsIntResult(res.toString()))
             calculated_number = Integer.toString(res.intValue());
@@ -143,7 +132,7 @@ public class CalcActivity extends VisionActivity {
       default:
         break;
     }
-    vb.vibrate(150);
+    vibrator.vibrate(150);
     ((TalkingButton) findViewById(R.id.result)).setText(calculated_number.toCharArray(), 0, calculated_number.length());
     ((TalkingButton) findViewById(R.id.result)).setReadText(calculated_number);
   }
@@ -153,21 +142,20 @@ public class CalcActivity extends VisionActivity {
    * 
    * @param id
    *          The sign button id, on which we clicked
+   * @return the corresponding sign
    */
-  private void getSign(int id) {
+  private static Sign getSignFromId(int id) {
     switch (id) {
       case R.id.plus:
-        sign = Sign.PLUS;
-        break;
+        return Sign.PLUS;
       case R.id.minus:
-        sign = Sign.MINUS;
-        break;
+        return Sign.MINUS;
       case R.id.multiplicity:
-        sign = Sign.TIMES;
-        break;
+        return Sign.TIMES;
       case R.id.div:
-        sign = Sign.DIV;
-        break;
+        return Sign.DIV;
+      default:
+        return Sign.NO_SIGN;
     }
   }
   
@@ -182,31 +170,25 @@ public class CalcActivity extends VisionActivity {
    *          The sign between the 2 numbers
    * @return The result (as a double) of the parsed string
    */
-  @SuppressWarnings("boxing") private Double parseResult(String lhs_num, String rhs_num, Sign s) {
-    Double result = null;
-    Double lhs = Double.parseDouble(lhs_num);
-    Double rhs = Double.parseDouble(rhs_num);
+  private double parseResult(String lhs_num, String rhs_num, Sign s) {
+    double lhs = Double.parseDouble(lhs_num);
+    double rhs = Double.parseDouble(rhs_num);
     switch (s) {
       case PLUS:
-        result = lhs + rhs;
-        break;
+        return lhs + rhs;
       case MINUS:
-        result = lhs - rhs;
-        break;
+        return lhs - rhs;
       case TIMES:
-        result = lhs * rhs;
-        break;
+        return lhs * rhs;
       case DIV:
         if (Math.abs(rhs) < ERROR) {
           speakOut(getString(R.string.division_by_zero));
-          break;
+          return Double.NaN;
         }
-        result = lhs / rhs;
-        break;
+        return lhs / rhs;
       default:
-        break;
+        return Double.NaN;
     }
-    return result;
   }
   
   /**

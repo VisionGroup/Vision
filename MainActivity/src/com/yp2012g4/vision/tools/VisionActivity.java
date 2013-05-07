@@ -1,10 +1,12 @@
 package com.yp2012g4.vision.tools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
@@ -28,6 +30,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
+  final protected Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
   
   public int getIcon() {
     return _icon;

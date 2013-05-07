@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
@@ -71,8 +70,6 @@ public class DialScreen extends VisionActivity {
    *          - the last button pressed before lifting the finger
    */
   @Override public void onActionUp(View v) {
-    // Get instance of Vibrator from current Context
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // make a phone call
     if (v.getId() == R.id.dialer_dial_button) {
       // no number was dialed
@@ -121,7 +118,7 @@ public class DialScreen extends VisionActivity {
         return;
     }
     // Vibrate for 150 milliseconds
-    vb.vibrate(150);
+    vibrator.vibrate(150);
     ((TalkingButton) findViewById(R.id.number)).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     ((TalkingButton) findViewById(R.id.number)).setReadText(read_number);
   }

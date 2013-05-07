@@ -26,7 +26,7 @@ public class CalcActivity extends VisionActivity {
   private Sign sign = Sign.NO_SIGN;
   private boolean equalsPressed = false;
   private boolean lhsDone = false;
-  private static double ERROR = 0.00001; // delta for identifying a zero FP
+  private static double EPSILON = 0.00001; // epsilon for identifying a zero FP
   // number
   private boolean isBadAction = false; // checks if a wrong operation has been
   // id of views
@@ -62,79 +62,95 @@ public class CalcActivity extends VisionActivity {
    * Overridden method which implements the action triggered by a button lift
    */
   @Override public void onActionUp(View v) {
+    final CharSequence buttonText = ((TalkingButton) v).getText();
+    final int buttonId = v.getId();
     // it's a digit
-    final Integer buttonId = Integer.valueOf(v.getId());
-    if (digits.contains(buttonId))
+    if (digits.contains(Integer.valueOf(buttonId)))
       if (!equalsPressed) {
         if (sign == Sign.NO_SIGN)
-          lhs_number += ((TalkingButton) v).getText();
+          lhs_number += buttonText;
         else
-          rhs_number += ((TalkingButton) v).getText();
-        calculated_number += ((TalkingButton) v).getText();
-      } else {
-        speakOut(getString(R.string.bad_action));
-        isBadAction = true;
-      }
+          rhs_number += buttonText;
+        calculated_number += buttonText;
+      } else
+        badAction();
     // it's a sign
-    if (getSignFromId(buttonId.intValue()) != Sign.NO_SIGN) {
-      if (lhs_number != "" && !lhs_number.endsWith(".") && sign == Sign.NO_SIGN) {
-        // updates sign to its corresponding enum
-        sign = getSignFromId(v.getId());
-        // number
-        calculated_number += ((TalkingButton) v).getText();
-        equalsPressed = false;
-      } else {
-        speakOut(getString(R.string.bad_action));
-        isBadAction = true;
+    else if (getSignFromId(buttonId) != Sign.NO_SIGN)
+      pressOnSignButton(buttonText, buttonId);
+    else
+      // not a digit, not a sign
+      switch (buttonId) {
+        case R.id.clear:
+          clearCalcFields();
+          break;
+        case R.id.dot:
+          pressOnDotButton(buttonText);
+          break;
+        case R.id.equals:
+          if (lhs_number != "" && rhs_number != "" && sign != Sign.NO_SIGN) {
+            Double res = Double.valueOf(parseResult(lhs_number, rhs_number, sign));
+            if (res.doubleValue() == Double.NaN)
+              return;
+            updateCalculatedNumber(res);
+          } else
+            badAction();
+          break;
+        default:
+          break;
       }
-      lhsDone = true;
-    }
-    switch (buttonId.intValue()) {
-      case R.id.clear:
-        lhs_number = rhs_number = calculated_number = "";
-        sign = Sign.NO_SIGN;
-        equalsPressed = false;
-        lhsDone = false;
-        break;
-      case R.id.dot:
-        if (lhs_number != "" && !lhs_number.contains(".") && !lhsDone) {
-          lhs_number += ((TalkingButton) v).getText();
-          calculated_number += ((TalkingButton) v).getText();
-        } else if (rhs_number != "" && !rhs_number.contains(".")) {
-          rhs_number += ((TalkingButton) v).getText();
-          calculated_number += ((TalkingButton) v).getText();
-        } else {
-          speakOut(getString(R.string.bad_action));
-          isBadAction = true;
-        }
-        break;
-      case R.id.equals:
-        if (lhs_number != "" && rhs_number != "" && sign != Sign.NO_SIGN) {
-          Double res = Double.valueOf(parseResult(lhs_number, rhs_number, sign));
-          if (res.doubleValue() == Double.NaN)
-            return;
-          if (IsIntResult(res.toString()))
-            calculated_number = Integer.toString(res.intValue());
-          else
-            calculated_number = res.toString();
-          lhs_number = calculated_number; // now, the result of previous
-          // operation is the lhs_number
-          rhs_number = "";
-          sign = Sign.NO_SIGN;
-          equalsPressed = true;
-          lhsDone = false;
-          speakOut(calculated_number);
-        } else {
-          speakOut(getString(R.string.bad_action));
-          isBadAction = true;
-        }
-        break;
-      default:
-        break;
-    }
     vibrator.vibrate(150);
-    ((TalkingButton) findViewById(R.id.result)).setText(calculated_number.toCharArray(), 0, calculated_number.length());
-    ((TalkingButton) findViewById(R.id.result)).setReadText(calculated_number);
+    final TalkingButton resultButton = (TalkingButton) findViewById(R.id.result);
+    resultButton.setText(calculated_number.toCharArray(), 0, calculated_number.length());
+    resultButton.setReadText(calculated_number);
+  }
+  
+  private void badAction() {
+    speakOut(getString(R.string.bad_action));
+    isBadAction = true;
+  }
+  
+  private void pressOnSignButton(final CharSequence buttonText, final int buttonId) {
+    lhsDone = true;
+    if (lhs_number != "" && !lhs_number.endsWith(".") && sign == Sign.NO_SIGN) {
+      // updates sign to its corresponding enum
+      sign = getSignFromId(buttonId);
+      // number
+      calculated_number += buttonText;
+      equalsPressed = false;
+      return;
+    }
+    badAction();
+  }
+  
+  private void updateCalculatedNumber(Double res) {
+    lhs_number = calculated_number = Integer.valueOf((int) Math.floor(res.doubleValue())).toString();
+    // operation is the lhs_number
+    rhs_number = "";
+    sign = Sign.NO_SIGN;
+    equalsPressed = true;
+    lhsDone = false;
+    speakOut(calculated_number);
+  }
+  
+  private void pressOnDotButton(CharSequence text) {
+    if (lhs_number != "" && !lhs_number.contains(".") && !lhsDone) {
+      lhs_number += text;
+      calculated_number += text;
+      return;
+    }
+    if (rhs_number != "" && !rhs_number.contains(".")) {
+      rhs_number += text;
+      calculated_number += text;
+      return;
+    }
+    badAction();
+  }
+  
+  private void clearCalcFields() {
+    lhs_number = rhs_number = calculated_number = "";
+    sign = Sign.NO_SIGN;
+    equalsPressed = false;
+    lhsDone = false;
   }
   
   /**
@@ -181,7 +197,7 @@ public class CalcActivity extends VisionActivity {
       case TIMES:
         return lhs * rhs;
       case DIV:
-        if (Math.abs(rhs) < ERROR) {
+        if (Math.abs(rhs) < EPSILON) {
           speakOut(getString(R.string.division_by_zero));
           return Double.NaN;
         }
@@ -189,17 +205,6 @@ public class CalcActivity extends VisionActivity {
       default:
         return Double.NaN;
     }
-  }
-  
-  /**
-   * Checks whether the calculated number is an integer or double
-   * 
-   * @param calculated_number
-   *          The calculated number as a string
-   * @return True if the calculated number is an integer. Else - false.
-   */
-  private static boolean IsIntResult(String calculated_number) {
-    return calculated_number.endsWith(".0") ? true : false;
   }
   
   /**

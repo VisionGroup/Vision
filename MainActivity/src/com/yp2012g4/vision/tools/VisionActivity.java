@@ -30,7 +30,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
-  final protected Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+  protected Vibrator vibrator = null;
   
   public int getIcon() {
     return _icon;
@@ -123,6 +123,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // hide titlebar of application
     // must be before setting the layout
     requestWindowFeature(Window.FEATURE_NO_TITLE);

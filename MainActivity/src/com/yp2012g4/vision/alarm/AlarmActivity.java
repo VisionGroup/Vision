@@ -39,10 +39,8 @@ public class AlarmActivity extends VisionActivity {
    */
   public void callSetClock(boolean isSettingMinutes) {
     waitForMinutes = isSettingMinutes;
-    Intent i = new Intent(AlarmActivity.this, SetClockActivity.class);
     int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
-    i.putExtra("type", type);
-    startActivityForResult(i, REQUEST_CODE);
+    startActivityForResult(new Intent(AlarmActivity.this, SetClockActivity.class).putExtra("type", type), REQUEST_CODE);
   }
   
   @Override public int getViewId() {
@@ -76,9 +74,7 @@ public class AlarmActivity extends VisionActivity {
       TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
       buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
       speakOutAsync(s);
-      while (_tts.isSpeaking() == true) {
-        // Wait for message to finish playing and then finish the activity
-      }
+      _tts.waitUntilFinishTalking();
     }
   }
   

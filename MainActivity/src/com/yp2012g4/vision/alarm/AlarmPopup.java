@@ -88,8 +88,8 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
       @Override public void onCompletion(MediaPlayer mpc) {
         final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        final Intent myIntent = new Intent(AlarmPopup.this, AlarmService.class);
-        AlarmActivity.pendingIntent = PendingIntent.getService(AlarmPopup.this, 0, myIntent, 0);
+        AlarmActivity.pendingIntent = PendingIntent.getService(AlarmPopup.this, 0, new Intent(AlarmPopup.this, AlarmService.class),
+            0);
         final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         final String snooze = getResources().getString(R.string.snooze_time);

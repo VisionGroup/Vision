@@ -18,17 +18,8 @@ public class AlarmService extends Service {
   static public MediaPlayer mp = null;
   
   @Override public IBinder onBind(Intent intent) {
-    // TODO Auto-generated method stub
     Toast.makeText(AlarmService.this, "onBind", Toast.LENGTH_LONG).show();
     return null;
-  }
-  
-  @Override public void onCreate() {
-    // TODO Auto-generated method stub
-  }
-  
-  @Override public void onDestroy() {
-    // TODO Auto-generated method stub
   }
   
   /***
@@ -46,10 +37,5 @@ public class AlarmService extends Service {
       getApplication().startActivity(dialogIntent);
       AlarmActivity.alarmIsSet = false;
     }
-  }
-  
-  @Override public boolean onUnbind(Intent intent) {
-    // TODO Auto-generated method stub
-    return super.onUnbind(intent);
   }
 }

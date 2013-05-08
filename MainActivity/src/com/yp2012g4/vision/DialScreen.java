@@ -70,16 +70,15 @@ public class DialScreen extends VisionActivity {
    *          - the last button pressed before lifting the finger
    */
   @Override public void onActionUp(View v) {
-    switch (v.getId()) {
+    int buttonId = v.getId();
+    switch (buttonId) {
       case R.id.dialer_dial_button: // make a phone call
         // no number was dialed
         if (dialed_number == "") {
           speakOutAsync(getString(R.string.dial_number));
           return;
         }
-        Intent call = new Intent(Intent.ACTION_CALL);
-        call.setData(Uri.parse("tel:" + dialed_number));
-        startActivity(call);
+        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)));
         break;
       case R.id.dialer_sms_button: // sms
         // no number was dialed
@@ -87,9 +86,7 @@ public class DialScreen extends VisionActivity {
           speakOutAsync(getString(R.string.dial_number));
           return;
         }
-        Intent i = new Intent(getApplicationContext(), QuickSMSActivity.class);
-        i.putExtra("number", dialed_number);
-        startActivity(i);
+        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra("number", dialed_number));
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
@@ -97,25 +94,19 @@ public class DialScreen extends VisionActivity {
         dialed_number = "";
         read_number = "";
         break;
+      case R.id.button_delete: // delete
+        if (dialed_number.length() == MAX_LENGTH || buttonId == R.id.button_delete) {
+          dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
+          read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
+        }
+        // a number or sign has been chosen
+        if (((View) v.getParent().getParent()).getId() == R.id.DialScreenNumbers) {
+          dialed_number += ((TalkingButton) v).getText();
+          read_number = read_number + ((TalkingButton) v).getText() + " ";
+        }
+        break;
       default:
         break;
-    }
-    // undo
-    if (v.getId() != R.id.button_reset) {
-      boolean flag = true;
-      if (dialed_number.length() == MAX_LENGTH || v.getId() == R.id.button_delete) {
-        dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
-        read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
-        flag = false;
-      }
-      // a number or sign has been chosen
-      if (((View) v.getParent().getParent()).getId() == R.id.DialScreenNumbers) {
-        dialed_number += ((TalkingButton) v).getText();
-        read_number = read_number + ((TalkingButton) v).getText() + " ";
-        flag = false;
-      }
-      if (flag)
-        return;
     }
     // Vibrate for 150 milliseconds
     vibrator.vibrate(150);

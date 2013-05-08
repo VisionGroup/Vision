@@ -26,7 +26,8 @@ public class CalcActivity extends VisionActivity {
   private Sign sign = Sign.NO_SIGN;
   private boolean equalsPressed = false;
   private boolean lhsDone = false;
-  private static double EPSILON = 0.00001; // epsilon for identifying a zero FP
+  final private static double EPSILON = 0.00001; // epsilon for identifying a
+                                                 // zero FP
   // number
   private boolean isBadAction = false; // checks if a wrong operation has been
   // id of views

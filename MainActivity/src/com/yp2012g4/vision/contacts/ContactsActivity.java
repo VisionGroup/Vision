@@ -2,11 +2,9 @@ package com.yp2012g4.vision.contacts;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -40,7 +38,6 @@ public class ContactsActivity extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     if (super.onSingleTapUp(e))
       return true;
     View button = getButtonByMode();
@@ -51,7 +48,7 @@ public class ContactsActivity extends VisionActivity {
           setContact();
         } else
           speakOutAsync(getString(R.string.no_more_contacts));
-        vb.vibrate(VIBRATE_TIME);
+        vibrate(VIBRATE_TIME);
         break;
       case R.id.contact_prev:
         if (currentContact > 0) {
@@ -59,7 +56,7 @@ public class ContactsActivity extends VisionActivity {
           setContact();
         } else
           speakOutAsync(getString(R.string.no_more_contacts));
-        vb.vibrate(VIBRATE_TIME);
+        vibrate(VIBRATE_TIME);
         break;
       case R.id.contacts_call:
         final Intent call = new Intent(Intent.ACTION_CALL);
@@ -84,7 +81,6 @@ public class ContactsActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts);
     init(0, getString(R.string.contacts_screen), getString(R.string.contacts_screen_help));
-    final ContactManager contactManager = new ContactManager(getApplicationContext());
     final Bundle extras = getIntent().getExtras();
     String listType = "all";
     if (extras != null)
@@ -93,17 +89,24 @@ public class ContactsActivity extends VisionActivity {
       } catch (final Exception e) {
         listType = "all";
       }
+    selectCorrespondingContactsList(listType);
+    setContact();
+  }
+  
+  private void selectCorrespondingContactsList(String listType) {
+    final ContactManager contactManager = new ContactManager(getApplicationContext());
     if (listType.equalsIgnoreCase("all")) {
       contacts = contactManager.getAllContacts();
       findViewById(getViewId()).setContentDescription("Contact list screen");
-    } else if (listType.equalsIgnoreCase("favorits")) {
+      return;
+    }
+    if (listType.equalsIgnoreCase("favorits")) {
       contacts = contactManager.getFavoriteContacts();
       findViewById(getViewId()).setContentDescription("Favorit contacts screen");
-    } else if (listType.equalsIgnoreCase("test")) {
-      findViewById(getViewId()).setContentDescription("Test contacts screen");
-      contacts = ContactManager.getTestContacts();
+      return;
     }
-    setContact();
+    findViewById(getViewId()).setContentDescription("Test contacts screen");
+    contacts = ContactManager.getTestContacts();
   }
   
   // @Override public boolean onCreateOptionsMenu(Menu menu) {

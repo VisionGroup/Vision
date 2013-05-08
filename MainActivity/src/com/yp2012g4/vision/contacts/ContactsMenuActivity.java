@@ -28,7 +28,6 @@ public class ContactsMenuActivity extends VisionActivity {
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.dialerButton:
-//			intent = new Intent(ContactsMenuActivity.this, CalcActivity.class);
         intent = new Intent(ContactsMenuActivity.this, DialScreen.class);
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;

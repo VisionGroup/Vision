@@ -9,7 +9,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/back_button"
         android:background="@android:color/transparent"
-        custom:ReadText="@string/back_button"
+        custom:readText="@string/back_button"
         style="?backgroundColor"  />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
@@ -17,7 +17,7 @@
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        custom:ReadText="@string/Tool_tip_button"
+        custom:readText="@string/Tool_tip_button"
         android:scaleType="fitCenter"
         android:src="@drawable/current_menu_button"
         android:background="@android:color/transparent"
@@ -28,7 +28,7 @@
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        custom:ReadText = "@string/current_menu_button"
+        custom:readText = "@string/current_menu_button"
         android:scaleType="fitCenter"
         android:src="@drawable/compass"
         android:background="@android:color/transparent"
@@ -39,7 +39,7 @@
         android:layout_width="0dip"
         android:layout_height="60dp"
         android:layout_weight="1"
-        custom:ReadText="@string/home_button"
+        custom:readText="@string/home_button"
         android:scaleType="fitCenter"
         android:src="@drawable/home_button"
         android:background="@android:color/transparent"

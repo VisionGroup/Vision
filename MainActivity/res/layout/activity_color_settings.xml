@@ -22,8 +22,8 @@
             android:background="@color/BLACK"
             android:text="@string/WhiteBlack"
             android:textColor="@color/WHITE"
-            app:PrefsValue="WHITE-BLACK"
-            app:ReadText="@string/WhiteBlack" />
+            app:prefsValue="WHITE-BLACK"
+            app:readText="@string/WhiteBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,8 +40,8 @@
             android:background="@color/RED"
             android:text="@string/WhiteRed"
             android:textColor="@color/WHITE"
-            app:PrefsValue="WHITE-RED"
-            app:ReadText="@string/WhiteRed" />
+            app:prefsValue="WHITE-RED"
+            app:readText="@string/WhiteRed" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,8 +58,8 @@
             android:background="@color/BLACK"
             android:text="@string/RedBlack"
             android:textColor="@color/RED"
-            app:PrefsValue="RED-BLACK"
-            app:ReadText="@string/RedBlack" />
+            app:prefsValue="RED-BLACK"
+            app:readText="@string/RedBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -76,8 +76,8 @@
             android:background="@color/GREEN"
             android:text="@string/WhiteGreen"
             android:textColor="@color/WHITE"
-            app:PrefsValue="WHITE-GREEN"
-            app:ReadText="@string/WhiteGreen" />
+            app:prefsValue="WHITE-GREEN"
+            app:readText="@string/WhiteGreen" />
     </LinearLayout>
 
     <LinearLayout
@@ -94,8 +94,8 @@
             android:background="@color/BLACK"
             android:text="@string/GreenBlack"
             android:textColor="@color/GREEN"
-            app:PrefsValue="GREEN-BLACK"
-            app:ReadText="@string/GreenBlack" />
+            app:prefsValue="GREEN-BLACK"
+            app:readText="@string/GreenBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,8 +112,8 @@
             android:background="@color/BLUE"
             android:text="@string/WhiteBlue"
             android:textColor="@color/WHITE"
-            app:PrefsValue="WHITE-BLUE"
-            app:ReadText="@string/WhiteBlue" />
+            app:prefsValue="WHITE-BLUE"
+            app:readText="@string/WhiteBlue" />
     </LinearLayout>
 
     <LinearLayout
@@ -130,8 +130,8 @@
             android:background="@color/BLACK"
             android:text="@string/BlueBlack"
             android:textColor="@color/BLUE"
-            app:PrefsValue="BLUE-BLACK"
-            app:ReadText="@string/BlueBlack" />
+            app:prefsValue="BLUE-BLACK"
+            app:readText="@string/BlueBlack" />
     </LinearLayout>
 
     <LinearLayout

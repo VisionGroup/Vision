@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/sos_button"
+            custom:readText="@string/sos_button"
             android:scaleType="fitCenter"
             android:src="@drawable/sos_button" />
 
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/time_button"
+            custom:readText="@string/time_button"
             android:scaleType="fitCenter"
             android:src="@drawable/time_button" />
     </LinearLayout>
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/where_am_i_button"
+            custom:readText="@string/where_am_i_button"
             android:scaleType="fitCenter"
             android:src="@drawable/compass_button" />
 
@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/read_sms_button"
+            custom:readText="@string/read_sms_button"
             android:scaleType="fitCenter"
             android:src="@drawable/read_sms_button" />
     </LinearLayout>
@@ -71,7 +71,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/phone_status_button"
+            custom:readText="@string/phone_status_button"
             android:scaleType="fitCenter"
             android:src="@drawable/phone_status_button" />
 
@@ -81,7 +81,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/alarm_clock_button"
+            custom:readText="@string/alarm_clock_button"
             android:scaleType="fitCenter"
             android:src="@drawable/alarm_clock_button" />
     </LinearLayout>
@@ -99,7 +99,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/chat_button"
-            custom:ReadText="@string/contacts_button" />
+            custom:readText="@string/contacts_button" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/setting_button"
@@ -107,7 +107,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:ReadText="@string/settings_button"
+            custom:readText="@string/settings_button"
             android:scaleType="fitCenter"
             android:src="@drawable/settings_button" />
     </LinearLayout>

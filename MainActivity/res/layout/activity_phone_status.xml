@@ -24,7 +24,7 @@
             android:contentDescription="@string/phoneStatus_button_getBatteryStatus_read"
             android:scaleType="fitCenter"
             android:src="@drawable/battery_button"
-            app:ReadText="@string/phoneStatus_button_getBatteryStatus_read" />
+            app:readText="@string/phoneStatus_button_getBatteryStatus_read" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,7 +42,7 @@
             android:contentDescription="@string/phoneStatus_button_getReceptionStatus_read"
             android:scaleType="fitCenter"
             android:src="@drawable/signal_button"
-            app:ReadText="@string/phoneStatus_button_getReceptionStatus_read" />
+            app:readText="@string/phoneStatus_button_getReceptionStatus_read" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:contentDescription="@string/phoneStatus_button_getMissedCalls_read"
             android:scaleType="fitCenter"
             android:src="@drawable/missed"
-            app:ReadText="@string/phoneStatus_button_getMissedCalls_read" />
+            app:readText="@string/phoneStatus_button_getMissedCalls_read" />
     </LinearLayout>
 
     <LinearLayout

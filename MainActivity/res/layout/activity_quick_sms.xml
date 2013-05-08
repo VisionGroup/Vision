@@ -20,7 +20,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_1"
-            app:ReadText="@string/SMS_number_1"
+            app:readText="@string/SMS_number_1"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -36,7 +36,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_2"
-            app:ReadText="@string/SMS_number_2"
+            app:readText="@string/SMS_number_2"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -52,7 +52,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_3"
-            app:ReadText="@string/SMS_number_3"
+            app:readText="@string/SMS_number_3"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -68,7 +68,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_4"
-            app:ReadText="@string/SMS_number_4"
+            app:readText="@string/SMS_number_4"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -84,7 +84,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_5"
-            app:ReadText="@string/SMS_number_5"
+            app:readText="@string/SMS_number_5"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -100,7 +100,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_6"
-            app:ReadText="@string/SMS_number_6"
+            app:readText="@string/SMS_number_6"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -116,7 +116,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_7"
-            app:ReadText="@string/SMS_number_7"
+            app:readText="@string/SMS_number_7"
             style="?textAppearance" />
     </LinearLayout>
 
@@ -132,7 +132,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/SMS_number_9"
-            app:ReadText="@string/SMS_number_9"
+            app:readText="@string/SMS_number_9"
             style="?textAppearance" />
     </LinearLayout>
 

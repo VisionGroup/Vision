@@ -21,7 +21,7 @@
             android:background="@android:color/transparent"
             android:scaleType="center"
             android:src="@drawable/sos_pic"
-            app:ReadText="@string/send_SOS_message" />
+            app:readText="@string/send_SOS_message" />
     </LinearLayout>
 
     <LinearLayout

@@ -50,7 +50,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/back_button"
-            app:ReadText="@string/previous_contact" />
+            app:readText="@string/previous_contact" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contact_next"
@@ -60,7 +60,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/next_button"
-            app:ReadText="@string/next_contact" />
+            app:readText="@string/next_contact" />
     </LinearLayout>
 
     <LinearLayout
@@ -75,7 +75,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/answer"
-            app:ReadText="@string/call_contact" />
+            app:readText="@string/call_contact" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contacts_sms"
@@ -85,7 +85,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/quick_sms_button"
-            app:ReadText="@string/send_quick_sms" />
+            app:readText="@string/send_quick_sms" />
     </LinearLayout>
 
     <LinearLayout

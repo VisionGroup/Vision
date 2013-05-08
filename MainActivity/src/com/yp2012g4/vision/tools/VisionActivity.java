@@ -166,4 +166,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
     }
     return returnButton;
   }
+  
+  /**
+   * Make the phone vibrate.
+   * 
+   * @param milliseconds
+   *          The time to vibrate.
+   */
+  protected void vibrate(long milliseconds) {
+    vibrator.vibrate(milliseconds);
+  }
 }

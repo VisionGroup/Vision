@@ -15,6 +15,11 @@ import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * The Main activity.
+ * 
+ */
 public class MainActivity extends VisionActivity {
 //  private static String TAG = "vision:MainActivity";
   @Override public int getViewId() {
@@ -91,9 +96,9 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.low_battery);
     final int signalS = PhoneNotifications.getSignalStrength();
     // TODO sparta constants
-    if (signalS < 2)
+    if (signalS <= PhoneStatusActivity.signal_noSignalThreshold)
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
-    else if (signalS < 5)
+    else if (signalS <= PhoneStatusActivity.signal_poor)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = CallManager.getMissedCallsNum(this); // pn.getMissedCallsNum();
     if (numOfMissedCalls > 0) {

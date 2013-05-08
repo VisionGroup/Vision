@@ -52,7 +52,7 @@ public class SpeakingClockActivity extends VisionActivity {
   }
   
   @Override public int getViewId() {
-    return R.id.SpeakingClockSctivity;
+    return R.id.SpeakingClockActivity;
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
@@ -78,11 +78,9 @@ public class SpeakingClockActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
-    TalkingButton dateButton = (TalkingButton) findViewById(R.id.DateButton);
+    TalkingButton dateButton = getTalkingButton(R.id.DateButton);
     dateButton.setText(getDateFormat());
-    MyTimerTask myTask = new MyTimerTask();
-    Timer myTimer = new Timer();
-    myTimer.schedule(myTask, 100, 1000);
+    new Timer().schedule(new MyTimerTask(), 100, 1000);
   }
   
   /***
@@ -94,7 +92,7 @@ public class SpeakingClockActivity extends VisionActivity {
     @Override public void run() {
       handler.post(new Runnable() {
         @Override public void run() {
-          TalkingButton timeButton = (TalkingButton) findViewById(R.id.TimeButton);
+          TalkingButton timeButton = getTalkingButton(R.id.TimeButton);
           Calendar cal = Calendar.getInstance();
           String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
           int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);

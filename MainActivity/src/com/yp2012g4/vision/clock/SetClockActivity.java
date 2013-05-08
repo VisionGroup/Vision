@@ -95,15 +95,11 @@ public class SetClockActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    _tts.waitUntilFinishTalking();
     if (!hasFocus)
       return;
     TextView tvTitle = (TextView) findViewById(R.id.textView1);
     speakOutAsync(tvTitle.getText().toString());
-    while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    _tts.waitUntilFinishTalking();
   }
 }

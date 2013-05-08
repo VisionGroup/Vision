@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
 
 /*
  * write by Yaron Auster
@@ -175,5 +176,16 @@ public abstract class VisionActivity extends VisionGestureDetector {
    */
   protected void vibrate(long milliseconds) {
     vibrator.vibrate(milliseconds);
+  }
+  
+  /**
+   * Return a Talking button by it's id.
+   * 
+   * @param id
+   *          The id of the button
+   * @return The talking button
+   */
+  public TalkingButton getTalkingButton(int id) {
+    return (TalkingButton) findViewById(id);
   }
 }

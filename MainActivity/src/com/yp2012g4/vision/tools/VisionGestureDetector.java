@@ -311,7 +311,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   public void speakOutSync(String s) {
     speakOutAsync(s);
-    while (_tts.isSpeaking() == true) {
+    while (_tts.isSpeaking()) {
       // Wait until finish talking.
     }
   }

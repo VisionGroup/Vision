@@ -112,8 +112,8 @@ public class ContactsActivity extends VisionActivity {
   // return true;
   // }
   private void setContact() {
-    final TalkingButton contactNameButton = (TalkingButton) findViewById(R.id.contact_name);
-    final TalkingButton conactPhoneButton = (TalkingButton) findViewById(R.id.contact_phone);
+    final TalkingButton contactNameButton = getTalkingButton(R.id.contact_name);
+    final TalkingButton conactPhoneButton = getTalkingButton(R.id.contact_phone);
     final TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
     final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_sms);
     if (contacts.size() != 0) {

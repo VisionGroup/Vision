@@ -71,7 +71,7 @@ public class AlarmActivity extends VisionActivity {
       alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
       alarmTime.set(Calendar.MINUTE, resultCode);
       String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
-      TalkingButton buttonStatus = (TalkingButton) findViewById(R.id.statusButton);
+      TalkingButton buttonStatus = getTalkingButton(R.id.statusButton);
       buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
       speakOutAsync(s);
       _tts.waitUntilFinishTalking();

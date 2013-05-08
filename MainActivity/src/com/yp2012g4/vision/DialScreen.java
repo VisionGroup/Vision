@@ -110,8 +110,8 @@ public class DialScreen extends VisionActivity {
     }
     // Vibrate for 150 milliseconds
     vibrator.vibrate(150);
-    ((TalkingButton) findViewById(R.id.number)).setText(dialed_number.toCharArray(), 0, dialed_number.length());
-    ((TalkingButton) findViewById(R.id.number)).setReadText(read_number);
+    (getTalkingButton(R.id.number)).setText(dialed_number.toCharArray(), 0, dialed_number.length());
+    (getTalkingButton(R.id.number)).setReadText(read_number);
   }
   
   /**
@@ -142,8 +142,8 @@ public class DialScreen extends VisionActivity {
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-      ((TalkingButton) findViewById(R.id.number)).setText("");
-      ((TalkingButton) findViewById(R.id.number)).setReadText("");
+      (getTalkingButton(R.id.number)).setText("");
+      (getTalkingButton(R.id.number)).setReadText("");
     }
   }
   

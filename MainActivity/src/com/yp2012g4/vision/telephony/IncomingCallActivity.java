@@ -148,10 +148,10 @@ public class IncomingCallActivity extends VisionActivity {
     } catch (Exception e) {
       // Silent exception is OK
     }
-    updateNumberButton((TalkingButton) findViewById(R.id.number), incomingNumber);
+    updateNumberButton(getTalkingButton(R.id.number), incomingNumber);
     incomingName = contact.getNameFromPhone(incomingNumber);
     if (!incomingName.equals(incomingNumber))
-      updateNumberButton((TalkingButton) findViewById(R.id.name), incomingName);
+      updateNumberButton(getTalkingButton(R.id.name), incomingName);
   }
   
   /**

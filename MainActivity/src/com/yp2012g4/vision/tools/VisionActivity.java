@@ -186,6 +186,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * @return The talking button
    */
   public TalkingButton getTalkingButton(int id) {
-    return (TalkingButton) findViewById(id);
+    return getTalkingButton(id);
   }
 }

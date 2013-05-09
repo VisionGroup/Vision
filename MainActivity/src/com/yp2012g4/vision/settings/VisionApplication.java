@@ -12,7 +12,6 @@ import java.util.Set;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.preference.PreferenceManager;
@@ -72,10 +71,8 @@ public class VisionApplication extends Application {
    * 
    */
   public static void savePrefs(String key, String val, Activity a) {
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
-    Editor e = sp.edit();
-    e.putString(key, val);
-    e.commit();
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+    sp.edit().putString(key, val).commit();
   }
   
   /**
@@ -101,7 +98,7 @@ public class VisionApplication extends Application {
   
   /**
    * 
-   * @return bg color
+   * @return background color
    */
   public static String getBackgroundColor() {
     return _backgroundColor;
@@ -134,16 +131,20 @@ public class VisionApplication extends Application {
    * @param v
    *          - current view being pressed
    */
-  @SuppressWarnings("boxing") public static void visualFeedback(View v, Activity act) {
+  public static void visualFeedback(View v, Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
+      TalkingImageButton b = (TalkingImageButton) v;
       if (_textColor.equals("WHITE")) {
-        ((ImageView) v).setColorFilter(_colorToString.get("LIGHT_PURPLE"), Mode.LIGHTEN);
-        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get("LIGHT_PURPLE"));
-      } else
-        ((ImageView) v).setColorFilter(_colorToString.get("LIGHT_PURPLE"), Mode.DARKEN);
-    } else if (v instanceof TextView)
-      ((TextView) v).setBackgroundColor(_colorToString.get("LIGHT_PURPLE"));
+        b.setColorFilter(_colorToString.get("LIGHT_PURPLE").intValue(), Mode.LIGHTEN);
+        b.setBackgroundColor(_colorToString.get("LIGHT_PURPLE").intValue());
+        return;
+      }
+      b.setColorFilter(_colorToString.get("LIGHT_PURPLE").intValue(), Mode.DARKEN);
+      return;
+    }
+    if (v instanceof TextView)
+      ((TextView) v).setBackgroundColor(_colorToString.get("LIGHT_PURPLE").intValue());
   }
   
   /**
@@ -155,19 +156,24 @@ public class VisionApplication extends Application {
   @SuppressWarnings("boxing") public static void restoreColors(View v, Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
+      TalkingImageButton b = (TalkingImageButton) v;
       if (_textColor.equals("WHITE")) {
-        ((ImageView) v).setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
-        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get(_backgroundColor));
-      } else
-        ((ImageView) v).setColorFilter(_colorToString.get(_textColor), Mode.DARKEN);
-    } else if (v instanceof TextView) {
+        b.setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
+        b.setBackgroundColor(_colorToString.get(_backgroundColor));
+        return;
+      }
+      b.setColorFilter(_colorToString.get(_textColor), Mode.DARKEN);
+      return;
+    }
+    if (v instanceof TextView) {
       String bg = _backgroundColor;
       // TODO sparta
-      if (v.getId() == R.id.WhiteRed)
+      int viewId = v.getId();
+      if (viewId == R.id.WhiteRed)
         bg = "RED";
-      else if (v.getId() == R.id.WhiteGreen)
+      else if (viewId == R.id.WhiteGreen)
         bg = "GREEN";
-      else if (v.getId() == R.id.WhiteBlue)
+      else if (viewId == R.id.WhiteBlue)
         bg = "BLUE";
       else if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
         bg = "BLACK";

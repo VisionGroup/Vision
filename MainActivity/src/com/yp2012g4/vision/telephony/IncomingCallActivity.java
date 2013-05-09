@@ -22,6 +22,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
 /**
  * 
  * @author Yaron
+ * @version 2
  * 
  */
 public class IncomingCallActivity extends VisionActivity {
@@ -182,10 +183,6 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   class ListenToPhoneState extends PhoneStateListener {
-    public ListenToPhoneState() {
-      // TODO Auto-generated constructor stub
-    }
-    
     @Override public void onCallStateChanged(int state, String inNumber) {
       if (state == TelephonyManager.CALL_STATE_IDLE && rang) {
         Log.d(TAG, "Ending Activity because " + stateName(state));
@@ -203,9 +200,8 @@ public class IncomingCallActivity extends VisionActivity {
         case TelephonyManager.CALL_STATE_RINGING:
           return "Ringing";
         default:
-          break;
+          return Integer.toString(state);
       }
-      return Integer.toString(state);
     }
   }
   

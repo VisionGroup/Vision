@@ -19,10 +19,15 @@ import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * @author Yaron
+ * @version 2
+ * 
+ */
 public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
   CallUtils callUtils;
-  private ListenToPhoneState listener;
   private final ContactManager contact = new ContactManager(this);
   boolean rang = false;
   TelephonyManager tManager;
@@ -44,7 +49,7 @@ public class IncomingCallActivity extends VisionActivity {
         endCall();
         break;
       case R.id.back_button:
-        speakOut(getString(R.string.previous_screen));
+        speakOutAsync(getString(R.string.previous_screen));
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
       default:
@@ -68,8 +73,8 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     super.onSingleTapUp(e);
     callUtils.silenceRinger();
-    if (clickFlag)
-      return clickFlag = false;
+    if (_navigationBar)
+      return _navigationBar = false;
     switch (curr_view.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -78,7 +83,7 @@ public class IncomingCallActivity extends VisionActivity {
         endCall();
         break;
       case R.id.back_button:
-        speakOut(getString(R.string.previous_screen));
+        speakOutAsync(getString(R.string.previous_screen));
         mHandler.postDelayed(mLaunchTask, 100);
         break;
       default:
@@ -144,10 +149,10 @@ public class IncomingCallActivity extends VisionActivity {
     } catch (Exception e) {
       // Silent exception is OK
     }
-    updateNumberButton((TalkingButton) findViewById(R.id.number), incomingNumber);
+    updateNumberButton(getTalkingButton(R.id.number), incomingNumber);
     incomingName = contact.getNameFromPhone(incomingNumber);
     if (!incomingName.equals(incomingNumber))
-      updateNumberButton((TalkingButton) findViewById(R.id.name), incomingName);
+      updateNumberButton(getTalkingButton(R.id.name), incomingName);
   }
   
   /**
@@ -174,14 +179,10 @@ public class IncomingCallActivity extends VisionActivity {
    */
   private void setPhoneStateListener() {
     tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    tManager.listen(listener = new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
+    tManager.listen(new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
   }
   
   class ListenToPhoneState extends PhoneStateListener {
-    public ListenToPhoneState() {
-      // TODO Auto-generated constructor stub
-    }
-    
     @Override public void onCallStateChanged(int state, String inNumber) {
       if (state == TelephonyManager.CALL_STATE_IDLE && rang) {
         Log.d(TAG, "Ending Activity because " + stateName(state));
@@ -199,9 +200,8 @@ public class IncomingCallActivity extends VisionActivity {
         case TelephonyManager.CALL_STATE_RINGING:
           return "Ringing";
         default:
-          break;
+          return Integer.toString(state);
       }
-      return Integer.toString(state);
     }
   }
   

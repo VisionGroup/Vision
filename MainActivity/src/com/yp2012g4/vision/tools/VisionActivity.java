@@ -1,10 +1,12 @@
 package com.yp2012g4.vision.tools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
@@ -16,6 +18,7 @@ import android.widget.LinearLayout;
 
 import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
 
 /*
  * write by Yaron Auster
@@ -28,6 +31,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
+  private Vibrator vibrator = null;
   
   public int getIcon() {
     return _icon;
@@ -85,26 +89,26 @@ public abstract class VisionActivity extends VisionGestureDetector {
     View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.back_button:
-        clickFlag = true;
+        _navigationBar = true;
         Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
-          speakOut(getString(R.string.in_main_screen));
+          speakOutAsync(getString(R.string.in_main_screen));
           break;
         }
         mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.tool_tip_button:
-        clickFlag = true;
-        speakOut(getToolTip());
+        _navigationBar = true;
+        speakOutAsync(getToolTip());
         break;
       case R.id.home_button:
-        clickFlag = true;
+        _navigationBar = true;
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
         break;
       case R.id.current_menu_button:
-        clickFlag = true;
-        speakOut(getString(R.string.this_is) + " " + _name);
+        _navigationBar = true;
+        speakOutAsync(getString(R.string.this_is) + " " + _name);
         break;
       default:
         last_button_view = tempLast;
@@ -120,6 +124,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // hide titlebar of application
     // must be before setting the layout
     requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -130,7 +135,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   }
   
   @Override public void onBackPressed() {
-    speakOut(getString(R.string.previous_screen));
+    speakOutAsync(getString(R.string.previous_screen));
     mHandler.postDelayed(mLaunchTask, 1000);
   }
   
@@ -161,5 +166,26 @@ public abstract class VisionActivity extends VisionGestureDetector {
       last_button_view = null;
     }
     return returnButton;
+  }
+  
+  /**
+   * Make the phone vibrate.
+   * 
+   * @param milliseconds
+   *          The time to vibrate.
+   */
+  protected void vibrate(long milliseconds) {
+    vibrator.vibrate(milliseconds);
+  }
+  
+  /**
+   * Return a Talking button by it's id.
+   * 
+   * @param id
+   *          The id of the button
+   * @return The talking button
+   */
+  public TalkingButton getTalkingButton(int id) {
+    return (TalkingButton) findViewById(id);
   }
 }

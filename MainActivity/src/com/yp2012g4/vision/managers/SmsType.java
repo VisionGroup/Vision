@@ -11,72 +11,72 @@ import android.text.format.DateFormat;
  * 
  */
 public class SmsType {
-  private String address = "";
-  private String person = "";
-  private String date = "";
-  private final String protocol = "";
-  private String read = "";
-  private String status = "";
-  private String type = "";
-  private final String subject = "";
-  private String body = "";
+  private String _address = "";
+  private String _person = "";
+  private String _date = "";
+  private final String _protocol = "";
+  private String _read = "";
+  private String _status = "";
+  private String _type = "";
+  private final String _subject = "";
+  private String _body = "";
   
   /**
    * constructor with Cursor
    * 
    * @param cur
-   * @param context
+   * @param c
    */
-  public SmsType(Cursor cur, Context context) {
-    address = cur.getString(cur.getColumnIndexOrThrow("address"));
-    String mili = cur.getString(cur.getColumnIndexOrThrow("date"));
-    long m = Long.parseLong(mili);
-    date = (String) DateFormat.format("dd/MM/yy", m);
+  public SmsType(Cursor cur, Context c) {
+    _address = cur.getString(cur.getColumnIndexOrThrow("address"));
+    String ds = cur.getString(cur.getColumnIndexOrThrow("date"));
+    long m = Long.parseLong(ds);
+    _date = (String) DateFormat.format("dd/MM/yy", m);
     // protocol =
     // cur.getString(cur.getColumnIndexOrThrow("protocol")); can
     // cause exception
-    read = cur.getString(cur.getColumnIndexOrThrow("read"));
-    status = cur.getString(cur.getColumnIndexOrThrow("status"));
-    type = cur.getString(cur.getColumnIndexOrThrow("type"));
+    _read = cur.getString(cur.getColumnIndexOrThrow("read"));
+    _status = cur.getString(cur.getColumnIndexOrThrow("status"));
+    _type = cur.getString(cur.getColumnIndexOrThrow("type"));
     // subject = c.getString(c.getColumnIndexOrThrow("subject"));
-    body = cur.getString(cur.getColumnIndexOrThrow("body"));
-    ContactManager cm = new ContactManager(context);
-    person = cm.getNameFromPhone(address);
+    _body = cur.getString(cur.getColumnIndexOrThrow("body"));
+    ContactManager cm = new ContactManager(c);
+    _person = cm.getNameFromPhone(_address);
   }
   
   public synchronized String getAddress() {
-    return address;
+    return _address;
   }
   
   public synchronized String getPerson() {
-    return person;
+    return _person;
   }
   
   public synchronized String getDate() {
-    return date;
+    return _date;
   }
   
   public synchronized String getProtocol() {
-    return protocol;
+    return _protocol;
   }
   
   public synchronized String getRead() {
-    return read;
+    return _read;
   }
   
   public synchronized String getStatus() {
-    return status;
+    return _status;
   }
   
   public synchronized String getType() {
-    return type;
+    return _type;
   }
   
   public synchronized String getSubject() {
-    return subject;
+    return _subject;
   }
   
   public synchronized String getBody() {
-    return body;
+    return _body;
   }
 }

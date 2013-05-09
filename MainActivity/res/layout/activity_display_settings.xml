@@ -18,7 +18,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/color_settings_button"
-        app:ReadText="@string/color_settings_button" />
+        app:readText="@string/color_settings_button" />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/button_set_theme"
@@ -29,7 +29,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/theme_settings_button"
-        app:ReadText="@string/theme_settings_button" />
+        app:readText="@string/theme_settings_button" />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/button_exit_launcher"
@@ -40,7 +40,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/home_button"
-        app:ReadText="@string/clear_launcher_defaults" />
+        app:readText="@string/clear_launcher_defaults" />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/locale"
@@ -51,7 +51,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/globe"
-        app:ReadText="@string/language" />
+        app:readText="@string/language" />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/button_selecting_mode"
@@ -62,7 +62,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/buttons_settings_button"
-        app:ReadText="@string/buttons_mode" />
+        app:readText="@string/buttons_mode" />
     
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/calculator"
@@ -73,7 +73,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/calc"
-        app:ReadText="@string/calculator" />
+        app:readText="@string/calculator" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -16,46 +16,43 @@ public class SmsAdapter extends BaseAdapter {
   private final ArrayList<SmsType> _data;
   Context _c;
   
-  public SmsAdapter(ArrayList<SmsType> data, Context c) {
-    _data = data;
+  public SmsAdapter(ArrayList<SmsType> d, Context c) {
+    _data = d;
     _c = c;
   }
   
   @Override public int getCount() {
-    // TODO Auto-generated method stub
     return _data.size();
   }
   
-  @Override public Object getItem(int position) {
-    // TODO Auto-generated method stub
-    return _data.get(position);
+  @Override public Object getItem(int p) {
+    return _data.get(p);
   }
   
-  @Override public long getItemId(int position) {
-    // TODO Auto-generated method stub
-    return position;
+  @Override public long getItemId(int p) {
+    return p;
   }
   
-  @Override public View getView(int position, View convertView, ViewGroup parent) {
-    View v = convertView;
-    if (v == null) {
+  @Override public View getView(int p, View v, ViewGroup pv) {
+    View $ = v;
+    if ($ == null) {
       final LayoutInflater vi = (LayoutInflater) _c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-      v = vi.inflate(R.layout.sms_view, null);
+      $ = vi.inflate(R.layout.sms_view, null);
     }
-    final TalkingButton fromView = (TalkingButton) v.findViewById(R.id.sms_from);
-    final TalkingButton bodyView = (TalkingButton) v.findViewById(R.id.sms_body);
-    final TalkingButton timeView = (TalkingButton) v.findViewById(R.id.sms_time);
+    final TalkingButton fromView = (TalkingButton) $.findViewById(R.id.sms_from);
+    final TalkingButton bodyView = (TalkingButton) $.findViewById(R.id.sms_body);
+    final TalkingButton timeView = (TalkingButton) $.findViewById(R.id.sms_time);
     SmsType msg;
-    if (position >= _data.size()) {
+    if (p >= _data.size()) {
       fromView.setText("");
       bodyView.setText("");
       timeView.setText("");
       fromView.setReadText("");
       bodyView.setReadText("");
       timeView.setReadText("");
-      return v;
+      return $;
     }
-    msg = _data.get(position);
+    msg = _data.get(p);
     String person = msg.getPerson();
     if (person == "")
       person = msg.getAddress();
@@ -65,12 +62,12 @@ public class SmsAdapter extends BaseAdapter {
     fromView.setReadText(person);
     bodyView.setReadText(msg.getBody());
     timeView.setReadText(msg.getDate());
-    return v;
+    return $;
   }
   
-  public void removeItemFromList(int position) {
-    if (position < 0 || position > _data.size())
+  public void removeItemFromList(int p) {
+    if (p < 0 || p > _data.size())
       return;
-    _data.remove(position);
+    _data.remove(p);
   }
 }

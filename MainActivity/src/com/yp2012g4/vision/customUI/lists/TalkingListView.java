@@ -26,23 +26,19 @@ public class TalkingListView extends RelativeLayout {
   private int _numOfPages = 0;
   private Adapter _adapter;
   private View[] _dispView;
-//  private final Context _context;
   private boolean _init = false;
   
   public TalkingListView(Context context) {
     super(context);
-//    _context = context;
   }
   
   public TalkingListView(Context context, AttributeSet attrs) {
     super(context, attrs);
-//    _context = context;
     getAttr(context, attrs);
   }
   
   public TalkingListView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-//    _context = context;
     getAttr(context, attrs);
   }
   
@@ -60,12 +56,12 @@ public class TalkingListView extends RelativeLayout {
   /**
    * Set new view array to be displayed.
    * 
-   * @param pageNum
+   * @param n
    */
-  private void setNewViewArr(int pageNum) {
+  private void setNewViewArr(int n) {
     for (int i = 0; i < _rows; i++)
       for (int j = 0; j < _cols; j++) {
-        final int pos = pageNum * _rows * _cols + i * _cols + j;
+        final int pos = n * _rows * _cols + i * _cols + j;
         final int vp = i * _cols + j;
         View oldV = _dispView[vp];
         if (pos < _adapter.getCount()) {
@@ -108,14 +104,14 @@ public class TalkingListView extends RelativeLayout {
    * sets view size according to the actual screen size.
    * 
    * @param v
-   * @param params
+   * @param p
    */
-  private void setViewSize(View v, LayoutParams params) {
+  private void setViewSize(View v, LayoutParams p) {
     int h = getHeight() / _rows;
     int w = getWidth() / _cols;
-    if (params != null) {
-      params.height = h;
-      params.width = w;
+    if (p != null) {
+      p.height = h;
+      p.width = w;
     }
   }
   
@@ -125,16 +121,16 @@ public class TalkingListView extends RelativeLayout {
    * 
    * @param
    */
-  private void setPage(int pageNum) {
+  private void setPage(int n) {
     if (_adapter == null)
       return;
-    if (pageNum < 0)
+    if (n < 0)
       return;
-    if (pageNum >= _numOfPages)
+    if (n >= _numOfPages)
       return;
-    setNewViewArr(pageNum);
+    setNewViewArr(n);
     setNewViewDisp();
-    _page = pageNum;
+    _page = n;
   }
   
   /**
@@ -150,8 +146,8 @@ public class TalkingListView extends RelativeLayout {
     /**
      * to update key's position
      */
-    VisionActivity host = (VisionActivity) getContext();
-    host.getButtonsPosition(this);
+    VisionActivity h = (VisionActivity) getContext();
+    h.getButtonsPosition(this);
   }
   
   /**
@@ -170,11 +166,11 @@ public class TalkingListView extends RelativeLayout {
   
   /**
    * 
-   * @param adapter
+   * @param a
    *          the adapter to set
    */
-  public void setAdapter(Adapter adapter) {
-    _adapter = adapter;
+  public void setAdapter(Adapter a) {
+    _adapter = a;
     int mod = _adapter.getCount() / (_cols * _rows);
     if (_adapter.getCount() % (_cols * _rows) != 0)
       _numOfPages = mod + 1;
@@ -202,10 +198,11 @@ public class TalkingListView extends RelativeLayout {
    * @return currently displayed items.
    */
   public long[] getDisplayedItemIds() {
-    long[] ids = new long[_rows * _cols];
-    for (int i = 0; i < ids.length; i++)
-      ids[i] = _page * _rows * _cols + i;
-    return ids;
+    long[] $ = new long[_rows * _cols];
+    for (int i = 0; i < _dispView.length; i++)
+      if (_dispView[i] != null)
+        $[i] = _dispView[i].getId();
+    return $;
   }
   
   /**

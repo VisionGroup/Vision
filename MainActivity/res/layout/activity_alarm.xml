@@ -18,7 +18,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/alarmStatus"
-        custom:ReadText="@string/alarmStatus" />
+        custom:readText="@string/alarmStatus" />
 
     <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/setButton"
@@ -29,7 +29,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/setAlarmButton"
-        custom:ReadText="@string/setAlarmButton" />
+        custom:readText="@string/setAlarmButton" />
 
     <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/startalarm"
@@ -40,7 +40,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/startAlarm"
-        custom:ReadText="@string/startAlarm" />
+        custom:readText="@string/startAlarm" />
 
     <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/cancelalarm"
@@ -51,7 +51,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/stopAlarm"
-        custom:ReadText="@string/stopAlarm" />
+        custom:readText="@string/stopAlarm" />
 
     <LinearLayout
         android:id="@+id/LinearLayout1"

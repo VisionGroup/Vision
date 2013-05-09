@@ -47,7 +47,7 @@
                 android:text="@string/digit1"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/one" />
+                app:readText="@string/one" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit2"
@@ -60,7 +60,7 @@
                 android:text="@string/digit2"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/two" />
+                app:readText="@string/two" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit3"
@@ -73,7 +73,7 @@
                 android:text="@string/digit3"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/three" />
+                app:readText="@string/three" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,7 +91,7 @@
                 android:text="@string/digit4"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/four" />
+                app:readText="@string/four" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit5"
@@ -104,7 +104,7 @@
                 android:text="@string/digit5"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/five" />
+                app:readText="@string/five" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit6"
@@ -117,7 +117,7 @@
                 android:text="@string/digit6"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/six" />
+                app:readText="@string/six" />
         </LinearLayout>
 
         <LinearLayout
@@ -135,7 +135,7 @@
                 android:text="@string/digit7"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/seven" />
+                app:readText="@string/seven" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit8"
@@ -148,7 +148,7 @@
                 android:text="@string/digit8"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/eight" />
+                app:readText="@string/eight" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit9"
@@ -161,7 +161,7 @@
                 android:text="@string/digit9"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/nine" />
+                app:readText="@string/nine" />
         </LinearLayout>
 
         <LinearLayout
@@ -179,7 +179,7 @@
                 android:text="@string/asterisk"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/asterisk_ReadText" />
+                app:readText="@string/asterisk_ReadText" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/digit0"
@@ -192,7 +192,7 @@
                 android:text="@string/digit0"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/zero" />
+                app:readText="@string/zero" />
 
             <com.yp2012g4.vision.customUI.TalkingButton
                 android:id="@+id/numberSign"
@@ -205,7 +205,7 @@
                 android:text="@string/number_sign"
                 android:textSize="48sp"
                 android:textStyle="bold"
-                app:ReadText="@string/read_number_sign" />
+                app:readText="@string/read_number_sign" />
         </LinearLayout>
     </LinearLayout>
 
@@ -222,7 +222,7 @@
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
             android:src="@drawable/delete_button"
-            app:ReadText="@string/delete_button_read" />
+            app:readText="@string/delete_button_read" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -234,7 +234,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/reset_button"
             android:paddingTop="5dp"
-            app:ReadText="@string/reset_button_read" />
+            app:readText="@string/reset_button_read" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_dial_button"
@@ -245,7 +245,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/quick_dial_button"
             android:paddingTop="5dp"
-            app:ReadText="@string/quick_dial_button" />
+            app:readText="@string/quick_dial_button" />
         
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_sms_button"
@@ -255,7 +255,7 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/quick_sms_button"
-            app:ReadText="@string/quick_sms_button" />
+            app:readText="@string/quick_sms_button" />
     </LinearLayout>
 
     <LinearLayout

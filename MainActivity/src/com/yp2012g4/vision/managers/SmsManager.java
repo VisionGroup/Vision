@@ -9,39 +9,43 @@ import android.net.Uri;
 import android.util.Log;
 
 public class SmsManager {
-//	Context c;
-//
-//	public SmsManager(Context c) {
-//		this.c = c;
-//	}
   public static ArrayList<SmsType> getIncomingMessages(Context c) {
-    ArrayList<SmsType> slist = new ArrayList<SmsType>();
+    ArrayList<SmsType> $ = new ArrayList<SmsType>();
     Uri uri = Uri.parse("content://sms/inbox");
     Cursor cur = c.getContentResolver().query(uri, null, null, null, null);
     if (cur.moveToFirst())
       do
         try {
-          slist.add(new SmsType(cur, c));
+          $.add(new SmsType(cur, c));
         } catch (IllegalArgumentException e) {
           // Ignore and go next
         }
       while (cur.moveToNext());
-    return slist;
+    return $;
   }
   
-  static public void markMessageRead(Context context, String number, String body) {
+  /**
+   * 
+   * @param c
+   *          context
+   * @param ns
+   *          name string
+   * @param bs
+   *          body string
+   */
+  static public void markMessageRead(Context c, String ns, String bs) {
     Uri uri = Uri.parse("content://sms/inbox");
-    Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+    Cursor cursor = c.getContentResolver().query(uri, null, null, null, null);
     try {
       while (cursor.moveToNext()) {
-        String address = cursor.getString(cursor.getColumnIndex("address"));
-        int nRead = cursor.getInt(cursor.getColumnIndex("read"));
-        if (address.equals(number) && nRead == 0)
-          if (cursor.getString(cursor.getColumnIndex("body")).startsWith(body)) {
+        String ad = cursor.getString(cursor.getColumnIndex("address"));
+        int n = cursor.getInt(cursor.getColumnIndex("read"));
+        if (ad.equals(ns) && n == 0)
+          if (cursor.getString(cursor.getColumnIndex("body")).startsWith(bs)) {
             String SmsMessageId = cursor.getString(cursor.getColumnIndex("_id"));
-            ContentValues values = new ContentValues();
-            values.put("read", Boolean.TRUE);
-            context.getContentResolver().update(Uri.parse("content://sms/inbox"), values, "_id=" + SmsMessageId, null);
+            ContentValues v = new ContentValues();
+            v.put("read", Boolean.TRUE);
+            c.getContentResolver().update(Uri.parse("content://sms/inbox"), v, "_id=" + SmsMessageId, null);
             return;
           }
       }
@@ -61,16 +65,25 @@ public class SmsManager {
     return cur.getCount();
   }
   
-  public static void deleteSMS(Context c, String msgBody, String msgAddr) {
+  /**
+   * 
+   * @param c
+   *          context
+   * @param ms
+   *          Massage body
+   * @param ma
+   *          Massage address
+   */
+  public static void deleteSMS(Context c, String ms, String ma) {
     try {
-      Uri uriSms = Uri.parse("content://sms/inbox");
-      Cursor cur = c.getContentResolver().query(uriSms, new String[] { "_id", "thread_id", "address", "person", "date", "body" },
+      Uri uri = Uri.parse("content://sms/inbox");
+      Cursor cur = c.getContentResolver().query(uri, new String[] { "_id", "thread_id", "address", "person", "date", "body" },
           null, null, null);
       if (cur != null && cur.moveToFirst())
         do {
-          String address = cur.getString(2);
-          String body = cur.getString(5);
-          if (msgBody.equals(body) && address.equals(msgAddr))
+          String ad = cur.getString(2);
+          String bd = cur.getString(5);
+          if (ms.equals(bd) && ad.equals(ma))
             c.getContentResolver().delete(Uri.parse("content://sms/" + cur.getLong(0)), null, null);
         } while (cur.moveToNext());
     } catch (Exception e) {

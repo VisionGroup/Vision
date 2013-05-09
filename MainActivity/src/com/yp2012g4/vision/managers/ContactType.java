@@ -11,43 +11,45 @@ import android.provider.ContactsContract;
  * 
  */
 public class ContactType {
-  private String phone = "";
-  private String contactName = "";
-  private String lookUpKey = "";
+  private String _phone = "";
+  private String _contactName = "";
+  private String _lookUpKey = "";
   
   /**
    * constructor with Cursor
    * 
    * @param cur
-   * @param context
+   * @param c
    */
-  public ContactType(Cursor cur, Context context) {
-    contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-    ContactManager cm = new ContactManager(context);
-    lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
-    phone = cm.lookupPhoneNumbers(lookUpKey);
+  public ContactType(Cursor cur, Context c) {
+    _contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+    ContactManager cm = new ContactManager(c);
+    _lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+    _phone = cm.lookupPhoneNumbers(_lookUpKey);
   }
   
   /**
    * constructor with fields
    * 
-   * @param phone1
-   * @param contactName1
+   * @param ps
+   *          phone string
+   * @param cs
+   *          contact name string
    */
-  public ContactType(String phone1, String contactName1) {
-    phone = phone1;
-    contactName = contactName1;
+  public ContactType(String ps, String cs) {
+    _phone = ps;
+    _contactName = cs;
   }
   
   public synchronized String getPhone() {
-    return phone;
+    return _phone;
   }
   
   public synchronized String getContactName() {
-    return contactName;
+    return _contactName;
   }
   
   public synchronized String getLookUpKey() {
-    return lookUpKey;
+    return _lookUpKey;
   }
 }

@@ -15,6 +15,11 @@ import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
+/**
+ * 
+ * The Main activity.
+ * 
+ */
 public class MainActivity extends VisionActivity {
 //  private static String TAG = "vision:MainActivity";
   @Override public int getViewId() {
@@ -35,8 +40,8 @@ public class MainActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (clickFlag)
-      return clickFlag = false;
+    if (_navigationBar)
+      return _navigationBar = false;
     Intent intent = getIntentByButtonId(getButtonByMode().getId());
     if (intent != null)
       startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -74,7 +79,7 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    while (_t.isSpeaking()) {
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
     if (!hasFocus)
@@ -91,9 +96,9 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.low_battery);
     final int signalS = PhoneNotifications.getSignalStrength();
     // TODO sparta constants
-    if (signalS < 2)
+    if (signalS <= PhoneStatusActivity.signal_noSignalThreshold)
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
-    else if (signalS < 5)
+    else if (signalS <= PhoneStatusActivity.signal_poor)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = CallManager.getMissedCallsNum(this); // pn.getMissedCallsNum();
     if (numOfMissedCalls > 0) {
@@ -104,13 +109,13 @@ public class MainActivity extends VisionActivity {
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
-    speakOut(s);
-    while (_t.isSpeaking()) {
+    speakOutAsync(s);
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }
   
   @Override public void onBackPressed() {
-    speakOut(getString(R.string.in_main_screen));
+    speakOutAsync(getString(R.string.in_main_screen));
   }
 }

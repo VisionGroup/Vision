@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
-    android:id="@+id/SpeakingClockSctivity"
+    android:id="@+id/SpeakingClockActivity"
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -19,7 +19,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/time_button"
-        custom:ReadText="@string/time_button" />
+        custom:readText="@string/time_button" />
 	
 	<com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/DateButton"
@@ -30,7 +30,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/date_button"
-        custom:ReadText="@string/date_button" />
+        custom:readText="@string/date_button" />
 	
 	<LinearLayout
         android:id="@+id/LinearLayout1"

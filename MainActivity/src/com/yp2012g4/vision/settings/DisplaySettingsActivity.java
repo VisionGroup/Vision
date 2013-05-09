@@ -31,15 +31,6 @@ public class DisplaySettingsActivity extends VisionActivity {
   }
   
   /**
-   * finish activity when back button pressed
-   */
-  @Override public void onBackPressed() {
-    // TODO Auto-generated method stub
-    super.onBackPressed();
-    DisplaySettingsActivity.this.finish();
-  }
-  
-  /**
    * Adds onSingleTapUp events to buttons in this view.
    * 
    * @param e
@@ -75,12 +66,12 @@ public class DisplaySettingsActivity extends VisionActivity {
           Locale locale = new Locale("iw");
           Locale.setDefault(locale);
           config.locale = locale;
-          speakOut(getString(R.string.switched_to_hebrew));
+          speakOutAsync(getString(R.string.switched_to_hebrew));
         } else {
           VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
           Locale.setDefault(Locale.US);
           config.locale = Locale.US;
-          speakOut(getString(R.string.switched_to_english));
+          speakOutAsync(getString(R.string.switched_to_english));
         }
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         // setResult(RESULT_OK, null);
@@ -92,10 +83,10 @@ public class DisplaySettingsActivity extends VisionActivity {
         String buttonMode = sp.getString("BUTTON MODE", "regular");
         if (buttonMode.equals("regular")) {
           VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
-          speakOut(getString(R.string.sticky_buttons_mode));
+          speakOutAsync(getString(R.string.sticky_buttons_mode));
         } else {
           VisionApplication.savePrefs("BUTTON MODE", "regular", this);
-          speakOut(getString(R.string.regular_buttons_mode));
+          speakOutAsync(getString(R.string.regular_buttons_mode));
         }
         break;
       case R.id.calculator:
@@ -116,7 +107,6 @@ public class DisplaySettingsActivity extends VisionActivity {
     Log.i("MyLog", "DisplaySettings:: onCreate");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
-    // adjustLayoutSize(3);
     init(0, getString(R.string.display_settings_screen), getString(R.string.settings_help));
   }
 }

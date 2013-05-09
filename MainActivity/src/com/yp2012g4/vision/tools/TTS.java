@@ -178,4 +178,10 @@ public class TTS implements OnInitListener {
     if (status == TextToSpeech.SUCCESS)
       _init = true;
   }
+  
+  public void waitUntilFinishTalking() {
+    while (_tts.isSpeaking()) {
+      // Wait for message to finish playing and then finish the activity
+    }
+  }
 }

@@ -19,8 +19,8 @@ public class TalkingImageButton extends ImageButton implements Runnable {
   public TalkingImageButton(Context context, AttributeSet attrs) {
     super(context, attrs);
     final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TalkingImageButton, 0, 0);
-    ReadText = a.getString(R.styleable.TalkingImageButton_ReadText);
-    PrefsValue = a.getString(R.styleable.TalkingButton_PrefsValue);
+    _readText = a.getString(R.styleable.TalkingImageButton_readText);
+    _prefsValue = a.getString(R.styleable.TalkingButton_prefsValue);
   }
   
   private Runnable _run;
@@ -31,16 +31,16 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * @return String ReadText
    */
   public String getReadText() {
-    return ReadText;
+    return _readText;
   }
   
   /**
    * Set the short button text that should be used for TTS.
    * 
-   * @param readText
+   * @param s
    */
-  public void setReadText(String readText) {
-    ReadText = readText;
+  public void setReadText(String s) {
+    _readText = s;
   }
   
   /**
@@ -49,21 +49,21 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * @return String ReadToolTip
    */
   public String getReadToolTip() {
-    return ReadToolTip;
+    return _readToolTip;
   }
   
   /**
    * Set the tool tip text that should be used for TTS.
    * 
-   * @param readToolTip
+   * @param s
    */
-  public void setReadToolTip(String readToolTip) {
-    ReadToolTip = readToolTip;
+  public void setReadToolTip(String s) {
+    _readToolTip = s;
   }
   
-  private String ReadText = "";
-  private String ReadToolTip = "";
-  private String PrefsValue = "";
+  private String _readText = "";
+  private String _readToolTip = "";
+  private String _prefsValue = "";
   
   // TODO: Check How to connect to foreground and background color settings
   /**
@@ -72,30 +72,29 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * @return String PrefsValue
    */
   public String getPrefsValue() {
-    return PrefsValue;
+    return _prefsValue;
   }
   
   /**
    * Set the value linked with the preference represented by the button.
    * 
-   * @param prefsValue
+   * @param s
    */
-  public void setPrefsValue(String prefsValue) {
-    PrefsValue = prefsValue;
+  public void setPrefsValue(String s) {
+    _prefsValue = s;
   }
   
   /**
    * set runnable class to button.
    * 
-   * @param run
+   * @param r
    */
-  public void setRun(Runnable run) {
-    _run = run;
+  public void setRun(Runnable r) {
+    _run = r;
   }
   
   @Override public void run() {
-    if (_run != null) {
+    if (_run != null)
       _run.run();
-    }
   }
 }

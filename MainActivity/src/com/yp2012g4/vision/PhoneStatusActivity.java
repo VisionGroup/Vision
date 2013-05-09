@@ -72,8 +72,8 @@ public class PhoneStatusActivity extends VisionActivity {
           s += c.getNumber() + "\n";// TODO: Remove when Hebrew is
         // detected.
       }
-    speakOut(s);
-    while (_t.isSpeaking()) {
+    speakOutAsync(s);
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }
@@ -94,14 +94,16 @@ public class PhoneStatusActivity extends VisionActivity {
     final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.button_getBatteryStatus:
-        speakOut(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read), Integer.valueOf(getBatteryLevel()),
-            getChargeStatus()));
+        speakOutAsync(String.format(res.getString(R.string.phoneStatus_message_batteryStatus_read),
+            Integer.valueOf(getBatteryLevel()), getChargeStatus()));
         break;
       case R.id.button_getReceptionStatus:
-        speakOut(signalToString());
+        speakOutAsync(signalToString());
         break;
       case R.id.button_getMissedCalls:
         getMissedCalls();
+        break;
+      default:
         break;
     }
     return false;
@@ -119,6 +121,9 @@ public class PhoneStatusActivity extends VisionActivity {
     pn = new PhoneNotifications(this);
   }
   
+  final public static int signal_veryGood = 12, signal_good = 8, signal_poor = 5, signal_noSignalThreshold = 2,
+      signal_noSignalValue = 99;
+  
   /**
    * Returns the signal strength in percentage.
    * 
@@ -128,13 +133,13 @@ public class PhoneStatusActivity extends VisionActivity {
     final int signal = PhoneNotifications.getSignalStrength();
     Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
     // TODO sparta constants
-    if (signal <= 2 || signal == 99)
+    if (signal <= signal_noSignalThreshold || signal == signal_noSignalValue)
       return getString(R.string.phoneStatus_message_noSignal_read);
-    if (signal >= 12)
+    if (signal >= signal_veryGood)
       return getString(R.string.phoneStatus_message_veryGoodSignal_read);
-    if (signal >= 8)
+    if (signal >= signal_good)
       return getString(R.string.phoneStatus_message_goodSignal_read);
-    if (signal >= 5)
+    if (signal >= signal_poor)
       return getString(R.string.phoneStatus_message_poorSignal_read);
     return getString(R.string.phoneStatus_message_veryPoorSignal_read);
   }

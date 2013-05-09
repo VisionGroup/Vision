@@ -63,7 +63,7 @@ public class VisionApplicationTest extends
 		solo.assertCurrentActivity("wrong activity",ThemeSettingsActivity.class);
 		solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.large_text_size_button));
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-		assertEquals(VisionApplication.textSize, "LARGE");
+		assertEquals(VisionApplication._textSize, "LARGE");
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
 		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() > size);
@@ -80,7 +80,7 @@ public class VisionApplicationTest extends
 		solo.assertCurrentActivity("wrong activity",ThemeSettingsActivity.class);
 		solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.normal_text_size_button));
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-		assertEquals(VisionApplication.textSize, "NORMAL");
+		assertEquals(VisionApplication._textSize, "NORMAL");
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
 		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() == size);
@@ -97,7 +97,7 @@ public class VisionApplicationTest extends
 		solo.assertCurrentActivity("wrong activity",ThemeSettingsActivity.class);
 		solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.small_text_size_button));
 		solo.assertCurrentActivity("wrong activity",DisplaySettingsActivity.class);
-		assertEquals(VisionApplication.textSize, "SMALL");
+		assertEquals(VisionApplication._textSize, "SMALL");
 		solo.clickOnView(solo.getView(R.id.button_set_colors));
 		solo.assertCurrentActivity("wrong activity",ColorSettingsActivity.class);
 		assert(((Button)(solo.getView(R.id.WhiteRed))).getTextSize() < size);

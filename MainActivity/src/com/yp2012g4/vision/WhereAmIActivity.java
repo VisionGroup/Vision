@@ -24,7 +24,8 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * @version 1.0
  */
 public class WhereAmIActivity extends VisionActivity {
-  private static String TAG = "vision:WhereAmIActivity";
+  final private static String TAG = "vision:WhereAmIActivity";
+  final private static int updateTimeOut = 60000; // in miliseconds
   
   // TODO: add a button to know the current status
   private static void log(String s) {
@@ -43,7 +44,7 @@ public class WhereAmIActivity extends VisionActivity {
   
   void makeUseOfNewLocation(double longitude, double latitude, String prov, String address) {
     l.lock();
-    if (new Date().getTime() - lastUpdate.getTime() < 60000) {
+    if (new Date().getTime() - lastUpdate.getTime() < updateTimeOut) {
       l.unlock();
       return;
     }
@@ -56,28 +57,7 @@ public class WhereAmIActivity extends VisionActivity {
     setText(toSpeak);
     log("speaking out location: " + toSpeak + "\n");
     l.unlock();
-    speakOut(toSpeak);
-  }
-  
-  private void initialize() {
-    final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    log("Got location manager");
-    f = new LocationFinder(manager);
-    log("Got location finder");
-    providerRunning = f.run(new LocationHandler() {
-      @Override public void handleLocation(double longitude, double latitude, String prov, String address) {
-        makeUseOfNewLocation(longitude, latitude, prov, address);
-      }
-    });
-    log("Now running");
-    l.lock();
-    if (!providerRunning) {
-      final String s = getString(R.string.could_not_find_a_location);
-      setText(s);
-      speakOut(s);
-    } else
-      setText(getString(R.string.finding_location));
-    l.unlock();
+    speakOutAsync(toSpeak);
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +79,24 @@ public class WhereAmIActivity extends VisionActivity {
   
   @Override protected void onResume() {
     log("onResume");
-    initialize();
+    final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    log("Got location manager");
+    f = new LocationFinder(manager);
+    log("Got location finder");
+    providerRunning = f.run(new LocationHandler() {
+      @Override public void handleLocation(double longitude, double latitude, String prov, String address) {
+        makeUseOfNewLocation(longitude, latitude, prov, address);
+      }
+    });
+    log("Now running");
+    l.lock();
+    if (!providerRunning) {
+      final String s = getString(R.string.could_not_find_a_location);
+      setText(s);
+      speakOutAsync(s);
+    } else
+      setText(getString(R.string.finding_location));
+    l.unlock();
     super.onResume();
   }
   
@@ -119,8 +116,10 @@ public class WhereAmIActivity extends VisionActivity {
       case R.id.where_am_i_Activity:
       case R.id.where_am_i_textview:
         l.lock();
-        speakOut(text);
+        speakOutAsync(text);
         l.unlock();
+        break;
+      default:
         break;
     }
     return false;

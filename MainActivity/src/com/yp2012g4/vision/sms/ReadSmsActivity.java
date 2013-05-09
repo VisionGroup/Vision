@@ -53,7 +53,7 @@ public class ReadSmsActivity extends VisionActivity {
           listView.prevPage();
         else
           listView.nextPage();
-        vb.vibrate(150);
+        vibrate(150);
       }
     return super.onFling(e1, e2, velocityX, velocityY);
   }
@@ -84,7 +84,7 @@ public class ReadSmsActivity extends VisionActivity {
         listView.setAdapter(adapter);
         listView.prevPage();
         speakOutAsync(getString(R.string.delete_message));
-        vb.vibrate(150);
+        vibrate(150);
         break;
       default:
         break;

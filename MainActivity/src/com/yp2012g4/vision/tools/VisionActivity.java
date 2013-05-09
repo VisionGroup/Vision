@@ -31,7 +31,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
-  protected Vibrator vibrator = null;
+  private Vibrator vibrator = null;
   
   public int getIcon() {
     return _icon;

@@ -99,7 +99,7 @@ public class CalcActivity extends VisionActivity {
         default:
           break;
       }
-    vibrator.vibrate(150);
+    vibrate(150);
     final TalkingButton resultButton = getTalkingButton(R.id.result);
     resultButton.setText(calculated_number.toCharArray(), 0, calculated_number.length());
     resultButton.setReadText(calculated_number);

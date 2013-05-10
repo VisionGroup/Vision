@@ -98,7 +98,7 @@ public class CalcActivityTest extends
 	solo.clickOnView(solo.getView(R.id.digit0));
 	final View v = solo.getView(R.id.equals);
 	TouchUtils.longClickView(this, v);
-	assertEquals(VisionGestureDetector.spokenString,
+	assertEquals(VisionGestureDetector._spokenString,
 		activity.getString(R.string.division_by_zero));
     }
 
@@ -110,21 +110,21 @@ public class CalcActivityTest extends
 	solo.clickOnView(solo.getView(R.id.digit7));
 	solo.clickOnView(solo.getView(R.id.equals));
 	solo.clickOnView(solo.getView(R.id.digit6));
-	assertEquals(VisionGestureDetector.spokenString,
+	assertEquals(VisionGestureDetector._spokenString,
 		activity.getString(R.string.bad_action));
 	solo.clickOnView(solo.getView(R.id.multiplicity));
 	solo.clickOnView(solo.getView(R.id.dot));
-	assertEquals(VisionGestureDetector.spokenString,
+	assertEquals(VisionGestureDetector._spokenString,
 		activity.getString(R.string.bad_action));
 	solo.clickOnView(solo.getView(R.id.digit2));
 	solo.clickOnView(solo.getView(R.id.dot));
 	solo.clickOnView(solo.getView(R.id.dot));
-	assertEquals(VisionGestureDetector.spokenString,
+	assertEquals(VisionGestureDetector._spokenString,
 		activity.getString(R.string.bad_action));
 	solo.clickOnView(solo.getView(R.id.digit5));
 	solo.clickOnView(solo.getView(R.id.equals));
 	solo.clickOnView(solo.getView(R.id.equals));
-	assertEquals(VisionGestureDetector.spokenString,
+	assertEquals(VisionGestureDetector._spokenString,
 		activity.getString(R.string.bad_action));
     }
 

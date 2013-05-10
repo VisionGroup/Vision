@@ -58,7 +58,7 @@ public class AlarmActivity extends VisionActivity {
         return;
       // if user pressed home
       if (-2 == resultCode) {
-        mHandler.postDelayed(mLaunchTask, 10);
+        _mHandler.postDelayed(mLaunchTask, 10);
         return;
       }
       if (!waitForMinutes) {

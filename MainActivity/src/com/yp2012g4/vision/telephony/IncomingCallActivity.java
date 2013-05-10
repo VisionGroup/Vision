@@ -50,7 +50,7 @@ public class IncomingCallActivity extends VisionActivity {
         break;
       case R.id.back_button:
         speakOutAsync(getString(R.string.previous_screen));
-        mHandler.postDelayed(mLaunchTask, 1000);
+        _mHandler.postDelayed(mLaunchTask, 1000);
         break;
       default:
         break;
@@ -84,7 +84,7 @@ public class IncomingCallActivity extends VisionActivity {
         break;
       case R.id.back_button:
         speakOutAsync(getString(R.string.previous_screen));
-        mHandler.postDelayed(mLaunchTask, 100);
+        _mHandler.postDelayed(mLaunchTask, 100);
         break;
       default:
         return false;
@@ -187,7 +187,7 @@ public class IncomingCallActivity extends VisionActivity {
       if (state == TelephonyManager.CALL_STATE_IDLE && rang) {
         Log.d(TAG, "Ending Activity because " + stateName(state));
         rang = false;
-        mHandler.postDelayed(mLaunchTask, 100);
+        _mHandler.postDelayed(mLaunchTask, 100);
       }
     }
     

@@ -33,7 +33,7 @@ public class SetClockActivity extends VisionActivity {
    */
   @Override public void onBackPressed() {
     setResult(-1);
-    mHandler.postDelayed(mLaunchTask, 1000);
+    _mHandler.postDelayed(mLaunchTask, 1000);
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {

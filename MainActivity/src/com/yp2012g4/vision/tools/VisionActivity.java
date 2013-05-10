@@ -95,7 +95,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
           speakOutAsync(getString(R.string.in_main_screen));
           break;
         }
-        mHandler.postDelayed(mLaunchTask, 1000);
+        _mHandler.postDelayed(mLaunchTask, 1000);
         break;
       case R.id.tool_tip_button:
         _navigationBar = true;
@@ -136,7 +136,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   
   @Override public void onBackPressed() {
     speakOutAsync(getString(R.string.previous_screen));
-    mHandler.postDelayed(mLaunchTask, 1000);
+    _mHandler.postDelayed(mLaunchTask, 1000);
   }
   
   /***

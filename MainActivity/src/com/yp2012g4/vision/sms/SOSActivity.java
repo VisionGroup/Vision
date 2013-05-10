@@ -67,7 +67,7 @@ public class SOSActivity extends VisionActivity {
         sms.sendMultipartTextMessage(number, null, parts, null, null);
         speakOutAsync(getString(R.string.SOS_message_has_been_sent));
       }
-      mHandler.postDelayed(mLaunchTask, 1500);
+      _mHandler.postDelayed(mLaunchTask, 1500);
     }
   };
   
@@ -78,7 +78,7 @@ public class SOSActivity extends VisionActivity {
     switch (button.getId()) {
       case R.id.Send_SOS_Message:
         speakOutAsync(getString(R.string.sending_SOS_message));
-        mHandler.postDelayed(sendSOSMessage, 5000);
+        _mHandler.postDelayed(sendSOSMessage, 5000);
         break;
       default:
         break;

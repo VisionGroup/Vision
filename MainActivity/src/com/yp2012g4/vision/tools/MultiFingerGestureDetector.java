@@ -15,10 +15,10 @@ import android.view.ViewConfiguration;
  */
 public class MultiFingerGestureDetector extends GestureDetector {
   private static final int TIMEOUT = ViewConfiguration.getDoubleTapTimeout() + 100;
-  private long mFirstDownTime = 0;
-  private boolean mSeparateTouches = false;
-  private byte mTwoFingerTapCount = 0;
-  MultiTouchRun multiTouchRun = null;
+  private long _mFirstDownTime = 0;
+  private boolean _mSeparateTouches = false;
+  private byte _mTwoFingerTapCount = 0;
+  MultiTouchRun _multiTouchRun = null;
   
   /**
    * set multi touch run class
@@ -26,7 +26,7 @@ public class MultiFingerGestureDetector extends GestureDetector {
    * @param multiTouchRun1
    */
   public synchronized void setMultiTouchRun(MultiTouchRun multiTouchRun1) {
-    multiTouchRun = multiTouchRun1;
+    _multiTouchRun = multiTouchRun1;
   }
   
   public MultiFingerGestureDetector(Context context, OnGestureListener listener, Handler handler, boolean unused) {
@@ -43,12 +43,10 @@ public class MultiFingerGestureDetector extends GestureDetector {
   
   public MultiFingerGestureDetector(OnGestureListener listener) {
     super(listener);
-    // TODO Auto-generated constructor stub
   }
   
   public MultiFingerGestureDetector(Context context, OnGestureListener listener) {
     super(context, listener);
-    // TODO Auto-generated constructor stub
   }
   
   @Override public boolean onTouchEvent(MotionEvent ev) {
@@ -57,29 +55,29 @@ public class MultiFingerGestureDetector extends GestureDetector {
   }
   
   private void reset(long time) {
-    mFirstDownTime = time;
-    mSeparateTouches = false;
-    mTwoFingerTapCount = 0;
+    _mFirstDownTime = time;
+    _mSeparateTouches = false;
+    _mTwoFingerTapCount = 0;
   }
   
   public boolean onTwoFingerDoubleTap(MotionEvent event) {
     switch (event.getActionMasked()) {
       case MotionEvent.ACTION_DOWN:
-        if (mFirstDownTime == 0 || event.getEventTime() - mFirstDownTime > TIMEOUT)
+        if (_mFirstDownTime == 0 || event.getEventTime() - _mFirstDownTime > TIMEOUT)
           reset(event.getDownTime());
         break;
       case MotionEvent.ACTION_POINTER_UP:
         if (event.getPointerCount() == 2)
-          mTwoFingerTapCount++;
+          _mTwoFingerTapCount++;
         else
-          mFirstDownTime = 0;
+          _mFirstDownTime = 0;
         break;
       case MotionEvent.ACTION_UP:
-        if (!mSeparateTouches)
-          mSeparateTouches = true;
-        else if (mTwoFingerTapCount == 2 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
-          multiTouchRun.twoFingerDoubleTapRun();
-          mFirstDownTime = 0;
+        if (!_mSeparateTouches)
+          _mSeparateTouches = true;
+        else if (_mTwoFingerTapCount == 2 && event.getEventTime() - _mFirstDownTime < TIMEOUT) {
+          _multiTouchRun.twoFingerDoubleTapRun();
+          _mFirstDownTime = 0;
           return true;
         }
         break;

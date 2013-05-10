@@ -27,7 +27,8 @@ public class CalcActivity extends VisionActivity {
   private boolean equalsPressed = false;
   private boolean lhsDone = false;
   final private static double EPSILON = 0.00001; // epsilon for identifying a
-                                                 // zero FP
+  private static final String dotZero = ".0";
+  // zero FP
   // number
   private boolean isBadAction = false; // checks if a wrong operation has been
   // id of views
@@ -50,9 +51,16 @@ public class CalcActivity extends VisionActivity {
       return isBadAction = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
+        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())) {
           speakOutAsync(textToRead(entry.getKey()));
+          if (tappedEquals(entry.getKey()))
+            speakOutSync(textToRead(entry.getKey()) + calculated_number);
+        }
     return true;
+  }
+  
+  private boolean tappedEquals(View v) {
+    return v.equals(findViewById(R.id.equals));
   }
   
   @Override public int getViewId() {
@@ -63,8 +71,8 @@ public class CalcActivity extends VisionActivity {
    * Overridden method which implements the action triggered by a button lift
    */
   @Override public void onActionUp(View v) {
-    final CharSequence buttonText = ((TalkingButton) v).getText();
     final int buttonId = v.getId();
+    CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
     // it's a digit
     if (digits.contains(Integer.valueOf(buttonId)))
       if (!equalsPressed) {
@@ -124,7 +132,7 @@ public class CalcActivity extends VisionActivity {
   }
   
   private void updateCalculatedNumber(Double res) {
-    lhs_number = calculated_number = Integer.valueOf((int) Math.floor(res.doubleValue())).toString();
+    lhs_number = calculated_number = res.toString().endsWith(dotZero) ? Integer.toString(res.intValue()) : res.toString();
     // operation is the lhs_number
     rhs_number = "";
     sign = Sign.NO_SIGN;
@@ -199,7 +207,7 @@ public class CalcActivity extends VisionActivity {
         return lhs * rhs;
       case DIV:
         if (Math.abs(rhs) < EPSILON) {
-          speakOutAsync(getString(R.string.division_by_zero));
+          speakOutSync(getString(R.string.division_by_zero));
           return Double.NaN;
         }
         return lhs / rhs;

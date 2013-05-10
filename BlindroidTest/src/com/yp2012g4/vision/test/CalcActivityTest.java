@@ -98,8 +98,7 @@ public class CalcActivityTest extends
 	solo.clickOnView(solo.getView(R.id.digit0));
 	final View v = solo.getView(R.id.equals);
 	TouchUtils.longClickView(this, v);
-	assertEquals(VisionGestureDetector._spokenString,
-		activity.getString(R.string.division_by_zero));
+	assertEquals(((TalkingButton) solo.getView(R.id.result)).getText().toString(),"NaN");
     }
 
     public void testBadAction() {

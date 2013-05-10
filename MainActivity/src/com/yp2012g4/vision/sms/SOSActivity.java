@@ -1,6 +1,5 @@
 package com.yp2012g4.vision.sms;
 
-import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -10,9 +9,9 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.tools.LocationFinder;
 import com.yp2012g4.vision.tools.LocationHandler;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -28,8 +27,9 @@ public class SOSActivity extends VisionActivity {
   LocationFinder f;
   Lock l = null;
   String lastProvider = "", address = "";
-  // these are non-initialized values
-  double latitude = 10000, longitude = 10000;
+  static final int DEFAULT_LAT_LONG = 10000;
+  static final int SEND_DELAY = 5000;
+  double latitude = DEFAULT_LAT_LONG, longitude = DEFAULT_LAT_LONG;
   final int maxLengthOfAddress = 100;
   static final String TAG = "vision:SOSActivity";
   
@@ -44,7 +44,7 @@ public class SOSActivity extends VisionActivity {
     @Override public void run() {
       String messageToSend = "I need your help!";
       l.lock();
-      if (latitude != 10000) {
+      if (latitude != DEFAULT_LAT_LONG) {
         messageToSend += "\nMy location is: latitude = " + latitude + "; longitude = " + longitude + ";\nMy address is ";
         if (address.length() > maxLengthOfAddress)
           messageToSend += address.substring(0, maxLengthOfAddress);
@@ -53,7 +53,6 @@ public class SOSActivity extends VisionActivity {
       }
       l.unlock();
       final String number = "0529240424";
-      // String number = "0543064260"; // Olivier's number
       Log.d(TAG, "Sending SOS : " + messageToSend);
       Log.d(TAG, "number : " + number);
       Log.d(TAG, "latitude =  " + latitude);
@@ -63,53 +62,57 @@ public class SOSActivity extends VisionActivity {
         Log.e(TAG, "SMS Manager is null! Not sending the message");
       else {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
-        final ArrayList<String> parts = sms.divideMessage(messageToSend);
-        sms.sendMultipartTextMessage(number, null, parts, null, null);
         speakOutAsync(getString(R.string.SOS_message_has_been_sent));
       }
-      _mHandler.postDelayed(mLaunchTask, 1500);
+      _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
     }
   };
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    if (super.onSingleTapUp(e))
+  @Override public boolean onSingleTapUp(MotionEvent me) {
+    if (super.onSingleTapUp(me))
       return true;
-    View button = getButtonByMode();
-    switch (button.getId()) {
-      case R.id.Send_SOS_Message:
-        speakOutAsync(getString(R.string.sending_SOS_message));
-        _mHandler.postDelayed(sendSOSMessage, 5000);
-        break;
-      default:
-        break;
+    if (getButtonByMode().getId() == R.id.Send_SOS_Message) {
+      speakOutAsync(getString(R.string.sending_SOS_message));
+      _mHandler.postDelayed(sendSOSMessage, SEND_DELAY);
     }
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  @Override protected void onCreate(Bundle b) {
+    super.onCreate(b);
     setContentView(R.layout.activity_sos);
     init(0, getString(R.string.sos_screen), getString(R.string.sos_help));
     l = new ReentrantLock();
   }
   
-  void makeUseOfNewLocation(double lon, double lat, String provider, String addr) {
+  /**
+   * Updates the location according to new info.
+   * 
+   * @param d1
+   *          longitude
+   * @param d2
+   *          latitude
+   * @param s1
+   *          the information's provider
+   * @param s1
+   *          the address
+   */
+  void makeUseOfNewLocation(double d1, double d2, String s1, String s2) {
     f.stop();
     l.lock();
-    address = addr;
-    lastProvider = provider;
-    latitude = lat;
-    longitude = lon;
+    address = s2;
+    lastProvider = s1;
+    latitude = d2;
+    longitude = d1;
     l.unlock();
   }
   
   @Override protected void onStart() {
     super.onStart();
-    final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    f = new LocationFinder(manager);
+    f = new LocationFinder((LocationManager) getSystemService(Context.LOCATION_SERVICE));
     final LocationHandler h = new LocationHandler() {
-      @Override public void handleLocation(double lon, double lat, String provider, String addr) {
-        makeUseOfNewLocation(lon, lat, provider, addr);
+      @Override public void handleLocation(double d1, double d2, String s1, String s2) {
+        makeUseOfNewLocation(d1, d2, s1, s2);
       }
     };
     f.run(h);

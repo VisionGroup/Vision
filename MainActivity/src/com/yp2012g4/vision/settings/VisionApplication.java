@@ -27,6 +27,7 @@ public class VisionApplication extends Application {
   public static final float SMALL = 20;
   public static final float NORMAL = 25;
   public static final float LARGE = 30;
+  public static final long DELAY = 1000;
   private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
   public static String _textSize = "NORMAL";
   private static String _textColor = "WHITE";

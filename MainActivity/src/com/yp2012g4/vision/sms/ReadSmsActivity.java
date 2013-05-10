@@ -1,14 +1,11 @@
 package com.yp2012g4.vision.sms;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.lists.SmsAdapter;
@@ -28,15 +25,15 @@ public class ReadSmsActivity extends VisionActivity {
   Vibrator vb;
   private static final int SWIPE_THRESHOLD = 100;
   private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+  private static final long VIBRATION_LEN = 150;
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  @Override protected void onCreate(Bundle b) {
+    super.onCreate(b);
     setContentView(R.layout.activity_read_sms);
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
     vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     listView = (TalkingListView) findViewById(R.id.TalkingSmsListView2);
-    ArrayList<SmsType> data = SmsManager.getIncomingMessages(this);
-    adapter = new SmsAdapter(data, this);
+    adapter = new SmsAdapter(SmsManager.getIncomingMessages(this), this);
     listView.setAdapter(adapter);
   }
   
@@ -44,18 +41,17 @@ public class ReadSmsActivity extends VisionActivity {
     return R.id.ReadSmsScreen;
   }
   
-  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-    float diffY = e2.getY() - e1.getY();
+  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float f1, float f2) {
     float diffX = e2.getX() - e1.getX();
-    if (Math.abs(diffX) > Math.abs(diffY))
-      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
+      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
         if (diffX > 0)
           listView.prevPage();
         else
           listView.nextPage();
-        vibrate(150);
+        vibrate(VIBRATION_LEN);
       }
-    return super.onFling(e1, e2, velocityX, velocityY);
+    return super.onFling(e1, e2, f1, f2);
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {
@@ -63,8 +59,7 @@ public class ReadSmsActivity extends VisionActivity {
       return true;
     Intent i = null;
     SmsType currMsg = getCurrentSms();
-    View button = getButtonByMode();
-    switch (button.getId()) {
+    switch (getButtonByMode().getId()) {
       case R.id.sms_send_sms:
         i = new Intent(getApplicationContext(), QuickSMSActivity.class);
         i.putExtra("number", currMsg.getAddress());
@@ -79,12 +74,11 @@ public class ReadSmsActivity extends VisionActivity {
         // first we remove the SMS from the phone DB
         SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
         // then we remove the SMS from the displayed list
-        int smsId = (int) listView.getDisplayedItemIds()[0];
-        adapter.removeItemFromList(smsId);
+        adapter.removeItemFromList((int) listView.getDisplayedItemIds()[0]);
         listView.setAdapter(adapter);
         listView.prevPage();
         speakOutAsync(getString(R.string.delete_message));
-        vibrate(150);
+        vibrate(VIBRATION_LEN);
         break;
       default:
         break;
@@ -94,8 +88,6 @@ public class ReadSmsActivity extends VisionActivity {
   }
   
   public SmsType getCurrentSms() {
-    long smsId = listView.getDisplayedItemIds()[0];
-    SmsType msg = (SmsType) adapter.getItem((int) smsId);
-    return msg;
+    return (SmsType) adapter.getItem((int) listView.getDisplayedItemIds()[0]);
   }
 }

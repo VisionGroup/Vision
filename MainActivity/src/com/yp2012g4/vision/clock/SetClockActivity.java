@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SetClockActivity extends VisionActivity {
@@ -33,7 +34,7 @@ public class SetClockActivity extends VisionActivity {
    */
   @Override public void onBackPressed() {
     setResult(-1);
-    _mHandler.postDelayed(mLaunchTask, 1000);
+    _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {

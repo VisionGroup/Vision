@@ -16,20 +16,23 @@ import com.yp2012g4.vision.R;
  * 
  */
 public class TalkingButton extends Button implements Runnable {
-  private Runnable _run;
-  private String _readText = "";
-  private String _readToolTip = "";
-  private String _prefsValue = "";
+  private Runnable _run; // the functionality of the button
+  private String _readText = ""; // the text for the TTS
+  private String _readToolTip = ""; // tool tip text
+  private String _prefsValue = ""; // value for preference buttons
   
-  public TalkingButton(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TalkingButton, 0, 0);
+  /**
+   * c'tor
+   */
+  public TalkingButton(Context c, AttributeSet as) {
+    super(c, as);
+    final TypedArray a = c.obtainStyledAttributes(as, R.styleable.TalkingButton, 0, 0);
     _readText = a.getString(R.styleable.TalkingButton_readText);
     _prefsValue = a.getString(R.styleable.TalkingButton_prefsValue);
   }
   
   /**
-   * Returns the short button text that should be used for TTS.
+   * Returns the text that should be used for TTS when touching the button.
    * 
    * @return String ReadText
    */
@@ -38,12 +41,12 @@ public class TalkingButton extends Button implements Runnable {
   }
   
   /**
-   * Set the short button text that should be used for TTS.
+   * Set the text that should be used for TTS when touching the button.
    * 
-   * @param s
+   * @param readText
    */
-  public void setReadText(String s) {
-    _readText = s;
+  public void setReadText(String readText) {
+    _readText = readText;
   }
   
   /**
@@ -64,7 +67,7 @@ public class TalkingButton extends Button implements Runnable {
     _readToolTip = s;
   }
   
-  // TODO: Check How to connect to foreground and background color settings
+  // TODO: Check How to connect to foreground and background color settings ???
   /**
    * Returns the value linked with the preference represented by the button.
    * 

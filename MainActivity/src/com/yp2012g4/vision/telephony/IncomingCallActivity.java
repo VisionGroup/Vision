@@ -16,6 +16,7 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.ContactManager;
+import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -50,7 +51,7 @@ public class IncomingCallActivity extends VisionActivity {
         break;
       case R.id.back_button:
         speakOutAsync(getString(R.string.previous_screen));
-        _mHandler.postDelayed(mLaunchTask, 1000);
+        _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
         break;
       default:
         break;
@@ -84,7 +85,7 @@ public class IncomingCallActivity extends VisionActivity {
         break;
       case R.id.back_button:
         speakOutAsync(getString(R.string.previous_screen));
-        _mHandler.postDelayed(mLaunchTask, 100);
+        _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
         break;
       default:
         return false;

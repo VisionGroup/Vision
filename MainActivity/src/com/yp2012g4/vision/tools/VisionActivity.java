@@ -1,6 +1,5 @@
 package com.yp2012g4.vision.tools;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,25 +47,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Initialization the class
    * 
-   * @param activity
-   *          The activity it's run
-   * @param icon
-   *          The icon for this activity
-   * @param name
-   *          The name of the activity
-   * @param toolTip
-   *          The tool user manual
-   */
-  @Deprecated public void init(Activity activity, int icon, String name, String toolTip) {
-    // _t = new TTS(activity, (OnInitListener) activity);
-    _icon = icon;
-    _name = name;
-    _toolTip = toolTip;
-  }
-  
-  /**
-   * Initialization the class
-   * 
    * @param icon
    *          The icon for this activity
    * @param name
@@ -84,7 +64,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * Dealing control bar on clicks
    */
   @Override public boolean onSingleTapUp(MotionEvent e) {
-    final Intent intent = new Intent(this, MainActivity.class);
+    final Intent _intent = new Intent(this, MainActivity.class);
     View tempLast = last_button_view;
     View button = getButtonByMode();
     switch (button.getId()) {
@@ -92,10 +72,11 @@ public abstract class VisionActivity extends VisionGestureDetector {
         _navigationBar = true;
         Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
-          speakOutAsync(getString(R.string.in_main_screen));
+          speakOutSync(getString(R.string.in_main_screen));
           break;
         }
-        _mHandler.postDelayed(mLaunchTask, 1000);
+        speakOutSync(getString(R.string.back_button));
+        finish();
         break;
       case R.id.tool_tip_button:
         _navigationBar = true;
@@ -103,7 +84,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
         break;
       case R.id.home_button:
         _navigationBar = true;
-        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        startActivity(_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
         break;
       case R.id.current_menu_button:
@@ -117,55 +98,53 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return true;
   }
   
-  @Override public int getViewId() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-  
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    // hide titlebar of application
-    // must be before setting the layout
+    // hide title-bar of application. Must be before setting the layout
     requestWindowFeature(Window.FEATURE_NO_TITLE);
-    // hide statusbar of Android
-    // could also be done later
+    // hide status-bar of Android. Could also be done later
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
   }
   
   @Override public void onBackPressed() {
-    speakOutAsync(getString(R.string.previous_screen));
-    _mHandler.postDelayed(mLaunchTask, 1000);
+    speakOutSync(getString(R.string.back_button));
+    finish();
   }
   
   /***
+   * Adjusts buttons to all screen sizes
    * 
    * @param numOfLayouts
    *          - the number of rows in the activity
    */
   public void adjustLayoutSize(int numOfLayouts) {
-    Display display = getWindowManager().getDefaultDisplay();
-    float density = getResources().getDisplayMetrics().density;
-    int height = display.getHeight() - (int) (60 * density);
+    Display _display = getWindowManager().getDefaultDisplay();
+    final float _density = getResources().getDisplayMetrics().density;
+    final int _height = _display.getHeight() - (int) (60 * _density);
     for (int i = 1; i <= numOfLayouts; i++) {
-      int resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
-      LinearLayout ll = (LinearLayout) findViewById(resID);
-      LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ll.getLayoutParams());
-      params.height = height / numOfLayouts;
-      ll.setLayoutParams(params);
+      final int _resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
+      LinearLayout _l = (LinearLayout) findViewById(_resID);
+      LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(_l.getLayoutParams());
+      params.height = _height / numOfLayouts;
+      _l.setLayoutParams(params);
     }
   }
   
+  /**
+   * 
+   * @return
+   */
   public View getButtonByMode() {
-    View returnButton = curr_view;
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    String buttonMode = sp.getString("BUTTON MODE", "regular");
+    View _returnButton = curr_view;
+    SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    String buttonMode = _sp.getString("BUTTON MODE", "regular");
     if (buttonMode.equals("sticky") && last_button_view != null) {
-      returnButton = last_button_view;
+      _returnButton = last_button_view;
       last_button_view = null;
     }
-    return returnButton;
+    return _returnButton;
   }
   
   /**

@@ -20,8 +20,8 @@ import com.yp2012g4.vision.telephony.IncomingCallActivity;
 public class IncomingCallReceiver extends BroadcastReceiver {
   private final static String TAG = "vision:IncomingCallReceiver";
   
-  @Override public void onReceive(Context context, Intent intent) {
-    final Bundle bundle = intent.getExtras();
+  @Override public void onReceive(Context c, Intent i) {
+    final Bundle bundle = i.getExtras();
     if (null == bundle)
       return;
     Log.d(TAG, bundle.toString());
@@ -30,20 +30,20 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
-      processIncomingCall(context, phonenumber);
+      processIncomingCall(c, phonenumber);
       return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_STATE_OFFHOOK);
       Log.i(TAG, "Call to:" + phonenumber);
-      processIncomingCall(context, phonenumber);
+      processIncomingCall(c, phonenumber);
       return;
     }
   }
   
   @SuppressWarnings({ "static-method" }) private void processIncomingCall(Context context, String phonenumber) {
     try {
-      Log.d(TAG, "Creatin IncomingCAllActivity intent");
+      Log.d(TAG, "Creating IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);
       i.putExtra(CallUtils.RANG_KEY, true);
       i.putExtra(CallUtils.INCOING_NUMBER_KEY, phonenumber);
@@ -52,7 +52,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       Thread.sleep(1000);
       context.startActivity(i);
     } catch (final Exception e) {
-      // e.printStackTrace();
       Log.e(TAG, "error starting IncomingCAllActivity", e);
     }
   }

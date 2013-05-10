@@ -64,13 +64,16 @@ public class QuickSMSActivityTest extends
     }
 
     public void testSMSText() {
-	final String[] string = { "Will call you back", "",
-		"Where have you been?", "", "See you tomorrow", "",
-		"Where are you?", "", "Bla Bla Bla" };
+	final String[] string = { activity.getString(R.string.SMS_number_1),
+		"", activity.getString(R.string.SMS_number_3), "",
+		activity.getString(R.string.SMS_number_5), "",
+		activity.getString(R.string.SMS_number_7), "",
+		activity.getString(R.string.SMS_number_9) };
 	final ArrayList<Button> btnList = solo.getCurrentButtons();
 	for (int i = 0; i < btnList.size(); i += 2) {
 	    final TalkingButton btn = (TalkingButton) btnList.get(i);
-	    assertTrue(btn.getText().toString().equals(string[i]));
+	    // assertTrue(btn.getText().toString().equals(string[i]));
+	    assertEquals(string[i], btn.getText().toString());
 	}
 
     }

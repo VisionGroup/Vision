@@ -21,16 +21,16 @@ import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
  * 
- * @author Yaron
+ * @author Yaron Auster
  * @version 2
  * 
  */
 public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
-  CallUtils callUtils;
-  private final ContactManager contact = new ContactManager(this);
+  private CallUtils _cu;
+  private final ContactManager _cm = new ContactManager(this);
   boolean rang = false;
-  TelephonyManager tManager;
+  private TelephonyManager _tm;
   
   /**
    * Adds onClick events to buttons in this view.
@@ -38,9 +38,13 @@ public class IncomingCallActivity extends VisionActivity {
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
   @Override public void onClick(View v) {
-    callUtils.silenceRinger();
+    _cu.silenceRinger();
     super.onClick(v);
     Log.d(TAG, v.toString());
+    _clickAction(v);
+  }
+  
+  private void _clickAction(View v) {
     switch (v.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -58,7 +62,7 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   @Override public void onAttachedToWindow() {
-    // make the activity show even the screen is locked.
+    // make the activity show even when the screen is locked.
     final Window window = getWindow();
     window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED +
     // WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON +
@@ -66,29 +70,30 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-    callUtils.silenceRinger();
+    _cu.silenceRinger();
     return super.onScroll(e1, e2, distanceX, distanceY);
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
-    super.onSingleTapUp(e);
-    callUtils.silenceRinger();
+  @Override public boolean onSingleTapUp(MotionEvent me) {
+    super.onSingleTapUp(me);
+    _cu.silenceRinger();
     if (_navigationBar)
       return _navigationBar = false;
-    switch (curr_view.getId()) {
-      case R.id.button_answer:
-        answerCall();
-        break;
-      case R.id.button_reject:
-        endCall();
-        break;
-      case R.id.back_button:
-        speakOutAsync(getString(R.string.previous_screen));
-        _mHandler.postDelayed(mLaunchTask, 100);
-        break;
-      default:
-        return false;
-    }
+    _clickAction(curr_view);
+    // switch (curr_view.getId()) {
+//      case R.id.button_answer:
+//        answerCall();
+//        break;
+//      case R.id.button_reject:
+//        endCall();
+//        break;
+//      case R.id.back_button:
+//        speakOutAsync(getString(R.string.previous_screen));
+//        _mHandler.postDelayed(mLaunchTask, 100);
+//        break;
+//      default:
+//        return false;
+//    }
     return true;
   }
   
@@ -96,13 +101,16 @@ public class IncomingCallActivity extends VisionActivity {
    * Answers the present phone call.
    */
   private void answerCall() {
-    AudioManager manager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-    manager.setWiredHeadsetOn(false);
-    manager.setSpeakerphoneOn(true);
-    manager.setRouting(AudioManager.MODE_CURRENT, AudioManager.ROUTE_SPEAKER, AudioManager.ROUTE_ALL);
-    manager.setMode(AudioManager.MODE_CURRENT);
+    AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+    if (am != null) {
+      am.setWiredHeadsetOn(false);
+      am.setSpeakerphoneOn(true);
+      am.setRouting(AudioManager.MODE_CURRENT, AudioManager.ROUTE_SPEAKER, AudioManager.ROUTE_ALL);
+      am.setMode(AudioManager.MODE_CURRENT);
+    } else
+      Log.e(TAG, "Unable to retrieve AUDIO_SERVICE");
     try {
-      CallUtils.answerPhoneHeadsethook(this);
+      CallUtils.answerCall(this);
       Log.d(TAG, "Answered call");
     } catch (final Exception e) {
       Log.e(TAG, "Error answering call", e);
@@ -113,7 +121,7 @@ public class IncomingCallActivity extends VisionActivity {
    * Terminate the present phone call.
    */
   private void endCall() {
-    callUtils.endCall();
+    _cu.endCall();
     Log.d(TAG, "Rejected call");
   }
   
@@ -128,7 +136,7 @@ public class IncomingCallActivity extends VisionActivity {
     tB.setContentDescription(s);
   }
   
-  @SuppressWarnings("null") @Override protected void onResume() {
+  @Override protected void onResume() {
     Log.d(TAG, "onResume Incoming call activity");
     super.onResume();
     setContentView(R.layout.activity_incoming_call);
@@ -137,20 +145,22 @@ public class IncomingCallActivity extends VisionActivity {
     final Bundle extras = getIntent().getExtras();
     if (extras == null)
       Log.d(TAG, "extras == null");
-    try {
-      rang = extras.getBoolean(CallUtils.RANG_KEY);
-    } catch (final Exception e) {
-      rang = false;
-    }
-    try {
-      incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
-      if (incomingNumber == null)
-        incomingNumber = new CallManager().getLastOutgoingCall(this).getNumber();
-    } catch (Exception e) {
-      // Silent exception is OK
+    else {
+      try {
+        rang = extras.getBoolean(CallUtils.RANG_KEY);
+      } catch (final Exception e) {
+        rang = false;
+      }
+      try {
+        incomingNumber = extras.getString(CallUtils.INCOING_NUMBER_KEY);
+        if (incomingNumber == null)
+          incomingNumber = new CallManager().getLastOutgoingCall(this).getNumber();
+      } catch (Exception e) {
+        // Silent exception is OK
+      }
     }
     updateNumberButton(getTalkingButton(R.id.number), incomingNumber);
-    incomingName = contact.getNameFromPhone(incomingNumber);
+    incomingName = _cm.getNameFromPhone(incomingNumber);
     if (!incomingName.equals(incomingNumber))
       updateNumberButton(getTalkingButton(R.id.name), incomingName);
   }
@@ -160,14 +170,14 @@ public class IncomingCallActivity extends VisionActivity {
    */
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    callUtils = new CallUtils(this);
+    _cu = new CallUtils(this);
     Log.d(TAG, "onCreate Incoming call activity");
-    init(0/* TODO Check what icon goes here */, getString(R.string.IncomingCall_whereami), getString(R.string.IncomingCall_help));
+    init(0, getString(R.string.IncomingCall_whereami), getString(R.string.IncomingCall_help));
   }
   
   @Override public void onDestroy() {
     super.onDestroy();
-    callUtils.restoreRinger();
+    _cu.restoreRinger();
   }
   
   @Override public int getViewId() {
@@ -178,20 +188,20 @@ public class IncomingCallActivity extends VisionActivity {
    * Sets the listener to the change in the phone's telephony status.
    */
   private void setPhoneStateListener() {
-    tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    tManager.listen(new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
+    _tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    _tm.listen(new ListenToPhoneState(), PhoneStateListener.LISTEN_CALL_STATE);
   }
   
   class ListenToPhoneState extends PhoneStateListener {
     @Override public void onCallStateChanged(int state, String inNumber) {
       if (state == TelephonyManager.CALL_STATE_IDLE && rang) {
-        Log.d(TAG, "Ending Activity because " + stateName(state));
+        Log.d(TAG, "Ending Activity because " + _stateName(state));
         rang = false;
         _mHandler.postDelayed(mLaunchTask, 100);
       }
     }
     
-    String stateName(int state) {
+    private String _stateName(int state) {
       switch (state) {
         case TelephonyManager.CALL_STATE_IDLE:
           return "Idle";

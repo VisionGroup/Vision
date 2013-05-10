@@ -27,63 +27,47 @@ public class CallUtils {
   public static final String RANG_KEY = "rang";
   public static final String INCOING_NUMBER_KEY = "iNumber";
   private com.android.internal.telephony.ITelephony telephonyService;
-  AudioManager audioManager;
+  private AudioManager _am;
   
   // ListenToPhoneState listener;
   /**
-   * Enables the use of speakerphone
+   * Enables the Speakerphone
    * 
    * @param context
    */
-  public static void enableSpeakerPhone(Context context) {
-    final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+  public static void enableSpeakerPhone(Context c) {
+    final AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
     audioManager.setSpeakerphoneOn(true);
   }
   
-  /**
-   * Use answerPhoneHeadsethook instead.
-   * 
-   * @throws Exception
-   */
-  @Deprecated public void answerCall() throws Exception {
-    // Silence the ringer and answer the call!
-    try {
-      telephonyService.silenceRinger();
-      telephonyService.answerRingingCall();
-    } catch (final Exception e) {
-      Log.e(TAG, "Error answerig calls", e);
-    }
-  }
-  
-  public CallUtils(Context context) {
+  public CallUtils(Context c) {
     super();
     try {
-      final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-      final Class<?> c = Class.forName(tm.getClass().getName());
-      final Method m = c.getDeclaredMethod("getITelephony");
+      final TelephonyManager tm = (TelephonyManager) c.getSystemService(Context.TELEPHONY_SERVICE);
+      final Class<?> cls = Class.forName(tm.getClass().getName());
+      final Method m = cls.getDeclaredMethod("getITelephony");
       m.setAccessible(true);
       telephonyService = (ITelephony) m.invoke(tm);
-      audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+      _am = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
     } catch (final Exception e) {
       Log.e(TAG, "Error starting CallUtils", e);
     }
   }
   
   /**
-   * Answer phone call.
+   * Answer phone call. Simulate a press of the headset button to pick up the
+   * call
    * 
    * @param context
    */
-  public static void answerPhoneHeadsethook(Context context) {
-    // Simulate a press of the headset button to pick up the call
-    // SettingsClass.logMe(tag, "Simulating headset button");
+  public static void answerCall(Context c) {
+    String recPerm = "android.permission.CALL_PRIVILEGED";
     final Intent buttonDown = new Intent(Intent.ACTION_MEDIA_BUTTON);
     buttonDown.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_HEADSETHOOK));
-    context.sendOrderedBroadcast(buttonDown, "android.permission.CALL_PRIVILEGED");
-    // froyo and beyond trigger on buttonUp instead of buttonDown
+    c.sendOrderedBroadcast(buttonDown, recPerm);
     final Intent buttonUp = new Intent(Intent.ACTION_MEDIA_BUTTON);
     buttonUp.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK));
-    context.sendOrderedBroadcast(buttonUp, "android.permission.CALL_PRIVILEGED");
+    c.sendOrderedBroadcast(buttonUp, recPerm);
   }
   
   /**
@@ -91,8 +75,6 @@ public class CallUtils {
    */
   public void endCall() {
     try {
-      // Java reflection to gain access to TelephonyManager's
-      // ITelephony getter
       telephonyService.endCall();
       Thread.sleep(1000);
     } catch (final Exception e) {
@@ -107,7 +89,7 @@ public class CallUtils {
    */
   public void silenceRinger() {
     try {
-      audioManager.setStreamMute(AudioManager.STREAM_RING, true);
+      _am.setStreamMute(AudioManager.STREAM_RING, true);
     } catch (final Exception e) {
       Log.e(TAG, "Error silencing Ringer", e);
     }
@@ -118,7 +100,7 @@ public class CallUtils {
    */
   public void restoreRinger() {
     try {
-      audioManager.setStreamMute(AudioManager.STREAM_RING, false);
+      _am.setStreamMute(AudioManager.STREAM_RING, false);
     } catch (final Exception e) {
       Log.e(TAG, "Error silencing Ringer", e);
     }

@@ -9,10 +9,9 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 
 /**
+ * This class is a wrapper class for the TTS engine.
  * 
  * @author Auster Yaron
- * 
- *         The TTS is make an handle to use the TTS class in android.
  * 
  */
 public class TTS implements OnInitListener {
@@ -26,30 +25,12 @@ public class TTS implements OnInitListener {
    * 
    * 
    * @param context
-   *          the context that running the class.
+   *          the context that is running the class.
    * @param listener
-   *          the listener that connected from the activity.
-   * @deprecated
-   */
-  @Deprecated public TTS(Context context, TextToSpeech.OnInitListener listener) {
-    _tts = new TextToSpeech(context, listener);
-    setQueueMode(TextToSpeech.QUEUE_FLUSH);
-    setLanguage(Locale.US);
-  }
-  
-  /**
-   * 
-   * 
-   * @param context
-   *          the context that running the class.
-   * @param listener
-   *          the listener that connected from the activity.
+   *          the listener that is connected from the activity.
    */
   public TTS(Context context) {
     _tts = new TextToSpeech(context, this);
-    // TODO check if to move to onInit - Amit
-    setQueueMode(TextToSpeech.QUEUE_FLUSH);
-    setLanguage(Locale.US); // TODO check if to move to onInit - AMIT
   }
   
   /**
@@ -66,7 +47,7 @@ public class TTS implements OnInitListener {
    *          the new queue mode.
    */
   public void setQueueMode(int queueMode) {
-    Log.i(TAG, "setQueueMode");
+    Log.d(TAG, "setQueueMode");
     _qm = queueMode;
   }
   
@@ -76,9 +57,19 @@ public class TTS implements OnInitListener {
    * @param languag
    *          the new language.
    */
-  public void setLanguage(Locale languag) {
-    Log.i(TAG, "setLanguage");
-    _tts.setLanguage(_language);
+  public void setLanguage(Locale l) {
+    Log.d(TAG, "setLanguage");
+    _language = l;
+    _tts.setLanguage(l);
+  }
+  
+  /**
+   * 
+   * @return The language being set.
+   */
+  public Locale getLanguage() {
+    Log.d(TAG, "getLanguage");
+    return _language;
   }
   
   /**
@@ -88,32 +79,9 @@ public class TTS implements OnInitListener {
    *          string to speak.
    */
   public void speak(String s) {
-    Log.i(TAG, "speak : " + s);
+    Log.d(TAG, "speak : " + s);
     if (null != s)
       _tts.speak(s, _qm, null);
-    /*
-     * // if (!isPureEnglise(s)) // _tts.speak("Hebrew.", _qm, null); // else
-     * _tts.speak(s, _qm, null);
-     */
-  }
-  
-  /**
-   * speak the given string and halts the program until speak finished.
-   * 
-   * @param s
-   *          string to speak.
-   */
-  public void speakSync(String s) {
-    Log.i(TAG, "speak : " + s);
-    if (null == s)
-      return;
-    // if (!isPureEnglise(s))
-    // _tts.speak("Hebrew.", _qm, null);
-    // else
-    _tts.speak(s, _qm, null);
-    while (_tts.isSpeaking()) {
-      // Wait for the end of speak
-    }
   }
   
   /**
@@ -137,7 +105,7 @@ public class TTS implements OnInitListener {
    * 
    */
   public void stop() {
-    Log.i(TAG, "stop");
+    Log.d(TAG, "stop");
     _tts.stop();
   }
   
@@ -152,31 +120,32 @@ public class TTS implements OnInitListener {
   }
   
   /**
-   * Check if speaking now.
    * 
-   * @return true if speaking.
+   * @return true if currently speaking, false otherwise.
    */
   public boolean isSpeaking() {
     return _tts.isSpeaking();
   }
   
   /**
-   * Check if the string contaion pure Englise.
+   * Check if the string contains pure English.
    * 
    * @param s
    *          string to check.
-   * @return true if only Englise letters.
+   * @return true if only English letters exist in the string.
    */
   public static boolean isPureEnglish(String s) {
     if (s == null)
       return true;
     return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();
-    // return !Pattern.compile("[*\\p{Hebrew}*]").matcher(s).find();
   }
   
   @Override public void onInit(int status) {
-    if (status == TextToSpeech.SUCCESS)
+    if (status == TextToSpeech.SUCCESS) {
       _init = true;
+      setQueueMode(TextToSpeech.QUEUE_FLUSH);
+      setLanguage(Locale.US);
+    }
   }
   
   public void waitUntilFinishTalking() {

@@ -39,6 +39,7 @@ public class ContactManager {
           // Ignore and go next
         }
       while (cur.moveToNext());
+    cur.close();
     return $;
   }
   
@@ -96,7 +97,7 @@ public class ContactManager {
       cs.moveToFirst();
       return cs.getString(cs.getColumnIndex(Phone.NUMBER));
     }
-    return "No phone number";
+    return "";// "No phone number";
   }
   
   static public ArrayList<ContactType> getTestContacts() {

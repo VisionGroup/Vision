@@ -118,7 +118,7 @@ public class LocationFinder {
   void OpenStreetMapGeocoding(final double latitude, final double longitude, final String provider) {
     final AsyncTask<Void, Void, String> _downloader = new AsyncTask<Void, Void, String>() {
       @Override protected String doInBackground(Void... params) {
-        return OpenStreetMapGeocoder.GetAddress(latitude, longitude);
+        return OpenStreetMapGeocoder.getAddress(latitude, longitude);
       }
       
       @Override protected void onPostExecute(String result) {

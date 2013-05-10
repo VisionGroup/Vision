@@ -20,13 +20,13 @@ import android.util.Log;
  */
 public class LocationFinder {
   private static final String TAG = "vision:LocationFinder";
-  List<LocationListener> listeners = null;
-  LocationManager locationManager;
-  LocationHandler handler;
-  boolean running = false; // to ensure we don't stop it twice
+  List<LocationListener> _listeners = null;
+  LocationManager _locationManager;
+  LocationHandler _handler;
+  boolean _running = false; // to ensure we don't stop it twice
   
   public LocationFinder(LocationManager newLocationManager) {
-    locationManager = newLocationManager;
+    _locationManager = newLocationManager;
     log("created");
   }
   
@@ -39,22 +39,22 @@ public class LocationFinder {
    */
   public boolean run(LocationHandler h) {
     log("run");
-    if (running)
+    if (_running)
       stop();
-    listeners = new ArrayList<LocationListener>();
-    handler = h;
+    _listeners = new ArrayList<LocationListener>();
+    _handler = h;
     setUpLocationListener(LocationManager.GPS_PROVIDER);
     setUpLocationListener(LocationManager.NETWORK_PROVIDER);
-    return running;
+    return _running;
   }
   
   private void setUpLocationListener(String p) {
-    if (locationManager.isProviderEnabled(p)) {
+    if (_locationManager.isProviderEnabled(p)) {
       log("enabling" + p);
       final LocationListener l = createLocationListener(p);
-      listeners.add(l);
-      locationManager.requestLocationUpdates(p, 0, 0, l);
-      running = true;
+      _listeners.add(l);
+      _locationManager.requestLocationUpdates(p, 0, 0, l);
+      _running = true;
     }
   }
   
@@ -84,7 +84,7 @@ public class LocationFinder {
    * @return The listener
    */
   private LocationListener createLocationListener(final String Provider) {
-    final LocationListener l = new LocationListener() {
+    final LocationListener _l = new LocationListener() {
       @Override public void onLocationChanged(Location location) {
         log("listener of provider " + Provider + ": location changed");
         makeUseOfNewLocation(location, Provider);
@@ -102,7 +102,7 @@ public class LocationFinder {
         // No modifications
       }
     };
-    return l;
+    return _l;
   }
   
   /**
@@ -116,7 +116,7 @@ public class LocationFinder {
    *          the provider of the current location
    */
   void OpenStreetMapGeocoding(final double latitude, final double longitude, final String provider) {
-    final AsyncTask<Void, Void, String> downloader = new AsyncTask<Void, Void, String>() {
+    final AsyncTask<Void, Void, String> _downloader = new AsyncTask<Void, Void, String>() {
       @Override protected String doInBackground(Void... params) {
         return OpenStreetMapGeocoder.GetAddress(latitude, longitude);
       }
@@ -124,11 +124,11 @@ public class LocationFinder {
       @Override protected void onPostExecute(String result) {
         super.onPostExecute(result);
         log("Geocoding: " + result);
-        handler.handleLocation(longitude, latitude, provider, result);
+        _handler.handleLocation(longitude, latitude, provider, result);
       }
     };
     try {
-      downloader.execute();
+      _downloader.execute();
     } catch (final Exception e) {
       log("Error: " + e.getMessage());
     }
@@ -138,16 +138,16 @@ public class LocationFinder {
    * Stop the service
    */
   public void stop() {
-    if (!running)
+    if (!_running)
       return;
     log("stopped");
-    if (listeners != null) {
-      for (final LocationListener l : listeners) {
+    if (_listeners != null) {
+      for (final LocationListener l : _listeners) {
         log("removed a listener");
-        locationManager.removeUpdates(l);
+        _locationManager.removeUpdates(l);
       }
-      listeners.clear();
-      listeners = null;
+      _listeners.clear();
+      _listeners = null;
     }
     log("end of stop");
   }

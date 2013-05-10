@@ -39,24 +39,19 @@ import com.yp2012g4.vision.settings.VisionApplication;
  * @author Amir
  * @version 1.1
  */
-public abstract class VisionGestureDetector extends Activity implements OnClickListener, /*
-                                                                                          * TextToSpeech
-                                                                                          * .
-                                                                                          * OnInitListener
-                                                                                          * ,
-                                                                                          */OnGestureListener, OnTouchListener {
+public abstract class VisionGestureDetector extends Activity implements OnClickListener, OnGestureListener, OnTouchListener {
   private static final String TAG = "vision:VisionGestureDetector";
   /**
    * for multitouch gesture detection
    */
   private static final int TIMEOUT = ViewConfiguration.getDoubleTapTimeout() + 100;
-  private long mFirstDownTime = 0;
-  private boolean mSeparateTouches = false;
-  private byte mTwoFingerTapCount = 0;
+  private long _mFirstDownTime = 0;
+  private boolean _mSeparateTouches = false;
+  private byte _mTwoFingerTapCount = 0;
   /**
    * Stores the dimensions of a button
    */
-  protected Rect rect;
+  protected Rect _rect;
   /**
    * For supporting Text-To-Speech
    */
@@ -69,11 +64,11 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   /**
    * For inserting delays...
    */
-  public Handler mHandler;
+  public Handler _mHandler;
   /**
    * Stores the gestures
    */
-  protected GestureDetector gestureDetector;
+  protected GestureDetector _gestureDetector;
   /**
    * Flag indicating a click on control bar button
    */
@@ -82,12 +77,18 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * Mapping from views to their locations on screen
    */
   private final Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
-  protected Locale myLocale;
-  protected Configuration config;
+  /**
+   * Stores the current locale
+   */
+  protected Locale _myLocale;
+  /**
+   * Stores configuration
+   */
+  protected Configuration _config;
   /**
    * Holds the current spoken string
    */
-  public static String spokenString;
+  public static String _spokenString;
   
   // ==================================================================
   // ===========================METHODS================================
@@ -98,12 +99,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onDown(MotionEvent e) {
     Log.i(TAG, "onDown");
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    String buttonMode = sp.getString("BUTTON MODE", "regular");
-    if (buttonMode.equals("regular"))
-      last_button_view = getView(e.getRawX(), e.getRawY()); // updating
-    else
-      getView(e.getRawX(), e.getRawY());
     return true;
   }
   
@@ -123,7 +118,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   @Override public void onShowPress(MotionEvent e) {
     Log.i(TAG, "onShowPress");
     if (isButtonType(last_button_view))
-      // changeButton();
       VisionApplication.restoreColors(last_button_view, this);
     hapticFeedback(last_button_view);
     speakOutAsync(textToRead(last_button_view));
@@ -136,30 +130,25 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onTouch(View v, MotionEvent event) {
     final int action = event.getAction() & MotionEvent.ACTION_MASK;
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    String buttonMode = sp.getString("BUTTON MODE", "regular");
+    SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    String buttonMode = _sp.getString("BUTTON MODE", "regular");
     switch (action) {
       case MotionEvent.ACTION_DOWN:
         Log.i("MyLog", "onTouch: ACTION_DOWN");
-        // resetting to false when touching screen
-        // updating curr_view (inside getView())
         VisionApplication.restoreColors(last_button_view, this);
         if (buttonMode.equals("regular"))
           last_button_view = getView(event.getRawX(), event.getRawY());
         break;
       case MotionEvent.ACTION_MOVE:
-        // viewArray.clear(); // finger is scrolling so can clear the array
         for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
           if (isButtonType(entry.getKey()))
-            if (entry.getValue().contains((int) event.getRawX(), (int) event.getRawY())) {
-              Log.i("MyLog", "onTouch: ACTION_MOVE");
+            if (entry.getValue().contains((int) event.getRawX(), (int) event.getRawY()))
               if (last_button_view != entry.getKey()) {
                 VisionApplication.restoreColors(entry.getKey(), this);
                 speakOutAsync(textToRead(entry.getKey()));
                 changeButton(entry.getKey());
               } else
-                last_button_view = getView(event.getRawX(), event.getRawY());
-            }
+                last_button_view = entry.getKey();
         break;
       case MotionEvent.ACTION_UP:
         Log.i(TAG, "ACTION UP");
@@ -172,11 +161,12 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     }
     // gestureDetector.setIsLongpressEnabled(false);
     // onTwoFingerDoubleTap(event);
-    return gestureDetector.onTouchEvent(event);
+    return _gestureDetector.onTouchEvent(event);
   }
   
   /**
-   * @param entry
+   * 
+   * @param curr
    */
   private void changeButton(View curr) {
     VisionApplication.restoreColors(last_button_view, this);
@@ -184,38 +174,49 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     hapticFeedback(last_button_view);
   }
   
+  /**
+   * Resets params for Two fingers double tap
+   * 
+   * @param time
+   */
   private void reset(long time) {
-    mFirstDownTime = time;
-    mSeparateTouches = false;
-    mTwoFingerTapCount = 0;
+    _mFirstDownTime = time;
+    _mSeparateTouches = false;
+    _mTwoFingerTapCount = 0;
   }
   
+  /**
+   * A new handler for two fingers double tap
+   * 
+   * @param event
+   * @return
+   */
   public boolean onTwoFingerDoubleTap(MotionEvent event) {
     switch (event.getActionMasked()) {
       case MotionEvent.ACTION_DOWN:
         Log.i(TAG, "onTwoFingerDoubleTap:ACTION_DOWN");
-        if (mFirstDownTime == 0 || event.getEventTime() - mFirstDownTime > TIMEOUT)
+        if (_mFirstDownTime == 0 || event.getEventTime() - _mFirstDownTime > TIMEOUT)
           reset(event.getDownTime());
         break;
       case MotionEvent.ACTION_POINTER_UP:
         Log.i(TAG, "onTwoFingerDoubleTap:ACTION_POINTER_UP");
         if (event.getPointerCount() == 2)
-          mTwoFingerTapCount++;
+          _mTwoFingerTapCount++;
         else
-          mFirstDownTime = 0;
+          _mFirstDownTime = 0;
         break;
       case MotionEvent.ACTION_UP:
         Log.i(TAG, "onTwoFingerDoubleTap:ACTION_UP");
-        if (!mSeparateTouches) {
-          mSeparateTouches = true;
+        if (!_mSeparateTouches) {
+          _mSeparateTouches = true;
           break;
         }
-        if (mTwoFingerTapCount == 2 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
+        if (_mTwoFingerTapCount == 2 && event.getEventTime() - _mFirstDownTime < TIMEOUT) {
           // open back door to tools.
           final Intent intent = new Intent(Settings.ACTION_SETTINGS);
           intent.addCategory(Intent.CATEGORY_LAUNCHER);
           startActivity(intent);
-          mFirstDownTime = 0;
+          _mFirstDownTime = 0;
           return true;
         }
         break;
@@ -225,6 +226,11 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return false;
   }
   
+  /**
+   * Getter function
+   * 
+   * @return
+   */
   public Map<View, Rect> getView_to_rect() {
     return view_to_rect;
   }
@@ -238,17 +244,16 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    final ViewGroup mainView = (ViewGroup) findViewById(getViewId());
-    getButtonsPosition(mainView);
-    // setLocaleToActivity(this);
+    final ViewGroup _mainView = (ViewGroup) findViewById(getViewId());
+    getButtonsPosition(_mainView);
     for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet()) {
       entry.getKey().setOnClickListener(this);
       entry.getKey().setOnTouchListener(this);
     }
     // reads layout description out loud
     if (hasFocus) {
-      VisionApplication.applyButtonSettings(view_to_rect.keySet(), mainView, this);
-      if (mainView.getContentDescription() != null)
+      VisionApplication.applyButtonSettings(view_to_rect.keySet(), _mainView, this);
+      if (_mainView.getContentDescription() != null)
         speakOutAsync(findViewById(getViewId()).getContentDescription().toString());
     }
   }
@@ -305,7 +310,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       Log.e(TAG, "TTS is null");
       return;
     }
-    spokenString = s;
+    _spokenString = s;
     _tts.speak(s);
   }
   
@@ -329,8 +334,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       Log.e(TAG, "tts init error");
     VisionApplication.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
-    mHandler = new Handler();
-    gestureDetector = new GestureDetector(this);
+    _mHandler = new Handler();
+    _gestureDetector = new GestureDetector(this);
     _navigationBar = false;
   }
   
@@ -342,15 +347,15 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          the view from which to get buttons positions
    */
   public void getButtonsPosition(View v) {
-    rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
+    _rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
     if (v instanceof TimePicker || v instanceof AnalogClock)
       return; // ignoring these view types
     if (isButtonType(v) || v instanceof TextView) {
-      view_to_rect.put(v, rect);
+      view_to_rect.put(v, _rect);
       return;
     }
     final ViewGroup vg = (ViewGroup) v;
-    view_to_rect.put(v, rect);
+    view_to_rect.put(v, _rect);
     for (int i = 0; i < vg.getChildCount(); i++)
       getButtonsPosition(vg.getChildAt(i));
     return;

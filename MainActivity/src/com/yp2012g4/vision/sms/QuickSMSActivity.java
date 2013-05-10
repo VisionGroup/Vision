@@ -43,7 +43,7 @@ public class QuickSMSActivity extends VisionActivity {
       final String messageToSend = ((TalkingButton) view).getReadText();
       SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null, null);
       speakOutAsync(getString(R.string.message_has_been_sent));
-      mHandler.postDelayed(mLaunchTask, 1500);
+      _mHandler.postDelayed(mLaunchTask, 1500);
       finish();
     }
     return false;
@@ -54,7 +54,7 @@ public class QuickSMSActivity extends VisionActivity {
     setContentView(R.layout.activity_quick_sms);
     init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_help));
     // TODO: create help string
-    mHandler = new Handler();
+    _mHandler = new Handler();
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
       try {

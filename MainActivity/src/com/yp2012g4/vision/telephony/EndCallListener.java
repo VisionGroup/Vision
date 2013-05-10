@@ -13,35 +13,34 @@ import android.telephony.TelephonyManager;
  * @version
  */
 public class EndCallListener extends PhoneStateListener {
-  TelephonyManager telephonyManager;
-  Context context;
+  Context _context;
   /**
    * isHangUp is true if phone hang-up, else - false
    */
-  boolean isHangUp = false;
+  boolean _isHangUp = false;
   
   /**
-   * @param context
+   * @param _context
    *          the application to return to when the phone call finishes
    */
   public EndCallListener(Context c) {
-    context = c;
+    _context = c;
   }
   
   @Override public void onCallStateChanged(int state, String incomingNumber) {
     switch (state) {
       case TelephonyManager.CALL_STATE_IDLE:// phone hang-up
-        if (isHangUp) {
+        if (_isHangUp) {
           // restart app
-          final Intent i = context.getApplicationContext().getPackageManager()
-              .getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+          final Intent i = _context.getApplicationContext().getPackageManager()
+              .getLaunchIntentForPackage(_context.getApplicationContext().getPackageName());
           i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-          context.startActivity(i);
-          isHangUp = false;
+          _context.startActivity(i);
+          _isHangUp = false;
         }
         break;
       case TelephonyManager.CALL_STATE_OFFHOOK:
-        isHangUp = true;
+        _isHangUp = true;
         break;
       default:
         break;

@@ -55,25 +55,25 @@ public class DisplaySettingsActivity extends VisionActivity {
         vibrate(300);
         break;
       case R.id.locale:
-        myLocale = Locale.getDefault(); // get xml strings file
-        config = new Configuration();
+        _myLocale = Locale.getDefault(); // get xml strings file
+        _config = new Configuration();
         String defaultLang = "HEBREW";
-        if (myLocale.equals(Locale.US))
+        if (_myLocale.equals(Locale.US))
           defaultLang = "ENGLISH";
         String language = sp.getString("LANGUAGE", defaultLang);
         if (language.equals("ENGLISH")) {
           VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
           Locale locale = new Locale("iw");
           Locale.setDefault(locale);
-          config.locale = locale;
+          _config.locale = locale;
           speakOutAsync(getString(R.string.switched_to_hebrew));
         } else {
           VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
           Locale.setDefault(Locale.US);
-          config.locale = Locale.US;
+          _config.locale = Locale.US;
           speakOutAsync(getString(R.string.switched_to_english));
         }
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
         // setResult(RESULT_OK, null);
         // empty activity stack
         startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

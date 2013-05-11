@@ -55,8 +55,7 @@ public class DialScreen extends VisionActivity {
       return _navigationBar = false;
     if (e.getAction() == MotionEvent.ACTION_UP) {
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())
-            && (last_button_view != entry.getKey() || buttonPressed == 0))
+        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
           speakOutAsync(textToRead(entry.getKey()));
       buttonPressed = 0;
     }

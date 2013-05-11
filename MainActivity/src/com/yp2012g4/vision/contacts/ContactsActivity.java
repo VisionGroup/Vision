@@ -15,6 +15,7 @@ import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
+import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -68,7 +69,7 @@ public class ContactsActivity extends VisionActivity {
         break;
       case R.id.contacts_sms:
         final Intent sms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
-        sms.putExtra(QuickSMSActivity.NUMBER_KEY, contacts.get(currentContact).getPhone());
+        sms.putExtra(CallUtils.NUMBER_KEY, contacts.get(currentContact).getPhone());
         startActivity(sms);
         break;
       default:

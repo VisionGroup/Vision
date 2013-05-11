@@ -34,7 +34,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-      final String phonenumber = bundle.getString(TelephonyManager.EXTRA_STATE_OFFHOOK);
+      final String phonenumber = "";// bundle.getString(CallUtils.NUMBER_KEY);
       Log.i(TAG, "Call to:" + phonenumber);
       processIncomingCall(c, phonenumber);
       return;
@@ -46,7 +46,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       Log.d(TAG, "Creating IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);
       i.putExtra(CallUtils.RANG_KEY, true);
-      i.putExtra(CallUtils.INCOING_NUMBER_KEY, phonenumber);
+      i.putExtra(CallUtils.NUMBER_KEY, phonenumber);
       i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       Log.d(TAG, "Starting IncomingCAllActivity");
       Thread.sleep(1000);

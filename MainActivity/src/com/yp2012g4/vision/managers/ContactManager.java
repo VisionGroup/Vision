@@ -73,6 +73,8 @@ public class ContactManager {
    * @return
    */
   public String getNameFromPhone(String ps) {
+    if (ps == null || ps.equals(""))
+      return "";
     String $ = ps;
     Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(ps));
     Cursor cs = _c.getContentResolver().query(uri, new String[] { PhoneLookup.DISPLAY_NAME }, PhoneLookup.NUMBER + "='" + ps + "'",

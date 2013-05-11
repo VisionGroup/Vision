@@ -221,11 +221,13 @@
     <string name="send_SOS_message">Send S O S</string>
 
     <!-- IncomingCallActivity -->
-    <string name="IncomingCall_whereami">Incoming Call</string>
+    <string name="IncomingCall_whereami">Call</string>
     <string name="IncomingCall_help">You can either reject or answer the call.</string>
     <string name="IncomingCall_button_Answer_read">Answer</string>
     <string name="IncomingCall_button_Reject_read">Reject</string>
-
+	<string name="IncomingCall_call_ended">call ended</string>
+    
+    
     <!-- VisionActivity -->
     <string name="this_is">This is</string>
     <string name="previous_screen">Previous screen</string>

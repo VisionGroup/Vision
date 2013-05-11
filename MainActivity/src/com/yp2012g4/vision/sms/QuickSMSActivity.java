@@ -9,6 +9,7 @@ import android.view.View;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.settings.VisionApplication;
+import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -25,7 +26,7 @@ public class QuickSMSActivity extends VisionActivity {
    * This is the key to be used when putting the destination number in this
    * activities extras.
    */
-  public static final String NUMBER_KEY = "number";
+  // public static final String NUMBER_KEY = "number";
   public String number;
   
   @Override public int getViewId() {
@@ -58,7 +59,7 @@ public class QuickSMSActivity extends VisionActivity {
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
       try {
-        number = extras.getString(QuickSMSActivity.NUMBER_KEY);
+        number = extras.getString(CallUtils.NUMBER_KEY);
       } catch (final Exception e) {
         number = "";
       }

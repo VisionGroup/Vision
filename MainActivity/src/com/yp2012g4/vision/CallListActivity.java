@@ -14,6 +14,7 @@ import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
+import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -46,7 +47,7 @@ public class CallListActivity extends VisionActivity {
     final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.calllist_send_sms:
-        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(QuickSMSActivity.NUMBER_KEY,
+        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY,
             currCall.getNumber()));
         break;
       case R.id.calllist_call_sender:

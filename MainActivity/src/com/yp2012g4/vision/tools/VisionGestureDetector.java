@@ -117,10 +117,11 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public void onShowPress(MotionEvent e) {
     Log.i(TAG, "onShowPress");
-    if (isButtonType(last_button_view))
+    if (isButtonType(last_button_view)) {
       VisionApplication.restoreColors(last_button_view, this);
-    hapticFeedback(last_button_view);
-    speakOutAsync(textToRead(last_button_view));
+      hapticFeedback(last_button_view);
+      speakOutAsync(textToRead(last_button_view));
+    }
   }
   
   @Override public boolean onSingleTapUp(MotionEvent e) {

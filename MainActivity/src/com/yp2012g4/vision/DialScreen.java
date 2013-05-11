@@ -37,11 +37,6 @@ public class DialScreen extends VisionActivity {
    * a string representing the number to be read
    */
   private String read_number = "";
-  /**
-   * the number of sequential buttons pressed without the user lifting his
-   * finger
-   */
-  private int buttonPressed = 0;
   
   /**
    * get the id of the main layout
@@ -54,13 +49,10 @@ public class DialScreen extends VisionActivity {
     super.onSingleTapUp(e);
     if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
       return _navigationBar = false;
-    if (e.getAction() == MotionEvent.ACTION_UP) {
+    if (e.getAction() == MotionEvent.ACTION_UP)
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())
-            && (last_button_view != entry.getKey() || buttonPressed == 0))
+        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
           speakOutAsync(textToRead(entry.getKey()));
-      buttonPressed = 0;
-    }
     return true;
   }
   
@@ -118,14 +110,6 @@ public class DialScreen extends VisionActivity {
     vibrate(150);
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
-  }
-  
-  /**
-   * update the number of sequential buttons pressed
-   */
-  @Override public void onShowPress(MotionEvent e) {
-    super.onShowPress(e);
-    ++buttonPressed;
   }
   
   /**

@@ -13,6 +13,7 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
+import com.yp2012g4.vision.tools.CallUtils;
 
 /**
  * Tests for QuickSMSActivity
@@ -81,7 +82,7 @@ public class QuickSMSActivityTest extends
     public void testToNumberString() {
 
 	final Intent i = new Intent(activity, QuickSMSActivity.class);
-	i.putExtra(QuickSMSActivity.NUMBER_KEY, "0578135813");
+	i.putExtra(CallUtils.NUMBER_KEY, "0578135813");
 	activity.startActivity(i);
 	solo.assertCurrentActivity("Check on first activity",
 		QuickSMSActivity.class);

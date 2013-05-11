@@ -15,6 +15,7 @@ import android.view.View;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.telephony.EndCallListener;
+import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -36,11 +37,6 @@ public class DialScreen extends VisionActivity {
    * a string representing the number to be read
    */
   private String read_number = "";
-  /**
-   * the number of sequential buttons pressed without the user lifting his
-   * finger
-   */
-  private int buttonPressed = 0;
   
   /**
    * get the id of the main layout
@@ -53,12 +49,10 @@ public class DialScreen extends VisionActivity {
     super.onSingleTapUp(e);
     if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
       return _navigationBar = false;
-    if (e.getAction() == MotionEvent.ACTION_UP) {
+    if (e.getAction() == MotionEvent.ACTION_UP)
       for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
           speakOutAsync(textToRead(entry.getKey()));
-      buttonPressed = 0;
-    }
     return true;
   }
   
@@ -77,7 +71,8 @@ public class DialScreen extends VisionActivity {
           speakOutAsync(getString(R.string.dial_number));
           return;
         }
-        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)));
+        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)).putExtra(CallUtils.NUMBER_KEY,
+            dialed_number));
         break;
       case R.id.dialer_sms_button: // sms
         // no number was dialed
@@ -85,7 +80,7 @@ public class DialScreen extends VisionActivity {
           speakOutAsync(getString(R.string.dial_number));
           return;
         }
-        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra("number", dialed_number));
+        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, dialed_number));
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
@@ -115,14 +110,6 @@ public class DialScreen extends VisionActivity {
     vibrate(150);
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
-  }
-  
-  /**
-   * update the number of sequential buttons pressed
-   */
-  @Override public void onShowPress(MotionEvent e) {
-    super.onShowPress(e);
-    ++buttonPressed;
   }
   
   /**

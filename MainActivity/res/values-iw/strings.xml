@@ -221,10 +221,11 @@
     <string name="send_SOS_message">שליחת הודעת SOS</string>
 
     <!-- IncomingCallActivity -->
-    <string name="IncomingCall_whereami">מסך שיחה נכנסת</string>
+    <string name="IncomingCall_whereami">שיחה</string>
     <string name="IncomingCall_help">באפשרותך לענות או לדחות שיחה</string>
     <string name="IncomingCall_button_Answer_read">מענה</string>
     <string name="IncomingCall_button_Reject_read">ניתוק</string>
+    <string name="IncomingCall_call_ended">שיחה הסתימה</string>
 
     <!-- VisionActivity -->
     <string name="this_is">זהו</string>

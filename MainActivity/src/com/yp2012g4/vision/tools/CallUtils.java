@@ -25,7 +25,7 @@ public class CallUtils {
   private static String TAG = "vison:CallUtils";
   // Used by the Incoming call receiver to transfer data to the activity.
   public static final String RANG_KEY = "rang";
-  public static final String INCOING_NUMBER_KEY = "iNumber";
+  public static final String NUMBER_KEY = TelephonyManager.EXTRA_INCOMING_NUMBER;
   private com.android.internal.telephony.ITelephony telephonyService;
   private AudioManager _am;
   

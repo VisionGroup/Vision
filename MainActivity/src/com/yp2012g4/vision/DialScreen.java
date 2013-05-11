@@ -99,14 +99,18 @@ public class DialScreen extends VisionActivity {
           dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
           read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
         }
-        // a number or sign has been chosen
-        if (((View) v.getParent().getParent()).getId() == R.id.DialScreenNumbers) {
-          dialed_number += ((TalkingButton) v).getText();
-          read_number = read_number + ((TalkingButton) v).getText() + " ";
-        }
         break;
       default:
         break;
+    }
+    if (dialed_number.length() == MAX_LENGTH) {
+      dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
+      read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
+    }
+    // a number or sign has been chosen
+    if (((View) v.getParent().getParent()).getId() == R.id.DialScreenNumbers) {
+      dialed_number += ((TalkingButton) v).getText();
+      read_number = read_number + ((TalkingButton) v).getText() + " ";
     }
     // Vibrate for 150 milliseconds
     vibrate(150);

@@ -46,8 +46,7 @@ public class SpeakingClockActivity extends VisionActivity {
   public static String parseTime(Calendar cal) {
     String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
     int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-    String s = h + " " + " and "/* Resources.getSystem().getString(R.string.and) */+ " " + cal.get(Calendar.MINUTE) + " "
-        + " minutes "/* Resources.getSystem().getString(R.string.minutes) */+ ampm;
+    String s = h + " " + " and " + " " + cal.get(Calendar.MINUTE) + " " + " minutes " + ampm;
     return s;
   }
   

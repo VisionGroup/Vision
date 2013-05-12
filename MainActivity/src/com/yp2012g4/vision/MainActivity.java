@@ -43,8 +43,11 @@ public class MainActivity extends VisionActivity {
     if (_navigationBar)
       return _navigationBar = false;
     Intent intent = getIntentByButtonId(getButtonByMode().getId());
-    if (intent != null)
-      startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    if (intent != null) {
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      startActivity(intent);
+    }
     return false;
   }
   

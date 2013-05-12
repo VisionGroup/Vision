@@ -14,6 +14,7 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
+import com.yp2012g4.vision.tools.CallUtils;
 
 public class ContactsActivityTest extends
 	ActivityInstrumentationTestCase2<ContactsActivity> {
@@ -90,7 +91,7 @@ public class ContactsActivityTest extends
 	String smsExtra = "";
 	if (extras2 != null)
 	    try {
-		smsExtra = extras2.getString(QuickSMSActivity.NUMBER_KEY);
+		smsExtra = extras2.getString(CallUtils.NUMBER_KEY);
 	    } catch (final Exception e) {
 		smsExtra = "";
 	    }

@@ -81,7 +81,7 @@ public class TalkingListView extends RelativeLayout {
     LayoutParams params = new RelativeLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
         android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
     params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-    setViewSize(_dispView[0], params);
+    setViewSize(params);
     addView(_dispView[0], params);
     for (int i = 1; i < _rows * _cols; i++) {
       params = new RelativeLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -93,7 +93,7 @@ public class TalkingListView extends RelativeLayout {
         params.addRule(RelativeLayout.RIGHT_OF, _dispView[i - 1].getId());
       if (rowPos > 0)
         params.addRule(RelativeLayout.BELOW, _dispView[i - _cols].getId());
-      setViewSize(_dispView[i], params);
+      setViewSize(params);
       addView(_dispView[i], params);
       _dispView[i].invalidate();
     }
@@ -106,7 +106,7 @@ public class TalkingListView extends RelativeLayout {
    * @param v
    * @param p
    */
-  private void setViewSize(View v, LayoutParams p) {
+  private void setViewSize(LayoutParams p) {
     int h = getHeight() / _rows;
     int w = getWidth() / _cols;
     if (p != null) {

@@ -297,7 +297,10 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          - last view being touched
    * 
    */
-  public void onActionUp(View v) {/* to be overridden */
+  public void onActionUp(@SuppressWarnings("unused") View v) {/*
+                                                               * to be
+                                                               * overridden
+                                                               */
   }
   
   /**

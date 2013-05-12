@@ -2,7 +2,6 @@ package com.yp2012g4.vision.managers;
 
 import java.util.Date;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
 
@@ -33,7 +32,7 @@ public class CallType {
    * @param cur
    * @param c
    */
-  public CallType(Cursor cur, Context c) {
+  public CallType(Cursor cur) {
     _mNumber = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
     String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
     long m = Long.parseLong(mili);

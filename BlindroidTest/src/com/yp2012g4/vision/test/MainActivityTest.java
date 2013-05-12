@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.Suppress;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -38,7 +39,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
   
   public void testNumOfButtons() {
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
-    ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
+    final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     assertEquals(12, btnList.size());
   }
   
@@ -70,7 +71,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     checkBackAndHome(com.yp2012g4.vision.R.id.setting_button, DisplaySettingsActivity.class);
   }
   
-  public void testReadSms() {
+  @Suppress public void testReadSms() {
     checkBackAndHome(com.yp2012g4.vision.R.id.read_sms_button, ReadSmsActivity.class);
   }
   
@@ -79,7 +80,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
    */
   public void checkBackAndHome(int id, Class<?> c) {
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
-    TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
+    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
     solo.clickOnView(tb);
     solo.assertCurrentActivity("wrong activity", c);

@@ -30,7 +30,7 @@ public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
   private CallUtils _cu;
   private final ContactManager _cm = new ContactManager(this);
-  private boolean _rang = false;
+  boolean _rang = false;
   private TelephonyManager _tm;
   
   /**

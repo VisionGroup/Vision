@@ -26,7 +26,7 @@ public class QuickSMSActivity extends VisionActivity {
    * This is the key to be used when putting the destination number in this
    * activities extras.
    */
-  // public static final String NUMBER_KEY = "number";
+  public static final String NUMBER_KEY = "number";
   public String number;
   
   @Override public int getViewId() {

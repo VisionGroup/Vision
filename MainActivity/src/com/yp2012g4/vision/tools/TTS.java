@@ -8,6 +8,8 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 
+import com.yp2012g4.vision.settings.VisionApplication;
+
 /**
  * This class is a wrapper class for the TTS engine.
  * 
@@ -94,7 +96,7 @@ public class TTS implements OnInitListener {
     speak(s);
     while (isSpeaking())
       try {
-        Thread.sleep(1000);
+        Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
       } catch (final Exception e) {
         e.printStackTrace();
       }
@@ -150,7 +152,7 @@ public class TTS implements OnInitListener {
   
   public void waitUntilFinishTalking() {
     while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
+      // Wait for message to finish playing and then continue
     }
   }
 }

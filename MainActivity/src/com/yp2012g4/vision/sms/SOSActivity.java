@@ -64,7 +64,7 @@ public class SOSActivity extends VisionActivity {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
         speakOutAsync(getString(R.string.SOS_message_has_been_sent));
       }
-      _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
+      _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
     }
   };
   

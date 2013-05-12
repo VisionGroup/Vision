@@ -297,10 +297,9 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          - last view being touched
    * 
    */
-  public void onActionUp(@SuppressWarnings("unused") View v) {/*
-                                                               * to be
-                                                               * overridden
-                                                               */
+  public void onActionUp(View v) {/*
+                                   * to be overridden
+                                   */
   }
   
   /**
@@ -320,9 +319,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   public void speakOutSync(String s) {
     speakOutAsync(s);
-    while (_tts.isSpeaking()) {
-      // Wait until finish talking.
-    }
+    _tts.waitUntilFinishTalking();
   }
   
   @Override public void onDestroy() {

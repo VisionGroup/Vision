@@ -94,12 +94,13 @@ public class ContactManager {
    * @return
    */
   public String lookupPhoneNumbers(String lk) {
+    String $ = "";// "No phone number"
     Cursor cs = _c.getContentResolver().query(Phone.CONTENT_URI, null, Phone.LOOKUP_KEY + " = ?", new String[] { lk }, null);
     if (cs.getCount() > 0) {
       cs.moveToFirst();
-      return cs.getString(cs.getColumnIndex(Phone.NUMBER));
+      $ = cs.getString(cs.getColumnIndex(Phone.NUMBER));
     }
-    return "";// "No phone number";
+    return $;
   }
   
   static public ArrayList<ContactType> getTestContacts() {

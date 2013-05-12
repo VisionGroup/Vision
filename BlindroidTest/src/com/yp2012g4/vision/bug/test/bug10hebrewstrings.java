@@ -11,11 +11,9 @@ import junit.framework.TestCase;
  * 
  */
 public class bug10hebrewstrings extends TestCase {
-
-    /*
-     * Reproducing the bug: 1. Run the application 2. Go to SMS reader. 3. Press
-     * an SMS which is written in hebrew - should say "Hebrew" or read the
-     * hebrew text.
-     */
-
+  /*
+   * Reproducing the bug: 1. Run the application 2. Go to SMS reader. 3. Press
+   * an SMS which is written in hebrew - should say "Hebrew" or read the hebrew
+   * text.
+   */
 }

@@ -30,8 +30,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     super("com.yp2012g4.vision", MainActivity.class);
   }
   
-  @Override
-  protected void setUp() throws Exception {
+  @Override protected void setUp() throws Exception {
     super.setUp();
     activity = getActivity();
     solo = new Solo(getInstrumentation(), activity);
@@ -94,8 +93,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     solo.finishOpenedActivities();
   }
   
-  @Override
-  protected void tearDown() throws Exception {
+  @Override protected void tearDown() throws Exception {
     solo.finishOpenedActivities();
     super.tearDown();
   }

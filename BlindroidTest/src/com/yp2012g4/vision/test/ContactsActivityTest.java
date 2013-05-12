@@ -16,120 +16,93 @@ import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.tools.CallUtils;
 
-public class ContactsActivityTest extends
-	ActivityInstrumentationTestCase2<ContactsActivity> {
-
-    private Solo solo;
-    private Activity activity;
-
-    public ContactsActivityTest() {
-	super("com.yp2012g4.vision.contacts", ContactsActivity.class);
+public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
+  private Solo solo;
+  private Activity activity;
+  
+  public ContactsActivityTest() {
+    super("com.yp2012g4.vision.contacts", ContactsActivity.class);
+  }
+  
+  @Override protected void setUp() throws Exception {
+    super.setUp();
+    final Intent i = new Intent();
+    i.putExtra(ContactsActivity.LIST_TYPE, "test");
+    setActivityIntent(i);
+    activity = getActivity();
+    solo = new Solo(getInstrumentation(), activity);
+  }
+  
+  /**
+   * Test the Contacts activity functionality
+   */
+  public void testContactActivity() {
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    // check intent
+    final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
+    String listType = "";
+    if (extras != null)
+      try {
+        listType = extras.getString(ContactsActivity.LIST_TYPE);
+      } catch (final Exception e) {
+        listType = "";
+      }
+    assertEquals("test", listType);
+    // check info
+    final TalkingButton name = (TalkingButton) solo.getView(R.id.contact_name);
+    final TalkingButton phone = (TalkingButton) solo.getView(R.id.contact_phone);
+    final ArrayList<ContactType> ac = ContactManager.getTestContacts();
+    assertEquals(ac.get(0).getContactName(), name.getText());
+    assertEquals(ac.get(0).getPhone(), phone.getText());
+    solo.clickOnView(solo.getView(R.id.contact_next));
+    assertEquals(ac.get(1).getContactName(), name.getText());
+    assertEquals(ac.get(1).getPhone(), phone.getText());
+    solo.clickOnView(solo.getView(R.id.contact_next));
+    assertEquals(ac.get(1).getContactName(), name.getText());
+    assertEquals(ac.get(1).getPhone(), phone.getText());
+    solo.clickOnView(solo.getView(R.id.contact_prev));
+    assertEquals(ac.get(0).getContactName(), name.getText());
+    assertEquals(ac.get(0).getPhone(), phone.getText());
+    solo.clickOnView(solo.getView(R.id.contact_prev));
+    assertEquals(ac.get(0).getContactName(), name.getText());
+    assertEquals(ac.get(0).getPhone(), phone.getText());
+    solo.clickOnView(solo.getView(R.id.contact_next));
+    solo.clickOnView(solo.getView(R.id.contacts_sms));
+    // test passing correct number to Quick SMS activity
+    solo.assertCurrentActivity("wrong activity", QuickSMSActivity.class);
+    final Bundle extras2 = solo.getCurrentActivity().getIntent().getExtras();
+    String smsExtra = "";
+    if (extras2 != null)
+      try {
+        smsExtra = extras2.getString(CallUtils.NUMBER_KEY);
+      } catch (final Exception e) {
+        smsExtra = "";
+      }
+    assertEquals(ac.get(1).getPhone(), smsExtra);
+  }
+  
+  /**
+   * Test contact manager
+   */
+  public void testManager() {
+    final ContactManager cm = new ContactManager(activity.getApplicationContext());
+    // should not contain empty contacts or phone numbers.
+    final ArrayList<ContactType> allContacts = cm.getAllContacts();
+    for (final ContactType contactType : allContacts) {
+      assertTrue(contactType.getContactName() != "");
+      if (contactType.getPhone() != "")
+        assertEquals(contactType.getContactName(), cm.getNameFromPhone(contactType.getPhone()));
+      // assertTrue(contactType.getPhone() != "");
+      if (contactType.getPhone() != "")
+        assertEquals(contactType.getPhone(), cm.lookupPhoneNumbers(contactType.getLookUpKey()));
     }
-
-    @Override
-    protected void setUp() throws Exception {
-	super.setUp();
-
-	final Intent i = new Intent();
-	i.putExtra(ContactsActivity.LIST_TYPE, "test");
-	setActivityIntent(i);
-	activity = getActivity();
-	solo = new Solo(getInstrumentation(), activity);
-
+    // should not contain empty contacts or phone numbers.
+    final ArrayList<ContactType> favoritContacts = cm.getFavoriteContacts();
+    for (final ContactType contactType : favoritContacts) {
+      assertTrue(contactType.getContactName() != "");
+      assertEquals(contactType.getContactName(), cm.getNameFromPhone(contactType.getPhone()));
+      assertTrue(contactType.getPhone() != "");
+      assertEquals(contactType.getPhone(), cm.lookupPhoneNumbers(contactType.getLookUpKey()));
     }
-
-    /**
-     * Test the Contacts activity functionality
-     */
-    public void testContactActivity() {
-	solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
-	// check intent
-	final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
-	String listType = "";
-	if (extras != null)
-	    try {
-		listType = extras.getString(ContactsActivity.LIST_TYPE);
-	    } catch (final Exception e) {
-		listType = "";
-	    }
-	assertEquals("test", listType);
-
-	// check info
-	final TalkingButton name = (TalkingButton) solo
-		.getView(R.id.contact_name);
-	final TalkingButton phone = (TalkingButton) solo
-		.getView(R.id.contact_phone);
-
-	final ArrayList<ContactType> ac = ContactManager.getTestContacts();
-
-	assertEquals(ac.get(0).getContactName(), name.getText());
-	assertEquals(ac.get(0).getPhone(), phone.getText());
-
-	solo.clickOnView(solo.getView(R.id.contact_next));
-	assertEquals(ac.get(1).getContactName(), name.getText());
-	assertEquals(ac.get(1).getPhone(), phone.getText());
-
-	solo.clickOnView(solo.getView(R.id.contact_next));
-	assertEquals(ac.get(1).getContactName(), name.getText());
-	assertEquals(ac.get(1).getPhone(), phone.getText());
-
-	solo.clickOnView(solo.getView(R.id.contact_prev));
-	assertEquals(ac.get(0).getContactName(), name.getText());
-	assertEquals(ac.get(0).getPhone(), phone.getText());
-
-	solo.clickOnView(solo.getView(R.id.contact_prev));
-	assertEquals(ac.get(0).getContactName(), name.getText());
-	assertEquals(ac.get(0).getPhone(), phone.getText());
-
-	solo.clickOnView(solo.getView(R.id.contact_next));
-	solo.clickOnView(solo.getView(R.id.contacts_sms));
-
-	// test passing correct number to Quick SMS activity
-	solo.assertCurrentActivity("wrong activity", QuickSMSActivity.class);
-	final Bundle extras2 = solo.getCurrentActivity().getIntent()
-		.getExtras();
-	String smsExtra = "";
-	if (extras2 != null)
-	    try {
-		smsExtra = extras2.getString(CallUtils.NUMBER_KEY);
-	    } catch (final Exception e) {
-		smsExtra = "";
-	    }
-	assertEquals(ac.get(1).getPhone(), smsExtra);
-    }
-
-    /**
-     * Test contact manager
-     */
-    public void testManager() {
-	final ContactManager cm = new ContactManager(
-		activity.getApplicationContext());
-
-	// should not contain empty contacts or phone numbers.
-	final ArrayList<ContactType> allContacts = cm.getAllContacts();
-	for (final ContactType contactType : allContacts) {
-	    assertTrue(contactType.getContactName() != "");
-	    if (contactType.getPhone() != "")
-		assertEquals(contactType.getContactName(),
-			cm.getNameFromPhone(contactType.getPhone()));
-	    // assertTrue(contactType.getPhone() != "");
-	    if (contactType.getPhone() != "")
-		assertEquals(contactType.getPhone(),
-			cm.lookupPhoneNumbers(contactType.getLookUpKey()));
-
-	}
-
-	// should not contain empty contacts or phone numbers.
-	final ArrayList<ContactType> favoritContacts = cm.getFavoriteContacts();
-	for (final ContactType contactType : favoritContacts) {
-	    assertTrue(contactType.getContactName() != "");
-	    assertEquals(contactType.getContactName(),
-		    cm.getNameFromPhone(contactType.getPhone()));
-	    assertTrue(contactType.getPhone() != "");
-	    assertEquals(contactType.getPhone(),
-		    cm.lookupPhoneNumbers(contactType.getLookUpKey()));
-	}
-
-    }
-
+  }
 }

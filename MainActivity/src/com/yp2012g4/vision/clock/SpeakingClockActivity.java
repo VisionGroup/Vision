@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SpeakingClockActivity extends VisionActivity {
@@ -79,7 +80,7 @@ public class SpeakingClockActivity extends VisionActivity {
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
     TalkingButton dateButton = getTalkingButton(R.id.DateButton);
     dateButton.setText(getDateFormat());
-    new Timer().schedule(new MyTimerTask(), 100, 1000);
+    new Timer().schedule(new MyTimerTask(), 100, VisionApplication.DEFUALT_DELAY_TIME);
   }
   
   /***

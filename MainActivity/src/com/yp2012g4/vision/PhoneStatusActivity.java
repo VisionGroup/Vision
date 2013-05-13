@@ -73,9 +73,7 @@ public class PhoneStatusActivity extends VisionActivity {
         // detected.
       }
     speakOutAsync(s);
-    while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    _tts.waitUntilFinishTalking();
   }
   
   @Override public int getViewId() {

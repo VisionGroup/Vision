@@ -82,9 +82,7 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    _tts.waitUntilFinishTalking();
     if (!hasFocus)
       return;
     VoiceNotify();
@@ -113,9 +111,7 @@ public class MainActivity extends VisionActivity {
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
     speakOutAsync(s);
-    while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    _tts.waitUntilFinishTalking();
   }
   
   @Override public void onBackPressed() {

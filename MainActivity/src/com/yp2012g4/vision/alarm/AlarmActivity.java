@@ -22,6 +22,8 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class AlarmActivity extends VisionActivity {
+  public static final int USER_PRESSED_HOME = -2;
+  public static final int USER_PRESSED_BACK = -1;
   public static PendingIntent pendingIntent;
   public static boolean alarmIsSet = false;
   public int lastHour = -1;
@@ -48,16 +50,14 @@ public class AlarmActivity extends VisionActivity {
   }
   
   /**
-   * This will be called when the result from the set clock activity returnes
+   * This will be called when the result from the set clock activity returns
    */
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == REQUEST_CODE) {
-      // if user pressed back
-      if (-1 == resultCode)
+      if (USER_PRESSED_BACK == resultCode)
         return;
-      // if user pressed home
-      if (-2 == resultCode) {
+      if (USER_PRESSED_HOME == resultCode) {
         _mHandler.postDelayed(mLaunchTask, 10);
         return;
       }
@@ -136,9 +136,7 @@ public class AlarmActivity extends VisionActivity {
   public void setAlarm() {
     if (alarmTime == null) {
       speakOutAsync(getString(R.string.you_need_to_set_ther_alarm_first));
-      while (_tts.isSpeaking() == true) {
-        // Wait for message to finish playing and then finish the activity
-      }
+      _tts.waitUntilFinishTalking();
       return;
     }
     Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);
@@ -152,8 +150,6 @@ public class AlarmActivity extends VisionActivity {
     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
     speakOutAsync(getString(R.string.alarm_is_activated));
-    while (_tts.isSpeaking() == true) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    _tts.waitUntilFinishTalking();
   }
 }

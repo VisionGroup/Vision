@@ -55,7 +55,7 @@ public class IncomingCallActivity extends VisionActivity {
         break;
       case R.id.back_button:
         speakOutAsync(getString(R.string.previous_screen));
-        _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
+        _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
         break;
       default:
         break;

@@ -24,10 +24,10 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 
 public class VisionApplication extends Application {
-  public static final float SMALL = 20;
-  public static final float NORMAL = 25;
-  public static final float LARGE = 30;
-  public static final long DELAY = 1000;
+  public static final float SMALL_FONT_SIZE = 20;
+  public static final float NORMAL_FONT_SIZE = 25;
+  public static final float LARGE_FONT_SIZE = 30;
+  public static final long DEFUALT_DELAY_TIME = 1000;
   private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
   public static String _textSize = "NORMAL";
   private static String _textColor = "WHITE";
@@ -190,37 +190,20 @@ public class VisionApplication extends Application {
    */
   public static void setThemeToActivity(Activity act) {
     loadPrefs(act);
-    if (_textSize.equals("LARGE")) {
-      if (_backgroundColor.equals("BLUE"))
-        act.setTheme(R.style.Theme_LargeWhiteBlue);
-      else if (_backgroundColor.equals("GREEN"))
-        act.setTheme(R.style.Theme_LargeWhiteGreen);
-      else if (_backgroundColor.equals("RED"))
-        act.setTheme(R.style.Theme_LargeWhiteRed);
-      else if (_textColor.equals("WHITE"))
-        act.setTheme(R.style.Theme_LargeWhiteBlack);
-      else if (_textColor.equals("BLUE"))
-        act.setTheme(R.style.Theme_LargeBlueBlack);
-      else if (_textColor.equals("RED"))
-        act.setTheme(R.style.Theme_LargeRedBlack);
-      else
-        act.setTheme(R.style.Theme_LargeGreenBlack);
-    } else if (_textSize.equals("SMALL"))
-      if (_backgroundColor.equals("BLUE"))
-        act.setTheme(R.style.Theme_SmallWhiteBlue);
-      else if (_backgroundColor.equals("GREEN"))
-        act.setTheme(R.style.Theme_SmallWhiteGreen);
-      else if (_backgroundColor.equals("RED"))
-        act.setTheme(R.style.Theme_SmallWhiteRed);
-      else if (_textColor.equals("WHITE"))
-        act.setTheme(R.style.Theme_SmallWhiteBlack);
-      else if (_textColor.equals("BLUE"))
-        act.setTheme(R.style.Theme_SmallBlueBlack);
-      else if (_textColor.equals("RED"))
-        act.setTheme(R.style.Theme_SmallRedBlack);
-      else
-        act.setTheme(R.style.Theme_SmallGreenBlack);
-    else if (_backgroundColor.equals("BLUE"))
+    if (_textSize.equals("LARGE"))
+      setLargeTheme(act);
+    else if (_textSize.equals("SMALL"))
+      setSmallTheme(act);
+    else
+      // NORMAL
+      setNormalTheme(act);
+  }
+  
+  /**
+   * @param act
+   */
+  private static void setNormalTheme(Activity act) {
+    if (_backgroundColor.equals("BLUE"))
       act.setTheme(R.style.Theme_NormalWhiteBlue);
     else if (_backgroundColor.equals("GREEN"))
       act.setTheme(R.style.Theme_NormalWhiteGreen);
@@ -234,5 +217,45 @@ public class VisionApplication extends Application {
       act.setTheme(R.style.Theme_NormalRedBlack);
     else
       act.setTheme(R.style.Theme_NormalGreenBlack);
+  }
+  
+  /**
+   * @param act
+   */
+  private static void setSmallTheme(Activity act) {
+    if (_backgroundColor.equals("BLUE"))
+      act.setTheme(R.style.Theme_SmallWhiteBlue);
+    else if (_backgroundColor.equals("GREEN"))
+      act.setTheme(R.style.Theme_SmallWhiteGreen);
+    else if (_backgroundColor.equals("RED"))
+      act.setTheme(R.style.Theme_SmallWhiteRed);
+    else if (_textColor.equals("WHITE"))
+      act.setTheme(R.style.Theme_SmallWhiteBlack);
+    else if (_textColor.equals("BLUE"))
+      act.setTheme(R.style.Theme_SmallBlueBlack);
+    else if (_textColor.equals("RED"))
+      act.setTheme(R.style.Theme_SmallRedBlack);
+    else
+      act.setTheme(R.style.Theme_SmallGreenBlack);
+  }
+  
+  /**
+   * @param act
+   */
+  private static void setLargeTheme(Activity act) {
+    if (_backgroundColor.equals("BLUE"))
+      act.setTheme(R.style.Theme_LargeWhiteBlue);
+    else if (_backgroundColor.equals("GREEN"))
+      act.setTheme(R.style.Theme_LargeWhiteGreen);
+    else if (_backgroundColor.equals("RED"))
+      act.setTheme(R.style.Theme_LargeWhiteRed);
+    else if (_textColor.equals("WHITE"))
+      act.setTheme(R.style.Theme_LargeWhiteBlack);
+    else if (_textColor.equals("BLUE"))
+      act.setTheme(R.style.Theme_LargeBlueBlack);
+    else if (_textColor.equals("RED"))
+      act.setTheme(R.style.Theme_LargeRedBlack);
+    else
+      act.setTheme(R.style.Theme_LargeGreenBlack);
   }
 }

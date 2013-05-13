@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.alarm.AlarmActivity;
 import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -33,15 +34,14 @@ public class SetClockActivity extends VisionActivity {
    * In order that the back key will be the same as the control bar's back
    */
   @Override public void onBackPressed() {
-    setResult(-1);
-    _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
+    setResult(AlarmActivity.USER_PRESSED_BACK);
+    _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
   }
   
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_set_clock);
     init(0, getString(R.string.title_activity_set_clock), getString(R.string.set_clock_help));
-//    gestureScanner = new GestureDetector(this);
     Bundle b = getIntent().getExtras();
     type = b.getInt("type");
     cal = Calendar.getInstance();
@@ -80,7 +80,7 @@ public class SetClockActivity extends VisionActivity {
     View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.back_button:
-        setResult(-1);
+        setResult(AlarmActivity.USER_PRESSED_BACK);
         break;
       default:
         int result = Integer.parseInt(tvNum.getText().toString());

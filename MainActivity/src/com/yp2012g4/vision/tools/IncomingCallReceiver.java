@@ -21,7 +21,7 @@ import com.yp2012g4.vision.telephony.IncomingCallActivity;
 public class IncomingCallReceiver extends BroadcastReceiver {
   private final static String TAG = "vision:IncomingCallReceiver";
   
-  @Override public void onReceive(Context c, Intent i) {
+  @Override public void onReceive(final Context c, final Intent i) {
     final Bundle bundle = i.getExtras();
     if (null == bundle)
       return;
@@ -42,7 +42,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     }
   }
   
-  @SuppressWarnings({ "static-method" }) private void processIncomingCall(Context context, String phonenumber) {
+  @SuppressWarnings({ "static-method" }) private void processIncomingCall(final Context context, final String phonenumber) {
     try {
       Log.d(TAG, "Creating IncomingCAllActivity intent");
       final Intent i = new Intent(context, IncomingCallActivity.class);

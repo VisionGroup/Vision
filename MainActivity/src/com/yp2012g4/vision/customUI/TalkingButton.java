@@ -24,7 +24,7 @@ public class TalkingButton extends Button implements Runnable {
   /**
    * c'tor
    */
-  public TalkingButton(Context c, AttributeSet as) {
+  public TalkingButton(final Context c, final AttributeSet as) {
     super(c, as);
     final TypedArray a = c.obtainStyledAttributes(as, R.styleable.TalkingButton, 0, 0);
     _readText = a.getString(R.styleable.TalkingButton_readText);
@@ -45,7 +45,7 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param readText
    */
-  public void setReadText(String readText) {
+  public void setReadText(final String readText) {
     _readText = readText;
   }
   
@@ -63,11 +63,10 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param s
    */
-  public void setReadToolTip(String s) {
+  public void setReadToolTip(final String s) {
     _readToolTip = s;
   }
   
-  // TODO: Check How to connect to foreground and background color settings ???
   /**
    * Returns the value linked with the preference represented by the button.
    * 
@@ -82,7 +81,7 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param s
    */
-  public void setPrefsValue(String s) {
+  public void setPrefsValue(final String s) {
     _prefsValue = s;
   }
   
@@ -91,7 +90,7 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param r
    */
-  public void setRun(Runnable r) {
+  public void setRun(final Runnable r) {
     _run = r;
   }
   

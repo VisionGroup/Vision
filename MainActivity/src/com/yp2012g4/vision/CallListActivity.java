@@ -27,7 +27,7 @@ public class CallListActivity extends VisionActivity {
   private static String TAG = "CallListActivity";
   CallAdapter adapter;
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_call_list);
     init(0, getString(R.string.call_list_screen), getString(R.string.call_list_screen));
@@ -40,7 +40,7 @@ public class CallListActivity extends VisionActivity {
       _tts.speak(getString(R.string.noCalls));
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     final CallType currCall = getCurrentCall();
@@ -54,23 +54,28 @@ public class CallListActivity extends VisionActivity {
         startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.getNumber())));
         break;
       case R.id.calllist_remove:
-        // first we remove the SMS from the phone DB
-        CallManager.DeleteCallLogByNumber(this, currCall.getNumber());
-        // then we remove the SMS from the displayed list
-        final int callId = (int) listView.getDisplayedItemIds()[0];
-        adapter.removeItemFromList(callId);
-        listView.setAdapter(adapter);
-        listView.prevPage();
-        speakOutAsync(getString(R.string.delete_call));
-        vibrate(150);
+        removeFromCallList(currCall);
         break;
       default:
         break;
     }
-    // SmsManager.markMessageRead(this,
-    // currCall.getAddress(),currCall.getBody());
     // TODO: Add mark call as seen.
     return false;
+  }
+  
+  /**
+   * @param currCall
+   */
+  private void removeFromCallList(final CallType currCall) {
+    // first we remove the SMS from the phone DB
+    CallManager.DeleteCallLogByNumber(this, currCall.getNumber());
+    // then we remove the SMS from the displayed list
+    final int callId = (int) listView.getDisplayedItemIds()[0];
+    adapter.removeItemFromList(callId);
+    listView.setAdapter(adapter);
+    listView.prevPage();
+    speakOutAsync(getString(R.string.delete_call));
+    vibrate(VIBRATE_DURATION);
   }
   
   public CallType getCurrentCall() {
@@ -82,7 +87,7 @@ public class CallListActivity extends VisionActivity {
     return R.id.CallListActivity;
   }
   
-  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
     listView.nextPage();
     return super.onFling(e1, e2, velocityX, velocityY);
   }

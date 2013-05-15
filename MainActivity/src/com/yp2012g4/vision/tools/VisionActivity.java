@@ -1,11 +1,12 @@
 package com.yp2012g4.vision.tools;
 
-import android.content.Context;
+import java.util.Map;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
@@ -30,7 +31,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
-  private Vibrator vibrator = null;
   
   public int getIcon() {
     return _icon;
@@ -54,7 +54,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * @param toolTip
    *          The tool user manual
    */
-  public void init(int icon, String name, String toolTip) {
+  public void init(final int icon, final String name, final String toolTip) {
     _icon = icon;
     _name = name;
     _toolTip = toolTip;
@@ -63,10 +63,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
   /**
    * Dealing control bar on clicks
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     final Intent _intent = new Intent(this, MainActivity.class);
-    View tempLast = last_button_view;
-    View button = getButtonByMode();
+    final View tempLast = last_button_view;
+    final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.back_button:
         _navigationBar = true;
@@ -98,9 +98,8 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return true;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // hide title-bar of application. Must be before setting the layout
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     // hide status-bar of Android. Could also be done later
@@ -119,14 +118,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
    * @param numOfLayouts
    *          - the number of rows in the activity
    */
-  public void adjustLayoutSize(int numOfLayouts) {
-    Display _display = getWindowManager().getDefaultDisplay();
+  public void adjustLayoutSize(final int numOfLayouts) {
+    final Display _display = getWindowManager().getDefaultDisplay();
     final float _density = getResources().getDisplayMetrics().density;
     final int _height = _display.getHeight() - (int) (60 * _density);
     for (int i = 1; i <= numOfLayouts; i++) {
       final int _resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
-      LinearLayout _l = (LinearLayout) findViewById(_resID);
-      LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(_l.getLayoutParams());
+      final LinearLayout _l = (LinearLayout) findViewById(_resID);
+      final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(_l.getLayoutParams());
       params.height = _height / numOfLayouts;
       _l.setLayoutParams(params);
     }
@@ -138,23 +137,13 @@ public abstract class VisionActivity extends VisionGestureDetector {
    */
   public View getButtonByMode() {
     View _returnButton = curr_view;
-    SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    String buttonMode = _sp.getString("BUTTON MODE", "regular");
+    final SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final String buttonMode = _sp.getString("BUTTON MODE", "regular");
     if (buttonMode.equals("sticky") && last_button_view != null) {
       _returnButton = last_button_view;
       last_button_view = null;
     }
     return _returnButton;
-  }
-  
-  /**
-   * Make the phone vibrate.
-   * 
-   * @param milliseconds
-   *          The time to vibrate.
-   */
-  protected void vibrate(long milliseconds) {
-    vibrator.vibrate(milliseconds);
   }
   
   /**
@@ -164,7 +153,16 @@ public abstract class VisionActivity extends VisionGestureDetector {
    *          The id of the button
    * @return The talking button
    */
-  public TalkingButton getTalkingButton(int id) {
+  public TalkingButton getTalkingButton(final int id) {
     return (TalkingButton) findViewById(id);
+  }
+  
+  /**
+   * @param e
+   * @param entry
+   * @return
+   */
+  public static boolean checkIfButtonPressed(final MotionEvent e, final Map.Entry<View, Rect> entry) {
+    return isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY());
   }
 }

@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class AlarmService extends Service {
   static public MediaPlayer mp = null;
   
-  @Override public IBinder onBind(Intent intent) {
+  @Override public IBinder onBind(final Intent intent) {
     Toast.makeText(AlarmService.this, "onBind", Toast.LENGTH_LONG).show();
     return null;
   }
@@ -25,14 +25,14 @@ public class AlarmService extends Service {
   /***
    * this method is called when a scheduled Alarm time arrives
    */
-  @Override public void onStart(Intent intent, int startId) {
+  @Override public void onStart(final Intent intent, final int startId) {
     super.onStart(intent, startId);
-    Calendar maxTime = Calendar.getInstance();
+    final Calendar maxTime = Calendar.getInstance();
     maxTime.add(Calendar.MINUTE, 1);
-    Calendar minTime = Calendar.getInstance();
+    final Calendar minTime = Calendar.getInstance();
     minTime.add(Calendar.MINUTE, -1);
     if (AlarmActivity.alarmTime.before(maxTime) && AlarmActivity.alarmTime.after(minTime)) {
-      Intent dialogIntent = new Intent(this, AlarmPopup.class);
+      final Intent dialogIntent = new Intent(this, AlarmPopup.class);
       dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       getApplication().startActivity(dialogIntent);
       AlarmActivity.alarmIsSet = false;

@@ -30,18 +30,17 @@ public class CallUtils {
   private com.android.internal.telephony.ITelephony telephonyService;
   private AudioManager _am;
   
-  // ListenToPhoneState listener;
   /**
    * Enables the Speakerphone
    * 
    * @param context
    */
-  public static void enableSpeakerPhone(Context c) {
+  public static void enableSpeakerPhone(final Context c) {
     final AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
     audioManager.setSpeakerphoneOn(true);
   }
   
-  public CallUtils(Context c) {
+  public CallUtils(final Context c) {
     try {
       final TelephonyManager tm = (TelephonyManager) c.getSystemService(Context.TELEPHONY_SERVICE);
       final Class<?> cls = Class.forName(tm.getClass().getName());
@@ -60,8 +59,8 @@ public class CallUtils {
    * 
    * @param context
    */
-  public static void answerCall(Context c) {
-    String recPerm = "android.permission.CALL_PRIVILEGED";
+  public static void answerCall(final Context c) {
+    final String recPerm = "android.permission.CALL_PRIVILEGED";
     final Intent buttonDown = new Intent(Intent.ACTION_MEDIA_BUTTON);
     buttonDown.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_HEADSETHOOK));
     c.sendOrderedBroadcast(buttonDown, recPerm);

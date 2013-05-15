@@ -11,12 +11,12 @@ import android.view.Menu;
  *          Activity for voice input.
  */
 public class ActivityVoiceInput extends Activity {
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_activity_voice_input);
   }
   
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override public boolean onCreateOptionsMenu(final Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.activity_activity_voice_input, menu);
     return true;

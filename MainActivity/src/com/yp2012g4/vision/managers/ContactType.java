@@ -21,9 +21,9 @@ public class ContactType {
    * @param cur
    * @param c
    */
-  public ContactType(Cursor cur, Context c) {
+  public ContactType(final Cursor cur, final Context c) {
     _contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-    ContactManager cm = new ContactManager(c);
+    final ContactManager cm = new ContactManager(c);
     _lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
     _phone = cm.lookupPhoneNumbers(_lookUpKey);
   }
@@ -36,7 +36,7 @@ public class ContactType {
    * @param cs
    *          contact name string
    */
-  public ContactType(String ps, String cs) {
+  public ContactType(final String ps, final String cs) {
     _phone = ps;
     _contactName = cs;
   }

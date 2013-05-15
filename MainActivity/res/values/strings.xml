@@ -143,6 +143,8 @@
     <string name="speaking_clock_help">You can press one of 2 buttons. \n1) to hear the time. \n2) to hear the date.</string>
     <string name="ClockTitle">Speaking clock</string>
     <string name="date_button">Date</string>
+    <string name="hourFormat">%1$d and %2$d minutes %3$s.</string>
+    
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">Contacts screen.</string>
@@ -152,10 +154,13 @@
 
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">Contacts menu</string>
-    <string name="contacts_help">You can press one of three buttons. \n1) to go to your Favorite contacts screen. \n2)to go to your full contacts screen. \n3) to go to the dialer screen.</string>
+    <string name="contacts_help">You can press one of three buttons. \n1) to go to your favorite contacts screen. \n2)to go to your full contacts screen. \n3) to go to the dialer screen.</string>
     <string name="contact_list_screen">Contact list screen</string>
+    <string name="favorite_list_screen">favorite list screen</string>
+    <string name="send_quick_sms_message">send quick SMS to: </string>
+     <string name="call_message">call :  </string>
     <string name="Dialer">Dialer</string>
-    <string name="favorit_contacts_list">Favorite contacts</string>
+    <string name="favorit_contacts_list">favorite contacts</string>
     <string name="contactsList">contacts</string>
 
     <!-- ColorSettingsActivity -->

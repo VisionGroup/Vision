@@ -18,7 +18,7 @@ public class CallType {
   private final Date _mDate;
   private String _mNumberType = "";
   
-  public CallType(String number, String type, String name, Date date, String numberType) {
+  public CallType(final String number, final String type, final String name, final Date date, final String numberType) {
     _mNumber = number;
     _mType = type;
     _mName = name;
@@ -32,24 +32,24 @@ public class CallType {
    * @param cur
    * @param c
    */
-  public CallType(Cursor cur) {
+  public CallType(final Cursor cur) {
     _mNumber = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-    String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
-    long m = Long.parseLong(mili);
+    final String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
+    final long m = Long.parseLong(mili);
     _mDate = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m));
     try {
       _mName = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
-    } catch (Exception e) {
+    } catch (final Exception e) {
       _mName = "";
     }
     try {
       _mNumberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));
-    } catch (Exception e) {
+    } catch (final Exception e) {
       _mNumberType = "";
     }
     try {
       _mType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE));
-    } catch (Exception e) {
+    } catch (final Exception e) {
       _mType = "";
     }
   }

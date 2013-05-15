@@ -40,7 +40,9 @@ import com.yp2012g4.vision.settings.VisionApplication;
  * @version 1.1
  */
 public abstract class VisionGestureDetector extends Activity implements OnClickListener, OnGestureListener, OnTouchListener {
+  private static final int VIBRATE_SHORT_DURATION = 20;
   private static final String TAG = "vision:VisionGestureDetector";
+  public static final long VIBRATE_DURATION = 150;
   /**
    * for multitouch gesture detection
    */
@@ -48,6 +50,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private long _mFirstDownTime = 0;
   private boolean _mSeparateTouches = false;
   private byte _mTwoFingerTapCount = 0;
+  private Vibrator vibrator = null;
   /**
    * Stores the dimensions of a button
    */
@@ -93,29 +96,29 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   // ==================================================================
   // ===========================METHODS================================
   // ==================================================================
-  @Override public void onClick(View v) {
+  @Override public void onClick(final View v) {
     // TODO Auto-generated method stub
   }
   
-  @Override public boolean onDown(MotionEvent e) {
+  @Override public boolean onDown(final MotionEvent e) {
     Log.i(TAG, "onDown");
     return true;
   }
   
-  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
     Log.i(TAG, "onFling");
     return false;
   }
   
-  @Override public void onLongPress(MotionEvent e) {
+  @Override public void onLongPress(final MotionEvent e) {
     Log.i(TAG, "onLongPress");
   }
   
-  @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+  @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
     return false;
   }
   
-  @Override public void onShowPress(MotionEvent e) {
+  @Override public void onShowPress(final MotionEvent e) {
     Log.i(TAG, "onShowPress");
     if (isButtonType(last_button_view)) {
       VisionApplication.restoreColors(last_button_view, this);
@@ -124,15 +127,15 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     }
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     Log.i(TAG, "onSingleTapUp");
     return false;
   }
   
-  @Override public boolean onTouch(View v, MotionEvent event) {
+  @Override public boolean onTouch(final View v, final MotionEvent event) {
     final int action = event.getAction() & MotionEvent.ACTION_MASK;
-    SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    String buttonMode = _sp.getString("BUTTON MODE", "regular");
+    final SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final String buttonMode = _sp.getString("BUTTON MODE", "regular");
     switch (action) {
       case MotionEvent.ACTION_DOWN:
         Log.i("MyLog", "onTouch: ACTION_DOWN");
@@ -169,7 +172,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * 
    * @param curr
    */
-  private void changeButton(View curr) {
+  private void changeButton(final View curr) {
     VisionApplication.restoreColors(last_button_view, this);
     last_button_view = curr;
     hapticFeedback(last_button_view);
@@ -180,7 +183,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * 
    * @param time
    */
-  private void reset(long time) {
+  private void reset(final long time) {
     _mFirstDownTime = time;
     _mSeparateTouches = false;
     _mTwoFingerTapCount = 0;
@@ -192,7 +195,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @param event
    * @return
    */
-  public boolean onTwoFingerDoubleTap(MotionEvent event) {
+  public boolean onTwoFingerDoubleTap(final MotionEvent event) {
     switch (event.getActionMasked()) {
       case MotionEvent.ACTION_DOWN:
         Log.i(TAG, "onTwoFingerDoubleTap:ACTION_DOWN");
@@ -243,7 +246,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @param hasFocus
    *          indicates whether a window has the focus
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     final ViewGroup _mainView = (ViewGroup) findViewById(getViewId());
     getButtonsPosition(_mainView);
@@ -273,7 +276,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          the view to to be checked against a button type
    * @return true if the given view has a button type
    */
-  protected static boolean isButtonType(View v) {
+  protected static boolean isButtonType(final View v) {
     return v instanceof TalkingButton || v instanceof TalkingImageButton;
   }
   
@@ -286,7 +289,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          button)
    * @return the button text to be read
    */
-  public static String textToRead(View v) {
+  public static String textToRead(final View v) {
     return v instanceof TalkingButton ? ((TalkingButton) v).getReadText() : ((TalkingImageButton) v).getReadText();
   }
   
@@ -297,9 +300,9 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          - last view being touched
    * 
    */
-  public void onActionUp(View v) {/*
-                                   * to be overridden
-                                   */
+  public void onActionUp(final View v) {/*
+                                         * to be overridden
+                                         */
   }
   
   /**
@@ -308,7 +311,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @param s
    *          the string to speak out
    */
-  public void speakOutAsync(String s) {
+  public void speakOutAsync(final String s) {
     if (_tts == null) {
       Log.e(TAG, "TTS is null");
       return;
@@ -317,7 +320,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _tts.speak(s);
   }
   
-  public void speakOutSync(String s) {
+  public void speakOutSync(final String s) {
     speakOutAsync(s);
     _tts.waitUntilFinishTalking();
   }
@@ -327,7 +330,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     super.onDestroy();
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     _tts = new TTS(this);
     if (_tts.isRuning())
       speakOutAsync("start");
@@ -338,6 +341,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _mHandler = new Handler();
     _gestureDetector = new GestureDetector(this);
     _navigationBar = false;
+    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
   }
   
   /**
@@ -347,7 +351,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @param v
    *          the view from which to get buttons positions
    */
-  public void getButtonsPosition(View v) {
+  public void getButtonsPosition(final View v) {
     _rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
     if (v instanceof TimePicker || v instanceof AnalogClock)
       return; // ignoring these view types
@@ -359,7 +363,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     view_to_rect.put(v, _rect);
     for (int i = 0; i < vg.getChildCount(); i++)
       getButtonsPosition(vg.getChildAt(i));
-    return;
   }
   
   /**
@@ -371,7 +374,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          position on screen
    * @return exact left position on screen
    */
-  public static int getRelativeLeft(View myView) {
+  public static int getRelativeLeft(final View myView) {
     if (myView.getParent() == myView.getRootView())
       return myView.getLeft();
     return myView.getLeft() + getRelativeLeft((View) myView.getParent());
@@ -386,7 +389,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          position on screen
    * @return exact top position on screen
    */
-  public static int getRelativeTop(View myView) {
+  public static int getRelativeTop(final View myView) {
     if (myView.getParent() == myView.getRootView())
       return myView.getTop();
     return myView.getTop() + getRelativeTop((View) myView.getParent());
@@ -402,7 +405,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return the view (button) for which the given coordinates belongs to. Null
    *         - if the coordinates are out of any button
    */
-  protected View getView(float x, float y) {
+  protected View getView(final float x, final float y) {
     for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
       if (entry.getValue().contains((int) x, (int) y)) {
         curr_view = entry.getKey();
@@ -413,11 +416,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return null;
   }
   
-  // @Override
-  // public void onInit(int status) {
-  // if (!_t.isRuning())
-  // _t = new TTS(this, this);
-  // }
   /**
    * Finishes the activity after some delay
    */
@@ -427,23 +425,23 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     }
   };
   
-  @Override public void startActivity(Intent intent) {
-    vibrate(200);
+  @Override public void startActivity(final Intent intent) {
+    vibrate(VIBRATE_DURATION);
     super.startActivity(intent);
   }
   
   /**
-   * vibration during touch.
+   * Make the phone vibrate.
    * 
-   * @param i
+   * @param milliseconds
+   *          The time to vibrate.
    */
-  protected void vibrate(int duration) {
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    vb.vibrate(duration);
+  protected void vibrate(final long milliseconds) {
+    vibrator.vibrate(milliseconds);
   }
   
-  protected void hapticFeedback(View v) {
+  protected void hapticFeedback(final View v) {
     VisionApplication.visualFeedback(v, this);
-    vibrate(20);
+    vibrate(VIBRATE_SHORT_DURATION);
   }
 }

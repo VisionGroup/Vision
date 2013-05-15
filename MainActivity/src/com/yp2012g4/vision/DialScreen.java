@@ -45,13 +45,13 @@ public class DialScreen extends VisionActivity {
     return R.id.DialScreen;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     super.onSingleTapUp(e);
     if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
       return _navigationBar = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
-      for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
+      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
+        if (checkIfButtonPressed(e, entry))
           speakOutAsync(textToRead(entry.getKey()));
     return true;
   }
@@ -62,37 +62,29 @@ public class DialScreen extends VisionActivity {
    * @param v
    *          - the last button pressed before lifting the finger
    */
-  @Override public void onActionUp(View v) {
-    int buttonId = v.getId();
+  @Override public void onActionUp(final View v) {
+    final int buttonId = v.getId();
     switch (buttonId) {
       case R.id.dialer_dial_button: // make a phone call
-        // no number was dialed
-        if (dialed_number == "") {
-          speakOutAsync(getString(R.string.dial_number));
-          return;
-        }
-        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)).putExtra(CallUtils.NUMBER_KEY,
-            dialed_number));
-        break;
       case R.id.dialer_sms_button: // sms
         // no number was dialed
         if (dialed_number == "") {
           speakOutAsync(getString(R.string.dial_number));
           return;
         }
-        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, dialed_number));
+        if (buttonId == R.id.dialer_sms_button)
+          startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, dialed_number));
+        else
+          startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)).putExtra(CallUtils.NUMBER_KEY,
+              dialed_number));
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
       case R.id.button_reset: // reset
-        dialed_number = "";
-        read_number = "";
+        pressedResetButton();
         break;
       case R.id.button_delete: // delete
-        if (dialed_number.length() == MAX_LENGTH || buttonId == R.id.button_delete) {
-          dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
-          read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
-        }
+        pressedDeleteButton(buttonId);
         break;
       default:
         break;
@@ -107,20 +99,37 @@ public class DialScreen extends VisionActivity {
       read_number = read_number + ((TalkingButton) v).getText() + " ";
     }
     // Vibrate for 150 milliseconds
-    vibrate(150);
+    vibrate(VIBRATE_DURATION);
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
   }
   
   /**
+   * 
+   */
+  private void pressedResetButton() {
+    dialed_number = "";
+    read_number = "";
+  }
+  
+  /**
+   * @param buttonId
+   */
+  private void pressedDeleteButton(final int buttonId) {
+    if (dialed_number.length() == MAX_LENGTH || buttonId == R.id.button_delete) {
+      dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
+      read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
+    }
+  }
+  
+  /**
    * Called when the activity is first created.
    * */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.dial_screen);
     init(0, getString(R.string.dial_screen), getString(R.string.dial_screen));
-    // TODO: create help string
   }
   
   /**
@@ -129,7 +138,7 @@ public class DialScreen extends VisionActivity {
    * @param hasFocus
    *          indicates whether a window has the focus
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       getTalkingButton(R.id.number).setText("");
@@ -139,7 +148,7 @@ public class DialScreen extends VisionActivity {
   
   public void telephone() {
     TelephonyManager telephonyManager;
-    EndCallListener callListener = new EndCallListener(getApplicationContext());
+    final EndCallListener callListener = new EndCallListener(getApplicationContext());
     telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     telephonyManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE);
   }

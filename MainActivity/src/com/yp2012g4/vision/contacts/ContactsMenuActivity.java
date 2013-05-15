@@ -10,21 +10,21 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class ContactsMenuActivity extends VisionActivity {
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts_menu);
     init(0, getString(R.string.title_activity_contacts_menu), getString(R.string.contacts_help));
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     Intent intent;
-    View button = getButtonByMode();
+    final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.contactsListButton:
         intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
-        intent.putExtra(ContactsActivity.LIST_TYPE, "all");
+        intent.putExtra(ContactsActivity.LIST_TYPE, ContactsActivity.ALL_CONTACTS);
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.dialerButton:
@@ -33,7 +33,7 @@ public class ContactsMenuActivity extends VisionActivity {
         break;
       case R.id.quickDialButton:
         intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
-        intent.putExtra(ContactsActivity.LIST_TYPE, "favorits");
+        intent.putExtra(ContactsActivity.LIST_TYPE, ContactsActivity.FAVORITS_CONTACTS);
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       default:

@@ -53,8 +53,8 @@ public class VisionApplication extends Application {
    *          - current activity
    * 
    */
-  public static void loadPrefs(Activity a) {
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+  public static void loadPrefs(final Activity a) {
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
     _textSize = sp.getString("TEXT SIZE", _textSize);
     _textColor = sp.getString("TEXT COLOR", _textColor);
     _backgroundColor = sp.getString("BG COLOR", _backgroundColor);
@@ -71,7 +71,7 @@ public class VisionApplication extends Application {
    *          - current activity
    * 
    */
-  public static void savePrefs(String key, String val, Activity a) {
+  public static void savePrefs(final String key, final String val, final Activity a) {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
     sp.edit().putString(key, val).commit();
   }
@@ -84,7 +84,7 @@ public class VisionApplication extends Application {
    * @param int2
    *          - background Color
    */
-  public static void setColors(String txtC, String backg) {
+  public static void setColors(final String txtC, final String backg) {
     _textColor = txtC;
     _backgroundColor = backg;
   }
@@ -113,16 +113,16 @@ public class VisionApplication extends Application {
    * @param v
    *          - main view of an activity
    */
-  @SuppressWarnings("boxing") public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
+  public static void applyButtonSettings(final Set<View> vs, final View mainView, final Activity act) {
     loadPrefs(act);
-    mainView.setBackgroundColor(_colorToString.get(_backgroundColor));
-    for (View v : vs)
+    mainView.setBackgroundColor(_colorToString.get(_backgroundColor).intValue());
+    for (final View v : vs)
       if (v instanceof TalkingImageButton) {
         if (_textColor.equals("WHITE"))
-          ((ImageView) v).setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
+          ((ImageView) v).setColorFilter(_colorToString.get(_backgroundColor).intValue(), Mode.LIGHTEN);
         else
-          ((ImageView) v).setColorFilter(_colorToString.get(_textColor), Mode.DARKEN);
-        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get(_backgroundColor));
+          ((ImageView) v).setColorFilter(_colorToString.get(_textColor).intValue(), Mode.DARKEN);
+        ((TalkingImageButton) v).setBackgroundColor(_colorToString.get(_backgroundColor).intValue());
       }
   }
   
@@ -132,10 +132,10 @@ public class VisionApplication extends Application {
    * @param v
    *          - current view being pressed
    */
-  public static void visualFeedback(View v, Activity act) {
+  public static void visualFeedback(final View v, final Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
-      TalkingImageButton b = (TalkingImageButton) v;
+      final TalkingImageButton b = (TalkingImageButton) v;
       if (_textColor.equals("WHITE")) {
         b.setColorFilter(_colorToString.get("LIGHT_PURPLE").intValue(), Mode.LIGHTEN);
         b.setBackgroundColor(_colorToString.get("LIGHT_PURPLE").intValue());
@@ -154,22 +154,21 @@ public class VisionApplication extends Application {
    * @param v
    *          - last view pressed
    */
-  @SuppressWarnings("boxing") public static void restoreColors(View v, Activity act) {
+  public static void restoreColors(final View v, final Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
-      TalkingImageButton b = (TalkingImageButton) v;
+      final TalkingImageButton b = (TalkingImageButton) v;
       if (_textColor.equals("WHITE")) {
-        b.setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
-        b.setBackgroundColor(_colorToString.get(_backgroundColor));
+        b.setColorFilter(_colorToString.get(_backgroundColor).intValue(), Mode.LIGHTEN);
+        b.setBackgroundColor(_colorToString.get(_backgroundColor).intValue());
         return;
       }
-      b.setColorFilter(_colorToString.get(_textColor), Mode.DARKEN);
+      b.setColorFilter(_colorToString.get(_textColor).intValue(), Mode.DARKEN);
       return;
     }
     if (v instanceof TextView) {
       String bg = _backgroundColor;
-      // TODO sparta
-      int viewId = v.getId();
+      final int viewId = v.getId();
       if (viewId == R.id.WhiteRed)
         bg = "RED";
       else if (viewId == R.id.WhiteGreen)
@@ -178,7 +177,7 @@ public class VisionApplication extends Application {
         bg = "BLUE";
       else if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
         bg = "BLACK";
-      ((Button) v).setBackgroundColor(_colorToString.get(bg));
+      ((Button) v).setBackgroundColor(_colorToString.get(bg).intValue());
     }
   }
   
@@ -188,7 +187,7 @@ public class VisionApplication extends Application {
    * @param act
    *          - current activity
    */
-  public static void setThemeToActivity(Activity act) {
+  public static void setThemeToActivity(final Activity act) {
     loadPrefs(act);
     if (_textSize.equals("LARGE"))
       setLargeTheme(act);
@@ -202,7 +201,7 @@ public class VisionApplication extends Application {
   /**
    * @param act
    */
-  private static void setNormalTheme(Activity act) {
+  private static void setNormalTheme(final Activity act) {
     if (_backgroundColor.equals("BLUE"))
       act.setTheme(R.style.Theme_NormalWhiteBlue);
     else if (_backgroundColor.equals("GREEN"))
@@ -222,7 +221,7 @@ public class VisionApplication extends Application {
   /**
    * @param act
    */
-  private static void setSmallTheme(Activity act) {
+  private static void setSmallTheme(final Activity act) {
     if (_backgroundColor.equals("BLUE"))
       act.setTheme(R.style.Theme_SmallWhiteBlue);
     else if (_backgroundColor.equals("GREEN"))
@@ -242,7 +241,7 @@ public class VisionApplication extends Application {
   /**
    * @param act
    */
-  private static void setLargeTheme(Activity act) {
+  private static void setLargeTheme(final Activity act) {
     if (_backgroundColor.equals("BLUE"))
       act.setTheme(R.style.Theme_LargeWhiteBlue);
     else if (_backgroundColor.equals("GREEN"))

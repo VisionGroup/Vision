@@ -38,14 +38,14 @@ public class IncomingCallActivity extends VisionActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public void onClick(View v) {
+  @Override public void onClick(final View v) {
     _cu.silenceRinger();
     super.onClick(v);
     Log.d(TAG, v.toString());
     _clickAction(v);
   }
   
-  private void _clickAction(View v) {
+  private void _clickAction(final View v) {
     switch (v.getId()) {
       case R.id.button_answer:
         answerCall();
@@ -65,17 +65,16 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public void onAttachedToWindow() {
     // make the activity show even when the screen is locked.
     final Window window = getWindow();
-    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED +
-    // WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON +
-        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+        + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
   }
   
-  @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+  @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
     _cu.silenceRinger();
     return super.onScroll(e1, e2, distanceX, distanceY);
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent me) {
+  @Override public boolean onSingleTapUp(final MotionEvent me) {
     super.onSingleTapUp(me);
     _cu.silenceRinger();
     if (_navigationBar)
@@ -88,7 +87,7 @@ public class IncomingCallActivity extends VisionActivity {
    * Answers the present phone call.
    */
   private void answerCall() {
-    AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+    final AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
     if (am != null) {
       am.setWiredHeadsetOn(false);
       am.setSpeakerphoneOn(true);
@@ -118,7 +117,7 @@ public class IncomingCallActivity extends VisionActivity {
    * 
    * @param number
    */
-  static void updateNumberButton(TalkingButton tB, String s) {
+  static void updateNumberButton(final TalkingButton tB, final String s) {
     tB.setText(s.toCharArray(), 0, s.length());
     tB.setReadText(s);
     tB.setContentDescription(s);
@@ -144,7 +143,7 @@ public class IncomingCallActivity extends VisionActivity {
       incomingNumber = extras.getString(CallUtils.NUMBER_KEY);
       if (incomingNumber == null)
         return;
-    } catch (Exception e) {
+    } catch (final Exception e) {
       return;
     }
     updateNumberButton(getTalkingButton(R.id.number), incomingNumber);
@@ -156,7 +155,7 @@ public class IncomingCallActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     _cu = new CallUtils(this);
     Log.d(TAG, "onCreate Incoming call activity");
@@ -181,7 +180,7 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   class ListenToPhoneState extends PhoneStateListener {
-    @Override public void onCallStateChanged(int state, String inNumber) {
+    @Override public void onCallStateChanged(final int state, final String inNumber) {
       if (state == TelephonyManager.CALL_STATE_IDLE && _rang) {
         Log.d(TAG, "Ending Activity because " + _stateName(state));
         _rang = false;
@@ -189,7 +188,7 @@ public class IncomingCallActivity extends VisionActivity {
       }
     }
     
-    private String _stateName(int state) {
+    private String _stateName(final int state) {
       switch (state) {
         case TelephonyManager.CALL_STATE_IDLE:
           return "Idle";
@@ -203,7 +202,7 @@ public class IncomingCallActivity extends VisionActivity {
     }
   }
   
-  @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
+  @Override public boolean onKeyDown(final int keyCode, final KeyEvent event) {
     Log.d(TAG, "onKeyDown " + keyCode);
     switch (keyCode) {
       case KeyEvent.KEYCODE_BACK:

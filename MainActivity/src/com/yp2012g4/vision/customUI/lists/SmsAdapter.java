@@ -16,7 +16,7 @@ public class SmsAdapter extends BaseAdapter {
   private final ArrayList<SmsType> _data;
   Context _c;
   
-  public SmsAdapter(ArrayList<SmsType> d, Context c) {
+  public SmsAdapter(final ArrayList<SmsType> d, final Context c) {
     _data = d;
     _c = c;
   }
@@ -25,15 +25,15 @@ public class SmsAdapter extends BaseAdapter {
     return _data.size();
   }
   
-  @Override public Object getItem(int p) {
+  @Override public Object getItem(final int p) {
     return _data.get(p);
   }
   
-  @Override public long getItemId(int p) {
+  @Override public long getItemId(final int p) {
     return p;
   }
   
-  @Override public View getView(int p, View v, ViewGroup pv) {
+  @Override public View getView(final int p, final View v, final ViewGroup pv) {
     View $ = v;
     if ($ == null) {
       final LayoutInflater vi = (LayoutInflater) _c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,30 +42,47 @@ public class SmsAdapter extends BaseAdapter {
     final TalkingButton fromView = (TalkingButton) $.findViewById(R.id.sms_from);
     final TalkingButton bodyView = (TalkingButton) $.findViewById(R.id.sms_body);
     final TalkingButton timeView = (TalkingButton) $.findViewById(R.id.sms_time);
-    SmsType msg;
     if (p >= _data.size()) {
-      fromView.setText("");
-      bodyView.setText("");
-      timeView.setText("");
-      fromView.setReadText("");
-      bodyView.setReadText("");
-      timeView.setReadText("");
+      resetSMSDisplay(fromView, bodyView, timeView);
       return $;
     }
-    msg = _data.get(p);
+    setSMSDisplay(p, fromView, bodyView, timeView);
+    return $;
+  }
+  
+  /**
+   * @param p
+   * @param fromView
+   * @param bodyView
+   * @param timeView
+   */
+  private void setSMSDisplay(final int p, final TalkingButton fromView, final TalkingButton bodyView, final TalkingButton timeView) {
+    final SmsType msg = _data.get(p);
     String person = msg.getPerson();
-    if (person == "")
-      person = msg.getAddress();
+    person = person == "" ? msg.getAddress() : person;
     fromView.setText(person);
     bodyView.setText(msg.getBody());
     timeView.setText(msg.getDate());
     fromView.setReadText(person);
     bodyView.setReadText(msg.getBody());
     timeView.setReadText(msg.getDate());
-    return $;
   }
   
-  public void removeItemFromList(int p) {
+  /**
+   * @param fromView
+   * @param bodyView
+   * @param timeView
+   */
+  private static void resetSMSDisplay(final TalkingButton fromView, final TalkingButton bodyView, final TalkingButton timeView) {
+    fromView.setText("");
+    bodyView.setText("");
+    timeView.setText("");
+    fromView.setReadText("");
+    bodyView.setReadText("");
+    timeView.setReadText("");
+  }
+  
+  public void removeItemFromList(final int p) {
     if (p < 0 || p > _data.size())
       return;
     _data.remove(p);

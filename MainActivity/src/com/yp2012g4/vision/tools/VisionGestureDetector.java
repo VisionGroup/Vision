@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.settings.VisionApplication;
 
@@ -277,7 +278,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return true if the given view has a button type
    */
   protected static boolean isButtonType(final View v) {
-    return v instanceof TalkingButton || v instanceof TalkingImageButton;
+    return v instanceof TalkingButton || v instanceof TalkingImageButton || v instanceof TalkingEditText;
   }
   
   /**
@@ -290,7 +291,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return the button text to be read
    */
   public static String textToRead(final View v) {
-    return v instanceof TalkingButton ? ((TalkingButton) v).getReadText() : ((TalkingImageButton) v).getReadText();
+    return v instanceof TalkingButton ? ((TalkingButton) v).getReadText()
+        : v instanceof TalkingImageButton ? ((TalkingImageButton) v).getReadText() : ((TalkingEditText) v).getReadText();
   }
   
   /**

@@ -16,11 +16,12 @@ import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 
 public class VisionApplication extends Application {
@@ -167,17 +168,18 @@ public class VisionApplication extends Application {
       return;
     }
     if (v instanceof TextView) {
+      final View viewType = v instanceof TalkingButton ? (TalkingButton) v : (TalkingEditText) v;
       String bg = _backgroundColor;
-      final int viewId = v.getId();
+      final int viewId = viewType.getId();
       if (viewId == R.id.WhiteRed)
         bg = "RED";
       else if (viewId == R.id.WhiteGreen)
         bg = "GREEN";
       else if (viewId == R.id.WhiteBlue)
         bg = "BLUE";
-      else if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
+      else if (((View) viewType.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
         bg = "BLACK";
-      ((Button) v).setBackgroundColor(_colorToString.get(bg).intValue());
+      viewType.setBackgroundColor(_colorToString.get(bg).intValue());
     }
   }
   

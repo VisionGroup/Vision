@@ -2,7 +2,6 @@ package com.yp2012g4.vision;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.alarm.AlarmActivity;
@@ -11,7 +10,6 @@ import com.yp2012g4.vision.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.sms.ReadSmsActivity;
 import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -29,11 +27,10 @@ public class MainActivity extends VisionActivity {
   /** Called when the activity is first created. */
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Log.i("MyLog", "MainActivity:: onCreate");
     setContentView(R.layout.activity_main);
     adjustLayoutSize(4);
     final PhoneNotifications pn = new PhoneNotifications(this);
-    init(0, getString(R.string.MainActivity_wai), getString(R.string.MainActivity_help));
+    init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
   }
   
@@ -69,7 +66,8 @@ public class MainActivity extends VisionActivity {
       case R.id.setting_button:
         return new Intent(MainActivity.this, DisplaySettingsActivity.class);
       case R.id.read_sms_button:
-        return new Intent(MainActivity.this, ReadSmsActivity.class);
+        return new Intent(MainActivity.this, SendSMSActivity.class);
+//        return new Intent(MainActivity.this, ReadSmsActivity.class);
         // intent = new Intent(MainActivity.this, CallListActivity.class);
       default:
         return null;

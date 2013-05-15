@@ -25,10 +25,12 @@ import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AnalogClock;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.settings.VisionApplication;
 
@@ -274,7 +276,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return true if the given view has a button type
    */
   protected static boolean isButtonType(View v) {
-    return v instanceof TalkingButton || v instanceof TalkingImageButton;
+    return v instanceof TalkingButton || v instanceof TalkingImageButton || v instanceof TalkingEditText;
   }
   
   /**
@@ -287,7 +289,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return the button text to be read
    */
   public static String textToRead(View v) {
-    return v instanceof TalkingButton ? ((TalkingButton) v).getReadText() : ((TalkingImageButton) v).getReadText();
+    return v instanceof TalkingButton ? ((TalkingButton) v).getReadText()
+        : v instanceof TalkingImageButton ? ((TalkingImageButton) v).getReadText() : ((TalkingEditText) v).getReadText();
   }
   
   /**
@@ -351,7 +354,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _rect = new Rect(getRelativeLeft(v), getRelativeTop(v), getRelativeLeft(v) + v.getWidth(), getRelativeTop(v) + v.getHeight());
     if (v instanceof TimePicker || v instanceof AnalogClock)
       return; // ignoring these view types
-    if (isButtonType(v) || v instanceof TextView) {
+    if (isButtonType(v) || v instanceof TextView || v instanceof EditText) {
       view_to_rect.put(v, _rect);
       return;
     }

@@ -17,6 +17,7 @@ import android.graphics.PorterDuff.Mode;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -167,18 +168,19 @@ public class VisionApplication extends Application {
       return;
     }
     if (v instanceof TextView) {
+      View viewType = v instanceof Button ? (Button) v : (EditText) v;
       String bg = _backgroundColor;
       // TODO sparta
-      int viewId = v.getId();
+      int viewId = viewType.getId();
       if (viewId == R.id.WhiteRed)
         bg = "RED";
       else if (viewId == R.id.WhiteGreen)
         bg = "GREEN";
       else if (viewId == R.id.WhiteBlue)
         bg = "BLUE";
-      else if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
+      else if (((View) viewType.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
         bg = "BLACK";
-      ((Button) v).setBackgroundColor(_colorToString.get(bg));
+      viewType.setBackgroundColor(_colorToString.get(bg));
     }
   }
   

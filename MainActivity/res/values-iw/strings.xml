@@ -34,7 +34,7 @@
 
 
     <!-- DialScreen -->
-    <string name="dial_screen">מסך חיוג</string>
+    <string name="dial_screen_whereami">מסך חיוג</string>
     <string name="dial_number">ראשית, יש להקיש מספר לחיוג</string>
     <string name="quick_sms_button">S M S מהיר</string>
     <string name="digit1">1</string>
@@ -68,7 +68,7 @@
     <string name="quick_dial_button">חייג</string>
 
     <!-- MainActivity -->
-    <string name="MainActivity_wai">מסך ראשי</string>
+    <string name="MainActivity_wheramai">מסך ראשי</string>
     <string name="MainActivity_help">בחר אחת משמונה אפשרויות</string>
     <string name="low_battery">סוללה חלשה</string>
     <string name="phoneStatus_message_veryPoorSignal_read">קליטה חלשה</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 Amit: This is the place to declare the new attributes for a new view you 
-have created.
+have created.
 -->
 
 <resources>
@@ -10,14 +10,14 @@ have created.
     <declare-styleable name="TalkingImageButton">
         <attr name="readText" format="string" />
         <attr name="readToolTip" format="string" />
-        <attr name="prefsValue" format="string"/>
+        <attr name="prefsValue" format="string" />
     </declare-styleable>
 
     <!-- Talking button -->
     <declare-styleable name="TalkingButton">
         <attr name="readText" />
         <attr name="readToolTip" />
-        <attr name="prefsValue"/>
+        <attr name="prefsValue" />
     </declare-styleable>
 
     <!-- Talking list view -->
@@ -26,9 +26,15 @@ have created.
         <attr name="rows" format="integer" />
     </declare-styleable>
 
+    <!-- Talking list view -->
+    <declare-styleable name="TalkingEditText">
+        <attr name="readText" />
+        <attr name="readToolTip" />
+        <attr name="prefsValue" />
+    </declare-styleable>
+
     <!-- View styles -->
     <attr name="textAppearance" format="reference" />
     <attr name="backgroundColor" format="reference" />
-
 
 </resources>

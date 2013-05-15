@@ -119,7 +119,7 @@ public class DialScreen extends VisionActivity {
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.dial_screen);
-    init(0, getString(R.string.dial_screen), getString(R.string.dial_screen));
+    init(0, getString(R.string.dial_screen_whereami), getString(R.string.dial_screen_whereami));
     // TODO: create help string
   }
   

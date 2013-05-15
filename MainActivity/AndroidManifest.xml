@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yp2012g4.vision"
+    android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="1.0" android:installLocation="auto">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -24,7 +25,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
-	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
         android:name="com.yp2012g4.vision.settings.VisionApplication"
@@ -215,6 +216,14 @@
         <activity
             android:name="com.yp2012g4.vision.CallListActivity"
             android:label="@string/title_activity_call_list" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.vision.SendSMSActivity"
+            android:configChanges="locale"
+            android:label="@string/title_activity_send_sms"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
     </application>
 

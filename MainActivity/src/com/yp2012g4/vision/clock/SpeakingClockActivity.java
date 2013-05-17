@@ -31,8 +31,8 @@ public class SpeakingClockActivity extends VisionActivity {
    * @return the current system date in string
    */
   public static String getDateFormat() {
-    Calendar cal = Calendar.getInstance();
-    String date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(cal.getTime());
+    final Calendar cal = Calendar.getInstance();
+    final String date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(cal.getTime());
     return date;
   }
   
@@ -43,10 +43,10 @@ public class SpeakingClockActivity extends VisionActivity {
    *          - the Calendar you want to parse
    * @return string to speak
    */
-  public static String parseTime(Calendar cal) {
-    String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-    int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-    String s = h + " " + " and " + " " + cal.get(Calendar.MINUTE) + " " + " minutes " + ampm;
+  public static String parseTime(final Calendar cal) {
+    final String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+    final int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
+    final String s = h + " " + " and " + " " + cal.get(Calendar.MINUTE) + " " + " minutes " + ampm;
     return s;
   }
   
@@ -54,17 +54,17 @@ public class SpeakingClockActivity extends VisionActivity {
     return R.id.SpeakingClockActivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View button = getButtonByMode();
+    final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.TimeButton:
-        Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance();
         speakOutAsync(parseTime(cal));
         break;
       case R.id.DateButton:
-        String d = getDateFormat();
+        final String d = getDateFormat();
         speakOutAsync(d);
         break;
       default:
@@ -73,11 +73,11 @@ public class SpeakingClockActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_speaking_clock);
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
-    TalkingButton dateButton = getTalkingButton(R.id.DateButton);
+    final TalkingButton dateButton = getTalkingButton(R.id.DateButton);
     dateButton.setText(getDateFormat());
     new Timer().schedule(new MyTimerTask(), 100, 1000);
   }
@@ -91,11 +91,11 @@ public class SpeakingClockActivity extends VisionActivity {
     @Override public void run() {
       handler.post(new Runnable() {
         @Override public void run() {
-          TalkingButton timeButton = getTalkingButton(R.id.TimeButton);
-          Calendar cal = Calendar.getInstance();
-          String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-          int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-          String s = h + " : " + cal.get(Calendar.MINUTE) + " " + ampm;
+          final TalkingButton timeButton = getTalkingButton(R.id.TimeButton);
+          final Calendar cal = Calendar.getInstance();
+          final String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+          final int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
+          final String s = h + " : " + cal.get(Calendar.MINUTE) + " " + ampm;
           timeButton.setText(s);
         }
       });
@@ -106,11 +106,10 @@ public class SpeakingClockActivity extends VisionActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current time
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-      Calendar cal = Calendar.getInstance();
-      speakOutAsync(parseTime(cal));
+      speakOutAsync(parseTime(Calendar.getInstance()));
     }
   }
 }

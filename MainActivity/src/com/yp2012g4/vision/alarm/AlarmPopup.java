@@ -31,7 +31,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
   /***
    * On the creation of the class we display the dialog and sound the alarm
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // hide titlebar of application
     // must be before setting the layout
@@ -52,7 +52,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     super.onDestroy();
   }
   
-  @Override public void onInit(int status) {
+  @Override public void onInit(final int status) {
     if (status == TextToSpeech.SUCCESS) {
       final int r = tts.setLanguage(Locale.US);
       if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA)
@@ -86,7 +86,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     mp = MediaPlayer.create(getApplicationContext(), R.raw.alarm);
     mp.start();
     mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-      @Override public void onCompletion(MediaPlayer mpc) {
+      @Override public void onCompletion(final MediaPlayer mpc) {
         final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         AlarmActivity.pendingIntent = PendingIntent.getService(AlarmPopup.this, 0, new Intent(AlarmPopup.this, AlarmService.class),
             0);
@@ -113,7 +113,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     });
   }
   
-  public void speakOut(String s) {
+  public void speakOut(final String s) {
     tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
   }
 }

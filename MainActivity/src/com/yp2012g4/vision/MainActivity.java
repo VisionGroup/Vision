@@ -27,7 +27,7 @@ public class MainActivity extends VisionActivity {
   }
   
   /** Called when the activity is first created. */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.i("MyLog", "MainActivity:: onCreate");
     setContentView(R.layout.activity_main);
@@ -37,12 +37,12 @@ public class MainActivity extends VisionActivity {
     pn.startSignalLisener();
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     if (_navigationBar)
       return _navigationBar = false;
-    Intent intent = getIntentByButtonId(getButtonByMode().getId());
+    final Intent intent = getIntentByButtonId(getButtonByMode().getId());
     if (intent != null) {
       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -52,7 +52,7 @@ public class MainActivity extends VisionActivity {
   }
   
 //Cannot be static because of MainActivity.this
-  @SuppressWarnings("static-method") private Intent getIntentByButtonId(int id) {
+  @SuppressWarnings("static-method") private Intent getIntentByButtonId(final int id) {
     switch (id) {
       case R.id.sos_button:
         return new Intent(MainActivity.this, SOSActivity.class);
@@ -80,7 +80,7 @@ public class MainActivity extends VisionActivity {
    * Perform actions when the window get into focus we start the activity by
    * reading out loud the current title
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity

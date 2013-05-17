@@ -23,11 +23,11 @@ public class EndCallListener extends PhoneStateListener {
    * @param _context
    *          the application to return to when the phone call finishes
    */
-  public EndCallListener(Context c) {
+  public EndCallListener(final Context c) {
     _context = c;
   }
   
-  @Override public void onCallStateChanged(int state, String incomingNumber) {
+  @Override public void onCallStateChanged(final int state, final String incomingNumber) {
     switch (state) {
       case TelephonyManager.CALL_STATE_IDLE:// phone hang-up
         if (_isHangUp) {

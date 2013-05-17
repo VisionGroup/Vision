@@ -15,7 +15,7 @@ public class ContactManager {
   private final String[] _projection = new String[] { BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME,
       ContactsContract.Data.TIMES_CONTACTED, ContactsContract.Contacts.HAS_PHONE_NUMBER, ContactsContract.Contacts.LOOKUP_KEY };
   
-  public ContactManager(Context c) {
+  public ContactManager(final Context c) {
     _c = c;
   }
   
@@ -24,18 +24,18 @@ public class ContactManager {
    * @return 10 favorite contacts.
    */
   public ArrayList<ContactType> getFavoriteContacts() {
-    Uri u = ContactsContract.Contacts.CONTENT_URI;
-    String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
-    String[] sa = null;
-    String so = ContactsContract.Data.TIMES_CONTACTED + " DESC, " + ContactsContract.Contacts.DISPLAY_NAME
+    final Uri u = ContactsContract.Contacts.CONTENT_URI;
+    final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
+    final String[] sa = null;
+    final String so = ContactsContract.Data.TIMES_CONTACTED + " DESC, " + ContactsContract.Contacts.DISPLAY_NAME
         + " COLLATE LOCALIZED ASC LIMIT 10";
-    Cursor cur = _c.getContentResolver().query(u, _projection, ss, sa, so);
-    ArrayList<ContactType> $ = new ArrayList<ContactType>();
+    final Cursor cur = _c.getContentResolver().query(u, _projection, ss, sa, so);
+    final ArrayList<ContactType> $ = new ArrayList<ContactType>();
     if (cur.moveToFirst())
       do
         try {
           $.add(new ContactType(cur, _c));
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
           // Ignore and go next
         }
       while (cur.moveToNext());
@@ -48,17 +48,17 @@ public class ContactManager {
    * @return all contacts arranged alphabetically
    */
   public ArrayList<ContactType> getAllContacts() {
-    Uri uri = ContactsContract.Contacts.CONTENT_URI;
-    String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
-    String[] sa = null;
-    String so = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    Cursor cur = _c.getContentResolver().query(uri, _projection, ss, sa, so);
-    ArrayList<ContactType> $ = new ArrayList<ContactType>();
+    final Uri uri = ContactsContract.Contacts.CONTENT_URI;
+    final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
+    final String[] sa = null;
+    final String so = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+    final Cursor cur = _c.getContentResolver().query(uri, _projection, ss, sa, so);
+    final ArrayList<ContactType> $ = new ArrayList<ContactType>();
     if (cur.moveToFirst())
       do
         try {
           $.add(new ContactType(cur, _c));
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
           // Ignore and go next
         }
       while (cur.moveToNext());
@@ -72,13 +72,13 @@ public class ContactManager {
    *          phone number string
    * @return
    */
-  public String getNameFromPhone(String ps) {
+  public String getNameFromPhone(final String ps) {
     if (ps == null || ps.equals(""))
       return "";
     String $ = ps;
-    Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(ps));
-    Cursor cs = _c.getContentResolver().query(uri, new String[] { PhoneLookup.DISPLAY_NAME }, PhoneLookup.NUMBER + "='" + ps + "'",
-        null, null);
+    final Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(ps));
+    final Cursor cs = _c.getContentResolver().query(uri, new String[] { PhoneLookup.DISPLAY_NAME },
+        PhoneLookup.NUMBER + "='" + ps + "'", null, null);
     if (cs.getCount() > 0) {
       cs.moveToFirst();
       $ = cs.getString(cs.getColumnIndex(PhoneLookup.DISPLAY_NAME));
@@ -93,8 +93,8 @@ public class ContactManager {
    *          lookupKey
    * @return
    */
-  public String lookupPhoneNumbers(String lk) {
-    Cursor cs = _c.getContentResolver().query(Phone.CONTENT_URI, null, Phone.LOOKUP_KEY + " = ?", new String[] { lk }, null);
+  public String lookupPhoneNumbers(final String lk) {
+    final Cursor cs = _c.getContentResolver().query(Phone.CONTENT_URI, null, Phone.LOOKUP_KEY + " = ?", new String[] { lk }, null);
     if (cs.getCount() > 0) {
       cs.moveToFirst();
       return cs.getString(cs.getColumnIndex(Phone.NUMBER));
@@ -103,7 +103,7 @@ public class ContactManager {
   }
   
   static public ArrayList<ContactType> getTestContacts() {
-    ArrayList<ContactType> $ = new ArrayList<ContactType>();
+    final ArrayList<ContactType> $ = new ArrayList<ContactType>();
     $.add(new ContactType("0544457141", "Roman Gurevitch"));
     $.add(new ContactType("0000000000", "John Doe"));
     return $;

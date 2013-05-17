@@ -53,8 +53,8 @@ public class VisionApplication extends Application {
    *          - current activity
    * 
    */
-  public static void loadPrefs(Activity a) {
-    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+  public static void loadPrefs(final Activity a) {
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
     _textSize = sp.getString("TEXT SIZE", _textSize);
     _textColor = sp.getString("TEXT COLOR", _textColor);
     _backgroundColor = sp.getString("BG COLOR", _backgroundColor);
@@ -71,7 +71,7 @@ public class VisionApplication extends Application {
    *          - current activity
    * 
    */
-  public static void savePrefs(String key, String val, Activity a) {
+  public static void savePrefs(final String key, final String val, final Activity a) {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
     sp.edit().putString(key, val).commit();
   }
@@ -84,7 +84,7 @@ public class VisionApplication extends Application {
    * @param int2
    *          - background Color
    */
-  public static void setColors(String txtC, String backg) {
+  public static void setColors(final String txtC, final String backg) {
     _textColor = txtC;
     _backgroundColor = backg;
   }
@@ -113,10 +113,10 @@ public class VisionApplication extends Application {
    * @param v
    *          - main view of an activity
    */
-  @SuppressWarnings("boxing") public static void applyButtonSettings(Set<View> vs, View mainView, Activity act) {
+  @SuppressWarnings("boxing") public static void applyButtonSettings(final Set<View> vs, final View mainView, final Activity act) {
     loadPrefs(act);
     mainView.setBackgroundColor(_colorToString.get(_backgroundColor));
-    for (View v : vs)
+    for (final View v : vs)
       if (v instanceof TalkingImageButton) {
         if (_textColor.equals("WHITE"))
           ((ImageView) v).setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
@@ -132,10 +132,10 @@ public class VisionApplication extends Application {
    * @param v
    *          - current view being pressed
    */
-  public static void visualFeedback(View v, Activity act) {
+  public static void visualFeedback(final View v, final Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
-      TalkingImageButton b = (TalkingImageButton) v;
+      final TalkingImageButton b = (TalkingImageButton) v;
       if (_textColor.equals("WHITE")) {
         b.setColorFilter(_colorToString.get("LIGHT_PURPLE").intValue(), Mode.LIGHTEN);
         b.setBackgroundColor(_colorToString.get("LIGHT_PURPLE").intValue());
@@ -154,10 +154,10 @@ public class VisionApplication extends Application {
    * @param v
    *          - last view pressed
    */
-  @SuppressWarnings("boxing") public static void restoreColors(View v, Activity act) {
+  @SuppressWarnings("boxing") public static void restoreColors(final View v, final Activity act) {
     loadPrefs(act);
     if (v instanceof TalkingImageButton) {
-      TalkingImageButton b = (TalkingImageButton) v;
+      final TalkingImageButton b = (TalkingImageButton) v;
       if (_textColor.equals("WHITE")) {
         b.setColorFilter(_colorToString.get(_backgroundColor), Mode.LIGHTEN);
         b.setBackgroundColor(_colorToString.get(_backgroundColor));
@@ -169,7 +169,7 @@ public class VisionApplication extends Application {
     if (v instanceof TextView) {
       String bg = _backgroundColor;
       // TODO sparta
-      int viewId = v.getId();
+      final int viewId = v.getId();
       if (viewId == R.id.WhiteRed)
         bg = "RED";
       else if (viewId == R.id.WhiteGreen)
@@ -188,7 +188,7 @@ public class VisionApplication extends Application {
    * @param act
    *          - current activity
    */
-  public static void setThemeToActivity(Activity act) {
+  public static void setThemeToActivity(final Activity act) {
     loadPrefs(act);
     if (_textSize.equals("LARGE")) {
       if (_backgroundColor.equals("BLUE"))

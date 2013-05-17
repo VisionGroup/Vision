@@ -29,7 +29,7 @@ public class TTS implements OnInitListener {
    * @param listener
    *          the listener that is connected from the activity.
    */
-  public TTS(Context context) {
+  public TTS(final Context context) {
     _tts = new TextToSpeech(context, this);
   }
   
@@ -46,7 +46,7 @@ public class TTS implements OnInitListener {
    * @param queueMode
    *          the new queue mode.
    */
-  public void setQueueMode(int queueMode) {
+  public void setQueueMode(final int queueMode) {
     Log.d(TAG, "setQueueMode");
     _qm = queueMode;
   }
@@ -57,7 +57,7 @@ public class TTS implements OnInitListener {
    * @param languag
    *          the new language.
    */
-  public void setLanguage(Locale l) {
+  public void setLanguage(final Locale l) {
     Log.d(TAG, "setLanguage");
     _language = l;
     _tts.setLanguage(l);
@@ -78,7 +78,7 @@ public class TTS implements OnInitListener {
    * @param s
    *          string to speak.
    */
-  public void speak(String s) {
+  public void speak(final String s) {
     Log.d(TAG, "speak : " + s);
     if (null != s)
       _tts.speak(s, _qm, null);
@@ -90,7 +90,7 @@ public class TTS implements OnInitListener {
    * @param s
    *          string to speak.
    */
-  public void syncSpeak(String s) {
+  public void syncSpeak(final String s) {
     speak(s);
     while (isSpeaking())
       try {
@@ -134,13 +134,13 @@ public class TTS implements OnInitListener {
    *          string to check.
    * @return true if only English letters exist in the string.
    */
-  public static boolean isPureEnglish(String s) {
+  public static boolean isPureEnglish(final String s) {
     if (s == null)
       return true;
     return !Pattern.compile("[\\p{InHebrew}]").matcher(s).find();
   }
   
-  @Override public void onInit(int status) {
+  @Override public void onInit(final int status) {
     if (status == TextToSpeech.SUCCESS) {
       _init = true;
       setQueueMode(TextToSpeech.QUEUE_FLUSH);

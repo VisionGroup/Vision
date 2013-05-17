@@ -28,22 +28,22 @@ public class TalkingListView extends RelativeLayout {
   private View[] _dispView;
   private boolean _init = false;
   
-  public TalkingListView(Context context) {
+  public TalkingListView(final Context context) {
     super(context);
   }
   
-  public TalkingListView(Context context, AttributeSet attrs) {
+  public TalkingListView(final Context context, final AttributeSet attrs) {
     super(context, attrs);
     getAttr(context, attrs);
   }
   
-  public TalkingListView(Context context, AttributeSet attrs, int defStyle) {
+  public TalkingListView(final Context context, final AttributeSet attrs, final int defStyle) {
     super(context, attrs, defStyle);
     getAttr(context, attrs);
   }
   
-  private void getAttr(Context context, AttributeSet attrs) {
-    TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TalkingListView, 0, 0);
+  private void getAttr(final Context context, final AttributeSet attrs) {
+    final TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TalkingListView, 0, 0);
     try {
       _rows = a.getInteger(R.styleable.TalkingListView_rows, DEFAULT_ROWS);
       _cols = a.getInteger(R.styleable.TalkingListView_cols, DEFAULT_COLS);
@@ -58,12 +58,12 @@ public class TalkingListView extends RelativeLayout {
    * 
    * @param n
    */
-  private void setNewViewArr(int n) {
+  private void setNewViewArr(final int n) {
     for (int i = 0; i < _rows; i++)
       for (int j = 0; j < _cols; j++) {
         final int pos = n * _rows * _cols + i * _cols + j;
         final int vp = i * _cols + j;
-        View oldV = _dispView[vp];
+        final View oldV = _dispView[vp];
         if (pos < _adapter.getCount()) {
           _dispView[vp] = _adapter.getView(pos, oldV, this);
           if (_dispView[vp].getId() == NO_ID)
@@ -106,9 +106,9 @@ public class TalkingListView extends RelativeLayout {
    * @param v
    * @param p
    */
-  private void setViewSize(LayoutParams p) {
-    int h = getHeight() / _rows;
-    int w = getWidth() / _cols;
+  private void setViewSize(final LayoutParams p) {
+    final int h = getHeight() / _rows;
+    final int w = getWidth() / _cols;
     if (p != null) {
       p.height = h;
       p.width = w;
@@ -121,7 +121,7 @@ public class TalkingListView extends RelativeLayout {
    * 
    * @param
    */
-  private void setPage(int n) {
+  private void setPage(final int n) {
     if (_adapter == null)
       return;
     if (n < 0)
@@ -136,7 +136,7 @@ public class TalkingListView extends RelativeLayout {
   /**
    * Initialize the layout.
    */
-  @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
+  @Override protected void onLayout(final boolean changed, final int l, final int t, final int r, final int b) {
     // TODO Auto-generated method stub
     super.onLayout(changed, l, t, r, b);
     if (_adapter != null && _init != true) {
@@ -146,7 +146,7 @@ public class TalkingListView extends RelativeLayout {
     /**
      * to update key's position
      */
-    VisionActivity h = (VisionActivity) getContext();
+    final VisionActivity h = (VisionActivity) getContext();
     h.getButtonsPosition(this);
   }
   
@@ -169,9 +169,9 @@ public class TalkingListView extends RelativeLayout {
    * @param a
    *          the adapter to set
    */
-  public void setAdapter(Adapter a) {
+  public void setAdapter(final Adapter a) {
     _adapter = a;
-    int mod = _adapter.getCount() / (_cols * _rows);
+    final int mod = _adapter.getCount() / (_cols * _rows);
     if (_adapter.getCount() % (_cols * _rows) != 0)
       _numOfPages = mod + 1;
     else
@@ -198,7 +198,7 @@ public class TalkingListView extends RelativeLayout {
    * @return currently displayed items.
    */
   public long[] getDisplayedItemIds() {
-    long[] $ = new long[_rows * _cols];
+    final long[] $ = new long[_rows * _cols];
     for (int i = 0; i < _dispView.length; i++)
       if (_dispView[i] != null)
         $[i] = _dispView[i].getId();
@@ -211,7 +211,8 @@ public class TalkingListView extends RelativeLayout {
    *          item position in the list
    * @return true if the item currently displayed.
    */
-  public boolean isItemDisplayed(int pos) {
+  public boolean isItemDisplayed(final int pos) {
+    // TODO return exp
     if (pos < _page * _rows * _cols || pos >= _page * _rows * _cols + _rows * _cols)
       return false;
     return true;

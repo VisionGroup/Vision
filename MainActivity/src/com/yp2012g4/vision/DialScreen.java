@@ -45,12 +45,12 @@ public class DialScreen extends VisionActivity {
     return R.id.DialScreen;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     super.onSingleTapUp(e);
     if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
       return _navigationBar = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
-      for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
+      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY()))
           speakOutAsync(textToRead(entry.getKey()));
     return true;
@@ -62,8 +62,8 @@ public class DialScreen extends VisionActivity {
    * @param v
    *          - the last button pressed before lifting the finger
    */
-  @Override public void onActionUp(View v) {
-    int buttonId = v.getId();
+  @Override public void onActionUp(final View v) {
+    final int buttonId = v.getId();
     switch (buttonId) {
       case R.id.dialer_dial_button: // make a phone call
         // no number was dialed
@@ -115,7 +115,7 @@ public class DialScreen extends VisionActivity {
   /**
    * Called when the activity is first created.
    * */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.dial_screen);
@@ -129,7 +129,7 @@ public class DialScreen extends VisionActivity {
    * @param hasFocus
    *          indicates whether a window has the focus
    */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
       getTalkingButton(R.id.number).setText("");
@@ -139,7 +139,7 @@ public class DialScreen extends VisionActivity {
   
   public void telephone() {
     TelephonyManager telephonyManager;
-    EndCallListener callListener = new EndCallListener(getApplicationContext());
+    final EndCallListener callListener = new EndCallListener(getApplicationContext());
     telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     telephonyManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE);
   }

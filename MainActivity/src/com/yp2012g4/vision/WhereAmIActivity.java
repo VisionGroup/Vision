@@ -28,7 +28,7 @@ public class WhereAmIActivity extends VisionActivity {
   final private static int updateTimeOut = 60000; // in miliseconds
   
   // TODO: add a button to know the current status
-  private static void log(String s) {
+  private static void log(final String s) {
     Log.d(TAG, s);
   }
   
@@ -42,7 +42,7 @@ public class WhereAmIActivity extends VisionActivity {
     return R.id.where_am_i_Activity;
   }
   
-  void makeUseOfNewLocation(double longitude, double latitude, String prov, String address) {
+  void makeUseOfNewLocation(final double longitude, final double latitude, final String prov, final String address) {
     l.lock();
     if (new Date().getTime() - lastUpdate.getTime() < updateTimeOut) {
       l.unlock();
@@ -60,7 +60,7 @@ public class WhereAmIActivity extends VisionActivity {
     speakOutAsync(toSpeak);
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
     init(0, getString(R.string.where_am_i_screen), getString(R.string.where_am_i_help));
@@ -72,7 +72,7 @@ public class WhereAmIActivity extends VisionActivity {
     l.unlock();
   }
   
-  private void setText(String s) {
+  private void setText(final String s) {
     text = s;
     ((TextView) findViewById(R.id.where_am_i_textview)).setText(s);
   }
@@ -84,7 +84,7 @@ public class WhereAmIActivity extends VisionActivity {
     f = new LocationFinder(manager);
     log("Got location finder");
     providerRunning = f.run(new LocationHandler() {
-      @Override public void handleLocation(double longitude, double latitude, String prov, String address) {
+      @Override public void handleLocation(final double longitude, final double latitude, final String prov, final String address) {
         makeUseOfNewLocation(longitude, latitude, prov, address);
       }
     });
@@ -107,10 +107,10 @@ public class WhereAmIActivity extends VisionActivity {
     super.onPause();
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View button = getButtonByMode();
+    final View button = getButtonByMode();
     switch (button.getId()) {
       case -1:
       case R.id.where_am_i_Activity:

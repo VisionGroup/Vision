@@ -24,7 +24,7 @@ public class PhoneNotifications {
     protected SignalStrengthListener() {
     }
     
-    @Override public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+    @Override public void onSignalStrengthsChanged(final android.telephony.SignalStrength signalStrength) {
       // get the signal strength (a value between 0 and 31)
       signal = signalStrength.getGsmSignalStrength();
       super.onSignalStrengthsChanged(signalStrength);
@@ -44,7 +44,7 @@ public class PhoneNotifications {
   public static int signal = -1;
   SignalStrengthListener signalStrengthListener;
   
-  public PhoneNotifications(Context c1) {
+  public PhoneNotifications(final Context c1) {
     c = c1;
   }
   
@@ -54,8 +54,8 @@ public class PhoneNotifications {
    * @return battery level between 0 to 1
    */
   public float getBatteryLevel() {
-    IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-    Intent batteryStatus = c.registerReceiver(null, ifilter);
+    final IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    final Intent batteryStatus = c.registerReceiver(null, ifilter);
     final int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
     final int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
     final float batteryPct = level / (float) scale;
@@ -68,8 +68,8 @@ public class PhoneNotifications {
    * @return true if charger is connected false otherwise
    */
   public boolean getChargerStatus() {
-    IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-    Intent batteryStatus = c.registerReceiver(null, ifilter);
+    final IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    final Intent batteryStatus = c.registerReceiver(null, ifilter);
     // Are we charging / charged?
     final int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
     final boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;

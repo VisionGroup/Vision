@@ -16,7 +16,7 @@ public class SmsAdapter extends BaseAdapter {
   private final ArrayList<SmsType> _data;
   Context _c;
   
-  public SmsAdapter(ArrayList<SmsType> d, Context c) {
+  public SmsAdapter(final ArrayList<SmsType> d, final Context c) {
     _data = d;
     _c = c;
   }
@@ -25,15 +25,15 @@ public class SmsAdapter extends BaseAdapter {
     return _data.size();
   }
   
-  @Override public Object getItem(int p) {
+  @Override public Object getItem(final int p) {
     return _data.get(p);
   }
   
-  @Override public long getItemId(int p) {
+  @Override public long getItemId(final int p) {
     return p;
   }
   
-  @Override public View getView(int p, View v, ViewGroup pv) {
+  @Override public View getView(final int p, final View v, final ViewGroup pv) {
     View $ = v;
     if ($ == null) {
       final LayoutInflater vi = (LayoutInflater) _c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,7 +65,7 @@ public class SmsAdapter extends BaseAdapter {
     return $;
   }
   
-  public void removeItemFromList(int p) {
+  public void removeItemFromList(final int p) {
     if (p < 0 || p > _data.size())
       return;
     _data.remove(p);

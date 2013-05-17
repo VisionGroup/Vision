@@ -34,10 +34,10 @@ public class ThemeSettingsActivity extends VisionActivity {
    *          - motion event
    * 
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View v = getButtonByMode();
+    final View v = getButtonByMode();
     if (v instanceof TalkingButton)
       speakOutSync(((TalkingButton) v).getReadText());
     switch (v.getId()) {
@@ -56,7 +56,7 @@ public class ThemeSettingsActivity extends VisionActivity {
   /**
    * Called when the activity is first created.
    * */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
     adjustLayoutSize(BUTTON_NUM);

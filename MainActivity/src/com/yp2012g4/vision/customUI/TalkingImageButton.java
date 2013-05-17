@@ -16,7 +16,7 @@ import com.yp2012g4.vision.R;
  * 
  */
 public class TalkingImageButton extends ImageButton implements Runnable {
-  public TalkingImageButton(Context context, AttributeSet attrs) {
+  public TalkingImageButton(final Context context, final AttributeSet attrs) {
     super(context, attrs);
     final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TalkingImageButton, 0, 0);
     _readText = a.getString(R.styleable.TalkingImageButton_readText);
@@ -39,7 +39,7 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * 
    * @param s
    */
-  public void setReadText(String s) {
+  public void setReadText(final String s) {
     _readText = s;
   }
   
@@ -57,7 +57,7 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * 
    * @param s
    */
-  public void setReadToolTip(String s) {
+  public void setReadToolTip(final String s) {
     _readToolTip = s;
   }
   
@@ -80,7 +80,7 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * 
    * @param s
    */
-  public void setPrefsValue(String s) {
+  public void setPrefsValue(final String s) {
     _prefsValue = s;
   }
   
@@ -89,7 +89,7 @@ public class TalkingImageButton extends ImageButton implements Runnable {
    * 
    * @param r
    */
-  public void setRun(Runnable r) {
+  public void setRun(final Runnable r) {
     _run = r;
   }
   

@@ -37,9 +37,9 @@ public class AlarmActivity extends VisionActivity {
    * @param isSettingMinutes
    *          - tell the activity if we want to set hours or minutes
    */
-  public void callSetClock(boolean isSettingMinutes) {
+  public void callSetClock(final boolean isSettingMinutes) {
     waitForMinutes = isSettingMinutes;
-    int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
+    final int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
     startActivityForResult(new Intent(AlarmActivity.this, SetClockActivity.class).putExtra("type", type), REQUEST_CODE);
   }
   
@@ -50,7 +50,7 @@ public class AlarmActivity extends VisionActivity {
   /**
    * This will be called when the result from the set clock activity returnes
    */
-  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == REQUEST_CODE) {
       // if user pressed back
@@ -70,24 +70,25 @@ public class AlarmActivity extends VisionActivity {
       alarmTime.setTimeInMillis(System.currentTimeMillis());
       alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
       alarmTime.set(Calendar.MINUTE, resultCode);
-      String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
-      TalkingButton buttonStatus = getTalkingButton(R.id.statusButton);
+      final String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime);
+      final TalkingButton buttonStatus = getTalkingButton(R.id.statusButton);
       buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime));
       speakOutAsync(s);
       _tts.waitUntilFinishTalking();
     }
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View button = getButtonByMode();
+    final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.statusButton:
         String s;
         if (alarmTime == null)
           s = getString(R.string.noAlarm);
         else {
+          // TODO: Ternarization
           if (alarmIsSet)
             s = getString(R.string.alarm_is_on_at);
           else
@@ -105,7 +106,7 @@ public class AlarmActivity extends VisionActivity {
       case R.id.cancelalarm:
         if (!alarmIsSet)
           return false;
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
         if (AlarmService.mp != null)
           AlarmService.mp.stop();
@@ -119,7 +120,7 @@ public class AlarmActivity extends VisionActivity {
   }
   
   /** Called when the activity is first created. */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_alarm);
     init(0, getString(R.string.title_activity_alarm), getString(R.string.alarm_clock_help));
@@ -136,15 +137,15 @@ public class AlarmActivity extends VisionActivity {
   public void setAlarm() {
     if (alarmTime == null) {
       speakOutAsync(getString(R.string.you_need_to_set_ther_alarm_first));
-      while (_tts.isSpeaking() == true) {
+      while (_tts.isSpeaking()) {
         // Wait for message to finish playing and then finish the activity
       }
       return;
     }
-    Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);
+    final Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);
     pendingIntent = PendingIntent.getService(AlarmActivity.this, 0, myIntent, 0);
-    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-    Calendar calendar = Calendar.getInstance();
+    final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    final Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(System.currentTimeMillis());
     alarmTime.set(Calendar.SECOND, 0);
     if (alarmTime.before(calendar))
@@ -152,7 +153,7 @@ public class AlarmActivity extends VisionActivity {
     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
     speakOutAsync(getString(R.string.alarm_is_activated));
-    while (_tts.isSpeaking() == true) {
+    while (_tts.isSpeaking()) {
       // Wait for message to finish playing and then finish the activity
     }
   }

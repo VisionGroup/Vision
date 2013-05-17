@@ -68,7 +68,7 @@ public class SOSActivity extends VisionActivity {
     }
   };
   
-  @Override public boolean onSingleTapUp(MotionEvent me) {
+  @Override public boolean onSingleTapUp(final MotionEvent me) {
     if (super.onSingleTapUp(me))
       return true;
     if (getButtonByMode().getId() == R.id.Send_SOS_Message) {
@@ -78,7 +78,7 @@ public class SOSActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle b) {
+  @Override protected void onCreate(final Bundle b) {
     super.onCreate(b);
     setContentView(R.layout.activity_sos);
     init(0, getString(R.string.sos_screen), getString(R.string.sos_help));
@@ -97,7 +97,7 @@ public class SOSActivity extends VisionActivity {
    * @param s1
    *          the address
    */
-  void makeUseOfNewLocation(double d1, double d2, String s1, String s2) {
+  void makeUseOfNewLocation(final double d1, final double d2, final String s1, final String s2) {
     f.stop();
     l.lock();
     address = s2;
@@ -111,7 +111,7 @@ public class SOSActivity extends VisionActivity {
     super.onStart();
     f = new LocationFinder((LocationManager) getSystemService(Context.LOCATION_SERVICE));
     final LocationHandler h = new LocationHandler() {
-      @Override public void handleLocation(double d1, double d2, String s1, String s2) {
+      @Override public void handleLocation(final double d1, final double d2, final String s1, final String s2) {
         makeUseOfNewLocation(d1, d2, s1, s2);
       }
     };

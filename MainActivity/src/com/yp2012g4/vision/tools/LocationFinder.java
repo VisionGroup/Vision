@@ -25,7 +25,7 @@ public class LocationFinder {
   LocationHandler _handler;
   boolean _running = false; // to ensure we don't stop it twice
   
-  public LocationFinder(LocationManager newLocationManager) {
+  public LocationFinder(final LocationManager newLocationManager) {
     _locationManager = newLocationManager;
     log("created");
   }
@@ -37,7 +37,7 @@ public class LocationFinder {
    *          the handler to call when getting location update
    * @return true if succeeded, false otherwise
    */
-  public boolean run(LocationHandler h) {
+  public boolean run(final LocationHandler h) {
     log("run");
     if (_running)
       stop();
@@ -48,7 +48,7 @@ public class LocationFinder {
     return _running;
   }
   
-  private void setUpLocationListener(String p) {
+  private void setUpLocationListener(final String p) {
     if (_locationManager.isProviderEnabled(p)) {
       log("enabling" + p);
       final LocationListener l = createLocationListener(p);
@@ -58,7 +58,7 @@ public class LocationFinder {
     }
   }
   
-  void makeUseOfNewLocation(Location location, String provider) {
+  void makeUseOfNewLocation(final Location location, final String provider) {
     log("Making use of new location from provider");
     final double latitude = location.getLatitude();
     final double longitude = location.getLongitude();
@@ -72,7 +72,7 @@ public class LocationFinder {
    * @param s
    *          the message to log
    */
-  static void log(String s) {
+  static void log(final String s) {
     Log.d(TAG, s);
   }
   
@@ -85,20 +85,20 @@ public class LocationFinder {
    */
   private LocationListener createLocationListener(final String Provider) {
     final LocationListener _l = new LocationListener() {
-      @Override public void onLocationChanged(Location location) {
+      @Override public void onLocationChanged(final Location location) {
         log("listener of provider " + Provider + ": location changed");
         makeUseOfNewLocation(location, Provider);
       }
       
-      @Override public void onProviderEnabled(String provider) {
+      @Override public void onProviderEnabled(final String provider) {
         // No modifications
       }
       
-      @Override public void onProviderDisabled(String provider) {
+      @Override public void onProviderDisabled(final String provider) {
         // No modifications
       }
       
-      @Override public void onStatusChanged(String provider, int status, Bundle extras) {
+      @Override public void onStatusChanged(final String provider, final int status, final Bundle extras) {
         // No modifications
       }
     };
@@ -117,11 +117,11 @@ public class LocationFinder {
    */
   void OpenStreetMapGeocoding(final double latitude, final double longitude, final String provider) {
     final AsyncTask<Void, Void, String> _downloader = new AsyncTask<Void, Void, String>() {
-      @Override protected String doInBackground(Void... params) {
+      @Override protected String doInBackground(final Void... params) {
         return OpenStreetMapGeocoder.getAddress(latitude, longitude);
       }
       
-      @Override protected void onPostExecute(String result) {
+      @Override protected void onPostExecute(final String result) {
         super.onPostExecute(result);
         log("Geocoding: " + result);
         _handler.handleLocation(longitude, latitude, provider, result);

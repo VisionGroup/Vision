@@ -36,13 +36,13 @@ public class CalcActivity extends VisionActivity {
       R.id.digit4, R.id.digit5, R.id.digit6, R.id.digit7, R.id.digit8, R.id.digit9);
   
   // made
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_calc);
     init(0, getString(R.string.calc_screen), getString(R.string.calc_screen));
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     super.onSingleTapUp(e);
     if (_navigationBar)
       return _navigationBar = false;
@@ -50,7 +50,7 @@ public class CalcActivity extends VisionActivity {
       // also the touched button text
       return isBadAction = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
-      for (Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
+      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())) {
           speakOutAsync(textToRead(entry.getKey()));
           if (tappedEquals(entry.getKey()))
@@ -59,7 +59,7 @@ public class CalcActivity extends VisionActivity {
     return true;
   }
   
-  private boolean tappedEquals(View v) {
+  private boolean tappedEquals(final View v) {
     return v.equals(findViewById(R.id.equals));
   }
   
@@ -70,9 +70,9 @@ public class CalcActivity extends VisionActivity {
   /**
    * Overridden method which implements the action triggered by a button lift
    */
-  @Override public void onActionUp(View v) {
+  @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
-    CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
+    final CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
     // it's a digit
     if (digits.contains(Integer.valueOf(buttonId)))
       if (!equalsPressed) {
@@ -97,7 +97,7 @@ public class CalcActivity extends VisionActivity {
           break;
         case R.id.equals:
           if (lhs_number != "" && rhs_number != "" && sign != Sign.NO_SIGN) {
-            Double res = Double.valueOf(parseResult(lhs_number, rhs_number, sign));
+            final Double res = Double.valueOf(parseResult(lhs_number, rhs_number, sign));
             if (res.doubleValue() == Double.NaN)
               return;
             updateCalculatedNumber(res);
@@ -131,7 +131,7 @@ public class CalcActivity extends VisionActivity {
     badAction();
   }
   
-  private void updateCalculatedNumber(Double res) {
+  private void updateCalculatedNumber(final Double res) {
     lhs_number = calculated_number = res.toString().endsWith(dotZero) ? Integer.toString(res.intValue()) : res.toString();
     // operation is the lhs_number
     rhs_number = "";
@@ -141,7 +141,7 @@ public class CalcActivity extends VisionActivity {
     speakOutAsync(calculated_number);
   }
   
-  private void pressOnDotButton(CharSequence text) {
+  private void pressOnDotButton(final CharSequence text) {
     if (lhs_number != "" && !lhs_number.contains(".") && !lhsDone) {
       lhs_number += text;
       calculated_number += text;
@@ -169,7 +169,7 @@ public class CalcActivity extends VisionActivity {
    *          The sign button id, on which we clicked
    * @return the corresponding sign
    */
-  private static Sign getSignFromId(int id) {
+  private static Sign getSignFromId(final int id) {
     switch (id) {
       case R.id.plus:
         return Sign.PLUS;
@@ -195,9 +195,9 @@ public class CalcActivity extends VisionActivity {
    *          The sign between the 2 numbers
    * @return The result (as a double) of the parsed string
    */
-  private double parseResult(String lhs_num, String rhs_num, Sign s) {
-    double lhs = Double.parseDouble(lhs_num);
-    double rhs = Double.parseDouble(rhs_num);
+  private double parseResult(final String lhs_num, final String rhs_num, final Sign s) {
+    final double lhs = Double.parseDouble(lhs_num);
+    final double rhs = Double.parseDouble(rhs_num);
     switch (s) {
       case PLUS:
         return lhs + rhs;

@@ -87,7 +87,7 @@ public class PhoneStatusActivity extends VisionActivity {
    * 
    * @see android.view.View.OnClickListener#onClick(android.view.View)
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     final Resources res = getResources();
@@ -112,7 +112,7 @@ public class PhoneStatusActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));

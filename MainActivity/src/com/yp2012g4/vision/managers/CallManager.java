@@ -21,7 +21,7 @@ public class CallManager {
    * 
    * @return list of all calls
    */
-  public static ArrayList<CallType> getAllCallsList(Context c) {
+  public static ArrayList<CallType> getAllCallsList(final Context c) {
 //		final String where = CallLog.Calls.TYPE + "="
 //				+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cr;
@@ -33,7 +33,7 @@ public class CallManager {
     return copyToList(cr, new ArrayList<CallType>());
   }
   
-  private static ArrayList<CallType> copyToList(Cursor cr, final ArrayList<CallType> al) {
+  private static ArrayList<CallType> copyToList(final Cursor cr, final ArrayList<CallType> al) {
     while (cr.moveToNext())
       al.add(new CallType(cr));
     return al;
@@ -45,7 +45,7 @@ public class CallManager {
    * 
    * @return list of missed calls
    */
-  public static ArrayList<CallType> getMissedCallsList(Context c) {
+  public static ArrayList<CallType> getMissedCallsList(final Context c) {
     final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cur;
     try {
@@ -65,7 +65,7 @@ public class CallManager {
    * @param ns
    *          - string of the phone number in the call log
    */
-  static public void DeleteCallLogByNumber(Context c, String ns) {
+  static public void DeleteCallLogByNumber(final Context c, final String ns) {
     try {
       c.getContentResolver().delete(CallLog.Calls.CONTENT_URI, CallLog.Calls.NUMBER + "=?", new String[] { ns });
     } catch (final Exception e) {
@@ -83,10 +83,10 @@ public class CallManager {
    *          how may call to get back
    * @return list of missed calls
    */
-  public CallType getLastOutgoingCall(Context c) {
+  public CallType getLastOutgoingCall(final Context c) {
     try {
       _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
-    } catch (Exception e) {
+    } catch (final Exception e) {
       return null;
     }
     if (_cur.moveToNext())
@@ -104,14 +104,14 @@ public class CallManager {
    *          how may call to get back
    * @return list of missed calls
    */
-  public ArrayList<CallType> getNextMissedCallsList(Context c, int ns) {
-    String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
+  public ArrayList<CallType> getNextMissedCallsList(final Context c, final int ns) {
+    final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     try {
       _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, where, null, null);
-    } catch (Exception e) {
+    } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    ArrayList<CallType> al = new ArrayList<CallType>();
+    final ArrayList<CallType> al = new ArrayList<CallType>();
     for (int i = 0; i < ns && _cur.moveToNext(); i++)
       al.add(new CallType(_cur));
     return al;
@@ -122,7 +122,7 @@ public class CallManager {
    * 
    * @return the missed calls number
    */
-  public static int getMissedCallsNum(Context c) {
+  public static int getMissedCallsNum(final Context c) {
     final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cur;
     try {

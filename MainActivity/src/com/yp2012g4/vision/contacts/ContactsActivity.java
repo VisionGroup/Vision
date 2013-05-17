@@ -38,10 +38,10 @@ public class ContactsActivity extends VisionActivity {
     return R.id.ContactsActivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View button = getButtonByMode();
+    final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.contact_next:
         if (currentContact < contacts.size() - 1) {
@@ -78,7 +78,7 @@ public class ContactsActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_contacts);
     init(0, getString(R.string.contacts_screen), getString(R.string.contacts_screen_help));
@@ -94,7 +94,7 @@ public class ContactsActivity extends VisionActivity {
     setContact();
   }
   
-  private void selectCorrespondingContactsList(String listType) {
+  private void selectCorrespondingContactsList(final String listType) {
     final ContactManager contactManager = new ContactManager(getApplicationContext());
     if (listType.equalsIgnoreCase("all")) {
       contacts = contactManager.getAllContacts();
@@ -138,7 +138,7 @@ public class ContactsActivity extends VisionActivity {
    * onActivityResults handles: - retrieving results of speech recognition
    * listening - retrieving result of TTS data check
    */
-  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
     // check speech recognition result
     if (requestCode == VR_REQUEST && resultCode == RESULT_OK) {
       // store the returned word list as an ArrayList

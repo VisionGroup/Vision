@@ -27,7 +27,7 @@ public class CallListActivity extends VisionActivity {
   private static String TAG = "CallListActivity";
   CallAdapter adapter;
   
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_call_list);
     init(0, getString(R.string.call_list_screen), getString(R.string.call_list_screen));
@@ -40,7 +40,7 @@ public class CallListActivity extends VisionActivity {
       _tts.speak(getString(R.string.noCalls));
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     final CallType currCall = getCurrentCall();
@@ -82,7 +82,7 @@ public class CallListActivity extends VisionActivity {
     return R.id.CallListActivity;
   }
   
-  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
     listView.nextPage();
     return super.onFling(e1, e2, velocityX, velocityY);
   }

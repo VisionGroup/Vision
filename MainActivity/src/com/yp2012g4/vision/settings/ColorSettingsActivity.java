@@ -25,8 +25,8 @@ public class ColorSettingsActivity extends VisionActivity {
    * @param int2
    *          - background Color
    */
-  private void changeSettings(String s) {
-    String[] c = s.split("-");
+  private void changeSettings(final String s) {
+    final String[] c = s.split("-");
     VisionApplication.savePrefs("TEXT COLOR", c[0], this);
     VisionApplication.savePrefs("BG COLOR", c[1], this);
     VisionApplication.loadPrefs(this);
@@ -46,15 +46,15 @@ public class ColorSettingsActivity extends VisionActivity {
    * @param e
    *          - motion event
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     if (_navigationBar)
       return _navigationBar = false;
-    View v = getButtonByMode();
+    final View v = getButtonByMode();
     if (v instanceof TalkingButton) {
       speakOutSync(((TalkingButton) v).getReadText());
-      String s = ((TalkingButton) v).getPrefsValue();
+      final String s = ((TalkingButton) v).getPrefsValue();
       if (!s.equals(""))
         changeSettings(s);
       finish();
@@ -66,7 +66,7 @@ public class ColorSettingsActivity extends VisionActivity {
   /**
    * onCreate method.
    */
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
     adjustLayoutSize(BUTTON_NUM);

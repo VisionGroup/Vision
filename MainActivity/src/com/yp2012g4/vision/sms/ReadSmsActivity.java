@@ -27,7 +27,7 @@ public class ReadSmsActivity extends VisionActivity {
   private static final int SWIPE_VELOCITY_THRESHOLD = 100;
   private static final long VIBRATION_LEN = 150;
   
-  @Override protected void onCreate(Bundle b) {
+  @Override protected void onCreate(final Bundle b) {
     super.onCreate(b);
     setContentView(R.layout.activity_read_sms);
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
@@ -41,8 +41,8 @@ public class ReadSmsActivity extends VisionActivity {
     return R.id.ReadSmsScreen;
   }
   
-  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float f1, float f2) {
-    float diffX = e2.getX() - e1.getX();
+  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
+    final float diffX = e2.getX() - e1.getX();
     if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
       if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
         if (diffX > 0)
@@ -54,11 +54,11 @@ public class ReadSmsActivity extends VisionActivity {
     return super.onFling(e1, e2, f1, f2);
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
     Intent i = null;
-    SmsType currMsg = getCurrentSms();
+    final SmsType currMsg = getCurrentSms();
     switch (getButtonByMode().getId()) {
       case R.id.sms_send_sms:
         i = new Intent(getApplicationContext(), QuickSMSActivity.class);

@@ -33,7 +33,7 @@ public class QuickSMSActivity extends VisionActivity {
     return R.id.QuickSMSActivity;
   }
   
-  @Override public boolean onSingleTapUp(MotionEvent me) {
+  @Override public boolean onSingleTapUp(final MotionEvent me) {
     if (super.onSingleTapUp(me))
       return true;
     final View view = getButtonByMode();
@@ -50,7 +50,7 @@ public class QuickSMSActivity extends VisionActivity {
     return false;
   }
   
-  @Override protected void onCreate(Bundle b) {
+  @Override protected void onCreate(final Bundle b) {
     super.onCreate(b);
     setContentView(R.layout.activity_quick_sms);
     init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_help));

@@ -37,10 +37,10 @@ public class DisplaySettingsActivity extends VisionActivity {
    *          - motion event
    * 
    */
-  @Override public boolean onSingleTapUp(MotionEvent e) {
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    View button = getButtonByMode();
+    final View button = getButtonByMode();
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     switch (button.getId()) {
       case R.id.button_set_colors:
@@ -50,7 +50,7 @@ public class DisplaySettingsActivity extends VisionActivity {
         startActivity(new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class));
         break;
       case R.id.button_exit_launcher:
-        PackageManager pm = getPackageManager();
+        final PackageManager pm = getPackageManager();
         pm.clearPackagePreferredActivities(getPackageName());
         vibrate(300);
         break;
@@ -60,10 +60,10 @@ public class DisplaySettingsActivity extends VisionActivity {
         String defaultLang = "HEBREW";
         if (_myLocale.equals(Locale.US))
           defaultLang = "ENGLISH";
-        String language = sp.getString("LANGUAGE", defaultLang);
+        final String language = sp.getString("LANGUAGE", defaultLang);
         if (language.equals("ENGLISH")) {
           VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
-          Locale locale = new Locale("iw");
+          final Locale locale = new Locale("iw");
           Locale.setDefault(locale);
           _config.locale = locale;
           speakOutAsync(getString(R.string.switched_to_hebrew));
@@ -80,7 +80,7 @@ public class DisplaySettingsActivity extends VisionActivity {
         finish();
         break;
       case R.id.button_selecting_mode:
-        String buttonMode = sp.getString("BUTTON MODE", "regular");
+        final String buttonMode = sp.getString("BUTTON MODE", "regular");
         if (buttonMode.equals("regular")) {
           VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
           speakOutAsync(getString(R.string.sticky_buttons_mode));
@@ -103,7 +103,7 @@ public class DisplaySettingsActivity extends VisionActivity {
    * Called when the activity is first created.
    */
   /** */
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(final Bundle savedInstanceState) {
     Log.i("MyLog", "DisplaySettings:: onCreate");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);

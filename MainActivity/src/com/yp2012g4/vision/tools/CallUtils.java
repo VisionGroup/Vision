@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.android.internal.telephony.ITelephony;
+import com.yp2012g4.vision.settings.VisionApplication;
 
 /**
  * This util class is used to answer, reject (and later call) calls and more
@@ -29,7 +30,6 @@ public class CallUtils {
   private com.android.internal.telephony.ITelephony telephonyService;
   private AudioManager _am;
   
-  // ListenToPhoneState listener;
   /**
    * Enables the Speakerphone
    * 
@@ -41,7 +41,6 @@ public class CallUtils {
   }
   
   public CallUtils(final Context c) {
-    super();
     try {
       final TelephonyManager tm = (TelephonyManager) c.getSystemService(Context.TELEPHONY_SERVICE);
       final Class<?> cls = Class.forName(tm.getClass().getName());
@@ -76,7 +75,7 @@ public class CallUtils {
   public void endCall() {
     try {
       telephonyService.endCall();
-      Thread.sleep(1000);
+      Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
     } catch (final Exception e) {
       e.printStackTrace();
       Log.e(TAG, "FATAL ERROR: could not connect to telephony subsystem");

@@ -43,13 +43,13 @@ public class TalkingListView extends RelativeLayout {
   }
   
   private void getAttr(final Context context, final AttributeSet attrs) {
-    final TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TalkingListView, 0, 0);
+    final TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TalkingListView, 0, 0);
     try {
-      _rows = a.getInteger(R.styleable.TalkingListView_rows, DEFAULT_ROWS);
-      _cols = a.getInteger(R.styleable.TalkingListView_cols, DEFAULT_COLS);
+      _rows = ta.getInteger(R.styleable.TalkingListView_rows, DEFAULT_ROWS);
+      _cols = ta.getInteger(R.styleable.TalkingListView_cols, DEFAULT_COLS);
       _dispView = new View[_rows * _cols];
     } finally {
-      a.recycle();
+      ta.recycle();
     }
   }
   
@@ -107,6 +107,8 @@ public class TalkingListView extends RelativeLayout {
    * @param p
    */
   private void setViewSize(final LayoutParams p) {
+    if (_rows == 0 || _cols == 0)
+      return;
     final int h = getHeight() / _rows;
     final int w = getWidth() / _cols;
     if (p != null) {
@@ -137,7 +139,6 @@ public class TalkingListView extends RelativeLayout {
    * Initialize the layout.
    */
   @Override protected void onLayout(final boolean changed, final int l, final int t, final int r, final int b) {
-    // TODO Auto-generated method stub
     super.onLayout(changed, l, t, r, b);
     if (_adapter != null && _init != true) {
       setPage(_page);
@@ -212,7 +213,6 @@ public class TalkingListView extends RelativeLayout {
    * @return true if the item currently displayed.
    */
   public boolean isItemDisplayed(final int pos) {
-    // TODO return exp
     if (pos < _page * _rows * _cols || pos >= _page * _rows * _cols + _rows * _cols)
       return false;
     return true;

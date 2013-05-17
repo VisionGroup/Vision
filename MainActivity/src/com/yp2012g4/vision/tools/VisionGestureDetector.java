@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.settings.VisionApplication;
 
@@ -40,7 +41,9 @@ import com.yp2012g4.vision.settings.VisionApplication;
  * @version 1.1
  */
 public abstract class VisionGestureDetector extends Activity implements OnClickListener, OnGestureListener, OnTouchListener {
+  private static final int VIBRATE_SHORT_DURATION = 20;
   private static final String TAG = "vision:VisionGestureDetector";
+  public static final long VIBRATE_DURATION = 150;
   /**
    * for multitouch gesture detection
    */
@@ -48,6 +51,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private long _mFirstDownTime = 0;
   private boolean _mSeparateTouches = false;
   private byte _mTwoFingerTapCount = 0;
+  private Vibrator vibrator = null;
   /**
    * Stores the dimensions of a button
    */
@@ -274,7 +278,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return true if the given view has a button type
    */
   protected static boolean isButtonType(final View v) {
-    return v instanceof TalkingButton || v instanceof TalkingImageButton;
+    return v instanceof TalkingButton || v instanceof TalkingImageButton || v instanceof TalkingEditText;
   }
   
   /**
@@ -287,7 +291,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @return the button text to be read
    */
   public static String textToRead(final View v) {
-    return v instanceof TalkingButton ? ((TalkingButton) v).getReadText() : ((TalkingImageButton) v).getReadText();
+    return v instanceof TalkingButton ? ((TalkingButton) v).getReadText()
+        : v instanceof TalkingImageButton ? ((TalkingImageButton) v).getReadText() : ((TalkingEditText) v).getReadText();
   }
   
   /**
@@ -297,10 +302,9 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          - last view being touched
    * 
    */
-  public void onActionUp(@SuppressWarnings("unused") final View v) {/*
-                                                                     * to be
-                                                                     * overridden
-                                                                     */
+  public void onActionUp(final View v) {/*
+                                         * to be overridden
+                                         */
   }
   
   /**
@@ -320,9 +324,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   public void speakOutSync(final String s) {
     speakOutAsync(s);
-    while (_tts.isSpeaking()) {
-      // Wait until finish talking.
-    }
+    _tts.waitUntilFinishTalking();
   }
   
   @Override public void onDestroy() {
@@ -341,6 +343,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _mHandler = new Handler();
     _gestureDetector = new GestureDetector(this);
     _navigationBar = false;
+    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
   }
   
   /**
@@ -362,7 +365,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     view_to_rect.put(v, _rect);
     for (int i = 0; i < vg.getChildCount(); i++)
       getButtonsPosition(vg.getChildAt(i));
-    return;
   }
   
   /**
@@ -416,11 +418,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return null;
   }
   
-  // @Override
-  // public void onInit(int status) {
-  // if (!_t.isRuning())
-  // _t = new TTS(this, this);
-  // }
   /**
    * Finishes the activity after some delay
    */
@@ -431,22 +428,22 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   };
   
   @Override public void startActivity(final Intent intent) {
-    vibrate(200);
+    vibrate(VIBRATE_DURATION);
     super.startActivity(intent);
   }
   
   /**
-   * vibration during touch.
+   * Make the phone vibrate.
    * 
-   * @param i
+   * @param milliseconds
+   *          The time to vibrate.
    */
-  protected void vibrate(final int duration) {
-    final Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    vb.vibrate(duration);
+  protected void vibrate(final long milliseconds) {
+    vibrator.vibrate(milliseconds);
   }
   
   protected void hapticFeedback(final View v) {
     VisionApplication.visualFeedback(v, this);
-    vibrate(20);
+    vibrate(VIBRATE_SHORT_DURATION);
   }
 }

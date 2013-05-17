@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -20,6 +21,7 @@ import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SpeakingClockActivity extends VisionActivity {
@@ -43,11 +45,10 @@ public class SpeakingClockActivity extends VisionActivity {
    *          - the Calendar you want to parse
    * @return string to speak
    */
-  public static String parseTime(final Calendar cal) {
+  public static String parseTime(final Calendar cal, final Resources res) {
     final String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
     final int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-    final String s = h + " " + " and " + " " + cal.get(Calendar.MINUTE) + " " + " minutes " + ampm;
-    return s;
+    return String.format(res.getString(R.string.hourFormat), Integer.valueOf(h), Integer.valueOf(cal.get(Calendar.MINUTE)), ampm);
   }
   
   @Override public int getViewId() {
@@ -61,7 +62,7 @@ public class SpeakingClockActivity extends VisionActivity {
     switch (button.getId()) {
       case R.id.TimeButton:
         final Calendar cal = Calendar.getInstance();
-        speakOutAsync(parseTime(cal));
+        speakOutAsync(parseTime(cal, getResources()));
         break;
       case R.id.DateButton:
         final String d = getDateFormat();
@@ -79,7 +80,7 @@ public class SpeakingClockActivity extends VisionActivity {
     init(0, getString(R.string.ClockTitle), getString(R.string.speaking_clock_help));
     final TalkingButton dateButton = getTalkingButton(R.id.DateButton);
     dateButton.setText(getDateFormat());
-    new Timer().schedule(new MyTimerTask(), 100, 1000);
+    new Timer().schedule(new MyTimerTask(), 100, VisionApplication.DEFUALT_DELAY_TIME);
   }
   
   /***
@@ -109,7 +110,8 @@ public class SpeakingClockActivity extends VisionActivity {
   @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-      speakOutAsync(parseTime(Calendar.getInstance()));
+      final Calendar cal = Calendar.getInstance();
+      speakOutAsync(parseTime(cal, getResources()));
     }
   }
 }

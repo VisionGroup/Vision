@@ -25,6 +25,8 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * @version 1.1
  */
 public class ContactsActivity extends VisionActivity {
+  public static final String FAVORITS_CONTACTS = "favorits";
+  public static final String ALL_CONTACTS = "all";
   public static final String LIST_TYPE = "list_type";
   TalkingButton b;
   private final int VIBRATE_TIME = 100;
@@ -32,7 +34,6 @@ public class ContactsActivity extends VisionActivity {
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
-  private static final int VR_REQUEST = 999;
   
   @Override public int getViewId() {
     return R.id.ContactsActivity;
@@ -63,8 +64,6 @@ public class ContactsActivity extends VisionActivity {
         final Intent call = new Intent(Intent.ACTION_CALL);
         call.setData(Uri.parse("tel:" + contacts.get(currentContact).getPhone()));
         startActivity(call);
-        // PhoneNotifications.DeleteCallLogByNumber(this,
-        // contacts.get(currentContact).getPhone());
         CallManager.DeleteCallLogByNumber(this, contacts.get(currentContact).getPhone());
         break;
       case R.id.contacts_sms:
@@ -83,12 +82,12 @@ public class ContactsActivity extends VisionActivity {
     setContentView(R.layout.activity_contacts);
     init(0, getString(R.string.contacts_screen), getString(R.string.contacts_screen_help));
     final Bundle extras = getIntent().getExtras();
-    String listType = "all";
+    String listType = ALL_CONTACTS;
     if (extras != null)
       try {
         listType = extras.getString(ContactsActivity.LIST_TYPE);
       } catch (final Exception e) {
-        listType = "all";
+        listType = ALL_CONTACTS;
       }
     selectCorrespondingContactsList(listType);
     setContact();
@@ -96,61 +95,37 @@ public class ContactsActivity extends VisionActivity {
   
   private void selectCorrespondingContactsList(final String listType) {
     final ContactManager contactManager = new ContactManager(getApplicationContext());
-    if (listType.equalsIgnoreCase("all")) {
+    if (listType.equalsIgnoreCase(ALL_CONTACTS)) {
       contacts = contactManager.getAllContacts();
-      findViewById(getViewId()).setContentDescription("Contact list screen");
+      findViewById(getViewId()).setContentDescription(getString(R.string.contact_list_screen));
       return;
     }
-    if (listType.equalsIgnoreCase("favorits")) {
+    if (listType.equalsIgnoreCase(FAVORITS_CONTACTS)) {
       contacts = contactManager.getFavoriteContacts();
-      findViewById(getViewId()).setContentDescription("Favorit contacts screen");
+      findViewById(getViewId()).setContentDescription(getString(R.string.favorite_list_screen));
       return;
     }
     findViewById(getViewId()).setContentDescription("Test contacts screen");
     contacts = ContactManager.getTestContacts();
   }
   
-  // @Override public boolean onCreateOptionsMenu(Menu menu) {
-  // // Inflate the menu; this adds items to the action bar if it is present.
-  // getMenuInflater().inflate(R.menu.activity_read_sms, menu);
-  // return true;
-  // }
   private void setContact() {
     final TalkingButton contactNameButton = getTalkingButton(R.id.contact_name);
     final TalkingButton conactPhoneButton = getTalkingButton(R.id.contact_phone);
     final TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
     final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_sms);
-    if (contacts.size() != 0) {
+    if (contacts.size() == 0)
+      speakOutAsync(getString(R.string.no_messages));
+    else {
       currentName = contacts.get(currentContact).getContactName();
       currentPhone = contacts.get(currentContact).getPhone();
-      callPhoneButton.setReadText("Call " + currentName);
-      smsPhoneButton.setReadText("Send quick sms to " + currentName);
+      callPhoneButton.setReadText(getString(R.string.call_message) + currentName);
+      smsPhoneButton.setReadText(getString(R.string.send_quick_sms_message) + currentName);
       contactNameButton.setText(currentName);
       contactNameButton.setReadText(currentName);
       conactPhoneButton.setText(currentPhone);
       conactPhoneButton.setReadText(currentPhone);
       speakOutAsync(currentName);
-    } else
-      speakOutAsync(getString(R.string.no_messages));
-  }
-  
-  /**
-   * onActivityResults handles: - retrieving results of speech recognition
-   * listening - retrieving result of TTS data check
-   */
-  @Override protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-    // check speech recognition result
-    if (requestCode == VR_REQUEST && resultCode == RESULT_OK) {
-      // store the returned word list as an ArrayList
-      // ArrayList<String> suggestedWords = data
-      // .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-      // set the retrieved list to display in the ListView using an
-      // ArrayAdapter
-      // wordList.setAdapter(new ArrayAdapter<String> (this,
-      // R.layout.word, suggestedWords));
     }
-    // tss code here
-    // call superclass method super.onActivityResult(requestCode,
-    // resultCode, data);
   }
 }

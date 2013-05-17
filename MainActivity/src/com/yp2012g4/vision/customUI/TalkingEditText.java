@@ -3,20 +3,11 @@ package com.yp2012g4.vision.customUI;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.Button;
+import android.widget.EditText;
 
 import com.yp2012g4.vision.R;
 
-/**
- * This is a Talking button used in a TTS project to provide the additional
- * functionality and information required by tts.
- * 
- * @version 1.0
- * @author Amit Yaffe
- * 
- */
-public class TalkingButton extends Button implements Runnable {
-  private Runnable _run; // the functionality of the button
+public class TalkingEditText extends EditText {
   private String _readText = ""; // the text for the TTS
   private String _readToolTip = ""; // tool tip text
   private String _prefsValue = ""; // value for preference buttons
@@ -24,11 +15,11 @@ public class TalkingButton extends Button implements Runnable {
   /**
    * c'tor
    */
-  public TalkingButton(final Context c, final AttributeSet as) {
+  public TalkingEditText(Context c, AttributeSet as) {
     super(c, as);
-    final TypedArray a = c.obtainStyledAttributes(as, R.styleable.TalkingButton, 0, 0);
-    _readText = a.getString(R.styleable.TalkingButton_readText);
-    _prefsValue = a.getString(R.styleable.TalkingButton_prefsValue);
+    final TypedArray a = c.obtainStyledAttributes(as, R.styleable.TalkingEditText, 0, 0);
+    _readText = a.getString(R.styleable.TalkingEditText_readText);
+    _prefsValue = a.getString(R.styleable.TalkingEditText_prefsValue);
   }
   
   /**
@@ -45,7 +36,7 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param readText
    */
-  public void setReadText(final String readText) {
+  public void setReadText(String readText) {
     _readText = readText;
   }
   
@@ -63,10 +54,11 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param s
    */
-  public void setReadToolTip(final String s) {
+  public void setReadToolTip(String s) {
     _readToolTip = s;
   }
   
+  // TODO: Check How to connect to foreground and background color settings ???
   /**
    * Returns the value linked with the preference represented by the button.
    * 
@@ -81,21 +73,7 @@ public class TalkingButton extends Button implements Runnable {
    * 
    * @param s
    */
-  public void setPrefsValue(final String s) {
+  public void setPrefsValue(String s) {
     _prefsValue = s;
-  }
-  
-  /**
-   * set runnable class to button.
-   * 
-   * @param r
-   */
-  public void setRun(final Runnable r) {
-    _run = r;
-  }
-  
-  @Override public void run() {
-    if (_run != null)
-      _run.run();
   }
 }

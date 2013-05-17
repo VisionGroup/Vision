@@ -26,9 +26,9 @@ import com.yp2012g4.vision.tools.VisionActivity;
  */
 public class PhoneStatusActivity extends VisionActivity {
   private static final String TAG = "vision:PhoneStatusActivity";
-  /**
-   * Used to activate the onTouch button reading function.
-   */
+  final public static int signal_veryGood = 12, signal_good = 8, signal_poor = 5, signal_noSignalThreshold = 2,
+      signal_noSignalValue = 99;
+  // Used to activate the onTouch button reading function.
   static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
   PhoneNotifications pn;
   final ArrayList<String> contacts = new ArrayList<String>();
@@ -64,18 +64,14 @@ public class PhoneStatusActivity extends VisionActivity {
       s = getString(R.string.no_missed_calls);
     else
       for (final CallType c : calls) {
-        s += getString(R.string.called_at) + " " + c.getDate() // c.getHour()
-            + ". " + getString(R.string.from) + " ";
+        s += getString(R.string.called_at) + " " + c.getDate() + ". " + getString(R.string.from) + " ";
         if (TTS.isPureEnglish(c.getName()))
           s += c.getName() + "\n";
         else
           s += c.getNumber() + "\n";// TODO: Remove when Hebrew is
         // detected.
       }
-    speakOutAsync(s);
-    while (_tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    speakOutSync(s);
   }
   
   @Override public int getViewId() {
@@ -115,14 +111,11 @@ public class PhoneStatusActivity extends VisionActivity {
   @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
-    init(0/* TODO Check what icon goes here */, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
+    init(0, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
     adjustLayoutSize(3);
     pn = new PhoneNotifications(this);
   }
-  
-  final public static int signal_veryGood = 12, signal_good = 8, signal_poor = 5, signal_noSignalThreshold = 2,
-      signal_noSignalValue = 99;
   
   /**
    * Returns the signal strength in percentage.
@@ -132,7 +125,6 @@ public class PhoneStatusActivity extends VisionActivity {
   public String signalToString() {
     final int signal = PhoneNotifications.getSignalStrength();
     Log.d(TAG, String.valueOf((int) (signal * 100.0f / MAX_SIGNAL)));
-    // TODO sparta constants
     if (signal <= signal_noSignalThreshold || signal == signal_noSignalValue)
       return getString(R.string.phoneStatus_message_noSignal_read);
     if (signal >= signal_veryGood)

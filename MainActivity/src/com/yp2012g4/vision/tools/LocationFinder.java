@@ -27,7 +27,7 @@ public class LocationFinder {
   
   public LocationFinder(final LocationManager newLocationManager) {
     _locationManager = newLocationManager;
-    log("created");
+    Log.i(TAG, "created");
   }
   
   /**
@@ -38,7 +38,7 @@ public class LocationFinder {
    * @return true if succeeded, false otherwise
    */
   public boolean run(final LocationHandler h) {
-    log("run");
+    Log.i(TAG, "run");
     if (_running)
       stop();
     _listeners = new ArrayList<LocationListener>();
@@ -50,7 +50,7 @@ public class LocationFinder {
   
   private void setUpLocationListener(final String p) {
     if (_locationManager.isProviderEnabled(p)) {
-      log("enabling" + p);
+      Log.i(TAG, "enabling" + p);
       final LocationListener l = createLocationListener(p);
       _listeners.add(l);
       _locationManager.requestLocationUpdates(p, 0, 0, l);
@@ -59,10 +59,10 @@ public class LocationFinder {
   }
   
   void makeUseOfNewLocation(final Location location, final String provider) {
-    log("Making use of new location from provider");
+    Log.i(TAG, "Making use of new location from provider");
     final double latitude = location.getLatitude();
     final double longitude = location.getLongitude();
-    log("latitude = " + latitude + ", longitude = " + longitude);
+    Log.i(TAG, "latitude = " + latitude + ", longitude = " + longitude);
     OpenStreetMapGeocoding(latitude, longitude, provider);
   }
   
@@ -86,7 +86,7 @@ public class LocationFinder {
   private LocationListener createLocationListener(final String Provider) {
     final LocationListener _l = new LocationListener() {
       @Override public void onLocationChanged(final Location location) {
-        log("listener of provider " + Provider + ": location changed");
+        Log.i(TAG, "listener of provider " + Provider + ": location changed");
         makeUseOfNewLocation(location, Provider);
       }
       
@@ -123,14 +123,14 @@ public class LocationFinder {
       
       @Override protected void onPostExecute(final String result) {
         super.onPostExecute(result);
-        log("Geocoding: " + result);
+        Log.i(TAG, "Geocoding: " + result);
         _handler.handleLocation(longitude, latitude, provider, result);
       }
     };
     try {
       _downloader.execute();
     } catch (final Exception e) {
-      log("Error: " + e.getMessage());
+      Log.e(TAG, "Error: " + e.getMessage());
     }
   }
   
@@ -140,15 +140,15 @@ public class LocationFinder {
   public void stop() {
     if (!_running)
       return;
-    log("stopped");
+    Log.i(TAG, "stopped");
     if (_listeners != null) {
       for (final LocationListener l : _listeners) {
-        log("removed a listener");
+        Log.i(TAG, "removed a listener");
         _locationManager.removeUpdates(l);
       }
       _listeners.clear();
       _listeners = null;
     }
-    log("end of stop");
+    Log.i(TAG, "end of stop");
   }
 }

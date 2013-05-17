@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.yp2012g4.vision.settings.VisionApplication;
 import com.yp2012g4.vision.telephony.IncomingCallActivity;
 
 /**
@@ -49,7 +50,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       i.putExtra(CallUtils.NUMBER_KEY, phonenumber);
       i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       Log.d(TAG, "Starting IncomingCAllActivity");
-      Thread.sleep(1000);
+      Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
       context.startActivity(i);
     } catch (final Exception e) {
       Log.e(TAG, "error starting IncomingCAllActivity", e);

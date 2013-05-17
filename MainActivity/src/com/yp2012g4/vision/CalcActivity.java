@@ -43,19 +43,22 @@ public class CalcActivity extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
-    super.onSingleTapUp(e);
+    if (super.onSingleTapUp(e))
+      return true;
     if (_navigationBar)
       return _navigationBar = false;
     if (isBadAction)
       // also the touched button text
       return isBadAction = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
-      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
-        if (isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY())) {
-          speakOutAsync(textToRead(entry.getKey()));
-          if (tappedEquals(entry.getKey()))
-            speakOutSync(textToRead(entry.getKey()) + calculated_number);
+      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet()) {
+        final View key = entry.getKey();
+        if (checkIfButtonPressed(e, entry)) {
+          speakOutAsync(textToRead(key));
+          if (tappedEquals(key))
+            speakOutSync(textToRead(key) + calculated_number);
         }
+      }
     return true;
   }
   
@@ -75,15 +78,7 @@ public class CalcActivity extends VisionActivity {
     final CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
     // it's a digit
     if (digits.contains(Integer.valueOf(buttonId)))
-      if (!equalsPressed) {
-        if (sign == Sign.NO_SIGN)
-          lhs_number += buttonText;
-        else
-          rhs_number += buttonText;
-        calculated_number += buttonText;
-      } else
-        badAction();
-    // it's a sign
+      digitPressed(buttonText);
     else if (getSignFromId(buttonId) != Sign.NO_SIGN)
       pressOnSignButton(buttonText, buttonId);
     else
@@ -107,10 +102,25 @@ public class CalcActivity extends VisionActivity {
         default:
           break;
       }
-    vibrate(150);
+    vibrate(VIBRATE_DURATION);
     final TalkingButton resultButton = getTalkingButton(R.id.result);
     resultButton.setText(calculated_number.toCharArray(), 0, calculated_number.length());
     resultButton.setReadText(calculated_number);
+  }
+  
+  /**
+   * @param buttonText
+   */
+  private void digitPressed(final CharSequence buttonText) {
+    if (equalsPressed)
+      badAction();
+    else {
+      if (sign == Sign.NO_SIGN)
+        lhs_number += buttonText;
+      else
+        rhs_number += buttonText;
+      calculated_number += buttonText;
+    }
   }
   
   private void badAction() {

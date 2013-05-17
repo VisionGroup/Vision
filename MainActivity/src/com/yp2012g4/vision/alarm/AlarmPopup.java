@@ -22,6 +22,7 @@ import android.view.WindowManager;
 
 import com.yp2012g4.vision.R;
 
+//when implements vision activity the application crashes on this screen
 public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener {
   private static final String TAG = "vision:AlarmPopup";
   static public MediaPlayer mp = null;

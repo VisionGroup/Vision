@@ -1,11 +1,12 @@
 package com.yp2012g4.vision.tools;
 
-import android.content.Context;
+import java.util.Map;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
@@ -30,7 +31,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
-  private Vibrator vibrator = null;
   
   public int getIcon() {
     return _icon;
@@ -100,7 +100,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
   
   @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     // hide title-bar of application. Must be before setting the layout
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     // hide status-bar of Android. Could also be done later
@@ -148,16 +147,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
   }
   
   /**
-   * Make the phone vibrate.
-   * 
-   * @param milliseconds
-   *          The time to vibrate.
-   */
-  protected void vibrate(final long milliseconds) {
-    vibrator.vibrate(milliseconds);
-  }
-  
-  /**
    * Return a Talking button by it's id.
    * 
    * @param id
@@ -166,5 +155,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
    */
   public TalkingButton getTalkingButton(final int id) {
     return (TalkingButton) findViewById(id);
+  }
+  
+  /**
+   * @param e
+   * @param entry
+   * @return
+   */
+  public static boolean checkIfButtonPressed(final MotionEvent e, final Map.Entry<View, Rect> entry) {
+    return isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY());
   }
 }

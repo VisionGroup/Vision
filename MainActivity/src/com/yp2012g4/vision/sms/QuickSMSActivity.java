@@ -26,7 +26,6 @@ public class QuickSMSActivity extends VisionActivity {
    * This is the key to be used when putting the destination number in this
    * activities extras.
    */
-  // public static final String NUMBER_KEY = "number";
   public String number;
   
   @Override public int getViewId() {
@@ -38,13 +37,10 @@ public class QuickSMSActivity extends VisionActivity {
       return true;
     final View view = getButtonByMode();
     if (view instanceof TalkingButton) {
-      speakOutAsync(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText());
-      while (_tts.isSpeaking()) {
-        // wait...
-      }
+      speakOutSync(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText());
       SmsManager.getDefault().sendTextMessage(number, null, ((TalkingButton) view).getReadText(), null, null);
-      speakOutAsync(getString(R.string.message_has_been_sent));
-      _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
+      speakOutSync(getString(R.string.message_has_been_sent));
+      _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
       finish();
     }
     return false;
@@ -54,7 +50,6 @@ public class QuickSMSActivity extends VisionActivity {
     super.onCreate(b);
     setContentView(R.layout.activity_quick_sms);
     init(0, getString(R.string.quick_sms_screen), getString(R.string.quick_sms_help));
-    // TODO: create help string
     _mHandler = new Handler();
     final Bundle extras = getIntent().getExtras();
     if (extras != null)

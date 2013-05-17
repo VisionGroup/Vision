@@ -94,14 +94,16 @@ public class ContactManager {
    * @return
    */
   public String lookupPhoneNumbers(final String lk) {
+    String $ = "";// "No phone number"
     final Cursor cs = _c.getContentResolver().query(Phone.CONTENT_URI, null, Phone.LOOKUP_KEY + " = ?", new String[] { lk }, null);
     if (cs.getCount() > 0) {
       cs.moveToFirst();
-      return cs.getString(cs.getColumnIndex(Phone.NUMBER));
+      $ = cs.getString(cs.getColumnIndex(Phone.NUMBER));
     }
-    return "";// "No phone number";
+    return $;
   }
   
+  // only for the use of tests
   static public ArrayList<ContactType> getTestContacts() {
     final ArrayList<ContactType> $ = new ArrayList<ContactType>();
     $.add(new ContactType("0544457141", "Roman Gurevitch"));

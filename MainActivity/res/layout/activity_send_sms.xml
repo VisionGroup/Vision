@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    android:id="@+id/SendSmsActivity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:contentDescription="@string/SendSms_whereami"
+    android:orientation="vertical" >
+
+    <com.yp2012g4.vision.customUI.TalkingEditText
+        android:id="@+id/phoneNumber"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:hint="@string/enter_a_phone_number"
+        android:inputType="phone"
+        custom:readText="@string/phone_number" />
+
+    <com.yp2012g4.vision.customUI.TalkingEditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="4"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        custom:readText="@string/message_content" />
+
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/sendMessageButton"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:text="@string/send_message"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        custom:readText="@string/send_message" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
+    </LinearLayout>
+
+</LinearLayout>

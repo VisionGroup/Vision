@@ -65,7 +65,6 @@ public class TalkingImageButton extends ImageButton implements Runnable {
   private String _readToolTip = "";
   private String _prefsValue = "";
   
-  // TODO: Check How to connect to foreground and background color settings
   /**
    * Returns the value linked with the preference represented by the button.
    * 

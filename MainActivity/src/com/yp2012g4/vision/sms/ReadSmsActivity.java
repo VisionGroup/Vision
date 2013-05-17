@@ -1,10 +1,8 @@
 package com.yp2012g4.vision.sms;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
@@ -22,16 +20,13 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class ReadSmsActivity extends VisionActivity {
   TalkingListView listView;
   SmsAdapter adapter;
-  Vibrator vb;
   private static final int SWIPE_THRESHOLD = 100;
   private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-  private static final long VIBRATION_LEN = 150;
   
   @Override protected void onCreate(final Bundle b) {
     super.onCreate(b);
     setContentView(R.layout.activity_read_sms);
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
-    vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     listView = (TalkingListView) findViewById(R.id.TalkingSmsListView2);
     adapter = new SmsAdapter(SmsManager.getIncomingMessages(this), this);
     listView.setAdapter(adapter);
@@ -49,7 +44,7 @@ public class ReadSmsActivity extends VisionActivity {
           listView.prevPage();
         else
           listView.nextPage();
-        vibrate(VIBRATION_LEN);
+        vibrate(VIBRATE_DURATION);
       }
     return super.onFling(e1, e2, f1, f2);
   }
@@ -78,7 +73,7 @@ public class ReadSmsActivity extends VisionActivity {
         listView.setAdapter(adapter);
         listView.prevPage();
         speakOutAsync(getString(R.string.delete_message));
-        vibrate(VIBRATION_LEN);
+        vibrate(VIBRATE_DURATION);
         break;
       default:
         break;

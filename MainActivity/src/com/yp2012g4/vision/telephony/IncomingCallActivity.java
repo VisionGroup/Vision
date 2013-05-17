@@ -55,7 +55,7 @@ public class IncomingCallActivity extends VisionActivity {
         break;
       case R.id.back_button:
         speakOutAsync(getString(R.string.previous_screen));
-        _mHandler.postDelayed(mLaunchTask, VisionApplication.DELAY);
+        _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
         break;
       default:
         break;
@@ -65,9 +65,8 @@ public class IncomingCallActivity extends VisionActivity {
   @Override public void onAttachedToWindow() {
     // make the activity show even when the screen is locked.
     final Window window = getWindow();
-    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED +
-    // WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON +
-        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+        + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
   }
   
   @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {

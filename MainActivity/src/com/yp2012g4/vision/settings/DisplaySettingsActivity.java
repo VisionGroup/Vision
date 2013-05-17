@@ -52,51 +52,63 @@ public class DisplaySettingsActivity extends VisionActivity {
       case R.id.button_exit_launcher:
         final PackageManager pm = getPackageManager();
         pm.clearPackagePreferredActivities(getPackageName());
-        vibrate(300);
+        vibrate(VIBRATE_DURATION);
         break;
       case R.id.locale:
-        _myLocale = Locale.getDefault(); // get xml strings file
-        _config = new Configuration();
-        String defaultLang = "HEBREW";
-        if (_myLocale.equals(Locale.US))
-          defaultLang = "ENGLISH";
-        final String language = sp.getString("LANGUAGE", defaultLang);
-        if (language.equals("ENGLISH")) {
-          VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
-          final Locale locale = new Locale("iw");
-          Locale.setDefault(locale);
-          _config.locale = locale;
-          speakOutAsync(getString(R.string.switched_to_hebrew));
-        } else {
-          VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
-          Locale.setDefault(Locale.US);
-          _config.locale = Locale.US;
-          speakOutAsync(getString(R.string.switched_to_english));
-        }
-        getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
-        // setResult(RESULT_OK, null);
-        // empty activity stack
-        startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        finish();
+        pressedLocalSelectButton(sp);
         break;
       case R.id.button_selecting_mode:
-        final String buttonMode = sp.getString("BUTTON MODE", "regular");
-        if (buttonMode.equals("regular")) {
-          VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
-          speakOutAsync(getString(R.string.sticky_buttons_mode));
-        } else {
-          VisionApplication.savePrefs("BUTTON MODE", "regular", this);
-          speakOutAsync(getString(R.string.regular_buttons_mode));
-        }
+        pressedButtonSelectButton(sp);
         break;
       case R.id.calculator:
-        startActivity(new Intent(this, CalcActivity.class)
-        /* .setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP ) */);
+        startActivity(new Intent(this, CalcActivity.class));
         break;
       default:
         break;
     }
     return false;
+  }
+  
+  /**
+   * @param sp
+   */
+  private void pressedLocalSelectButton(final SharedPreferences sp) {
+    _myLocale = Locale.getDefault(); // get xml strings file
+    _config = new Configuration();
+    String defaultLang = "HEBREW";
+    if (_myLocale.equals(Locale.US))
+      defaultLang = "ENGLISH";
+    final String language = sp.getString("LANGUAGE", defaultLang);
+    if (language.equals("ENGLISH")) {
+      VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
+      final Locale locale = new Locale("iw");
+      Locale.setDefault(locale);
+      _config.locale = locale;
+      speakOutAsync(getString(R.string.switched_to_hebrew));
+    } else {
+      VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
+      Locale.setDefault(Locale.US);
+      _config.locale = Locale.US;
+      speakOutAsync(getString(R.string.switched_to_english));
+    }
+    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
+    // empty activity stack
+    startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    finish();
+  }
+  
+  /**
+   * @param sp
+   */
+  private void pressedButtonSelectButton(final SharedPreferences sp) {
+    final String buttonMode = sp.getString("BUTTON MODE", "regular");
+    if (buttonMode.equals("regular")) {
+      VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
+      speakOutAsync(getString(R.string.sticky_buttons_mode));
+    } else {
+      VisionApplication.savePrefs("BUTTON MODE", "regular", this);
+      speakOutAsync(getString(R.string.regular_buttons_mode));
+    }
   }
   
   /**

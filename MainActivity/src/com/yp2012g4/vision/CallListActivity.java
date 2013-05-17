@@ -54,23 +54,28 @@ public class CallListActivity extends VisionActivity {
         startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.getNumber())));
         break;
       case R.id.calllist_remove:
-        // first we remove the SMS from the phone DB
-        CallManager.DeleteCallLogByNumber(this, currCall.getNumber());
-        // then we remove the SMS from the displayed list
-        final int callId = (int) listView.getDisplayedItemIds()[0];
-        adapter.removeItemFromList(callId);
-        listView.setAdapter(adapter);
-        listView.prevPage();
-        speakOutAsync(getString(R.string.delete_call));
-        vibrate(150);
+        removeFromCallList(currCall);
         break;
       default:
         break;
     }
-    // SmsManager.markMessageRead(this,
-    // currCall.getAddress(),currCall.getBody());
     // TODO: Add mark call as seen.
     return false;
+  }
+  
+  /**
+   * @param currCall
+   */
+  private void removeFromCallList(final CallType currCall) {
+    // first we remove the SMS from the phone DB
+    CallManager.DeleteCallLogByNumber(this, currCall.getNumber());
+    // then we remove the SMS from the displayed list
+    final int callId = (int) listView.getDisplayedItemIds()[0];
+    adapter.removeItemFromList(callId);
+    listView.setAdapter(adapter);
+    listView.prevPage();
+    speakOutAsync(getString(R.string.delete_call));
+    vibrate(VIBRATE_DURATION);
   }
   
   public CallType getCurrentCall() {

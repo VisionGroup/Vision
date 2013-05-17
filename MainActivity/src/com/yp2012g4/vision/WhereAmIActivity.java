@@ -27,16 +27,15 @@ public class WhereAmIActivity extends VisionActivity {
   final private static String TAG = "vision:WhereAmIActivity";
   final private static int updateTimeOut = 60000; // in miliseconds
   
-  // TODO: add a button to know the current status
   private static void log(final String s) {
     Log.d(TAG, s);
   }
   
-  Lock l = null;
-  LocationFinder f;
-  boolean providerRunning;
-  String text;
-  Date lastUpdate;
+  private Lock l = null;
+  private LocationFinder f;
+  private boolean providerRunning;
+  private String text;
+  private Date lastUpdate;
   
   @Override public int getViewId() {
     return R.id.where_am_i_Activity;
@@ -49,13 +48,13 @@ public class WhereAmIActivity extends VisionActivity {
       return;
     }
     lastUpdate = new Date();
-    log("longitude = " + longitude + "\n");
-    log("latitude = " + latitude + "\n");
-    log("provider = " + prov + "\n");
-    log("address: " + address);
+    Log.i(TAG, "longitude = " + longitude + "\n");
+    Log.i(TAG, "latitude = " + latitude + "\n");
+    Log.i(TAG, "provider = " + prov + "\n");
+    Log.i(TAG, "address: " + address);
     final String toSpeak = getString(R.string.your_location_is) + ": " + address;
     setText(toSpeak);
-    log("speaking out location: " + toSpeak + "\n");
+    Log.i(TAG, "speaking out location: " + toSpeak + "\n");
     l.unlock();
     speakOutAsync(toSpeak);
   }
@@ -64,7 +63,7 @@ public class WhereAmIActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_where_am_i);
     init(0, getString(R.string.where_am_i_screen), getString(R.string.where_am_i_help));
-    log("WhereAmIActivity::onCreate");
+    Log.i(TAG, "WhereAmIActivity::onCreate");
     l = new ReentrantLock();
     l.lock();
     lastUpdate = new GregorianCalendar(1800, 1, 1).getTime();
@@ -78,11 +77,11 @@ public class WhereAmIActivity extends VisionActivity {
   }
   
   @Override protected void onResume() {
-    log("onResume");
+    Log.i(TAG, "onResume");
     final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    log("Got location manager");
+    Log.i(TAG, "Got location manager");
     f = new LocationFinder(manager);
-    log("Got location finder");
+    Log.i(TAG, "Got location finder");
     providerRunning = f.run(new LocationHandler() {
       @Override public void handleLocation(final double longitude, final double latitude, final String prov, final String address) {
         makeUseOfNewLocation(longitude, latitude, prov, address);
@@ -101,9 +100,9 @@ public class WhereAmIActivity extends VisionActivity {
   }
   
   @Override protected void onPause() {
-    log("onPause");
+    Log.i(TAG, "onPause");
     f.stop();
-    log("Location finder stopped");
+    Log.i(TAG, "Location finder stopped");
     super.onPause();
   }
   

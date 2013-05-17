@@ -42,12 +42,7 @@ public class CallAdapter extends BaseAdapter {
     final TalkingButton numberView = (TalkingButton) $.findViewById(R.id.call_number);
     final TalkingButton nameView = (TalkingButton) $.findViewById(R.id.call_name);
     final TalkingButton timeView = (TalkingButton) $.findViewById(R.id.call_time);
-    CallType call;
-    // TODO: ternarize
-    if (p >= _data.size())
-      call = _data.get(0);
-    else
-      call = _data.get(p);
+    final CallType call = _data.get(p >= _data.size() ? 0 : p);
     nameView.setText(call.getName());
     numberView.setText(call.getNumber());
     timeView.setText(call.getDate().toString());
@@ -55,8 +50,7 @@ public class CallAdapter extends BaseAdapter {
   }
   
   public void removeItemFromList(final int p) {
-    if (p < 0 || p > _data.size())
-      return;
-    _data.remove(p);
+    if (p >= 0 && p <= _data.size())
+      _data.remove(p);
   }
 }

@@ -22,8 +22,6 @@ public class CallManager {
    * @return list of all calls
    */
   public static ArrayList<CallType> getAllCallsList(final Context c) {
-//		final String where = CallLog.Calls.TYPE + "="
-//				+ CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cr;
     try {
       cr = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
@@ -46,14 +44,12 @@ public class CallManager {
    * @return list of missed calls
    */
   public static ArrayList<CallType> getMissedCallsList(final Context c) {
-    final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cur;
     try {
-      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, where, null, null);
+      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    // final ArrayList<CallType> al = ;
     return copyToList(cur, new ArrayList<CallType>());
   }
   
@@ -105,9 +101,8 @@ public class CallManager {
    * @return list of missed calls
    */
   public ArrayList<CallType> getNextMissedCallsList(final Context c, final int ns) {
-    final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     try {
-      _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, where, null, null);
+      _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
@@ -123,13 +118,19 @@ public class CallManager {
    * @return the missed calls number
    */
   public static int getMissedCallsNum(final Context c) {
-    final String where = CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
     Cursor cur;
     try {
-      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, where, null, null);
+      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return 0;
     }
     return cur.getCount();
+  }
+  
+  /**
+   * @return where string for a SQL query for missed calls list
+   */
+  private static String missedCallWhere() {
+    return CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
   }
 }

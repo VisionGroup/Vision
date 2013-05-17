@@ -24,7 +24,7 @@ public class ContactsMenuActivity extends VisionActivity {
     switch (button.getId()) {
       case R.id.contactsListButton:
         intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
-        intent.putExtra(ContactsActivity.LIST_TYPE, "all");
+        intent.putExtra(ContactsActivity.LIST_TYPE, ContactsActivity.ALL_CONTACTS);
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       case R.id.dialerButton:
@@ -33,7 +33,7 @@ public class ContactsMenuActivity extends VisionActivity {
         break;
       case R.id.quickDialButton:
         intent = new Intent(ContactsMenuActivity.this, ContactsActivity.class);
-        intent.putExtra(ContactsActivity.LIST_TYPE, "favorits");
+        intent.putExtra(ContactsActivity.LIST_TYPE, ContactsActivity.FAVORITS_CONTACTS);
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         break;
       default:

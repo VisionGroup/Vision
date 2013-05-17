@@ -34,7 +34,7 @@
 
 
     <!-- DialScreen -->
-    <string name="dial_screen">מסך חיוג</string>
+    <string name="dial_screen_whereami">מסך חיוג</string>
     <string name="dial_number">ראשית, יש להקיש מספר לחיוג</string>
     <string name="quick_sms_button">S M S מהיר</string>
     <string name="digit1">1</string>
@@ -68,7 +68,7 @@
     <string name="quick_dial_button">חייג</string>
 
     <!-- MainActivity -->
-    <string name="MainActivity_wai">מסך ראשי</string>
+    <string name="MainActivity_wheramai">מסך ראשי</string>
     <string name="MainActivity_help">בחר אחת משמונה אפשרויות</string>
     <string name="low_battery">סוללה חלשה</string>
     <string name="phoneStatus_message_veryPoorSignal_read">קליטה חלשה</string>
@@ -142,6 +142,7 @@
     <string name="speaking_clock_help">בחר אחת מ-2 אפשרויות: 1) שמיעת השעה. 2) שמיעת התאריך</string>
     <string name="ClockTitle">מסך שעון</string>
     <string name="date_button">תאריך</string>
+  
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">מסך אנשי קשר</string>
@@ -153,6 +154,9 @@
     <string name="title_activity_contacts_menu">מסך תפריט אנשי קשר</string>
     <string name="contacts_help">בחר אחת מ-3 אפשרויות: 1) מעבר למסך אנשי הקשר המועדפים. 2)מעבר למסך כל אנשי הקשר. 3) מעבר לחייגן</string>
     <string name="contact_list_screen">מסך אנשי קשר</string>
+    <string name="favorite_list_screen">מסך אנשי קשר מועדפים</string>
+    <string name="send_quick_sms_message">שלח SMS מהיר ל: </string>
+    <string name="call_message">התקשר ל: </string>
     <string name="Dialer">חייגן</string>
     <string name="favorit_contacts_list">אנשי קשר מועדפים</string>
     <string name="contactsList">אנשי קשר</string>

@@ -32,13 +32,9 @@ public class SmsType {
     final String ds = cur.getString(cur.getColumnIndexOrThrow("date"));
     final long m = Long.parseLong(ds);
     _date = (String) DateFormat.format("dd/MM/yy", m);
-    // protocol =
-    // cur.getString(cur.getColumnIndexOrThrow("protocol")); can
-    // cause exception
     _read = cur.getString(cur.getColumnIndexOrThrow("read"));
     _status = cur.getString(cur.getColumnIndexOrThrow("status"));
     _type = cur.getString(cur.getColumnIndexOrThrow("type"));
-    // subject = c.getString(c.getColumnIndexOrThrow("subject"));
     _body = cur.getString(cur.getColumnIndexOrThrow("body"));
     final ContactManager cm = new ContactManager(c);
     _person = cm.getNameFromPhone(_address);

@@ -12,14 +12,14 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.clock.SpeakingClockActivity;
+import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 
 public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<SpeakingClockActivity> {
   private Solo solo;
   private Activity activity;
   
   public SpeakingClockActivityTest() {
-    super("com.yp2012g4.vision.clock", SpeakingClockActivity.class);
+    super("com.yp2012g4.vision.apps.clock", SpeakingClockActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

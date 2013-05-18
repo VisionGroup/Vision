@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.MainActivity;
+import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.R;
 
 /**
@@ -20,7 +20,7 @@ public class bugTextColorUnchanged extends ActivityInstrumentationTestCase2<Main
   private Activity activity;
   
   public bugTextColorUnchanged() {
-    super("com.yp2012g4.vision.settings", MainActivity.class);
+    super("com.yp2012g4.vision.apps.settings", MainActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

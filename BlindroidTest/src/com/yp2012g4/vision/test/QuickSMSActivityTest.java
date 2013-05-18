@@ -10,9 +10,9 @@ import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.tools.CallUtils;
 
 /**
@@ -26,7 +26,7 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
   private Activity activity;
   
   public QuickSMSActivityTest() {
-    super("com.yp2012g4.vision.sms", QuickSMSActivity.class);
+    super("com.yp2012g4.vision.apps.smsSender", QuickSMSActivity.class);
     // TODO Auto-generated constructor stub
   }
   

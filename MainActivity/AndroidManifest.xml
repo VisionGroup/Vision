@@ -28,13 +28,13 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
-        android:name="com.yp2012g4.vision.settings.VisionApplication"
+        android:name="com.yp2012g4.vision.apps.settings.VisionApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme" >
         <activity
-            android:name="com.yp2012g4.vision.MainActivity"
+            android:name="com.yp2012g4.vision.apps.main.MainActivity"
             android:configChanges="locale"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.sms.SOSActivity"
+            android:name="com.yp2012g4.vision.apps.SOS.SOSActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_sos"
             android:launchMode="singleInstance"
@@ -60,7 +60,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.settings.DisplaySettingsActivity"
+            android:name="com.yp2012g4.vision.apps.settings.DisplaySettingsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_display_settings"
             android:launchMode="singleInstance"
@@ -68,7 +68,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.settings.ThemeSettingsActivity"
+            android:name="com.yp2012g4.vision.apps.settings.ThemeSettingsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_theme_settings"
             android:launchMode="singleInstance"
@@ -76,7 +76,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.PhoneStatusActivity"
+            android:name="com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_phone_status"
             android:launchMode="singleInstance"
@@ -84,7 +84,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.clock.SpeakingClockActivity"
+            android:name="com.yp2012g4.vision.apps.clock.SpeakingClockActivity"
             android:configChanges="locale"
             android:label="@string/ClockTitle"
             android:launchMode="singleInstance"
@@ -92,7 +92,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.settings.ColorSettingsActivity"
+            android:name="com.yp2012g4.vision.apps.settings.ColorSettingsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_color_settings"
             android:launchMode="singleInstance"
@@ -100,7 +100,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.sms.QuickSMSActivity"
+            android:name="com.yp2012g4.vision.apps.smsSender.QuickSMSActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_quick_sms"
             android:launchMode="singleInstance"
@@ -108,21 +108,21 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.alarm.AlarmActivity"
+            android:name="com.yp2012g4.vision.apps.alarm.AlarmActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_alarm"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.alarm.AlarmPopup"
+            android:name="com.yp2012g4.vision.apps.alarm.AlarmPopup"
             android:configChanges="locale"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.WhereAmIActivity"
+            android:name="com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_where_am_i"
             android:launchMode="singleInstance"
@@ -130,18 +130,18 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
 
-        <service android:name="com.yp2012g4.vision.alarm.AlarmService" >
+        <service android:name="com.yp2012g4.vision.apps.alarm.AlarmService" >
         </service>
 
         <activity
-            android:name="com.yp2012g4.vision.clock.SetClockActivity"
+            android:name="com.yp2012g4.vision.apps.alarm.SetClockActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_set_clock"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.DialScreen"
+            android:name="com.yp2012g4.vision.apps.contacts.DialScreen"
             android:configChanges="locale"
             android:label="@string/title_dial_screen"
             android:launchMode="singleInstance"
@@ -156,7 +156,7 @@
         </receiver>
 
         <activity
-            android:name="com.yp2012g4.vision.telephony.IncomingCallActivity"
+            android:name="com.yp2012g4.vision.apps.telephony.IncomingCallActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_incoming_call"
             android:launchMode="singleInstance"
@@ -164,7 +164,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.sms.ReadSmsActivity"
+            android:name="com.yp2012g4.vision.apps.smsReader.ReadSmsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_read_sms"
             android:launchMode="singleInstance"
@@ -172,10 +172,10 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.vision.MainActivity" />
+                android:value="com.yp2012g4.vision.apps.main.MainActivity" />
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.contacts.ContactsMenuActivity"
+            android:name="com.yp2012g4.vision.apps.contacts.ContactsMenuActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_contacts_menu"
             android:launchMode="singleInstance"
@@ -183,7 +183,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.contacts.ContactsActivity"
+            android:name="com.yp2012g4.vision.apps.contacts.ContactsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_contacts"
             android:launchMode="singleInstance"
@@ -199,7 +199,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.CalcActivity"
+            android:name="com.yp2012g4.vision.apps.calculator.CalcActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_calc"
             android:launchMode="singleInstance"
@@ -207,11 +207,11 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.sms.ReadSmsTest"
+            android:name="com.yp2012g4.vision.apps.smsReader.ReadSmsTest"
             android:label="@string/title_activity_read_sms_test" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.yp2012g4.vision.MainActivity" />
+                android:value="com.yp2012g4.vision.apps.main.MainActivity" />
         </activity>
         <activity
             android:name="com.yp2012g4.vision.CallListActivity"

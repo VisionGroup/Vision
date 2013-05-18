@@ -9,11 +9,11 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.contacts.ContactsActivity;
+import com.yp2012g4.vision.apps.contacts.ContactsActivity;
+import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
-import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.tools.CallUtils;
 
 public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
@@ -21,7 +21,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   private Activity activity;
   
   public ContactsActivityTest() {
-    super("com.yp2012g4.vision.contacts", ContactsActivity.class);
+    super("com.yp2012g4.vision.apps.contacts", ContactsActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

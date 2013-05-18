@@ -10,8 +10,8 @@ import android.test.TouchUtils;
 import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.DialScreen;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.contacts.DialScreen;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.VisionGestureDetector;

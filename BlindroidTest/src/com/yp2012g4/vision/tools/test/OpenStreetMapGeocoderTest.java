@@ -2,7 +2,7 @@ package com.yp2012g4.vision.tools.test;
 
 import junit.framework.TestCase;
 
-import com.yp2012g4.vision.tools.OpenStreetMapGeocoder;
+import com.yp2012g4.vision.tools.location.OpenStreetMapGeocoder;
 
 /**
  * 

@@ -28,10 +28,10 @@ import android.widget.AnalogClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.settings.VisionApplication;
 
 /**
  * This super class is handling on touch events with text-to-speech feedback for
@@ -103,6 +103,12 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override public boolean onDown(final MotionEvent e) {
     Log.i(TAG, "onDown");
+    final SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final String buttonMode = _sp.getString("BUTTON MODE", "regular");
+    if (buttonMode.equals("regular"))
+      last_button_view = getView(e.getRawX(), e.getRawY()); // updating
+    else
+      getView(e.getRawX(), e.getRawY());
     return true;
   }
   

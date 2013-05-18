@@ -16,8 +16,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.yp2012g4.vision.MainActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 
 /*

@@ -7,9 +7,9 @@ import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.PhoneNotifications;
-import com.yp2012g4.vision.PhoneStatusActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
+import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 
 /**

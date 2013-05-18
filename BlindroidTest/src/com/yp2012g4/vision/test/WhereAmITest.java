@@ -8,16 +8,16 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.MainActivity;
+import com.yp2012g4.vision.apps.main.MainActivity;
+import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.WhereAmIActivity;
 
 public class WhereAmITest extends ActivityInstrumentationTestCase2<WhereAmIActivity> {
   private Solo solo;
   private Activity activity;
   
   public WhereAmITest() {
-    super("com.yp2012g4.vision", WhereAmIActivity.class);
+    super("com.yp2012g4.vision.apps.whereAmI", WhereAmIActivity.class);
     // TODO Auto-generated constructor stub
   }
   

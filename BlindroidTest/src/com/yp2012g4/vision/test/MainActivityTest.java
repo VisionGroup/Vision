@@ -12,23 +12,23 @@ import android.test.suitebuilder.annotation.Suppress;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.MainActivity;
-import com.yp2012g4.vision.PhoneStatusActivity;
-import com.yp2012g4.vision.WhereAmIActivity;
-import com.yp2012g4.vision.alarm.AlarmActivity;
-import com.yp2012g4.vision.clock.SpeakingClockActivity;
-import com.yp2012g4.vision.contacts.ContactsMenuActivity;
+import com.yp2012g4.vision.apps.SOS.SOSActivity;
+import com.yp2012g4.vision.apps.alarm.AlarmActivity;
+import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
+import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
+import com.yp2012g4.vision.apps.main.MainActivity;
+import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
+import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
+import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.sms.ReadSmsActivity;
-import com.yp2012g4.vision.sms.SOSActivity;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
   private Solo solo;
   private Activity activity;
   
   public MainActivityTest() {
-    super("com.yp2012g4.vision", MainActivity.class);
+    super("com.yp2012g4.vision.apps.main", MainActivity.class);
   }
   
   @Override protected void setUp() throws Exception {
@@ -83,12 +83,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
     solo.clickOnView(tb);
-    solo.assertCurrentActivity("wrong activity", c);
+    solo.waitForActivity(c.getName(), 2000);
+    //solo.assertCurrentActivity("wrong activity", c);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     // Test Home button
     solo.clickOnView(tb);
-    solo.assertCurrentActivity("wrong activity", c);
+    //solo.assertCurrentActivity("wrong activity", c);
+    solo.waitForActivity(c.getName(), 2000);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.home_button));
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     solo.finishOpenedActivities();

@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.customUI.lists.CallAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.CallType;
-import com.yp2012g4.vision.sms.QuickSMSActivity;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 

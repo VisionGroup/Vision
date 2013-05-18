@@ -14,14 +14,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.settings.ColorSettingsActivity;
+import com.yp2012g4.vision.apps.settings.ColorSettingsActivity;
 
 public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<ColorSettingsActivity> {
   private Solo solo;
   private Activity activity;
   
   public ColorSettingsActivityTest() {
-    super("com.yp2012g4.vision.settings", ColorSettingsActivity.class);
+    super("com.yp2012g4.vision.apps.settings", ColorSettingsActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

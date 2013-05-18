@@ -10,17 +10,17 @@ import android.widget.Button;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.settings.ColorSettingsActivity;
-import com.yp2012g4.vision.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.settings.ThemeSettingsActivity;
-import com.yp2012g4.vision.settings.VisionApplication;
+import com.yp2012g4.vision.apps.settings.ColorSettingsActivity;
+import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.ThemeSettingsActivity;
+import com.yp2012g4.vision.apps.settings.VisionApplication;
 
 public class VisionApplicationTest extends ActivityInstrumentationTestCase2<DisplaySettingsActivity> {
   private Solo solo;
   private Activity activity;
   
   public VisionApplicationTest() {
-    super("com.yp2012g4.vision.settings", DisplaySettingsActivity.class);
+    super("com.yp2012g4.vision.apps.settings", DisplaySettingsActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

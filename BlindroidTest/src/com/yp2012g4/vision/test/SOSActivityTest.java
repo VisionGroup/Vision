@@ -9,8 +9,8 @@ import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.SOS.SOSActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.sms.SOSActivity;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
 
 /**
@@ -24,7 +24,7 @@ public class SOSActivityTest extends ActivityInstrumentationTestCase2<SOSActivit
   private Activity activity;
   
   public SOSActivityTest() {
-    super("com.yp2012g4.vision.sms", SOSActivity.class);
+    super("com.yp2012g4.vision.apps.SOS", SOSActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

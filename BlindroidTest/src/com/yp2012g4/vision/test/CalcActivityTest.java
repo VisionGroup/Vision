@@ -6,7 +6,7 @@ import android.test.TouchUtils;
 import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.CalcActivity;
+import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
@@ -16,7 +16,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
   private Activity activity;
   
   public CalcActivityTest() {
-    super("com.yp2012g4.vision", CalcActivity.class);
+    super("com.yp2012g4.vision.apps.calculator", CalcActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

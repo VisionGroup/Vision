@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.yp2012g4.vision.settings.VisionApplication;
-import com.yp2012g4.vision.telephony.IncomingCallActivity;
+import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.apps.telephony.IncomingCallActivity;
 
 /**
  * This receiver will activate the IncomingCallActivity when an incoming call

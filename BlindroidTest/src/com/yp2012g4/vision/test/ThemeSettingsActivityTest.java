@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.settings.ThemeSettingsActivity;
+import com.yp2012g4.vision.apps.settings.ThemeSettingsActivity;
 
 /**
  * Tests for ThemeSettingsActivity
@@ -25,7 +25,7 @@ public class ThemeSettingsActivityTest extends ActivityInstrumentationTestCase2<
   private Activity activity;
   
   public ThemeSettingsActivityTest() {
-    super("com.yp2012g4.vision.settings", ThemeSettingsActivity.class);
+    super("com.yp2012g4.vision.apps.settings", ThemeSettingsActivity.class);
   }
   
   @Override protected void setUp() throws Exception {

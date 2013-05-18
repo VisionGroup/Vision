@@ -24,7 +24,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * @version 1.0
  */
 public class SOSActivity extends VisionActivity {
-  LocationFinder f;
+  LocationFinder lf;
   Lock l = null;
   String lastProvider = "", address = "";
   static final int DEFAULT_LAT_LONG = 10000;
@@ -42,7 +42,7 @@ public class SOSActivity extends VisionActivity {
    */
   public Runnable sendSOSMessage = new Runnable() {
     @Override public void run() {
-      String messageToSend = "I need your help!";
+      String messageToSend = getString(R.string.sos_msg_to_send);
       l.lock();
       if (latitude != DEFAULT_LAT_LONG) {
         messageToSend += "\nMy location is: latitude = " + latitude + "; longitude = " + longitude + ";\nMy address is ";
@@ -52,11 +52,8 @@ public class SOSActivity extends VisionActivity {
           messageToSend += address;
       }
       l.unlock();
-      final String number = "0529240424";
-      Log.d(TAG, "Sending SOS : " + messageToSend);
-      Log.d(TAG, "number : " + number);
-      Log.d(TAG, "latitude =  " + latitude);
-      Log.d(TAG, "longitude =  " + longitude);
+      final String number = "0529240424"; // TODO: Move to configuration.
+      Log.d(TAG, "Sending SOS: " + messageToSend + " to:" + number + " lat=" + latitude + " long=" + longitude);
       final SmsManager sms = SmsManager.getDefault();
       if (sms == null)
         Log.e(TAG, "SMS Manager is null! Not sending the message");
@@ -98,7 +95,7 @@ public class SOSActivity extends VisionActivity {
    *          the address
    */
   void makeUseOfNewLocation(final double d1, final double d2, final String s1, final String s2) {
-    f.stop();
+    lf.stop();
     l.lock();
     address = s2;
     lastProvider = s1;
@@ -109,17 +106,17 @@ public class SOSActivity extends VisionActivity {
   
   @Override protected void onStart() {
     super.onStart();
-    f = new LocationFinder((LocationManager) getSystemService(Context.LOCATION_SERVICE));
+    lf = new LocationFinder((LocationManager) getSystemService(Context.LOCATION_SERVICE));
     final LocationHandler h = new LocationHandler() {
       @Override public void handleLocation(final double d1, final double d2, final String s1, final String s2) {
         makeUseOfNewLocation(d1, d2, s1, s2);
       }
     };
-    f.run(h);
+    lf.run(h);
   }
   
   @Override protected void onStop() {
-    f.stop();
+    lf.stop();
     super.onStop();
   }
 }

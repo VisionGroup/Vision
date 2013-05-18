@@ -38,7 +38,7 @@ public class TTS implements OnInitListener {
   /**
    * @return true if the TTS engine is initialized.
    */
-  public boolean isRuning() {
+  public boolean isRunning() {
     return _init;
   }
   
@@ -145,6 +145,7 @@ public class TTS implements OnInitListener {
   @Override public void onInit(final int status) {
     if (status == TextToSpeech.SUCCESS) {
       _init = true;
+      Log.d(TAG, "TTS init completed succesfully.");
       setQueueMode(TextToSpeech.QUEUE_FLUSH);
       setLanguage(Locale.US);
     }

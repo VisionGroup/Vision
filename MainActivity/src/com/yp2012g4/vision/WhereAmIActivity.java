@@ -26,11 +26,6 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class WhereAmIActivity extends VisionActivity {
   final private static String TAG = "vision:WhereAmIActivity";
   final private static int updateTimeOut = 60000; // in miliseconds
-  
-  private static void log(final String s) {
-    Log.d(TAG, s);
-  }
-  
   private Lock l = null;
   private LocationFinder f;
   private boolean providerRunning;
@@ -68,6 +63,7 @@ public class WhereAmIActivity extends VisionActivity {
     l.lock();
     lastUpdate = new GregorianCalendar(1800, 1, 1).getTime();
     setText(getString(R.string.initializing));
+    speakOutAsync(getString(R.string.initializing));
     l.unlock();
   }
   
@@ -77,24 +73,23 @@ public class WhereAmIActivity extends VisionActivity {
   }
   
   @Override protected void onResume() {
-    Log.i(TAG, "onResume");
+    Log.d(TAG, "onResume");
     final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    Log.i(TAG, "Got location manager");
     f = new LocationFinder(manager);
-    Log.i(TAG, "Got location finder");
     providerRunning = f.run(new LocationHandler() {
       @Override public void handleLocation(final double longitude, final double latitude, final String prov, final String address) {
         makeUseOfNewLocation(longitude, latitude, prov, address);
       }
     });
-    log("Now running");
+    Log.d(TAG, "Now running");
     l.lock();
     if (!providerRunning) {
       final String s = getString(R.string.could_not_find_a_location);
       setText(s);
-      speakOutAsync(s);
-    } else
-      setText(getString(R.string.finding_location));
+    } else {
+      final String s = getString(R.string.finding_location);
+      setText(s);
+    }
     l.unlock();
     super.onResume();
   }
@@ -122,5 +117,11 @@ public class WhereAmIActivity extends VisionActivity {
         break;
     }
     return false;
+  }
+  
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus)
+      speakOutAsync(text);
   }
 }

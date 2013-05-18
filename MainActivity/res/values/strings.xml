@@ -224,6 +224,7 @@
     <string name="SOS_message_has_been_sent">S O S message has been sent.</string>
     <string name="sending_SOS_message">Sending S O S message.</string>
     <string name="send_SOS_message">Send S O S</string>
+    <string name="sos_msg_to_send">I need your help!</string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">Call</string>

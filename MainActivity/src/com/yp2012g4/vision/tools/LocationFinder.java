@@ -27,7 +27,6 @@ public class LocationFinder {
   
   public LocationFinder(final LocationManager newLocationManager) {
     _locationManager = newLocationManager;
-    Log.i(TAG, "created");
   }
   
   /**
@@ -38,7 +37,6 @@ public class LocationFinder {
    * @return true if succeeded, false otherwise
    */
   public boolean run(final LocationHandler h) {
-    Log.i(TAG, "run");
     if (_running)
       stop();
     _listeners = new ArrayList<LocationListener>();
@@ -50,7 +48,6 @@ public class LocationFinder {
   
   private void setUpLocationListener(final String p) {
     if (_locationManager.isProviderEnabled(p)) {
-      Log.i(TAG, "enabling" + p);
       final LocationListener l = createLocationListener(p);
       _listeners.add(l);
       _locationManager.requestLocationUpdates(p, 0, 0, l);

@@ -223,6 +223,8 @@
     <string name="SOS_message_has_been_sent">הודעת SOS נשלחה</string>
     <string name="sending_SOS_message">שולח הודעת SOS</string>
     <string name="send_SOS_message">שליחת הודעת SOS</string>
+        <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
+    
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">שיחה</string>

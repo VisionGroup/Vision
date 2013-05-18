@@ -340,7 +340,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   
   @Override protected void onCreate(final Bundle savedInstanceState) {
     _tts = new TTS(this);
-    if (_tts.isRuning())
+    if (_tts.isRunning())
       speakOutAsync("start");
     else
       Log.e(TAG, "tts init error");

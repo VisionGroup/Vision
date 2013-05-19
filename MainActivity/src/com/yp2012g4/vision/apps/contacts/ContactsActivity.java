@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.managers.CallManager;
@@ -67,9 +68,14 @@ public class ContactsActivity extends VisionActivity {
         CallManager.DeleteCallLogByNumber(this, contacts.get(currentContact).getPhone());
         break;
       case R.id.contacts_sms:
-        final Intent sms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
-        sms.putExtra(CallUtils.NUMBER_KEY, contacts.get(currentContact).getPhone());
-        startActivity(sms);
+        final Intent _sms = new Intent(ContactsActivity.this, SendSMSActivity.class);
+        _sms.putExtra(CallUtils.NUMBER_KEY, contacts.get(currentContact).getPhone());
+        startActivity(_sms);
+        break;
+      case R.id.contacts_quick_sms:
+        final Intent _quickSms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
+        _quickSms.putExtra(CallUtils.NUMBER_KEY, contacts.get(currentContact).getPhone());
+        startActivity(_quickSms);
         break;
       default:
         break;
@@ -113,7 +119,7 @@ public class ContactsActivity extends VisionActivity {
     final TalkingButton contactNameButton = getTalkingButton(R.id.contact_name);
     final TalkingButton conactPhoneButton = getTalkingButton(R.id.contact_phone);
     final TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
-    final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_sms);
+    final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_quick_sms);
     if (contacts.size() == 0)
       speakOutAsync(getString(R.string.no_messages));
     else {

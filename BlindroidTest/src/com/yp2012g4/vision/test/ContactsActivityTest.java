@@ -67,7 +67,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     assertEquals(ac.get(0).getContactName(), name.getText());
     assertEquals(ac.get(0).getPhone(), phone.getText());
     solo.clickOnView(solo.getView(R.id.contact_next));
-    solo.clickOnView(solo.getView(R.id.contacts_sms));
+    solo.clickOnView(solo.getView(R.id.contacts_quick_sms));
     // test passing correct number to Quick SMS activity
     solo.assertCurrentActivity("wrong activity", QuickSMSActivity.class);
     final Bundle extras2 = solo.getCurrentActivity().getIntent().getExtras();

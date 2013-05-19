@@ -24,10 +24,6 @@
     <string name="emptyHour">hh:mm:ss</string>
     <string name="next_message">Next message</string>
     <string name="previous_message">Previous message</string>
-    <string name="delete_message">Delete message</string>
-    <string name="next_contact">Next contact</string>
-    <string name="previous_contact">Previous contact</string>
-    <string name="call_contact">Call contact</string>
 
     <!-- ====================== -->
     <!-- Text To Speech strings -->
@@ -144,13 +140,16 @@
     <string name="ClockTitle">Speaking clock</string>
     <string name="date_button">Date</string>
     <string name="hourFormat">%1$d and %2$d minutes %3$s.</string>
-    
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">Contacts screen.</string>
     <string name="contacts_screen_help">Touch on screen to select contact with next and previous buttons \n. Call or send message to current contact.</string>
     <string name="no_more_contacts">No more contacts</string>
     <string name="no_messages">No messages.</string>
+    <string name="next_contact">Next contact</string>
+    <string name="previous_contact">Previous contact</string>
+    <string name="call_contact">Call contact</string>
+    <string name="send_sms">Send SMS</string>
 
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">Contacts menu</string>
@@ -158,7 +157,7 @@
     <string name="contact_list_screen">Contact list screen</string>
     <string name="favorite_list_screen">favorite list screen</string>
     <string name="send_quick_sms_message">send quick SMS to: </string>
-     <string name="call_message">call :  </string>
+    <string name="call_message">call :  </string>
     <string name="Dialer">Dialer</string>
     <string name="favorit_contacts_list">favorite contacts</string>
     <string name="contactsList">contacts</string>
@@ -217,6 +216,7 @@
     <string name="read_sms_help"> touch screen to read message, slide your finger right or left to move to the next or previous message, you can reply to the message or delete it</string>
     <string name="message_number">Message number</string>
     <string name="no_more_messages">No more messages</string>
+    <string name="delete_message">Delete message</string>
 
     <!-- SOSActivity -->
     <string name="sos_screen">S O S screen</string>
@@ -280,6 +280,7 @@
     <string name="send_message">Send Message</string>
     <string name="enter_a_phone_number">Enter a phone number</string>
     <string name="message_content">Message content</string>
+    <string name="enter_a_message">Enter a message</string>
     <string name="phone_number">Phone number</string>
 
 </resources>

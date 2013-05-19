@@ -218,7 +218,7 @@
             android:label="@string/title_activity_call_list" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.SendSMSActivity"
+            android:name="com.yp2012g4.vision.apps.smsSender.SendSMSActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_send_sms"
             android:launchMode="singleInstance"

@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ContactsActivity"
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:contentDescription="@string/contact_list_screen"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="4"
+    tools:ignore="NestedWeights" >
+
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/contact_name"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:textSize="30sp" />
+
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/contact_phone"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/contact_name"
-            style="?textAppearance"
-            android:layout_width="0dip"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:textSize="30sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/contact_phone"
-            style="?textAppearance"
-            android:layout_width="0dip"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contact_prev"
             android:layout_width="0dip"
-            android:layout_height="100dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -55,7 +51,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contact_next"
             android:layout_width="0dip"
-            android:layout_height="100dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -65,12 +61,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contacts_call"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -80,17 +79,17 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contacts_sms"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/sms"
             app:readText="@string/send_sms" />
-        
+
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contacts_quick_sms"
             android:layout_width="0dip"
-            android:layout_height="70dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -100,7 +99,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal" >
 

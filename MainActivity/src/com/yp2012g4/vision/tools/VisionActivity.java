@@ -27,6 +27,7 @@ import com.yp2012g4.vision.customUI.TalkingButton;
  * to this app.
  */
 public abstract class VisionActivity extends VisionGestureDetector {
+  private static final int BAR_HEIGHT = 60;
   private static final String TAG = "vision:VisionActivity";
   private int _icon;
   private String _name;
@@ -121,7 +122,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   public void adjustLayoutSize(final int numOfLayouts) {
     final Display _display = getWindowManager().getDefaultDisplay();
     final float _density = getResources().getDisplayMetrics().density;
-    final int _height = _display.getHeight() - (int) (60 * _density);
+    final int _height = _display.getHeight() - (int) (BAR_HEIGHT * _density);
     for (int i = 1; i <= numOfLayouts; i++) {
       final int _resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
       final LinearLayout _l = (LinearLayout) findViewById(_resID);

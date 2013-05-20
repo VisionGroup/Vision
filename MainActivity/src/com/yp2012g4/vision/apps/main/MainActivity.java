@@ -26,6 +26,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * 
  */
 public class MainActivity extends VisionActivity {
+  private static final int NUM_OF_BUTTONS = 4;
   private static final double LOW_BATTERY_LEVEL = 0.3;
   private static String TAG = "vision:MainActivity";
   
@@ -38,7 +39,7 @@ public class MainActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
     setContentView(R.layout.activity_main);
-    adjustLayoutSize(4);
+    adjustLayoutSize(NUM_OF_BUTTONS);
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();

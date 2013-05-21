@@ -14,7 +14,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
+import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
@@ -84,8 +84,8 @@ public class MainActivity extends VisionActivity {
         nextActivity = DisplaySettingsActivity.class;
         break;
       case R.id.read_sms_button:
-//        nextActivity = ReadSmsActivity.class;
-        nextActivity = SendSMSActivity.class;
+        nextActivity = ReadSmsActivity.class;
+//        nextActivity = SendSMSActivity.class;
         break;
       default:
         return null;

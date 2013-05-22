@@ -37,7 +37,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
       final String phonenumber = "";// bundle.getString(CallUtils.NUMBER_KEY);
       Log.i(TAG, "Call to:" + phonenumber);
-      processIncomingCall(c, phonenumber);
+      // processIncomingCall(c, phonenumber); //TODO: Checking.
       return;
     }
   }

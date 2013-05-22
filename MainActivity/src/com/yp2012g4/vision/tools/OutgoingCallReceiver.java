@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.telephony.IncomingCallActivity;
 
 public class OutgoingCallReceiver extends BroadcastReceiver {
@@ -30,9 +31,9 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
         return;
       final String phoneNumber = b.getString(OutgoingCallReceiver.INTENT_PHONE_NUMBER);
       Log.v(TAG, "Incoming phonenumber: " + phoneNumber);
-      // c.startService(new Intent(c, CallScreenService.class));// TODO:
+      c.startService(new Intent(c, CallScreenService.class));// TODO:
       // REMoVE!!!
-      processOutgoingCall(c, phoneNumber);
+      // processOutgoingCall(c, phoneNumber);
       // if ((phoneNumber != null) &&
       // phoneNumber.equals(OutgoingCallReceiver.ABORT_PHONE_NUMBER)) {
 //          Toast.makeText(context, "NEW_OUTGOING_CALL intercepted to number 123-123-1234 - aborting call",

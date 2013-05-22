@@ -1,280 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/CalcScreen"
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:contentDescription="@string/calc_screen"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="6"
+    tools:ignore="NestedWeights" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/result"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="62dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="left"
             android:paddingLeft="32dp"
             android:paddingTop="15dp"
-            android:textSize="25sp"
             android:textStyle="bold"
             app:readText="@string/result" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit7"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit7"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/seven" />
 
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit7"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit7"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/seven" />
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit8"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit8"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/eight" />
 
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit8"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit8"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/eight" />
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit9"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit9"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/nine" />
 
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit9"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit9"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/nine" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/plus"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/plus"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/ReadPlus" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit4"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit4"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/four" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit5"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit5"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/five" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit6"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit6"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/six" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/minus"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/minus"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/ReadMinus" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit1"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit1"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/one" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit2"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit2"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/two" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit3"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit3"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/three" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/multiplicity"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/times"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/ReadTimes" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/digit0"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/digit0"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/zero" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/dot"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/dot"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/ReadDot" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/clear"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/clear"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/ReadClear" />
-
-            <com.yp2012g4.vision.customUI.TalkingButton
-                android:id="@+id/div"
-                style="?textAppearance"
-                android:layout_width="0dip"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:text="@string/div"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                app:readText="@string/ReadDiv" />
-        </LinearLayout>
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/plus"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/plus"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/ReadPlus" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit4"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit4"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/four" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit5"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit5"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/five" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit6"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit6"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/six" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/minus"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/minus"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/ReadMinus" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit1"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit1"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/one" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit2"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit2"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/two" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit3"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit3"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/three" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/multiplicity"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/times"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/ReadTimes" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/digit0"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/digit0"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/zero" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/dot"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/dot"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/ReadDot" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/clear"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/clear"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/ReadClear" />
+
+        <com.yp2012g4.vision.customUI.TalkingButton
+            android:id="@+id/div"
+            style="?textAppearance"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/div"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:readText="@string/ReadDiv" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="1" >
 
         <com.yp2012g4.vision.customUI.TalkingButton
             android:id="@+id/equals"
             style="?textAppearance"
             android:layout_width="0dip"
-            android:layout_height="55dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:text="@string/equals"
-            android:textSize="48sp"
+            android:textSize="50sp"
             android:textStyle="bold"
             app:readText="@string/ReadEquals" />
     </LinearLayout>
@@ -282,7 +296,7 @@
     <LinearLayout
         android:id="@+id/DialScreenBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal" >
 

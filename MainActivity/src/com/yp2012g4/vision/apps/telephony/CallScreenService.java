@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.tools.CallUtils;
 
 public class CallScreenService extends Service {
   private static final String TAG = "vision:OverlayService";
@@ -29,13 +30,29 @@ public class CallScreenService extends Service {
 //        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
 //        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
 //        /* | WindowManager.LayoutParams.FLAG_FULLSCREEN */, PixelFormat.TRANSLUCENT);
-    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-            | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-        /* | WindowManager.LayoutParams.FLAG_FULLSCREEN */, PixelFormat.TRANSLUCENT);
-    windowManager.addView(overlay, params);
+//    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//        WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+//        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, PixelFormat.TRANSLUCENT);
+//    params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_DIM_BEHIND
+//        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//    windowManager.addView(overlay, params);
+    processOutgoingCall(this, "");
     Log.d(TAG, "Finished onCreate");
+  }
+  
+  @SuppressWarnings({ "static-method" }) private void processOutgoingCall(final Context context, final String phonenumber) {
+    try {
+      Log.d(TAG, "Creating OutgoingCAllActivity intent");
+      final Intent i = new Intent(context, IncomingCallActivity.class);
+      i.putExtra(CallUtils.RANG_KEY, true);
+      i.putExtra(CallUtils.NUMBER_KEY, phonenumber);
+      i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      Log.d(TAG, "Starting OutgoingCAllActivity");
+      Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
+      context.startActivity(i);
+    } catch (final Exception e) {
+      Log.e(TAG, "error starting OutgoingCAllActivity", e);
+    }
   }
   
   @Override public IBinder onBind(final Intent intent) {

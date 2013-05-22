@@ -14,7 +14,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
+import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
@@ -26,6 +26,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * 
  */
 public class MainActivity extends VisionActivity {
+  private static final int NUM_OF_BUTTONS = 4;
   private static final double LOW_BATTERY_LEVEL = 0.3;
   private static String TAG = "vision:MainActivity";
   
@@ -38,7 +39,7 @@ public class MainActivity extends VisionActivity {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
     setContentView(R.layout.activity_main);
-    adjustLayoutSize(4);
+    adjustLayoutSize(NUM_OF_BUTTONS);
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
@@ -83,8 +84,8 @@ public class MainActivity extends VisionActivity {
         nextActivity = DisplaySettingsActivity.class;
         break;
       case R.id.read_sms_button:
-//        nextActivity = ReadSmsActivity.class;
-        nextActivity = SendSMSActivity.class;
+        nextActivity = ReadSmsActivity.class;
+//        nextActivity = SendSMSActivity.class;
         break;
       default:
         return null;

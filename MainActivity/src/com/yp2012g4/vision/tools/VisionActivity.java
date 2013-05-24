@@ -106,6 +106,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
     // hide status-bar of Android. Could also be done later
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
+    TTS.initStaticTTS(getApplicationContext());
   }
   
   @Override public void onBackPressed() {

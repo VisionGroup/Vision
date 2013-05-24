@@ -22,6 +22,24 @@ public class TTS implements OnInitListener {
   private int _qm;
   private Locale _language;
   private boolean _init = false;
+  private static TTS staticTTS = null;
+  
+  public static void initStaticTTS(final Context c) {
+    if (staticTTS == null || !staticTTS.isRunning()) {
+      staticTTS = new TTS(c);
+      Log.v(TAG, "TTS initialized");
+    } else
+      Log.v(TAG, "TTS already running so not initialized");
+  }
+  
+  public static void speakOut(final String s) {
+    Log.v(TAG, "static TTS speaking: " + s);
+    staticTTS.speak(s);
+    Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[3].getClassName() + ":"
+        + Thread.currentThread().getStackTrace()[3].getMethodName());
+    Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[4].getClassName() + ":"
+        + Thread.currentThread().getStackTrace()[4].getMethodName());
+  }
   
   /**
    * 
@@ -106,27 +124,27 @@ public class TTS implements OnInitListener {
    * Stop speak!.
    * 
    */
-  public void stop() {
+  public static void stop() {
     Log.d(TAG, "stop");
-    _tts.stop();
+    staticTTS._tts.stop();
   }
   
   /**
    * Close the TTS engine.
    * 
    */
-  public void shutdown() {
+  public static void shutdown() {
     stop();
-    _tts.shutdown();
-    _tts = null;
+    staticTTS._tts.shutdown();
+    staticTTS._tts = null;
   }
   
   /**
    * 
    * @return true if currently speaking, false otherwise.
    */
-  public boolean isSpeaking() {
-    return _tts.isSpeaking();
+  public static boolean isSpeaking() {
+    return staticTTS._tts.isSpeaking();
   }
   
   /**
@@ -151,8 +169,8 @@ public class TTS implements OnInitListener {
     }
   }
   
-  public void waitUntilFinishTalking() {
-    while (_tts.isSpeaking()) {
+  public static void waitUntilFinishTalking() {
+    while (isSpeaking()) {
       // Wait for message to finish playing and then continue
     }
   }

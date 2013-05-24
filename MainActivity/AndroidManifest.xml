@@ -132,7 +132,9 @@
 
         <service android:name="com.yp2012g4.vision.apps.alarm.AlarmService" >
         </service>
-
+        <service android:name="com.yp2012g4.vision.tools.TTSService" >
+        </service> 
+        
         <activity
             android:name="com.yp2012g4.vision.apps.alarm.SetClockActivity"
             android:configChanges="locale"

@@ -1,5 +1,5 @@
-
 package com.yp2012g4.vision.apps.SOS;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,7 +15,6 @@ import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.location.LocationFinder;
 import com.yp2012g4.vision.tools.location.LocationHandler;
-
 
 /**
  * This class is an activity which sends a pre-defined SOS message to a

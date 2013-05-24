@@ -15,8 +15,6 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class ThemeSettingsActivity extends VisionActivity {
-  private final static int BUTTON_NUM = 3;
-  
   /**
    * get the activity's main view ID
    * 
@@ -59,7 +57,6 @@ public class ThemeSettingsActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_theme_settings);
-    adjustLayoutSize(BUTTON_NUM);
     init(0, getString(R.string.theme_settings_screen), getString(R.string.size_setting_help));
   }
 }

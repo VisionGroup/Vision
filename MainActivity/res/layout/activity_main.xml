@@ -1,100 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/MainActivityView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:contentDescription="@string/MainActivity_wheramai"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="4"
+    tools:ignore="NestedWeights" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout1" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sos_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/sos_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/sos_button" />
+            android:src="@drawable/sos_button"
+            custom:readText="@string/sos_button" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/time_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/time_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/time_button" />
+            android:src="@drawable/time_button"
+            custom:readText="@string/time_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
- 		android:id="@+id/layout2">
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/where_am_i_button"
             style="android:ButtonStyle"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/where_am_i_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/compass_button" />
+            android:src="@drawable/compass_button"
+            custom:readText="@string/where_am_i_button" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/read_sms_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/read_sms_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/read_sms_button" />
+            android:src="@drawable/read_sms_button"
+            custom:readText="@string/read_sms_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:id="@+id/layout3">
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/phone_status_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/phone_status_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/phone_status_button" />
+            android:src="@drawable/phone_status_button"
+            custom:readText="@string/phone_status_button" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/alarm_clock_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/alarm_clock_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/alarm_clock_button" />
+            android:src="@drawable/alarm_clock_button"
+            custom:readText="@string/alarm_clock_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:id="@+id/layout4">
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/contacts_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -104,20 +115,21 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/setting_button"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            custom:readText="@string/settings_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/settings_button" />
+            android:src="@drawable/settings_button"
+            custom:readText="@string/settings_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom" >
-		<include layout="@layout/control_bar_view"/>
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/control_bar_view" />
     </LinearLayout>
 
 </LinearLayout>

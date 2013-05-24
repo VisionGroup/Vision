@@ -7,48 +7,46 @@
     android:layout_height="fill_parent"
     android:contentDescription="@string/title_activity_contacts_menu"
     android:orientation="vertical"
-   	tools:context=".ContactsMenuActivity" >
-	
-     <com.yp2012g4.vision.customUI.TalkingImageButton
+    tools:context=".ContactsMenuActivity" >
+
+    <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/quickDialButton"
         style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:contentDescription="@string/favorit_contacts_list"
         android:scaleType="fitCenter"
-        android:text="@string/favorit_contacts_list"
         android:src="@drawable/star"
+        android:text="@string/favorit_contacts_list"
         custom:readText="@string/favorit_contacts_list" />
-     
+
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/contactsListButton"
         style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:contentDescription="@string/contactsList"
         android:scaleType="fitCenter"
+        android:src="@drawable/contacts"
         android:text="@string/contactsList"
-         android:src="@drawable/contacts"
         custom:readText="@string/contactsList" />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/dialerButton"
         style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-         android:contentDescription="@string/Dialer"
+        android:contentDescription="@string/Dialer"
         android:scaleType="fitCenter"
-        android:text="@string/Dialer"
         android:src="@drawable/dialer"
+        android:text="@string/Dialer"
         custom:readText="@string/Dialer" />
-
-    
 
     <LinearLayout
         android:id="@+id/LinearLayout1"

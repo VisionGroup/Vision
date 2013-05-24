@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ReadSmsScreen"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="2dp" >
+    android:padding="2dp"
+    android:weightSum="6"
+    tools:ignore="NestedWeights" >
 
     <com.yp2012g4.vision.customUI.lists.TalkingListView
         android:id="@+id/TalkingSmsListView2"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="4"
         custom:cols="1"
         custom:rows="1" >
     </com.yp2012g4.vision.customUI.lists.TalkingListView>
-    
-     <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_call_sender"
             android:layout_width="0dip"
-            android:layout_height="90dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -33,7 +38,7 @@
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_send_sms"
             android:layout_width="0dip"
-            android:layout_height="90dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -41,22 +46,15 @@
             custom:readText="@string/quick_sms_button" />
     </LinearLayout>
 
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/sms_remove"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="horizontal" >
-
-        <com.yp2012g4.vision.customUI.TalkingImageButton
-            android:id="@+id/sms_remove"
-            android:layout_width="0dip"
-            android:layout_height="90dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/delete_button_round"
-            custom:readText="@string/delete_message" />
-    </LinearLayout>
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/delete_button_round"
+        custom:readText="@string/delete_message" />
 
     <LinearLayout
         android:layout_width="fill_parent"

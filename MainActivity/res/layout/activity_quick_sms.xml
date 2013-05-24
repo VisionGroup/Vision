@@ -3,142 +3,102 @@
     xmlns:app="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     android:id="@+id/QuickSMSActivity"
     style="?backgroundColor"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:contentDescription="@string/quick_sms_screen"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_1"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_1"
+        app:readText="@string/SMS_number_1" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_1"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_1"
-            app:readText="@string/SMS_number_1"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_2"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_2"
+        app:readText="@string/SMS_number_2" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_2"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_2"
-            app:readText="@string/SMS_number_2"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_3"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_3"
+        app:readText="@string/SMS_number_3" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_3"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_3"
-            app:readText="@string/SMS_number_3"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_4"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_4"
+        app:readText="@string/SMS_number_4" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_4"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_4"
-            app:readText="@string/SMS_number_4"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_5"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_5"
+        app:readText="@string/SMS_number_5" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_5"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_5"
-            app:readText="@string/SMS_number_5"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_6"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_6"
+        app:readText="@string/SMS_number_6" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_6"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_6"
-            app:readText="@string/SMS_number_6"
-            style="?textAppearance" />
-    </LinearLayout>
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_7"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_7"
+        app:readText="@string/SMS_number_7" />
+
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SMS_number_9"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:text="@string/SMS_number_9"
+        app:readText="@string/SMS_number_9" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_7"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_7"
-            app:readText="@string/SMS_number_7"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/SMS_number_9"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:text="@string/SMS_number_9"
-            app:readText="@string/SMS_number_9"
-            style="?textAppearance" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal" >
 

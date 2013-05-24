@@ -8,31 +8,30 @@
     android:contentDescription="@string/ClockTitle"
     android:orientation="vertical"
     tools:context=".MainActivity" >
-    
-    
-	<com.yp2012g4.vision.customUI.TalkingButton
+
+    <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/TimeButton"
         style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/time_button"
         custom:readText="@string/time_button" />
-	
-	<com.yp2012g4.vision.customUI.TalkingButton
+
+    <com.yp2012g4.vision.customUI.TalkingButton
         android:id="@+id/DateButton"
         style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:text="@string/date_button"
         custom:readText="@string/date_button" />
-	
-	<LinearLayout
+
+    <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

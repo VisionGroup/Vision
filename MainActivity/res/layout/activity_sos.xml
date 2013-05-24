@@ -9,24 +9,20 @@
     android:orientation="vertical"
     tools:context=".DisplayMessageActivity" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/Send_SOS_Message"
-            android:layout_width="0dip"
-            android:layout_height="360dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="center"
             android:src="@drawable/sos_pic"
             app:readText="@string/send_SOS_message" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal" >
 

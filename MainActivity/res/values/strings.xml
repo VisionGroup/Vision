@@ -102,8 +102,10 @@
     <string name="where_am_i_help">Touch on screen to find your current location.</string>
     <string name="your_location_is">Your Location is</string>
     <string name="could_not_find_a_location">Could not find a location</string>
+    <string name="No_Location_Found_Yet">No location found yet</string>
     <string name="finding_location">Trying to find a location</string>
     <string name="initializing">Initializing&#8230; </string>
+    <string name="Location">Location</string>
 
     <!-- AlarmActivity -->
     <string name="title_activity_alarm">Alarm Clock</string>
@@ -119,7 +121,7 @@
     <string name="setAlarmButton">Set Alarm</string>
     <string name="startAlarm">Start Alarm</string>
     <string name="stopAlarm">Stop Alarm</string>
-    <string name="setHour">Hours</string>
+    <string name="setHour">hours</string>
     <string name="setMinutes">Minutes</string>
     <string name="am"></string>
     <string name="pm"></string>
@@ -133,6 +135,7 @@
 
     <!-- SetClockActivity -->
     <string name="title_activity_set_clock">Set Clock</string>
+    <string name="set_time_button">Set clock area</string>
     <string name="set_clock_help">fling your finger up to increase the time and down to decrease the time\n tap the screen to confirm </string>
 
     <!-- SpeakingClockActivity -->

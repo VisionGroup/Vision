@@ -104,6 +104,8 @@
     <string name="could_not_find_a_location">לא ניתן למצוא מיקום</string>
     <string name="finding_location">מנסה למצוא מיקום</string>
     <string name="initializing">מאתחל&#8230;</string>
+    <string name="No_Location_Found_Yet">עדיין לא נמצא מיקום</string>
+    <string name="Location">מיקום</string>
 
     <!-- AlarmActivity -->
     <string name="title_activity_alarm">מסך שעון מעורר</string>

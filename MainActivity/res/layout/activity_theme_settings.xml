@@ -8,63 +8,45 @@
     android:contentDescription="@string/theme_settings_screen"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/Small_text_size_button"
+        style="?textAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:id="@+id/layout1">
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:text="@string/small_text_size_button"
+        android:textSize="20sp"
+        app:prefsValue="SMALL"
+        app:readText="@string/small_text_size_button" />
 
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/Small_text_size_button"
-            style="?textAppearance"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="@string/small_text_size_button"
-            android:textSize="20sp"
-            app:prefsValue="SMALL"
-            app:readText="@string/small_text_size_button" />
-    </LinearLayout>
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/Normal_text_size_button"
+        style="?textAppearance"
+           android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:text="@string/normal_text_size_button"
+        android:textSize="26sp"
+        app:prefsValue="NORMAL"
+        app:readText="@string/normal_text_size_button" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:id="@+id/layout2">
-
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/Normal_text_size_button"
-            style="?textAppearance"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="@string/normal_text_size_button"
-            android:textSize="26sp"
-            app:prefsValue="NORMAL"
-            app:readText="@string/normal_text_size_button" />
-    </LinearLayout>
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/Large_text_size_button"
+        style="?textAppearance"
+           android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:text="@string/large_text_size_button"
+        android:textSize="32sp"
+        app:prefsValue="LARGE"
+        app:readText="@string/large_text_size_button" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout3" >
-
-        <com.yp2012g4.vision.customUI.TalkingButton
-            android:id="@+id/Large_text_size_button"
-            style="?textAppearance"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="@string/large_text_size_button"
-            android:textSize="32sp"
-            app:prefsValue="LARGE"
-            app:readText="@string/large_text_size_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="horizontal" >
 

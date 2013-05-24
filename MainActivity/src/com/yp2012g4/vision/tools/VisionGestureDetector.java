@@ -326,7 +326,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    */
   public static void speakOutAsync(final String s) {
     _spokenString = s;
-    TTS.speakOut(s);
+    TTS.speak(s);
   }
   
   public static void speakOutSync(final String s) {

@@ -40,7 +40,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     // hide statusbar of Android
     // could also be done later
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    tts = new TextToSpeech(this, this);
+    // tts = new TextToSpeech(this, this);
     soundAlarm();
   }
   

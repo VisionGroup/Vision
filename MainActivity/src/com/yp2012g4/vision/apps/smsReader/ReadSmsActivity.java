@@ -29,7 +29,7 @@ public class ReadSmsActivity extends VisionActivity {
     setContentView(R.layout.activity_read_sms);
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
     listView = (TalkingListView) findViewById(R.id.TalkingSmsListView2);
-    adapter = new SmsAdapter(SmsManager.getIncomingMessages(this), this);
+    adapter = new SmsAdapter(this);
     listView.setAdapter(adapter);
   }
   
@@ -84,6 +84,7 @@ public class ReadSmsActivity extends VisionActivity {
   }
   
   public SmsType getCurrentSms() {
-    return (SmsType) adapter.getItem((int) listView.getDisplayedItemIds()[0]);
+    final int displayItemId = listView.getPage();
+    return (SmsType) adapter.getItem(displayItemId);
   }
 }

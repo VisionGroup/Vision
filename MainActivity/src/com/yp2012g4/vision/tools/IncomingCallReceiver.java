@@ -10,8 +10,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.yp2012g4.vision.apps.main.MainActivity;
-import com.yp2012g4.vision.apps.settings.VisionApplication;
-import com.yp2012g4.vision.apps.telephony.IncomingCallActivity;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 
 /**
@@ -22,6 +20,7 @@ import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
  * @version 1.1
  * 
  */
+//TODO: Spartanize
 public class IncomingCallReceiver extends BroadcastReceiver {
   private final static String TAG = "vision:IncomingCallReceiver";
   
@@ -48,7 +47,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       } catch (final RemoteException e) {
         Log.d(TAG, "Unable to send message to callScreenService.", e);
       }
-      // processIncomingCall(c, phonenumber);
       return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
@@ -56,21 +54,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       Log.i(TAG, "Call to:" + phonenumber);
       // processIncomingCall(c, phonenumber); //TODO: Checking.
       return;
-    }
-  }
-  
-  @SuppressWarnings({ "static-method" }) private void processIncomingCall(final Context context, final String phonenumber) {
-    try {
-      Log.d(TAG, "Creating IncomingCAllActivity intent");
-      final Intent i = new Intent(context, IncomingCallActivity.class);
-      i.putExtra(CallUtils.RANG_KEY, true);
-      i.putExtra(CallUtils.NUMBER_KEY, phonenumber);
-      i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      Log.d(TAG, "Starting IncomingCAllActivity");
-      Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
-      context.startActivity(i);
-    } catch (final Exception e) {
-      Log.e(TAG, "error starting IncomingCAllActivity", e);
     }
   }
 }

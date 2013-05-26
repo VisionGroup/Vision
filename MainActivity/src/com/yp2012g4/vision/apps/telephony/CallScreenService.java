@@ -11,25 +11,12 @@ import com.yp2012g4.vision.tools.AbstractService;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 
+//TODO: Spartanize
 public class CallScreenService extends AbstractService {
   private static final String TAG = "vision:CallScreenService";
   
   @Override public void onCreate() {
     super.onCreate();
-//    final WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-//    final LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//    /* View */final View overlay = vi.inflate(R.layout.activity_incoming_call, null);// new
-//    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
-//        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-//        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-//        /* | WindowManager.LayoutParams.FLAG_FULLSCREEN */, PixelFormat.TRANSLUCENT);
-//    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//        WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-//        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, PixelFormat.TRANSLUCENT);
-//    params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_DIM_BEHIND
-//        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_FULLSCREEN;
-//    windowManager.addView(overlay, params);
-    // processOutgoingCall(this, "");
     Log.d(TAG, "Finished onCreate");
   }
   
@@ -89,29 +76,3 @@ public class CallScreenService extends AbstractService {
     }
   }
 }
-//class HUDView extends ViewGroup {
-//  private final Paint mLoadPaint;
-//  
-//  public HUDView(final Context context) {
-//    super(context);
-//    Toast.makeText(getContext(), "HUDView", Toast.LENGTH_LONG).show();
-//    mLoadPaint = new Paint();
-//    mLoadPaint.setAntiAlias(true);
-//    mLoadPaint.setTextSize(10);
-//    mLoadPaint.setARGB(255, 255, 0, 0);
-//  }
-//  
-//  @Override protected void onDraw(final Canvas canvas) {
-//    super.onDraw(canvas);
-//    canvas.drawText("Hello World", 5, 15, mLoadPaint);
-//  }
-//  
-//  @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
-//  }
-//  
-//  @Override public boolean onTouchEvent(final MotionEvent event) {
-//    // return super.onTouchEvent(event);
-//    Toast.makeText(getContext(), "onTouchEvent", Toast.LENGTH_LONG).show();
-//    return true;
-//  }
-//}

@@ -18,6 +18,7 @@
  */
 package com.yp2012g4.vision.tools;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.ComponentName;
@@ -31,15 +32,27 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
+/**
+ * A manager used to communicate with AbstractService implementing classes.
+ * 
+ * @author Philipp C. Heckel
+ * 
+ */
+//TODO: Spartanize
 public class ServiceManager {
   private final Class<? extends AbstractService> mServiceClass;
   private final Context mActivity;
   private boolean mIsBound;
-  private Messenger mService = null;
-  private Handler mIncomingHandler = null;
-  private final Messenger mMessenger = new Messenger(new IncomingHandler());
+  Messenger mService = null;
+  Handler mIncomingHandler = null;
+  final Messenger mMessenger = new Messenger(new IncomingHandler());
   
+  @SuppressLint("HandlerLeak")
   private class IncomingHandler extends Handler {
+    public IncomingHandler() {
+      // TODO Auto-generated constructor stub
+    }
+    
     @Override public void handleMessage(final Message msg) {
       if (mIncomingHandler != null) {
         Log.i("ServiceHandler", "Incoming message. Passing to handler: " + msg);

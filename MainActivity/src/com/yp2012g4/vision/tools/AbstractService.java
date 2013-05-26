@@ -20,6 +20,7 @@ package com.yp2012g4.vision.tools;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
@@ -29,6 +30,14 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
+/**
+ * Abstarct service class for the creation of local services, and the basis of
+ * communications.
+ * 
+ * @author Philipp C. Heckel
+ * 
+ */
+//TODO: Spartanize
 public abstract class AbstractService extends Service {
   static final int MSG_REGISTER_CLIENT = 9991;
   static final int MSG_UNREGISTER_CLIENT = 9992;
@@ -46,8 +55,13 @@ public abstract class AbstractService extends Service {
                                                                      // to
                                                                      // IncomingHandler.
   
+  @SuppressLint("HandlerLeak")
   private class IncomingHandler extends Handler { // Handler of incoming
-                                                  // messages from clients.
+    public IncomingHandler() {
+      // TODO Auto-generated constructor stub
+    }
+    
+    // messages from clients.
     @Override public void handleMessage(final Message msg) {
       switch (msg.what) {
         case MSG_REGISTER_CLIENT:

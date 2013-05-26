@@ -26,7 +26,6 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * 
  */
 public class PhoneStatusActivity extends VisionActivity {
-  private static final int NUM_OF_BUTTONS = 3;
   private static final String TAG = "vision:PhoneStatusActivity";
   final public static int signal_veryGood = 12, signal_good = 8, signal_poor = 5, signal_noSignalThreshold = 2,
       signal_noSignalValue = 99;
@@ -115,7 +114,6 @@ public class PhoneStatusActivity extends VisionActivity {
     Log.d(TAG, "IncomingCAllActivity starting");
     init(0, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
-    adjustLayoutSize(NUM_OF_BUTTONS);
     pn = new PhoneNotifications(this);
   }
   

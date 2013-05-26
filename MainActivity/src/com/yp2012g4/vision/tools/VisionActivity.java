@@ -9,12 +9,10 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.main.MainActivity;
@@ -27,7 +25,6 @@ import com.yp2012g4.vision.customUI.TalkingButton;
  * to this app.
  */
 public abstract class VisionActivity extends VisionGestureDetector {
-  private static final int BAR_HEIGHT = 60;
   private static final String TAG = "vision:VisionActivity";
   private int _icon;
   private String _name;
@@ -111,25 +108,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
   @Override public void onBackPressed() {
     speakOutSync(getString(R.string.back_button));
     finish();
-  }
-  
-  /***
-   * Adjusts buttons to all screen sizes
-   * 
-   * @param numOfLayouts
-   *          - the number of rows in the activity
-   */
-  public void adjustLayoutSize(final int numOfLayouts) {
-    final Display _display = getWindowManager().getDefaultDisplay();
-    final float _density = getResources().getDisplayMetrics().density;
-    final int _height = _display.getHeight() - (int) (BAR_HEIGHT * _density);
-    for (int i = 1; i <= numOfLayouts; i++) {
-      final int _resID = getResources().getIdentifier("layout" + i, "id", getPackageName());
-      final LinearLayout _l = (LinearLayout) findViewById(_resID);
-      final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(_l.getLayoutParams());
-      params.height = _height / numOfLayouts;
-      _l.setLayoutParams(params);
-    }
   }
   
   /**

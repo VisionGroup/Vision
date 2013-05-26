@@ -15,8 +15,6 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class ColorSettingsActivity extends VisionActivity {
-  private final static int BUTTON_NUM = 7;
-  
   /**
    * set the text and background colors for the entire application
    * 
@@ -69,7 +67,6 @@ public class ColorSettingsActivity extends VisionActivity {
   @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_color_settings);
-    adjustLayoutSize(BUTTON_NUM);
     init(0, getString(R.string.color_settings_screen), getString(R.string.color_setting_help));
   }
 }

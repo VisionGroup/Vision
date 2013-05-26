@@ -11,16 +11,16 @@ import java.util.Calendar;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SetClockActivity extends VisionActivity {
   public final static int HOUR_CODE = 0;
   public final static int MIN_CODE = 1;
-  private TextView tvNum;
+  private TalkingButton tbNum;
   private Calendar cal;
   // Can be either HOUR_CODE or MIN_CODE
   private int type;
@@ -52,8 +52,8 @@ public class SetClockActivity extends VisionActivity {
   private void updateDisplayByType() {
     cal = Calendar.getInstance();
     cal.setTimeInMillis(System.currentTimeMillis());
-    tvNum = (TextView) findViewById(R.id.number);
-    final TextView tvTitle = (TextView) findViewById(R.id.textView1);
+    tbNum = (TalkingButton) findViewById(R.id.number);
+    final TalkingButton tbTitle = (TalkingButton) findViewById(R.id.textView1);
     int number;
     String t;
     if (type == HOUR_CODE) {
@@ -63,8 +63,10 @@ public class SetClockActivity extends VisionActivity {
       number = cal.get(Calendar.MINUTE);
       t = getString(R.string.setMinutes);
     }
-    tvNum.setText(Integer.toString(number));
-    tvTitle.setText(t);
+    tbNum.setText(number + "");
+    tbNum.setReadText(number + " " + t);
+    tbTitle.setText(t);
+    tbTitle.setReadText(t);
   }
   
   /**
@@ -72,10 +74,16 @@ public class SetClockActivity extends VisionActivity {
    */
   @Override public boolean onFling(final MotionEvent start, final MotionEvent finish, final float velocityX, final float velocityY) {
     final int change = start.getRawY() < finish.getRawY() ? -1 : 1;
-    final int field = type == HOUR_CODE ? Calendar.HOUR_OF_DAY : Calendar.MINUTE;
+    String typeRead = getString(R.string.setHour);
+    int field = Calendar.HOUR_OF_DAY;
+    if (type == MIN_CODE) {
+      field = Calendar.MINUTE;
+      typeRead = getString(R.string.minutes);
+    }
     cal.roll(field, change);
     final int value = cal.get(field);
-    tvNum.setText(Integer.toString(value));
+    tbNum.setText(value + "");
+    tbNum.setReadText(value + " " + typeRead);
     speakOutAsync(Integer.toString(value));
     return true;
   }
@@ -89,7 +97,7 @@ public class SetClockActivity extends VisionActivity {
         setResult(AlarmActivity.USER_PRESSED_BACK);
         break;
       default:
-        final int result = Integer.parseInt(tvNum.getText().toString());
+        final int result = Integer.parseInt(tbNum.getText().toString());
         setResult(result);
         finish();
     }
@@ -105,7 +113,7 @@ public class SetClockActivity extends VisionActivity {
     _tts.waitUntilFinishTalking();
     if (!hasFocus)
       return;
-    final TextView tvTitle = (TextView) findViewById(R.id.textView1);
-    speakOutSync(tvTitle.getText().toString());
+    final TalkingButton tbTitle = (TalkingButton) findViewById(R.id.textView1);
+    speakOutSync(tbTitle.getText().toString());
   }
 }

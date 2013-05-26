@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.util.Log;
 
 public class SmsManager {
-  private static final String CONTENT_SMS_INBOX = "content://sms/inbox";
+  public static final String CONTENT_SMS_INBOX = "content://sms/inbox";
   
   public static ArrayList<SmsType> getIncomingMessages(final Context c) {
     final ArrayList<SmsType> $ = new ArrayList<SmsType>();
@@ -77,6 +77,7 @@ public class SmsManager {
    *          Massage address
    */
   public static void deleteSMS(final Context c, final String ms, final String ma) {
+    Log.i("SmsManager", "deleting msg: " + ms + " from: " + ma);
     try {
       final Uri uri = Uri.parse(CONTENT_SMS_INBOX);
       final Cursor cur = c.getContentResolver().query(uri,
@@ -85,8 +86,10 @@ public class SmsManager {
         do {
           final String address = cur.getString(2);
           final String body = cur.getString(5);
-          if (ms.equals(body) && address.equals(ma))
+          if (ms.equals(body) && address.equals(ma)) {
             c.getContentResolver().delete(Uri.parse("content://sms/" + cur.getLong(0)), null, null);
+            cur.close();
+          }
         } while (cur.moveToNext());
     } catch (final Exception e) {
       Log.e("ReadSmsActivity", "Could not delete SMS from inbox: " + e.getMessage());

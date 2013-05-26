@@ -26,6 +26,8 @@ public class DisplaySettingsActivity extends VisionActivity {
    * get the activity's main view ID
    * 
    */
+  private static final String TAG = "vision:DisplaySettingsActivity";
+  
   @Override public int getViewId() {
     return R.id.displaySettingsActivity;
   }
@@ -40,7 +42,7 @@ public class DisplaySettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    Log.i("amir", "display setting");
+    Log.i(TAG, "display setting");
     final View button = getButtonByMode();
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     switch (button.getId()) {
@@ -117,7 +119,7 @@ public class DisplaySettingsActivity extends VisionActivity {
    */
   /** */
   @Override public void onCreate(final Bundle savedInstanceState) {
-    Log.i("MyLog", "DisplaySettings:: onCreate");
+    Log.i(TAG, "DisplaySettings:: onCreate");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_display_settings);
     init(0, getString(R.string.display_settings_screen), getString(R.string.settings_help));

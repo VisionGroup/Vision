@@ -4,11 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 
+import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
-import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.telephony.IncomingCallActivity;
+import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 
 public class OutgoingCallReceiver extends BroadcastReceiver {
   private static final String TAG = "vision:OutGoingCallReceiver";
@@ -31,8 +34,16 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
         return;
       final String phoneNumber = b.getString(OutgoingCallReceiver.INTENT_PHONE_NUMBER);
       Log.v(TAG, "Incoming phonenumber: " + phoneNumber);
-      c.startService(new Intent(c, CallScreenService.class));// TODO:
-      // REMoVE!!!
+      final Message m = new Message();
+      final Bundle b1 = new Bundle();
+      b1.putString(CallUtils.NUMBER_KEY, phoneNumber);
+      b1.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
+      m.setData(b1);
+      try {
+        MainActivity.callScreenServiceManager.send(m);
+      } catch (final RemoteException e) {
+        Log.d(TAG, "Unable to send message to callScreenService.", e);
+      } // REMoVE!!!
       // processOutgoingCall(c, phoneNumber);
       // if ((phoneNumber != null) &&
       // phoneNumber.equals(OutgoingCallReceiver.ABORT_PHONE_NUMBER)) {

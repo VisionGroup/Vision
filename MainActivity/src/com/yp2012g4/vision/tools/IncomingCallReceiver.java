@@ -4,11 +4,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.apps.telephony.IncomingCallActivity;
+import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 
 /**
  * This receiver will activate the IncomingCallActivity when an incoming call
@@ -21,17 +25,30 @@ import com.yp2012g4.vision.apps.telephony.IncomingCallActivity;
 public class IncomingCallReceiver extends BroadcastReceiver {
   private final static String TAG = "vision:IncomingCallReceiver";
   
+  // private static ServiceManager callScreenServiceManager;
   @Override public void onReceive(final Context c, final Intent i) {
     final Bundle bundle = i.getExtras();
     if (null == bundle)
       return;
+    // callScreenServiceManager = new ServiceManager(c.getApplicationContext(),
+    // CallScreenService.class, null);
     Log.d(TAG, bundle.toString());
     final String state = bundle.getString(TelephonyManager.EXTRA_STATE);
     Log.d(TAG, "State: " + state);
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
-      processIncomingCall(c, phonenumber);
+      final Message m = new Message();
+      final Bundle b = new Bundle();
+      b.putString(CallUtils.NUMBER_KEY, phonenumber);
+      b.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
+      m.setData(b);
+      try {
+        MainActivity.callScreenServiceManager.send(m);
+      } catch (final RemoteException e) {
+        Log.d(TAG, "Unable to send message to callScreenService.", e);
+      }
+      // processIncomingCall(c, phonenumber);
       return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {

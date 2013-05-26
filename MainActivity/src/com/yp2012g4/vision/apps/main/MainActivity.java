@@ -15,9 +15,11 @@ import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
+import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
+import com.yp2012g4.vision.tools.ServiceManager;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -29,6 +31,7 @@ public class MainActivity extends VisionActivity {
   private static final int NUM_OF_BUTTONS = 4;
   private static final double LOW_BATTERY_LEVEL = 0.3;
   private static String TAG = "vision:MainActivity";
+  public static ServiceManager callScreenServiceManager;
   
   @Override public int getViewId() {
     return R.id.MainActivityView;
@@ -43,6 +46,11 @@ public class MainActivity extends VisionActivity {
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
+    /* Call service manager initialisation. */
+    if (callScreenServiceManager == null)
+      callScreenServiceManager = new ServiceManager(getApplicationContext(), CallScreenService.class, null);
+    if (!callScreenServiceManager.isRunning())
+      callScreenServiceManager.start();
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {

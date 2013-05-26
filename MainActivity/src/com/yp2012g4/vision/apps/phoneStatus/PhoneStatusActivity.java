@@ -66,11 +66,11 @@ public class PhoneStatusActivity extends VisionActivity {
       s = getString(R.string.no_missed_calls);
     else
       for (final CallType c : calls) {
-        s += getString(R.string.called_at) + " " + c.getDate() + ". " + getString(R.string.from) + " ";
+        s += getString(R.string.called_at) + " " + c.getDate().toLocaleString() + ". " + getString(R.string.from) + " ";
         if (TTS.isPureEnglish(c.getName()))
-          s += c.getName() + "\n";
+          s += c.getName() + ".\n";
         else
-          s += c.getNumber() + "\n";// TODO: Remove when Hebrew is
+          s += c.getNumber() + ".\n";// TODO: Remove when Hebrew is
         // detected.
       }
     speakOutSync(s);

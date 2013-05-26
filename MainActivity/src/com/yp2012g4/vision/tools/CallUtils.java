@@ -27,6 +27,12 @@ public class CallUtils {
   // Used by the Incoming call receiver to transfer data to the activity.
   public static final String RANG_KEY = "rang";
   public static final String NUMBER_KEY = TelephonyManager.EXTRA_INCOMING_NUMBER;
+  public static final String CALL_TYPE_KEY = "call_type_key";
+  
+  public static enum CALL_TYPE {
+    INCOMING_CALL, OUTGOING_CALL
+  }
+  
   private com.android.internal.telephony.ITelephony telephonyService;
   private AudioManager _am;
   

@@ -163,8 +163,8 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   @Override public void onDestroy() {
-    super.onDestroy();
     _cu.restoreRinger();
+    super.onDestroy();
   }
   
   @Override public int getViewId() {

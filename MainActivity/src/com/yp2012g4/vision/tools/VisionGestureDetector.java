@@ -145,7 +145,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     final String buttonMode = _sp.getString("BUTTON MODE", "regular");
     switch (action) {
       case MotionEvent.ACTION_DOWN:
-        Log.i("MyLog", "onTouch: ACTION_DOWN");
+        Log.i(TAG, "onTouch: ACTION_DOWN");
         VisionApplication.restoreColors(last_button_view, this);
         if (buttonMode.equals("regular"))
           last_button_view = getView(event.getRawX(), event.getRawY());

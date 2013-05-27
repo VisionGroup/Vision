@@ -1,25 +1,28 @@
+package com.yp2012g4.vision.apps.sos;
 
-package com.yp2012g4.vision.apps.SOS;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.location.LocationFinder;
 import com.yp2012g4.vision.tools.location.LocationHandler;
 
-
 /**
- * This class is an activity which sends a pre-defined SOS message to a
- * pre-defined contact
+ * This class is an activity which sends a pre-defined SOS message to
+ * configurable content
  * 
  * @author Amir
  * @version 1.0
@@ -33,6 +36,7 @@ public class SOSActivity extends VisionActivity {
   double latitude = DEFAULT_LAT_LONG, longitude = DEFAULT_LAT_LONG;
   final int maxLengthOfAddress = 100;
   static final String TAG = "vision:SOSActivity";
+  String _number = "";
   
   @Override public int getViewId() {
     return R.id.SOS_textview;
@@ -53,8 +57,7 @@ public class SOSActivity extends VisionActivity {
           messageToSend += address;
       }
       l.unlock();
-      final String number = "0529240424"; // TODO: Move to configuration.
-      Log.d(TAG, "Sending SOS: " + messageToSend + " to:" + number + " lat=" + latitude + " long=" + longitude);
+      Log.d(TAG, "Sending SOS: " + messageToSend + " to:" + _number + " lat=" + latitude + " long=" + longitude);
       final SmsManager sms = SmsManager.getDefault();
       if (sms == null)
         Log.e(TAG, "SMS Manager is null! Not sending the message");
@@ -69,9 +72,17 @@ public class SOSActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent me) {
     if (super.onSingleTapUp(me))
       return true;
-    if (getButtonByMode().getId() == R.id.Send_SOS_Message) {
-      speakOutAsync(getString(R.string.sending_SOS_message));
-      _mHandler.postDelayed(sendSOSMessage, SEND_DELAY);
+    switch (getButtonByMode().getId()) {
+      case R.id.Send_SOS_Message:
+        speakOutSync(getString(R.string.sending_SOS_message) + "to " + _number);
+        sendSOSMessage.run();
+        break;
+      case R.id.SOS_Change_contact:
+        final Intent i = new Intent(this, SOSconfig.class);
+        startActivity(i);
+        break;
+      default:
+        break;
     }
     return false;
   }
@@ -114,6 +125,20 @@ public class SOSActivity extends VisionActivity {
       }
     };
     lf.run(h);
+    loadNumber();
+  }
+  
+  private void loadNumber() {
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+    _number = sp.getString(getString(R.string.sos_number), _number);
+    if (_number == "") {
+      speakOutSync(getString(R.string.SOS_number_empty));
+      final Intent i = new Intent(this, SOSconfig.class);
+      startActivity(i);
+    }
+    final TalkingButton tb = (TalkingButton) findViewById(R.id.SOS_phone_number);
+    tb.setText(_number);
+    tb.setReadText(getString(R.string.sos_contact_number) + _number);
   }
   
   @Override protected void onStop() {

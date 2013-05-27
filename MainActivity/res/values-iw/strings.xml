@@ -226,7 +226,7 @@
     <string name="sending_SOS_message">שולח הודעת SOS</string>
     <string name="send_SOS_message">שליחת הודעת SOS</string>
     <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
-    <string name="SOS_number_empty">איש קשר S O S ריק הגדר איש קשר</string>
+    <string name="SOS_number_empty">איש קשר S O S ריק. הכנס מספר תקין.</string>
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">מסך הגדרת איש קשר S O S</string>

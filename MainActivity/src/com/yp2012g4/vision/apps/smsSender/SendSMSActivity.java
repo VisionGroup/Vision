@@ -117,7 +117,7 @@ public class SendSMSActivity extends VisionActivity {
    * @param cs
    *          The string to be spoken when moving to the view
    */
-  private void moveCursor(final EditText et, final CharSequence cs) {
+  static private void moveCursor(final EditText et, final CharSequence cs) {
     Selection.setSelection(et.getText(), et.getSelectionStart());
     et.requestFocus();
     speakOutAsync(cs.toString());

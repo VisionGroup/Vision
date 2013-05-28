@@ -13,7 +13,7 @@
         android:id="@+id/button_set_colors"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -24,7 +24,7 @@
         android:id="@+id/button_set_theme"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -35,7 +35,7 @@
         android:id="@+id/button_exit_launcher"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -46,7 +46,7 @@
         android:id="@+id/locale"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -54,21 +54,21 @@
         app:readText="@string/language" />
 
     <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/button_selecting_mode"
+        android:id="@+id/vision_call_enable_button"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        android:src="@drawable/buttons_settings_button"
-        app:readText="@string/buttons_mode" />
+        android:src="@drawable/missed"
+        app:readText="@string/phone_call_service_button" />
     
     <com.yp2012g4.vision.customUI.TalkingImageButton
         android:id="@+id/calculator"
         style="android:ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"

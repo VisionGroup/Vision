@@ -15,6 +15,8 @@ import com.yp2012g4.vision.apps.settings.VisionApplication;
  * 
  * @author Auster Yaron
  * 
+ * @author Olivier Modified the class so that it is a singleton
+ * 
  */
 public class TTS implements OnInitListener {
   private static final String TAG = "vision:TTS";
@@ -22,24 +24,33 @@ public class TTS implements OnInitListener {
   private int _qm;
   private Locale _language;
   private boolean _init = false;
+  private static TTS staticTTS = null;
+  
+  public static void init(final Context c) {
+    if (staticTTS == null || !TTS.isRunning()) {
+      staticTTS = new TTS(c);
+      Log.v(TAG, "TTS initialized");
+    } else
+      Log.v(TAG, "TTS already running so not initialized");
+  }
   
   /**
    * 
    * 
-   * @param context
+   * @param c
    *          the context that is running the class.
    * @param listener
    *          the listener that is connected from the activity.
    */
-  public TTS(final Context context) {
-    _tts = new TextToSpeech(context, this);
+  private TTS(final Context c) {
+    _tts = new TextToSpeech(c, this);
   }
   
   /**
    * @return true if the TTS engine is initialized.
    */
-  public boolean isRunning() {
-    return _init;
+  public static boolean isRunning() {
+    return staticTTS._init;
   }
   
   /**
@@ -48,9 +59,9 @@ public class TTS implements OnInitListener {
    * @param queueMode
    *          the new queue mode.
    */
-  public void setQueueMode(final int queueMode) {
+  public static void setQueueMode(final int queueMode) {
     Log.d(TAG, "setQueueMode");
-    _qm = queueMode;
+    staticTTS._qm = queueMode;
   }
   
   /**
@@ -58,20 +69,21 @@ public class TTS implements OnInitListener {
    * 
    * @param languag
    *          the new language.
+   * @return
    */
-  public void setLanguage(final Locale l) {
+  public static int setLanguage(final Locale l) {
     Log.d(TAG, "setLanguage");
-    _language = l;
-    _tts.setLanguage(l);
+    staticTTS._language = l;
+    return staticTTS._tts.setLanguage(l);
   }
   
   /**
    * 
    * @return The language being set.
    */
-  public Locale getLanguage() {
+  public static Locale getLanguage() {
     Log.d(TAG, "getLanguage");
-    return _language;
+    return staticTTS._language;
   }
   
   /**
@@ -80,10 +92,17 @@ public class TTS implements OnInitListener {
    * @param s
    *          string to speak.
    */
-  public void speak(final String s) {
+  public static void speak(final String s) {
     Log.d(TAG, "speak : " + s);
     if (null != s)
-      _tts.speak(s, _qm, null);
+      staticTTS._tts.speak(s, staticTTS._qm, null);
+    final boolean debug = false;
+    if (debug) {
+      Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[3].getClassName() + ":"
+          + Thread.currentThread().getStackTrace()[3].getMethodName());
+      Log.d(TAG, "caller function 2: " + Thread.currentThread().getStackTrace()[4].getClassName() + ":"
+          + Thread.currentThread().getStackTrace()[4].getMethodName());
+    }
   }
   
   /**
@@ -92,7 +111,7 @@ public class TTS implements OnInitListener {
    * @param s
    *          string to speak.
    */
-  public void syncSpeak(final String s) {
+  public static void syncSpeak(final String s) {
     speak(s);
     while (isSpeaking())
       try {
@@ -106,27 +125,27 @@ public class TTS implements OnInitListener {
    * Stop speak!.
    * 
    */
-  public void stop() {
+  public static void stop() {
     Log.d(TAG, "stop");
-    _tts.stop();
+    staticTTS._tts.stop();
   }
   
   /**
    * Close the TTS engine.
    * 
    */
-  public void shutdown() {
+  public static void shutdown() {
     stop();
-    _tts.shutdown();
-    _tts = null;
+    staticTTS._tts.shutdown();
+    staticTTS._tts = null;
   }
   
   /**
    * 
    * @return true if currently speaking, false otherwise.
    */
-  public boolean isSpeaking() {
-    return _tts.isSpeaking();
+  public static boolean isSpeaking() {
+    return staticTTS._tts.isSpeaking();
   }
   
   /**
@@ -151,8 +170,8 @@ public class TTS implements OnInitListener {
     }
   }
   
-  public void waitUntilFinishTalking() {
-    while (_tts.isSpeaking()) {
+  public static void waitUntilFinishTalking() {
+    while (isSpeaking()) {
       // Wait for message to finish playing and then continue
     }
   }

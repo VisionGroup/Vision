@@ -15,7 +15,7 @@ public class TalkingEditText extends EditText {
   /**
    * c'tor
    */
-  public TalkingEditText(Context c, AttributeSet as) {
+  public TalkingEditText(final Context c, final AttributeSet as) {
     super(c, as);
     final TypedArray a = c.obtainStyledAttributes(as, R.styleable.TalkingEditText, 0, 0);
     _readText = a.getString(R.styleable.TalkingEditText_readText);
@@ -36,7 +36,7 @@ public class TalkingEditText extends EditText {
    * 
    * @param readText
    */
-  public void setReadText(String readText) {
+  public void setReadText(final String readText) {
     _readText = readText;
   }
   
@@ -54,7 +54,7 @@ public class TalkingEditText extends EditText {
    * 
    * @param s
    */
-  public void setReadToolTip(String s) {
+  public void setReadToolTip(final String s) {
     _readToolTip = s;
   }
   
@@ -73,7 +73,7 @@ public class TalkingEditText extends EditText {
    * 
    * @param s
    */
-  public void setPrefsValue(String s) {
+  public void setPrefsValue(final String s) {
     _prefsValue = s;
   }
 }

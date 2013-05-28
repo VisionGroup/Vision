@@ -1,5 +1,6 @@
 package com.yp2012g4.vision.apps.sos;
 
+import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,7 +15,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 import com.yp2012g4.vision.tools.location.LocationFinder;
@@ -63,9 +63,11 @@ public class SOSActivity extends VisionActivity {
         Log.e(TAG, "SMS Manager is null! Not sending the message");
       else {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
-        speakOutAsync(getString(R.string.SOS_message_has_been_sent));
+        final ArrayList<String> parts = sms.divideMessage(messageToSend);
+        sms.sendMultipartTextMessage(_number, null, parts, null, null);
+        speakOutSync(getString(R.string.SOS_message_has_been_sent));
       }
-      _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
+      finish();
     }
   };
   
@@ -75,7 +77,7 @@ public class SOSActivity extends VisionActivity {
     switch (getButtonByMode().getId()) {
       case R.id.Send_SOS_Message:
         speakOutSync(getString(R.string.sending_SOS_message) + "to " + _number);
-        sendSOSMessage.run();
+        _mHandler.postDelayed(sendSOSMessage, 5000);
         break;
       case R.id.SOS_Change_contact:
         final Intent i = new Intent(this, SOSconfig.class);

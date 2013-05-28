@@ -347,14 +347,15 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _gestureDetector = new GestureDetector(this);
     _navigationBar = false;
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-      @Override public void uncaughtException(final Thread thread, final Throwable ex) {
-        final StringWriter s = new StringWriter();
-        final PrintWriter p = new PrintWriter(s);
-        ex.printStackTrace(p);
-        Log.e(TAG, "fatal exception: " + s.toString());
-      }
-    });
+    if (false)
+      Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+        @Override public void uncaughtException(final Thread thread, final Throwable ex) {
+          final StringWriter s = new StringWriter();
+          final PrintWriter p = new PrintWriter(s);
+          ex.printStackTrace(p);
+          Log.e(TAG, "fatal exception: " + s.toString());
+        }
+      });
   }
   
   /**

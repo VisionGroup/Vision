@@ -69,11 +69,12 @@ public class TTS implements OnInitListener {
    * 
    * @param languag
    *          the new language.
+   * @return
    */
-  public static void setLanguage(final Locale l) {
+  public static int setLanguage(final Locale l) {
     Log.d(TAG, "setLanguage");
     staticTTS._language = l;
-    staticTTS._tts.setLanguage(l);
+    return staticTTS._tts.setLanguage(l);
   }
   
   /**

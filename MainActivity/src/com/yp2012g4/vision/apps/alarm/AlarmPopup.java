@@ -21,12 +21,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.tools.TTS;
 
 //when implements vision activity the application crashes on this screen
 public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener {
   private static final String TAG = "vision:AlarmPopup";
   static public MediaPlayer mp = null;
-  protected TextToSpeech tts;
   private boolean left = false;
   
   /***
@@ -40,22 +40,16 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     // hide statusbar of Android
     // could also be done later
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    // tts = new TextToSpeech(this, this);
     soundAlarm();
   }
   
   @Override public void onDestroy() {
-    if (tts != null) {
-      speakOut("stop");
-      tts.stop();
-      tts.shutdown();
-    }
     super.onDestroy();
   }
   
   @Override public void onInit(final int status) {
     if (status == TextToSpeech.SUCCESS) {
-      final int r = tts.setLanguage(Locale.US);
+      final int r = TTS.setLanguage(Locale.US);
       if (r == TextToSpeech.LANG_NOT_SUPPORTED || r == TextToSpeech.LANG_MISSING_DATA)
         Log.e(TAG, "error setLanguage");
       return;
@@ -72,10 +66,8 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     left = true;
     mp.stop();
     AlarmActivity.alarmIsSet = false;
-    speakOut(getString(R.string.alarm_is_off));
-    while (tts.isSpeaking()) {
-      // Wait for message to finish playing and then finish the activity
-    }
+    TTS.speak(getString(R.string.alarm_is_off));
+    TTS.waitUntilFinishTalking();
     finish();
     super.onUserInteraction();
   }
@@ -105,16 +97,10 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmActivity.pendingIntent);
         AlarmActivity.alarmIsSet = true;
         AlarmActivity.alarmTime = calendar;
-        speakOut(getString(R.string.snooze_for) + " " + snooze + getString(R.string.minutes));
-        while (tts.isSpeaking()) {
-          // Wait for message to finish playing and then finish the activity
-        }
+        TTS.speak(getString(R.string.snooze_for) + " " + snooze + getString(R.string.minutes));
+        TTS.waitUntilFinishTalking();
         finish();
       }
     });
-  }
-  
-  public void speakOut(final String s) {
-    tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
   }
 }

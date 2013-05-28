@@ -26,34 +26,24 @@ public class IncomingCallReceiver extends BroadcastReceiver {
   
   // private static ServiceManager callScreenServiceManager;
   @Override public void onReceive(final Context c, final Intent i) {
-    final Bundle bundle = i.getExtras();
-    if (null == bundle)
+    final Bundle b1 = i.getExtras();
+    if (null == b1)
       return;
-    // callScreenServiceManager = new ServiceManager(c.getApplicationContext(),
-    // CallScreenService.class, null);
-    Log.d(TAG, bundle.toString());
-    final String state = bundle.getString(TelephonyManager.EXTRA_STATE);
+    final String state = b1.getString(TelephonyManager.EXTRA_STATE);
     Log.d(TAG, "State: " + state);
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
-      final String phonenumber = bundle.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+      final String phonenumber = b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
       final Message m = new Message();
-      final Bundle b = new Bundle();
-      b.putString(CallUtils.NUMBER_KEY, phonenumber);
-      b.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
-      m.setData(b);
+      final Bundle b2 = new Bundle();
+      b2.putString(CallUtils.NUMBER_KEY, phonenumber);
+      b2.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
+      m.setData(b2);
       try {
         MainActivity.callScreenServiceManager.send(m);
       } catch (final RemoteException e) {
         Log.d(TAG, "Unable to send message to callScreenService.", e);
       }
-      return;
-    }
-    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-      final String phonenumber = "";// bundle.getString(CallUtils.NUMBER_KEY);
-      Log.i(TAG, "Call to:" + phonenumber);
-      // processIncomingCall(c, phonenumber); //TODO: Checking.
-      return;
     }
   }
 }

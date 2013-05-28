@@ -36,16 +36,17 @@ import android.util.Log;
  * A manager used to communicate with AbstractService implementing classes.
  * 
  * @author Philipp C. Heckel
+ * @adapter Amit Yaffe
  * 
  */
-//TODO: Spartanize
 public class ServiceManager {
-  private final Class<? extends AbstractService> mServiceClass;
-  private final Context mActivity;
-  private boolean mIsBound;
-  Messenger mService = null;
-  Handler mIncomingHandler = null;
-  final Messenger mMessenger = new Messenger(new IncomingHandler());
+  private final static String TAG = "vision:ServiceManager";
+  private final Class<? extends AbstractService> _serviceClass;
+  private final Context _activity;
+  private boolean _isBound;
+  Messenger _service = null;
+  Handler _incomingHandler = null;
+  final Messenger _messenger = new Messenger(new IncomingHandler());
   
   @SuppressLint("HandlerLeak")
   private class IncomingHandler extends Handler {
@@ -53,42 +54,40 @@ public class ServiceManager {
       // TODO Auto-generated constructor stub
     }
     
-    @Override public void handleMessage(final Message msg) {
-      if (mIncomingHandler != null) {
-        Log.i("ServiceHandler", "Incoming message. Passing to handler: " + msg);
-        mIncomingHandler.handleMessage(msg);
+    @Override public void handleMessage(final Message m) {
+      if (_incomingHandler != null) {
+        Log.i(TAG, "Incoming message. Passing to handler: " + m);
+        _incomingHandler.handleMessage(m);
       }
     }
   }
   
   private final ServiceConnection mConnection = new ServiceConnection() {
     @Override public void onServiceConnected(final ComponentName className, final IBinder service) {
-      mService = new Messenger(service);
-      // textStatus.setText("Attached.");
-      Log.i("ServiceHandler", "Attached.");
+      Log.i(TAG, "Attached.");
       try {
         final Message msg = Message.obtain(null, AbstractService.MSG_REGISTER_CLIENT);
-        msg.replyTo = mMessenger;
-        mService.send(msg);
+        msg.replyTo = _messenger;
+        new Messenger(service).send(msg);
       } catch (final RemoteException e) {
-        // In this case the service has crashed before we could even do anything
-        // with it
+        Log.d(TAG, "service has crashed before we could do anything with it");
       }
     }
     
+    /**
+     * This is called when the connection with the service has been unexpectedly
+     * disconnected - process crashed.
+     */
     @Override public void onServiceDisconnected(final ComponentName className) {
-      // This is called when the connection with the service has been
-      // unexpectedly disconnected - process crashed.
-      mService = null;
-      // textStatus.setText("Disconnected.");
-      Log.i("ServiceHandler", "Disconnected.");
+      _service = null;
+      Log.i(TAG, "Disconnected.");
     }
   };
   
-  public ServiceManager(final Context context, final Class<? extends AbstractService> serviceClass, final Handler incomingHandler) {
-    mActivity = context;
-    mServiceClass = serviceClass;
-    mIncomingHandler = incomingHandler;
+  public ServiceManager(final Context c, final Class<? extends AbstractService> serviceClass, final Handler incomingHandler) {
+    _activity = c;
+    _serviceClass = serviceClass;
+    _incomingHandler = incomingHandler;
     if (isRunning())
       doBindService();
   }
@@ -111,47 +110,47 @@ public class ServiceManager {
   }
   
   public boolean isRunning() {
-    final ActivityManager manager = (ActivityManager) mActivity.getSystemService(Context.ACTIVITY_SERVICE);
-    for (final RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE))
-      if (mServiceClass.getName().equals(service.service.getClassName()))
+    for (final RunningServiceInfo service : ((ActivityManager) _activity.getSystemService(Context.ACTIVITY_SERVICE))
+        .getRunningServices(Integer.MAX_VALUE))
+      if (_serviceClass.getName().equals(service.service.getClassName()))
         return true;
     return false;
   }
   
   public void send(final Message msg) throws RemoteException {
-    if (mIsBound)
-      if (mService != null)
-        mService.send(msg);
+    if (_isBound)
+      if (_service != null)
+        _service.send(msg);
   }
   
   private void doStartService() {
-    mActivity.startService(new Intent(mActivity, mServiceClass));
+    _activity.startService(new Intent(_activity, _serviceClass));
   }
   
   private void doStopService() {
-    mActivity.stopService(new Intent(mActivity, mServiceClass));
+    _activity.stopService(new Intent(_activity, _serviceClass));
   }
   
   private void doBindService() {
-    mActivity.bindService(new Intent(mActivity, mServiceClass), mConnection, Context.BIND_AUTO_CREATE);
-    mIsBound = true;
+    _activity.bindService(new Intent(_activity, _serviceClass), mConnection, Context.BIND_AUTO_CREATE);
+    _isBound = true;
   }
   
   private void doUnbindService() {
-    if (mIsBound) {
+    if (_isBound) {
       // If we have received the service, and hence registered with it, then now
       // is the time to unregister.
-      if (mService != null)
+      if (_service != null)
         try {
           final Message msg = Message.obtain(null, AbstractService.MSG_UNREGISTER_CLIENT);
-          msg.replyTo = mMessenger;
-          mService.send(msg);
+          msg.replyTo = _messenger;
+          _service.send(msg);
         } catch (final RemoteException e) {
           // There is nothing special we need to do if the service has crashed.
         }
       // Detach our existing connection.
-      mActivity.unbindService(mConnection);
-      mIsBound = false;
+      _activity.unbindService(mConnection);
+      _isBound = false;
       // textStatus.setText("Unbinding.");
       Log.i("ServiceHandler", "Unbinding.");
     }

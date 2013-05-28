@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.SOS.SOSActivity;
+import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
 

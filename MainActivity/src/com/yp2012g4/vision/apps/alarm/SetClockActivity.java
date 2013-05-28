@@ -15,6 +15,7 @@ import android.view.View;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SetClockActivity extends VisionActivity {
@@ -110,7 +111,7 @@ public class SetClockActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    _tts.waitUntilFinishTalking();
+    TTS.waitUntilFinishTalking();
     if (!hasFocus)
       return;
     final TalkingButton tbTitle = (TalkingButton) findViewById(R.id.textView1);

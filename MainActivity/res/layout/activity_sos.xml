@@ -7,18 +7,40 @@
     android:layout_height="fill_parent"
     android:contentDescription="@string/sos_screen"
     android:orientation="vertical"
+    android:weightSum="12"
     tools:context=".DisplayMessageActivity" >
 
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SOS_phone_number"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="2"
+        android:background="@android:color/transparent"
+        android:scaleType="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <com.yp2012g4.vision.customUI.TalkingImageButton
-            android:id="@+id/Send_SOS_Message"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="center"
-            android:src="@drawable/sos_pic"
-            app:readText="@string/send_SOS_message" />
+    <com.yp2012g4.vision.customUI.TalkingImageButton
+        android:id="@+id/Send_SOS_Message"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="8"
+        android:background="@android:color/transparent"
+        android:scaleType="center"
+        android:src="@drawable/sos_pic"
+        app:readText="@string/send_SOS_message" />
+
+    <com.yp2012g4.vision.customUI.TalkingButton
+        android:id="@+id/SOS_Change_contact"
+        style="?textAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="2"
+        android:background="@android:color/transparent"
+        android:scaleType="center"
+        android:text="@string/change_contact_number"
+        app:readText="@string/change_contact_number"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
         android:layout_width="match_parent"

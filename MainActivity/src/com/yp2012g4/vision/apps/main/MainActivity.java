@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.SOS.SOSActivity;
 import com.yp2012g4.vision.apps.alarm.AlarmActivity;
 import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
@@ -15,11 +14,13 @@ import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
+import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.tools.ServiceManager;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -105,7 +106,7 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    _tts.waitUntilFinishTalking();
+    TTS.waitUntilFinishTalking();
     if (!hasFocus)
       return;
     VoiceNotify();
@@ -133,7 +134,7 @@ public class MainActivity extends VisionActivity {
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
     speakOutAsync(s);
-    _tts.waitUntilFinishTalking();
+    TTS.waitUntilFinishTalking();
   }
   
   @Override public void onBackPressed() {

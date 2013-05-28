@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.apps.SOS.SOSActivity"
+            android:name="com.yp2012g4.vision.apps.sos.SOSActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_sos"
             android:launchMode="singleInstance"

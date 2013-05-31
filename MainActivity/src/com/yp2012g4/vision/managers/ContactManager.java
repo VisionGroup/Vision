@@ -12,57 +12,68 @@ import android.provider.ContactsContract.PhoneLookup;
 
 public class ContactManager {
   private final Context _c;
+  public final int NUMBER_OF_CONTACTS_BATCH = 5;
+  private int _size;
+  private Cursor cur;
+  public ArrayList<ContactType> _contactsArray;
   private final String[] _projection = new String[] { BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME,
       ContactsContract.Data.TIMES_CONTACTED, ContactsContract.Contacts.HAS_PHONE_NUMBER, ContactsContract.Contacts.LOOKUP_KEY };
   
   public ContactManager(final Context c) {
     _c = c;
+    _contactsArray = new ArrayList<ContactType>();
   }
   
   /**
    * 
    * @return 10 favorite contacts.
    */
-  public ArrayList<ContactType> getFavoriteContacts() {
+  public void getFavoriteContacts() {
     final Uri u = ContactsContract.Contacts.CONTENT_URI;
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
     final String[] sa = null;
     final String so = ContactsContract.Data.TIMES_CONTACTED + " DESC, " + ContactsContract.Contacts.DISPLAY_NAME
         + " COLLATE LOCALIZED ASC LIMIT 10";
-    final Cursor cur = _c.getContentResolver().query(u, _projection, ss, sa, so);
-    final ArrayList<ContactType> $ = new ArrayList<ContactType>();
-    if (cur.moveToFirst())
-      do
-        try {
-          $.add(new ContactType(cur, _c));
-        } catch (final IllegalArgumentException e) {
-          // Ignore and go next
-        }
-      while (cur.moveToNext());
-    cur.close();
-    return $;
+    cur = _c.getContentResolver().query(u, _projection, ss, sa, so);
+    cur.moveToFirst();
+    _size = cur.getCount();
   }
   
   /**
    * 
    * @return all contacts arranged alphabetically
    */
-  public ArrayList<ContactType> getAllContacts() {
+  public void getAllContacts() {
     final Uri uri = ContactsContract.Contacts.CONTENT_URI;
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
     final String[] sa = null;
     final String so = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    final Cursor cur = _c.getContentResolver().query(uri, _projection, ss, sa, so);
-    final ArrayList<ContactType> $ = new ArrayList<ContactType>();
-    if (cur.moveToFirst())
-      do
-        try {
-          $.add(new ContactType(cur, _c));
-        } catch (final IllegalArgumentException e) {
-          // Ignore and go next
-        }
-      while (cur.moveToNext());
-    return $;
+    cur = _c.getContentResolver().query(uri, _projection, ss, sa, so);
+    cur.moveToFirst();
+    _size = cur.getCount();
+  }
+  
+  public void getNextContacts() {
+    for (int i = 0; i < NUMBER_OF_CONTACTS_BATCH && !cur.isAfterLast(); i++) {
+      try {
+        _contactsArray.add(new ContactType(cur, _c));
+      } catch (final IllegalArgumentException e) {
+        // Ignore and go next
+      }
+      cur.moveToNext();
+    }
+  }
+  
+  public int getNumOfContacts() {
+    return _size;
+  }
+  
+  public ContactType getContact(final int p) {
+    if (getNumOfContacts() < p)
+      return null;
+    while (_contactsArray.size() <= p)
+      getNextContacts();
+    return _contactsArray.get(p);
   }
   
   /**
@@ -104,10 +115,10 @@ public class ContactManager {
   }
   
   // only for the use of tests
-  static public ArrayList<ContactType> getTestContacts() {
-    final ArrayList<ContactType> $ = new ArrayList<ContactType>();
-    $.add(new ContactType("0544457141", "Roman Gurevitch"));
-    $.add(new ContactType("0000000000", "John Doe"));
-    return $;
+  public void getTestContacts() {
+    cur = null;
+    _contactsArray.add(new ContactType("0544457141", "Roman Gurevitch"));
+    _contactsArray.add(new ContactType("0000000000", "John Doe"));
+    _size = _contactsArray.size();
   }
 }

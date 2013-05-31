@@ -47,6 +47,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private static final int VIBRATE_SHORT_DURATION = 20;
   private static final String TAG = "vision:VisionGestureDetector";
   public static final long VIBRATE_DURATION = 150;
+  public static final int SWIPE_THRESHOLD = 100;
+  public static final int SWIPE_VELOCITY_THRESHOLD = 100;
   /**
    * for multitouch gesture detection
    */

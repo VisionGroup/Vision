@@ -1,11 +1,10 @@
 package com.yp2012g4.vision.test;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.TouchUtils;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
@@ -51,22 +50,23 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     // check info
     final TalkingButton name = (TalkingButton) solo.getView(R.id.contact_name);
     final TalkingButton phone = (TalkingButton) solo.getView(R.id.contact_phone);
-    final ArrayList<ContactType> ac = ContactManager.getTestContacts();
-    assertEquals(ac.get(0).getContactName(), name.getText());
-    assertEquals(ac.get(0).getPhone(), phone.getText());
-    solo.clickOnView(solo.getView(R.id.contact_next));
-    assertEquals(ac.get(1).getContactName(), name.getText());
-    assertEquals(ac.get(1).getPhone(), phone.getText());
-    solo.clickOnView(solo.getView(R.id.contact_next));
-    assertEquals(ac.get(1).getContactName(), name.getText());
-    assertEquals(ac.get(1).getPhone(), phone.getText());
-    solo.clickOnView(solo.getView(R.id.contact_prev));
-    assertEquals(ac.get(0).getContactName(), name.getText());
-    assertEquals(ac.get(0).getPhone(), phone.getText());
-    solo.clickOnView(solo.getView(R.id.contact_prev));
-    assertEquals(ac.get(0).getContactName(), name.getText());
-    assertEquals(ac.get(0).getPhone(), phone.getText());
-    solo.clickOnView(solo.getView(R.id.contact_next));
+    ContactManager cm = new ContactManager(activity);
+    cm.getTestContacts();
+    assertEquals(cm.getContact(0).getContactName(), name.getText());
+    assertEquals(cm.getContact(0).getPhone(), phone.getText());
+    flingRight(this);
+    assertEquals(cm.getContact(1).getContactName(), name.getText());
+    assertEquals(cm.getContact(1).getPhone(), phone.getText());
+    flingRight(this);
+    assertEquals(cm.getContact(1).getContactName(), name.getText());
+    assertEquals(cm.getContact(1).getPhone(), phone.getText());
+    flingLeft(this);
+    assertEquals(cm.getContact(0).getContactName(), name.getText());
+    assertEquals(cm.getContact(0).getPhone(), phone.getText());
+    flingLeft(this);
+    assertEquals(cm.getContact(0).getContactName(), name.getText());
+    assertEquals(cm.getContact(0).getPhone(), phone.getText());
+    flingRight(this);
     solo.clickOnView(solo.getView(R.id.contacts_quick_sms));
     // test passing correct number to Quick SMS activity
     solo.assertCurrentActivity("wrong activity", QuickSMSActivity.class);
@@ -78,7 +78,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
       } catch (final Exception e) {
         smsExtra = "";
       }
-    assertEquals(ac.get(1).getPhone(), smsExtra);
+    assertEquals(cm.getContact(1).getPhone(), smsExtra);
   }
   
   /**
@@ -87,8 +87,9 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   public void testManager() {
     final ContactManager cm = new ContactManager(activity.getApplicationContext());
     // should not contain empty contacts or phone numbers.
-    final ArrayList<ContactType> allContacts = cm.getAllContacts();
-    for (final ContactType contactType : allContacts) {
+    cm.getAllContacts();
+    for (int i = 0; i < cm.getNumOfContacts(); i++) {
+      ContactType contactType = cm.getContact(i);
       assertTrue(contactType.getContactName() != "");
       if (contactType.getPhone() != "")
         assertEquals(contactType.getContactName(), cm.getNameFromPhone(contactType.getPhone()));
@@ -97,12 +98,25 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
         assertEquals(contactType.getPhone(), cm.lookupPhoneNumbers(contactType.getLookUpKey()));
     }
     // should not contain empty contacts or phone numbers.
-    final ArrayList<ContactType> favoritContacts = cm.getFavoriteContacts();
-    for (final ContactType contactType : favoritContacts) {
+    cm.getFavoriteContacts();
+    for (int i = 0; i < cm.getNumOfContacts(); i++) {
+      ContactType contactType = cm.getContact(i);
       assertTrue(contactType.getContactName() != "");
       assertEquals(contactType.getContactName(), cm.getNameFromPhone(contactType.getPhone()));
       assertTrue(contactType.getPhone() != "");
       assertEquals(contactType.getPhone(), cm.lookupPhoneNumbers(contactType.getLookUpKey()));
     }
+  }
+  
+  public static void flingRight(ActivityInstrumentationTestCase2<?> c) {
+    final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
+    final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
+    TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 - 150, screenHeight / 2, screenHeight / 2, 20);
+  }
+  
+  public static void flingLeft(ActivityInstrumentationTestCase2<?> c) {
+    final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
+    final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
+    TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 + 150, screenHeight / 2, screenHeight / 2, 20);
   }
 }

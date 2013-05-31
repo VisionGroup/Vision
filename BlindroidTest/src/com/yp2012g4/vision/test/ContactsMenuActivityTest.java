@@ -31,8 +31,8 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.quickDialButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
-    solo.clickOnView(solo.getView(R.id.contact_next));
-    solo.clickOnView(solo.getView(R.id.contact_prev));
+    ContactsActivityTest.flingRight(this);
+    ContactsActivityTest.flingLeft(this);
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
   }
@@ -44,8 +44,8 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.contactsListButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
-    solo.clickOnView(solo.getView(R.id.contact_next));
-    solo.clickOnView(solo.getView(R.id.contact_prev));
+    ContactsActivityTest.flingRight(this);
+    ContactsActivityTest.flingLeft(this);
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
   }

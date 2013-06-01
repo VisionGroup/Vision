@@ -65,6 +65,8 @@ public class DialScreen extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
+    if (isNavigationManuButton(buttonId))
+      return;
     switch (buttonId) {
       case R.id.dialer_dial_button: // make a phone call
       case R.id.dialer_sms_button: // sms

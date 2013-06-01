@@ -59,6 +59,8 @@ public class SOSconfig extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
+    if (isNavigationManuButton(buttonId))
+      return;
     switch (buttonId) {
       case R.id.button_ok:
         if (dialed_number == "") {

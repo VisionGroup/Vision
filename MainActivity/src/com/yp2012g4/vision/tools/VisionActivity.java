@@ -82,6 +82,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
         break;
       case R.id.home_button:
         _navigationBar = true;
+        if (_name.equals("Main screen")) {
+          speakOutSync(getString(R.string.in_main_screen));
+          break;
+        }
         startActivity(_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
         break;
@@ -144,5 +148,17 @@ public abstract class VisionActivity extends VisionGestureDetector {
    */
   public static boolean checkIfButtonPressed(final MotionEvent e, final Map.Entry<View, Rect> entry) {
     return isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY());
+  }
+  
+  public static boolean isNavigationManuButton(final int buttonId) {
+    if (buttonId == R.id.back_button)
+      return true;
+    if (buttonId == R.id.tool_tip_button)
+      return true;
+    if (buttonId == R.id.current_menu_button)
+      return true;
+    if (buttonId == R.id.home_button)
+      return true;
+    return false;
   }
 }

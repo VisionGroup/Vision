@@ -47,9 +47,10 @@ public class DialScreen extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
-    super.onSingleTapUp(e);
-    if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
-      return _navigationBar = false;
+    if (super.onSingleTapUp(e))
+      return true;
+    if (curr_view.getId() == R.id.dialer_sms_button)
+      return false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (checkIfButtonPressed(e, entry))

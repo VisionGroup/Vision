@@ -79,10 +79,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    */
   protected GestureDetector _gestureDetector;
   /**
-   * Flag indicating a click on control bar button
-   */
-  protected boolean _navigationBar;
-  /**
    * Mapping from views to their locations on screen
    */
   private final Map<View, Rect> view_to_rect = new HashMap<View, Rect>();
@@ -347,7 +343,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     super.onCreate(savedInstanceState);
     _mHandler = new Handler();
     _gestureDetector = new GestureDetector(this);
-    _navigationBar = false;
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     if (false)
       Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {

@@ -46,8 +46,6 @@ public class CalcActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (_navigationBar)
-      return _navigationBar = false;
     if (isBadAction)
       // also the touched button text
       return isBadAction = false;

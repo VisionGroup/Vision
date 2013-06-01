@@ -75,10 +75,9 @@ public class IncomingCallActivity extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent me) {
-    super.onSingleTapUp(me);
     _cu.silenceRinger();
-    if (_navigationBar)
-      return _navigationBar = false;
+    if (super.onSingleTapUp(me))
+      return true;
     _clickAction(curr_view);
     return true;
   }

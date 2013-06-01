@@ -228,6 +228,11 @@
     <string name="sending_SOS_message">Sending S O S message.</string>
     <string name="send_SOS_message">Send S O S</string>
     <string name="sos_msg_to_send">I need your help!</string>
+    
+    <!-- Delete Confirmation Activity -->
+    <string name="delete_confirmation_screen">Delete confirmation</string>
+    <string name="delete_confirmation_info">Are you sure?</string>
+    <string name="delete_confirmation_help">Fling to delete, tap screen to cancel. </string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">Call</string>

@@ -136,6 +136,11 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return (TalkingButton) findViewById(id);
   }
   
+  @Override protected void onNewIntent(final Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+  }
+  
   /**
    * @param e
    * @param entry

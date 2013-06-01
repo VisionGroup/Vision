@@ -226,6 +226,11 @@
     <string name="sending_SOS_message">שולח הודעת SOS</string>
     <string name="send_SOS_message">שליחת הודעת SOS</string>
     <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
+    
+    <!-- Delete Confirmation Activity -->
+    <string name="delete_confirmation_screen">מסך אישור מחיקה</string>
+    <string name="delete_confirmation_info">האם אתה בטוח?</string>
+    <string name="delete_confirmation_help">לחץ על המסך לביטול, גרור למחיקה</string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">שיחה</string>

@@ -21,8 +21,6 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class ReadSmsActivity extends VisionActivity {
   TalkingListView listView;
   SmsAdapter adapter;
-  private static final int SWIPE_THRESHOLD = 100;
-  private static final int SWIPE_VELOCITY_THRESHOLD = 100;
   
   @Override protected void onCreate(final Bundle b) {
     super.onCreate(b);
@@ -38,14 +36,17 @@ public class ReadSmsActivity extends VisionActivity {
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
+    boolean res = true;
     final float diffX = e2.getX() - e1.getX();
     if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
       if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
         if (diffX > 0)
-          listView.prevPage();
+          res = listView.prevPage();
         else
-          listView.nextPage();
+          res = listView.nextPage();
         vibrate(VIBRATE_DURATION);
+        if (!res)
+          speakOutAsync(getString(R.string.no_more_contacts));
       }
     return super.onFling(e1, e2, f1, f2);
   }

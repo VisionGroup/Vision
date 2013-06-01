@@ -15,6 +15,7 @@ import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.tools.CallUtils;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -37,7 +38,7 @@ public class CallListActivity extends VisionActivity {
     adapter = new CallAdapter(data, this);
     listView.setAdapter(adapter);
     if (data.isEmpty())
-      _tts.speak(getString(R.string.noCalls));
+      TTS.speak(getString(R.string.noCalls));
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {

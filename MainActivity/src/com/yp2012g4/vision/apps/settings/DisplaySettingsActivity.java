@@ -6,6 +6,7 @@ package com.yp2012g4.vision.apps.settings;
 
 import java.util.Locale;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -19,9 +20,15 @@ import android.view.View;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.apps.main.MainActivity;
+import com.yp2012g4.vision.apps.sos.SOSconfig;
+import com.yp2012g4.vision.tools.IncomingCallReceiver;
+import com.yp2012g4.vision.tools.OutgoingCallReceiver;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DisplaySettingsActivity extends VisionActivity {
+  private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
+  private static final String DISABLE_PREF = "disable";
+  private static final String ENABLE_PREF = "enable";
   /**
    * get the activity's main view ID
    * 
@@ -45,7 +52,11 @@ public class DisplaySettingsActivity extends VisionActivity {
     Log.i(TAG, "display setting");
     final View button = getButtonByMode();
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final PackageManager pm = getPackageManager();
     switch (button.getId()) {
+      case R.id.SOS_Change_contact:
+        startActivity(new Intent(DisplaySettingsActivity.this, SOSconfig.class));
+        break;
       case R.id.button_set_colors:
         startActivity(new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class));
         break;
@@ -53,15 +64,17 @@ public class DisplaySettingsActivity extends VisionActivity {
         startActivity(new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class));
         break;
       case R.id.button_exit_launcher:
-        final PackageManager pm = getPackageManager();
         pm.clearPackagePreferredActivities(getPackageName());
         vibrate(VIBRATE_DURATION);
         break;
       case R.id.locale:
         pressedLocalSelectButton(sp);
         break;
-      case R.id.button_selecting_mode:
-        pressedButtonSelectButton(sp);
+      // case R.id.button_selecting_mode: TODO: add this button and fixed bugs
+      // pressedButtonSelectButton(sp);
+      // break;
+      case R.id.vision_call_enable_button:
+        pressedButtonCallEnable(sp);
         break;
       case R.id.calculator:
         startActivity(new Intent(this, CalcActivity.class));
@@ -70,6 +83,28 @@ public class DisplaySettingsActivity extends VisionActivity {
         break;
     }
     return false;
+  }
+  
+  private void pressedButtonCallEnable(final SharedPreferences sp) {
+    final String buttonMode = sp.getString(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF);
+    boolean enable = false;
+    if (buttonMode.equals(ENABLE_PREF)) {
+      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, DISABLE_PREF, this);
+      speakOutAsync(getString(R.string.disable_call_service));
+    } else {
+      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF, this);
+      enable = true;
+      speakOutAsync(getString(R.string.enable_call_service));
+    }
+    changeEnableState(IncomingCallReceiver.class, enable);
+    changeEnableState(OutgoingCallReceiver.class, enable);
+  }
+  
+  private void changeEnableState(final Class<?> cl, final boolean enable) {
+    final PackageManager pm = getPackageManager();
+    final ComponentName componentName = new ComponentName(getPackageName(), cl.getName());
+    final int state = enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+    pm.setComponentEnabledSetting(componentName, state, PackageManager.DONT_KILL_APP);
   }
   
   /**
@@ -100,20 +135,19 @@ public class DisplaySettingsActivity extends VisionActivity {
     finish();
   }
   
-  /**
-   * @param sp
-   */
-  private void pressedButtonSelectButton(final SharedPreferences sp) {
-    final String buttonMode = sp.getString("BUTTON MODE", "regular");
-    if (buttonMode.equals("regular")) {
-      VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
-      speakOutAsync(getString(R.string.sticky_buttons_mode));
-    } else {
-      VisionApplication.savePrefs("BUTTON MODE", "regular", this);
-      speakOutAsync(getString(R.string.regular_buttons_mode));
-    }
-  }
-  
+//  /**
+//   * @param sp
+//   */
+//  private void pressedButtonSelectButton(final SharedPreferences sp) {
+//    final String buttonMode = sp.getString("BUTTON MODE", "regular");
+//    if (buttonMode.equals("regular")) {
+//      VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
+//      speakOutAsync(getString(R.string.sticky_buttons_mode));
+//    } else {
+//      VisionApplication.savePrefs("BUTTON MODE", "regular", this);
+//      speakOutAsync(getString(R.string.regular_buttons_mode));
+//    }
+//  }
   /**
    * Called when the activity is first created.
    */

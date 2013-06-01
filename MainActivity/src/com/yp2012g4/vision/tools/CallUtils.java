@@ -22,9 +22,8 @@ import com.yp2012g4.vision.apps.settings.VisionApplication;
  * 
  */
 public class CallUtils {
-  // Used by Log
   private static String TAG = "vison:CallUtils";
-  // Used by the Incoming call receiver to transfer data to the activity.
+  // Used by the Receivers to transfer data to the activity.
   public static final String RANG_KEY = "rang";
   public static final String NUMBER_KEY = TelephonyManager.EXTRA_INCOMING_NUMBER;
   public static final String CALL_TYPE_KEY = "call_type_key";

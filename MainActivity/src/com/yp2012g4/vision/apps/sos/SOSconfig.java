@@ -1,32 +1,25 @@
-package com.yp2012g4.vision.apps.contacts;
+package com.yp2012g4.vision.apps.sos;
 
 import java.util.Map;
 
-import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
-import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
-import com.yp2012g4.vision.apps.telephony.EndCallListener;
 import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
- * A dialer which offers both SMS and phone calls to a dialed number;
+ * Number configuration for SOS screen;
  * 
- * @author Maytal
+ * @author Roman
  * @version 1.1
  */
-public class DialScreen extends VisionActivity {
+public class SOSconfig extends VisionActivity {
   /**
    * max length of dialed number
    */
@@ -44,14 +37,12 @@ public class DialScreen extends VisionActivity {
    * get the id of the main layout
    */
   @Override public int getViewId() {
-    return R.id.DialScreen;
+    return R.id.SosConfig;
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (curr_view.getId() == R.id.dialer_sms_button)
-      return false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (checkIfButtonPressed(e, entry))
@@ -70,26 +61,19 @@ public class DialScreen extends VisionActivity {
     if (isNavigationManuButton(buttonId))
       return;
     switch (buttonId) {
-      case R.id.dialer_dial_button: // make a phone call
-      case R.id.dialer_sms_button: // sms
-        // no number was dialed
+      case R.id.button_ok:
         if (dialed_number == "") {
-          speakOutAsync(getString(R.string.dial_number));
-          return;
+          speakOutAsync(getString(R.string.SOS_number_empty));
+          break;
         }
-        if (buttonId == R.id.dialer_sms_button)
-          startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, dialed_number));
-        else
-          startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)).putExtra(CallUtils.NUMBER_KEY,
-              dialed_number));
-        dialed_number = "";
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.edit().putString(getString(R.string.sos_number), dialed_number).commit();
+        finish();
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
       case R.id.button_reset: // reset
-        final Intent intent = new Intent(getApplicationContext(), DeleteConfirmation.class);
-        intent.putExtra("activity", "com.yp2012g4.vision.apps.contacts.DialScreen");
-        startActivity(intent);
+        pressedResetButton();
         break;
       case R.id.button_delete: // delete
         pressedDeleteButton(buttonId);
@@ -112,22 +96,12 @@ public class DialScreen extends VisionActivity {
     getTalkingButton(R.id.number).setReadText(read_number);
   }
   
-  @Override protected void onNewIntent(final Intent intent) {
-    super.onNewIntent(intent);
-    final Bundle extras = getIntent().getExtras();
-    if (extras != null)
-      if (extras.getString("ACTION").equals("DELETE"))
-        pressedResetButton();
-  }
-  
   /**
    * 
    */
   private void pressedResetButton() {
     dialed_number = "";
     read_number = "";
-    getTalkingButton(R.id.number).setText("");
-    getTalkingButton(R.id.number).setReadText("");
   }
   
   /**
@@ -145,17 +119,21 @@ public class DialScreen extends VisionActivity {
    * */
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    telephone();
-    setContentView(R.layout.dial_screen);
-    init(0, getString(R.string.dial_screen_whereami), getString(R.string.dial_screen_whereami));
-    getTalkingButton(R.id.number).setText("");
-    getTalkingButton(R.id.number).setReadText("");
+    setContentView(R.layout.activity_sosconfig);
+    init(0, getString(R.string.sos_config_screen_whereami), getString(R.string.sos_config_screen_whereami));
   }
   
-  public void telephone() {
-    TelephonyManager telephonyManager;
-    final EndCallListener callListener = new EndCallListener(getApplicationContext());
-    telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-    telephonyManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE);
+  /**
+   * In this overridden function the dialed number is initialized
+   * 
+   * @param hasFocus
+   *          indicates whether a window has the focus
+   */
+  @Override public void onWindowFocusChanged(final boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    if (hasFocus) {
+      getTalkingButton(R.id.number).setText("");
+      getTalkingButton(R.id.number).setReadText("");
+    }
   }
 }

@@ -8,7 +8,7 @@
     android:layout_height="fill_parent"
     android:contentDescription="@string/contact_list_screen"
     android:orientation="vertical"
-    android:weightSum="4"
+    android:weightSum="3"
     tools:ignore="NestedWeights" >
 
     <com.yp2012g4.vision.customUI.TalkingButton
@@ -31,34 +31,7 @@
         android:scaleType="fitCenter"
         android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="2" >
-
-        <com.yp2012g4.vision.customUI.TalkingImageButton
-            android:id="@+id/contact_prev"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/back_button"
-            app:readText="@string/previous_contact" />
-
-        <com.yp2012g4.vision.customUI.TalkingImageButton
-            android:id="@+id/contact_next"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/next_button"
-            app:readText="@string/next_contact" />
-    </LinearLayout>
-
+   
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"

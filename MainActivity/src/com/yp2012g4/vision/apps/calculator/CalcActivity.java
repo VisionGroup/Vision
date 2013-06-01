@@ -46,8 +46,6 @@ public class CalcActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (_navigationBar)
-      return _navigationBar = false;
     if (isBadAction)
       // also the touched button text
       return isBadAction = false;
@@ -76,6 +74,8 @@ public class CalcActivity extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
+    if (isNavigationManuButton(buttonId))
+      return;
     final CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
     // it's a digit
     if (digits.contains(Integer.valueOf(buttonId)))

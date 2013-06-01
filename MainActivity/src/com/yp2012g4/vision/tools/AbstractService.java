@@ -37,44 +37,31 @@ import android.util.Log;
  * @author Philipp C. Heckel
  * 
  */
-//TODO: Spartanize
 public abstract class AbstractService extends Service {
   static final int MSG_REGISTER_CLIENT = 9991;
   static final int MSG_UNREGISTER_CLIENT = 9992;
-  ArrayList<Messenger> mClients = new ArrayList<Messenger>(); // Keeps track of
-                                                              // all current
-                                                              // registered
-                                                              // clients.
-  final Messenger mMessenger = new Messenger(new IncomingHandler()); // Target
-                                                                     // we
-                                                                     // publish
-                                                                     // for
-                                                                     // clients
-                                                                     // to send
-                                                                     // messages
-                                                                     // to
-                                                                     // IncomingHandler.
+  // Keeps track of all current registered clients.
+  ArrayList<Messenger> mClients = new ArrayList<Messenger>();
+  // Target we publish for clients to send messages to IncomingHandler.
+  @SuppressWarnings("synthetic-access") final Messenger mMessenger = new Messenger(new IncomingHandler());
   
   @SuppressLint("HandlerLeak")
-  private class IncomingHandler extends Handler { // Handler of incoming
-    public IncomingHandler() {
-      // TODO Auto-generated constructor stub
-    }
-    
-    // messages from clients.
-    @Override public void handleMessage(final Message msg) {
-      switch (msg.what) {
+  /**
+   * Handler of incoming messages from clients.
+   */
+  private class IncomingHandler extends Handler {
+    @Override public void handleMessage(final Message m) {
+      switch (m.what) {
         case MSG_REGISTER_CLIENT:
-          Log.i("MyService", "Client registered: " + msg.replyTo);
-          mClients.add(msg.replyTo);
+          Log.i("MyService", "Client registered: " + m.replyTo);
+          mClients.add(m.replyTo);
           break;
         case MSG_UNREGISTER_CLIENT:
-          Log.i("MyService", "Client un-registered: " + msg.replyTo);
-          mClients.remove(msg.replyTo);
+          Log.i("MyService", "Client un-registered: " + m.replyTo);
+          mClients.remove(m.replyTo);
           break;
         default:
-          // super.handleMessage(msg);
-          onReceiveMessage(msg);
+          onReceiveMessage(m);
       }
     }
   }
@@ -85,12 +72,12 @@ public abstract class AbstractService extends Service {
     Log.i("MyService", "Service Started.");
   }
   
-  @Override public int onStartCommand(final Intent intent, final int flags, final int startId) {
-    Log.i("MyService", "Received start id " + startId + ": " + intent);
+  @Override public int onStartCommand(final Intent i, final int flags, final int startId) {
+    Log.i("MyService", "Received start id " + startId + ": " + i);
     return START_STICKY; // run until explicitly stopped.
   }
   
-  @Override public IBinder onBind(final Intent intent) {
+  @Override public IBinder onBind(final Intent i) {
     return mMessenger.getBinder();
   }
   
@@ -100,14 +87,12 @@ public abstract class AbstractService extends Service {
     Log.i("MyService", "Service Stopped.");
   }
   
-  protected void send(final Message msg) {
+  protected void send(final Message m) {
     for (int i = mClients.size() - 1; i >= 0; i--)
       try {
-        Log.i("MyService", "Sending message to clients: " + msg);
-        mClients.get(i).send(msg);
+        Log.i("MyService", "Sending message to clients: " + m);
+        mClients.get(i).send(m);
       } catch (final RemoteException e) {
-        // The client is dead. Remove it from the list; we are going through the
-        // list from back to front so this is safe to do inside the loop.
         Log.e("MyService", "Client is dead. Removing from list: " + i);
         mClients.remove(i);
       }

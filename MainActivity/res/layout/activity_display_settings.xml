@@ -7,73 +7,118 @@
     android:layout_height="fill_parent"
     android:contentDescription="@string/display_settings_screen"
     android:orientation="vertical"
-    tools:context=".DisplaySettings" >
+    android:weightSum="4"
+    tools:context=".DisplaySettings"
+    tools:ignore="NestedWeights" >
 
-    <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/button_set_colors"
-        style="android:ButtonStyle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/color_settings_button"
-        app:readText="@string/color_settings_button" />
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
-    <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/button_set_theme"
-        style="android:ButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="112dp"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/theme_settings_button"
-        app:readText="@string/theme_settings_button" />
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/button_set_colors"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/color_settings_button"
+            app:readText="@string/color_settings_button" />
 
-    <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/button_exit_launcher"
-        style="android:ButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="112dp"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/home_button"
-        app:readText="@string/clear_launcher_defaults" />
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/button_set_theme"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/theme_settings_button"
+            app:readText="@string/theme_settings_button" />
+    </LinearLayout>
 
-    <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/locale"
-        style="android:ButtonStyle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/globe"
-        app:readText="@string/language" />
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
-    <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/button_selecting_mode"
-        style="android:ButtonStyle"
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/button_exit_launcher"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/home_not"
+            app:readText="@string/clear_launcher_defaults" />
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/locale"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/globe"
+            app:readText="@string/language" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/buttons_settings_button"
-        app:readText="@string/buttons_mode" />
-    
-    <com.yp2012g4.vision.customUI.TalkingImageButton
-        android:id="@+id/calculator"
-        style="android:ButtonStyle"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/vision_call_enable_button"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/missed"
+            app:readText="@string/phone_call_service_button" />
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/calculator"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calc"
+            app:readText="@string/calculator" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="0dip"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/calc"
-        app:readText="@string/calculator" />
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/SOS_Change_contact"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sos_config"
+            app:readText="@string/change_contact_number" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

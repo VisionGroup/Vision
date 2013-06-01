@@ -16,7 +16,7 @@ import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.managers.SmsType;
 
 public class SmsAdapter extends BaseAdapter {
-  private static final int NUMBER_OF_BATCH = 5;
+  public static final int NUMBER_OF_BATCH = 5;
   private final ArrayList<SmsType> _smsArray;
   Cursor _curser;
   Context _c;

@@ -1,5 +1,8 @@
 package com.yp2012g4.vision.tools;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -44,6 +47,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private static final int VIBRATE_SHORT_DURATION = 20;
   private static final String TAG = "vision:VisionGestureDetector";
   public static final long VIBRATE_DURATION = 150;
+  public static final int SWIPE_THRESHOLD = 100;
+  public static final int SWIPE_VELOCITY_THRESHOLD = 100;
   /**
    * for multitouch gesture detection
    */
@@ -73,10 +78,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * Stores the gestures
    */
   protected GestureDetector _gestureDetector;
-  /**
-   * Flag indicating a click on control bar button
-   */
-  protected boolean _navigationBar;
   /**
    * Mapping from views to their locations on screen
    */
@@ -267,6 +268,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
       if (_mainView.getContentDescription() != null)
         speakOutAsync(findViewById(getViewId()).getContentDescription().toString());
     }
+    Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[3].getClassName() + ":"
+        + Thread.currentThread().getStackTrace()[3].getMethodName());
   }
   
   /**
@@ -302,7 +305,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   }
   
   /**
-   * This method defined the behavior when the user stops touching the screen
+   * This method define the behavior when the user stops touching the screen
    * 
    * @param v
    *          - last view being touched
@@ -319,37 +322,37 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * @param s
    *          the string to speak out
    */
-  public void speakOutAsync(final String s) {
-    if (_tts == null) {
-      Log.e(TAG, "TTS is null");
-      return;
-    }
+  public static void speakOutAsync(final String s) {
     _spokenString = s;
-    _tts.speak(s);
+    TTS.speak(s);
   }
   
-  public void speakOutSync(final String s) {
+  public static void speakOutSync(final String s) {
     speakOutAsync(s);
-    _tts.waitUntilFinishTalking();
+    TTS.waitUntilFinishTalking();
   }
   
   @Override public void onDestroy() {
-    _tts.shutdown();
+    // _tts.shutdown();
     super.onDestroy();
   }
   
   @Override protected void onCreate(final Bundle savedInstanceState) {
-    _tts = new TTS(this);
-    if (_tts.isRunning())
-      speakOutAsync("start");
-    else
-      Log.e(TAG, "tts init error");
+    Log.v(TAG, "VisionGestureDetector:onCreate");
     VisionApplication.setThemeToActivity(this);
     super.onCreate(savedInstanceState);
     _mHandler = new Handler();
     _gestureDetector = new GestureDetector(this);
-    _navigationBar = false;
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    if (false)
+      Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+        @Override public void uncaughtException(final Thread thread, final Throwable ex) {
+          final StringWriter s = new StringWriter();
+          final PrintWriter p = new PrintWriter(s);
+          ex.printStackTrace(p);
+          Log.e(TAG, "fatal exception: " + s.toString());
+        }
+      });
   }
   
   /**

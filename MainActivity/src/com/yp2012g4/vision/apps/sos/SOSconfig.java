@@ -41,9 +41,8 @@ public class SOSconfig extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
-    super.onSingleTapUp(e);
-    if (_navigationBar)
-      return _navigationBar = false;
+    if (super.onSingleTapUp(e))
+      return true;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (checkIfButtonPressed(e, entry))
@@ -59,6 +58,8 @@ public class SOSconfig extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
+    if (isNavigationManuButton(buttonId))
+      return;
     switch (buttonId) {
       case R.id.button_ok:
         if (dialed_number == "") {

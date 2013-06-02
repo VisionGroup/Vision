@@ -242,6 +242,11 @@
     <string name="send_SOS_message">Send S O S</string>
     <string name="sos_msg_to_send">I need your help!</string>
     <string name="SOS_number_empty">S O S contact is empty. Enter valid contact number</string>
+    <!-- Delete Confirmation Activity -->
+    <string name="delete_confirmation_screen">Delete confirmation</string>
+    <string name="delete_confirmation_info">Are you sure?</string>
+    <string name="delete_confirmation_help">Fling to delete, tap screen to cancel. </string>
+    <string name="delete_confirmation_button">Fling to delete, tap screen to cancel. </string>
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">S O S configuration screen</string>
@@ -297,6 +302,7 @@
     <string name="title_activity_call_list">CallList</string>
     <string name="hello_world">Hello world!</string>
     <string name="call_list_screen">Call List Screen</string>
+    <string name="call_list_help"> touch screen to read call properties, slide your finger right or left to move to the next or previous call, you can reply to the call or delete it.</string>
     <string name="noCalls">No Calls.</string>
     <string name="delete_call">Delete call</string>
 

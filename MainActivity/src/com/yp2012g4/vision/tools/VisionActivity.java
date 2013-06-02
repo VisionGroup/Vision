@@ -67,7 +67,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
     final View button = getButtonByMode();
     switch (button.getId()) {
       case R.id.back_button:
-        _navigationBar = true;
         Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
           speakOutSync(getString(R.string.in_main_screen));
@@ -75,25 +74,26 @@ public abstract class VisionActivity extends VisionGestureDetector {
         }
         speakOutSync(getString(R.string.back_button));
         finish();
-        break;
+        return true;
       case R.id.tool_tip_button:
-        _navigationBar = true;
         speakOutAsync(getToolTip());
-        break;
+        return true;
       case R.id.home_button:
-        _navigationBar = true;
+        if (_name.equals("Main screen")) {
+          speakOutSync(getString(R.string.in_main_screen));
+          return true;
+        }
         startActivity(_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
-        break;
+        return true;
       case R.id.current_menu_button:
-        _navigationBar = true;
         speakOutAsync(getString(R.string.this_is) + " " + _name);
-        break;
+        return true;
       default:
         last_button_view = tempLast;
         return false;
     }
-    return true;
+    return false;
   }
   
   @Override protected void onCreate(final Bundle savedInstanceState) {
@@ -137,6 +137,11 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return (TalkingButton) findViewById(id);
   }
   
+  @Override protected void onNewIntent(final Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+  }
+  
   /**
    * @param e
    * @param entry
@@ -144,5 +149,17 @@ public abstract class VisionActivity extends VisionGestureDetector {
    */
   public static boolean checkIfButtonPressed(final MotionEvent e, final Map.Entry<View, Rect> entry) {
     return isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY());
+  }
+  
+  public static boolean isNavigationManuButton(final int buttonId) {
+    if (buttonId == R.id.back_button)
+      return true;
+    if (buttonId == R.id.tool_tip_button)
+      return true;
+    if (buttonId == R.id.current_menu_button)
+      return true;
+    if (buttonId == R.id.home_button)
+      return true;
+    return false;
   }
 }

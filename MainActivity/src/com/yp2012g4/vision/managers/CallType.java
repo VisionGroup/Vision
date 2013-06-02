@@ -12,18 +12,18 @@ import android.text.format.DateFormat;
  * 
  */
 public class CallType {
-  private String _mNumber = "";
-  private String _mType = "";
-  private String _mName = "";
-  private final Date _mDate;
-  private String _mNumberType = "";
+  private String _number = "";
+  private String _type = "";
+  private String _name = "";
+  private Date _date;
+  private String _numberType = "";
   
   public CallType(final String number, final String type, final String name, final Date date, final String numberType) {
-    _mNumber = number;
-    _mType = type;
-    _mName = name;
-    _mDate = date;
-    _mNumberType = numberType;
+    _number = number;
+    _type = type;
+    _name = name;
+    _date = date;
+    _numberType = numberType;
   }
   
   /**
@@ -33,44 +33,50 @@ public class CallType {
    * @param c
    */
   public CallType(final Cursor cur) {
-    _mNumber = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-    final String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
-    final long m = Long.parseLong(mili);
-    _mDate = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m));
+    _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
+//    final String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
+//    final long m = Long.parseLong(cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE)));
     try {
-      _mName = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
-    } catch (final Exception e) {
-      _mName = "";
+      _date = new Date((String) DateFormat.format("dd/MM/yy hh:mm",
+          cur.getLong(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))));
+    } catch (final Exception e1) {
+      _date = new Date();
+      e1.printStackTrace();
     }
     try {
-      _mNumberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));
+      _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
     } catch (final Exception e) {
-      _mNumberType = "";
+      _name = "";
     }
     try {
-      _mType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE));
+      _numberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));
     } catch (final Exception e) {
-      _mType = "";
+      _numberType = "";
+    }
+    try {
+      _type = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE));
+    } catch (final Exception e) {
+      _type = "";
     }
   }
   
   public synchronized String getNumber() {
-    return _mNumber;
+    return _number;
   }
   
   public synchronized String getNumberType() {
-    return _mNumberType;
+    return _numberType;
   }
   
   public synchronized Date getDate() {
-    return _mDate;
+    return _date;
   }
   
   public synchronized String getType() {
-    return _mType;
+    return _type;
   }
   
   public synchronized String getName() {
-    return _mName;
+    return _name;
   }
 }

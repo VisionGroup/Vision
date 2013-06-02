@@ -123,6 +123,13 @@
             android:theme="@android:style/Theme.Translucent" >
         </activity>
         <activity
+            android:name="com.yp2012g4.vision.apps.smsReader.DeleteConfirmation"
+            android:configChanges="locale"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
             android:name="com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_where_am_i"

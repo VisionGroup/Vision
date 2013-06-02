@@ -68,6 +68,23 @@ public class ReadSmsActivity extends VisionActivity {
         startActivity(i);
         break;
       case R.id.sms_remove:
+        final Intent intent = new Intent(this, DeleteConfirmation.class);
+        intent.putExtra("activity", "com.yp2012g4.vision.apps.smsReader.ReadSmsActivity");
+        startActivity(intent);
+        break;
+      default:
+        break;
+    }
+    SmsManager.markMessageRead(this, currMsg.getAddress(), currMsg.getBody());
+    return false;
+  }
+  
+  @Override protected void onNewIntent(final Intent intent) {
+    super.onNewIntent(intent);
+    final SmsType currMsg = getCurrentSms();
+    final Bundle extras = getIntent().getExtras();
+    if (extras != null)
+      if (extras.getString("ACTION").equals("DELETE")) {
         // first we remove the SMS from the phone DB
         SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
         // then we remove the SMS from the displayed list
@@ -76,12 +93,7 @@ public class ReadSmsActivity extends VisionActivity {
         listView.prevPage();
         speakOutAsync(getString(R.string.delete_message));
         vibrate(VIBRATE_DURATION);
-        break;
-      default:
-        break;
-    }
-    SmsManager.markMessageRead(this, currMsg.getAddress(), currMsg.getBody());
-    return false;
+      }
   }
   
   public SmsType getCurrentSms() {

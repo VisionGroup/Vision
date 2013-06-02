@@ -2,12 +2,14 @@ package com.yp2012g4.vision.apps.phoneStatus;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.CallType;
@@ -98,7 +100,11 @@ public class PhoneStatusActivity extends VisionActivity {
         speakOutAsync(signalToString());
         break;
       case R.id.button_getMissedCalls:
-        getMissedCalls();
+        // getMissedCalls();
+        final Intent intent = new Intent(this, CallListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
         break;
       default:
         break;

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.SOS.SOSActivity;
 import com.yp2012g4.vision.apps.alarm.AlarmActivity;
 import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
@@ -14,7 +15,6 @@ import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
-import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;

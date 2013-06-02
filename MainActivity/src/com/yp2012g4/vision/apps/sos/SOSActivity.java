@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.apps.sos;
+package com.yp2012g4.vision.apps.SOS;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;

@@ -279,6 +279,7 @@
     <string name="Call_sceen">רשימת שיחות</string>
     <string name="Call">חייג</string>
     <string name="call_list_screen">רשימת שיחות</string>
+    <string name="call_list_help"> לחץ על המסך לשמוע פרטי השיחה. באפשרותך לעבור בין השיחות על ידי החלקת האצבע  ימינה ושמאלה.ניתן להשיב לשיחה או למחוק אותה </string>
     <string name="noCalls">אין שיחות ברשימה</string>
     <string name="delete_call">מחק שיחה</string>
 

@@ -47,8 +47,6 @@ public class ColorSettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (_navigationBar)
-      return _navigationBar = false;
     final View v = getButtonByMode();
     if (v instanceof TalkingButton) {
       speakOutSync(((TalkingButton) v).getReadText());

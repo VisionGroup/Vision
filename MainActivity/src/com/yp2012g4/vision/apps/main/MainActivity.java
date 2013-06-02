@@ -55,8 +55,6 @@ public class MainActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (_navigationBar)
-      return _navigationBar = false;
     final Intent intent = getIntentByButtonId(MainActivity.this, getButtonByMode().getId());
     if (intent != null) {
       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -232,6 +232,13 @@
     <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
     <string name="SOS_number_empty">איש קשר S O S ריק. הכנס מספר תקין.</string>
 
+    <!-- Delete Confirmation Activity -->
+    <string name="delete_confirmation_screen">מסך אישור מחיקה</string>
+    <string name="delete_confirmation_info">האם אתה בטוח?</string>
+    <string name="delete_confirmation_help">לחץ על המסך לביטול, גרור למחיקה</string>
+        <string name="delete_confirmation_button">לחץ על המסך לביטול, גרור למחיקה</string>
+    
+
     <!-- SOS config -->
     <string name="sos_config_screen_name">מסך הגדרת איש קשר S O S</string>
     <string name="ok_button">הגדר איש קשר</string>

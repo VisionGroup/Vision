@@ -47,6 +47,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private static final int VIBRATE_SHORT_DURATION = 20;
   private static final String TAG = "vision:VisionGestureDetector";
   public static final long VIBRATE_DURATION = 150;
+  public static final int SWIPE_THRESHOLD = 100;
+  public static final int SWIPE_VELOCITY_THRESHOLD = 100;
   /**
    * for multitouch gesture detection
    */
@@ -76,10 +78,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * Stores the gestures
    */
   protected GestureDetector _gestureDetector;
-  /**
-   * Flag indicating a click on control bar button
-   */
-  protected boolean _navigationBar;
   /**
    * Mapping from views to their locations on screen
    */
@@ -345,7 +343,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     super.onCreate(savedInstanceState);
     _mHandler = new Handler();
     _gestureDetector = new GestureDetector(this);
-    _navigationBar = false;
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     if (false)
       Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {

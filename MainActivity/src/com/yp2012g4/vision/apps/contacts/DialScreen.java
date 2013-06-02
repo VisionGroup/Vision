@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.telephony.EndCallListener;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -47,9 +48,10 @@ public class DialScreen extends VisionActivity {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
-    super.onSingleTapUp(e);
-    if (_navigationBar || curr_view.getId() == R.id.dialer_sms_button)
-      return _navigationBar = false;
+    if (super.onSingleTapUp(e))
+      return true;
+    if (curr_view.getId() == R.id.dialer_sms_button)
+      return false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
         if (checkIfButtonPressed(e, entry))
@@ -65,6 +67,8 @@ public class DialScreen extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
+    if (isNavigationManuButton(buttonId))
+      return;
     switch (buttonId) {
       case R.id.dialer_dial_button: // make a phone call
       case R.id.dialer_sms_button: // sms
@@ -78,11 +82,14 @@ public class DialScreen extends VisionActivity {
         else
           startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)).putExtra(CallUtils.NUMBER_KEY,
               dialed_number));
+        dialed_number = "";
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
       case R.id.button_reset: // reset
-        pressedResetButton();
+        final Intent intent = new Intent(getApplicationContext(), DeleteConfirmation.class);
+        intent.putExtra("activity", "com.yp2012g4.vision.apps.contacts.DialScreen");
+        startActivity(intent);
         break;
       case R.id.button_delete: // delete
         pressedDeleteButton(buttonId);
@@ -105,12 +112,22 @@ public class DialScreen extends VisionActivity {
     getTalkingButton(R.id.number).setReadText(read_number);
   }
   
+  @Override protected void onNewIntent(final Intent intent) {
+    super.onNewIntent(intent);
+    final Bundle extras = getIntent().getExtras();
+    if (extras != null)
+      if (extras.getString("ACTION").equals("DELETE"))
+        pressedResetButton();
+  }
+  
   /**
    * 
    */
   private void pressedResetButton() {
     dialed_number = "";
     read_number = "";
+    getTalkingButton(R.id.number).setText("");
+    getTalkingButton(R.id.number).setReadText("");
   }
   
   /**
@@ -131,20 +148,8 @@ public class DialScreen extends VisionActivity {
     telephone();
     setContentView(R.layout.dial_screen);
     init(0, getString(R.string.dial_screen_whereami), getString(R.string.dial_screen_whereami));
-  }
-  
-  /**
-   * In this overridden function the dialed number is initialized
-   * 
-   * @param hasFocus
-   *          indicates whether a window has the focus
-   */
-  @Override public void onWindowFocusChanged(final boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    if (hasFocus) {
-      getTalkingButton(R.id.number).setText("");
-      getTalkingButton(R.id.number).setReadText("");
-    }
+    getTalkingButton(R.id.number).setText("");
+    getTalkingButton(R.id.number).setReadText("");
   }
   
   public void telephone() {

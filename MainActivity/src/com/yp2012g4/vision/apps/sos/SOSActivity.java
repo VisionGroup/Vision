@@ -5,7 +5,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -79,10 +78,6 @@ public class SOSActivity extends VisionActivity {
         speakOutSync(getString(R.string.sending_SOS_message) + "to " + _number);
         _mHandler.postDelayed(sendSOSMessage, 5000);
         break;
-      case R.id.SOS_Change_contact:
-        final Intent i = new Intent(this, SOSconfig.class);
-        startActivity(i);
-        break;
       default:
         break;
     }
@@ -135,8 +130,7 @@ public class SOSActivity extends VisionActivity {
     _number = sp.getString(getString(R.string.sos_number), _number);
     if (_number == "") {
       speakOutSync(getString(R.string.SOS_number_empty));
-      final Intent i = new Intent(this, SOSconfig.class);
-      startActivity(i);
+      finish();
     }
     final TalkingButton tb = (TalkingButton) findViewById(R.id.SOS_phone_number);
     tb.setText(_number);

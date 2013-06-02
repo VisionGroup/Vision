@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.apps.sos.SOSActivity"
+            android:name="com.yp2012g4.vision.apps.SOS.SOSActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_sos"
             android:launchMode="singleInstance"
@@ -121,6 +121,13 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.vision.apps.smsReader.DeleteConfirmation"
+            android:configChanges="locale"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity"
@@ -240,7 +247,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.apps.sos.SOSconfig"
+            android:name="com.yp2012g4.vision.apps.SOS.SOSconfig"
             android:configChanges="locale"
             android:label="@string/title_activity_sosconfiguation"
             android:launchMode="singleInstance"

@@ -15,7 +15,7 @@ public class CallType {
   private String _number = "";
   private String _type = "";
   private String _name = "";
-  private final Date _date;
+  private Date _date;
   private String _numberType = "";
   
   public CallType(final String number, final String type, final String name, final Date date, final String numberType) {
@@ -34,9 +34,15 @@ public class CallType {
    */
   public CallType(final Cursor cur) {
     _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-    final String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
-    final long m = Long.parseLong(mili);
-    _date = new Date((String) DateFormat.format("dd/MM/yy hh:mm:ss", m));
+//    final String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
+//    final long m = Long.parseLong(cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE)));
+    try {
+      _date = new Date((String) DateFormat.format("dd/MM/yy hh:mm",
+          cur.getLong(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))));
+    } catch (final Exception e1) {
+      _date = new Date();
+      e1.printStackTrace();
+    }
     try {
       _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
     } catch (final Exception e) {

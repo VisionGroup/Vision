@@ -37,7 +37,7 @@ public class SmsAdapter extends BaseAdapter {
   }
   
   @Override public Object getItem(final int p) {
-    if (getCount() < p)
+    if (getCount() <= p)
       return null;
     while (_smsArray.size() <= p)
       getNextIncomingMessages();

@@ -153,6 +153,16 @@
     <string name="previous_contact">Previous contact</string>
     <string name="call_contact">Call contact</string>
     <string name="send_sms">Send SMS</string>
+    <string name="delete_contact_success">deleted contact </string>
+    <string name="delete_contact_failed">contact deletion failed</string>
+    <string name="delete_contact_button">delete current contact</string>
+    <string name="add_new_contact_button">add new contact</string>
+    
+      <!-- AddContactActivity -->
+    <string name="add_contact_screen">Add contact screen.</string>
+    <string name="add_contact_success">contact added</string>
+    <string name="enter_a_name">Enter a name</string>
+    <string name="contact_name">contact name</string>
 
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">Contacts menu</string>
@@ -193,7 +203,6 @@
     <string name="phone_call_service_button"> vision phone call service </string>
     <string name="disable_call_service">disabled vision phone call service</string>
     <string name="enable_call_service">enabled vision phone call service</string>
-   
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">Theme settings screen</string>
@@ -234,15 +243,13 @@
     <string name="sos_msg_to_send">I need your help!</string>
     <string name="SOS_number_empty">S O S contact is empty. Enter valid contact number</string>
 
-    
     <!-- SOS config -->
     <string name="sos_config_screen_name">S O S configuration screen</string>
     <string name="ok_button">Set number</string>
     <string name="sos_config_screen_whereami">S O S configuration screen</string>
     <string name="sos_number">sosNumber</string>
-	<string name="change_contact_number">Change S O S Contact Number</string>
-	<string name="sos_contact_number">S O S contact number </string>
-    
+    <string name="change_contact_number">Change S O S Contact Number</string>
+    <string name="sos_contact_number">S O S contact number </string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">Call</string>
@@ -301,5 +308,6 @@
     <string name="enter_a_message">Enter a message</string>
     <string name="phone_number">Phone number</string>
     <string name="title_activity_sosconfiguation">SOSconfiguation</string>
+    <string name="title_activity_add_contact">AddContactActivity</string>
 
 </resources>

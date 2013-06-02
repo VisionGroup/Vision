@@ -8,7 +8,7 @@
     android:layout_height="fill_parent"
     android:contentDescription="@string/contact_list_screen"
     android:orientation="vertical"
-    android:weightSum="3"
+    android:weightSum="7"
     tools:ignore="NestedWeights" >
 
     <com.yp2012g4.vision.customUI.TalkingButton
@@ -16,7 +16,7 @@
         style="?textAppearance"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:textSize="30sp" />
@@ -26,16 +26,15 @@
         style="?textAppearance"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:textSize="20sp" />
 
-   
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="horizontal"
         android:weightSum="3" >
 
@@ -68,6 +67,34 @@
             android:scaleType="fitCenter"
             android:src="@drawable/quick_sms_button"
             app:readText="@string/send_quick_sms" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/add_contact"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add_new_contact"
+            app:readText="@string/add_new_contact_button" />
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/delete_contact"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_button_round"
+            app:readText="@string/delete_contact_button" />
     </LinearLayout>
 
     <LinearLayout

@@ -19,7 +19,6 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class AlarmActivity extends VisionActivity {
@@ -149,8 +148,7 @@ public class AlarmActivity extends VisionActivity {
    */
   public void setAlarm() {
     if (alarmTime == null) {
-      speakOutAsync(getString(R.string.you_need_to_set_ther_alarm_first));
-      TTS.waitUntilFinishTalking();
+      speakOutSync(getString(R.string.you_need_to_set_ther_alarm_first));
       return;
     }
     final Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);

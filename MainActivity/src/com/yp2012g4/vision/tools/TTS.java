@@ -95,6 +95,10 @@ public class TTS implements OnInitListener {
    *          string to speak.
    */
   public static void speak(final String s) {
+    if (VisionApplication.muted) {
+      Log.d(TAG, "not speaking because application is muted");
+      return;
+    }
     Log.d(TAG, "speak : " + s);
     if (null != s)
       staticTTS._tts.speak(s, staticTTS._qm, null);

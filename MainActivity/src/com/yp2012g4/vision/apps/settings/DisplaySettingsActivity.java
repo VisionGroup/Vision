@@ -58,7 +58,13 @@ public class DisplaySettingsActivity extends VisionActivity {
         startActivity(new Intent(DisplaySettingsActivity.this, SOSconfig.class));
         break;
       case R.id.Mute_Sound:
+        Log.i(TAG, "Muting/Unmuting sound");
         Log.e(TAG, "Mute sound not yet implemented");
+        if (VisionApplication.muted)
+          speakOutSync(R.string.sound_muted);
+        else
+          speakOutSync(R.string.sound_Activated);
+        VisionApplication.muted = !VisionApplication.muted;
         break;
       case R.id.button_set_colors:
         startActivity(new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class));
@@ -90,14 +96,13 @@ public class DisplaySettingsActivity extends VisionActivity {
   
   private void pressedButtonCallEnable(final SharedPreferences sp) {
     final String buttonMode = sp.getString(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF);
-    boolean enable = false;
-    if (buttonMode.equals(ENABLE_PREF)) {
+    final boolean enable = !buttonMode.equals(ENABLE_PREF);
+    if (enable) {
       VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, DISABLE_PREF, this);
-      speakOutAsync(getString(R.string.disable_call_service));
+      speakOutAsync(R.string.disable_call_service);
     } else {
       VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF, this);
-      enable = true;
-      speakOutAsync(getString(R.string.enable_call_service));
+      speakOutAsync(R.string.enable_call_service);
     }
     changeEnableState(IncomingCallReceiver.class, enable);
     changeEnableState(OutgoingCallReceiver.class, enable);

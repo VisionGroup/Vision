@@ -327,9 +327,17 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     TTS.speak(s);
   }
   
+  public void speakOutAsync(final int id) {
+    speakOutAsync(getString(id));
+  }
+  
   public static void speakOutSync(final String s) {
     speakOutAsync(s);
     TTS.waitUntilFinishTalking();
+  }
+  
+  public void speakOutSync(final int id) {
+    speakOutAsync(getString(id));
   }
   
   @Override public void onDestroy() {

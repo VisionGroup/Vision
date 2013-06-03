@@ -204,6 +204,8 @@
     <string name="disable_call_service">disabled vision phone call service</string>
     <string name="enable_call_service">enabled vision phone call service</string>
     <string name="mute_sound">Mute or Activate Sound</string>
+    <string name="sound_muted">Sound Muted</string>
+    <string name="sound_Activated">Sound Activated</string>
     
 
     <!-- ThemeSettingsActivity -->

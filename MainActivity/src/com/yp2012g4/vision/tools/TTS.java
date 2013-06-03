@@ -25,10 +25,12 @@ public class TTS implements OnInitListener {
   private Locale _language;
   private boolean _init = false;
   private static TTS staticTTS = null;
+  private static String engine = "";
   
   public static void init(final Context c) {
-    if (staticTTS == null || !TTS.isRunning()) {
+    if (staticTTS == null || !TTS.isRunning() || engine != staticTTS._tts.getDefaultEngine()) {
       staticTTS = new TTS(c);
+      engine = staticTTS._tts.getDefaultEngine();
       Log.v(TAG, "TTS initialized");
     } else
       Log.v(TAG, "TTS already running so not initialized");

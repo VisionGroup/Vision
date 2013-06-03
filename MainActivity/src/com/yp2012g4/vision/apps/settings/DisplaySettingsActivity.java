@@ -57,6 +57,9 @@ public class DisplaySettingsActivity extends VisionActivity {
       case R.id.SOS_Change_contact:
         startActivity(new Intent(DisplaySettingsActivity.this, SOSconfig.class));
         break;
+      case R.id.Mute_Sound:
+        Log.e(TAG, "Mute sound not yet implemented");
+        break;
       case R.id.button_set_colors:
         startActivity(new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class));
         break;

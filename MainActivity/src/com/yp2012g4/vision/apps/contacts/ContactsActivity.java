@@ -65,7 +65,9 @@ public class ContactsActivity extends VisionActivity {
         startActivity(_quickSms);
         break;
       case R.id.add_contact:
-        startActivityForResult(new Intent(ContactsActivity.this, AddContactActivity.class), REQUEST_CODE);
+        final Intent intent = new Intent(ContactsActivity.this, AddContactActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, REQUEST_CODE);
 //        selectCorrespondingContactsList();
 //        setContact();
         break;

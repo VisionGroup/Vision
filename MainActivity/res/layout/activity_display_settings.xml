@@ -118,6 +118,16 @@
             android:scaleType="fitCenter"
             android:src="@drawable/sos_config"
             app:readText="@string/change_contact_number" />
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/Mute_Sound"
+            style="android:ButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:readText="@string/mute_sound" />
     </LinearLayout>
 
     <LinearLayout

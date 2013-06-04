@@ -5,6 +5,7 @@
     android:id="@+id/ReadSmsScreen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:contentDescription="@string/read_sms_screen"
     android:orientation="vertical"
     android:padding="2dp"
     android:weightSum="6"

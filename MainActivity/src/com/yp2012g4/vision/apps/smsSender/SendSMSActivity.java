@@ -14,7 +14,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
 /**
  * A class for an sending SMS
  * 
- * @author Amir
+ * @author Amir Mizrachi
  * @version 2.0
  */
 public class SendSMSActivity extends VisionActivity {

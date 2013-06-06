@@ -60,11 +60,14 @@ public class DisplaySettingsActivity extends VisionActivity {
       case R.id.Mute_Sound:
         Log.i(TAG, "Muting/Unmuting sound");
         Log.e(TAG, "Mute sound not yet implemented");
-        if (VisionApplication.muted)
+        if (VisionApplication.muted) {
+          VisionApplication.muted = false;
           speakOutSync(R.string.sound_muted);
-        else
-          speakOutSync(R.string.sound_Activated);
-        VisionApplication.muted = !VisionApplication.muted;
+          break;
+        }
+        // note that the ordering between these two lines is not innocent
+        speakOutSync(R.string.sound_Activated);
+        VisionApplication.muted = true;
         break;
       case R.id.button_set_colors:
         startActivity(new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class));

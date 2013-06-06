@@ -59,14 +59,13 @@ public class DisplaySettingsActivity extends VisionActivity {
         break;
       case R.id.Mute_Sound:
         Log.i(TAG, "Muting/Unmuting sound");
-        Log.e(TAG, "Mute sound not yet implemented");
         if (VisionApplication.muted) {
           VisionApplication.muted = false;
-          speakOutSync(R.string.sound_muted);
+          speakOutSync(R.string.sound_Activated);
           break;
         }
         // note that the ordering between these two lines is not innocent
-        speakOutSync(R.string.sound_Activated);
+        speakOutSync(R.string.sound_muted);
         VisionApplication.muted = true;
         break;
       case R.id.button_set_colors:

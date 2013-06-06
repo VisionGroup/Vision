@@ -3,6 +3,7 @@ package com.yp2012g4.vision.apps.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -20,6 +21,7 @@ import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.tools.ServiceManager;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -131,7 +133,8 @@ public class MainActivity extends VisionActivity {
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
-    speakOutAsync(s);
+    TTS.speak(s, TextToSpeech.QUEUE_ADD);
+    // speakOutAsync(s);
     // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
     // may cause other problems
   }

@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 
 /**
@@ -23,15 +22,18 @@ import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 //TODO: Spartanize
 public class IncomingCallReceiver extends BroadcastReceiver {
   private final static String TAG = "vision:IncomingCallReceiver";
+  private static boolean _rang = false;
   
   // private static ServiceManager callScreenServiceManager;
   @Override public void onReceive(final Context c, final Intent i) {
     final Bundle b1 = i.getExtras();
+    CallService.initialise(c.getApplicationContext());
     if (null == b1)
       return;
     final String state = b1.getString(TelephonyManager.EXTRA_STATE);
     Log.d(TAG, "State: " + state);
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
+      _rang = true;
       final String phonenumber = b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
       final Message m = new Message();
@@ -40,10 +42,28 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       b2.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
       m.setData(b2);
       try {
-        MainActivity.callScreenServiceManager.send(m);
+        CallService.callScreenServiceManager.send(m);
       } catch (final RemoteException e) {
         Log.d(TAG, "Unable to send message to callScreenService.", e);
       }
     }
+    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE) && _rang) {
+      _rang = false;
+      // final String phonenumber =
+      // b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+      Log.i(TAG, "Call ended.");
+      final Message m = new Message();
+      final Bundle b2 = new Bundle();
+      b2.putString(CallUtils.NUMBER_KEY, "");
+      b2.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.CALL_ENDED.ordinal());
+      m.setData(b2);
+      try {
+        CallService.callScreenServiceManager.send(m);
+      } catch (final RemoteException e) {
+        Log.d(TAG, "Unable to send message to callScreenService.", e);
+      }
+    }
+    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK))
+      _rang = true;
   }
 }

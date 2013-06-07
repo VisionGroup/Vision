@@ -3,6 +3,7 @@
     xmlns:custom="http://schemas.android.com/apk/res/com.yp2012g4.vision"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ReadSmsScreen"
+    style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:contentDescription="@string/read_sms_screen"
@@ -24,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:weightSum="2" >
+        android:weightSum="3" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_call_sender"
@@ -38,6 +39,16 @@
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/sms_send_sms"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sms_send"
+            custom:readText="@string/send_sms" />
+
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/sms_send_quick_sms"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"

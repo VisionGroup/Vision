@@ -127,6 +127,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
+            android:src="@drawable/sound"
             app:readText="@string/mute_sound" />
     </LinearLayout>
 

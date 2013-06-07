@@ -73,6 +73,11 @@ public class SOSActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent me) {
     if (super.onSingleTapUp(me))
       return true;
+    if (_number == "") {
+      speakOutSync(getString(R.string.SOS_number_empty));
+      finish();
+      return true;
+    }
     switch (getButtonByMode().getId()) {
       case R.id.Send_SOS_Message:
         speakOutSync(getString(R.string.sending_SOS_message) + "to " + _number);
@@ -128,10 +133,6 @@ public class SOSActivity extends VisionActivity {
   private void loadNumber() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
     _number = sp.getString(getString(R.string.sos_number), _number);
-    if (_number == "") {
-      speakOutSync(getString(R.string.SOS_number_empty));
-      finish();
-    }
     final TalkingButton tb = (TalkingButton) findViewById(R.id.SOS_phone_number);
     tb.setText(_number);
     tb.setReadText(getString(R.string.sos_contact_number) + _number);

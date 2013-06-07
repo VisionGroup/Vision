@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -19,7 +20,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
+import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
@@ -76,8 +77,7 @@ public class MainActivity extends VisionActivity {
       return true;
     final Intent intent = getIntentByButtonId(MainActivity.this, getButtonByMode().getId());
     if (intent != null) {
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      setIntentFlags(intent);
       startActivity(intent);
     }
     return false;
@@ -108,8 +108,8 @@ public class MainActivity extends VisionActivity {
         nextActivity = DisplaySettingsActivity.class;
         break;
       case R.id.read_sms_button:
-//        nextActivity = ReadSmsActivity.class;
-        nextActivity = SendSMSActivity.class;
+        nextActivity = ReadSmsActivity.class;
+//        nextActivity = SendSMSActivity.class;
         break;
       default:
         return null;
@@ -123,7 +123,8 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    TTS.waitUntilFinishTalking();
+    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
+    // may cause other problems
     if (!hasFocus)
       return;
     VoiceNotify();
@@ -151,8 +152,10 @@ public class MainActivity extends VisionActivity {
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
-    speakOutAsync(s);
-    TTS.waitUntilFinishTalking();
+    TTS.speak(s, TextToSpeech.QUEUE_ADD);
+    // speakOutAsync(s);
+    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
+    // may cause other problems
   }
   
   @Override public void onBackPressed() {

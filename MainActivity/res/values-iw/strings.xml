@@ -187,16 +187,19 @@
     <string name="theme_settings_button">הגדרת גודל טקסט</string>
     <string name="clear_launcher_defaults">נקה ברירת מחדל</string>
     <string name="language">שפה</string>
+    <!--
     <string name="switched_to_hebrew">הוחלף לעברית</string>
     <string name="switched_to_english">הוחלף לאנגלית</string>
+    -->
+    <string name="one_lang_avail">רק שפה אחת זמינה.</string>
+    <string name="switched_to">הוחלף ל-</string>
     <string name="buttons_mode">מצב מקשים</string>
     <string name="sticky_buttons_mode">הוחלף למצב מקשים דביקים </string>
     <string name="regular_buttons_mode">הוחלף למצב מקשים רגיל </string>
     <string name="calculator">מחשבון</string>
-     <string name="phone_call_service_button"> שירות טלפון של vision </string>
+    <string name="phone_call_service_button"> שירות טלפון של vision </string>
     <string name="disable_call_service">ביטול שירות טלפון</string>
     <string name="enable_call_service">אפשור שירות טלפון</string>
-   
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">מסך הגדרות נושא</string>
@@ -241,8 +244,7 @@
     <string name="delete_confirmation_screen">מסך אישור מחיקה</string>
     <string name="delete_confirmation_info">האם אתה בטוח?</string>
     <string name="delete_confirmation_help">לחץ על המסך לביטול, גרור למחיקה</string>
-        <string name="delete_confirmation_button">לחץ על המסך לביטול, גרור למחיקה</string>
-    
+    <string name="delete_confirmation_button">לחץ על המסך לביטול, גרור למחיקה</string>
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">מסך הגדרת איש קשר S O S</string>

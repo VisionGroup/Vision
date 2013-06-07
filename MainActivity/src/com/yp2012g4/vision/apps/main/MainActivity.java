@@ -1,8 +1,14 @@
 package com.yp2012g4.vision.apps.main;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -41,6 +47,19 @@ public class MainActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    /*
+     * _myLocale = Locale.getDefault(); // get xml strings file String
+     * defaultLang = "HEBREW"; if (_myLocale.equals(Locale.US)) defaultLang =
+     * "ENGLISH";
+     */
+    Locale locale = Locale.US;
+    if (sp.getString("LANGUAGE", "ENGLISH").equals("HEBREW"))
+      locale = new Locale("iw");
+    Locale.setDefault(locale);
+    _config = new Configuration();
+    _config.locale = locale;
+    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     setContentView(R.layout.activity_main);
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
@@ -124,9 +143,10 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = CallManager.getMissedCallsNum(this);
     if (numOfMissedCalls > 0) {
-      s += numOfMissedCalls + " " + getString(R.string.missed_call);
-      if (numOfMissedCalls > 1)
-        s += "s";
+      final Resources res = getResources();
+      final String missedCalls = res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls,
+          Integer.valueOf(numOfMissedCalls));
+      s = missedCalls;
     }
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)

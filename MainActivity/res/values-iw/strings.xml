@@ -32,6 +32,7 @@
 
     <!-- DialScreen -->
     <string name="dial_screen_whereami">מסך חיוג</string>
+    <string name="dial_screen_info">כפתורי החיוג נמצאים באמצע המסך. בראש המסך נמצא המספר שחוייג. בתחתית המסך ישנם ארבעה כפתורים: אס אם אס מהיר, חיוג, מחיקת מספר ומחיקת ספרה.</string>
     <string name="dial_number">ראשית, יש להקיש מספר לחיוג</string>
     <string name="quick_sms_button">S M S מהיר</string>
     <string name="digit1">1</string>

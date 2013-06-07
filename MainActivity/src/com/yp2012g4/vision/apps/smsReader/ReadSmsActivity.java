@@ -47,6 +47,8 @@ public class ReadSmsActivity extends VisionActivity {
         vibrate(VIBRATE_DURATION);
         if (!res)
           speakOutAsync(getString(R.string.no_more_contacts));
+        else
+          speakOutAsync(getCurrentSms().getPerson());
       }
     return super.onFling(e1, e2, f1, f2);
   }

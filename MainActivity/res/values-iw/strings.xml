@@ -151,6 +151,11 @@
     <string name="previous_contact">איש קשר קודם</string>
     <string name="call_contact">התקשר לאישר הקשר</string>
     <string name="send_sms">שליחת SMS</string>
+    <string name="delete_contact_success">נמחק איש הקשר  </string>
+    <string name="delete_contact_failed">מחיקת איש הקשר נכשלה</string>
+    <string name="delete_contact_button">מחק איש קשר נוכחי</string>
+    <string name="add_new_contact_button">הוסף איש קשר</string>
+    <string name="add_contact_success">איש קשר התווסף בהצלחה</string>
 
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">מסך תפריט אנשי קשר</string>

@@ -327,9 +327,17 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     TTS.speak(s);
   }
   
+  public void speakOutAsync(final int id) {
+    speakOutAsync(getString(id));
+  }
+  
   public static void speakOutSync(final String s) {
     speakOutAsync(s);
     TTS.waitUntilFinishTalking();
+  }
+  
+  public void speakOutSync(final int id) {
+    speakOutAsync(getString(id));
   }
   
   @Override public void onDestroy() {
@@ -344,15 +352,14 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _mHandler = new Handler();
     _gestureDetector = new GestureDetector(this);
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    if (false)
-      Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-        @Override public void uncaughtException(final Thread thread, final Throwable ex) {
-          final StringWriter s = new StringWriter();
-          final PrintWriter p = new PrintWriter(s);
-          ex.printStackTrace(p);
-          Log.e(TAG, "fatal exception: " + s.toString());
-        }
-      });
+    Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+      @Override public void uncaughtException(final Thread thread, final Throwable ex) {
+        final StringWriter s = new StringWriter();
+        final PrintWriter p = new PrintWriter(s);
+        ex.printStackTrace(p);
+        Log.e(TAG, "fatal exception: " + s.toString());
+      }
+    });
   }
   
   /**

@@ -2,6 +2,7 @@ package com.yp2012g4.vision.managers;
 
 import java.util.ArrayList;
 
+import android.content.ContentProviderOperation;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
+import android.util.Log;
 
 public class ContactManager {
   private final Context _c;
@@ -120,5 +122,52 @@ public class ContactManager {
     _contactsArray.add(new ContactType("0544457141", "Roman Gurevitch"));
     _contactsArray.add(new ContactType("0000000000", "John Doe"));
     _size = _contactsArray.size();
+  }
+  
+  public static void addContactToPhone(final Context context, final String DisplayName, final String MobileNumber) {
+    final ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+    ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+        .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null).withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
+        .build());
+    // ------------------------------------------------------ Name
+    if (DisplayName != null)
+      ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+          .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+          .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+          .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, DisplayName).build());
+    // ------------------------------------------------------ Mobile Number
+    if (MobileNumber != null)
+      ops.add(ContentProviderOperation
+          .newInsert(ContactsContract.Data.CONTENT_URI)
+          .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+          .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+          .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, MobileNumber)
+          .withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+              Integer.valueOf(ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE)).build());
+    try {
+      context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+    } catch (final Exception e) {
+      e.printStackTrace();
+      Log.e("ContactManager", "Exception: " + e.getMessage());
+    }
+  }
+  
+  public boolean deleteContact(final String phone, final String name) {
+    final Uri contactUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
+    final Cursor curser = _c.getContentResolver().query(contactUri, null, null, null, null);
+    try {
+      if (curser.moveToFirst())
+        do
+          if (curser.getString(curser.getColumnIndex(PhoneLookup.DISPLAY_NAME)).equalsIgnoreCase(name)) {
+            final String lookupKey = curser.getString(curser.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+            final Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
+            _c.getContentResolver().delete(uri, null, null);
+            return true;
+          }
+        while (curser.moveToNext());
+    } catch (final Exception e) {
+      Log.e("ContactManager", "delete contact Exception: " + e.getMessage());
+    }
+    return false;
   }
 }

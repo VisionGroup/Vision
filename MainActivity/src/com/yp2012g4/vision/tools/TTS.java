@@ -25,10 +25,12 @@ public class TTS implements OnInitListener {
   private Locale _language;
   private boolean _init = false;
   private static TTS staticTTS = null;
+  private static String engine = "";
   
   public static void init(final Context c) {
-    if (staticTTS == null || !TTS.isRunning()) {
+    if (staticTTS == null || !TTS.isRunning() || engine != staticTTS._tts.getDefaultEngine()) {
       staticTTS = new TTS(c);
+      engine = staticTTS._tts.getDefaultEngine();
       Log.v(TAG, "TTS initialized");
     } else
       Log.v(TAG, "TTS already running so not initialized");
@@ -87,15 +89,31 @@ public class TTS implements OnInitListener {
   }
   
   /**
-   * speak the given string.
+   * speak the given string in default queueMode
    * 
    * @param s
    *          string to speak.
    */
   public static void speak(final String s) {
+    speak(s, staticTTS._qm);
+  }
+  
+  /**
+   * speak the given string.
+   * 
+   * @param s
+   *          string to speak.
+   * @param queueMode
+   *          The queueMode to use
+   */
+  public static void speak(final String s, final int queueMode) {
+    if (VisionApplication.muted) {
+      Log.d(TAG, "not speaking because application is muted");
+      return;
+    }
     Log.d(TAG, "speak : " + s);
     if (null != s)
-      staticTTS._tts.speak(s, staticTTS._qm, null);
+      staticTTS._tts.speak(s, queueMode, null);
     final boolean debug = false;
     if (debug) {
       Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[3].getClassName() + ":"

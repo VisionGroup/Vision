@@ -3,6 +3,7 @@ package com.yp2012g4.vision.apps.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -13,7 +14,8 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
+import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
@@ -81,8 +83,8 @@ public class MainActivity extends VisionActivity {
         nextActivity = DisplaySettingsActivity.class;
         break;
       case R.id.read_sms_button:
-        nextActivity = ReadSmsActivity.class;
-//        nextActivity = SendSMSActivity.class;
+//        nextActivity = ReadSmsActivity.class;
+        nextActivity = SendSMSActivity.class;
         break;
       default:
         return null;
@@ -96,7 +98,8 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    TTS.waitUntilFinishTalking();
+    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
+    // may cause other problems
     if (!hasFocus)
       return;
     VoiceNotify();
@@ -123,8 +126,10 @@ public class MainActivity extends VisionActivity {
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
-    speakOutAsync(s);
-    TTS.waitUntilFinishTalking();
+    TTS.speak(s, TextToSpeech.QUEUE_ADD);
+    // speakOutAsync(s);
+    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
+    // may cause other problems
   }
   
   @Override public void onBackPressed() {

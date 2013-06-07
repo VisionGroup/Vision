@@ -207,7 +207,6 @@
             android:name="com.yp2012g4.vision.apps.contacts.ContactsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_contacts"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
@@ -252,6 +251,13 @@
             android:label="@string/title_activity_sosconfiguation"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.yp2012g4.vision.apps.contacts.AddContactActivity"
+            android:label="@string/title_activity_add_contact"
+            android:screenOrientation="portrait"
+            android:configChanges="locale"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
     </application>

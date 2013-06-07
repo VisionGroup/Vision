@@ -33,6 +33,7 @@ public class VisionApplication extends Application {
   public static String _textSize = "NORMAL";
   private static String _textColor = "WHITE";
   private static String _backgroundColor = "BLACK";
+  public static boolean muted = false;
   
   /**
    * c'tor. initialize color mapping.

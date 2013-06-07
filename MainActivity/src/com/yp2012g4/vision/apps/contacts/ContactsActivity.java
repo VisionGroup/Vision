@@ -27,6 +27,8 @@ public class ContactsActivity extends VisionActivity {
   public static final String FAVORITS_CONTACTS = "favorits";
   public static final String ALL_CONTACTS = "all";
   public static final String LIST_TYPE = "list_type";
+  private static final int REQUEST_CODE = 666;
+  String listType = ALL_CONTACTS;
   private ContactManager contactManager;
   TalkingButton b;
   private final int VIBRATE_TIME = 150;
@@ -62,10 +64,34 @@ public class ContactsActivity extends VisionActivity {
         _quickSms.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
         startActivity(_quickSms);
         break;
+      case R.id.add_contact:
+        startActivityForResult(new Intent(ContactsActivity.this, AddContactActivity.class), REQUEST_CODE);
+//        selectCorrespondingContactsList();
+//        setContact();
+        break;
+      case R.id.delete_contact:
+        if (contactManager.deleteContact(ct.getPhone(), ct.getContactName())) {
+          selectCorrespondingContactsList();
+          setContact();
+          speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
+        } else
+          speakOutAsync(getString(R.string.delete_contact_failed));
+        break;
       default:
         break;
     }
     return false;
+  }
+  
+  /**
+   * This will be called when the add contact is finished
+   */
+  @Override protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == REQUEST_CODE) {
+      selectCorrespondingContactsList();
+      setContact();
+    }
   }
   
   private void changeToPreviousContact() {
@@ -102,18 +128,17 @@ public class ContactsActivity extends VisionActivity {
     setContentView(R.layout.activity_contacts);
     init(0, getString(R.string.contacts_screen), getString(R.string.contacts_screen_help));
     final Bundle extras = getIntent().getExtras();
-    String listType = ALL_CONTACTS;
     if (extras != null)
       try {
         listType = extras.getString(ContactsActivity.LIST_TYPE);
       } catch (final Exception e) {
         listType = ALL_CONTACTS;
       }
-    selectCorrespondingContactsList(listType);
+    selectCorrespondingContactsList();
     setContact();
   }
   
-  private void selectCorrespondingContactsList(final String listType) {
+  private void selectCorrespondingContactsList() {
     contactManager = new ContactManager(getApplicationContext());
     if (listType.equalsIgnoreCase(ALL_CONTACTS)) {
       contactManager.getAllContacts();

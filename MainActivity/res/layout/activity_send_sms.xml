@@ -14,6 +14,8 @@
         android:layout_weight="1"
         android:hint="@string/enter_a_phone_number"
         android:inputType="phone"
+        android:textColor="@color/WHITE"
+        android:textSize="30sp"
         custom:readText="@string/phone_number" />
 
     <com.yp2012g4.vision.customUI.TalkingEditText
@@ -22,7 +24,10 @@
         android:layout_height="0dip"
         android:layout_weight="4"
         android:ems="10"
+        android:hint="@string/enter_a_message"
         android:inputType="textMultiLine"
+        android:textColor="@color/WHITE"
+        android:textSize="30sp"
         custom:readText="@string/message_content" />
 
     <com.yp2012g4.vision.customUI.TalkingButton

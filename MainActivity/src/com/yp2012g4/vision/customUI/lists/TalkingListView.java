@@ -184,7 +184,7 @@ public class TalkingListView extends RelativeLayout {
    * sets the next page to be displayed on the screen
    */
   public boolean nextPage() {
-    if (_page >= _numOfPages)
+    if (_page >= _numOfPages - 1)
       return false;
     setPage(_page + 1);
     return true;

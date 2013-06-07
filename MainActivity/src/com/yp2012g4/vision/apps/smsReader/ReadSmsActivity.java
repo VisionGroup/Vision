@@ -56,22 +56,25 @@ public class ReadSmsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    Intent i = null;
+    Intent intent;
     final SmsType currMsg = getCurrentSms();
     switch (getButtonByMode().getId()) {
       case R.id.sms_send_sms:
-        i = new Intent(getApplicationContext(), QuickSMSActivity.class);
-        i.putExtra("number", currMsg.getAddress());
-        startActivity(i);
+        intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
+        intent.putExtra("number", currMsg.getAddress());
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       case R.id.sms_call_sender:
-        i = new Intent(Intent.ACTION_CALL);
-        i.setData(Uri.parse("tel:" + currMsg.getAddress()));
-        startActivity(i);
+        intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + currMsg.getAddress()));
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       case R.id.sms_remove:
-        final Intent intent = new Intent(this, DeleteConfirmation.class);
+        intent = new Intent(this, DeleteConfirmation.class);
         intent.putExtra("activity", "com.yp2012g4.vision.apps.smsReader.ReadSmsActivity");
+        setIntentFlags(intent);
         startActivity(intent);
         break;
       default:

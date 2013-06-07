@@ -152,16 +152,16 @@ public class ContactManager {
     }
   }
   
-  public boolean deleteContact(final String phone, final String name) {
+  public static boolean deleteContact(final String phone, final String name, final Context c) {
     final Uri contactUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
-    final Cursor curser = _c.getContentResolver().query(contactUri, null, null, null, null);
+    final Cursor curser = c.getContentResolver().query(contactUri, null, null, null, null);
     try {
       if (curser.moveToFirst())
         do
           if (curser.getString(curser.getColumnIndex(PhoneLookup.DISPLAY_NAME)).equalsIgnoreCase(name)) {
             final String lookupKey = curser.getString(curser.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
             final Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
-            _c.getContentResolver().delete(uri, null, null);
+            c.getContentResolver().delete(uri, null, null);
             return true;
           }
         while (curser.moveToNext());
@@ -169,5 +169,27 @@ public class ContactManager {
       Log.e("ContactManager", "delete contact Exception: " + e.getMessage());
     }
     return false;
+  }
+  
+  /**
+   * returns name if exists otherwise the phone.
+   * 
+   * @param ps
+   *          phone number string
+   * @return
+   */
+  public static ContactType getContactFromName(final String name, final Context c) {
+    ContactType $ = null;
+    final String selection = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like'%" + name + "%'";
+    final Cursor cs = c.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, selection, null, null);
+    if (cs.moveToFirst())
+      do
+        if (name.equals(cs.getString(cs.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME)))) {
+          $ = new ContactType(cs, c);
+          break;
+        }
+      while (cs.moveToNext());
+    cs.close();
+    return $;
   }
 }

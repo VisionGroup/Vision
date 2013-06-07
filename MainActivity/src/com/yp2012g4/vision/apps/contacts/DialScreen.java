@@ -67,28 +67,41 @@ public class DialScreen extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
+    final Intent intent;
     if (isNavigationManuButton(buttonId))
       return;
     switch (buttonId) {
       case R.id.dialer_dial_button: // make a phone call
+        // no number was dialed
+        if (dialed_number == "") {
+          speakOutAsync(getString(R.string.dial_number));
+          return;
+        }
+        intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + dialed_number));
+        intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
+        setIntentFlags(intent);
+        startActivity(intent);
+        dialed_number = "";
+        break;
       case R.id.dialer_sms_button: // sms
         // no number was dialed
         if (dialed_number == "") {
           speakOutAsync(getString(R.string.dial_number));
           return;
         }
-        if (buttonId == R.id.dialer_sms_button)
-          startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, dialed_number));
-        else
-          startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + dialed_number)).putExtra(CallUtils.NUMBER_KEY,
-              dialed_number));
+        intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
+        intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
+        setIntentFlags(intent);
+        startActivity(intent);
         dialed_number = "";
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
       case R.id.button_reset: // reset
-        final Intent intent = new Intent(getApplicationContext(), DeleteConfirmation.class);
+        intent = new Intent(getApplicationContext(), DeleteConfirmation.class);
         intent.putExtra("activity", "com.yp2012g4.vision.apps.contacts.DialScreen");
+        setIntentFlags(intent);
         startActivity(intent);
         break;
       case R.id.button_delete: // delete
@@ -147,7 +160,7 @@ public class DialScreen extends VisionActivity {
     super.onCreate(savedInstanceState);
     telephone();
     setContentView(R.layout.dial_screen);
-    init(0, getString(R.string.dial_screen_whereami), getString(R.string.dial_screen_whereami));
+    init(0, getString(R.string.dial_screen_whereami), getString(R.string.dial_screen_info));
     getTalkingButton(R.id.number).setText("");
     getTalkingButton(R.id.number).setReadText("");
   }

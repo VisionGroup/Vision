@@ -1,8 +1,14 @@
 package com.yp2012g4.vision.apps.main;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,7 +20,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
+import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
@@ -40,6 +46,19 @@ public class MainActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    /*
+     * _myLocale = Locale.getDefault(); // get xml strings file String
+     * defaultLang = "HEBREW"; if (_myLocale.equals(Locale.US)) defaultLang =
+     * "ENGLISH";
+     */
+    Locale locale = Locale.US;
+    if (sp.getString("LANGUAGE", "ENGLISH").equals("HEBREW"))
+      locale = new Locale("iw");
+    Locale.setDefault(locale);
+    _config = new Configuration();
+    _config.locale = locale;
+    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     setContentView(R.layout.activity_main);
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
@@ -51,8 +70,7 @@ public class MainActivity extends VisionActivity {
       return true;
     final Intent intent = getIntentByButtonId(MainActivity.this, getButtonByMode().getId());
     if (intent != null) {
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      setIntentFlags(intent);
       startActivity(intent);
     }
     return false;
@@ -83,8 +101,8 @@ public class MainActivity extends VisionActivity {
         nextActivity = DisplaySettingsActivity.class;
         break;
       case R.id.read_sms_button:
-//        nextActivity = ReadSmsActivity.class;
-        nextActivity = SendSMSActivity.class;
+        nextActivity = ReadSmsActivity.class;
+//        nextActivity = SendSMSActivity.class;
         break;
       default:
         return null;
@@ -119,9 +137,10 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = CallManager.getMissedCallsNum(this);
     if (numOfMissedCalls > 0) {
-      s += numOfMissedCalls + " " + getString(R.string.missed_call);
-      if (numOfMissedCalls > 1)
-        s += "s";
+      final Resources res = getResources();
+      final String missedCalls = res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls,
+          Integer.valueOf(numOfMissedCalls));
+      s = missedCalls;
     }
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)

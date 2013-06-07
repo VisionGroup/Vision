@@ -102,8 +102,7 @@ public class PhoneStatusActivity extends VisionActivity {
       case R.id.button_getMissedCalls:
         // getMissedCalls();
         final Intent intent = new Intent(this, CallListActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        setIntentFlags(intent);
         startActivity(intent);
         break;
       default:

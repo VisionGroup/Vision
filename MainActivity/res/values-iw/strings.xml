@@ -305,4 +305,6 @@
     <string name="enter_a_message">הכנס הודעה</string>
     <string name="phone_number">מספר טלפון</string>
 
+    <!-- Manger's -->
+    <string name="incoming_call_from_private_number">מספר חסום</string>
 </resources>

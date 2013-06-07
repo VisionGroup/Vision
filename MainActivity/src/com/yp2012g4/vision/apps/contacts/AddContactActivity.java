@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.managers.ContactManager;
+import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -20,11 +21,37 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class AddContactActivity extends VisionActivity {
   private static final int TEXT = 0;
   private static final int PHONE = 1;
+  String contactDisplayName = null;
+  String contactPhone = null;
+  boolean createNewContact = true;
   
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_contact);
     init(0, getString(R.string.add_contact_screen), getString(R.string.add_contact_screen));
+    final Bundle extras = getIntent().getExtras();
+    if (extras != null)
+      try {
+        contactDisplayName = extras.getString(ContactsActivity.CONTACT_NAME_FLAG);
+      } catch (final Exception e) {
+        contactDisplayName = null;
+        createNewContact = true;
+      }
+    if (contactDisplayName != null) {
+      createNewContact = false;
+      fillFieldWithContact();
+    }
+  }
+  
+  private void fillFieldWithContact() {
+    final EditText _etPhone = (EditText) findViewById(R.id.phoneNumber);
+    final EditText _etName = (EditText) findViewById(R.id.contact_name);
+    _etName.setText(contactDisplayName);
+    moveCursor(_etName, contactDisplayName);
+    final ContactType ct = ContactManager.getContactFromName(contactDisplayName, this);
+    contactPhone = ct.getPhone();
+    _etPhone.setText(contactPhone);
+    moveCursor(_etPhone, contactPhone);
   }
   
   @Override public int getViewId() {
@@ -47,21 +74,44 @@ public class AddContactActivity extends VisionActivity {
         _s = getText(_etPhone, PHONE);
         moveCursor(_etPhone, _s);
         break;
-      case R.id.add_contact_button:
-        final CharSequence num = _etPhone.getText();
-        if (num.length() > 0) {
-          final CharSequence name = getText(_etName, TEXT);
-          ContactManager.addContactToPhone(this, name.toString(), num.toString());
-          speakOutSync(getString(R.string.add_contact_success));
-          final Intent returnIntent = new Intent();
-          setResult(RESULT_OK, returnIntent);
-          finish();
-        }
+      case R.id.confirmation_button:
+        confirmationButtonPressed(_etPhone, _etName);
         break;
       default:
         break;
     }
     return false;
+  }
+  
+  /**
+   * User pressed the confirmation button so we confirm the data and respond
+   * accordingly
+   * 
+   * @param _etPhone
+   * @param _etName
+   */
+  private void confirmationButtonPressed(final EditText _etPhone, final EditText _etName) {
+    final Intent returnIntent = new Intent();
+    final CharSequence num = _etPhone.getText();
+    final CharSequence name = getText(_etName, TEXT);
+    if (num.length() <= 0 || name.equals(getString(R.string.enter_a_name))) {
+      speakOutSync(getString(R.string.required_fields));
+      return;
+    }
+    if (!createNewContact) {
+      ContactManager.deleteContact(contactPhone, contactDisplayName, this);
+      ContactManager.addContactToPhone(this, name.toString(), num.toString());
+      speakOutSync(getString(R.string.edit_contact_success));
+      setResult(RESULT_OK, returnIntent);
+    } else if (ContactManager.getContactFromName(name.toString(), this) == null) {
+      ContactManager.addContactToPhone(this, name.toString(), num.toString());
+      speakOutSync(getString(R.string.add_contact_success));
+      setResult(RESULT_OK, returnIntent);
+    } else {
+      speakOutSync(getString(R.string.contact_exist));
+      setResult(RESULT_CANCELED, returnIntent);
+    }
+    finish();
   }
   
   /**

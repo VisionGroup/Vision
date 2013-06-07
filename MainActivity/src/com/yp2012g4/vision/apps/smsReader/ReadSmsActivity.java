@@ -73,7 +73,7 @@ public class ReadSmsActivity extends VisionActivity {
         break;
       case R.id.sms_remove:
         intent = new Intent(this, DeleteConfirmation.class);
-        intent.putExtra("activity", "com.yp2012g4.vision.apps.smsReader.ReadSmsActivity");
+        intent.putExtra(DeleteConfirmation.ACTIVITY_EXTRA, this.getClass().getName());
         setIntentFlags(intent);
         startActivity(intent);
         break;
@@ -89,7 +89,7 @@ public class ReadSmsActivity extends VisionActivity {
     final SmsType currMsg = getCurrentSms();
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
-      if (extras.getString("ACTION").equals("DELETE")) {
+      if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         // first we remove the SMS from the phone DB
         SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
         // then we remove the SMS from the displayed list

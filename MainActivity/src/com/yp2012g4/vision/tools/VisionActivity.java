@@ -29,6 +29,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
   private int _icon;
   private String _name;
   private String _toolTip;
+  public static final String ACTION_EXTRA = "ACTION";
   
   public int getIcon() {
     return _icon;

@@ -3,6 +3,7 @@ package com.yp2012g4.vision.apps.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -104,7 +105,8 @@ public class MainActivity extends VisionActivity {
    */
   @Override public void onWindowFocusChanged(final boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    TTS.waitUntilFinishTalking();
+    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
+    // may cause other problems
     if (!hasFocus)
       return;
     VoiceNotify();
@@ -131,8 +133,10 @@ public class MainActivity extends VisionActivity {
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
       s += numOfSms + getString(R.string.new_sms);
-    speakOutAsync(s);
-    TTS.waitUntilFinishTalking();
+    TTS.speak(s, TextToSpeech.QUEUE_ADD);
+    // speakOutAsync(s);
+    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
+    // may cause other problems
   }
   
   @Override public void onBackPressed() {

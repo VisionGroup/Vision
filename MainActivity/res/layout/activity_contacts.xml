@@ -55,7 +55,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            android:src="@drawable/sms"
+            android:src="@drawable/sms_send"
             app:readText="@string/send_sms" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton

@@ -157,12 +157,18 @@
     <string name="delete_contact_failed">contact deletion failed</string>
     <string name="delete_contact_button">delete current contact</string>
     <string name="add_new_contact_button">add new contact</string>
-    
-      <!-- AddContactActivity -->
-    <string name="add_contact_screen">Add contact screen.</string>
+    <string name="edit_contact_button">edit current contact</string>
+   
+
+    <!-- AddContactActivity -->
+    <string name="add_contact_screen">contact configuration screen</string>
     <string name="add_contact_success">contact added</string>
+    <string name="edit_contact_success">contact edited</string>
     <string name="enter_a_name">Enter a name</string>
     <string name="contact_name">contact name</string>
+    <string name="contact_exist">contact already existes</string>
+    <string name="required_fields">all required fields must be filled</string>
+     <string name="confirmation_button">confirm contact details</string>
 
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">Contacts menu</string>
@@ -206,7 +212,6 @@
     <string name="mute_sound">Mute or Activate Sound</string>
     <string name="sound_muted">Sound Muted</string>
     <string name="sound_Activated">Sound Activated</string>
-    
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">Theme settings screen</string>
@@ -245,7 +250,7 @@
     <string name="sending_SOS_message">Sending S O S message.</string>
     <string name="send_SOS_message">Send S O S</string>
     <string name="sos_msg_to_send">I need your help!</string>
-    <string name="SOS_number_empty">S O S contact is empty. Enter valid contact number</string>
+    <string name="SOS_number_empty">S O S contact is empty. Please setup number in configuration screen</string>
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">Delete confirmation</string>
     <string name="delete_confirmation_info">Are you sure?</string>

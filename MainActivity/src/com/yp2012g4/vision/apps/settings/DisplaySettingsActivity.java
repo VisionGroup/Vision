@@ -50,12 +50,15 @@ public class DisplaySettingsActivity extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     Log.i(TAG, "display setting");
+    Intent intent;
     final View button = getButtonByMode();
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     final PackageManager pm = getPackageManager();
     switch (button.getId()) {
       case R.id.SOS_Change_contact:
-        startActivity(new Intent(DisplaySettingsActivity.this, SOSconfig.class));
+        intent = new Intent(DisplaySettingsActivity.this, SOSconfig.class);
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       case R.id.Mute_Sound:
         Log.i(TAG, "Muting/Unmuting sound");
@@ -69,10 +72,14 @@ public class DisplaySettingsActivity extends VisionActivity {
         VisionApplication.muted = true;
         break;
       case R.id.button_set_colors:
-        startActivity(new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class));
+        intent = new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class);
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       case R.id.button_set_theme:
-        startActivity(new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class));
+        intent = new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class);
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       case R.id.button_exit_launcher:
         pm.clearPackagePreferredActivities(getPackageName());
@@ -88,7 +95,9 @@ public class DisplaySettingsActivity extends VisionActivity {
         pressedButtonCallEnable(sp);
         break;
       case R.id.calculator:
-        startActivity(new Intent(this, CalcActivity.class));
+        intent = new Intent(this, CalcActivity.class);
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       default:
         break;
@@ -141,7 +150,9 @@ public class DisplaySettingsActivity extends VisionActivity {
     }
     getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     // empty activity stack
-    startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    final Intent intent = new Intent(this, MainActivity.class);
+    setIntentFlags(intent);
+    startActivity(intent);
     finish();
   }
   

@@ -44,7 +44,8 @@ public class DeleteConfirmation extends VisionActivity {
     Log.d(TAG, _caller.toString());
     final Intent intent = new Intent(getApplicationContext(), _caller).putExtra("ACTION", "CANCEL");
     Log.d(TAG, intent.toString());
-    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+    // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+    setIntentFlags(intent);
     startActivity(intent);
     finish();
     return false;
@@ -52,7 +53,8 @@ public class DeleteConfirmation extends VisionActivity {
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
     final Intent intent = new Intent(getApplicationContext(), _caller).putExtra("ACTION", "DELETE");
-    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+    // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+    setIntentFlags(intent);
     startActivity(intent);
     finish();
     return super.onFling(e1, e2, f1, f2);

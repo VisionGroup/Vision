@@ -13,6 +13,7 @@ import android.text.format.DateFormat;
  * 
  */
 public class CallType {
+  private static int MINIMAL_SIZE_FOR_PHONE_NUMBER = 3;
   private String _number = "";
   private String _type = "";
   private String _name = "";
@@ -43,7 +44,7 @@ public class CallType {
     }
     try {
       _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-      if (_number.contains("-2"))
+      if (_number.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
         _number = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
       else
         _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));

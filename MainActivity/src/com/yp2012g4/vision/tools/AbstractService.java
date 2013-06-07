@@ -43,6 +43,7 @@ public abstract class AbstractService extends Service {
   // Keeps track of all current registered clients.
   ArrayList<Messenger> mClients = new ArrayList<Messenger>();
   // Target we publish for clients to send messages to IncomingHandler.
+  private static final String TAG = "vision:AbstractService";
   @SuppressWarnings("synthetic-access") final Messenger mMessenger = new Messenger(new IncomingHandler());
   
   @SuppressLint("HandlerLeak")
@@ -53,11 +54,11 @@ public abstract class AbstractService extends Service {
     @Override public void handleMessage(final Message m) {
       switch (m.what) {
         case MSG_REGISTER_CLIENT:
-          Log.i("MyService", "Client registered: " + m.replyTo);
+          Log.i(TAG, "Client registered: " + m.replyTo);
           mClients.add(m.replyTo);
           break;
         case MSG_UNREGISTER_CLIENT:
-          Log.i("MyService", "Client un-registered: " + m.replyTo);
+          Log.i(TAG, "Client un-registered: " + m.replyTo);
           mClients.remove(m.replyTo);
           break;
         default:
@@ -69,11 +70,11 @@ public abstract class AbstractService extends Service {
   @Override public void onCreate() {
     super.onCreate();
     onStartService();
-    Log.i("MyService", "Service Started.");
+    Log.d(TAG, "Service Started.");
   }
   
   @Override public int onStartCommand(final Intent i, final int flags, final int startId) {
-    Log.i("MyService", "Received start id " + startId + ": " + i);
+    Log.d(TAG, "Received start id " + startId + ": " + i);
     return START_STICKY; // run until explicitly stopped.
   }
   
@@ -84,16 +85,16 @@ public abstract class AbstractService extends Service {
   @Override public void onDestroy() {
     super.onDestroy();
     onStopService();
-    Log.i("MyService", "Service Stopped.");
+    Log.i(TAG, "Service Stopped.");
   }
   
   protected void send(final Message m) {
     for (int i = mClients.size() - 1; i >= 0; i--)
       try {
-        Log.i("MyService", "Sending message to clients: " + m);
+        Log.i(TAG, "Sending message to clients: " + m);
         mClients.get(i).send(m);
       } catch (final RemoteException e) {
-        Log.e("MyService", "Client is dead. Removing from list: " + i);
+        Log.e(TAG, "Client is dead. Removing from list: " + i);
         mClients.remove(i);
       }
   }

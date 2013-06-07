@@ -142,8 +142,8 @@
         </service>
         <service android:name="com.yp2012g4.vision.apps.telephony.CallScreenService" >
         </service>
-        <service android:name="com.yp2012g4.vision.tools.TTSService" >
-        </service>
+        <!-- <service android:name="com.yp2012g4.vision.tools.TTSService" >
+        </service> -->
 
         <activity
             android:name="com.yp2012g4.vision.apps.alarm.SetClockActivity"

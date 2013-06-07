@@ -25,12 +25,12 @@ public class TTS implements OnInitListener {
   private Locale _language;
   private boolean _init = false;
   private static TTS staticTTS = null;
-  private static String engine = "";
+  private static String _engine = "";
   
   public static void init(final Context c) {
-    if (staticTTS == null || !TTS.isRunning() || engine != staticTTS._tts.getDefaultEngine()) {
+    if (staticTTS == null || !TTS.isRunning() || _engine != staticTTS._tts.getDefaultEngine()) {
       staticTTS = new TTS(c);
-      engine = staticTTS._tts.getDefaultEngine();
+      _engine = staticTTS._tts.getDefaultEngine();
       Log.v(TAG, "TTS initialized");
     } else
       Log.v(TAG, "TTS already running so not initialized");
@@ -192,5 +192,16 @@ public class TTS implements OnInitListener {
     while (isSpeaking()) {
       // Wait for message to finish playing and then continue
     }
+  }
+  
+  /**
+   * Checks whether or not the language is supported by the current TTS engine.
+   * 
+   * @param l
+   * @return
+   */
+  public static boolean isLanguageAvailable(final Locale l) {
+    final int res = staticTTS._tts.isLanguageAvailable(l);
+    return res != TextToSpeech.LANG_MISSING_DATA && res != TextToSpeech.LANG_NOT_SUPPORTED;
   }
 }

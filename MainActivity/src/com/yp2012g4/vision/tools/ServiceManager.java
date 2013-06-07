@@ -46,14 +46,10 @@ public class ServiceManager {
   private boolean _isBound;
   Messenger _service = null;
   Handler _incomingHandler = null;
-  final Messenger _messenger = new Messenger(new IncomingHandler());
+  @SuppressWarnings("synthetic-access") final Messenger _messenger = new Messenger(new IncomingHandler());
   
   @SuppressLint("HandlerLeak")
   private class IncomingHandler extends Handler {
-    public IncomingHandler() {
-      // TODO Auto-generated constructor stub
-    }
-    
     @Override public void handleMessage(final Message m) {
       if (_incomingHandler != null) {
         Log.i(TAG, "Incoming message. Passing to handler: " + m);
@@ -62,13 +58,14 @@ public class ServiceManager {
     }
   }
   
-  private final ServiceConnection mConnection = new ServiceConnection() {
+  private final ServiceConnection _connection = new ServiceConnection() {
     @Override public void onServiceConnected(final ComponentName className, final IBinder service) {
+      _service = new Messenger(service);
       Log.i(TAG, "Attached.");
       try {
         final Message msg = Message.obtain(null, AbstractService.MSG_REGISTER_CLIENT);
         msg.replyTo = _messenger;
-        new Messenger(service).send(msg);
+        _service.send(msg);
       } catch (final RemoteException e) {
         Log.d(TAG, "service has crashed before we could do anything with it");
       }
@@ -95,6 +92,7 @@ public class ServiceManager {
   public void start() {
     doStartService();
     doBindService();
+    Log.d(TAG, "Service Started");
   }
   
   public void stop() {
@@ -118,9 +116,12 @@ public class ServiceManager {
   }
   
   public void send(final Message msg) throws RemoteException {
+    Log.d(TAG, "Trying to Send msg." + _isBound + " " + _service);
     if (_isBound)
-      if (_service != null)
+      if (_service != null) {
+        Log.d(TAG, "Sending msg.");
         _service.send(msg);
+      }
   }
   
   private void doStartService() {
@@ -132,8 +133,10 @@ public class ServiceManager {
   }
   
   private void doBindService() {
-    _activity.bindService(new Intent(_activity, _serviceClass), mConnection, Context.BIND_AUTO_CREATE);
+    Log.d(TAG, "doBindService");
+    _activity.bindService(new Intent(_activity, _serviceClass), _connection, Context.BIND_AUTO_CREATE);
     _isBound = true;
+    Log.d(TAG, "doBindService done.");
   }
   
   private void doUnbindService() {
@@ -149,9 +152,8 @@ public class ServiceManager {
           // There is nothing special we need to do if the service has crashed.
         }
       // Detach our existing connection.
-      _activity.unbindService(mConnection);
+      _activity.unbindService(_connection);
       _isBound = false;
-      // textStatus.setText("Unbinding.");
       Log.i("ServiceHandler", "Unbinding.");
     }
   }

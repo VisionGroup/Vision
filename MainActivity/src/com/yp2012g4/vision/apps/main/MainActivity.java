@@ -13,7 +13,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
-import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
+import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.telephony.CallScreenService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
@@ -57,8 +57,7 @@ public class MainActivity extends VisionActivity {
       return true;
     final Intent intent = getIntentByButtonId(MainActivity.this, getButtonByMode().getId());
     if (intent != null) {
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      setIntentFlags(intent);
       startActivity(intent);
     }
     return false;
@@ -89,8 +88,8 @@ public class MainActivity extends VisionActivity {
         nextActivity = DisplaySettingsActivity.class;
         break;
       case R.id.read_sms_button:
-//        nextActivity = ReadSmsActivity.class;
-        nextActivity = SendSMSActivity.class;
+        nextActivity = ReadSmsActivity.class;
+//        nextActivity = SendSMSActivity.class;
         break;
       default:
         return null;

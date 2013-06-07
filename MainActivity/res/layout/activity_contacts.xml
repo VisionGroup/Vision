@@ -74,7 +74,7 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="2" >
+        android:weightSum="3" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/add_contact"
@@ -85,6 +85,16 @@
             android:scaleType="fitCenter"
             android:src="@drawable/add_new_contact"
             app:readText="@string/add_new_contact_button" />
+        
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/edit_contact"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/black_pen"
+            app:readText="@string/edit_contact_button" />
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/delete_contact"

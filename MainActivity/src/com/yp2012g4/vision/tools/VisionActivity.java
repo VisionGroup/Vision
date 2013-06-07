@@ -83,7 +83,8 @@ public abstract class VisionActivity extends VisionGestureDetector {
           speakOutSync(getString(R.string.in_main_screen));
           return true;
         }
-        startActivity(_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        setIntentFlags(_intent);
+        startActivity(_intent);
         finish();
         return true;
       case R.id.current_menu_button:
@@ -161,5 +162,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
     if (buttonId == R.id.home_button)
       return true;
     return false;
+  }
+  
+  public static void setIntentFlags(final Intent intent) {
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
   }
 }

@@ -24,6 +24,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * @version 1.1
  */
 public class ContactsActivity extends VisionActivity {
+  public static final String CONTACT_NAME_FLAG = "ContactName";
   public static final String FAVORITS_CONTACTS = "favorits";
   public static final String ALL_CONTACTS = "all";
   public static final String LIST_TYPE = "list_type";
@@ -44,35 +45,44 @@ public class ContactsActivity extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     final View button = getButtonByMode();
+    Intent intent;
     final ContactType ct = contactManager.getContact(currentContact);
     if (ct == null)
       return false;
     switch (button.getId()) {
       case R.id.contacts_call:
-        final Intent call = new Intent(Intent.ACTION_CALL);
-        call.setData(Uri.parse("tel:" + ct.getPhone()));
-        startActivity(call);
+        intent = new Intent(Intent.ACTION_CALL);
+        setIntentFlags(intent);
+        intent.setData(Uri.parse("tel:" + ct.getPhone()));
+        startActivity(intent);
         CallManager.DeleteCallLogByNumber(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
-        final Intent _sms = new Intent(ContactsActivity.this, SendSMSActivity.class);
-        _sms.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
-        startActivity(_sms);
+        intent = new Intent(ContactsActivity.this, SendSMSActivity.class);
+        setIntentFlags(intent);
+        intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
+        startActivity(intent);
         break;
       case R.id.contacts_quick_sms:
-        final Intent _quickSms = new Intent(ContactsActivity.this, QuickSMSActivity.class);
-        _quickSms.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
-        startActivity(_quickSms);
+        intent = new Intent(ContactsActivity.this, QuickSMSActivity.class);
+        setIntentFlags(intent);
+        intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
+        startActivity(intent);
         break;
       case R.id.add_contact:
-        final Intent intent = new Intent(ContactsActivity.this, AddContactActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent = new Intent(ContactsActivity.this, AddContactActivity.class);
+        setIntentFlags(intent);
         startActivityForResult(intent, REQUEST_CODE);
-//        selectCorrespondingContactsList();
-//        setContact();
+        break;
+      case R.id.edit_contact:
+        intent = new Intent(ContactsActivity.this, AddContactActivity.class);
+        final String name = ct.getContactName();
+        intent.putExtra(CONTACT_NAME_FLAG, name);
+        setIntentFlags(intent);
+        startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.delete_contact:
-        if (contactManager.deleteContact(ct.getPhone(), ct.getContactName())) {
+        if (ContactManager.deleteContact(ct.getPhone(), ct.getContactName(), this)) {
           selectCorrespondingContactsList();
           setContact();
           speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());

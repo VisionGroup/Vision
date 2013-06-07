@@ -22,6 +22,7 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class AlarmActivity extends VisionActivity {
+  private static final String TYPE_STRING = "type";
   public static final int USER_PRESSED_HOME = -2;
   public static final int USER_PRESSED_BACK = -1;
   public static PendingIntent pendingIntent;
@@ -42,7 +43,9 @@ public class AlarmActivity extends VisionActivity {
   public void callSetClock(final boolean isSettingMinutes) {
     waitForMinutes = isSettingMinutes;
     final int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
-    startActivityForResult(new Intent(AlarmActivity.this, SetClockActivity.class).putExtra("type", type), REQUEST_CODE);
+    final Intent intent = new Intent(AlarmActivity.this, SetClockActivity.class).putExtra(TYPE_STRING, type);
+    setIntentFlags(intent);
+    startActivityForResult(intent, REQUEST_CODE);
   }
   
   @Override public int getViewId() {
@@ -152,6 +155,7 @@ public class AlarmActivity extends VisionActivity {
       return;
     }
     final Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);
+    setIntentFlags(myIntent);
     pendingIntent = PendingIntent.getService(AlarmActivity.this, 0, myIntent, 0);
     final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     final Calendar calendar = Calendar.getInstance();

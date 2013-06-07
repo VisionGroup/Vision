@@ -15,6 +15,9 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DeleteConfirmation extends VisionActivity {
+  public static final String ACTIVITY_EXTRA = "activity";
+  public static final String CANCEL_FLAG = "CANCEL";
+  public static final String DELETE_FLAG = "DELETE";
   @SuppressWarnings("rawtypes") private Class _caller;
   private static final String TAG = "vision:DeleteConfirmation";
   
@@ -42,7 +45,7 @@ public class DeleteConfirmation extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     Log.d(TAG, _caller.toString());
-    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra("ACTION", "CANCEL");
+    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, CANCEL_FLAG);
     Log.d(TAG, intent.toString());
     // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     setIntentFlags(intent);
@@ -52,7 +55,7 @@ public class DeleteConfirmation extends VisionActivity {
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra("ACTION", "DELETE");
+    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG);
     // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     setIntentFlags(intent);
     startActivity(intent);
@@ -68,7 +71,7 @@ public class DeleteConfirmation extends VisionActivity {
     setContentView(R.layout.activity_delete_confirmation);
     init(0, getString(R.string.delete_confirmation_screen), getString(R.string.delete_confirmation_help));
     try {
-      _caller = Class.forName(getIntent().getStringExtra("activity"));
+      _caller = Class.forName(getIntent().getStringExtra(ACTIVITY_EXTRA));
     } catch (final ClassNotFoundException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

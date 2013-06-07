@@ -7,10 +7,12 @@ import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.lists.SmsAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.managers.SmsType;
+import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -60,8 +62,14 @@ public class ReadSmsActivity extends VisionActivity {
     final SmsType currMsg = getCurrentSms();
     switch (getButtonByMode().getId()) {
       case R.id.sms_send_sms:
+        intent = new Intent(getApplicationContext(), SendSMSActivity.class);
+        setIntentFlags(intent);
+        intent.putExtra(CallUtils.NUMBER_KEY, currMsg.getAddress());
+        startActivity(intent);
+        break;
+      case R.id.sms_send_quick_sms:
         intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
-        intent.putExtra("number", currMsg.getAddress());
+        intent.putExtra(CallUtils.NUMBER_KEY, currMsg.getAddress());
         setIntentFlags(intent);
         startActivity(intent);
         break;
@@ -73,7 +81,7 @@ public class ReadSmsActivity extends VisionActivity {
         break;
       case R.id.sms_remove:
         intent = new Intent(this, DeleteConfirmation.class);
-        intent.putExtra("activity", "com.yp2012g4.vision.apps.smsReader.ReadSmsActivity");
+        intent.putExtra(DeleteConfirmation.ACTIVITY_EXTRA, this.getClass().getName());
         setIntentFlags(intent);
         startActivity(intent);
         break;
@@ -89,7 +97,7 @@ public class ReadSmsActivity extends VisionActivity {
     final SmsType currMsg = getCurrentSms();
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
-      if (extras.getString("ACTION").equals("DELETE")) {
+      if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         // first we remove the SMS from the phone DB
         SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
         // then we remove the SMS from the displayed list

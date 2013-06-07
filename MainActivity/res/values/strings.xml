@@ -37,15 +37,25 @@
         							screen there are 4 buttons: undo, reset, call, and quick SMS.</string>
     <string name="dial_number">Please dial a number first!</string>
     <string name="quick_sms_button">Quick S M S</string>
+    <string name="digit1">1</string>
     <string name="one">one</string>
+    <string name="digit2">2</string>
     <string name="two">two</string>
+    <string name="digit3">3</string>
     <string name="three">three</string>
+    <string name="digit4">4</string>
     <string name="four">four</string>
+    <string name="digit5">5</string>
     <string name="five">five</string>
+    <string name="digit6">6</string>
     <string name="six">six</string>
+    <string name="digit7">7</string>
     <string name="seven">seven</string>
+    <string name="digit8">8</string>
     <string name="eight">eight</string>
+    <string name="digit9">9</string>
     <string name="nine">nine</string>
+    <string name="digit0">0</string>
     <string name="zero">zero</string>
     <string name="asterisk">*</string>
     <string name="asterisk_ReadText">asterisk</string>

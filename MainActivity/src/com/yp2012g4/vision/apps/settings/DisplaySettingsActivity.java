@@ -23,12 +23,14 @@ import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.sos.SOSconfig;
 import com.yp2012g4.vision.tools.IncomingCallReceiver;
 import com.yp2012g4.vision.tools.OutgoingCallReceiver;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DisplaySettingsActivity extends VisionActivity {
   private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
   private static final String DISABLE_PREF = "disable";
   private static final String ENABLE_PREF = "enable";
+  private static boolean firstTime = true;
   /**
    * get the activity's main view ID
    * 
@@ -130,24 +132,34 @@ public class DisplaySettingsActivity extends VisionActivity {
    * @param sp
    */
   private void pressedLocalSelectButton(final SharedPreferences sp) {
-    _myLocale = Locale.getDefault(); // get xml strings file
     _config = new Configuration();
-    String defaultLang = "HEBREW";
-    if (_myLocale.equals(Locale.US))
-      defaultLang = "ENGLISH";
-    final String language = sp.getString("LANGUAGE", defaultLang);
-    if (language.equals("ENGLISH")) {
-      VisionApplication.savePrefs("LANGUAGE", "HEBREW", this);
-      final Locale locale = new Locale("iw");
-      Locale.setDefault(locale);
-      _config.locale = locale;
-      speakOutAsync(getString(R.string.switched_to_hebrew));
-    } else {
-      VisionApplication.savePrefs("LANGUAGE", "ENGLISH", this);
-      Locale.setDefault(Locale.US);
-      _config.locale = Locale.US;
-      speakOutAsync(getString(R.string.switched_to_english));
+    final Locale l = Locale.getDefault();// defaultLang = "HEBREW";
+    // TODO Try to check availability of TTS engines
+    final String lang = sp.getString("LANGUAGE", l.getLanguage());
+    if (!TTS.isLanguageAvailable(new Locale(lang)) || firstTime) { // TODO:
+                                                                   // Remove
+                                                                   // first time
+                                                                   // when
+                                                                   // Initialization
+                                                                   // is correct
+      firstTime = false;
+      VisionApplication.savePrefs("LANGUAGE", Language.getDefaultLocale().getLanguage(), this);
+      Locale.setDefault(Language.getDefaultLocale());
+      _config.locale = Language.getDefaultLocale();
+      Log.d(TAG, "changed to locale: " + Language.getDefaultLocale().getLanguage());
     }
+    Log.d(TAG, "Current lang: " + lang);
+    final int currentLIndex = Language.availableLocals().indexOf(new Locale(lang));
+    final Locale nextLocale = Language.availableLocals().get((currentLIndex + 1) % Language.availableLocals().size());
+    Log.d(TAG, "Next lang: " + nextLocale.getLanguage());
+    if (TTS.isLanguageAvailable(nextLocale)) {
+      VisionApplication.savePrefs("LANGUAGE", nextLocale.getLanguage(), this);
+      Locale.setDefault(nextLocale);
+      speakOutAsync(getString(R.string.switched_to) + " " + nextLocale.getLanguage());
+      _config.locale = nextLocale;
+      Log.d(TAG, "changed to locale: " + nextLocale.getLanguage());
+    } else
+      speakOutAsync(getString(R.string.one_lang_avail));
     getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     // empty activity stack
     final Intent intent = new Intent(this, MainActivity.class);

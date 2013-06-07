@@ -29,7 +29,7 @@ public class CallUtils {
   public static final String CALL_TYPE_KEY = "call_type_key";
   
   public static enum CALL_TYPE {
-    INCOMING_CALL, OUTGOING_CALL
+    INCOMING_CALL, OUTGOING_CALL, CALL_ENDED
   }
   
   private com.android.internal.telephony.ITelephony telephonyService;

@@ -8,7 +8,6 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 
 public class OutgoingCallReceiver extends BroadcastReceiver {
@@ -33,7 +32,7 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
       b1.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
       m.setData(b1);
       try {
-        MainActivity.callScreenServiceManager.send(m);
+        CallService.callScreenServiceManager.send(m);
       } catch (final RemoteException e) {
         Log.d(TAG, "Unable to send message to callScreenService.", e);
       }

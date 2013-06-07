@@ -1,8 +1,14 @@
 package com.yp2012g4.vision.apps.main;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,11 +22,10 @@ import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
-import com.yp2012g4.vision.apps.telephony.CallScreenService;
+import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
-import com.yp2012g4.vision.tools.ServiceManager;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -32,7 +37,6 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class MainActivity extends VisionActivity {
   private static final double LOW_BATTERY_LEVEL = 0.3;
   private static String TAG = "vision:MainActivity";
-  public static ServiceManager callScreenServiceManager;
   
   @Override public int getViewId() {
     return R.id.MainActivityView;
@@ -42,15 +46,23 @@ public class MainActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    /*
+     * _myLocale = Locale.getDefault(); // get xml strings file String
+     * defaultLang = "HEBREW"; if (_myLocale.equals(Locale.US)) defaultLang =
+     * "ENGLISH";
+     */
+    Locale locale = Locale.US;
+    if (sp.getString("LANGUAGE", "ENGLISH").equals("HEBREW"))
+      locale = new Locale("iw");
+    Locale.setDefault(locale);
+    _config = new Configuration();
+    _config.locale = locale;
+    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     setContentView(R.layout.activity_main);
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
-    /* Call service manager initialisation. */
-    if (callScreenServiceManager == null)
-      callScreenServiceManager = new ServiceManager(getApplicationContext(), CallScreenService.class, null);
-    if (!callScreenServiceManager.isRunning())
-      callScreenServiceManager.start();
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
@@ -125,9 +137,10 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = CallManager.getMissedCallsNum(this);
     if (numOfMissedCalls > 0) {
-      s += numOfMissedCalls + " " + getString(R.string.missed_call);
-      if (numOfMissedCalls > 1)
-        s += "s";
+      final Resources res = getResources();
+      final String missedCalls = res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls,
+          Integer.valueOf(numOfMissedCalls));
+      s = missedCalls;
     }
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)

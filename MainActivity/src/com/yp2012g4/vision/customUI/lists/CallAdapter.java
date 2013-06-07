@@ -79,7 +79,7 @@ public class CallAdapter extends BaseAdapter {
     numberView.setText(call.getNumber());
     nameView.setText(call.getName());
     timeView.setText(call.getDate().toLocaleString());
-    numberView.setReadText(person);
+    numberView.setReadText(call.getNumber());
     nameView.setReadText(call.getName());
     timeView.setReadText(call.getDate().toLocaleString());
   }
@@ -108,7 +108,7 @@ public class CallAdapter extends BaseAdapter {
   public void getNextCall() {
     for (int i = 0; i < NUMBER_OF_BATCH && !_curser.isAfterLast(); i++) {
       try {
-        _callArray.add(new CallType(_curser));
+        _callArray.add(new CallType(_c, _curser));
       } catch (final IllegalArgumentException e) {
         // Ignore and go next
       }

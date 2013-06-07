@@ -28,12 +28,12 @@ public class CallManager {
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    return copyToList(cr, new ArrayList<CallType>());
+    return copyToList(c, cr, new ArrayList<CallType>());
   }
   
-  private static ArrayList<CallType> copyToList(final Cursor cr, final ArrayList<CallType> al) {
+  private static ArrayList<CallType> copyToList(final Context c, final Cursor cr, final ArrayList<CallType> al) {
     while (cr.moveToNext())
-      al.add(new CallType(cr));
+      al.add(new CallType(c, cr));
     return al;
   }
   
@@ -50,7 +50,7 @@ public class CallManager {
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    return copyToList(cur, new ArrayList<CallType>());
+    return copyToList(c, cur, new ArrayList<CallType>());
   }
   
   /**
@@ -86,7 +86,7 @@ public class CallManager {
       return null;
     }
     if (_cur.moveToNext())
-      return new CallType(_cur);
+      return new CallType(c, _cur);
     return null;
   }
   
@@ -108,7 +108,7 @@ public class CallManager {
     }
     final ArrayList<CallType> al = new ArrayList<CallType>();
     for (int i = 0; i < ns && _cur.moveToNext(); i++)
-      al.add(new CallType(_cur));
+      al.add(new CallType(c, _cur));
     return al;
   }
   

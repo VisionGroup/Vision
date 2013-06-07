@@ -2,6 +2,7 @@ package com.yp2012g4.vision.managers;
 
 import java.util.Date;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
 
@@ -12,6 +13,7 @@ import android.text.format.DateFormat;
  * 
  */
 public class CallType {
+  private static int MINIMAL_SIZE_FOR_PHONE_NUMBER = 3;
   private String _number = "";
   private String _type = "";
   private String _name = "";
@@ -32,10 +34,7 @@ public class CallType {
    * @param cur
    * @param c
    */
-  public CallType(final Cursor cur) {
-    _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-//    final String mili = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE));
-//    final long m = Long.parseLong(cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE)));
+  public CallType(final Context c, final Cursor cur) {
     try {
       _date = new Date((String) DateFormat.format("dd/MM/yy hh:mm",
           cur.getLong(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))));
@@ -44,7 +43,11 @@ public class CallType {
       e1.printStackTrace();
     }
     try {
-      _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
+      _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
+      if (_number.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
+        _number = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
+      else
+        _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
     } catch (final Exception e) {
       _name = "";
     }

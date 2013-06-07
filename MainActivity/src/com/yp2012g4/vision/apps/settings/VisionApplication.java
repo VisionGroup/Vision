@@ -79,6 +79,22 @@ public class VisionApplication extends Application {
   }
   
   /**
+   * save a certain preference to the xml file
+   * 
+   * @param key
+   *          - preference name
+   * @param val
+   *          - value to be saved
+   * @param a
+   *          - current activity
+   * 
+   */
+  public static void savePrefs(final String key, final int val, final Activity a) {
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+    sp.edit().putInt(key, val).commit();
+  }
+  
+  /**
    * set the text and background colors for the entire application
    * 
    * @param int1

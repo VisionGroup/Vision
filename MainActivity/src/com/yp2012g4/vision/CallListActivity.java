@@ -82,7 +82,7 @@ public class CallListActivity extends VisionActivity {
    */
   private void removeFromCallList(final CallType currCall) {
     // first we remove the Call from the phone DB
-    CallManager.DeleteCallLogByNumber(this, currCall.getNumber());
+    CallManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
     // then we remove the Call from the displayed list
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);
@@ -108,6 +108,7 @@ public class CallListActivity extends VisionActivity {
           _tlv.prevPage();
         else
           _tlv.nextPage();
+        CallManager.UnmarkCallLFromMissedCallList(this, ((CallType) _ca.getItem(_tlv.getPage())).getNumber());
         vibrate(VIBRATE_DURATION);
       }
     return super.onFling(e1, e2, f1, f2);

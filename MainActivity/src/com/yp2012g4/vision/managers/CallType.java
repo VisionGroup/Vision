@@ -48,6 +48,8 @@ public class CallType {
         _number = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
       else
         _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
+      if (_name == null)
+        _name = "";
     } catch (final Exception e) {
       _name = "";
     }

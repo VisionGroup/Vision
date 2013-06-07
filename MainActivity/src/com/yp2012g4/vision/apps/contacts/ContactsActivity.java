@@ -55,7 +55,7 @@ public class ContactsActivity extends VisionActivity {
         setIntentFlags(intent);
         intent.setData(Uri.parse("tel:" + ct.getPhone()));
         startActivity(intent);
-        CallManager.DeleteCallLogByNumber(this, ct.getPhone());
+        CallManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
         intent = new Intent(ContactsActivity.this, SendSMSActivity.class);

@@ -245,7 +245,7 @@
     <string name="sending_SOS_message">Sending S O S message.</string>
     <string name="send_SOS_message">Send S O S</string>
     <string name="sos_msg_to_send">I need your help!</string>
-    <string name="SOS_number_empty">S O S contact is empty. Enter valid contact number</string>
+    <string name="SOS_number_empty">S O S contact is empty. Please setup number in configuration screen</string>
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">Delete confirmation</string>
     <string name="delete_confirmation_info">Are you sure?</string>

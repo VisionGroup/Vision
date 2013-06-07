@@ -320,4 +320,7 @@
     <string name="title_activity_sosconfiguation">SOSconfiguation</string>
     <string name="title_activity_add_contact">AddContactActivity</string>
 
+    <!-- Manger's -->
+    <string name="incoming_call_from_private_number">Private number</string>
+    
 </resources>

@@ -108,14 +108,14 @@ public class DisplaySettingsActivity extends VisionActivity {
   }
   
   private void pressedButtonCallEnable(final SharedPreferences sp) {
-    final String buttonMode = sp.getString(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF);
-    final boolean enable = !buttonMode.equals(ENABLE_PREF);
+    final boolean enable = sp.getBoolean(VISION_CALL_ENABLE_ENTRY, true);
+    // final boolean enable = !buttonMode.equals(ENABLE_PREF);
     if (enable) {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, DISABLE_PREF, this);
-      speakOutAsync(R.string.disable_call_service);
-    } else {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF, this);
+      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, false, this);
       speakOutAsync(R.string.enable_call_service);
+    } else {
+      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, true, this);
+      speakOutAsync(R.string.disable_call_service);
     }
     changeEnableState(IncomingCallReceiver.class, enable);
     changeEnableState(OutgoingCallReceiver.class, enable);

@@ -25,6 +25,7 @@ import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
+import com.yp2012g4.vision.tools.CallService;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -62,6 +63,7 @@ public class MainActivity extends VisionActivity {
     final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
+    CallService.initialise(getApplicationContext());
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {

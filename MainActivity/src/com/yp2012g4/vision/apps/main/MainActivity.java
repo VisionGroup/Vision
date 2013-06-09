@@ -20,6 +20,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
@@ -53,23 +54,7 @@ public class MainActivity extends VisionActivity {
   
   private void programSetup() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-<<<<<<< HEAD
-    /*
-     * _myLocale = Locale.getDefault(); // get xml strings file String
-     * defaultLang = "HEBREW"; if (_myLocale.equals(Locale.US)) defaultLang =
-     * "ENGLISH";
-     */
-    Locale locale = Locale.US;
-    if (sp.getString("LANGUAGE", Locale.US.getLanguage()).equals(new Locale("iw").getLanguage()))
-      locale = new Locale("iw");
-    Log.d(TAG, "Setting default local to: " + locale.getLanguage());
-    Locale.setDefault(locale);
-    _config = new Configuration();
-    _config.locale = locale;
-    TTS.setLanguage(locale);
-=======
-    final Locale l = Locale.US;// new Locale(sp.getString("LANGUAGE",
-                               // Language.getDefaultLocale().getISO3Language()));
+    final Locale l = new Locale(sp.getString("LANGUAGE", Language.getDefaultLocale().getLanguage()));
     Locale.setDefault(l);
     Log.d(TAG, "Language: " + l.getLanguage());
     final int ret = TTS.setLanguage(l);

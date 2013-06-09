@@ -27,9 +27,6 @@ import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DisplaySettingsActivity extends VisionActivity {
-  private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
-  private static final String DISABLE_PREF = "disable";
-  private static final String ENABLE_PREF = "enable";
   private static boolean firstTime = true;
   /**
    * get the activity's main view ID
@@ -108,13 +105,13 @@ public class DisplaySettingsActivity extends VisionActivity {
   }
   
   private void pressedButtonCallEnable(final SharedPreferences sp) {
-    final String buttonMode = sp.getString(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF);
-    final boolean enable = !buttonMode.equals(ENABLE_PREF);
+    final String buttonMode = sp.getString(SetupSettingsString.VisionCallEnableEntry, SetupSettingsString.EnablePref);
+    final boolean enable = !buttonMode.equals(SetupSettingsString.EnablePref);
     if (enable) {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, DISABLE_PREF, this);
+      VisionApplication.savePrefs(SetupSettingsString.VisionCallEnableEntry, SetupSettingsString.DisablePref, this);
       speakOutAsync(R.string.disable_call_service);
     } else {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF, this);
+      VisionApplication.savePrefs(SetupSettingsString.VisionCallEnableEntry, SetupSettingsString.EnablePref, this);
       speakOutAsync(R.string.enable_call_service);
     }
     changeEnableState(IncomingCallReceiver.class, enable);
@@ -143,7 +140,7 @@ public class DisplaySettingsActivity extends VisionActivity {
                                                                    // Initialization
                                                                    // is correct
       firstTime = false;
-      VisionApplication.savePrefs("LANGUAGE", Language.getDefaultLocale().getLanguage(), this);
+      VisionApplication.savePrefs(SetupSettingsString.Language, Language.getDefaultLocale().getLanguage(), this);
       Locale.setDefault(Language.getDefaultLocale());
       _config.locale = Language.getDefaultLocale();
       Log.d(TAG, "changed to locale: " + Language.getDefaultLocale().getLanguage());
@@ -153,7 +150,7 @@ public class DisplaySettingsActivity extends VisionActivity {
     final Locale nextLocale = Language.availableLocals().get((currentLIndex + 1) % Language.availableLocals().size());
     Log.d(TAG, "Next lang: " + nextLocale.getLanguage());
     if (TTS.isLanguageAvailable(nextLocale)) {
-      VisionApplication.savePrefs("LANGUAGE", nextLocale.getLanguage(), this);
+      VisionApplication.savePrefs(SetupSettingsString.Language, nextLocale.getLanguage(), this);
       Locale.setDefault(nextLocale);
       speakOutAsync(getString(R.string.switched_to) + " " + nextLocale.getLanguage());
       _config.locale = nextLocale;

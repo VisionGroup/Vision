@@ -57,9 +57,9 @@ public class VisionApplication extends Application {
    */
   public static void loadPrefs(final Activity a) {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
-    _textSize = sp.getString("TEXT SIZE", _textSize);
-    _textColor = sp.getString("TEXT COLOR", _textColor);
-    _backgroundColor = sp.getString("BG COLOR", _backgroundColor);
+    _textSize = sp.getString(SetupSettingsString.TextSize, _textSize);
+    _textColor = sp.getString(SetupSettingsString.TextColor, _textColor);
+    _backgroundColor = sp.getString(SetupSettingsString.BackGround, _backgroundColor);
   }
   
   /**

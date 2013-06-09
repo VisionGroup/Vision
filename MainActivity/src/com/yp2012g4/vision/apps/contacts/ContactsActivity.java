@@ -11,7 +11,7 @@ import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.tools.CallUtils;
@@ -55,7 +55,7 @@ public class ContactsActivity extends VisionActivity {
         setIntentFlags(intent);
         intent.setData(Uri.parse("tel:" + ct.getPhone()));
         startActivity(intent);
-        CallManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
+        CallsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
         intent = new Intent(ContactsActivity.this, SendSMSActivity.class);

@@ -28,8 +28,9 @@ public class CallAdapter extends BaseAdapter {
   }
   
   private void initCurser() {
-    _curser = _c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
-    _curser.moveToLast(); // Changed from move to first.
+    // _curser = _c.getContentResolver().query(CallLog.Calls.CONTENT_URI,
+    // _projection, null, null, null);
+    // _curser.moveToLast(); // Changed from move to first.
   }
   
   @Override public int getCount() {

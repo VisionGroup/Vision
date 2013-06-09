@@ -24,7 +24,7 @@ import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
-import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -135,7 +135,7 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS <= PhoneStatusActivity.signal_poor)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
-    final int numOfMissedCalls = CallManager.getMissedCallsNum(this);
+    final int numOfMissedCalls = CallsManager.getMissedCallsNum(this);
     if (numOfMissedCalls > 0) {
       final Resources res = getResources();
       final String missedCalls = res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls,

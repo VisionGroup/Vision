@@ -10,7 +10,7 @@ import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.customUI.lists.CallAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
-import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -82,7 +82,7 @@ public class CallListActivity extends VisionActivity {
    */
   private void removeFromCallList(final CallType currCall) {
     // first we remove the Call from the phone DB
-    CallManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
+    CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
     // then we remove the Call from the displayed list
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);
@@ -108,7 +108,7 @@ public class CallListActivity extends VisionActivity {
           _tlv.prevPage();
         else
           _tlv.nextPage();
-        CallManager.UnmarkCallLFromMissedCallList(this, ((CallType) _ca.getItem(_tlv.getPage())).getNumber());
+        CallsManager.UnmarkCallLFromMissedCallList(this, ((CallType) _ca.getItem(_tlv.getPage())).getNumber());
         vibrate(VIBRATE_DURATION);
       }
     return super.onFling(e1, e2, f1, f2);

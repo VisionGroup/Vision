@@ -88,7 +88,7 @@ public class CallListActivity extends VisionActivity {
     _tlv.setAdapter(_ca);
     _tlv.prevPage();
     speakOutAsync(getString(R.string.delete_call));
-    vibrate(VIBRATE_DURATION);
+    vibrate();
   }
   
   public CallType getCurrentCall() {
@@ -102,14 +102,14 @@ public class CallListActivity extends VisionActivity {
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
     final float diffX = e2.getX() - e1.getX();
-    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
-      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
-        if (diffX > 0)
-          _tlv.prevPage();
-        else
-          _tlv.nextPage();
-        vibrate(VIBRATE_DURATION);
-      }
+    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()) && Math.abs(diffX) > SWIPE_THRESHOLD
+        && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
+      if (diffX > 0)
+        _tlv.prevPage();
+      else
+        _tlv.nextPage();
+      vibrate();
+    }
     return super.onFling(e1, e2, f1, f2);
   }
 }

@@ -458,6 +458,16 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     vibrator.vibrate(milliseconds);
   }
   
+  /**
+   * Make the phone vibrate for a default duration
+   * 
+   * @param milliseconds
+   *          The time to vibrate.
+   */
+  protected void vibrate() {
+    vibrator.vibrate(VIBRATE_DURATION);
+  }
+  
   protected void hapticFeedback(final View v) {
     VisionApplication.visualFeedback(v, this);
     vibrate(VIBRATE_SHORT_DURATION);

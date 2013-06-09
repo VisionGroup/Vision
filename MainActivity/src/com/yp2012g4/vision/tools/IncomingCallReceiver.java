@@ -38,8 +38,6 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE) && _rang) {
       _rang = false;
-      // final String phonenumber =
-      // b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Call ended.");
       _sendMessage(c, "", CALL_TYPE.CALL_ENDED);
     }

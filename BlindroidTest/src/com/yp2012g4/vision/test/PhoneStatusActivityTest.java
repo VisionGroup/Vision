@@ -5,6 +5,7 @@ package com.yp2012g4.vision.test;
 
 import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
@@ -37,7 +38,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     // pn = new PhoneNotifications(getActivity());
   }
   
-  public void test_signalToPercent() {
+  @MediumTest public void test_signalToPercent() {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     PhoneNotifications.signal = 99;
     assertEquals(getActivity().signalToString(), getActivity().getString(R.string.phoneStatus_message_noSignal_read));
@@ -51,7 +52,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(getActivity().signalToString(), getActivity().getString(R.string.phoneStatus_message_veryPoorSignal_read));
   }
   
-  public void test_TalkingImageButton() {
+  @MediumTest public void test_TalkingImageButton() {
     final TalkingImageButton tlkbtn = (TalkingImageButton) solo.getView(R.id.button_getBatteryStatus);
     tlkbtn.setReadText("Test String");
     assertEquals(tlkbtn.getReadText(), "Test String");

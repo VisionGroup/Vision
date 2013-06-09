@@ -3,11 +3,12 @@ package com.yp2012g4.vision.test;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
 
@@ -25,7 +26,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testResultButton() {
+  @MediumTest public void testResultButton() {
     solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit1));
     solo.clickOnView(solo.getView(R.id.digit2));
@@ -37,7 +38,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     assertEquals(((TalkingButton) solo.getView(R.id.result)).getText().toString(), "127+43");
   }
   
-  public void testComplicatedCalculation() {
+  @MediumTest public void testComplicatedCalculation() {
     solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit8));
     solo.clickOnView(solo.getView(R.id.digit5));
@@ -51,7 +52,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     assertEquals(((TalkingButton) solo.getView(R.id.result)).getText().toString(), "273");
   }
   
-  public void testClear() {
+  @MediumTest public void testClear() {
     solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit9));
     solo.clickOnView(solo.getView(R.id.digit4));
@@ -64,7 +65,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     assertEquals(((TalkingButton) solo.getView(R.id.result)).getText().toString(), "3*7");
   }
   
-  public void testDecimalNumber() {
+  @MediumTest public void testDecimalNumber() {
     solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit5));
     solo.clickOnView(solo.getView(R.id.dot));
@@ -78,7 +79,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     assertEquals(((TalkingButton) solo.getView(R.id.result)).getText().toString(), "29.3");
   }
   
-  public void testDivisionByZero() {
+  @MediumTest public void testDivisionByZero() {
     solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit4));
     solo.clickOnView(solo.getView(R.id.digit5));
@@ -93,7 +94,7 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     assertEquals(((TalkingButton) solo.getView(R.id.result)).getText().toString(), "NaN");
   }
   
-  public void testBadAction() {
+  @MediumTest public void testBadAction() {
     solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     // clickOnArrayElements(arr[10]);
     solo.clickOnView(solo.getView(R.id.digit4));

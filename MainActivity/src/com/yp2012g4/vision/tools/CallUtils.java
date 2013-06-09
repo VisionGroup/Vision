@@ -27,6 +27,7 @@ public class CallUtils {
   public static final String RANG_KEY = "rang";
   public static final String NUMBER_KEY = TelephonyManager.EXTRA_INCOMING_NUMBER;
   public static final String CALL_TYPE_KEY = "call_type_key";
+  private static boolean speakerPhone = false;
   
   public static enum CALL_TYPE {
     INCOMING_CALL, OUTGOING_CALL, CALL_ENDED
@@ -40,9 +41,10 @@ public class CallUtils {
    * 
    * @param context
    */
-  public static void enableSpeakerPhone(final Context c) {
+  public static void toggleSpeakerPhone(final Context c) {
     final AudioManager audioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
-    audioManager.setSpeakerphoneOn(true);
+    speakerPhone = !speakerPhone;
+    audioManager.setSpeakerphoneOn(speakerPhone);
   }
   
   public CallUtils(final Context c) {

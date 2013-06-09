@@ -25,7 +25,7 @@ public class SendSMSActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_send_sms);
-    init(0, getString(R.string.SendSms_whereami), getString(R.string.SendSms_whereami));
+    init(0, getString(R.string.SendSms_whereami), getString(R.string.SendSms_info));
     final Bundle extras = getIntent().getExtras();
     try {
       number = extras.getString(CallUtils.NUMBER_KEY);

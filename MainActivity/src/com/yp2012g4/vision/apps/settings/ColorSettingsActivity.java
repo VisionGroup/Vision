@@ -25,8 +25,8 @@ public class ColorSettingsActivity extends VisionActivity {
    */
   private void changeSettings(final String s) {
     final String[] c = s.split("-");
-    VisionApplication.savePrefs("TEXT COLOR", c[0], this);
-    VisionApplication.savePrefs("BG COLOR", c[1], this);
+    VisionApplication.savePrefs(SetupSettingsString.TextColor, c[0], this);
+    VisionApplication.savePrefs(SetupSettingsString.BackGround, c[1], this);
     VisionApplication.loadPrefs(this);
   }
   

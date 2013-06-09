@@ -44,8 +44,7 @@ public class AlarmActivity extends VisionActivity {
     waitForMinutes = isSettingMinutes;
     final int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
     final Intent intent = new Intent(AlarmActivity.this, SetClockActivity.class).putExtra(TYPE_STRING, type);
-    setIntentFlags(intent);
-    startActivityForResult(intent, REQUEST_CODE);
+    startActivityForResult(setIntentFlags(intent), REQUEST_CODE);
   }
   
   @Override public int getViewId() {
@@ -154,8 +153,7 @@ public class AlarmActivity extends VisionActivity {
       speakOutSync(R.string.you_need_to_set_ther_alarm_first);
       return;
     }
-    final Intent myIntent = new Intent(AlarmActivity.this, AlarmService.class);
-    setIntentFlags(myIntent);
+    final Intent myIntent = setIntentFlags(new Intent(AlarmActivity.this, AlarmService.class));
     pendingIntent = PendingIntent.getService(AlarmActivity.this, 0, myIntent, 0);
     final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     final Calendar calendar = Calendar.getInstance();

@@ -70,7 +70,7 @@
     <!-- MainActivity -->
     <string name="MainActivity_wheramai">Main screen</string>
     <string name="MainActivity_help">Select one of eight options.</string>
-    <string name="low_battery">Low Battery! \n.</string>
+    <string name="low_battery">Low Battery! \n</string>
     <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor</string>
     <string name="missed_call">missed call</string>
     <string name="new_sms">new S M S \n</string>
@@ -89,7 +89,11 @@
        	<item quantity="other">%d missed calls.</item>
    	</plurals>
     
-    
+    <plurals name="numberOfNewSMS">
+       	<item quantity="one">One new SMS.</item>
+       	<item quantity="other">%d new SMS messages.</item>
+   	</plurals>
+   	
     <!-- PhoneStatusActivity -->
     <string name="phoneStatus_whereami">Phone Status Menu</string>
     <string name="phoneStatus_help">You can press one of three buttons. \n1) to get Battery level and charger status. \n2)to get Reception status. \n3)to get missed calles list.</string>
@@ -218,7 +222,7 @@
     <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
     <string name="regular_buttons_mode">Switched to regular buttons mode </string>
     <string name="calculator">Calculator</string>
-    <string name="phone_call_service_button"> vision phone call service </string>
+    <string name="phone_call_service_button"> vision call service </string>
     <string name="disable_call_service">disabled vision phone call service</string>
     <string name="enable_call_service">enabled vision phone call service</string>
     <string name="mute_sound">Mute or Activate Sound</string>
@@ -271,6 +275,8 @@
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">S O S configuration screen</string>
+    <string name="sos_config_screen_info">At the top you can find the number. In the middle you have the dialer. At the bottom you have three buttons,
+        from left to right: undo, reset, OK.</string>
     <string name="ok_button">Set number</string>
     <string name="sos_config_screen_whereami">S O S configuration screen</string>
     <string name="sos_number">sosNumber</string>
@@ -299,6 +305,8 @@
 
     <!-- CalcActivity -->
     <string name="calc_screen">Calculator Screen</string>
+    <string name="calc_screen_info">The calculator buttons are at the center of the screen. At the top of the screen you can find
+        the expression, and the bottom you can find the button to click for the result.</string> 
     <string name="plus">+</string>
     <string name="ReadPlus">plus</string>
     <string name="minus">-</string>
@@ -329,6 +337,8 @@
 
     <!-- SendSmsActivity -->
     <string name="SendSms_whereami">Send SMS Screen</string>
+    <string name="SendSms_info">Tap the center of the screen to enter your text, then click the button at the bottom of the screen to send.
+        You can change the phone number by tapping the top of the screen.</string>
     <string name="send_message">Send Message</string>
     <string name="enter_a_phone_number">Enter a phone number</string>
     <string name="message_content">Message content</string>

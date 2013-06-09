@@ -57,9 +57,9 @@ public class VisionApplication extends Application {
    */
   public static void loadPrefs(final Activity a) {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
-    _textSize = sp.getString("TEXT SIZE", _textSize);
-    _textColor = sp.getString("TEXT COLOR", _textColor);
-    _backgroundColor = sp.getString("BG COLOR", _backgroundColor);
+    _textSize = sp.getString(SetupSettingsString.TextSize, _textSize);
+    _textColor = sp.getString(SetupSettingsString.TextColor, _textColor);
+    _backgroundColor = sp.getString(SetupSettingsString.BackGround, _backgroundColor);
   }
   
   /**
@@ -92,6 +92,22 @@ public class VisionApplication extends Application {
   public static void savePrefs(final String key, final int val, final Activity a) {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
     sp.edit().putInt(key, val).commit();
+  }
+  
+  /**
+   * save a certain preference to the xml file
+   * 
+   * @param key
+   *          - preference name
+   * @param val
+   *          - value to be saved
+   * @param a
+   *          - current activity
+   * 
+   */
+  public static void savePrefs(final String key, final boolean val, final Activity a) {
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(a.getApplicationContext());
+    sp.edit().putBoolean(key, val).commit();
   }
   
   /**

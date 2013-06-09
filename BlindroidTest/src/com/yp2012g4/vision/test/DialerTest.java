@@ -7,6 +7,7 @@ package com.yp2012g4.vision.test;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -30,7 +31,7 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testSimpleDial() {
+  @MediumTest public void testSimpleDial() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     solo.clickOnView(solo.getView(R.id.digit1));
     solo.clickOnView(solo.getView(R.id.digit2));
@@ -39,7 +40,7 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "1234");
   }
   
-  public void testDialMoreThanMaxNumbers() {
+  @MediumTest public void testDialMoreThanMaxNumbers() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     for (int i = 0; i < DialScreen.MAX_LENGTH; ++i)
       solo.clickOnView(solo.getView(R.id.digit1));
@@ -48,19 +49,19 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "11111111111111111112");
   }
   
-  public void testDialNoNumber() {
+  @MediumTest public void testDialNoNumber() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     solo.clickOnView(solo.getView(R.id.dialer_dial_button));
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
   }
   
-  public void testSMSNoNumber() {
+  @MediumTest public void testSMSNoNumber() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     solo.clickOnView(solo.getView(R.id.dialer_sms_button));
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
   }
   
-  public void testUndo() {
+  @MediumTest public void testUndo() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     solo.clickOnView(solo.getView(R.id.digit1));
     solo.clickOnView(solo.getView(R.id.digit2));
@@ -70,7 +71,7 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "134");
   }
   
-  public void testReset() {
+  @MediumTest public void testReset() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     solo.clickOnView(solo.getView(R.id.digit1));
     solo.clickOnView(solo.getView(R.id.digit2));
@@ -80,19 +81,19 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "4");
   }
   
-  public static void testGetViewId() {
+  @MediumTest public static void testGetViewId() {
     VisionActivity screen = new DialScreen();
     assertEquals(screen.getViewId(), R.id.DialScreen);
   }
   
-  public void testOnShowPress() {
+  @MediumTest public void testOnShowPress() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     View v = solo.getView(R.id.digit9);
     TouchUtils.longClickView(this, v);
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "9");
   }
   
-  public void testMove() {
+  @MediumTest public void testMove() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     View v = solo.getView(R.id.digit3);
     int left1 = VisionGestureDetector.getRelativeLeft(v);

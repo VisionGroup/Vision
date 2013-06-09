@@ -53,8 +53,8 @@ public class SetClockActivity extends VisionActivity {
   private void updateDisplayByType() {
     cal = Calendar.getInstance();
     cal.setTimeInMillis(System.currentTimeMillis());
-    tbNum = (TalkingButton) findViewById(R.id.number);
-    final TalkingButton tbTitle = (TalkingButton) findViewById(R.id.textView1);
+    tbNum = getTalkingButton(R.id.number);
+    final TalkingButton tbTitle = getTalkingButton(R.id.textView1);
     int number;
     String t;
     if (type == HOUR_CODE) {
@@ -114,7 +114,7 @@ public class SetClockActivity extends VisionActivity {
     TTS.waitUntilFinishTalking();
     if (!hasFocus)
       return;
-    final TalkingButton tbTitle = (TalkingButton) findViewById(R.id.textView1);
+    final TalkingButton tbTitle = getTalkingButton(R.id.textView1);
     speakOutSync(tbTitle.getText().toString());
   }
 }

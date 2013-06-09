@@ -2,13 +2,17 @@ package com.yp2012g4.vision.apps.telephony;
 
 import android.content.Context;
 import android.content.Intent;
+import android.gesture.GestureOverlayView;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 import com.yp2012g4.vision.tools.AbstractService;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
+import com.yp2012g4.vision.tools.TTS;
 
 public class CallScreenService extends AbstractService {
   private static final String TAG = "vision:CallScreenService";
@@ -53,27 +58,13 @@ public class CallScreenService extends AbstractService {
   }
   
   private void endCall() {
-    Toast.makeText(getBaseContext(), "onDestroy", Toast.LENGTH_LONG).show();
-    if (mView != null) {
-      ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mView);
-      mView = null;
+    if (csView != null) {
+      ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(csView);
+      csView = null;
     }
+    new CallUtils(this).restoreRinger();
   }
   
-//  private static void processCall(final Context c, final String phoneNumber) {
-//    try {
-//      Log.d(TAG, "Creating CAllActivity intent");
-//      final Intent i = new Intent(c, IncomingCallActivity.class);
-//      i.putExtra(CallUtils.RANG_KEY, true);
-//      i.putExtra(CallUtils.NUMBER_KEY, phoneNumber);
-//      i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//      Log.d(TAG, "Starting CAllActivity");
-//      Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
-//      c.startActivity(i);
-//    } catch (final Exception e) {
-//      Log.e(TAG, "error starting CAllActivity", e);
-//    }
-//  }
   @Override public void onStartService() {
     Log.d(TAG, "Service Started.");
   }
@@ -82,50 +73,106 @@ public class CallScreenService extends AbstractService {
     Log.d(TAG, "Service Stopped.");
   }
   
-  HUDView mView;
+  CallScreenView csView;
+  GestureOverlayView gV;
   
   @Override public IBinder onBind(final Intent intent) {
-    return null;
+    return super.onBind(intent);
   }
   
   private void processCall(final Context c, final String phoneNumber) {
     Toast.makeText(getBaseContext(), "onCreate", Toast.LENGTH_LONG).show();
-    mView = new HUDView(this);
-    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
-        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY, 0,
-//            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-//                    | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-        PixelFormat.TRANSLUCENT);
+    csView = new CallScreenView(this);
+    gV = new GestureOverlayView(c);
+    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_PRIORITY_PHONE,
+        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+            | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_FULLSCREEN, PixelFormat.TRANSLUCENT);
     params.gravity = Gravity.RIGHT | Gravity.TOP;
     params.setTitle("Load Average");
     final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-    wm.addView(mView, params);
+    csView.setNumber(phoneNumber);
+    wm.addView(csView, params);
   }
 }
 
-class HUDView extends ViewGroup {
+class CallScreenView extends ViewGroup implements OnGestureListener {
   private final Paint mLoadPaint;
+  private String _number = "";
+  private static final String TAG = "vision:CallScreenView";
+  private final GestureDetector gd = new GestureDetector(this);
+  private final CallUtils _cu;
+  private final Context _c;
   
-  public HUDView(final Context context) {
-    super(context);
-    Toast.makeText(getContext(), "HUDView", Toast.LENGTH_LONG).show();
+  public CallScreenView(final Context c) {
+    super(c);
     mLoadPaint = new Paint();
     mLoadPaint.setAntiAlias(true);
-    mLoadPaint.setTextSize(10);
+    mLoadPaint.setTextSize(25);
     mLoadPaint.setARGB(255, 255, 0, 0);
+    _cu = new CallUtils(c);
+    _c = c;
+//    final LayoutInflater vi = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//    final View v = vi.inflate(R.layout.activity_incoming_call, null);
   }
   
   @Override protected void onDraw(final Canvas canvas) {
     super.onDraw(canvas);
-    canvas.drawText("Hello World", 5, 15, mLoadPaint);
+    canvas.drawColor(Color.BLACK);
+    canvas.drawText(_number, 20, 20, mLoadPaint);
+    TTS.speak(_number);
+  }
+  
+  public void setNumber(final String number) {
+    _number = number;
   }
   
   @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
   }
   
   @Override public boolean onTouchEvent(final MotionEvent event) {
-    // return super.onTouchEvent(event);
-    Toast.makeText(getContext(), "onTouchEvent", Toast.LENGTH_LONG).show();
+    _cu.silenceRinger();
+    Log.d(TAG, "onTOuch");
+    return gd.onTouchEvent(event);// true;
+  }
+  
+  @Override public boolean onDown(final MotionEvent e) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+  
+  public static final long VIBRATE_DURATION = 150;
+  public static final int SWIPE_THRESHOLD = 100;
+  public static final int SWIPE_VELOCITY_THRESHOLD = 100;
+  
+  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
+    Log.d(TAG, "OnFling"); // TODO: generify and move somewhere else onFling
+    final float diffX = e2.getX() - e1.getX();
+    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
+      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD)
+        if (diffX > 0)
+          CallUtils.answerCall(_c);
+        else
+          _cu.endCall();
+//TODO: Add speaker phone activation
     return true;
+  }
+  
+  @Override public void onLongPress(final MotionEvent e) {
+    // TODO Auto-generated method stub
+  }
+  
+  @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+  
+  @Override public void onShowPress(final MotionEvent e) {
+    // TODO Auto-generated method stub
+  }
+  
+  @Override public boolean onSingleTapUp(final MotionEvent e) {
+    TTS.speak(_number);
+    return false;
   }
 }

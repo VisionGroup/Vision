@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.main.MainActivity;
@@ -139,6 +140,17 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return (TalkingButton) findViewById(id);
   }
   
+  /**
+   * Return an Edit Text by it's id.
+   * 
+   * @param id
+   *          The id of the EditText
+   * @return The EditText
+   */
+  public EditText getEditText(final int id) {
+    return (EditText) findViewById(id);
+  }
+  
   @Override protected void onNewIntent(final Intent intent) {
     super.onNewIntent(intent);
     setIntent(intent);
@@ -153,20 +165,21 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY());
   }
   
-  public static boolean isNavigationManuButton(final int buttonId) {
-    if (buttonId == R.id.back_button)
-      return true;
-    if (buttonId == R.id.tool_tip_button)
-      return true;
-    if (buttonId == R.id.current_menu_button)
-      return true;
-    if (buttonId == R.id.home_button)
-      return true;
-    return false;
+  public static boolean isNavigationMenuButton(final int buttonId) {
+    switch (buttonId) {
+      case R.id.back_button:
+      case R.id.tool_tip_button:
+      case R.id.current_menu_button:
+      case R.id.home_button:
+        return true;
+      default:
+        return false;
+    }
   }
   
-  public static void setIntentFlags(final Intent intent) {
+  public static Intent setIntentFlags(final Intent intent) {
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    return intent;
   }
 }

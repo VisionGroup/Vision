@@ -25,7 +25,7 @@ public class SendSMSActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_send_sms);
-    init(0, getString(R.string.SendSms_whereami), getString(R.string.SendSms_whereami));
+    init(0, getString(R.string.SendSms_whereami), getString(R.string.SendSms_info));
     final Bundle extras = getIntent().getExtras();
     try {
       number = extras.getString(CallUtils.NUMBER_KEY);
@@ -40,10 +40,10 @@ public class SendSMSActivity extends VisionActivity {
    * cursor to message text view
    */
   private void updatePhoneNumber() {
-    EditText _et = (EditText) findViewById(R.id.phoneNumber);
+    EditText _et = getEditText(R.id.phoneNumber);
     _et.setText(number);
     if (!number.equals("")) {
-      _et = (EditText) findViewById(R.id.message);
+      _et = getEditText(R.id.message);
       Selection.setSelection(_et.getText(), _et.getSelectionStart());
       _et.requestFocus();
     }
@@ -57,11 +57,11 @@ public class SendSMSActivity extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     final View _editText = getButtonByMode();
-    EditText _et = (EditText) findViewById(R.id.phoneNumber);
+    EditText _et = getEditText(R.id.phoneNumber);
     final CharSequence _s;
     switch (_editText.getId()) {
       case R.id.message:
-        _et = (EditText) findViewById(R.id.message);
+        _et = getEditText(R.id.message);
         _s = getText(_et, MESSAGE);
         moveCursor(_et, _s);
         break;
@@ -72,7 +72,7 @@ public class SendSMSActivity extends VisionActivity {
       case R.id.sendMessageButton:
         final CharSequence num = _et.getText();
         if (num.length() > 0) {
-          _et = (EditText) findViewById(R.id.message);
+          _et = getEditText(R.id.message);
           SmsManager.getDefault().sendTextMessage(num.toString(), null, _et.getText().toString(), null, null);
           speakOutSync(getString(R.string.message_has_been_sent));
           finish();

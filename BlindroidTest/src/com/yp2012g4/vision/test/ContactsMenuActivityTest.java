@@ -2,6 +2,7 @@ package com.yp2012g4.vision.test;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.Suppress;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -27,7 +28,7 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
   /**
    * Basic test to test liveliness of the list with contacts from Android
    */
-  public void testAllContactsAlive() {
+  @MediumTest public void testAllContactsAlive() {
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.quickDialButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
@@ -40,7 +41,7 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
   /**
    * Basic test to test liveliness of the list with contacts from Android
    */
-  @Suppress public void testFavoritsContactsAlive() {
+  @MediumTest @Suppress public void testFavoritsContactsAlive() {
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.contactsListButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
@@ -53,7 +54,7 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
   /**
    * Basic test to test liveliness of Dial screen.
    */
-  public void testDialerAlive() {
+  @MediumTest public void testDialerAlive() {
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.dialerButton));
     solo.assertCurrentActivity("wrong activity", DialScreen.class);

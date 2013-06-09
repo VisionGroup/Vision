@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.view.View;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -33,11 +34,11 @@ public class SOSActivityTest extends ActivityInstrumentationTestCase2<SOSActivit
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testSOSButton() {
+  @MediumTest public void testSOSButton() {
     solo.assertCurrentActivity("Check on first activity", SOSActivity.class);
     final TalkingImageButton sos = (TalkingImageButton) activity.findViewById(R.id.Send_SOS_Message);
     assertTrue(sos.isShown());
-    for (final Entry<View, Rect> entry : ((VisionGestureDetector) activity).getView_to_rect().entrySet())
+    for (final Entry<View, Rect> entry : ((VisionGestureDetector) activity).getView_to_rect())
       if (entry.getKey().equals(sos))
         assertEquals(entry.getKey(), sos);
       else

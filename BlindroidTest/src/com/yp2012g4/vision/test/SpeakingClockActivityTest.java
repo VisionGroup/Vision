@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
@@ -28,7 +29,7 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testCheckDate() {
+  @MediumTest public void testCheckDate() {
     solo.assertCurrentActivity("wrong activity", SpeakingClockActivity.class);
     Calendar cal = Calendar.getInstance();
     String date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(cal.getTime());
@@ -38,7 +39,7 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
     // TODO check if the time and date speaking is OK
   }
   
-  public void testCheckTime() {
+  @MediumTest public void testCheckTime() {
     solo.assertCurrentActivity("wrong activity", SpeakingClockActivity.class);
     Calendar cal = Calendar.getInstance();
     String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";

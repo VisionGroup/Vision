@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -36,19 +37,19 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testNumOfButtons() {
+  @MediumTest public void testNumOfButtons() {
     solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
     final ArrayList<Button> btnList = solo.getCurrentButtons();
     assertEquals(8, btnList.size());
   }
   
-  public void testNumOfImageButtons() {
+  @MediumTest public void testNumOfImageButtons() {
     solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
     final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     assertEquals(4, btnList.size());
   }
   
-  public void testClickOnBackButton() {
+  @MediumTest public void testClickOnBackButton() {
     solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
     final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     final TalkingImageButton btn = (TalkingImageButton) btnList.get(0);
@@ -57,7 +58,7 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
     solo.assertCurrentActivity("Back to main screen", QuickSMSActivity.class);
   }
   
-  public void testSMSText() {
+  @MediumTest public void testSMSText() {
     final String[] string = { activity.getString(R.string.SMS_number_1), "", activity.getString(R.string.SMS_number_3), "",
         activity.getString(R.string.SMS_number_5), "", activity.getString(R.string.SMS_number_7), "",
         activity.getString(R.string.SMS_number_9) };
@@ -69,7 +70,7 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
     }
   }
   
-  public void testToNumberString() {
+  @MediumTest public void testToNumberString() {
     final Intent i = new Intent(activity, QuickSMSActivity.class);
     i.putExtra(CallUtils.NUMBER_KEY, "0578135813");
     activity.startActivity(i);

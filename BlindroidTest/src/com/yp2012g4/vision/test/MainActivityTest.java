@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.Suppress;
 import android.widget.ImageButton;
 
@@ -37,59 +38,59 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testNumOfButtons() {
+  @MediumTest public void testNumOfButtons() {
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     assertEquals(12, btnList.size());
   }
   
-  public void testSOS() {
+  @MediumTest public void testSOS() {
     checkBackAndHome(com.yp2012g4.vision.R.id.sos_button, SOSActivity.class);
   }
   
-  public void testSpeakingClock() {
+  @MediumTest public void testSpeakingClock() {
     checkBackAndHome(com.yp2012g4.vision.R.id.time_button, SpeakingClockActivity.class);
   }
   
-  public void testWhereAmI() {
+  @MediumTest public void testWhereAmI() {
     checkBackAndHome(com.yp2012g4.vision.R.id.where_am_i_button, WhereAmIActivity.class);
   }
   
-  public void testPhoneStatus() {
+  @MediumTest public void testPhoneStatus() {
     checkBackAndHome(com.yp2012g4.vision.R.id.phone_status_button, PhoneStatusActivity.class);
   }
   
-  public void testAlarm() {
+  @MediumTest public void testAlarm() {
     checkBackAndHome(com.yp2012g4.vision.R.id.alarm_clock_button, AlarmActivity.class);
   }
   
-  public void testContacts() {
+  @MediumTest public void testContacts() {
     checkBackAndHome(com.yp2012g4.vision.R.id.contacts_button, ContactsMenuActivity.class);
   }
   
-  public void testSettings() {
+  @MediumTest public void testSettings() {
     checkBackAndHome(com.yp2012g4.vision.R.id.setting_button, DisplaySettingsActivity.class);
   }
   
-  @Suppress public void testReadSms() {
+  @MediumTest @Suppress public void testReadSms() {
     checkBackAndHome(com.yp2012g4.vision.R.id.read_sms_button, ReadSmsActivity.class);
   }
   
   /**
    * 
    */
-  public void checkBackAndHome(int id, Class<?> c) {
+  @MediumTest public void checkBackAndHome(int id, Class<?> c) {
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
     solo.clickOnView(tb);
     solo.waitForActivity(c.getName(), 2000);
-    //solo.assertCurrentActivity("wrong activity", c);
+    // solo.assertCurrentActivity("wrong activity", c);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     // Test Home button
     solo.clickOnView(tb);
-    //solo.assertCurrentActivity("wrong activity", c);
+    // solo.assertCurrentActivity("wrong activity", c);
     solo.waitForActivity(c.getName(), 2000);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.home_button));
     solo.assertCurrentActivity("wrong activity", MainActivity.class);

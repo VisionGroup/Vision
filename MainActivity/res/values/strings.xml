@@ -222,7 +222,7 @@
     <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
     <string name="regular_buttons_mode">Switched to regular buttons mode </string>
     <string name="calculator">Calculator</string>
-    <string name="phone_call_service_button"> vision phone call service </string>
+    <string name="phone_call_service_button"> vision call service </string>
     <string name="disable_call_service">disabled vision phone call service</string>
     <string name="enable_call_service">enabled vision phone call service</string>
     <string name="mute_sound">Mute or Activate Sound</string>

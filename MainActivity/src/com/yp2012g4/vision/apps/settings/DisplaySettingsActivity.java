@@ -30,7 +30,6 @@ public class DisplaySettingsActivity extends VisionActivity {
   private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
   private static final String DISABLE_PREF = "disable";
   private static final String ENABLE_PREF = "enable";
-  private static boolean firstTime = true;
   /**
    * get the activity's main view ID
    * 
@@ -51,7 +50,6 @@ public class DisplaySettingsActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    Log.i(TAG, "display setting");
     Intent intent;
     final View button = getButtonByMode();
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -108,14 +106,14 @@ public class DisplaySettingsActivity extends VisionActivity {
   }
   
   private void pressedButtonCallEnable(final SharedPreferences sp) {
-    final String buttonMode = sp.getString(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF);
-    final boolean enable = !buttonMode.equals(ENABLE_PREF);
+    final boolean enable = sp.getBoolean(VISION_CALL_ENABLE_ENTRY, true);
+    // final boolean enable = !buttonMode.equals(ENABLE_PREF);
     if (enable) {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, DISABLE_PREF, this);
-      speakOutAsync(R.string.disable_call_service);
-    } else {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, ENABLE_PREF, this);
+      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, false, this);
       speakOutAsync(R.string.enable_call_service);
+    } else {
+      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, true, this);
+      speakOutAsync(R.string.disable_call_service);
     }
     changeEnableState(IncomingCallReceiver.class, enable);
     changeEnableState(OutgoingCallReceiver.class, enable);
@@ -133,24 +131,11 @@ public class DisplaySettingsActivity extends VisionActivity {
    */
   private void pressedLocalSelectButton(final SharedPreferences sp) {
     _config = new Configuration();
-    final Locale l = Locale.getDefault();// defaultLang = "HEBREW";
     // TODO Try to check availability of TTS engines
-    final String lang = sp.getString("LANGUAGE", l.getLanguage());
-    if (!TTS.isLanguageAvailable(new Locale(lang)) || firstTime) { // TODO:
-                                                                   // Remove
-                                                                   // first time
-                                                                   // when
-                                                                   // Initialization
-                                                                   // is correct
-      firstTime = false;
-      VisionApplication.savePrefs("LANGUAGE", Language.getDefaultLocale().getLanguage(), this);
-      Locale.setDefault(Language.getDefaultLocale());
-      _config.locale = Language.getDefaultLocale();
-      Log.d(TAG, "changed to locale: " + Language.getDefaultLocale().getLanguage());
-    }
+    final String lang = sp.getString("LANGUAGE", Language.getDefaultLocale().getLanguage());
     Log.d(TAG, "Current lang: " + lang);
-    final int currentLIndex = Language.availableLocals().indexOf(new Locale(lang));
-    final Locale nextLocale = Language.availableLocals().get((currentLIndex + 1) % Language.availableLocals().size());
+    final Locale nextLocale = Language.availableLocals().get(
+        (Language.availableLocals().indexOf(new Locale(lang)) + 1) % Language.availableLocals().size());
     Log.d(TAG, "Next lang: " + nextLocale.getLanguage());
     if (TTS.isLanguageAvailable(nextLocale)) {
       VisionApplication.savePrefs("LANGUAGE", nextLocale.getLanguage(), this);

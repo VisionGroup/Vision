@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
@@ -35,7 +36,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   /**
    * Test the Contacts activity functionality
    */
-  public void testContactActivity() {
+  @MediumTest public void testContactActivity() {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     // check intent
     final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
@@ -84,7 +85,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   /**
    * Test contact manager
    */
-  public void testManager() {
+  @MediumTest public void testManager() {
     final ContactManager cm = new ContactManager(activity.getApplicationContext());
     // should not contain empty contacts or phone numbers.
     cm.getAllContacts();

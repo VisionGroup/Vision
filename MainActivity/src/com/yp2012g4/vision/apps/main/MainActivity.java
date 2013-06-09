@@ -25,6 +25,7 @@ import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.SmsManager;
+import com.yp2012g4.vision.tools.CallService;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -45,7 +46,14 @@ public class MainActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
+    programSetup();
+    setContentView(R.layout.activity_main);
+    init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
+  }
+  
+  private void programSetup() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+<<<<<<< HEAD
     /*
      * _myLocale = Locale.getDefault(); // get xml strings file String
      * defaultLang = "HEBREW"; if (_myLocale.equals(Locale.US)) defaultLang =
@@ -59,11 +67,20 @@ public class MainActivity extends VisionActivity {
     _config = new Configuration();
     _config.locale = locale;
     TTS.setLanguage(locale);
+=======
+    final Locale l = Locale.US;// new Locale(sp.getString("LANGUAGE",
+                               // Language.getDefaultLocale().getISO3Language()));
+    Locale.setDefault(l);
+    Log.d(TAG, "Language: " + l.getLanguage());
+    final int ret = TTS.setLanguage(l);
+    Log.d(TAG, "SetLanguage result=" + ret);
+    _config = new Configuration();
+    _config.locale = l;
+>>>>>>> 119294750ed9fc602d454e26dbd6d5bec102d34f
     getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
-    setContentView(R.layout.activity_main);
     final PhoneNotifications pn = new PhoneNotifications(this);
-    init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
     pn.startSignalLisener();
+    CallService.initialise(getApplicationContext());
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {

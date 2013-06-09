@@ -142,8 +142,6 @@
         </service>
         <service android:name="com.yp2012g4.vision.apps.telephony.CallScreenService" >
         </service>
-        <!-- <service android:name="com.yp2012g4.vision.tools.TTSService" >
-        </service> -->
 
         <activity
             android:name="com.yp2012g4.vision.apps.alarm.SetClockActivity"
@@ -207,6 +205,7 @@
             android:name="com.yp2012g4.vision.apps.contacts.ContactsActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_contacts"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -30,13 +31,13 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testNumOfButtons() {
+  @MediumTest public void testNumOfButtons() {
     solo.assertCurrentActivity("Check on first activity", ColorSettingsActivity.class);
     ArrayList<Button> btnList = solo.getCurrentButtons();
     assertEquals(7, btnList.size());
   }
   
-  public void testNumOfImageButtons() {
+  @MediumTest public void testNumOfImageButtons() {
     solo.assertCurrentActivity("Check on first activity", ColorSettingsActivity.class);
     ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     assertEquals(4, btnList.size());

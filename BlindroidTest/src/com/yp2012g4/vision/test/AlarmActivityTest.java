@@ -7,6 +7,8 @@ package com.yp2012g4.vision.test;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.test.suitebuilder.annotation.LargeTest;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.apps.alarm.AlarmActivity;
@@ -26,14 +28,14 @@ public class AlarmActivityTest extends ActivityInstrumentationTestCase2<AlarmAct
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testSettingAlarm() {
+  @MediumTest public void testSettingAlarm() {
     setAlarmToOneMin();
     solo.waitForActivity("AlarmPopup", 60000);
     solo.clickOnScreen(50, 50);
     solo.waitForActivity("AlarmActivity", 1000);
   }
   
-  public void testSnooze() {
+  @LargeTest public void testSnooze() {
     setAlarmToOneMin();
     solo.waitForActivity("AlarmPopup", 60000);
     solo.waitForActivity("AlarmActivity", 30000);
@@ -42,7 +44,7 @@ public class AlarmActivityTest extends ActivityInstrumentationTestCase2<AlarmAct
     solo.waitForActivity("AlarmActivity", 1000);
   }
   
-  public void testCancelAlarm() {
+  @LargeTest public void testCancelAlarm() {
     setAlarmToOneMin();
     solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.stopAlarm));
     assertFalse(solo.waitForActivity("AlarmPopup", 60000));

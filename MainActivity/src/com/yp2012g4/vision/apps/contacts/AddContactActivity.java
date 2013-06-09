@@ -19,6 +19,8 @@ import com.yp2012g4.vision.tools.VisionActivity;
  * @version 2.0
  */
 public class AddContactActivity extends VisionActivity {
+  public static final String ADD_FLAG = "ADD";
+  public static final String RESULT_EXTRA = "RESULT";
   private static final int TEXT = 0;
   private static final int PHONE = 1;
   String contactDisplayName = null;
@@ -91,26 +93,28 @@ public class AddContactActivity extends VisionActivity {
    * @param _etName
    */
   private void confirmationButtonPressed(final EditText _etPhone, final EditText _etName) {
-    final Intent returnIntent = new Intent();
     final CharSequence num = _etPhone.getText();
     final CharSequence name = getText(_etName, TEXT);
     if (num.length() <= 0 || name.equals(getString(R.string.enter_a_name))) {
       speakOutSync(getString(R.string.required_fields));
       return;
     }
+    final Intent returnIntent = new Intent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
     if (!createNewContact) {
       ContactManager.deleteContact(contactPhone, contactDisplayName, this);
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
       speakOutSync(getString(R.string.edit_contact_success));
-      setResult(RESULT_OK, returnIntent);
+      returnIntent.putExtra(RESULT_EXTRA, RESULT_OK);
     } else if (ContactManager.getContactFromName(name.toString(), this) == null) {
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
       speakOutSync(getString(R.string.add_contact_success));
-      setResult(RESULT_OK, returnIntent);
+      returnIntent.putExtra(RESULT_EXTRA, RESULT_OK);
     } else {
       speakOutSync(getString(R.string.contact_exist));
-      setResult(RESULT_CANCELED, returnIntent);
+      returnIntent.putExtra(RESULT_EXTRA, RESULT_CANCELED);
     }
+    setIntentFlags(returnIntent);
+    startActivity(returnIntent);
     finish();
   }
   

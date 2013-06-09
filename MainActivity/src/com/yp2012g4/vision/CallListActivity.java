@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.lists.CallAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.CallsManager;
@@ -25,8 +25,6 @@ public class CallListActivity extends VisionActivity {
   private static String TAG = "vision:CallListActivity";
   private CallAdapter _ca;
   
-//  private static final int SWIPE_THRESHOLD = 100;
-//  private static final int SWIPE_VELOCITY_THRESHOLD = 100;
   @Override protected void onCreate(final Bundle b) {
     super.onCreate(b);
     setContentView(R.layout.activity_call_list);
@@ -41,21 +39,23 @@ public class CallListActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
+    Intent intent;
     final CallType currCall = getCurrentCall();
     Log.d(TAG, currCall.getName().toString() + " " + currCall.getNumber() + " " + currCall.getDate().toString());
     switch (getButtonByMode().getId()) {
+      case R.id.calllist_send_quick_sms:
+        intent = new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.getNumber());
+        setIntentFlags(intent);
+        startActivity(intent);
+        break;
       case R.id.calllist_send_sms:
-        startActivity(new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY,
-            currCall.getNumber()));
+        intent = new Intent(getApplicationContext(), SendSMSActivity.class);
+        setIntentFlags(intent);
+        intent.putExtra(CallUtils.NUMBER_KEY, currCall.getNumber());
+        startActivity(intent);
         break;
       case R.id.calllist_call_sender:
         startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.getNumber())));
-        break;
-      case R.id.calllist_remove:
-        final Intent intent = new Intent(this, DeleteConfirmation.class);
-        intent.putExtra("activity", "com.yp2012g4.vision.CallListActivity");
-        startActivity(intent);
-        // removeFromCallList(currCall);
         break;
       default:
         break;

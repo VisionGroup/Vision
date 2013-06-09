@@ -185,7 +185,7 @@ public class TTS implements OnInitListener {
       _init = true;
       Log.d(TAG, "TTS init completed succesfully.");
       setQueueMode(TextToSpeech.QUEUE_FLUSH);
-      setLanguage(Locale.US);
+      // setLanguage(Locale.US);
     }
   }
   

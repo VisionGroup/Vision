@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -82,12 +83,10 @@ public class ContactsActivity extends VisionActivity {
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.delete_contact:
-        if (ContactManager.deleteContact(ct.getPhone(), ct.getContactName(), this)) {
-          selectCorrespondingContactsList();
-          setContact();
-          speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
-        } else
-          speakOutAsync(getString(R.string.delete_contact_failed));
+        intent = new Intent(this, DeleteConfirmation.class);
+        intent.putExtra(DeleteConfirmation.ACTIVITY_EXTRA, this.getClass().getName());
+        setIntentFlags(intent);
+        startActivity(intent);
         break;
       default:
         break;
@@ -95,15 +94,33 @@ public class ContactsActivity extends VisionActivity {
     return false;
   }
   
-  /**
+  /* 
+  *//**
    * This will be called when the add contact is finished
    */
-  @Override protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == REQUEST_CODE) {
-      selectCorrespondingContactsList();
-      setContact();
-    }
+  /*
+   * @Override protected void onActivityResult(final int requestCode, final int
+   * resultCode, final Intent data) { super.onActivityResult(requestCode,
+   * resultCode, data); if (requestCode == REQUEST_CODE) {
+   * selectCorrespondingContactsList(); setContact(); } }
+   */
+  @Override protected void onNewIntent(final Intent intent) {
+    super.onNewIntent(intent);
+    final Bundle extras = getIntent().getExtras();
+    if (extras != null)
+      if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
+        final ContactType ct = contactManager.getContact(currentContact);
+        if (ContactManager.deleteContact(ct.getPhone(), ct.getContactName(), this)) {
+          selectCorrespondingContactsList();
+          setContact();
+          speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
+        } else
+          speakOutAsync(getString(R.string.delete_contact_failed));
+        vibrate(VIBRATE_DURATION);
+      } else if (extras.getString(ACTION_EXTRA).equals(AddContactActivity.ADD_FLAG)) {
+        selectCorrespondingContactsList();
+        setContact();
+      }
   }
   
   private void changeToPreviousContact() {

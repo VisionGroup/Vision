@@ -165,8 +165,9 @@ public abstract class VisionActivity extends VisionGestureDetector {
     }
   }
   
-  public static void setIntentFlags(final Intent intent) {
+  public static Intent setIntentFlags(final Intent intent) {
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    return intent;
   }
 }

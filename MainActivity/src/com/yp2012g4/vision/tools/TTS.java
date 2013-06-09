@@ -99,6 +99,18 @@ public class TTS implements OnInitListener {
   }
   
   /**
+   * speak the given string in default queueMode, then wait for the TTS to
+   * finish talking
+   * 
+   * @param s
+   *          string to speak.
+   */
+  public static void speakSync(final String s) {
+    speak(s, staticTTS._qm);
+    waitUntilFinishTalking();
+  }
+  
+  /**
    * speak the given string.
    * 
    * @param s

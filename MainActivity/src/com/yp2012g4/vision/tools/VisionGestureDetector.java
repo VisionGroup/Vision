@@ -6,6 +6,8 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Context;
@@ -243,8 +245,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    * 
    * @return
    */
-  public Map<View, Rect> getView_to_rect() {
-    return view_to_rect;
+  public Set<Entry<View, Rect>> getView_to_rect() {
+    return view_to_rect.entrySet();
   }
   
   /**

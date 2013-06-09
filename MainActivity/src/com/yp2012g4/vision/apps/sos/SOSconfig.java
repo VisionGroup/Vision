@@ -44,7 +44,7 @@ public class SOSconfig extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     if (e.getAction() == MotionEvent.ACTION_UP)
-      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet())
+      for (final Map.Entry<View, Rect> entry : getView_to_rect())
         if (checkIfButtonPressed(e, entry))
           speakOutAsync(textToRead(entry.getKey()));
     return true;

@@ -61,7 +61,6 @@ public class MainActivity extends VisionActivity {
     Log.d(TAG, "SetLanguage result=" + ret);
     _config = new Configuration();
     _config.locale = l;
->>>>>>> 119294750ed9fc602d454e26dbd6d5bec102d34f
     getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     final PhoneNotifications pn = new PhoneNotifications(this);
     pn.startSignalLisener();

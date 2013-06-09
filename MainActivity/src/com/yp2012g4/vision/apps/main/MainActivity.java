@@ -20,6 +20,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
@@ -53,8 +54,7 @@ public class MainActivity extends VisionActivity {
   
   private void programSetup() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    final Locale l = Locale.US;// new Locale(sp.getString("LANGUAGE",
-                               // Language.getDefaultLocale().getISO3Language()));
+    final Locale l = new Locale(sp.getString("LANGUAGE", Language.getDefaultLocale().getLanguage()));
     Locale.setDefault(l);
     Log.d(TAG, "Language: " + l.getLanguage());
     final int ret = TTS.setLanguage(l);

@@ -1,5 +1,7 @@
 package com.yp2012g4.vision.apps.telephony;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.AbstractService;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
@@ -103,6 +106,8 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   private final Context _c;
   private float w;
   private float h;
+  ContactManager _cm;
+  String _name;
   
   /********/
   @Override protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
@@ -124,8 +129,10 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
     mLoadPaint.setAntiAlias(true);
     mLoadPaint.setTextSize(VisionApplication.getTextSize());
     mLoadPaint.setColor(VisionApplication.getTextColor());
+    // mLoadPaint.setTextAlign(Align.RIGHT);
     _cu = new CallUtils(c);
     _c = c;
+    _cm = new ContactManager(_c);
 //    final LayoutInflater vi = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //    final View v = vi.inflate(R.layout.activity_incoming_call, null);
   }
@@ -135,12 +142,18 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
     // final SharedPreferences sp =
     // PreferenceManager.getDefaultSharedPreferences(_c.getApplicationContext());
     canvas.drawColor(VisionApplication.getBackgroundColor());
-    canvas.drawText(_number, getPaddingLeft(), getPaddingTop(), mLoadPaint);
-    TTS.speak(_number);
+    // TODO:: Find screen center, discard magic numbers
+    canvas.drawText(_number, 40, /* getHeight() / 2 */100 - VisionApplication.getTextSize(), mLoadPaint);
+    canvas.drawText(_name, 40, /* getHeight() / 2 */100 + VisionApplication.getTextSize(), mLoadPaint);
+    if (TTS.getLanguage() == Locale.US && !TTS.isPureEnglish(_name))
+      TTS.speak(_number);
+    else
+      TTS.speak(_name);
   }
   
   public void setNumber(final String number) {
     _number = number;
+    _name = _cm.getNameFromPhone(_number);
   }
   
   @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
@@ -188,7 +201,7 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
-    TTS.speak(_number);
+    TTS.speak(_name + " " + _number);
     return false;
   }
 }

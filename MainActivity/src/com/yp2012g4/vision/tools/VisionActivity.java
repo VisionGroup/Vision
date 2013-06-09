@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.main.MainActivity;
@@ -137,6 +138,17 @@ public abstract class VisionActivity extends VisionGestureDetector {
    */
   public TalkingButton getTalkingButton(final int id) {
     return (TalkingButton) findViewById(id);
+  }
+  
+  /**
+   * Return an Edit Text by it's id.
+   * 
+   * @param id
+   *          The id of the EditText
+   * @return The EditText
+   */
+  public EditText getEditText(final int id) {
+    return (EditText) findViewById(id);
   }
   
   @Override protected void onNewIntent(final Intent intent) {

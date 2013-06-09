@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.managers.ContactManager;
-import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -46,12 +45,11 @@ public class AddContactActivity extends VisionActivity {
   }
   
   private void fillFieldWithContact() {
-    final EditText _etPhone = (EditText) findViewById(R.id.phoneNumber);
-    final EditText _etName = (EditText) findViewById(R.id.contact_name);
+    final EditText _etPhone = getEditText(R.id.phoneNumber);
+    final EditText _etName = getEditText(R.id.contact_name);
     _etName.setText(contactDisplayName);
     moveCursor(_etName, contactDisplayName);
-    final ContactType ct = ContactManager.getContactFromName(contactDisplayName, this);
-    contactPhone = ct.getPhone();
+    contactPhone = ContactManager.getContactFromName(contactDisplayName, this).getPhone();
     _etPhone.setText(contactPhone);
     moveCursor(_etPhone, contactPhone);
   }
@@ -64,8 +62,8 @@ public class AddContactActivity extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     final View _editText = getButtonByMode();
-    final EditText _etPhone = (EditText) findViewById(R.id.phoneNumber);
-    final EditText _etName = (EditText) findViewById(R.id.contact_name);
+    final EditText _etPhone = getEditText(R.id.phoneNumber);
+    final EditText _etName = getEditText(R.id.contact_name);
     CharSequence _s;
     switch (_editText.getId()) {
       case R.id.contact_name:
@@ -96,25 +94,24 @@ public class AddContactActivity extends VisionActivity {
     final CharSequence num = _etPhone.getText();
     final CharSequence name = getText(_etName, TEXT);
     if (num.length() <= 0 || name.equals(getString(R.string.enter_a_name))) {
-      speakOutSync(getString(R.string.required_fields));
+      speakOutSync(R.string.required_fields);
       return;
     }
     final Intent returnIntent = new Intent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
     if (!createNewContact) {
       ContactManager.deleteContact(contactPhone, contactDisplayName, this);
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
-      speakOutSync(getString(R.string.edit_contact_success));
+      speakOutSync(R.string.edit_contact_success);
       returnIntent.putExtra(RESULT_EXTRA, RESULT_OK);
     } else if (ContactManager.getContactFromName(name.toString(), this) == null) {
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
-      speakOutSync(getString(R.string.add_contact_success));
+      speakOutSync(R.string.add_contact_success);
       returnIntent.putExtra(RESULT_EXTRA, RESULT_OK);
     } else {
-      speakOutSync(getString(R.string.contact_exist));
+      speakOutSync(R.string.contact_exist);
       returnIntent.putExtra(RESULT_EXTRA, RESULT_CANCELED);
     }
-    setIntentFlags(returnIntent);
-    startActivity(returnIntent);
+    startActivity(setIntentFlags(returnIntent));
     finish();
   }
   

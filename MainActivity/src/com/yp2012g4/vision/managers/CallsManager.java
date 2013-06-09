@@ -2,9 +2,11 @@ package com.yp2012g4.vision.managers;
 
 import java.util.ArrayList;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
+import android.provider.CallLog.Calls;
 
 /**
  * Call type container
@@ -14,21 +16,26 @@ import android.provider.CallLog;
  */
 public class CallsManager {
   private Cursor _cur = null;
+  private final Context _context;
   private static final String[] _projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+  
+  public CallsManager(final Context c) {
+    _context = c;
+  }
   
   /**
    * Get a list of all the calls with the date, name and phone number of each
    * 
    * @return list of all calls
    */
-  public static ArrayList<CallType> getAllCallsList(final Context c) {
+  public ArrayList<CallType> getAllCallsList() {
     Cursor cr;
     try {
-      cr = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
+      cr = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    return copyToList(c, cr, new ArrayList<CallType>());
+    return copyToList(_context, cr, new ArrayList<CallType>());
   }
   
   private static ArrayList<CallType> copyToList(final Context c, final Cursor cr, final ArrayList<CallType> al) {
@@ -43,14 +50,14 @@ public class CallsManager {
    * 
    * @return list of missed calls
    */
-  public static ArrayList<CallType> getMissedCallsList(final Context c) {
+  public ArrayList<CallType> getMissedCallsList() {
     Cursor cur;
     try {
-      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
+      cur = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    return copyToList(c, cur, new ArrayList<CallType>());
+    return copyToList(_context, cur, new ArrayList<CallType>());
   }
   
   /**
@@ -61,10 +68,23 @@ public class CallsManager {
    * @param ns
    *          - string of the phone number in the call log
    */
-  static public void UnmarkCallLFromMissedCallList(final Context c, final String ns) {
+  public void UnmarkCallLFromMissedCallList(final String phoneNumber, final String date) {
     try {
-      // c.getContentResolver().delete(CallLog.Calls.CONTENT_URI,
-      // CallLog.Calls.NUMBER + "=?", new String[] { ns });
+//      final ContentValues cv = new ContentValues();
+//      cv.put(CallLog.Calls.NEW, 0);
+//      _context.getContentResolver().update(CallLog.Calls.CONTENT_URI, cv, CallLog.Calls.NUMBER + "= " + phoneNumber, null);
+//       (CallLog.Calls.CONTENT_URI, CallLog.Calls.NUMBER + "=?", new String[] { ns });
+//       CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1"
+      final ContentValues values = new ContentValues();
+      values.put(Calls.NEW, 0);
+//      values.put(Calls.IS_READ, 1);
+      final StringBuilder where = new StringBuilder();
+      where.append(Calls.NEW);
+      where.append(" = 1 AND ");
+      where.append(Calls.TYPE);
+      where.append(" = ?");
+      _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
+          new String[] { Integer.toString(Calls.MISSED_TYPE) });
     } catch (final Exception e) {
       e.getMessage();
     }
@@ -80,14 +100,14 @@ public class CallsManager {
    *          how may call to get back
    * @return list of missed calls
    */
-  public CallType getLastOutgoingCall(final Context c) {
+  public CallType getLastOutgoingCall() {
     try {
-      _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
+      _cur = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
     } catch (final Exception e) {
       return null;
     }
     if (_cur.moveToNext())
-      return new CallType(c, _cur);
+      return new CallType(_context, _cur);
     return null;
   }
   
@@ -101,16 +121,16 @@ public class CallsManager {
    *          how may call to get back
    * @return list of missed calls
    */
-  public ArrayList<CallType> getNextMissedCallsList(final Context c, final int ns) {
+  public ArrayList<CallType> getNextMissedCallsList(final int ns) {
     try {
       if (_cur == null)
-        _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
+        _cur = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
     final ArrayList<CallType> $ = new ArrayList<CallType>();
     for (int i = 0; i < ns && _cur.moveToNext(); i++)
-      $.add(new CallType(c, _cur));
+      $.add(new CallType(_context, _cur));
     return $;
   }
   
@@ -119,10 +139,10 @@ public class CallsManager {
    * 
    * @return the missed calls number
    */
-  public static int getMissedCallsNum(final Context c) {
+  public int getMissedCallsNum() {
     Cursor $;
     try {
-      $ = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, missedCallWhere(), null, null);
+      $ = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return 0;
     }

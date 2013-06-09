@@ -12,7 +12,6 @@ import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
 import com.yp2012g4.vision.tools.CallUtils;
@@ -29,15 +28,17 @@ public class ContactsActivity extends VisionActivity {
   public static final String FAVORITS_CONTACTS = "favorits";
   public static final String ALL_CONTACTS = "all";
   public static final String LIST_TYPE = "list_type";
+  // TODO amit: 666 ???
   private static final int REQUEST_CODE = 666;
-  String listType = ALL_CONTACTS;
+  private String listType = ALL_CONTACTS;
   private ContactManager contactManager;
-  TalkingButton b;
+  // private TalkingButton b;
   private final int VIBRATE_TIME = 150;
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
   
+//  private final CallsManager callsManager = new CallsManager(this);
   @Override public int getViewId() {
     return R.id.ContactsActivity;
   }
@@ -56,7 +57,8 @@ public class ContactsActivity extends VisionActivity {
         setIntentFlags(intent);
         intent.setData(Uri.parse("tel:" + ct.getPhone()));
         startActivity(intent);
-        CallsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
+        // TODO
+        // callsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
         intent = new Intent(ContactsActivity.this, SendSMSActivity.class);

@@ -28,8 +28,6 @@ import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DisplaySettingsActivity extends VisionActivity {
   private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
-  private static final String DISABLE_PREF = "disable";
-  private static final String ENABLE_PREF = "enable";
   /**
    * get the activity's main view ID
    * 

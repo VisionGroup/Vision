@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -61,7 +61,7 @@ public class PhoneStatusActivity extends VisionActivity {
    * read the call log of the missed calls
    */
   public void getMissedCalls() {
-    final ArrayList<CallType> calls = CallManager.getMissedCallsList(this);
+    final ArrayList<CallType> calls = CallsManager.getMissedCallsList(this);
     String s = "";
     if (calls.isEmpty())
       s = getString(R.string.no_missed_calls);

@@ -29,8 +29,7 @@ public class CalcActivity extends VisionActivity {
   private boolean lhsDone = false;
   final private static double EPSILON = 0.00001; // epsilon for identifying a
   private static final String dotZero = ".0";
-  // zero FP
-  // number
+  // zero FP number
   private boolean isBadAction = false; // checks if a wrong operation has been
   // id of views
   @SuppressWarnings("boxing") final List<Integer> digits = Arrays.asList(R.id.digit0, R.id.digit1, R.id.digit2, R.id.digit3,
@@ -50,7 +49,7 @@ public class CalcActivity extends VisionActivity {
       // also the touched button text
       return isBadAction = false;
     if (e.getAction() == MotionEvent.ACTION_UP)
-      for (final Map.Entry<View, Rect> entry : getView_to_rect().entrySet()) {
+      for (final Map.Entry<View, Rect> entry : getView_to_rect()) {
         final View key = entry.getKey();
         if (checkIfButtonPressed(e, entry)) {
           speakOutAsync(textToRead(key));
@@ -74,7 +73,7 @@ public class CalcActivity extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
-    if (isNavigationManuButton(buttonId))
+    if (isNavigationMenuButton(buttonId))
       return;
     final CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
     // it's a digit
@@ -103,7 +102,7 @@ public class CalcActivity extends VisionActivity {
         default:
           break;
       }
-    vibrate(VIBRATE_DURATION);
+    vibrate();
     final TalkingButton resultButton = getTalkingButton(R.id.result);
     resultButton.setText(calculated_number.toCharArray(), 0, calculated_number.length());
     resultButton.setReadText(calculated_number);
@@ -113,15 +112,15 @@ public class CalcActivity extends VisionActivity {
    * @param buttonText
    */
   private void digitPressed(final CharSequence buttonText) {
-    if (equalsPressed)
+    if (equalsPressed) {
       badAction();
-    else {
-      if (sign == Sign.NO_SIGN)
-        lhs_number += buttonText;
-      else
-        rhs_number += buttonText;
-      calculated_number += buttonText;
+      return;
     }
+    if (sign == Sign.NO_SIGN)
+      lhs_number += buttonText;
+    else
+      rhs_number += buttonText;
+    calculated_number += buttonText;
   }
   
   private void badAction() {

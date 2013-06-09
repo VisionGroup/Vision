@@ -95,7 +95,21 @@ public class TTS implements OnInitListener {
    *          string to speak.
    */
   public static void speak(final String s) {
+    if (s == null)
+      return;
     speak(s, staticTTS._qm);
+  }
+  
+  /**
+   * speak the given string in default queueMode, then wait for the TTS to
+   * finish talking
+   * 
+   * @param s
+   *          string to speak.
+   */
+  public static void speakSync(final String s) {
+    speak(s, staticTTS._qm);
+    waitUntilFinishTalking();
   }
   
   /**
@@ -112,8 +126,7 @@ public class TTS implements OnInitListener {
       return;
     }
     Log.d(TAG, "speak : " + s);
-    if (null != s)
-      staticTTS._tts.speak(s, queueMode, null);
+    staticTTS._tts.speak(s, queueMode, null);
     final boolean debug = false;
     if (debug) {
       Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[3].getClassName() + ":"

@@ -12,7 +12,7 @@ import android.provider.CallLog;
  * @author Yaron
  * 
  */
-public class CallManager {
+public class CallsManager {
   private Cursor _cur = null;
   private static final String[] _projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
   
@@ -61,9 +61,10 @@ public class CallManager {
    * @param ns
    *          - string of the phone number in the call log
    */
-  static public void DeleteCallLogByNumber(final Context c, final String ns) {
+  static public void UnmarkCallLFromMissedCallList(final Context c, final String ns) {
     try {
-      c.getContentResolver().delete(CallLog.Calls.CONTENT_URI, CallLog.Calls.NUMBER + "=?", new String[] { ns });
+      // c.getContentResolver().delete(CallLog.Calls.CONTENT_URI,
+      // CallLog.Calls.NUMBER + "=?", new String[] { ns });
     } catch (final Exception e) {
       e.getMessage();
     }
@@ -102,14 +103,15 @@ public class CallManager {
    */
   public ArrayList<CallType> getNextMissedCallsList(final Context c, final int ns) {
     try {
-      _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
+      if (_cur == null)
+        _cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
-    final ArrayList<CallType> al = new ArrayList<CallType>();
+    final ArrayList<CallType> $ = new ArrayList<CallType>();
     for (int i = 0; i < ns && _cur.moveToNext(); i++)
-      al.add(new CallType(c, _cur));
-    return al;
+      $.add(new CallType(c, _cur));
+    return $;
   }
   
   /**
@@ -118,13 +120,13 @@ public class CallManager {
    * @return the missed calls number
    */
   public static int getMissedCallsNum(final Context c) {
-    Cursor cur;
+    Cursor $;
     try {
-      cur = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, missedCallWhere(), null, null);
+      $ = c.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, missedCallWhere(), null, null);
     } catch (final Exception e) {
       return 0;
     }
-    return cur.getCount();
+    return $.getCount();
   }
   
   /**

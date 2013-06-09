@@ -10,8 +10,8 @@ import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.lists.CallAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
-import com.yp2012g4.vision.managers.CallManager;
 import com.yp2012g4.vision.managers.CallType;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -32,7 +32,7 @@ public class CallListActivity extends VisionActivity {
     _tlv = (TalkingListView) findViewById(R.id.TalkingCallListView);
     _ca = new CallAdapter(this);
     _tlv.setAdapter(_ca);
-    // if (_tlv.isEmpty())
+//    if (_tlv.isEmpty())
 //      TTS.speak(getString(R.string.noCalls));
   }
   
@@ -82,13 +82,13 @@ public class CallListActivity extends VisionActivity {
    */
   private void removeFromCallList(final CallType currCall) {
     // first we remove the Call from the phone DB
-    CallManager.DeleteCallLogByNumber(this, currCall.getNumber());
+    CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
     // then we remove the Call from the displayed list
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);
     _tlv.prevPage();
     speakOutAsync(getString(R.string.delete_call));
-    vibrate(VIBRATE_DURATION);
+    vibrate();
   }
   
   public CallType getCurrentCall() {
@@ -102,14 +102,15 @@ public class CallListActivity extends VisionActivity {
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
     final float diffX = e2.getX() - e1.getX();
-    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
-      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
-        if (diffX > 0)
-          _tlv.prevPage();
-        else
-          _tlv.nextPage();
-        vibrate(VIBRATE_DURATION);
-      }
+    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()) && Math.abs(diffX) > SWIPE_THRESHOLD
+        && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
+      if (diffX > 0)
+        _tlv.prevPage();
+      else
+        _tlv.nextPage();
+      CallsManager.UnmarkCallLFromMissedCallList(this, ((CallType) _ca.getItem(_tlv.getPage())).getNumber());
+      vibrate(VIBRATE_DURATION);
+    }
     return super.onFling(e1, e2, f1, f2);
   }
 }

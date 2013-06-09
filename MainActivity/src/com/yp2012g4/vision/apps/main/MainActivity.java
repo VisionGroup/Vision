@@ -52,11 +52,13 @@ public class MainActivity extends VisionActivity {
      * "ENGLISH";
      */
     Locale locale = Locale.US;
-    if (sp.getString("LANGUAGE", "ENGLISH").equals("HEBREW"))
+    if (sp.getString("LANGUAGE", Locale.US.getLanguage()).equals(new Locale("iw").getLanguage()))
       locale = new Locale("iw");
+    Log.d(TAG, "Setting default local to: " + locale.getLanguage());
     Locale.setDefault(locale);
     _config = new Configuration();
     _config.locale = locale;
+    TTS.setLanguage(locale);
     getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     setContentView(R.layout.activity_main);
     final PhoneNotifications pn = new PhoneNotifications(this);
@@ -135,15 +137,12 @@ public class MainActivity extends VisionActivity {
     else if (signalS <= PhoneStatusActivity.signal_poor)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = CallManager.getMissedCallsNum(this);
-    if (numOfMissedCalls > 0) {
-      final Resources res = getResources();
-      final String missedCalls = res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls,
-          Integer.valueOf(numOfMissedCalls));
-      s = missedCalls;
-    }
+    final Resources res = getResources();
+    if (numOfMissedCalls > 0)
+      s += res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls, Integer.valueOf(numOfMissedCalls));
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
-      s += numOfSms + getString(R.string.new_sms);
+      s += res.getQuantityString(R.plurals.numberOfNewSMS, numOfSms, Integer.valueOf(numOfSms));
     TTS.speak(s, TextToSpeech.QUEUE_ADD);
     // speakOutAsync(s);
     // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but

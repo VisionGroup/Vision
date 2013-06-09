@@ -39,13 +39,23 @@ public class SpeakingClockActivity extends VisionActivity {
   /**
    * Parse the Calendar to a string to speak
    * 
+   * @param cal
+   *          the Calendar to parse string
    * @return string to speak
    */
-  public static String parseTime(final Resources res) {
-    final Calendar cal = Calendar.getInstance();
+  public static String parseTime(final Calendar cal, final Resources res) {
     final String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
     final int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
     return String.format(res.getString(R.string.hourFormat), Integer.valueOf(h), Integer.valueOf(cal.get(Calendar.MINUTE)), ampm);
+  }
+  
+  /**
+   * Parse the current time to a string;
+   * 
+   * @return string to speak
+   */
+  public static String parseTime(final Resources res) {
+    return parseTime(Calendar.getInstance(), res);
   }
   
   @Override public int getViewId() {

@@ -38,7 +38,7 @@ public class SOSActivityTest extends ActivityInstrumentationTestCase2<SOSActivit
     solo.assertCurrentActivity("Check on first activity", SOSActivity.class);
     final TalkingImageButton sos = (TalkingImageButton) activity.findViewById(R.id.Send_SOS_Message);
     assertTrue(sos.isShown());
-    for (final Entry<View, Rect> entry : ((VisionGestureDetector) activity).getView_to_rect().entrySet())
+    for (final Entry<View, Rect> entry : ((VisionGestureDetector) activity).getView_to_rect())
       if (entry.getKey().equals(sos))
         assertEquals(entry.getKey(), sos);
       else

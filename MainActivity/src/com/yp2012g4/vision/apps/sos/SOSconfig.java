@@ -120,7 +120,7 @@ public class SOSconfig extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sosconfig);
-    init(0, getString(R.string.sos_config_screen_whereami), getString(R.string.sos_config_screen_whereami));
+    init(0, getString(R.string.sos_config_screen_whereami), getString(R.string.sos_config_screen_info));
   }
   
   /**

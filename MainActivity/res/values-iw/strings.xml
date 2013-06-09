@@ -82,6 +82,16 @@
     <string name="settings_button">הגדרות</string>
     <string name="read_sms_button">קריאת SMS</string>
 
+	<plurals name="numberOfMissedCalls">
+        <item quantity="one">שיחה אחת שלא נענתה.</item>
+        <item quantity="other">%d שיחות שלא נענו</item>
+	</plurals>
+	
+    <plurals name="numberOfNewSMS">
+       	<item quantity="one">הודעת אס אמ אס חדשה.</item>
+       	<item quantity="other">%d הודעות אס אמ אס חדשות.</item>
+   	</plurals>
+    
     <!-- PhoneStatusActivity -->
     <string name="phoneStatus_whereami">תפריט מצב הטלפון</string>
     <string name="phoneStatus_help">ניתן לבחור באחת מהאפשרויות הבאות: 1) מצב הסוללה ומצב הטעינה. 2) מצב קליטת הטלפון. 3) רשימת שיחות שלא נענו</string>
@@ -249,6 +259,7 @@
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">מסך הגדרת איש קשר S O S</string>
+    <string name="sos_config_screen_info">בראש המסך נמצא המספר שנבחר. במרכז המסך נמצאים כפתורי החיוג. בתחתית המסך יש שלושה כפתורים, מימין לשמאל: אישור, ניקוי, מחיקת ספרה. </string>
     <string name="ok_button">הגדר איש קשר</string>
     <string name="sos_config_screen_whereami">מסך הגדרת איש קשר S O S</string>
     <string name="sos_number">sosNumber</string>
@@ -265,13 +276,14 @@
     <!-- VisionActivity -->
     <string name="this_is">זהו</string>
     <string name="previous_screen">מסך קודם</string>
-    <string name="back_button">חזרה</string>
+    <string name="back_button">חָזַרַה</string>
     <string name="home_button">בית</string>
     <string name="Tool_tip_button">מידע</string>
     <string name="current_menu_button">מסך נוכחי</string>
 
     <!-- CalcActivity -->
-    <string name="calc_screen">מסך מחשבון</string>
+    <string name="calc_screen">מסך מחשבון</string>  
+    <string name="calc_screen_info">כפתורי המחשבון נמצאים באמצע המסך. בראש המסך נמצא הביטוי החשבוני. בתחתית המסך נמצא הכפתור שווה..</string> 
     <string name="plus">+</string>
     <string name="ReadPlus">פלוס</string>
     <string name="minus">-</string>
@@ -300,6 +312,7 @@
 
     <!-- SendSmsActivity -->
     <string name="SendSms_whereami">מסך שליחת SMS</string>
+    <string name="SendSms_info">לחץ על מרכז המסך כדי להזין הודעה. לחץ על הכפתור בתחתית המסך על מנת לבצע שליחה. לחץ על החלק העליון של המסך על מנת לשנות מספר טלפון.</string>
     <string name="send_message">שלח הודעה</string>
     <string name="enter_a_phone_number">הכנס מספר טלפון</string>
     <string name="message_content">תוכן ההודעה</string>

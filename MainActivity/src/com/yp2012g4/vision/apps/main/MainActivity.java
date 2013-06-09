@@ -20,10 +20,11 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
-import com.yp2012g4.vision.managers.CallManager;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.tools.CallService;
 import com.yp2012g4.vision.tools.TTS;
@@ -53,8 +54,7 @@ public class MainActivity extends VisionActivity {
   
   private void programSetup() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    final Locale l = Locale.US;// new Locale(sp.getString("LANGUAGE",
-                               // Language.getDefaultLocale().getISO3Language()));
+    final Locale l = new Locale(sp.getString("LANGUAGE", Language.getDefaultLocale().getLanguage()));
     Locale.setDefault(l);
     Log.d(TAG, "Language: " + l.getLanguage());
     final int ret = TTS.setLanguage(l);
@@ -137,16 +137,13 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS <= PhoneStatusActivity.signal_poor)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
-    final int numOfMissedCalls = CallManager.getMissedCallsNum(this);
-    if (numOfMissedCalls > 0) {
-      final Resources res = getResources();
-      final String missedCalls = res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls,
-          Integer.valueOf(numOfMissedCalls));
-      s = missedCalls;
-    }
+    final int numOfMissedCalls = CallsManager.getMissedCallsNum(this);
+    final Resources res = getResources();
+    if (numOfMissedCalls > 0)
+      s += res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls, Integer.valueOf(numOfMissedCalls));
     final int numOfSms = SmsManager.getUnreadSMS(this);
     if (numOfSms > 0)
-      s += numOfSms + getString(R.string.new_sms);
+      s += res.getQuantityString(R.plurals.numberOfNewSMS, numOfSms, Integer.valueOf(numOfSms));
     TTS.speak(s, TextToSpeech.QUEUE_ADD);
     // speakOutAsync(s);
     // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but

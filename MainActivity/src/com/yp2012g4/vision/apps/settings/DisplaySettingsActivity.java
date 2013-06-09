@@ -140,10 +140,10 @@ public class DisplaySettingsActivity extends VisionActivity {
       Locale.setDefault(nextLocale);
       speakOutAsync(getString(R.string.switched_to) + " " + nextLocale.getLanguage());
       _config.locale = nextLocale;
+      getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
       Log.d(TAG, "changed to locale: " + nextLocale.getLanguage());
     } else
       speakOutAsync(getString(R.string.one_lang_avail));
-    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     // empty activity stack
     final Intent intent = new Intent(this, MainActivity.class);
     setIntentFlags(intent);

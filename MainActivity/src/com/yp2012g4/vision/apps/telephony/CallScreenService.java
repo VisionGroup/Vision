@@ -2,16 +2,13 @@ package com.yp2012g4.vision.apps.telephony;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.gesture.GestureOverlayView;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -19,7 +16,6 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.yp2012g4.vision.apps.settings.VisionApplication;
 import com.yp2012g4.vision.tools.AbstractService;
@@ -84,7 +80,6 @@ public class CallScreenService extends AbstractService {
   }
   
   private void processCall(final Context c, final String phoneNumber) {
-    Toast.makeText(getBaseContext(), "onCreate", Toast.LENGTH_LONG).show();
     csView = new CallScreenView(this);
     gV = new GestureOverlayView(c);
     final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -106,13 +101,29 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   private final GestureDetector gd = new GestureDetector(this);
   private final CallUtils _cu;
   private final Context _c;
+  private float w;
+  private float h;
   
+  /********/
+  @Override protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
+    super.onSizeChanged(w, h, oldw, oldh);
+    //
+    // Set dimensions for text, pie chart, etc
+    //
+    // Account for padding
+    final float xpad = getPaddingLeft() + getPaddingRight();
+    final float ypad = getPaddingTop() + getPaddingBottom();
+    this.w = w - xpad;
+    this.h = h - ypad;
+  }
+  
+  /********/
   public CallScreenView(final Context c) {
     super(c);
     mLoadPaint = new Paint();
     mLoadPaint.setAntiAlias(true);
-    mLoadPaint.setTextSize(25);
-    mLoadPaint.setColor(Color.parseColor(VisionApplication.getTextColor()));
+    mLoadPaint.setTextSize(VisionApplication.getTextSize());
+    mLoadPaint.setColor(VisionApplication.getTextColor());
     _cu = new CallUtils(c);
     _c = c;
 //    final LayoutInflater vi = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -121,9 +132,10 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   
   @Override protected void onDraw(final Canvas canvas) {
     super.onDraw(canvas);
-    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(_c.getApplicationContext());
-    canvas.drawColor(Color.parseColor(VisionApplication.getBackgroundColor()));
-    canvas.drawText(_number, 20, 20, mLoadPaint);
+    // final SharedPreferences sp =
+    // PreferenceManager.getDefaultSharedPreferences(_c.getApplicationContext());
+    canvas.drawColor(VisionApplication.getBackgroundColor());
+    canvas.drawText(_number, getPaddingLeft(), getPaddingTop(), mLoadPaint);
     TTS.speak(_number);
   }
   

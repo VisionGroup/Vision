@@ -74,7 +74,7 @@ public class CalcActivity extends VisionActivity {
    */
   @Override public void onActionUp(final View v) {
     final int buttonId = v.getId();
-    if (isNavigationManuButton(buttonId))
+    if (isNavigationMenuButton(buttonId))
       return;
     final CharSequence buttonText = v instanceof TalkingButton ? ((TalkingButton) v).getText() : null;
     // it's a digit

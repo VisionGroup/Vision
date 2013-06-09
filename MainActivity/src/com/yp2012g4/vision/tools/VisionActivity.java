@@ -153,16 +153,16 @@ public abstract class VisionActivity extends VisionGestureDetector {
     return isButtonType(entry.getKey()) && entry.getValue().contains((int) e.getRawX(), (int) e.getRawY());
   }
   
-  public static boolean isNavigationManuButton(final int buttonId) {
-    if (buttonId == R.id.back_button)
-      return true;
-    if (buttonId == R.id.tool_tip_button)
-      return true;
-    if (buttonId == R.id.current_menu_button)
-      return true;
-    if (buttonId == R.id.home_button)
-      return true;
-    return false;
+  public static boolean isNavigationMenuButton(final int buttonId) {
+    switch (buttonId) {
+      case R.id.back_button:
+      case R.id.tool_tip_button:
+      case R.id.current_menu_button:
+      case R.id.home_button:
+        return true;
+      default:
+        return false;
+    }
   }
   
   public static void setIntentFlags(final Intent intent) {

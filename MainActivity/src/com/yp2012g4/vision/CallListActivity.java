@@ -32,7 +32,7 @@ public class CallListActivity extends VisionActivity {
     _tlv = (TalkingListView) findViewById(R.id.TalkingCallListView);
     _ca = new CallAdapter(this);
     _tlv.setAdapter(_ca);
-    // if (_tlv.isEmpty())
+//    if (_tlv.isEmpty())
 //      TTS.speak(getString(R.string.noCalls));
   }
   

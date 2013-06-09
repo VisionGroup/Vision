@@ -16,7 +16,6 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -59,13 +58,9 @@ public class CallScreenService extends AbstractService {
   }
   
   private void endCall() {
-    // Toast.makeText(getBaseContext(), "onDestroy", Toast.LENGTH_LONG).show();
     if (csView != null) {
       ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(csView);
       csView = null;
-//    if (v != null) {
-//      ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(v);
-//      v = null;
     }
     new CallUtils(this).restoreRinger();
   }
@@ -89,23 +84,15 @@ public class CallScreenService extends AbstractService {
     Toast.makeText(getBaseContext(), "onCreate", Toast.LENGTH_LONG).show();
     csView = new CallScreenView(this);
     gV = new GestureOverlayView(c);
-    // gV.seton
-    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-        WindowManager.LayoutParams.TYPE_PHONE, WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-            | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-        PixelFormat.TRANSLUCENT);
-//        
-//        WindowManager.LayoutParams.WRAP_CONTENT,
-//        WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY/* ALERT */, 0,
-////            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-////                    | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-//        PixelFormat.TRANSLUCENT);
+    final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_PRIORITY_PHONE,
+        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+            | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_FULLSCREEN, PixelFormat.TRANSLUCENT);
     params.gravity = Gravity.RIGHT | Gravity.TOP;
     params.setTitle("Load Average");
     final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
     csView.setNumber(phoneNumber);
     wm.addView(csView, params);
-    // wm.addView(gV, params);
   }
 }
 
@@ -119,7 +106,6 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   
   public CallScreenView(final Context c) {
     super(c);
-    // Toast.makeText(getContext(), "HUDView", Toast.LENGTH_LONG).show();
     mLoadPaint = new Paint();
     mLoadPaint.setAntiAlias(true);
     mLoadPaint.setTextSize(25);
@@ -145,7 +131,6 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   }
   
   @Override public boolean onTouchEvent(final MotionEvent event) {
-    // Toast.makeText(getContext(), "onTouchEvent", Toast.LENGTH_LONG).show();
     _cu.silenceRinger();
     Log.d(TAG, "onTOuch");
     return gd.onTouchEvent(event);// true;
@@ -161,7 +146,7 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   public static final int SWIPE_VELOCITY_THRESHOLD = 100;
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    Log.d(TAG, "OnFling");
+    Log.d(TAG, "OnFling"); // TODO: generify and move somewhere else onFling
     final float diffX = e2.getX() - e1.getX();
     if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
       if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD)
@@ -169,7 +154,7 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
           CallUtils.answerCall(_c);
         else
           _cu.endCall();
-    // vibrate(VIBRATE_DURATION);
+//TODO: Add speaker phone activation
     return true;
   }
   

@@ -74,7 +74,7 @@ public class TTS implements OnInitListener {
    * @return
    */
   public static int setLanguage(final Locale l) {
-    Log.d(TAG, "setLanguage");
+    Log.d(TAG, "Current locale = " + staticTTS._tts.getLanguage() + ". setLanguage t o " + l.getLanguage());
     staticTTS._language = l;
     return staticTTS._tts.setLanguage(l);
   }

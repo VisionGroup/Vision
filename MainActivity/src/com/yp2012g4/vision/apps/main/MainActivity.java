@@ -46,22 +46,23 @@ public class MainActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.i(TAG, "MainActivity:: onCreate");
-    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    /*
-     * _myLocale = Locale.getDefault(); // get xml strings file String
-     * defaultLang = "HEBREW"; if (_myLocale.equals(Locale.US)) defaultLang =
-     * "ENGLISH";
-     */
-    Locale locale = Locale.US;
-    if (sp.getString("LANGUAGE", "ENGLISH").equals("HEBREW"))
-      locale = new Locale("iw");
-    Locale.setDefault(locale);
-    _config = new Configuration();
-    _config.locale = locale;
-    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
+    programSetup();
     setContentView(R.layout.activity_main);
-    final PhoneNotifications pn = new PhoneNotifications(this);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
+  }
+  
+  private void programSetup() {
+    final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final Locale l = Locale.US;// new Locale(sp.getString("LANGUAGE",
+                               // Language.getDefaultLocale().getISO3Language()));
+    Locale.setDefault(l);
+    Log.d(TAG, "Language: " + l.getLanguage());
+    final int ret = TTS.setLanguage(l);
+    Log.d(TAG, "SetLanguage result=" + ret);
+    _config = new Configuration();
+    _config.locale = l;
+    getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
+    final PhoneNotifications pn = new PhoneNotifications(this);
     pn.startSignalLisener();
     CallService.initialise(getApplicationContext());
   }

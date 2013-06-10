@@ -11,8 +11,8 @@ import android.view.View;
 
 import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.CallType;
+import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -35,6 +35,7 @@ public class PhoneStatusActivity extends VisionActivity {
   static final int MAX_SIGNAL = 31; // Maximum signal strength of GSM
   PhoneNotifications pn;
   final ArrayList<String> contacts = new ArrayList<String>();
+  private CallsManager callsManager;
   
   /**
    * format the current battery level
@@ -61,7 +62,7 @@ public class PhoneStatusActivity extends VisionActivity {
    * read the call log of the missed calls
    */
   public void getMissedCalls() {
-    final ArrayList<CallType> calls = CallsManager.getMissedCallsList(this);
+    final ArrayList<CallType> calls = callsManager.getMissedCallsList();
     String s = "";
     if (calls.isEmpty())
       s = getString(R.string.no_missed_calls);
@@ -117,6 +118,7 @@ public class PhoneStatusActivity extends VisionActivity {
   @Override protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "IncomingCAllActivity starting");
+    callsManager = new CallsManager(this);
     init(0, getString(R.string.phoneStatus_whereami), getString(R.string.phoneStatus_help));
     setContentView(R.layout.activity_phone_status);
     pn = new PhoneNotifications(this);

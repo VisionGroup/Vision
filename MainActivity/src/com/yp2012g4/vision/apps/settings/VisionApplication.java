@@ -30,6 +30,7 @@ public class VisionApplication extends Application {
   public static final float LARGE_FONT_SIZE = 30;
   public static final long DEFUALT_DELAY_TIME = 1000;
   private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
+  private static HashMap<String, Float> _sizeToFloat = new HashMap<String, Float>();
   public static String _textSize = "NORMAL";
   private static String _textColor = "WHITE";
   private static String _backgroundColor = "BLACK";
@@ -46,6 +47,9 @@ public class VisionApplication extends Application {
     _colorToString.put("GREEN", Integer.valueOf(Color.parseColor("#04B45F")));
     _colorToString.put("BLUE", Integer.valueOf(Color.parseColor("#0489B1")));
     _colorToString.put("LIGHT_PURPLE", Integer.valueOf(Color.parseColor("#A901DB")));
+    _sizeToFloat.put("SMALL", Float.valueOf(SMALL_FONT_SIZE));
+    _sizeToFloat.put("NORMAL", Float.valueOf(NORMAL_FONT_SIZE));
+    _sizeToFloat.put("LARGE", Float.valueOf(LARGE_FONT_SIZE));
   }
   
   /**
@@ -127,16 +131,24 @@ public class VisionApplication extends Application {
    * @return text color
    * 
    */
-  public static String getTextColor() {
-    return _textColor;
+  public static int getTextColor() {
+    return _colorToString.get(_textColor).intValue();
   }
   
   /**
    * 
    * @return background color
    */
-  public static String getBackgroundColor() {
-    return _backgroundColor;
+  public static int getBackgroundColor() {
+    return _colorToString.get(_backgroundColor).intValue();
+  }
+  
+  /**
+   * 
+   * @return Text size
+   */
+  public static float getTextSize() {
+    return _sizeToFloat.get(_textSize).floatValue();
   }
   
   /**

@@ -207,7 +207,7 @@
 
     <!-- DisplaySettingsActivity -->
     <string name="display_settings_screen">Display settings screen</string>
-    <string name="settings_help">You can press one of two buttons. \n1) to go to the color setting screen. \n2) to go the text size setting screen.</string>
+    <string name="settings_help">A button screen in which you can define variuos program settings.</string>
     <string name="title_activity_color_settings">Color Settings</string>
     <string name="color_settings_button">Color Settings</string>
     <string name="theme_settings_button">Text Size Settings</string>

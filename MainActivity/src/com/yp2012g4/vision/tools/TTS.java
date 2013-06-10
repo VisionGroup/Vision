@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 
+import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.settings.VisionApplication;
 
 /**
@@ -22,7 +23,7 @@ public class TTS implements OnInitListener {
   private static final String TAG = "vision:TTS";
   public TextToSpeech _tts;
   private int _qm;
-  private Locale _language;
+  private Locale _language = Language.getDefaultLocale();
   private boolean _init = false;
   private static TTS staticTTS = null;
   private static String _engine = "";
@@ -74,9 +75,11 @@ public class TTS implements OnInitListener {
    * @return
    */
   public static int setLanguage(final Locale l) {
-    Log.d(TAG, "Current locale = " + staticTTS._tts.getLanguage() + ". setLanguage t o " + l.getLanguage());
+    Log.d(TAG, "setLanguage to " + l.getLanguage());
     staticTTS._language = l;
-    return staticTTS._tts.setLanguage(l);
+    if (staticTTS._init)
+      return staticTTS._tts.setLanguage(l);
+    return -3;
   }
   
   /**
@@ -197,7 +200,7 @@ public class TTS implements OnInitListener {
       _init = true;
       Log.d(TAG, "TTS init completed succesfully.");
       setQueueMode(TextToSpeech.QUEUE_FLUSH);
-      // setLanguage(Locale.US);
+      setLanguage(_language);
     }
   }
   

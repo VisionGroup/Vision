@@ -49,7 +49,11 @@ public class AddContactActivity extends VisionActivity {
     final EditText _etName = getEditText(R.id.contact_name);
     _etName.setText(contactDisplayName);
     moveCursor(_etName, contactDisplayName);
-    contactPhone = ContactManager.getContactFromName(contactDisplayName, this).getPhone();
+    try {
+      contactPhone = ContactManager.getContactFromName(contactDisplayName, this).getPhone();
+    } catch (final Exception e) {
+      contactPhone = "";
+    }
     _etPhone.setText(contactPhone);
     moveCursor(_etPhone, contactPhone);
   }

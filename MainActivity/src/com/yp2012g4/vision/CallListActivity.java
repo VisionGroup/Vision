@@ -82,7 +82,8 @@ public class CallListActivity extends VisionActivity {
    */
   private void removeFromCallList(final CallType currCall) {
     // first we remove the Call from the phone DB
-    CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
+    // TODO
+    // CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
     // then we remove the Call from the displayed list
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);

@@ -111,6 +111,7 @@ public class CallAdapter extends BaseAdapter {
   
   public void getNextCall() {
     _callArray.addAll(_callsManager.getNextMissedCallsList(NUMBER_OF_BATCH));
+//    _callsManager.UnmarkCallLFromMissedCallList(phoneNumber, date)
 //      _curser.moveToPrevious(); // CHANGED FROM MOVE TO NEXT
   }
 }

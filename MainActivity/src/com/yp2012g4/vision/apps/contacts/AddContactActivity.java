@@ -103,7 +103,7 @@ public class AddContactActivity extends VisionActivity {
     }
     final Intent returnIntent = new Intent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
     if (!createNewContact) {
-      ContactManager.deleteContact(contactPhone, contactDisplayName, this);
+      ContactManager.deleteContact(contactDisplayName, this);
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
       speakOutSync(R.string.edit_contact_success);
       returnIntent.putExtra(RESULT_EXTRA, RESULT_OK);

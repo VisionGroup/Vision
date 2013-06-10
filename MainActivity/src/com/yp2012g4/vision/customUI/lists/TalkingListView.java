@@ -123,7 +123,7 @@ public class TalkingListView extends RelativeLayout {
    * 
    * @param
    */
-  private void setPage(final int n) {
+  public void setPage(final int n) {
     if (_adapter == null)
       return;
     if (n < 0)

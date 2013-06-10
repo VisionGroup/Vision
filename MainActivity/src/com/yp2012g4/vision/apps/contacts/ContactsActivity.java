@@ -108,7 +108,7 @@ public class ContactsActivity extends VisionActivity {
     if (extras != null && extras.getString(ACTION_EXTRA) != null)
       if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         final ContactType ct = contactManager.getContact(currentContact);
-        if (ContactManager.deleteContact(ct.getPhone(), ct.getContactName(), this)) {
+        if (ContactManager.deleteContact(ct.getContactName(), this)) {
           selectCorrespondingContactsList();
           setContact();
           speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());

@@ -42,26 +42,21 @@ public class CallType {
       _date = new Date();
       e1.printStackTrace();
     }
+    _number = getColString(cur, android.provider.CallLog.Calls.NUMBER);
+    if (_number.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
+      _number = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
+    else
+      _name = getColString(cur, android.provider.CallLog.Calls.CACHED_NAME);
+    _numberType = getColString(cur, android.provider.CallLog.Calls.CACHED_NUMBER_TYPE);
+    _type = getColString(cur, android.provider.CallLog.Calls.TYPE);
+  }
+  
+  private static String getColString(final Cursor cur, final String colIndex) {
     try {
-      _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-      if (_number.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
-        _number = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
-      else
-        _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
-      if (_name == null)
-        _name = "";
+      final String $ = cur.getString(cur.getColumnIndexOrThrow(colIndex));
+      return $ == null ? "" : $;
     } catch (final Exception e) {
-      _name = "";
-    }
-    try {
-      _numberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));
-    } catch (final Exception e) {
-      _numberType = "";
-    }
-    try {
-      _type = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE));
-    } catch (final Exception e) {
-      _type = "";
+      return "";
     }
   }
   

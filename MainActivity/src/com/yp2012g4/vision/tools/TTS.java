@@ -150,10 +150,8 @@ public class TTS implements OnInitListener {
     for (final char c : s.toCharArray())
       if (c >= '0' && c <= '9' || c == '+')
         digitCount++;
-    if (digitCount / (double) s.length() > 0.8) {
-      Log.d(TAG, "will spell: " + s + " -->  " + spell(s));
+    if (digitCount / (double) s.length() > 0.8)
       return spell(s);
-    }
     return s;
   }
   

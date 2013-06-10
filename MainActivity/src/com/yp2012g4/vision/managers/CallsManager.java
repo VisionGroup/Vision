@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.util.Log;
 
 /**
  * Call type container
@@ -18,6 +19,7 @@ public class CallsManager {
   private Cursor _cur = null;
   private final Context _context;
   private static final String[] _projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+  private static String TAG = "vision:CallsManager";
   
   public CallsManager(final Context c) {
     _context = c;
@@ -64,8 +66,7 @@ public class CallsManager {
    * Delete all the entries of a number from the missed call list - require
    * WRITE_CONTACTS permission
    * 
-   * @param c
-   * @param ns
+   * @param phoneNumber
    *          - string of the phone number in the call log
    */
   public void UnmarkCallLFromMissedCallList(final String phoneNumber) {
@@ -73,15 +74,12 @@ public class CallsManager {
       final ContentValues values = new ContentValues();
       values.put(Calls.NEW, Integer.valueOf(0));
       final StringBuilder where = new StringBuilder();
-      where.append(Calls.NEW + " = 1");
-      where.append(" AND ");
-      where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
-      where.append(" AND ");
-      where.append(Calls.NUMBER + " = ? ");
+      where.append(Calls.NEW + " = 1").append(" AND ").append(Calls.TYPE + " = ?").append(" AND ").append(Calls.NUMBER + " = ? ");
+      // + Calls.MISSED_TYPE);
       _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
           new String[] { Integer.toString(Calls.MISSED_TYPE), phoneNumber });
     } catch (final Exception e) {
-      e.getMessage();
+      Log.e(TAG, e.getMessage());
     }
   }
   

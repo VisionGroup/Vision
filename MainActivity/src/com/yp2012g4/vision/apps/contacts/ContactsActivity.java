@@ -53,22 +53,19 @@ public class ContactsActivity extends VisionActivity {
       return false;
     switch (button.getId()) {
       case R.id.contacts_call:
-        intent = new Intent(Intent.ACTION_CALL);
-        setIntentFlags(intent);
+        intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
         intent.setData(Uri.parse("tel:" + ct.getPhone()));
         startActivity(intent);
         // TODO
         // callsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
-        intent = new Intent(ContactsActivity.this, SendSMSActivity.class);
-        setIntentFlags(intent);
+        intent = setIntentFlags(new Intent(ContactsActivity.this, SendSMSActivity.class));
         intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
         startActivity(intent);
         break;
       case R.id.contacts_quick_sms:
-        intent = new Intent(ContactsActivity.this, QuickSMSActivity.class);
-        setIntentFlags(intent);
+        intent = setIntentFlags(new Intent(ContactsActivity.this, QuickSMSActivity.class));
         intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
         startActivity(intent);
         break;
@@ -78,10 +75,9 @@ public class ContactsActivity extends VisionActivity {
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.edit_contact:
-        intent = new Intent(ContactsActivity.this, AddContactActivity.class);
+        intent = setIntentFlags(new Intent(ContactsActivity.this, AddContactActivity.class));
         final String name = ct.getContactName();
         intent.putExtra(CONTACT_NAME_FLAG, name);
-        setIntentFlags(intent);
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.delete_contact:
@@ -109,7 +105,7 @@ public class ContactsActivity extends VisionActivity {
   @Override protected void onNewIntent(final Intent intent) {
     super.onNewIntent(intent);
     final Bundle extras = getIntent().getExtras();
-    if (extras != null)
+    if (extras != null && extras.getString(ACTION_EXTRA) != null)
       if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         final ContactType ct = contactManager.getContact(currentContact);
         if (ContactManager.deleteContact(ct.getPhone(), ct.getContactName(), this)) {

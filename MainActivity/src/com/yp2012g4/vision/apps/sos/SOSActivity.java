@@ -133,7 +133,7 @@ public class SOSActivity extends VisionActivity {
   private void loadNumber() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
     _number = sp.getString(getString(R.string.sos_number), _number);
-    final TalkingButton tb = (TalkingButton) findViewById(R.id.SOS_phone_number);
+    final TalkingButton tb = getTalkingButton(R.id.SOS_phone_number);
     tb.setText(_number);
     tb.setReadText(getString(R.string.sos_contact_number) + _number);
   }

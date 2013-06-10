@@ -66,8 +66,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
     left = true;
     mp.stop();
     AlarmActivity.alarmIsSet = false;
-    TTS.speak(getString(R.string.alarm_is_off));
-    TTS.waitUntilFinishTalking();
+    TTS.speakSync(getString(R.string.alarm_is_off));
     finish();
     super.onUserInteraction();
   }
@@ -97,8 +96,7 @@ public class AlarmPopup extends Activity implements TextToSpeech.OnInitListener 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmActivity.pendingIntent);
         AlarmActivity.alarmIsSet = true;
         AlarmActivity.alarmTime = calendar;
-        TTS.speak(getString(R.string.snooze_for) + " " + snooze + getString(R.string.minutes));
-        TTS.waitUntilFinishTalking();
+        TTS.speakSync(getString(R.string.snooze_for) + " " + snooze + getString(R.string.minutes));
         finish();
       }
     });

@@ -1,10 +1,11 @@
 package com.yp2012g4.vision.apps.telephony;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -17,8 +18,9 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
 
+import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.AbstractService;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
@@ -81,7 +83,6 @@ public class CallScreenService extends AbstractService {
   }
   
   private void processCall(final Context c, final String phoneNumber) {
-    Toast.makeText(getBaseContext(), "onCreate", Toast.LENGTH_LONG).show();
     csView = new CallScreenView(this);
     gV = new GestureOverlayView(c);
     final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -96,6 +97,7 @@ public class CallScreenService extends AbstractService {
   }
 }
 
+//TODO: spartanize, put in seperate class, remove other unused telephony classes.
 class CallScreenView extends ViewGroup implements OnGestureListener {
   private final Paint mLoadPaint;
   private String _number = "";
@@ -103,31 +105,50 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   private final GestureDetector gd = new GestureDetector(this);
   private final CallUtils _cu;
   private final Context _c;
+  ContactManager _cm;
+  String _name;
   
+  /********/
+  @Override protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
+    super.onSizeChanged(w, h, oldw, oldh);
+  }
+  
+  /********/
   public CallScreenView(final Context c) {
     super(c);
     mLoadPaint = new Paint();
     mLoadPaint.setAntiAlias(true);
-    mLoadPaint.setTextSize(25);
-    mLoadPaint.setARGB(255, 255, 0, 0);
+    mLoadPaint.setTextSize(VisionApplication.getTextSize());
+    mLoadPaint.setColor(VisionApplication.getTextColor());
+    // mLoadPaint.setTextAlign(Align.RIGHT);
     _cu = new CallUtils(c);
     _c = c;
+    _cm = new ContactManager(_c);
 //    final LayoutInflater vi = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //    final View v = vi.inflate(R.layout.activity_incoming_call, null);
   }
   
   @Override protected void onDraw(final Canvas canvas) {
     super.onDraw(canvas);
-    canvas.drawColor(Color.BLACK);
-    canvas.drawText(_number, 20, 20, mLoadPaint);
-    TTS.speak(_number);
+    // final SharedPreferences sp =
+    // PreferenceManager.getDefaultSharedPreferences(_c.getApplicationContext());
+    canvas.drawColor(VisionApplication.getBackgroundColor());
+    // TODO:: Find screen center, discard magic numbers
+    canvas.drawText(_number, 40, /* getHeight() / 2 */100 - VisionApplication.getTextSize(), mLoadPaint);
+    canvas.drawText(_name, 40, /* getHeight() / 2 */100 + VisionApplication.getTextSize(), mLoadPaint);
+    if (TTS.getLanguage() == Locale.US && !TTS.isPureEnglish(_name))
+      TTS.speak(_number);
+    else
+      TTS.speak(_name);
   }
   
   public void setNumber(final String number) {
     _number = number;
+    _name = _cm.getNameFromPhone(_number);
   }
   
   @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
+    // Unused
   }
   
   @Override public boolean onTouchEvent(final MotionEvent event) {
@@ -172,7 +193,7 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
-    TTS.speak(_number);
+    TTS.speak(_name + " " + _number);
     return false;
   }
 }

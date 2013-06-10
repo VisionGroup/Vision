@@ -38,6 +38,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class MainActivity extends VisionActivity {
   private static final double LOW_BATTERY_LEVEL = 0.3;
   private static String TAG = "vision:MainActivity";
+  private final CallsManager callsManager = new CallsManager(this);
   
   @Override public int getViewId() {
     return R.id.MainActivityView;
@@ -137,7 +138,7 @@ public class MainActivity extends VisionActivity {
       s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS <= PhoneStatusActivity.signal_poor)
       s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
-    final int numOfMissedCalls = CallsManager.getMissedCallsNum(this);
+    final int numOfMissedCalls = callsManager.getMissedCallsNum();
     final Resources res = getResources();
     if (numOfMissedCalls > 0)
       s += res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls, Integer.valueOf(numOfMissedCalls));

@@ -192,7 +192,7 @@
 
     <!-- DisplaySettingsActivity -->
     <string name="display_settings_screen">מסך הגדרות תצוגה</string>
-    <string name="settings_help">בחר אחת מ-2 אפשרויות: 1) מעבר למסך הגדרות צבע המסך. 2) מעבר למסך הגדרות גודל הטקסט</string>
+    <string name="settings_help">מסך כפתורים המאפשר להגדיר הגדרות שונות של הטלפון.</string>
     <string name="title_activity_color_settings">הגדרות צבע מסך</string>
     <string name="color_settings_button">הגדרת צבע</string>
     <string name="theme_settings_button">הגדרת גודל טקסט</string>

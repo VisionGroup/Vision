@@ -31,12 +31,10 @@ public class ContactManager {
    * @return 10 favorite contacts.
    */
   public void getFavoriteContacts() {
-    final Uri u = ContactsContract.Contacts.CONTENT_URI;
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
-    final String[] sa = null;
     final String so = ContactsContract.Data.TIMES_CONTACTED + " DESC, " + ContactsContract.Contacts.DISPLAY_NAME
         + " COLLATE LOCALIZED ASC LIMIT 10";
-    cur = _c.getContentResolver().query(u, _projection, ss, sa, so);
+    cur = _c.getContentResolver().query(Phone.CONTENT_URI, _projection, ss, null, so);
     cur.moveToFirst();
     _size = cur.getCount();
   }
@@ -46,11 +44,9 @@ public class ContactManager {
    * @return all contacts arranged alphabetically
    */
   public void getAllContacts() {
-    final Uri uri = ContactsContract.Contacts.CONTENT_URI;
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
-    final String[] sa = null;
     final String so = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    cur = _c.getContentResolver().query(uri, _projection, ss, sa, so);
+    cur = _c.getContentResolver().query(Phone.CONTENT_URI, _projection, ss, null, so);
     cur.moveToFirst();
     _size = cur.getCount();
   }
@@ -152,9 +148,8 @@ public class ContactManager {
     }
   }
   
-  public static boolean deleteContact(final String phone, final String name, final Context c) {
-    final Uri contactUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
-    final Cursor curser = c.getContentResolver().query(contactUri, null, null, null, null);
+  public static boolean deleteContact(final String name, final Context c) {
+    final Cursor curser = c.getContentResolver().query(Phone.CONTENT_URI, null, null, null, null);
     try {
       if (curser.moveToFirst())
         do

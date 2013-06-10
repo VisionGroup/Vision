@@ -4,7 +4,10 @@
  */
 package com.yp2012g4.vision.test;
 
+import java.util.HashMap;
+
 import android.app.Activity;
+import android.graphics.Color;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
@@ -19,9 +22,16 @@ import com.yp2012g4.vision.apps.settings.VisionApplication;
 public class VisionApplicationTest extends ActivityInstrumentationTestCase2<DisplaySettingsActivity> {
   private Solo solo;
   private Activity activity;
+  private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
   
   public VisionApplicationTest() {
     super("com.yp2012g4.vision.apps.settings", DisplaySettingsActivity.class);
+    _colorToString.put("BLACK", Integer.valueOf(Color.parseColor("#000000")));
+    _colorToString.put("WHITE", Integer.valueOf(Color.parseColor("#FFFFFF")));
+    _colorToString.put("RED", Integer.valueOf(Color.parseColor("#B40404")));
+    _colorToString.put("GREEN", Integer.valueOf(Color.parseColor("#04B45F")));
+    _colorToString.put("BLUE", Integer.valueOf(Color.parseColor("#0489B1")));
+    _colorToString.put("LIGHT_PURPLE", Integer.valueOf(Color.parseColor("#A901DB")));
   }
   
   @Override protected void setUp() throws Exception {
@@ -32,22 +42,22 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
   
   @MediumTest public static void testGetBackgroundColor() {
     VisionApplication.setColors("WHITE", "BLACK");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLACK");
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public static void testGetTextColor() {
     VisionApplication.setColors("RED", "BLACK");
-    assertEquals(VisionApplication.getTextColor(), "RED");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#B40404"));
   }
   
   @MediumTest public static void testSetColors() {
     VisionApplication.setColors("BLUE", "BLACK");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLACK");
-    assertEquals(VisionApplication.getTextColor(), "BLUE");
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#0489B1"));
   }
   
   @MediumTest// /////////////////////////////SYSTEM
-             // TESTS//////////////////////////////////
+  // TESTS//////////////////////////////////
   public void testSetFontSizeToLarge() {
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
@@ -147,8 +157,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteBlue));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "WHITE");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLUE");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#0489B1"));
   }
   
   @MediumTest public void testSetColorsWhiteBlack() {
@@ -157,8 +167,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteBlack));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "WHITE");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLACK");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testSetColorsWhiteRed() {
@@ -167,8 +177,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteRed));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "WHITE");
-    assertEquals(VisionApplication.getBackgroundColor(), "RED");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#B40404"));
   }
   
   @MediumTest public void testSetColorsWhiteGreen() {
@@ -177,8 +187,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteGreen));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "WHITE");
-    assertEquals(VisionApplication.getBackgroundColor(), "GREEN");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#04B45F"));
   }
   
   @MediumTest public void testSetColorsBlueBlack() {
@@ -187,8 +197,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.BlueBlack));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "BLUE");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLACK");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#0489B1"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testSetColorsRedBlack() {
@@ -197,8 +207,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.RedBlack));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "RED");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLACK");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#B40404"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testSetColorsGreenBlack() {
@@ -207,8 +217,8 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.GreenBlack));
     solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
-    assertEquals(VisionApplication.getTextColor(), "GREEN");
-    assertEquals(VisionApplication.getBackgroundColor(), "BLACK");
+    assertEquals(VisionApplication.getTextColor(), Color.parseColor("#04B45F"));
+    assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testWhiteBlueLarge() {

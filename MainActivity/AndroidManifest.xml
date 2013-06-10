@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yp2012g4.vision"
     android:installLocation="auto"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="3"
+    android:versionName="0.5" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -234,8 +234,8 @@
         </activity>
         <activity
             android:name="com.yp2012g4.vision.CallListActivity"
-            android:label="@string/title_activity_call_list" 
             android:configChanges="locale"
+            android:label="@string/title_activity_call_list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -258,9 +258,10 @@
         </activity>
         <activity
             android:name="com.yp2012g4.vision.apps.contacts.AddContactActivity"
-            android:label="@string/title_activity_add_contact"
-            android:screenOrientation="portrait"
             android:configChanges="locale"
+            android:label="@string/title_activity_add_contact"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
     </application>

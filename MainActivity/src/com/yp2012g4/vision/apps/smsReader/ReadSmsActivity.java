@@ -101,9 +101,10 @@ public class ReadSmsActivity extends VisionActivity {
         // first we remove the SMS from the phone DB
         SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
         // then we remove the SMS from the displayed list
+        final int pageNumber = listView.getPage();
         adapter.removeItemFromList((int) listView.getDisplayedItemIds()[0]);
         listView.setAdapter(adapter);
-        listView.prevPage();
+        listView.setPage(pageNumber);
         speakOutAsync(getString(R.string.delete_message));
         vibrate(VIBRATE_DURATION);
       }

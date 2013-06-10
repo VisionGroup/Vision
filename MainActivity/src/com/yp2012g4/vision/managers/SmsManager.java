@@ -89,6 +89,7 @@ public class SmsManager {
           if (ms.equals(body) && address.equals(ma)) {
             c.getContentResolver().delete(Uri.parse("content://sms/" + cur.getLong(0)), null, null);
             cur.close();
+            break;
           }
         } while (cur.moveToNext());
     } catch (final Exception e) {

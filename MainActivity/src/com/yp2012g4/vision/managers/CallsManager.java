@@ -69,6 +69,7 @@ public class CallsManager {
    *          - string of the phone number in the call log
    */
   public void UnmarkCallLFromMissedCallList(final String phoneNumber, final String date) {
+    int i;
     try {
 //      final ContentValues cv = new ContentValues();
 //      cv.put(CallLog.Calls.NEW, 0);
@@ -77,14 +78,32 @@ public class CallsManager {
 //       CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1"
       final ContentValues values = new ContentValues();
       values.put(Calls.NEW, 0);
-//      values.put(Calls.IS_READ, 1);
       final StringBuilder where = new StringBuilder();
-      where.append(Calls.NEW);
-      where.append(" = 1 AND ");
-      where.append(Calls.TYPE);
-      where.append(" = ?");
-      _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
+      where.append(Calls.NEW + " = 1");
+      where.append(" AND ");
+      where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
+//      where.append(" AND ");
+//      where.append(Calls.NUMBER + " LIKE " + phoneNumber);
+      i = _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
           new String[] { Integer.toString(Calls.MISSED_TYPE) });
+      i++;
+    } catch (final Exception e) {
+      e.getMessage();
+    }
+  }
+  
+  public void MarkCallLFromMissedCallList() {
+    int i;
+    try {
+      final ContentValues values = new ContentValues();
+      values.put(Calls.NEW, 1);
+      final StringBuilder where = new StringBuilder();
+      where.append(Calls.NEW + " = 0");
+      where.append(" AND ");
+      where.append(Calls.TYPE + " = ?");
+      i = _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
+          new String[] { Integer.toString(Calls.MISSED_TYPE) });
+      i++;
     } catch (final Exception e) {
       e.getMessage();
     }

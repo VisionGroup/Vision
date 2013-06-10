@@ -24,7 +24,9 @@ public class CallAdapter extends BaseAdapter {
   public CallAdapter(final Context c) {
     _c = c;
     _callsManager = new CallsManager(c);
-    _callArray = _callsManager.getNextMissedCallsList(NUMBER_OF_BATCH);
+    // _callsManager.MarkCallLFromMissedCallList();
+    _callArray = new ArrayList<CallType>();
+    _callArray.addAll(_callsManager.getNextMissedCallsList(NUMBER_OF_BATCH));
     // initCurser();
   }
   

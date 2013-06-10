@@ -103,7 +103,7 @@ public class ContactsActivity extends VisionActivity {
   @Override protected void onNewIntent(final Intent intent) {
     super.onNewIntent(intent);
     final Bundle extras = getIntent().getExtras();
-    if (extras != null)
+    if (extras != null && extras.getString(ACTION_EXTRA) != null)
       if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         final ContactType ct = contactManager.getContact(currentContact);
         if (ContactManager.deleteContact(ct.getPhone(), ct.getContactName(), this)) {

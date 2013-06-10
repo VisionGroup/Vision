@@ -47,9 +47,9 @@ public class VisionApplication extends Application {
     _colorToString.put("GREEN", Integer.valueOf(Color.parseColor("#04B45F")));
     _colorToString.put("BLUE", Integer.valueOf(Color.parseColor("#0489B1")));
     _colorToString.put("LIGHT_PURPLE", Integer.valueOf(Color.parseColor("#A901DB")));
-    _sizeToFloat.put("SMALL", SMALL_FONT_SIZE);
-    _sizeToFloat.put("NORMAL", NORMAL_FONT_SIZE);
-    _sizeToFloat.put("LARGE", LARGE_FONT_SIZE);
+    _sizeToFloat.put("SMALL", Float.valueOf(SMALL_FONT_SIZE));
+    _sizeToFloat.put("NORMAL", Float.valueOf(NORMAL_FONT_SIZE));
+    _sizeToFloat.put("LARGE", Float.valueOf(LARGE_FONT_SIZE));
   }
   
   /**
@@ -132,7 +132,7 @@ public class VisionApplication extends Application {
    * 
    */
   public static int getTextColor() {
-    return _colorToString.get(_textColor);
+    return _colorToString.get(_textColor).intValue();
   }
   
   /**
@@ -140,7 +140,7 @@ public class VisionApplication extends Application {
    * @return background color
    */
   public static int getBackgroundColor() {
-    return _colorToString.get(_backgroundColor);
+    return _colorToString.get(_backgroundColor).intValue();
   }
   
   /**
@@ -148,7 +148,7 @@ public class VisionApplication extends Application {
    * @return Text size
    */
   public static float getTextSize() {
-    return _sizeToFloat.get(_textSize);
+    return _sizeToFloat.get(_textSize).floatValue();
   }
   
   /**

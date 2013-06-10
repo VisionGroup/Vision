@@ -97,6 +97,7 @@ public class CallScreenService extends AbstractService {
   }
 }
 
+//TODO: spartanize, put in seperate class, remove other unused telephony classes.
 class CallScreenView extends ViewGroup implements OnGestureListener {
   private final Paint mLoadPaint;
   private String _number = "";
@@ -104,22 +105,12 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   private final GestureDetector gd = new GestureDetector(this);
   private final CallUtils _cu;
   private final Context _c;
-  private float w;
-  private float h;
   ContactManager _cm;
   String _name;
   
   /********/
   @Override protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
-    //
-    // Set dimensions for text, pie chart, etc
-    //
-    // Account for padding
-    final float xpad = getPaddingLeft() + getPaddingRight();
-    final float ypad = getPaddingTop() + getPaddingBottom();
-    this.w = w - xpad;
-    this.h = h - ypad;
   }
   
   /********/
@@ -157,6 +148,7 @@ class CallScreenView extends ViewGroup implements OnGestureListener {
   }
   
   @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
+    // Unused
   }
   
   @Override public boolean onTouchEvent(final MotionEvent event) {

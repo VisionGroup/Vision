@@ -68,10 +68,10 @@ public class CallsManager {
    * @param ns
    *          - string of the phone number in the call log
    */
-  public void UnmarkCallLFromMissedCallList(final String phoneNumber, final String date) {
+  public void UnmarkCallLFromMissedCallList(final String phoneNumber) {
     try {
       final ContentValues values = new ContentValues();
-      values.put(Calls.NEW, 0);
+      values.put(Calls.NEW, Integer.valueOf(0));
       final StringBuilder where = new StringBuilder();
       where.append(Calls.NEW + " = 1");
       where.append(" AND ");

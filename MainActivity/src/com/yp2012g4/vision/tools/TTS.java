@@ -210,6 +210,16 @@ public class TTS implements OnInitListener {
     }
   }
   
+  public static String spell(final String s) {
+    if (s.length() == 0)
+      return s;
+    final StringBuilder $ = new StringBuilder();
+    $.append(s.charAt(0));
+    for (final char c : s.substring(1).toCharArray())
+      $.append(' ').append(c);
+    return $.toString();
+  }
+  
   /**
    * Checks whether or not the language is supported by the current TTS engine.
    * 

@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Bundle;
+import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -50,8 +52,7 @@ public class CallUtils {
   public CallUtils(final Context c) {
     try {
       final TelephonyManager tm = (TelephonyManager) c.getSystemService(Context.TELEPHONY_SERVICE);
-      final Class<?> cls = Class.forName(tm.getClass().getName());
-      final Method m = cls.getDeclaredMethod("getITelephony");
+      final Method m = Class.forName(tm.getClass().getName()).getDeclaredMethod("getITelephony");
       m.setAccessible(true);
       telephonyService = (ITelephony) m.invoke(tm);
       _am = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
@@ -110,5 +111,14 @@ public class CallUtils {
     } catch (final Exception e) {
       Log.e(TAG, "Error silencing Ringer", e);
     }
+  }
+  
+  public static Message newMessage(final String number, final CALL_TYPE ct) {
+    final Message m = new Message();
+    final Bundle b2 = new Bundle();
+    b2.putString(CallUtils.NUMBER_KEY, number);
+    b2.putInt(CallUtils.CALL_TYPE_KEY, ct.ordinal());
+    m.setData(b2);
+    return m;
   }
 }

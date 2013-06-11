@@ -78,8 +78,11 @@ public class CallsManager {
       where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
       where.append(" AND ");
       where.append(Calls.NUMBER + " = ? ");
-      _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
+//      where.append(" AND ");
+//      where.append(Calls.DATE + " = ? ");
+      final int i = _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
           new String[] { Integer.toString(Calls.MISSED_TYPE), phoneNumber });
+      System.out.println(i);
     } catch (final Exception e) {
       e.getMessage();
     }
@@ -132,17 +135,24 @@ public class CallsManager {
    *          how may call to get back
    * @return list of missed calls
    */
-  public ArrayList<CallType> getNextMissedCallsList(final int ns) {
+  public CallType getNextMissedCalls() {
     try {
       if (_cur == null)
         _cur = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
     } catch (final Exception e) {
-      return new ArrayList<CallType>();
+      return null;
     }
-    final ArrayList<CallType> $ = new ArrayList<CallType>();
-    for (int i = 0; i < ns && _cur.moveToNext(); i++)
-      $.add(new CallType(_context, _cur));
-    return $;
+    // final ArrayList<CallType> $ = new ArrayList<CallType>();
+    // for (int i = 0; i < 1 && _cur.moveToNext(); i++)
+    // $.add(new CallType(_context, _cur));
+    // UnmarkCallLFromMissedCallList($.get(0).getNumber(), "");
+//    return $;
+    if (_cur.moveToNext()) {
+      final CallType $ = new CallType(_context, _cur);
+      UnmarkCallLFromMissedCallList($.getNumber(), "");
+      return $;
+    }
+    return null;
   }
   
   /**
@@ -165,5 +175,11 @@ public class CallsManager {
    */
   private static String missedCallWhere() {
     return CallLog.Calls.TYPE + "=" + CallLog.Calls.MISSED_TYPE + " AND NEW = 1";
+  }
+  
+  public void UnmarkCallLFromMissedCallList(final CallType callType) {
+    // TODO date?
+    // if 12 call from 1 number ?
+    UnmarkCallLFromMissedCallList(callType.getNumber(), "");
   }
 }

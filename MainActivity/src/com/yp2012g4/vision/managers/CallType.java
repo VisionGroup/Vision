@@ -49,9 +49,9 @@ public class CallType {
       else
         _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
       if (_name == null)
-        _name = "";
+        _name = " ";
     } catch (final Exception e) {
-      _name = "";
+      _name = " ";
     }
     try {
       _numberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));

@@ -29,10 +29,14 @@ public class CallListActivity extends VisionActivity {
     setContentView(R.layout.activity_call_list);
     init(0, getString(R.string.call_list_screen), getString(R.string.call_list_help));
     _tlv = (TalkingListView) findViewById(R.id.TalkingCallListView);
-    _ca = new CallAdapter(this);
-    _tlv.setAdapter(_ca);
 //    if (_tlv.isEmpty())
 //      TTS.speak(getString(R.string.noCalls));
+  }
+  
+  @Override public void onResume() {
+    super.onRestart();
+    _ca = new CallAdapter(this);
+    _tlv.setAdapter(_ca);
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {

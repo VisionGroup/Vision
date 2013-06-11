@@ -14,36 +14,28 @@ import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.managers.CallsManager;
 
 public class CallAdapter extends BaseAdapter {
-  private static final int NUMBER_OF_BATCH = 5;
   private final ArrayList<CallType> _callArray;
-  // Cursor _curser;
   Context _c;
+  int _count;
   private final CallsManager _callsManager;
   
-//  private static final String[] _projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
   public CallAdapter(final Context c) {
     _c = c;
     _callsManager = new CallsManager(c);
-    // _callsManager.MarkCallLFromMissedCallList();
     _callArray = new ArrayList<CallType>();
-    _callArray.addAll(_callsManager.getNextMissedCallsList(NUMBER_OF_BATCH));
-    // initCurser();
-  }
-  
-  private void initCurser() {
-//    _curser = _c.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
-//    _curser.moveToLast(); // Changed from move to first.
+    _callArray.add(_callsManager.getNextMissedCalls());
+    _count = _callsManager.getMissedCallsNum() + 1;
   }
   
   @Override public int getCount() {
-    return _callArray.size();
+    return _count;
   }
   
   @Override public Object getItem(final int p) {
     if (getCount() < p)
       return null;
     while (_callArray.size() <= p)
-      _callArray.addAll(_callsManager.getNextMissedCallsList(NUMBER_OF_BATCH));
+      _callArray.add(_callsManager.getNextMissedCalls());
 //      getNextCall();
     return _callArray.get(p);
   }
@@ -106,12 +98,10 @@ public class CallAdapter extends BaseAdapter {
     if (p < 0 || p > _callArray.size())
       return;
     _callArray.clear();
-    initCurser();
   }
   
   public void getNextCall() {
-    _callArray.addAll(_callsManager.getNextMissedCallsList(NUMBER_OF_BATCH));
-//    _callsManager.UnmarkCallLFromMissedCallList(phoneNumber, date)
-//      _curser.moveToPrevious(); // CHANGED FROM MOVE TO NEXT
+    _callsManager.UnmarkCallLFromMissedCallList(_callArray.get(_callArray.size() - 1));
+    _callArray.add(_callsManager.getNextMissedCalls());
   }
 }

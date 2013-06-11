@@ -111,6 +111,8 @@ public class TTS implements OnInitListener {
    *          string to speak.
    */
   public static void speakSync(final String s) {
+    if (s == null || s == "")
+      return;
     speak(s, staticTTS._qm);
     waitUntilFinishTalking();
   }

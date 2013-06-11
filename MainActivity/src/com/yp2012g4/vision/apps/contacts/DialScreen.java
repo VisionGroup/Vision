@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.telephony.EndCallListener;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -99,10 +98,7 @@ public class DialScreen extends VisionActivity {
       case R.id.number: // user wished to hear the number, no action needed.
         return;
       case R.id.button_reset: // reset
-        intent = new Intent(getApplicationContext(), DeleteConfirmation.class);
-        intent.putExtra("activity", "com.yp2012g4.vision.apps.contacts.DialScreen");
-        setIntentFlags(intent);
-        startActivity(intent);
+        pressedResetButton();
         break;
       case R.id.button_delete: // delete
         pressedDeleteButton(buttonId);
@@ -123,14 +119,6 @@ public class DialScreen extends VisionActivity {
     vibrate(VIBRATE_DURATION);
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
-  }
-  
-  @Override protected void onNewIntent(final Intent intent) {
-    super.onNewIntent(intent);
-    final Bundle extras = getIntent().getExtras();
-    if (extras != null)
-      if (extras.getString("ACTION").equals("DELETE"))
-        pressedResetButton();
   }
   
   /**

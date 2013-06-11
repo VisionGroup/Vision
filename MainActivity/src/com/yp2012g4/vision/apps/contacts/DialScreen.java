@@ -73,7 +73,7 @@ public class DialScreen extends VisionActivity {
       case R.id.dialer_dial_button: // make a phone call
         // no number was dialed
         if (dialed_number == "") {
-          speakOutAsync(getString(R.string.dial_number));
+          speakOutAsync(R.string.dial_number);
           return;
         }
         intent = new Intent(Intent.ACTION_CALL);
@@ -86,7 +86,7 @@ public class DialScreen extends VisionActivity {
       case R.id.dialer_sms_button: // sms
         // no number was dialed
         if (dialed_number == "") {
-          speakOutAsync(getString(R.string.dial_number));
+          speakOutAsync(R.string.dial_number);
           return;
         }
         intent = new Intent(getApplicationContext(), QuickSMSActivity.class);

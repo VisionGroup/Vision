@@ -64,7 +64,7 @@ public class WhereAmIActivity extends VisionActivity {
     l.lock();
     lastUpdate = new GregorianCalendar(1800, 1, 1).getTime();
     setText(getString(R.string.initializing));
-    speakOutAsync(getString(R.string.initializing));
+    speakOutAsync(R.string.initializing);
     l.unlock();
   }
   

@@ -74,7 +74,7 @@ public class SendSMSActivity extends VisionActivity {
         if (num.length() > 0) {
           _et = getEditText(R.id.message);
           SmsManager.getDefault().sendTextMessage(num.toString(), null, _et.getText().toString(), null, null);
-          speakOutSync(getString(R.string.message_has_been_sent));
+          speakOutSync(R.string.message_has_been_sent);
           finish();
         }
         break;

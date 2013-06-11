@@ -23,8 +23,22 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.zubhium.ZubhiumSDK;
+import com.zubhium.ZubhiumSDK.CrashReportingMode;
 
 public class VisionApplication extends Application {
+  ZubhiumSDK sdk;
+  
+  @Override public void onCreate() {
+    super.onCreate();
+    sdk = ZubhiumSDK.getZubhiumSDKInstance(getApplicationContext(), "9c8c8df856cd1a282fa86e6f2b635e");
+    sdk.setCrashReportingMode(CrashReportingMode.SILENT);
+  }
+  
+  public ZubhiumSDK getZubhiumSdk() {
+    return sdk;
+  }
+  
   public static final float SMALL_FONT_SIZE = 20;
   public static final float NORMAL_FONT_SIZE = 25;
   public static final float LARGE_FONT_SIZE = 30;

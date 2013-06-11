@@ -72,10 +72,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
       case R.id.back_button:
         Log.i(TAG, _name);
         if (_name.equals("Main screen")) {
-          speakOutSync(getString(R.string.in_main_screen));
+          speakOutSync(R.string.in_main_screen);
           break;
         }
-        speakOutSync(getString(R.string.back_button));
+        speakOutSync(R.string.back_button);
         finish();
         return true;
       case R.id.tool_tip_button:

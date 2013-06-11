@@ -64,7 +64,7 @@ public class SOSActivity extends VisionActivity {
         Log.d(TAG, "SMS Manager is not null! Sending the message");
         final ArrayList<String> parts = sms.divideMessage(messageToSend);
         sms.sendMultipartTextMessage(_number, null, parts, null, null);
-        speakOutSync(getString(R.string.SOS_message_has_been_sent));
+        speakOutSync(R.string.SOS_message_has_been_sent);
       }
       finish();
     }
@@ -73,8 +73,8 @@ public class SOSActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent me) {
     if (super.onSingleTapUp(me))
       return true;
-    if (_number == "") {
-      speakOutSync(getString(R.string.SOS_number_empty));
+    if (_number.length() == 0) {
+      speakOutSync(R.string.SOS_number_empty);
       finish();
       return true;
     }

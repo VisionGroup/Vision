@@ -28,4 +28,10 @@ public class TTSTest extends TestCase {
     assertFalse(TTS.isPureEnglish("òAabnhdkkmoolîéúòelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
     assertFalse(TTS.isPureEnglish("kkkkkkò"));
   }
+  
+  public void testSpell() {
+    assertEquals("a b c", TTS.spell("abc"));
+    assertEquals("", TTS.spell(""));
+    assertEquals("a b c d e f g 1 5 6 e", TTS.spell("abcdefg156e"));
+  }
 }

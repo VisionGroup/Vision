@@ -19,7 +19,6 @@ import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
  * @version 1.1
  * 
  */
-//TODO: Spartanize
 public class IncomingCallReceiver extends BroadcastReceiver {
   private final static String TAG = "vision:IncomingCallReceiver";
   private static boolean _rang = false;
@@ -35,25 +34,23 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       final String phonenumber = b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
       Log.i(TAG, "Incoming call from:" + phonenumber);
       _sendMessage(c, phonenumber, CALL_TYPE.INCOMING_CALL);
+      return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE) && _rang) {
       _rang = false;
       Log.i(TAG, "Call ended.");
       _sendMessage(c, "", CALL_TYPE.CALL_ENDED);
+      return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK))
       _rang = true;
   }
   
   private static void _sendMessage(final Context c, final String number, final CALL_TYPE ct) {
-    final Message m = new Message();
-    final Bundle b2 = new Bundle();
-    b2.putString(CallUtils.NUMBER_KEY, number);
-    b2.putInt(CallUtils.CALL_TYPE_KEY, ct.ordinal());
-    m.setData(b2);
+    final Message m = CallUtils.newMessage(number, ct);
+    if (CallService.callScreenServiceManager == null)
+      CallService.initialise(c);
     try {
-      if (CallService.callScreenServiceManager == null)
-        CallService.initialise(c);
       CallService.callScreenServiceManager.send(m);
     } catch (final RemoteException e) {
       Log.d(TAG, "Unable to send message to callScreenService.", e);

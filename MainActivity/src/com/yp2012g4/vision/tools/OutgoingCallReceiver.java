@@ -26,11 +26,7 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
         return;
       final String phoneNumber = b.getString(OutgoingCallReceiver.INTENT_PHONE_NUMBER);
       Log.v(TAG, "Incoming phonenumber: " + phoneNumber);
-      final Message m = new Message();
-      final Bundle b1 = new Bundle();
-      b1.putString(CallUtils.NUMBER_KEY, phoneNumber);
-      b1.putInt(CallUtils.CALL_TYPE_KEY, CALL_TYPE.INCOMING_CALL.ordinal());
-      m.setData(b1);
+      final Message m = CallUtils.newMessage(phoneNumber, CALL_TYPE.INCOMING_CALL);
       try {
         CallService.callScreenServiceManager.send(m);
       } catch (final RemoteException e) {

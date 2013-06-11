@@ -60,30 +60,28 @@ public class ContactsActivity extends VisionActivity {
         // callsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
-        intent = setIntentFlags(new Intent(ContactsActivity.this, SendSMSActivity.class));
+        intent = newFlaggedIntent(ContactsActivity.this, SendSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
         startActivity(intent);
         break;
       case R.id.contacts_quick_sms:
-        intent = setIntentFlags(new Intent(ContactsActivity.this, QuickSMSActivity.class));
+        intent = newFlaggedIntent(ContactsActivity.this, QuickSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
         startActivity(intent);
         break;
       case R.id.add_contact:
-        intent = new Intent(ContactsActivity.this, AddContactActivity.class);
-        setIntentFlags(intent);
+        intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.edit_contact:
-        intent = setIntentFlags(new Intent(ContactsActivity.this, AddContactActivity.class));
+        intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
         final String name = ct.getContactName();
         intent.putExtra(CONTACT_NAME_FLAG, name);
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.delete_contact:
-        intent = new Intent(this, DeleteConfirmation.class);
+        intent = newFlaggedIntent(this, DeleteConfirmation.class);
         intent.putExtra(DeleteConfirmation.ACTIVITY_EXTRA, this.getClass().getName());
-        setIntentFlags(intent);
         startActivity(intent);
         break;
       default:

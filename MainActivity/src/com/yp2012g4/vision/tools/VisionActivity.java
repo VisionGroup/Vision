@@ -2,6 +2,7 @@ package com.yp2012g4.vision.tools;
 
 import java.util.Map;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -175,6 +176,10 @@ public abstract class VisionActivity extends VisionGestureDetector {
       default:
         return false;
     }
+  }
+  
+  public static Intent newFlaggedIntent(final Context con, final Class<?> c) {
+    return setIntentFlags(new Intent(con, c));
   }
   
   public static Intent setIntentFlags(final Intent intent) {

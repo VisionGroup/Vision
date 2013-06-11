@@ -111,6 +111,8 @@ public class TTS implements OnInitListener {
    *          string to speak.
    */
   public static void speakSync(final String s) {
+    if (s == null || s == "")
+      return;
     speak(s, staticTTS._qm);
     waitUntilFinishTalking();
   }
@@ -124,19 +126,35 @@ public class TTS implements OnInitListener {
    *          The queueMode to use
    */
   public static void speak(final String s, final int queueMode) {
+    final String ss = spellIfNeeded(s);
     if (VisionApplication.muted) {
       Log.d(TAG, "not speaking because application is muted");
       return;
     }
-    Log.d(TAG, "speak : " + s);
-    staticTTS._tts.speak(s, queueMode, null);
-    final boolean debug = false;
-    if (debug) {
-      Log.d(TAG, "caller function : " + Thread.currentThread().getStackTrace()[3].getClassName() + ":"
-          + Thread.currentThread().getStackTrace()[3].getMethodName());
-      Log.d(TAG, "caller function 2: " + Thread.currentThread().getStackTrace()[4].getClassName() + ":"
-          + Thread.currentThread().getStackTrace()[4].getMethodName());
-    }
+    Log.d(TAG, "speak : " + ss);
+    staticTTS._tts.speak(ss, queueMode, null);
+  }
+  
+  /**
+   * Try to detect if we need to spell the string, and if yes, convert it to a
+   * "spelled" string The TTS will sometimes automatically spell the string if
+   * it detects it's a number or something, but this is TTS engine dependent, so
+   * we cannot rely on it
+   * 
+   * @param s
+   *          The string to potentially spell
+   * @return The inputed string, transformed to "spelled" string if needed
+   */
+  private static String spellIfNeeded(final String s) {
+    if (s.length() <= 3 || s.length() >= 15)
+      return s;
+    int digitCount = 0;
+    for (final char c : s.toCharArray())
+      if (c >= '0' && c <= '9' || c == '+')
+        digitCount++;
+    if (digitCount / (double) s.length() > 0.8)
+      return spell(s);
+    return s;
   }
   
   /**
@@ -208,6 +226,16 @@ public class TTS implements OnInitListener {
     while (isSpeaking()) {
       // Wait for message to finish playing and then continue
     }
+  }
+  
+  public static String spell(final String s) {
+    if (s.length() == 0)
+      return s;
+    final StringBuilder $ = new StringBuilder();
+    $.append(s.charAt(0));
+    for (final char c : s.substring(1).toCharArray())
+      $.append(' ').append(c);
+    return $.toString();
   }
   
   /**

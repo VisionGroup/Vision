@@ -11,7 +11,6 @@ import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.lists.CallAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.CallType;
-import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -30,10 +29,14 @@ public class CallListActivity extends VisionActivity {
     setContentView(R.layout.activity_call_list);
     init(0, getString(R.string.call_list_screen), getString(R.string.call_list_help));
     _tlv = (TalkingListView) findViewById(R.id.TalkingCallListView);
-    _ca = new CallAdapter(this);
-    _tlv.setAdapter(_ca);
 //    if (_tlv.isEmpty())
 //      TTS.speak(getString(R.string.noCalls));
+  }
+  
+  @Override public void onResume() {
+    super.onRestart();
+    _ca = new CallAdapter(this);
+    _tlv.setAdapter(_ca);
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {
@@ -82,7 +85,8 @@ public class CallListActivity extends VisionActivity {
    */
   private void removeFromCallList(final CallType currCall) {
     // first we remove the Call from the phone DB
-    CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
+    // TODO
+    // CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
     // then we remove the Call from the displayed list
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);
@@ -108,7 +112,7 @@ public class CallListActivity extends VisionActivity {
         _tlv.prevPage();
       else
         _tlv.nextPage();
-      CallsManager.UnmarkCallLFromMissedCallList(this, ((CallType) _ca.getItem(_tlv.getPage())).getNumber());
+//      callsManager.UnmarkCallLFromMissedCallList(((CallType) _ca.getItem(_tlv.getPage())).getNumber(), "");
       vibrate(VIBRATE_DURATION);
     }
     return super.onFling(e1, e2, f1, f2);

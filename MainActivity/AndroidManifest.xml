@@ -235,8 +235,8 @@
         </activity>
         <activity
             android:name="com.yp2012g4.vision.CallListActivity"
-            android:label="@string/title_activity_call_list" 
             android:configChanges="locale"
+            android:label="@string/title_activity_call_list"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -259,9 +259,10 @@
         </activity>
         <activity
             android:name="com.yp2012g4.vision.apps.contacts.AddContactActivity"
-            android:label="@string/title_activity_add_contact"
-            android:screenOrientation="portrait"
             android:configChanges="locale"
+            android:label="@string/title_activity_add_contact"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
     </application>

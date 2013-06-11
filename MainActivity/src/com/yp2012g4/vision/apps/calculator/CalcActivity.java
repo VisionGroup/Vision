@@ -124,7 +124,7 @@ public class CalcActivity extends VisionActivity {
   }
   
   private void badAction() {
-    speakOutAsync(getString(R.string.bad_action));
+    speakOutAsync(R.string.bad_action);
     isBadAction = true;
   }
   
@@ -217,7 +217,7 @@ public class CalcActivity extends VisionActivity {
         return lhs * rhs;
       case DIV:
         if (Math.abs(rhs) < EPSILON) {
-          speakOutSync(getString(R.string.division_by_zero));
+          speakOutSync(R.string.division_by_zero);
           return Double.NaN;
         }
         return lhs / rhs;

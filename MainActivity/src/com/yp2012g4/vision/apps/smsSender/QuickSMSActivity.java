@@ -39,7 +39,7 @@ public class QuickSMSActivity extends VisionActivity {
     if (view instanceof TalkingButton) {
       speakOutSync(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText());
       SmsManager.getDefault().sendTextMessage(number, null, ((TalkingButton) view).getReadText(), null, null);
-      speakOutSync(getString(R.string.message_has_been_sent));
+      speakOutSync(R.string.message_has_been_sent);
       _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
       finish();
     }

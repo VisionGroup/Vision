@@ -91,7 +91,7 @@ public class CallListActivity extends VisionActivity {
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);
     _tlv.prevPage();
-    speakOutAsync(getString(R.string.delete_call));
+    speakOutAsync(R.string.delete_call);
     vibrate();
   }
   

@@ -152,6 +152,6 @@ public class MainActivity extends VisionActivity {
   }
   
   @Override public void onBackPressed() {
-    speakOutAsync(getString(R.string.in_main_screen));
+    speakOutAsync(R.string.in_main_screen);
   }
 }

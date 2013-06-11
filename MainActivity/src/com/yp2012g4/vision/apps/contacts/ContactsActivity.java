@@ -111,7 +111,7 @@ public class ContactsActivity extends VisionActivity {
           setContact();
           speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
         } else
-          speakOutAsync(getString(R.string.delete_contact_failed));
+          speakOutAsync(R.string.delete_contact_failed);
         vibrate(VIBRATE_DURATION);
       } else if (extras.getString(ACTION_EXTRA).equals(AddContactActivity.ADD_FLAG)) {
         selectCorrespondingContactsList();
@@ -124,7 +124,7 @@ public class ContactsActivity extends VisionActivity {
       currentContact--;
       setContact();
     } else
-      speakOutAsync(getString(R.string.no_more_contacts));
+      speakOutAsync(R.string.no_more_contacts);
     vibrate(VIBRATE_TIME);
   }
   
@@ -133,7 +133,7 @@ public class ContactsActivity extends VisionActivity {
       currentContact++;
       setContact();
     } else
-      speakOutAsync(getString(R.string.no_more_contacts));
+      speakOutAsync(R.string.no_more_contacts);
     vibrate(VIBRATE_TIME);
   }
   
@@ -185,7 +185,7 @@ public class ContactsActivity extends VisionActivity {
     final TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
     final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_quick_sms);
     if (contactManager.getNumOfContacts() == 0)
-      speakOutAsync(getString(R.string.no_messages));
+      speakOutAsync(R.string.no_messages);
     else {
       final ContactType curContect = contactManager.getContact(currentContact);
       currentName = curContect.getContactName();

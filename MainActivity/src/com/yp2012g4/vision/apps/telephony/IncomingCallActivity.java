@@ -54,7 +54,7 @@ public class IncomingCallActivity extends VisionActivity {
         endCall();
         break;
       case R.id.back_button:
-        speakOutAsync(getString(R.string.previous_screen));
+        speakOutAsync(R.string.previous_screen);
         _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
         break;
       default:
@@ -108,7 +108,7 @@ public class IncomingCallActivity extends VisionActivity {
   private void endCall() {
     _cu.endCall();
     Log.d(TAG, "Rejected call");
-    speakOutSync(getString(R.string.IncomingCall_call_ended));
+    speakOutSync(R.string.IncomingCall_call_ended);
   }
   
   /**

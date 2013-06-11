@@ -13,6 +13,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
 public class ContactManager {
+  private static final String TAG = "vision:ContactManager";
   private final Context _c;
   public final int NUMBER_OF_CONTACTS_BATCH = 5;
   private int _size;
@@ -46,7 +47,7 @@ public class ContactManager {
   public void getAllContacts() {
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
     final String so = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    cur = _c.getContentResolver().query(Phone.CONTENT_URI, _projection, ss, null, so);
+    cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
     cur.moveToFirst();
     _size = cur.getCount();
   }
@@ -107,7 +108,12 @@ public class ContactManager {
     final Cursor cs = _c.getContentResolver().query(Phone.CONTENT_URI, null, Phone.LOOKUP_KEY + " = ?", new String[] { lk }, null);
     if (cs.getCount() > 0) {
       cs.moveToFirst();
-      $ = cs.getString(cs.getColumnIndex(Phone.NUMBER));
+      try {
+        $ = cs.getString(cs.getColumnIndex(Phone.NUMBER));
+      } catch (final Exception e) {
+        Log.d(TAG, "At lookupphonenumber" + e.getMessage());
+        $ = "";
+      }
     }
     return $;
   }

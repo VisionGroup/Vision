@@ -63,7 +63,7 @@ public class SOSconfig extends VisionActivity {
     switch (buttonId) {
       case R.id.button_ok:
         if (dialed_number == "") {
-          speakOutAsync(getString(R.string.SOS_number_empty));
+          speakOutAsync(R.string.SOS_number_empty);
           break;
         }
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);

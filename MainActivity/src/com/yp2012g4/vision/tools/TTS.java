@@ -16,7 +16,7 @@ import com.yp2012g4.vision.apps.settings.VisionApplication;
  * 
  * @author Auster Yaron
  * 
- * @author Olivier Modified the class so that it is a singleton
+ * @author Olivier (Modified the class so that it is a singleton)
  * 
  */
 public class TTS implements OnInitListener {
@@ -29,9 +29,14 @@ public class TTS implements OnInitListener {
   private static String _engine = "";
   
   public static void init(final Context c) {
-    if (staticTTS == null || !TTS.isRunning() || _engine != staticTTS._tts.getDefaultEngine()) {
+    if (staticTTS == null || !TTS.isRunning() || !_engine.equals(staticTTS._tts.getDefaultEngine())) {
+      // I know this seems overly complex, but it is a workaround aroud the fact
+      // that getDefaultEngine() sometimes returns an empty string
+      if (staticTTS != null)
+        _engine = staticTTS._tts.getDefaultEngine();
       staticTTS = new TTS(c);
-      _engine = staticTTS._tts.getDefaultEngine();
+      if (staticTTS._tts.getDefaultEngine().length() != 0)
+        _engine = staticTTS._tts.getDefaultEngine();
       Log.v(TAG, "TTS initialized");
     } else
       Log.v(TAG, "TTS already running so not initialized");

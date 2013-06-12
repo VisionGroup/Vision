@@ -158,10 +158,10 @@ public class DisplaySettingsActivity extends VisionActivity {
 //    final String buttonMode = sp.getString("BUTTON MODE", "regular");
 //    if (buttonMode.equals("regular")) {
 //      VisionApplication.savePrefs("BUTTON MODE", "sticky", this);
-//      speakOutAsync(getString(R.string.sticky_buttons_mode));
+//      speakOutAsync(R.string.sticky_buttons_mode);
 //    } else {
 //      VisionApplication.savePrefs("BUTTON MODE", "regular", this);
-//      speakOutAsync(getString(R.string.regular_buttons_mode));
+//      speakOutAsync(R.string.regular_buttons_mode);
 //    }
 //  }
   /**

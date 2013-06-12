@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import com.yp2012g4.vision.tools.TTS;
 
+@SuppressWarnings("static-method")
 public class TTSTest extends TestCase {
   public TTSTest(String name) {
     super(name);
@@ -17,7 +18,7 @@ public class TTSTest extends TestCase {
     super.tearDown();
   }
   
-  @SuppressWarnings("static-method") public void testisPureEnglish() {
+  public void testisPureEnglish() {
     assertTrue(TTS.isPureEnglish("Abcdefghijklmnopqrstuvwxyz"));
     assertTrue(TTS.isPureEnglish("Aabnhdkkmoolelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
     assertTrue(TTS.isPureEnglish(""));
@@ -26,5 +27,11 @@ public class TTSTest extends TestCase {
     assertFalse(TTS.isPureEnglish("ò"));
     assertFalse(TTS.isPureEnglish("òAabnhdkkmoolîéúòelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
     assertFalse(TTS.isPureEnglish("kkkkkkò"));
+  }
+  
+  public void testSpell() {
+    assertEquals("a b c", TTS.spell("abc"));
+    assertEquals("", TTS.spell(""));
+    assertEquals("a b c d e f g 1 5 6 e", TTS.spell("abcdefg156e"));
   }
 }

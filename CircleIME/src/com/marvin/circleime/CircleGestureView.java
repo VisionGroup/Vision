@@ -1,6 +1,7 @@
 package com.marvin.circleime;
 
 //import com.google.tts.TTSEarcon;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -86,7 +87,7 @@ public class CircleGestureView extends KeyboardView {
     }
 
     private enum KeyboardMode {
-	ALPHA, NUMERIC
+	ALPHA_MODE, NUMERIC_MODE
     }
 
     private enum Dir {
@@ -109,8 +110,8 @@ public class CircleGestureView extends KeyboardView {
     }
 
     private static final int numOfDir = 9;
-    private static final int X = 0;
-    private static final int Y = 1;
+    // private static final int X = 0;
+    // private static final int Y = 1;
 
     private static final String TAG = "vision:CircleIME";
 
@@ -157,7 +158,7 @@ public class CircleGestureView extends KeyboardView {
 
     private String currentCharacter = "";// Using the READ abc
 
-    private int currentCharOrdinal = -1;
+    // private int currentCharOrdinal = -1;
 
     private String currentString = "";
 
@@ -177,7 +178,8 @@ public class CircleGestureView extends KeyboardView {
 
     private int lang = languages.EN.ordinal();
 
-    private KeyboardMode keyboardMode = KeyboardMode.ALPHA; // Alpha or Numeric
+    private KeyboardMode keyboardMode = KeyboardMode.ALPHA_MODE; // Alpha or
+								 // Numeric
 
     public CircleGestureView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -235,7 +237,7 @@ public class CircleGestureView extends KeyboardView {
     }
 
     public static int getWheel(Dir value, KeyboardMode km) {
-	if (km == KeyboardMode.ALPHA)
+	if (km == KeyboardMode.ALPHA_MODE)
 	    switch (value) {
 	    case NW:
 		return AE;
@@ -464,10 +466,12 @@ public class CircleGestureView extends KeyboardView {
 	lastX = x;
 	lastY = y;
 	currentDir = Dir.NONE;
-	currentWheel = (keyboardMode == KeyboardMode.ALPHA) ? ALPHA : NUMERIC;
+	currentWheel = (keyboardMode == KeyboardMode.ALPHA_MODE) ? ALPHA
+		: NUMERIC;
 	currentCharacter = "";
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     public void onDraw(Canvas canvas) {
 	// super.onDraw(canvas);
@@ -799,6 +803,8 @@ public class CircleGestureView extends KeyboardView {
 			xy[Dir.W.ordinal()], canvas, paint, false);
 
 		break;
+	    default:
+		break;
 	    }
 	}
 
@@ -872,12 +878,12 @@ public class CircleGestureView extends KeyboardView {
      * Changes between Alpha and numeric layouts.
      */
     public void toggleKeyboardMode() {
-	if (keyboardMode == KeyboardMode.ALPHA) {
-	    keyboardMode = KeyboardMode.NUMERIC;
+	if (keyboardMode == KeyboardMode.ALPHA_MODE) {
+	    keyboardMode = KeyboardMode.NUMERIC_MODE;
 	    currentWheel = NUMERIC;
 	    _tts.speak("Numbers");
 	} else {
-	    keyboardMode = KeyboardMode.ALPHA;
+	    keyboardMode = KeyboardMode.ALPHA_MODE;
 	    currentWheel = ALPHA;
 	    _tts.speak("Alpha");
 	}

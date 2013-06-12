@@ -91,8 +91,8 @@ public class LatinKeyboard extends Keyboard {
          * key that closes the keyboard.
          */
         @Override
-        public boolean isInside(int x, int y) {
-            return super.isInside(x, codes[0] == KEYCODE_CANCEL ? y - 10 : y);
+        public boolean isInside(int _x, int _y) {
+            return super.isInside(_x, codes[0] == KEYCODE_CANCEL ? _y - 10 : _y);
         }
     }
 

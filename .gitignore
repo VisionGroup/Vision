@@ -8,3 +8,7 @@ gen
 /Mainactivity/gen/com/yp2012g4/blindroid/BuildConfig.java
 /Mainactivity/gen/com/yp2012g4/blindroid/R.java
 
+
+/MainActivity/libs/zubhiumsdk.zip
+
+/MainActivity/target/classes/com/android/internal/telephony/ITelephony.aidl

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
@@ -34,22 +35,20 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
     super.setUp();
     activity = getActivity();
     solo = new Solo(getInstrumentation(), activity);
+    solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
   }
   
   @MediumTest public void testNumOfButtons() {
-    solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
     final ArrayList<Button> btnList = solo.getCurrentButtons();
     assertEquals(8, btnList.size());
   }
   
   @MediumTest public void testNumOfImageButtons() {
-    solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
     final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     assertEquals(4, btnList.size());
   }
   
   @MediumTest public void testClickOnBackButton() {
-    solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
     final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     final TalkingImageButton btn = (TalkingImageButton) btnList.get(0);
     assertTrue(btn.getId() == R.id.back_button);
@@ -64,7 +63,6 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
     final ArrayList<Button> btnList = solo.getCurrentButtons();
     for (int i = 0; i < btnList.size(); i += 2) {
       final TalkingButton btn = (TalkingButton) btnList.get(i);
-      // assertTrue(btn.getText().toString().equals(string[i]));
       assertEquals(string[i], btn.getText().toString());
     }
   }
@@ -74,6 +72,7 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
     i.putExtra(CallUtils.NUMBER_KEY, "0578135813");
     activity.startActivity(i);
     solo.assertCurrentActivity("Check on first activity", QuickSMSActivity.class);
-    // TODO: Check the activity contains the same string as a phone number.
+    final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
+    assertEquals(extras.getString(CallUtils.NUMBER_KEY), "0578135813");
   }
 }

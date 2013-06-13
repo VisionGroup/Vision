@@ -240,7 +240,7 @@
     <string name="quick_sms_screen">Quick S M S screen</string>
     <string name="quick_sms_help">Choose quick S M S message from the list above.</string>
     <string name="send_quick_sms">send quick S M S</string>
-    <string name="sending">Sending</string>
+    <string name="sending">Sending </string>
     <string name="message_has_been_sent">Message has been sent</string>
     <string name="SMS_number_1">Will call you back</string>
     <string name="SMS_number_2">How are you?</string>
@@ -251,6 +251,7 @@
     <string name="SMS_number_7">Where are you?</string>
     <string name="SMS_number_8">Remind me later</string>
     <string name="SMS_number_9">Happy Birthday!</string>
+    <string name="error_in_sending_sms">Phone number is empty.</string>
 
     <!-- ReadSMSActivity -->
     <string name="read_sms_screen">Read S M S screen</string>

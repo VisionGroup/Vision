@@ -47,10 +47,11 @@ public class ContactsActivity extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     final View button = getButtonByMode();
-    Intent intent;
+    final Intent intent;
     final ContactType ct = contactManager.getContact(currentContact);
     if (ct == null)
       return false;
+    final String name;
     switch (button.getId()) {
       case R.id.contacts_call:
         intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
@@ -67,6 +68,8 @@ public class ContactsActivity extends VisionActivity {
       case R.id.contacts_quick_sms:
         intent = newFlaggedIntent(ContactsActivity.this, QuickSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
+        name = ct.getContactName();
+        intent.putExtra(CONTACT_NAME_FLAG, name);
         startActivity(intent);
         break;
       case R.id.add_contact:
@@ -75,7 +78,7 @@ public class ContactsActivity extends VisionActivity {
         break;
       case R.id.edit_contact:
         intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
-        final String name = ct.getContactName();
+        name = ct.getContactName();
         intent.putExtra(CONTACT_NAME_FLAG, name);
         startActivityForResult(intent, REQUEST_CODE);
         break;

@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.test.suitebuilder.annotation.MediumTest;
+import android.widget.EditText;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.contacts.ContactsActivity;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
@@ -107,6 +109,24 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
       assertTrue(contactType.getPhone() != "");
       assertEquals(contactType.getPhone(), cm.lookupPhoneNumbers(contactType.getLookUpKey()));
     }
+  }
+  
+  @MediumTest public void testSendSmsToContact() throws Exception {
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    solo.clickOnView(solo.getView(R.id.contacts_sms));
+    solo.assertCurrentActivity("wrong activity", SendSMSActivity.class);
+    solo.clickOnView(solo.getView(R.id.phoneNumber));
+    final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
+    assertEquals(((EditText) solo.getView(R.id.phoneNumber)).getText().toString(), extras.getString(CallUtils.NUMBER_KEY));
+//TODO: check why "click cannot be completed" error occures????s
+    // try {
+//      solo.clickOnView(solo.getView(R.id.sendMessageButton));
+//    } catch (Error e) {
+//      Log.i("MyLog", VisionGestureDetector._spokenString);
+//      assertEquals(VisionGestureDetector._spokenString, "Message was not sent. Please check reception or sim card.");
+//      return;
+//    }
+//    assertEquals(VisionGestureDetector._spokenString, "Message has been sent");
   }
   
   public static void flingRight(ActivityInstrumentationTestCase2<?> c) {

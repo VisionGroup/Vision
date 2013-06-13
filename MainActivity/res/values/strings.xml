@@ -346,6 +346,7 @@
     <string name="phone_number">Phone number</string>
     <string name="title_activity_sosconfiguation">SOSconfiguation</string>
     <string name="title_activity_add_contact">AddContactActivity</string>
+    <string name="message_was_not_sent">Message was not sent. Please check reception or sim card.</string>
 
     <!-- Manger's -->
     <string name="incoming_call_from_private_number">Private number</string>

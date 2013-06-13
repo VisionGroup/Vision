@@ -82,16 +82,15 @@
     <string name="settings_button">הגדרות</string>
     <string name="read_sms_button">קריאת SMS</string>
 
-	<plurals name="numberOfMissedCalls">
+    <plurals name="numberOfMissedCalls">
         <item quantity="one">שיחה אחת שלא נענתה.</item>
         <item quantity="other">%d שיחות שלא נענו</item>
-	</plurals>
-	
+    </plurals>
     <plurals name="numberOfNewSMS">
-       	<item quantity="one">הודעת אס אמ אס חדשה.</item>
-       	<item quantity="other">%d הודעות אס אמ אס חדשות.</item>
-   	</plurals>
-    
+        <item quantity="one">הודעת אס אמ אס חדשה.</item>
+        <item quantity="other">%d הודעות אס אמ אס חדשות.</item>
+    </plurals>
+
     <!-- PhoneStatusActivity -->
     <string name="phoneStatus_whereami">תפריט מצב הטלפון</string>
     <string name="phoneStatus_help">ניתן לבחור באחת מהאפשרויות הבאות: 1) מצב הסוללה ומצב הטעינה. 2) מצב קליטת הטלפון. 3) רשימת שיחות שלא נענו</string>
@@ -200,7 +199,7 @@
     <string name="language">שפה</string>
     <!--
     <string name="switched_to_hebrew">הוחלף לעברית</string>
-    <string name="switched_to_english">הוחלף לאנגלית</string>
+    <string name="switched_to_english">הוחלף לאנגלית</string>
     -->
     <string name="one_lang_avail">רק שפה אחת זמינה.</string>
     <string name="switched_to">הוחלף ל-</string>
@@ -282,8 +281,8 @@
     <string name="current_menu_button">מסך נוכחי</string>
 
     <!-- CalcActivity -->
-    <string name="calc_screen">מסך מחשבון</string>  
-    <string name="calc_screen_info">כפתורי המחשבון נמצאים באמצע המסך. בראש המסך נמצא הביטוי החשבוני. בתחתית המסך נמצא הכפתור שווה..</string> 
+    <string name="calc_screen">מסך מחשבון</string>
+    <string name="calc_screen_info">כפתורי המחשבון נמצאים באמצע המסך. בראש המסך נמצא הביטוי החשבוני. בתחתית המסך נמצא הכפתור שווה..</string>
     <string name="plus">+</string>
     <string name="ReadPlus">פלוס</string>
     <string name="minus">-</string>
@@ -318,7 +317,9 @@
     <string name="message_content">תוכן ההודעה</string>
     <string name="enter_a_message">הכנס הודעה</string>
     <string name="phone_number">מספר טלפון</string>
+    <string name="message_was_not_sent">ההודעה לא נשלחה. יש לבדוק קליטה או כרטיס סים.</string>
 
     <!-- Manger's -->
     <string name="incoming_call_from_private_number">מספר חסום</string>
+
 </resources>

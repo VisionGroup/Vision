@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
@@ -99,6 +100,7 @@ public class SOSconfig extends VisionActivity {
     vibrate(VIBRATE_DURATION);
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
+    v.playSoundEffect(SoundEffectConstants.CLICK);
   }
   
   /**

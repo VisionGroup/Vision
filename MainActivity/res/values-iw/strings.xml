@@ -199,7 +199,7 @@
     <string name="language">שפה</string>
     <!--
     <string name="switched_to_hebrew">הוחלף לעברית</string>
-    <string name="switched_to_english">הוחלף לאנגלית</string>
+    <string name="switched_to_english">הוחלף לאנגלית</string>
     -->
     <string name="one_lang_avail">רק שפה אחת זמינה.</string>
     <string name="switched_to">הוחלף ל-</string>
@@ -249,6 +249,7 @@
     <string name="send_SOS_message">שליחת הודעת SOS</string>
     <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
     <string name="SOS_number_empty">איש קשר S O S ריק. הכנס מספר תקין.</string>
+    <string name="to">אל</string>
 
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">מסך אישור מחיקה</string>
@@ -263,7 +264,7 @@
     <string name="sos_config_screen_whereami">מסך הגדרת איש קשר S O S</string>
     <string name="sos_number">sosNumber</string>
     <string name="change_contact_number">הגדר איש קשר S O S</string>
-    <string name="sos_contact_number">איש קשר S O S </string>
+    <string name="sos_contact_number_is">איש קשר S O S הוא</string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">שיחה</string>

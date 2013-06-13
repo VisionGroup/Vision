@@ -118,7 +118,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     solo.clickOnView(solo.getView(R.id.phoneNumber));
     final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
     assertEquals(((EditText) solo.getView(R.id.phoneNumber)).getText().toString(), extras.getString(CallUtils.NUMBER_KEY));
-//TODO: check why "click cannot be completed" error occures????s
+//TODO: check why "click cannot be completed" error occurs????
     // try {
 //      solo.clickOnView(solo.getView(R.id.sendMessageButton));
 //    } catch (Error e) {

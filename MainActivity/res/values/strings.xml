@@ -263,10 +263,12 @@
     <string name="sos_screen">S O S screen</string>
     <string name="sos_help">tap screen to send an S O S message with your location </string>
     <string name="SOS_message_has_been_sent">S O S message has been sent.</string>
-    <string name="sending_SOS_message">Sending S O S message.</string>
+    <string name="sending_SOS_message">Sending S O S message</string>
     <string name="send_SOS_message">Send S O S</string>
     <string name="sos_msg_to_send">I need your help!</string>
     <string name="SOS_number_empty">S O S contact is empty. Please setup number in configuration screen</string>
+    <string name="to">to</string>
+    
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">Delete confirmation</string>
     <string name="delete_confirmation_info">Are you sure?</string>
@@ -281,7 +283,7 @@
     <string name="sos_config_screen_whereami">S O S configuration screen</string>
     <string name="sos_number">sosNumber</string>
     <string name="change_contact_number">Change S O S Contact Number</string>
-    <string name="sos_contact_number">S O S contact number </string>
+    <string name="sos_contact_number_is">S O S contact number is.</string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">Call</string>

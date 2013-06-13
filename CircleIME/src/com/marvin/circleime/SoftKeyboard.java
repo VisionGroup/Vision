@@ -644,20 +644,22 @@ public class SoftKeyboard extends InputMethodService implements
     }
 
     private void handleCharacter(int primaryCode) {
+	int pC = primaryCode;
 	if (isInputViewShown())
 	    if (mInputView.isShifted())
-		primaryCode = Character.toUpperCase(primaryCode);
-	if (isAlphabet(primaryCode) && mPredictionOn) {
-	    mComposing.append((char) primaryCode);
+		pC = Character.toUpperCase(primaryCode);
+	if (isAlphabet(pC) && mPredictionOn) {
+	    mComposing.append((char) pC);
 	    getCurrentInputConnection().setComposingText(mComposing, 1);
 	    updateShiftKeyState(getCurrentInputEditorInfo());
 	    updateCandidates();
 	} else
-	    getCurrentInputConnection().commitText(
-		    String.valueOf((char) primaryCode), 1);
+	    getCurrentInputConnection()
+		    .commitText(String.valueOf((char) pC), 1);
     }
 
     private void handleClose() {
+	// TODO: Add audio notification close.
 	if (_open) {
 	    commitTyped(getCurrentInputConnection());
 	    requestHideSelf(0);

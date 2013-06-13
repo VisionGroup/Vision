@@ -71,7 +71,7 @@ public class CallsManager {
   public void UnmarkCallLFromMissedCallList(final String phoneNumber, final String date) {
     try {
       final ContentValues values = new ContentValues();
-      values.put(Calls.NEW, 0);
+      values.put(Calls.NEW, Integer.valueOf(0));
       final StringBuilder where = new StringBuilder();
       where.append(Calls.NEW + " = 1");
       where.append(" AND ");

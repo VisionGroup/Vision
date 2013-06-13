@@ -74,20 +74,25 @@ public class SendSMSActivity extends VisionActivity {
         final CharSequence num = _et.getText();
         if (num.length() > 0) {
           _et = getEditText(R.id.message);
-          try {
-            SmsManager.getDefault().sendTextMessage(num.toString(), null, _et.getText().toString(), null, null);
-          } catch (final Exception exception) {
-            speakOutSync(R.string.message_was_not_sent);
-            break;
-          }
-          speakOutSync(R.string.message_has_been_sent);
-          finish();
+          handleSendMessage(_et, num);
         }
         break;
       default:
         break;
     }
     return false;
+  }
+  
+  private void handleSendMessage(final EditText _et, final CharSequence num) {
+    try {
+      SmsManager.getDefault().sendTextMessage(num.toString(), null, _et.getText().toString(), null, null);
+    } catch (final Exception exception) {
+      speakOutSync(R.string.message_was_not_sent);
+      return;
+    }
+    speakOutSync(R.string.message_has_been_sent);
+    finish();
+    return;
   }
   
   /**

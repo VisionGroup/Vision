@@ -9,6 +9,12 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
 
+/**
+ * Tests for SendSMSActivity
+ * 
+ * @author Amir Mizrachi
+ * @version 2.0
+ */
 public class SendSMSActivityTest extends ActivityInstrumentationTestCase2<SendSMSActivity> {
   private Solo solo;
   private Activity activity;

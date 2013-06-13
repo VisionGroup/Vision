@@ -12,6 +12,12 @@ import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
 
+/**
+ * Tests for CalcActivity
+ * 
+ * @author Amir Mizrachi
+ * @version 2.0
+ */
 public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActivity> {
   private Solo solo;
   private Activity activity;
@@ -24,10 +30,10 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
     super.setUp();
     activity = getActivity();
     solo = new Solo(getInstrumentation(), activity);
+    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
   }
   
   @MediumTest public void testResultButton() {
-    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit1));
     solo.clickOnView(solo.getView(R.id.digit2));
     solo.clickOnView(solo.getView(R.id.digit7));
@@ -39,7 +45,6 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
   }
   
   @MediumTest public void testComplicatedCalculation() {
-    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit8));
     solo.clickOnView(solo.getView(R.id.digit5));
     solo.clickOnView(solo.getView(R.id.plus));
@@ -53,7 +58,6 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
   }
   
   @MediumTest public void testClear() {
-    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit9));
     solo.clickOnView(solo.getView(R.id.digit4));
     solo.clickOnView(solo.getView(R.id.div));
@@ -66,7 +70,6 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
   }
   
   @MediumTest public void testDecimalNumber() {
-    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit5));
     solo.clickOnView(solo.getView(R.id.dot));
     solo.clickOnView(solo.getView(R.id.digit7));
@@ -80,7 +83,6 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
   }
   
   @MediumTest public void testDivisionByZero() {
-    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
     solo.clickOnView(solo.getView(R.id.digit4));
     solo.clickOnView(solo.getView(R.id.digit5));
     solo.clickOnView(solo.getView(R.id.div));
@@ -95,8 +97,6 @@ public class CalcActivityTest extends ActivityInstrumentationTestCase2<CalcActiv
   }
   
   @MediumTest public void testBadAction() {
-    solo.assertCurrentActivity("wrong activity", CalcActivity.class);
-    // clickOnArrayElements(arr[10]);
     solo.clickOnView(solo.getView(R.id.digit4));
     solo.clickOnView(solo.getView(R.id.plus));
     solo.clickOnView(solo.getView(R.id.digit7));

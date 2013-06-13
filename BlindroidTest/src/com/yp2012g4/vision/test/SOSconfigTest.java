@@ -14,6 +14,12 @@ import com.yp2012g4.vision.apps.sos.SOSconfig;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionGestureDetector;
 
+/**
+ * Tests for SOSconfig
+ * 
+ * @author Amir Mizrachi
+ * @version 2.0
+ */
 public class SOSconfigTest extends ActivityInstrumentationTestCase2<SOSconfig> {
   private Solo solo;
   private Activity activity;

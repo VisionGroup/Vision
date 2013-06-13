@@ -20,7 +20,7 @@ import com.yp2012g4.vision.tools.CallUtils;
 /**
  * Tests for QuickSMSActivity
  * 
- * @author Amir
+ * @author Amir Mizrachi
  * @version 1.0
  */
 public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<QuickSMSActivity> {

@@ -2,6 +2,7 @@ package com.yp2012g4.vision.apps.sos;
 
 import java.util.Map;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -32,6 +33,10 @@ public class SOSconfig extends VisionActivity {
    * a string representing the number to be read
    */
   private String read_number = "";
+  /**
+   * store activity context
+   */
+  private static Context context;
   
   /**
    * get the id of the main layout
@@ -71,7 +76,7 @@ public class SOSconfig extends VisionActivity {
         finish();
         break;
       case R.id.number: // user wished to hear the number, no action needed.
-        return;
+        break;
       case R.id.button_reset: // reset
         pressedResetButton();
         break;
@@ -121,6 +126,7 @@ public class SOSconfig extends VisionActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sosconfig);
     init(0, getString(R.string.sos_config_screen_whereami), getString(R.string.sos_config_screen_info));
+    SOSconfig.context = getApplicationContext();
   }
   
   /**
@@ -135,5 +141,9 @@ public class SOSconfig extends VisionActivity {
       getTalkingButton(R.id.number).setText("");
       getTalkingButton(R.id.number).setReadText("");
     }
+  }
+  
+  public static Context getActivityContext() {
+    return SOSconfig.context;
   }
 }

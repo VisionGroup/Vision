@@ -330,6 +330,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   }
   
   public void speakOutAsync(final int id) {
+    _spokenString = getString(id);
     speakOutAsync(getString(id));
   }
   

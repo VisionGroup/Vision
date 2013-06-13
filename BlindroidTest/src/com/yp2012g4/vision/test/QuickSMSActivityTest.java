@@ -28,7 +28,6 @@ public class QuickSMSActivityTest extends ActivityInstrumentationTestCase2<Quick
   
   public QuickSMSActivityTest() {
     super("com.yp2012g4.vision.apps.smsSender", QuickSMSActivity.class);
-    // TODO Auto-generated constructor stub
   }
   
   @Override protected void setUp() throws Exception {

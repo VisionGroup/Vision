@@ -14,18 +14,18 @@ import android.widget.Button;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.settings.ColorSettingsActivity;
-import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.SettingsActivity;
 import com.yp2012g4.vision.apps.settings.ThemeSettingsActivity;
-import com.yp2012g4.vision.apps.settings.VisionApplication;
 
-public class VisionApplicationTest extends ActivityInstrumentationTestCase2<DisplaySettingsActivity> {
+public class VisionApplicationTest extends ActivityInstrumentationTestCase2<SettingsActivity> {
   private Solo solo;
   private Activity activity;
   private static HashMap<String, Integer> _colorToString = new HashMap<String, Integer>();
   
   public VisionApplicationTest() {
-    super("com.yp2012g4.vision.apps.settings", DisplaySettingsActivity.class);
+    super("com.yp2012g4.vision.apps.settings", SettingsActivity.class);
     _colorToString.put("BLACK", Integer.valueOf(Color.parseColor("#000000")));
     _colorToString.put("WHITE", Integer.valueOf(Color.parseColor("#FFFFFF")));
     _colorToString.put("RED", Integer.valueOf(Color.parseColor("#B40404")));
@@ -59,16 +59,16 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
   @MediumTest// /////////////////////////////SYSTEM
   // TESTS//////////////////////////////////
   public void testSetFontSizeToLarge() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
     solo.clickOnView(solo.getView(R.id.back_button));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_theme));
     solo.assertCurrentActivity("wrong activity", ThemeSettingsActivity.class);
     solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.large_text_size_button));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication._textSize, "LARGE");
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
@@ -76,16 +76,16 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
   }
   
   @MediumTest public void testSetFontSizeToNormal() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
     solo.clickOnView(solo.getView(R.id.back_button));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_theme));
     solo.assertCurrentActivity("wrong activity", ThemeSettingsActivity.class);
     solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.normal_text_size_button));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication._textSize, "NORMAL");
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
@@ -93,16 +93,16 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
   }
   
   @MediumTest public void testSetFontSizeToSmall() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
     solo.clickOnView(solo.getView(R.id.back_button));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_theme));
     solo.assertCurrentActivity("wrong activity", ThemeSettingsActivity.class);
     solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.small_text_size_button));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication._textSize, "SMALL");
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
@@ -152,71 +152,71 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Disp
   }
   
   @MediumTest public void testSetColorsWhiteBlue() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteBlue));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#0489B1"));
   }
   
   @MediumTest public void testSetColorsWhiteBlack() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteBlack));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testSetColorsWhiteRed() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteRed));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#B40404"));
   }
   
   @MediumTest public void testSetColorsWhiteGreen() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteGreen));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#04B45F"));
   }
   
   @MediumTest public void testSetColorsBlueBlack() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.BlueBlack));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#0489B1"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testSetColorsRedBlack() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.RedBlack));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#B40404"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }
   
   @MediumTest public void testSetColorsGreenBlack() {
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.GreenBlack));
-    solo.assertCurrentActivity("wrong activity", DisplaySettingsActivity.class);
+    solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#04B45F"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
   }

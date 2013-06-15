@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 

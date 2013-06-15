@@ -3,27 +3,27 @@
 
     <string name="app_name">Vision</string>
     <string name="menu_settings">הגדרות</string>
-    <string name="title_activity_quick_sms">QuickSMSActivity</string>
-    <string name="title_dial_screen">DialScreen</string>
-    <string name="title_activity_sos">SOSActivity</string>
-    <string name="title_activity_quick_dial">QuickDialActivity</string>
-    <string name="title_activity_phone_status">PhoneStatusActivity</string>
-    <string name="title_activity_talking_sms">TalkingSMS</string>
-    <string name="title_activity_talking_list">TalkingList</string>
-    <string name="title_activity_where_am_i">Where Am I</string>
-    <string name="title_activity_talking_sms_list">TalkingSmsList</string>
-    <string name="title_activity_contacts_list">ContactsListActivity</string>
-    <string name="title_activity_theme_settings">Theme Settings</string>
-    <string name="title_activity_display_settings">Display Settings</string>
-    <string name="title_activity_incoming_call">IncomingCallActivity</string>
-    <string name="title_activity_contacts">ContactsActivity</string>
-    <string name="title_activity_read_sms">ReadSmsActivity</string>
-    <string name="title_activity_voice_note_recorder">voice note recorder</string>
-    <string name="title_activity_calc">CalcActivity</string>
+    <string name="title_activity_quick_sms">מסך SMS מהיר</string>
+    <string name="title_dial_screen">מסך חיוג</string>
+    <string name="title_activity_sos">מסך SOS</string>
+    <string name="title_activity_quick_dial">מסך חיוג מהיר</string>
+    <string name="title_activity_phone_status">מסך מצב טלפון</string>
+    <string name="title_activity_talking_sms">הקראת SMS</string>
+    <string name="title_activity_talking_list">רשימה מדברת</string>
+    <string name="title_activity_where_am_i">היכן אני</string>
+    <string name="title_activity_talking_sms_list">רשימת SMS מדברת</string>
+    <string name="title_activity_contacts_list">מסך רשימת אנשי קשר</string>
+    <string name="title_activity_theme_settings">הגדרות תצוגה</string>
+    <string name="title_activity_settings">הגדרות</string>
+    <string name="title_activity_incoming_call">מסך שיחה נכנסת</string>
+    <string name="title_activity_contacts">מסך אנשי קשר</string>
+    <string name="title_activity_read_sms">מסך הקראת SMS</string>
+    <string name="title_activity_voice_note_recorder">מסך מקליט הודעות</string>
+    <string name="title_activity_calc">מסך מחשבון</string>
     <string name="MainTitle">מסך ראשי</string>
     <string name="emptyHour">hh:mm:ss</string>
-    <string name="next_message">Next message</string>
-    <string name="previous_message">previous message</string>
+    <string name="next_message">הודעה הבאה</string>
+    <string name="previous_message">הודעה קודמת</string>
 
     <!-- ====================== -->
     <!-- Text To Speech strings -->
@@ -190,8 +190,8 @@
     <string name="BlueBlack">שחור וכחול</string>
     <string name="WhiteBlue">לבן וכחול</string>
 
-    <!-- DisplaySettingsActivity -->
-    <string name="display_settings_screen">מסך הגדרות תצוגה</string>
+    <!-- SettingsActivity -->
+    <string name="settings_screen">מסך הגדרות</string>
     <string name="settings_help">מסך כפתורים המאפשר להגדיר הגדרות שונות של הטלפון.</string>
     <string name="title_activity_color_settings">הגדרות צבע מסך</string>
     <string name="color_settings_button">הגדרת צבע</string>

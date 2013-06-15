@@ -93,9 +93,7 @@ public class DisplaySettingsActivity extends VisionActivity {
         pressedButtonCallEnable(sp);
         break;
       case R.id.calculator:
-        intent = new Intent(this, CalcActivity.class);
-        setIntentFlags(intent);
-        startActivity(intent);
+        startActivity(newFlaggedIntent(this, CalcActivity.class));
         break;
       default:
         break;
@@ -106,13 +104,11 @@ public class DisplaySettingsActivity extends VisionActivity {
   private void pressedButtonCallEnable(final SharedPreferences sp) {
     final boolean enable = sp.getBoolean(VISION_CALL_ENABLE_ENTRY, true);
     // final boolean enable = !buttonMode.equals(ENABLE_PREF);
-    if (enable) {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, false, this);
+    VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, !enable, this);
+    if (enable)
       speakOutAsync(R.string.enable_call_service);
-    } else {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, true, this);
+    else
       speakOutAsync(R.string.disable_call_service);
-    }
     changeEnableState(IncomingCallReceiver.class, enable);
     changeEnableState(OutgoingCallReceiver.class, enable);
   }

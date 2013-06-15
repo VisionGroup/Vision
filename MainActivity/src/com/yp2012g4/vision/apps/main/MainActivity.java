@@ -51,6 +51,8 @@ public class MainActivity extends VisionActivity {
     programSetup();
     setContentView(R.layout.activity_main);
     init(0, getString(R.string.MainActivity_wheramai), getString(R.string.MainActivity_help));
+//    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+//      getActionBar().hide();
   }
   
   private void programSetup() {

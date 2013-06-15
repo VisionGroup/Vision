@@ -36,7 +36,6 @@ public class SpeakingClockActivityTest extends ActivityInstrumentationTestCase2<
     String text = solo.getText(1).getText().toString();
     assertTrue(text.equals(date));
     solo.clickOnText(date);
-    // TODO check if the time and date speaking is OK
   }
   
   @MediumTest public void testCheckTime() {

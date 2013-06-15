@@ -128,7 +128,7 @@ public class AlarmActivity extends VisionActivity {
         s = getString(R.string.alarm_is_on_at);
       else
         s = getString(R.string.alarm_is_off_at);
-      s = s + " " + SpeakingClockActivity.parseTime(alarmTime, getResources());
+      s += " " + SpeakingClockActivity.parseTime(alarmTime, getResources());
     }
     speakOutAsync(s);
   }
@@ -153,7 +153,7 @@ public class AlarmActivity extends VisionActivity {
       speakOutSync(R.string.you_need_to_set_ther_alarm_first);
       return;
     }
-    final Intent myIntent = setIntentFlags(new Intent(AlarmActivity.this, AlarmService.class));
+    final Intent myIntent = newFlaggedIntent(AlarmActivity.this, AlarmService.class);
     pendingIntent = PendingIntent.getService(AlarmActivity.this, 0, myIntent, 0);
     final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     final Calendar calendar = Calendar.getInstance();

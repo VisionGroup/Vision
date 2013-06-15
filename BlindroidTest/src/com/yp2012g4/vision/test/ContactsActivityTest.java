@@ -37,7 +37,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  public void testAddContact() {
+  @MediumTest public void testAddContact() {
     // try to add a contact without all required fields
     goToAddContact();
     fillAddContactFormAndConfirm(firstName, "");
@@ -64,7 +64,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   
 //this test should run after testAddContact() - because I assume the
   // 2 contacts were added successfully
-  public void testDeleteContacts() {
+  @MediumTest public void testDeleteContacts() {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     goToContact(true, firstName);
     deleteCurrentContact(false);
@@ -75,7 +75,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   
   // this test should run after testDeleteContacts() - because I assume the
   // first added contact as been deleted
-  public void testEditContacts() {
+  @MediumTest public void testEditContacts() {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     // first we change the phone number
     goToContact(true, secondName);
@@ -110,21 +110,21 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     solo.clickOnView(solo.getView(R.id.confirmation_button));
   }
   
-  private void goToAddContact() {
+  @MediumTest private void goToAddContact() {
     // Go into contact configuration screen by clicking the add contact button
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.add_contact));
     solo.assertCurrentActivity("wrong activity", AddContactActivity.class);
   }
   
-  private void goToEditContact() {
+  @MediumTest private void goToEditContact() {
     // Go into contact configuration screen by clicking the add contact button
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.edit_contact));
     solo.assertCurrentActivity("wrong activity", AddContactActivity.class);
   }
   
-  private void deleteCurrentContact(boolean confirmDelete) {
+  @MediumTest private void deleteCurrentContact(boolean confirmDelete) {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.delete_contact));
     solo.assertCurrentActivity("wrong activity", DeleteConfirmation.class);
@@ -166,7 +166,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   }
   
   // fling left until the start of the list
-  public void goToStart() {
+  @MediumTest public void goToStart() {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     String lastContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     String currContact = lastContact;

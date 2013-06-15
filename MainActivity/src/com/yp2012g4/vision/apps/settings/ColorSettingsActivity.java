@@ -54,7 +54,7 @@ public class ColorSettingsActivity extends VisionActivity {
       final String s = ((TalkingButton) v).getPrefsValue();
       if (!s.equals(""))
         changeSettings(s);
-      finish();
+      // finish();
       return true;
     }
     return false;

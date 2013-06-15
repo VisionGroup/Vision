@@ -39,7 +39,7 @@ public class CallListActivity extends VisionActivity {
     _ca = new CallAdapter(this);
     if (_ca.getCount() == 0) {
       TTS.speakSync(getString(R.string.noCalls));
-      onStart();
+      finish();
     }
     _tlv.setAdapter(_ca);
   }

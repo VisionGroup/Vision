@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
@@ -119,6 +120,7 @@ public class DialScreen extends VisionActivity {
     vibrate(VIBRATE_DURATION);
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
+    v.playSoundEffect(SoundEffectConstants.CLICK);
   }
   
   /**

@@ -3,6 +3,7 @@ package com.yp2012g4.vision.test;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.Suppress;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
@@ -10,6 +11,7 @@ import com.yp2012g4.vision.apps.contacts.ContactsActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.contacts.DialScreen;
 
+@Suppress
 public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<ContactsMenuActivity> {
   private Solo solo;
   private Activity activity;
@@ -53,7 +55,7 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
   /**
    * Basic test to test liveliness of Dial screen.
    */
-  @MediumTest public void testDialerAlive() {
+  @Suppress @MediumTest public void testDialerAlive() {
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.dialerButton));
     solo.assertCurrentActivity("wrong activity", DialScreen.class);

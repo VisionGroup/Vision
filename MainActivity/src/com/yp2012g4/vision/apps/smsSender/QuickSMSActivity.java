@@ -7,7 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.VisionApplication;
+
+import com.yp2012g4.vision.VisionApplication;import com.yp2012g4.vision.apps.contacts.ContactsActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.CallUtils;
 import com.yp2012g4.vision.tools.VisionActivity;
@@ -15,7 +16,7 @@ import com.yp2012g4.vision.tools.VisionActivity;
 /**
  * This class is an activity that enables to send a quick SMS message
  * 
- * @author Amir
+ * @author Amir Mizrachi
  * @version 1.0
  * @author Amit Y.
  * @changes Added support for setting the sent number.
@@ -26,7 +27,8 @@ public class QuickSMSActivity extends VisionActivity {
    * This is the key to be used when putting the destination number in this
    * activities extras.
    */
-  public String number;
+  private String number = null;
+  private String contactName = null;
   
   @Override public int getViewId() {
     return R.id.QuickSMSActivity;
@@ -37,10 +39,13 @@ public class QuickSMSActivity extends VisionActivity {
       return true;
     final View view = getButtonByMode();
     if (view instanceof TalkingButton) {
-      speakOutSync(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText());
-      SmsManager.getDefault().sendTextMessage(number, null, ((TalkingButton) view).getReadText(), null, null);
+      speakOutSync(getString(R.string.sending) + ((TalkingButton) curr_view).getReadText() + getString(R.string.to) + contactName);
+      try {
+        SmsManager.getDefault().sendTextMessage(number, null, ((TalkingButton) view).getReadText(), null, null);
+      } catch (final Exception e) {
+        speakOutSync(R.string.error_in_sending_sms);
+      }
       speakOutSync(R.string.message_has_been_sent);
-      _mHandler.postDelayed(mLaunchTask, VisionApplication.DEFUALT_DELAY_TIME);
       finish();
     }
     return false;
@@ -55,8 +60,10 @@ public class QuickSMSActivity extends VisionActivity {
     if (extras != null)
       try {
         number = extras.getString(CallUtils.NUMBER_KEY);
+        contactName = extras.getString(ContactsActivity.CONTACT_NAME_FLAG);
       } catch (final Exception e) {
         number = "";
+        contactName = "";
       }
   }
 }

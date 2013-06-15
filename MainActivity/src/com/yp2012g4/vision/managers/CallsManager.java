@@ -68,7 +68,7 @@ public class CallsManager {
    * @param ns
    *          - string of the phone number in the call log
    */
-  public void UnmarkCallLFromMissedCallList(final String phoneNumber, final String date) {
+  public void UnmarkCallLFromMissedCallList(final String phoneNumber) {
     try {
       final ContentValues values = new ContentValues();
       values.put(Calls.NEW, Integer.valueOf(0));
@@ -149,7 +149,7 @@ public class CallsManager {
 //    return $;
     if (_cur.moveToNext()) {
       final CallType $ = new CallType(_context, _cur);
-      UnmarkCallLFromMissedCallList($.getNumber(), "");
+      UnmarkCallLFromMissedCallList($.getNumber());
       return $;
     }
     return null;
@@ -180,6 +180,6 @@ public class CallsManager {
   public void UnmarkCallLFromMissedCallList(final CallType callType) {
     // TODO date?
     // if 12 call from 1 number ?
-    UnmarkCallLFromMissedCallList(callType.getNumber(), "");
+    UnmarkCallLFromMissedCallList(callType.getNumber());
   }
 }

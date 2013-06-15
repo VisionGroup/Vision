@@ -22,8 +22,8 @@ import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.sos.SOSconfig;
-import com.yp2012g4.vision.tools.IncomingCallReceiver;
-import com.yp2012g4.vision.tools.OutgoingCallReceiver;
+import com.yp2012g4.vision.apps.telephony.IncomingCallReceiver;
+import com.yp2012g4.vision.apps.telephony.OutgoingCallReceiver;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 

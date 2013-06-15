@@ -160,13 +160,13 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
 
-        <receiver android:name="com.yp2012g4.vision.tools.IncomingCallReceiver" >
+        <receiver android:name="com.yp2012g4.vision.apps.telephony.IncomingCallReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.yp2012g4.vision.tools.OutgoingCallReceiver"
+            android:name="com.yp2012g4.vision.apps.telephony.OutgoingCallReceiver"
             android:exported="true" >
             <intent-filter>
                 <action

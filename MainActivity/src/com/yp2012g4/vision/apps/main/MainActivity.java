@@ -23,10 +23,10 @@ import com.yp2012g4.vision.apps.settings.SettingsActivity;
 import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
+import com.yp2012g4.vision.apps.telephony.CallService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.SmsManager;
-import com.yp2012g4.vision.tools.CallService;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 

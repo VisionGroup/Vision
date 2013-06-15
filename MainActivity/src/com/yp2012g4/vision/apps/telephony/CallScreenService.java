@@ -20,10 +20,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.yp2012g4.vision.VisionApplication;
+import com.yp2012g4.vision.apps.telephony.CallUtils.CALL_TYPE;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.AbstractService;
-import com.yp2012g4.vision.tools.CallUtils;
-import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
 import com.yp2012g4.vision.tools.TTS;
 
 public class CallScreenService extends AbstractService {

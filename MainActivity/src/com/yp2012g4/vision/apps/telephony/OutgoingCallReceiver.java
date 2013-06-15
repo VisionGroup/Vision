@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.tools;
+package com.yp2012g4.vision.apps.telephony;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
+import com.yp2012g4.vision.apps.telephony.CallUtils.CALL_TYPE;
 
 public class OutgoingCallReceiver extends BroadcastReceiver {
   private static final String TAG = "vision:OutGoingCallReceiver";

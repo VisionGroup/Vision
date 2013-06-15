@@ -21,6 +21,7 @@ public class SendSMSActivity extends VisionActivity {
   private static final int MESSAGE = 0;
   private static final int PHONE = 1;
   private String number;
+  private static String _spokenMessage;
   
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -56,32 +57,42 @@ public class SendSMSActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    final View _editText = getButtonByMode();
+    final View _v = getButtonByMode();
     EditText _et = getEditText(R.id.phoneNumber);
-    final CharSequence _s;
-    switch (_editText.getId()) {
+    final CharSequence _cs;
+    switch (_v.getId()) {
       case R.id.message:
         _et = getEditText(R.id.message);
-        _s = getText(_et, MESSAGE);
-        moveCursor(_et, _s);
+        _cs = getText(_et, MESSAGE);
+        moveCursor(_et, _cs);
         break;
       case R.id.phoneNumber:
-        _s = getText(_et, PHONE);
-        moveCursor(_et, _s);
+        _cs = getText(_et, PHONE);
+        moveCursor(_et, _cs);
         break;
       case R.id.sendMessageButton:
         final CharSequence num = _et.getText();
         if (num.length() > 0) {
           _et = getEditText(R.id.message);
-          SmsManager.getDefault().sendTextMessage(num.toString(), null, _et.getText().toString(), null, null);
-          speakOutSync(R.string.message_has_been_sent);
-          finish();
+          handleSendMessage(_et, num);
         }
         break;
       default:
         break;
     }
     return false;
+  }
+  
+  private void handleSendMessage(final EditText _et, final CharSequence num) {
+    try {
+      SmsManager.getDefault().sendTextMessage(num.toString(), null, _et.getText().toString(), null, null);
+    } catch (final Exception exception) {
+      speakOutSync(R.string.message_was_not_sent);
+      return;
+    }
+    speakOutSync(R.string.message_has_been_sent);
+    finish();
+    return;
   }
   
   /**
@@ -118,8 +129,20 @@ public class SendSMSActivity extends VisionActivity {
    *          The string to be spoken when moving to the view
    */
   static private void moveCursor(final EditText et, final CharSequence cs) {
-    Selection.setSelection(et.getText(), et.getSelectionStart());
+    _spokenMessage = cs.toString();
+    Selection.setSelection(et.getText(), et.getSelectionEnd());
     et.requestFocus();
-    speakOutAsync(cs.toString());
+    // if a phone number contains "-" then create (once) a new string to speak
+    if (et.getId() == R.id.phoneNumber && et.getText().toString().contains("-"))
+      _spokenMessage = ignoreSeparator(cs);
+    speakOutAsync(_spokenMessage);
+  }
+  
+  private static String ignoreSeparator(final CharSequence cs) {
+    final String[] _s = cs.toString().split("-");
+    String _newString = "";
+    for (final String s : _s)
+      _newString += s;
+    return _newString;
   }
 }

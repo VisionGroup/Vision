@@ -22,9 +22,9 @@ public class AddContactActivity extends VisionActivity {
   public static final String RESULT_EXTRA = "RESULT";
   private static final int TEXT = 0;
   private static final int PHONE = 1;
-  String contactDisplayName = null;
-  String contactPhone = null;
-  boolean createNewContact = true;
+  private String contactDisplayName = null;
+  private String contactPhone = null;
+  private boolean createNewContact = true;
   
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

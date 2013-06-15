@@ -240,7 +240,7 @@
     <string name="quick_sms_screen">Quick S M S screen</string>
     <string name="quick_sms_help">Choose quick S M S message from the list above.</string>
     <string name="send_quick_sms">send quick S M S</string>
-    <string name="sending">Sending</string>
+    <string name="sending">Sending </string>
     <string name="message_has_been_sent">Message has been sent</string>
     <string name="SMS_number_1">Will call you back</string>
     <string name="SMS_number_2">How are you?</string>
@@ -251,6 +251,7 @@
     <string name="SMS_number_7">Where are you?</string>
     <string name="SMS_number_8">Remind me later</string>
     <string name="SMS_number_9">Happy Birthday!</string>
+    <string name="error_in_sending_sms">Phone number is empty.</string>
 
     <!-- ReadSMSActivity -->
     <string name="read_sms_screen">Read S M S screen</string>
@@ -263,10 +264,12 @@
     <string name="sos_screen">S O S screen</string>
     <string name="sos_help">tap screen to send an S O S message with your location </string>
     <string name="SOS_message_has_been_sent">S O S message has been sent.</string>
-    <string name="sending_SOS_message">Sending S O S message.</string>
+    <string name="sending_SOS_message">Sending S O S message</string>
     <string name="send_SOS_message">Send S O S</string>
     <string name="sos_msg_to_send">I need your help!</string>
     <string name="SOS_number_empty">S O S contact is empty. Please setup number in configuration screen</string>
+    <string name="to">to</string>
+    
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">Delete confirmation</string>
     <string name="delete_confirmation_info">Are you sure?</string>
@@ -281,7 +284,7 @@
     <string name="sos_config_screen_whereami">S O S configuration screen</string>
     <string name="sos_number">sosNumber</string>
     <string name="change_contact_number">Change S O S Contact Number</string>
-    <string name="sos_contact_number">S O S contact number </string>
+    <string name="sos_contact_number_is">S O S contact number is.</string>
 
     <!-- IncomingCallActivity -->
     <string name="IncomingCall_whereami">Call</string>
@@ -346,6 +349,7 @@
     <string name="phone_number">Phone number</string>
     <string name="title_activity_sosconfiguation">SOSconfiguation</string>
     <string name="title_activity_add_contact">AddContactActivity</string>
+    <string name="message_was_not_sent">Message was not sent. Please check reception or sim card.</string>
 
     <!-- Manger's -->
     <string name="incoming_call_from_private_number">Private number</string>

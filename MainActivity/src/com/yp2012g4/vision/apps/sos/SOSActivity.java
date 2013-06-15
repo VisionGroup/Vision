@@ -57,7 +57,7 @@ public class SOSActivity extends VisionActivity {
       }
       l.unlock();
       Log.d(TAG, "Sending SOS: " + messageToSend + " to:" + _number + " lat=" + latitude + " long=" + longitude);
-      final SmsManager sms = SmsManager.getDefault();
+      final SmsManager sms = android.telephony.SmsManager.getDefault();
       if (sms == null)
         Log.e(TAG, "SMS Manager is null! Not sending the message");
       else {
@@ -80,8 +80,11 @@ public class SOSActivity extends VisionActivity {
     }
     switch (getButtonByMode().getId()) {
       case R.id.Send_SOS_Message:
-        speakOutSync(getString(R.string.sending_SOS_message) + "to " + _number);
+        speakOutSync(getString(R.string.sending_SOS_message) + " " + getString(R.string.to) + " " + _number);
         _mHandler.postDelayed(sendSOSMessage, 5000);
+        break;
+      case R.id.SOS_phone_number:
+        speakOutSync(getString(R.string.sos_contact_number_is) + " " + _number);
         break;
       default:
         break;
@@ -135,7 +138,7 @@ public class SOSActivity extends VisionActivity {
     _number = sp.getString(getString(R.string.sos_number), _number);
     final TalkingButton tb = getTalkingButton(R.id.SOS_phone_number);
     tb.setText(_number);
-    tb.setReadText(getString(R.string.sos_contact_number) + _number);
+    tb.setReadText(getString(R.string.sos_contact_number_is) + " " + _number);
   }
   
   @Override protected void onStop() {

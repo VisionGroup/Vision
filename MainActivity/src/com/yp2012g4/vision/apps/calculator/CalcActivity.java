@@ -7,6 +7,7 @@ import java.util.Map;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
@@ -106,6 +107,7 @@ public class CalcActivity extends VisionActivity {
     final TalkingButton resultButton = getTalkingButton(R.id.result);
     resultButton.setText(calculated_number.toCharArray(), 0, calculated_number.length());
     resultButton.setReadText(calculated_number);
+    v.playSoundEffect(SoundEffectConstants.CLICK);
   }
   
   /**

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.widget.EditText;
+import android.widget.EditText;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.contacts.AddContactActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsActivity;
 import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 
 public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
@@ -108,7 +110,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     solo.clickOnView(solo.getView(R.id.confirmation_button));
   }
   
-  private void goToAddContact() {
+<<<<<<< .mine
     // Go into contact configuration screen by clicking the add contact button
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.add_contact));
@@ -131,9 +133,70 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     else
       solo.clickOnView(solo.getView(R.id.Delete_Confirmation_Button));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+=======
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    solo.clickOnView(solo.getView(R.id.contacts_sms));
+    solo.assertCurrentActivity("wrong activity", SendSMSActivity.class);
+    solo.clickOnView(solo.getView(R.id.phoneNumber));
+    final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
+    assertEquals(((EditText) solo.getView(R.id.phoneNumber)).getText().toString(), extras.getString(CallUtils.NUMBER_KEY));
+//TODO: check why "click cannot be completed" error occurs????
+    // try {
+//      solo.clickOnView(solo.getView(R.id.sendMessageButton));
+//    } catch (Error e) {
+//      Log.i("MyLog", VisionGestureDetector._spokenString);
+//      assertEquals(VisionGestureDetector._spokenString, "Message was not sent. Please check reception or sim card.");
+//      return;
+//    }
+//    assertEquals(VisionGestureDetector._spokenString, "Message has been sent");
   }
   
-  public static void flingRight(ActivityInstrumentationTestCase2<?> c) {
+
+
+
+
+
+>>>>>>> .theirs
+ private void goToAddContact() {
+    // Go into contact configuration screen by clicking the add contact button
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    solo.clickOnView(solo.getView(R.id.add_contact));
+    solo.assertCurrentActivity("wrong activity", AddContactActivity.class);
+  }
+  
+  private void goToEditContact() {
+    // Go into contact configuration screen by clicking the add contact button
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    solo.clickOnView(solo.getView(R.id.edit_contact));
+    solo.assertCurrentActivity("wrong activity", AddContactActivity.class);
+  }
+  
+  private void deleteCurrentContact(boolean confirmDelete) {
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    solo.clickOnView(solo.getView(R.id.delete_contact));
+    solo.assertCurrentActivity("wrong activity", DeleteConfirmation.class);
+    if (confirmDelete)
+      flingRight(this);
+    else
+      solo.clickOnView(solo.getView(R.id.Delete_Confirmation_Button));
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+  } @MediumTest public void testSendSmsToContact() throws Exception {
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    solo.clickOnView(solo.getView(R.id.contacts_sms));
+    solo.assertCurrentActivity("wrong activity", SendSMSActivity.class);
+    solo.clickOnView(solo.getView(R.id.phoneNumber));
+    final Bundle extras = solo.getCurrentActivity().getIntent().getExtras();
+    assertEquals(((EditText) solo.getView(R.id.phoneNumber)).getText().toString(), extras.getString(CallUtils.NUMBER_KEY));
+//TODO: check why "click cannot be completed" error occurs????
+    // try {
+//      solo.clickOnView(solo.getView(R.id.sendMessageButton));
+//    } catch (Error e) {
+//      Log.i("MyLog", VisionGestureDetector._spokenString);
+//      assertEquals(VisionGestureDetector._spokenString, "Message was not sent. Please check reception or sim card.");
+//      return;
+//    }
+//    assertEquals(VisionGestureDetector._spokenString, "Message has been sent");
+  }  public static void flingRight(ActivityInstrumentationTestCase2<?> c) {
     final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
     final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
     TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 - 150, screenHeight / 2, screenHeight / 2, 20);

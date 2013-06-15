@@ -1,12 +1,15 @@
 package com.yp2012g4.vision.managers;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+
+import com.yp2012g4.vision.R;
 
 /**
  * Call type container
@@ -18,9 +21,11 @@ public class CallsManager {
   private Cursor _cur = null;
   private final Context _context;
   private static final String[] _projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
+  private boolean _hasNext;
   
   public CallsManager(final Context c) {
     _context = c;
+    _hasNext = true;
   }
   
   /**
@@ -32,6 +37,7 @@ public class CallsManager {
     Cursor cr;
     try {
       cr = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
+      _hasNext = false;
     } catch (final Exception e) {
       return new ArrayList<CallType>();
     }
@@ -117,6 +123,7 @@ public class CallsManager {
   public CallType getLastOutgoingCall() {
     try {
       _cur = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, null, null, null);
+      _hasNext = false;
     } catch (final Exception e) {
       return null;
     }
@@ -151,6 +158,10 @@ public class CallsManager {
       final CallType $ = new CallType(_context, _cur);
       UnmarkCallLFromMissedCallList($.getNumber());
       return $;
+    }
+    if (_hasNext) {
+      _hasNext = false;
+      return new CallType(" ", " ", _context.getString(R.string.noCalls), new Date(), " ");
     }
     return null;
   }

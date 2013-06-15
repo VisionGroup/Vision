@@ -3,11 +3,13 @@
  */
 package com.yp2012g4.vision.test;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
+import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
@@ -20,6 +22,7 @@ import com.yp2012g4.vision.customUI.TalkingImageButton;
 public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<PhoneStatusActivity> {
   Resources res;
   private Solo solo;
+  private Activity activity;
   
   // private PhoneNotifications pn;
   public PhoneStatusActivityTest() {
@@ -35,7 +38,12 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     super.setUp();
     solo = new Solo(getInstrumentation(), getActivity());
     res = getInstrumentation().getContext().getResources();
+    activity = getActivity();
     // pn = new PhoneNotifications(getActivity());
+  }
+  
+  @MediumTest public void test_missedCallsScreen() {
+    checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
   }
   
   @MediumTest public void test_signalToPercent() {
@@ -58,6 +66,17 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadText(), "Test String");
     tlkbtn.setReadToolTip("Test String2");
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
+  }
+  
+  private void checkBack(int id, Class<?> c) {
+    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
+    // Test Back button
+    solo.clickOnView(tb);
+    solo.waitForActivity(c.getName(), 2000);
+    solo.assertCurrentActivity("wrong activity", c);
+    solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
+    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   
   /*

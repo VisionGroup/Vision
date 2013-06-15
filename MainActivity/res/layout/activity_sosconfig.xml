@@ -25,10 +25,11 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
+            android:ellipsize="start"
             android:gravity="left"
             android:paddingLeft="32dp"
             android:paddingTop="15dp"
-            android:textSize="25sp"
+            android:singleLine="true"
             android:textStyle="bold" />
     </LinearLayout>
 

@@ -12,6 +12,7 @@ import com.yp2012g4.vision.customUI.lists.CallAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.tools.CallUtils;
+import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -36,6 +37,10 @@ public class CallListActivity extends VisionActivity {
   @Override public void onResume() {
     super.onRestart();
     _ca = new CallAdapter(this);
+    if (_ca.getCount() == 0) {
+      TTS.speakSync(getString(R.string.noCalls));
+      onStart();
+    }
     _tlv.setAdapter(_ca);
   }
   

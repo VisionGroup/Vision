@@ -25,6 +25,8 @@ public class CallAdapter extends BaseAdapter {
     _callArray = new ArrayList<CallType>();
     _callArray.add(_callsManager.getNextMissedCalls());
     _count = _callsManager.getMissedCallsNum();
+    if (_count == 0)
+      _count++;// to get messge for NO CALL!!!
   }
   
   @Override public int getCount() {

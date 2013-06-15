@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.tools.test;
+package com.yp2012g4.vision.test.tools;
 
 import junit.framework.TestCase;
 

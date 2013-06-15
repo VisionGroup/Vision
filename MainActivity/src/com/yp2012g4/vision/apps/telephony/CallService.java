@@ -1,9 +1,9 @@
-package com.yp2012g4.vision.tools;
+package com.yp2012g4.vision.apps.telephony;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.yp2012g4.vision.apps.telephony.CallScreenService;
+import com.yp2012g4.vision.tools.ServiceManager;
 
 public class CallService {
   public static ServiceManager callScreenServiceManager;

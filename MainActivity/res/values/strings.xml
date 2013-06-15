@@ -14,7 +14,7 @@
     <string name="title_activity_talking_sms_list">TalkingSmsList</string>
     <string name="title_activity_contacts_list">ContactsListActivity</string>
     <string name="title_activity_theme_settings">Theme Settings</string>
-    <string name="title_activity_display_settings">Display Settings</string>
+    <string name="title_activity_settings">Settings</string>
     <string name="title_activity_incoming_call">IncomingCallActivity</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_read_sms">ReadSmsActivity</string>
@@ -205,8 +205,8 @@
     <string name="BlueBlack">Blue &amp; Black</string>
     <string name="WhiteBlue">White &amp; Blue</string>
 
-    <!-- DisplaySettingsActivity -->
-    <string name="display_settings_screen">Display settings screen</string>
+    <!-- SettingsActivity -->
+    <string name="settings_screen">Settings screen</string>
     <string name="settings_help">A button screen in which you can define variuos program settings.</string>
     <string name="title_activity_color_settings">Color Settings</string>
     <string name="color_settings_button">Color Settings</string>
@@ -222,7 +222,7 @@
     <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
     <string name="regular_buttons_mode">Switched to regular buttons mode </string>
     <string name="calculator">Calculator</string>
-    <string name="phone_call_service_button"> vision call service </string>
+    <string name="phone_call_service_button"> Vision call service </string>
     <string name="disable_call_service">disabled vision phone call service</string>
     <string name="enable_call_service">enabled vision phone call service</string>
     <string name="mute_sound">Mute or Activate Sound</string>

@@ -5,7 +5,7 @@
     style="?backgroundColor"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:contentDescription="@string/display_settings_screen"
+    android:contentDescription="@string/settings_screen"
     android:orientation="vertical"
     android:weightSum="4"
     tools:context=".DisplaySettings"

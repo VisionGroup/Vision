@@ -3,7 +3,6 @@ package com.yp2012g4.vision.test;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.Suppress;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
@@ -41,7 +40,7 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
   /**
    * Basic test to test liveliness of the list with contacts from Android
    */
-  @MediumTest @Suppress public void testFavoritsContactsAlive() {
+  @MediumTest public void testFavoritsContactsAlive() {
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.contactsListButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);

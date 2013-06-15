@@ -33,7 +33,7 @@ import android.widget.AnalogClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
@@ -313,9 +313,10 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
    *          - last view being touched
    * 
    */
-  public void onActionUp(final View v) {/*
-                                         * to be overridden
-                                         */
+  public void onActionUp(@SuppressWarnings("unused") final View v) {/*
+                                                                     * to be
+                                                                     * overridden
+                                                                     */
   }
   
   /**

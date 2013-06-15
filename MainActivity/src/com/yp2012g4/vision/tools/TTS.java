@@ -8,8 +8,8 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.settings.Language;
-import com.yp2012g4.vision.apps.settings.VisionApplication;
 
 /**
  * This class is a wrapper class for the TTS engine.

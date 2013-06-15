@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -43,7 +44,7 @@ public class ThemeSettingsActivity extends VisionActivity {
       case R.id.Normal_text_size_button:
       case R.id.Large_text_size_button:
         VisionApplication.savePrefs(SetupSettingsString.TextSize, ((TalkingButton) v).getPrefsValue(), this);
-        finish();
+        // finish();
         break;
       default:
         break;

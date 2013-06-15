@@ -18,15 +18,16 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.calculator.CalcActivity;
 import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.sos.SOSconfig;
-import com.yp2012g4.vision.tools.IncomingCallReceiver;
-import com.yp2012g4.vision.tools.OutgoingCallReceiver;
+import com.yp2012g4.vision.apps.telephony.IncomingCallReceiver;
+import com.yp2012g4.vision.apps.telephony.OutgoingCallReceiver;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
-public class DisplaySettingsActivity extends VisionActivity {
+public class SettingsActivity extends VisionActivity {
   private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
   /**
    * get the activity's main view ID
@@ -54,7 +55,7 @@ public class DisplaySettingsActivity extends VisionActivity {
     final PackageManager pm = getPackageManager();
     switch (button.getId()) {
       case R.id.SOS_Change_contact:
-        intent = new Intent(DisplaySettingsActivity.this, SOSconfig.class);
+        intent = new Intent(SettingsActivity.this, SOSconfig.class);
         setIntentFlags(intent);
         startActivity(intent);
         break;
@@ -70,12 +71,12 @@ public class DisplaySettingsActivity extends VisionActivity {
         VisionApplication.muted = true;
         break;
       case R.id.button_set_colors:
-        intent = new Intent(DisplaySettingsActivity.this, ColorSettingsActivity.class);
+        intent = new Intent(SettingsActivity.this, ColorSettingsActivity.class);
         setIntentFlags(intent);
         startActivity(intent);
         break;
       case R.id.button_set_theme:
-        intent = new Intent(DisplaySettingsActivity.this, ThemeSettingsActivity.class);
+        intent = new Intent(SettingsActivity.this, ThemeSettingsActivity.class);
         setIntentFlags(intent);
         startActivity(intent);
         break;
@@ -93,9 +94,7 @@ public class DisplaySettingsActivity extends VisionActivity {
         pressedButtonCallEnable(sp);
         break;
       case R.id.calculator:
-        intent = new Intent(this, CalcActivity.class);
-        setIntentFlags(intent);
-        startActivity(intent);
+        startActivity(newFlaggedIntent(this, CalcActivity.class));
         break;
       default:
         break;
@@ -106,13 +105,11 @@ public class DisplaySettingsActivity extends VisionActivity {
   private void pressedButtonCallEnable(final SharedPreferences sp) {
     final boolean enable = sp.getBoolean(VISION_CALL_ENABLE_ENTRY, true);
     // final boolean enable = !buttonMode.equals(ENABLE_PREF);
-    if (enable) {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, false, this);
+    VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, !enable, this);
+    if (enable)
       speakOutAsync(R.string.enable_call_service);
-    } else {
-      VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, true, this);
+    else
       speakOutAsync(R.string.disable_call_service);
-    }
     changeEnableState(IncomingCallReceiver.class, enable);
     changeEnableState(OutgoingCallReceiver.class, enable);
   }
@@ -171,7 +168,7 @@ public class DisplaySettingsActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     Log.i(TAG, "DisplaySettings:: onCreate");
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_display_settings);
-    init(0, getString(R.string.display_settings_screen), getString(R.string.settings_help));
+    setContentView(R.layout.activity_settings);
+    init(0, getString(R.string.settings_screen), getString(R.string.settings_help));
   }
 }

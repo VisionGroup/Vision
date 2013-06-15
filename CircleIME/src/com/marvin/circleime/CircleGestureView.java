@@ -1,6 +1,8 @@
 package com.marvin.circleime;
 
-//import com.google.tts.TTSEarcon;
+import java.util.Locale;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,7 +14,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.yp2012g4.vision.utils.TTS;
+import com.yp2012g4.vision.tools.TTS;
 
 /**
  * A transparent overlay which catches all touch events and uses a call back to
@@ -86,7 +88,7 @@ public class CircleGestureView extends KeyboardView {
     }
 
     private enum KeyboardMode {
-	ALPHA, NUMERIC
+	ALPHA_MODE, NUMERIC_MODE
     }
 
     private enum Dir {
@@ -109,8 +111,8 @@ public class CircleGestureView extends KeyboardView {
     }
 
     private static final int numOfDir = 9;
-    private static final int X = 0;
-    private static final int Y = 1;
+    // private static final int X = 0;
+    // private static final int Y = 1;
 
     private static final String TAG = "vision:CircleIME";
 
@@ -157,7 +159,7 @@ public class CircleGestureView extends KeyboardView {
 
     private String currentCharacter = "";// Using the READ abc
 
-    private int currentCharOrdinal = -1;
+    // private int currentCharOrdinal = -1;
 
     private String currentString = "";
 
@@ -173,17 +175,16 @@ public class CircleGestureView extends KeyboardView {
 
     private SoftKeyboard parent;
 
-    private TTS _tts;
-
     private int lang = languages.EN.ordinal();
 
-    private KeyboardMode keyboardMode = KeyboardMode.ALPHA; // Alpha or Numeric
+    private KeyboardMode keyboardMode = KeyboardMode.ALPHA_MODE; // Alpha or
+								 // Numeric
 
-    public CircleGestureView(Context context, AttributeSet attrs) {
-	super(context, attrs);
-	parent = (SoftKeyboard) context;
-	vibe = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-	_tts = new TTS(context);
+    public CircleGestureView(Context c, AttributeSet attrs) {
+	super(c, attrs);
+	parent = (SoftKeyboard) c;
+	vibe = (Vibrator) c.getSystemService(Context.VIBRATOR_SERVICE);
+	TTS.init(c);
     }
 
     @Override
@@ -226,7 +227,7 @@ public class CircleGestureView extends KeyboardView {
 		}// else String[] params = new String[1];
 		 // params[0] = TTSParams.VOICE_FEMALE.toString();
 		else
-		    _tts.speak(currentCharacter);
+		    TTS.speak(currentCharacter);
 
 		vibe.vibrate(PATTERN, -1);
 	    }
@@ -235,7 +236,7 @@ public class CircleGestureView extends KeyboardView {
     }
 
     public static int getWheel(Dir value, KeyboardMode km) {
-	if (km == KeyboardMode.ALPHA)
+	if (km == KeyboardMode.ALPHA_MODE)
 	    switch (value) {
 	    case NW:
 		return AE;
@@ -450,7 +451,7 @@ public class CircleGestureView extends KeyboardView {
 	    currentString = currentString + c;
 	    // parent.tts.speak(currentCharacter, 0, null);
 	    if (c.length() > 0) {
-		parent.sendKeyChar(c.toLowerCase().charAt(0));
+		parent.sendKeyChar(c.toLowerCase(Locale.US).charAt(0));
 		Log.i(TAG, "Character sent: " + c);
 	    }
 	}
@@ -464,10 +465,12 @@ public class CircleGestureView extends KeyboardView {
 	lastX = x;
 	lastY = y;
 	currentDir = Dir.NONE;
-	currentWheel = (keyboardMode == KeyboardMode.ALPHA) ? ALPHA : NUMERIC;
+	currentWheel = (keyboardMode == KeyboardMode.ALPHA_MODE) ? ALPHA
+		: NUMERIC;
 	currentCharacter = "";
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     public void onDraw(Canvas canvas) {
 	// super.onDraw(canvas);
@@ -492,26 +495,26 @@ public class CircleGestureView extends KeyboardView {
 	paint.setTextAlign(Paint.Align.CENTER);
 	paint.setTypeface(Typeface.DEFAULT_BOLD);
 
-	int x = 5;
-	int y = 50;
+	// int x = 5;
+	// int y = 50;
 	paint.setTextSize(50);
 	paint.setTextAlign(Paint.Align.LEFT);
-	y -= paint.ascent() / 2;
+	// y -= paint.ascent() / 2;
 
 	// canvas.drawText(currentString, x, y, paint);
 
 	if (!screenIsBeingTouched) {
-	    x = 5;
-	    y = getHeight() - 40;
+	    // x = 5;
+	    // y = getHeight() - 40;
 	    paint.setTextSize(20);
 	    paint.setTextAlign(Paint.Align.LEFT);
-	    y -= paint.ascent() / 2;
+	    // y -= paint.ascent() / 2;
 
-	    x = 5;
-	    y = getHeight() - 20;
+	    // x = 5;
+	    // y = getHeight() - 20;
 	    paint.setTextSize(20);
 	    paint.setTextAlign(Paint.Align.LEFT);
-	    y -= paint.ascent() / 2;
+	    // y -= paint.ascent() / 2;
 	} else {
 	    final int offset = 90; // TODO : CHange According to screen size
 	    final Loc[] xy = new Loc[numOfDir];
@@ -772,9 +775,9 @@ public class CircleGestureView extends KeyboardView {
 			xy[Dir.SW.ordinal()], canvas, paint, false);
 		paint.setColor(Color.YELLOW);
 		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][24],
-			xy[Dir.W.ordinal()], canvas, paint, false);
-		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][31],
 			xy[Dir.E.ordinal()], canvas, paint, false);
+		drawCharacter(abc[lang][ABCType.DISPLAYED.ordinal()][31],
+			xy[Dir.W.ordinal()], canvas, paint, false);
 		break;
 	    case NUMERIC:
 		paint.setColor(Color.YELLOW);
@@ -799,6 +802,8 @@ public class CircleGestureView extends KeyboardView {
 			xy[Dir.W.ordinal()], canvas, paint, false);
 
 		break;
+	    default:
+		break;
 	    }
 	}
 
@@ -814,7 +819,7 @@ public class CircleGestureView extends KeyboardView {
 		    currentString.length() - 1);
 	}
 	if (!deletedCharacter.equals(""))
-	    _tts.speak(deletedCharacter + " deleted.");
+	    TTS.speak(deletedCharacter + " deleted.");
 	else {
 	    // parent.tts.playEarcon(TTSEarcon.TOCK.toString(), 0, null);
 	    // parent.tts.playEarcon(TTSEarcon.TOCK.toString(), 1, null);
@@ -872,15 +877,16 @@ public class CircleGestureView extends KeyboardView {
      * Changes between Alpha and numeric layouts.
      */
     public void toggleKeyboardMode() {
-	if (keyboardMode == KeyboardMode.ALPHA) {
-	    keyboardMode = KeyboardMode.NUMERIC;
+	if (keyboardMode == KeyboardMode.ALPHA_MODE) {
+	    keyboardMode = KeyboardMode.NUMERIC_MODE;
 	    currentWheel = NUMERIC;
-	    _tts.speak("Numbers");
+	    TTS.speak("Numbers");
 	} else {
-	    keyboardMode = KeyboardMode.ALPHA;
+	    keyboardMode = KeyboardMode.ALPHA_MODE;
 	    currentWheel = ALPHA;
-	    _tts.speak("Alpha");
+	    TTS.speak("Alpha");
 	}
+	// TODO Change at startup according to input field.
     }
 
     // @Override
@@ -906,10 +912,10 @@ public class CircleGestureView extends KeyboardView {
     public void changeLang() {
 	if (lang == languages.EN.ordinal()) {
 	    lang = languages.HE.ordinal();
-	    _tts.speak("עברית");
+	    TTS.speak("עברית");
 	} else {
 	    lang = languages.EN.ordinal();
-	    _tts.speak("english");
+	    TTS.speak("english");
 	}
 	invalidate();
     }

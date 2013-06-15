@@ -4,7 +4,7 @@
  * @author Maytal
  * 
  */
-package com.yp2012g4.vision.apps.settings;
+package com.yp2012g4.vision;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.settings.SetupSettingsString;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
@@ -32,7 +32,7 @@ public class VisionApplication extends Application {
   @Override public void onCreate() {
     super.onCreate();
     sdk = ZubhiumSDK.getZubhiumSDKInstance(getApplicationContext(), "9c8c8df856cd1a282fa86e6f2b635e");
-    sdk.setCrashReportingMode(CrashReportingMode.SILENT);
+    sdk.setCrashReportingMode(CrashReportingMode.DEFAULT);
   }
   
   public ZubhiumSDK getZubhiumSdk() {

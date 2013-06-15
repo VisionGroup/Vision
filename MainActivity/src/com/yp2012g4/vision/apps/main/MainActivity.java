@@ -19,14 +19,14 @@ import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
-import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.SettingsActivity;
 import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
+import com.yp2012g4.vision.apps.telephony.CallService;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
 import com.yp2012g4.vision.managers.CallsManager;
 import com.yp2012g4.vision.managers.SmsManager;
-import com.yp2012g4.vision.tools.CallService;
 import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
@@ -103,7 +103,7 @@ public class MainActivity extends VisionActivity {
         nextActivity = ContactsMenuActivity.class;
         break;
       case R.id.setting_button:
-        nextActivity = DisplaySettingsActivity.class;
+        nextActivity = SettingsActivity.class;
         break;
       case R.id.read_sms_button:
         nextActivity = ReadSmsActivity.class;

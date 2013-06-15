@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.tools;
+package com.yp2012g4.vision.apps.telephony;
 
 import java.lang.reflect.Method;
 
@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.android.internal.telephony.ITelephony;
-import com.yp2012g4.vision.apps.settings.VisionApplication;
+import com.yp2012g4.vision.VisionApplication;
 
 /**
  * This util class is used to answer, reject (and later call) calls and more

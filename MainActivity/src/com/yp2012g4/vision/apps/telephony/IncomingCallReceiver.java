@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.tools;
+package com.yp2012g4.vision.apps.telephony;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.os.RemoteException;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.yp2012g4.vision.tools.CallUtils.CALL_TYPE;
+import com.yp2012g4.vision.apps.telephony.CallUtils.CALL_TYPE;
 
 /**
  * This receiver will activate the IncomingCallActivity when an incoming call
@@ -31,15 +31,23 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     Log.d(TAG, "State: " + state);
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       _rang = true;
-      final String phonenumber = b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
-      Log.i(TAG, "Incoming call from:" + phonenumber);
-      _sendMessage(c, phonenumber, CALL_TYPE.INCOMING_CALL);
+      try {
+        final String phonenumber = b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
+        Log.i(TAG, "Incoming call from:" + phonenumber);
+        _sendMessage(c, phonenumber, CALL_TYPE.INCOMING_CALL);
+      } catch (final Exception e) {
+        Log.d(TAG, "Failed to load incoming call screen.");
+      }
       return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE) && _rang) {
       _rang = false;
       Log.i(TAG, "Call ended.");
-      _sendMessage(c, "", CALL_TYPE.CALL_ENDED);
+      try {
+        _sendMessage(c, "", CALL_TYPE.CALL_ENDED);
+      } catch (final Exception e) {
+        Log.d(TAG, "Failed to execute end call code.");
+      }
       return;
     }
     if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK))

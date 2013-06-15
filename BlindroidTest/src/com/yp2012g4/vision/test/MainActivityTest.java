@@ -18,7 +18,7 @@ import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
-import com.yp2012g4.vision.apps.settings.DisplaySettingsActivity;
+import com.yp2012g4.vision.apps.settings.SettingsActivity;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.whereAmI.WhereAmIActivity;
@@ -69,7 +69,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
   }
   
   @MediumTest public void testSettings() {
-    checkBackAndHome(com.yp2012g4.vision.R.id.setting_button, DisplaySettingsActivity.class);
+    checkBackAndHome(com.yp2012g4.vision.R.id.setting_button, SettingsActivity.class);
   }
   
   @MediumTest @Suppress public void testReadSms() {

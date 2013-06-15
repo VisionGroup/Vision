@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:text="@string/small_text_size_button"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:prefsValue="SMALL"
         app:readText="@string/small_text_size_button" />
 
@@ -28,7 +28,7 @@
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:text="@string/normal_text_size_button"
-        android:textSize="26sp"
+        android:textSize="40sp"
         app:prefsValue="NORMAL"
         app:readText="@string/normal_text_size_button" />
 
@@ -40,7 +40,7 @@
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:text="@string/large_text_size_button"
-        android:textSize="32sp"
+        android:textSize="50sp"
         app:prefsValue="LARGE"
         app:readText="@string/large_text_size_button" />
 

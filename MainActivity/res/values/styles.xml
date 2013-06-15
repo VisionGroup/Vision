@@ -7,13 +7,13 @@
     <color name="LIGHT_PURPLE">#A901DB</color>
     
    <style name="small_text">
-      <item name="android:textSize">20sp</item>
+      <item name="android:textSize">30sp</item>
    </style>
    <style name="normal_text">
-      <item name="android:textSize">25sp</item>
+      <item name="android:textSize">40sp</item>
    </style>
    <style name="large_text">
-      <item name="android:textSize">30sp</item>
+      <item name="android:textSize">50sp</item>
    </style>
    
    <style name="small_white_text" parent="@style/small_text">

@@ -61,7 +61,7 @@ public class ContactsActivity extends VisionActivity {
         intent.setData(Uri.parse("tel:" + ct.phone));
         startActivity(intent);
         // TODO
-        // callsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
+        // callsManager.UnmarkCallLFromMissedCallList(this, ct.phone);
         break;
       case R.id.contacts_sms:
         intent = newFlaggedIntent(ContactsActivity.this, SendSMSActivity.class);

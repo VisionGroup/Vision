@@ -1,6 +1,7 @@
 package com.yp2012g4.vision.test.tools;
 
 import junit.framework.TestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.yp2012g4.vision.tools.location.OpenStreetMapGeocoder;
 
@@ -22,7 +23,7 @@ public class OpenStreetMapGeocoderTest extends TestCase {
     super.tearDown();
   }
   
-  @SuppressWarnings("static-method") public void testGeoLocation() {
+  @MediumTest @SuppressWarnings("static-method") public void testGeoLocation() {
     assertEquals(
         "137, Pilkington Avenue, Castle Vale, Birmingham, West Midlands, England, B72 1LH, United Kingdom, European Union",
         OpenStreetMapGeocoder.getAddress(52.5487429714954, -1.81602098644987));

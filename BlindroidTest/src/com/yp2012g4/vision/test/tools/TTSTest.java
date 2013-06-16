@@ -1,6 +1,7 @@
 package com.yp2012g4.vision.test.tools;
 
 import junit.framework.TestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.yp2012g4.vision.tools.TTS;
 
@@ -18,7 +19,7 @@ public class TTSTest extends TestCase {
     super.tearDown();
   }
   
-  public void testisPureEnglish() {
+  @MediumTest public void testisPureEnglish() {
     assertTrue(TTS.isPureEnglish("Abcdefghijklmnopqrstuvwxyz"));
     assertTrue(TTS.isPureEnglish("Aabnhdkkmoolelma;oerffen,cmnieio89249fkjfh';adf,zvn"));
     assertTrue(TTS.isPureEnglish(""));
@@ -29,7 +30,7 @@ public class TTSTest extends TestCase {
     assertFalse(TTS.isPureEnglish("kkkkkkò"));
   }
   
-  public void testSpell() {
+  @MediumTest public void testSpell() {
     assertEquals("a b c", TTS.spell("abc"));
     assertEquals("", TTS.spell(""));
     assertEquals("a b c d e f g 1 5 6 e", TTS.spell("abcdefg156e"));

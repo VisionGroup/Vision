@@ -38,16 +38,15 @@ public class WhereAmIActivity extends VisionActivity {
   }
   
   void makeUseOfNewLocation(final double longitude, final double latitude, final String prov, final String address) {
+    if (address == null || address == "")
+      return;
     l.lock();
     if (new Date().getTime() - lastUpdate.getTime() < updateTimeOut) {
       l.unlock();
       return;
     }
     lastUpdate = new Date();
-    Log.i(TAG, "longitude = " + longitude + "\n");
-    Log.i(TAG, "latitude = " + latitude + "\n");
-    Log.i(TAG, "provider = " + prov + "\n");
-    Log.i(TAG, "address: " + address);
+    Log.i(TAG, "longitude = " + longitude + " latitude = " + latitude + " provider = " + prov + " address: " + address);
     final String toSpeak = getString(R.string.your_location_is) + ": " + address;
     setText(toSpeak);
     Log.i(TAG, "speaking out location: " + toSpeak + "\n");

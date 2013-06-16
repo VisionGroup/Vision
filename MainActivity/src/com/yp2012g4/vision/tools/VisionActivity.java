@@ -89,8 +89,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
           speakOutSync(getString(R.string.in_main_screen));
           return true;
         }
-        setIntentFlags(_intent);
-        startActivity(_intent);
+        startActivity(setIntentFlags(_intent));
         finish();
         return true;
       case R.id.current_menu_button:

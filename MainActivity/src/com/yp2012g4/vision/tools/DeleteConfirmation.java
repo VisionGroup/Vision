@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.apps.smsReader;
+package com.yp2012g4.vision.tools;
 
 /**
  * An activity offering the option to change the text size
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DeleteConfirmation extends VisionActivity {
   public static final String ACTIVITY_EXTRA = "activity";
@@ -20,7 +19,7 @@ public class DeleteConfirmation extends VisionActivity {
   public static final String DELETE_FLAG = "DELETE";
   @SuppressWarnings("rawtypes") private Class _caller;
   private static final String TAG = "vision:DeleteConfirmation";
-  
+   
   /**
    * get the activity's main view ID
    * 
@@ -45,19 +44,15 @@ public class DeleteConfirmation extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     Log.d(TAG, _caller.toString());
-    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, CANCEL_FLAG);
+    final Intent intent = newFlaggedIntent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, CANCEL_FLAG);
     Log.d(TAG, intent.toString());
-    // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    setIntentFlags(intent);
     startActivity(intent);
     finish();
     return false;
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG);
-    // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    setIntentFlags(intent);
+    final Intent intent = newFlaggedIntent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG);
     startActivity(intent);
     finish();
     return super.onFling(e1, e2, f1, f2);

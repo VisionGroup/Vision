@@ -98,8 +98,7 @@ public class SetClockActivity extends VisionActivity {
         setResult(AlarmActivity.USER_PRESSED_BACK);
         break;
       default:
-        final int result = Integer.parseInt(tbNum.getText().toString());
-        setResult(result);
+        setResult(Integer.parseInt(tbNum.getText().toString()));
         finish();
     }
     return false;

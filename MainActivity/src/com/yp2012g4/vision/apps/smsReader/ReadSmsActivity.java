@@ -13,6 +13,7 @@ import com.yp2012g4.vision.customUI.lists.SmsAdapter;
 import com.yp2012g4.vision.customUI.lists.TalkingListView;
 import com.yp2012g4.vision.managers.SmsManager;
 import com.yp2012g4.vision.managers.SmsType;
+import com.yp2012g4.vision.tools.DeleteConfirmation;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -30,6 +31,10 @@ public class ReadSmsActivity extends VisionActivity {
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
     listView = (TalkingListView) findViewById(R.id.TalkingSmsListView2);
     adapter = new SmsAdapter(this);
+    if (adapter.getCount() == 0) {
+      speakOutSync(R.string.no_messages);
+      finish();
+    }
     listView.setAdapter(adapter);
   }
   

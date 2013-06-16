@@ -6,7 +6,7 @@ import android.view.Display;
 
 import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
+import com.yp2012g4.vision.tools.DeleteConfirmation;
 
 public class GestureTestUtils {
   public static void flingRight(final ActivityInstrumentationTestCase2<?> c) {

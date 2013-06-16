@@ -13,7 +13,9 @@ import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
+import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.test.utils.GestureUtils;
 import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 /**
@@ -24,6 +26,8 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   Resources res;
   private Solo solo;
   private Activity activity;
+  private final String num1 = "00000";
+  private final String num2 = "11111";
   
   // private PhoneNotifications pn;
   public PhoneStatusActivityTest() {
@@ -43,11 +47,23 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     // pn = new PhoneNotifications(getActivity());
   }
   
-  @MediumTest public void test_missedCallsScreen() {
-    ManagerUtils.addUnansweredCall(activity.getApplicationContext(), "00000");
-    checkNonEmptyCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
+  @MediumTest public void test_missedCallsScreenAlive() {
+    ManagerUtils.addUnansweredCall(activity.getApplicationContext(), num1);
+    checkNonEmptyCallList();
     ManagerUtils.removeAllUnansweredCalls(activity.getApplicationContext());
-    checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
+    checkEmptyMissedCallList();
+  }
+  
+  @MediumTest public void test_missedCallsScreenSwipe() {
+    ManagerUtils.removeAllUnansweredCalls(activity.getApplicationContext());
+    ManagerUtils.addUnansweredCall(activity.getApplicationContext(), num1);
+    ManagerUtils.addUnansweredCall(activity.getApplicationContext(), num2);
+    goToCallsScreen();
+    assertEquals(num1, ((TalkingButton) solo.getView(R.id.call_number)).getText());
+    GestureUtils.flingRight(this);
+    assertEquals(num2, ((TalkingButton) solo.getView(R.id.call_number)).getText());
+    pressBack();
+    ManagerUtils.removeAllUnansweredCalls(activity.getApplicationContext());
   }
   
   @MediumTest public void test_signalToPercent() {
@@ -72,22 +88,26 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
   }
   
-  private void checkNonEmptyCallList(int id) {
+  private void goToCallsScreen() {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
-    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
-    // Test Back button
+    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(com.yp2012g4.vision.R.id.button_getMissedCalls);
     solo.clickOnView(tb);
+  }
+  
+  private void checkNonEmptyCallList() {
+    goToCallsScreen();
     solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", CallListActivity.class);
-    solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
+    pressBack();
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   
-  private void checkEmptyMissedCallList(int id) {
-    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
-    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
-    // should go back if list is empty.
-    solo.clickOnView(tb);
+  private void pressBack() {
+    solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
+  }
+  
+  private void checkEmptyMissedCallList() {
+    goToCallsScreen();
     solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }

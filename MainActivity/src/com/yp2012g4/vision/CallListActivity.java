@@ -49,7 +49,7 @@ public class CallListActivity extends VisionActivity {
       return true;
     Intent intent;
     final CallType currCall = getCurrentCall();
-    Log.d(TAG, currCall.getName().toString() + " " + currCall.number + " " + currCall.date.toString());
+    Log.d(TAG, currCall.name + " " + currCall.number + " " + currCall.date.toString());
     switch (getButtonByMode().getId()) {
       case R.id.calllist_send_quick_sms:
         intent = newFlaggedIntent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);

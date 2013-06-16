@@ -60,33 +60,32 @@ public class CallTesting extends ActivityInstrumentationTestCase2<MainActivity> 
     solo.assertCurrentActivity("Wrong activity", MainActivity.class);
   }
   
-  private void simInCall(String number) {
-    Intent i = new Intent();
+  private void simInCall(final String number) {
+    final Intent i = new Intent();
     i.setAction("android.intent.action.PHONE_STATE");
     i.setClass(activity.getApplicationContext(), IncomingCallReceiver.class);
     i.putExtra(TelephonyManager.EXTRA_STATE, TelephonyManager.EXTRA_STATE_RINGING);
     i.putExtra(TelephonyManager.EXTRA_INCOMING_NUMBER, number);
-    IncomingCallReceiver icr = new IncomingCallReceiver();
+    final IncomingCallReceiver icr = new IncomingCallReceiver();
     icr.onReceive(activity, i);
   }
   
   private void simEndCall() {
-    Intent i = new Intent();
+    final Intent i = new Intent();
     i.setAction("android.intent.action.PHONE_STATE");
     i.putExtra(TelephonyManager.EXTRA_STATE, TelephonyManager.EXTRA_STATE_IDLE);
     i.setClass(activity.getApplicationContext(), IncomingCallReceiver.class);
-    IncomingCallReceiver icr = new IncomingCallReceiver();
+    final IncomingCallReceiver icr = new IncomingCallReceiver();
     icr.onReceive(activity, i);
   }
   
-  private void simOutCall(String number) {
-    Intent i = new Intent("NEW_OUTGOING_CALL");
+  private void simOutCall(final String number) {
+    final Intent i = new Intent("NEW_OUTGOING_CALL");
     i.putExtra(TelephonyManager.EXTRA_STATE, TelephonyManager.EXTRA_STATE_RINGING);
     i.putExtra("android.intent.extra.PHONE_NUMBER", number);
     i.setAction("android.intent.action.NEW_OUTGOING_CALL");
     i.setClass(activity.getApplicationContext(), OutgoingCallReceiver.class);
-    // activity.sendBroadcast(i);
-    OutgoingCallReceiver ocr = new OutgoingCallReceiver();
+    final OutgoingCallReceiver ocr = new OutgoingCallReceiver();
     ocr.onReceive(activity, i);
   }
 }

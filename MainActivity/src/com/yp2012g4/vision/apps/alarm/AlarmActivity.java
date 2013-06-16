@@ -18,7 +18,6 @@ import android.view.View;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
-import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class AlarmActivity extends VisionActivity {
@@ -72,10 +71,8 @@ public class AlarmActivity extends VisionActivity {
       alarmTime.setTimeInMillis(System.currentTimeMillis());
       alarmTime.set(Calendar.HOUR_OF_DAY, reqHour);
       alarmTime.set(Calendar.MINUTE, resultCode);
-      final String s = getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime, getResources());
-      final TalkingButton buttonStatus = getTalkingButton(R.id.statusButton);
-      buttonStatus.setReadText(SpeakingClockActivity.parseTime(alarmTime, getResources()));
-      speakOutSync(s);
+      getTalkingButton(R.id.statusButton).setReadText(SpeakingClockActivity.parseTime(alarmTime, getResources()));
+      speakOutSync(getString(R.string.alarm_is_set_to) + " " + SpeakingClockActivity.parseTime(alarmTime, getResources()));
     }
   }
   
@@ -155,13 +152,12 @@ public class AlarmActivity extends VisionActivity {
     }
     final Intent myIntent = newFlaggedIntent(AlarmActivity.this, AlarmService.class);
     pendingIntent = PendingIntent.getService(AlarmActivity.this, 0, myIntent, 0);
-    final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     final Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(System.currentTimeMillis());
     alarmTime.set(Calendar.SECOND, 0);
     if (alarmTime.before(calendar))
       alarmTime.roll(Calendar.DAY_OF_MONTH, true);
-    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+    ((AlarmManager) getSystemService(ALARM_SERVICE)).set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
     alarmIsSet = true;
     speakOutSync(R.string.alarm_is_activated);
   }

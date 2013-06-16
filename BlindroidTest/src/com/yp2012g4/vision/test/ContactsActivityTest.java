@@ -3,7 +3,6 @@ package com.yp2012g4.vision.test;
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.EditText;
 
@@ -13,9 +12,10 @@ import com.yp2012g4.vision.apps.contacts.AddContactActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.main.MainActivity;
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
+import com.yp2012g4.vision.test.utils.GestureUtils;
+import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
   private Solo solo;
@@ -129,11 +129,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   @MediumTest private void deleteCurrentContact(final boolean confirmDelete) {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.delete_contact));
-    solo.assertCurrentActivity("wrong activity", DeleteConfirmation.class);
-    if (confirmDelete)
-      flingRight(this);
-    else
-      solo.clickOnView(solo.getView(R.id.Delete_Confirmation_Button));
+    ManagerUtils.useDeleteConfirmation(confirmDelete, solo, this);
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
   }
   
@@ -167,18 +163,6 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     deleteCurrentContact(true);
   }
   
-  public static void flingRight(final ActivityInstrumentationTestCase2<?> c) {
-    final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
-    final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
-    TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 - 150, screenHeight / 2, screenHeight / 2, 20);
-  }
-  
-  public static void flingLeft(final ActivityInstrumentationTestCase2<?> c) {
-    final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
-    final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
-    TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 + 150, screenHeight / 2, screenHeight / 2, 20);
-  }
-  
   // fling left until the start of the list
   @MediumTest public void goToStart() {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
@@ -186,7 +170,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     String currContact = lastContact;
     do {
       lastContact = currContact;
-      flingLeft(this);
+      GestureUtils.flingLeft(this);
       currContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     } while (!currContact.equals(lastContact));
   }
@@ -195,13 +179,13 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     String lastContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     if (lastContact.equals(name))
       return true;
-    flingRight(this);
+    GestureUtils.flingRight(this);
     String currContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     while (!currContact.equals(lastContact)) {
       if (currContact.equals(name))
         return true;
       lastContact = currContact;
-      flingRight(this);
+      GestureUtils.flingRight(this);
       currContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     }
     return false;

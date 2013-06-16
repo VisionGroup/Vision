@@ -3,8 +3,6 @@
  */
 package com.yp2012g4.vision.test;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -20,8 +18,6 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.managers.CallType;
-import com.yp2012g4.vision.managers.CallsManager;
 
 /**
  * @author Amit Yaffe
@@ -52,18 +48,10 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
-    CallsManager cm = new CallsManager(activity.getApplicationContext());
-    ArrayList<CallType> missedCalls = cm.getMissedCallsList();
-    if (missedCalls.size() != 0)
-      checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
-    else
-      checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls, PhoneStatusActivity.class);
     addUnansweredCall();
     checkNonEmptyCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
     removeAllUnansweredCalls();
     checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
-
-
   }
   
   @MediumTest public void test_signalToPercent() {
@@ -88,27 +76,22 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
   }
   
-  private void checkBack(int id, Class<?> c) {
-  private void checkNonEmptyCallList(int id) {
+  private void checkNonEmptyCallList(final int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
     solo.clickOnView(tb);
-    solo.waitForActivity(c.getName(), 2000);
-    solo.assertCurrentActivity("wrong activity", c);
     solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", CallListActivity.class);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   
-  private void checkEmptyMissedCallList(int id, Class<?> c) {
-  private void checkEmptyMissedCallList(int id) {
+  private void checkEmptyMissedCallList(final int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // should go back if list is empty.
     solo.clickOnView(tb);
-    solo.waitForActivity(c.getName(), 2000);
     solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
@@ -130,8 +113,8 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   private void addUnansweredCall() {
-    ContentResolver cr = activity.getApplicationContext().getContentResolver();
-    ContentValues values = new ContentValues();
+    final ContentResolver cr = activity.getApplicationContext().getContentResolver();
+    final ContentValues values = new ContentValues();
     values.put(CallLog.Calls.NUMBER, phoneNumber);
     values.put(CallLog.Calls.DATE, Long.valueOf(System.currentTimeMillis()));
     values.put(CallLog.Calls.DURATION, Integer.valueOf(2));

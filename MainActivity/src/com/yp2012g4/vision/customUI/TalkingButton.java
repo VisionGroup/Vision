@@ -17,7 +17,7 @@ import com.yp2012g4.vision.R;
  */
 public class TalkingButton extends Button implements Runnable {
   private Runnable _run; // the functionality of the button
-  private String _readText = ""; // the text for the TTS
+  private String _readText; // the text for the TTS
   private String _readToolTip = ""; // tool tip text
   private String _prefsValue = ""; // value for preference buttons
   

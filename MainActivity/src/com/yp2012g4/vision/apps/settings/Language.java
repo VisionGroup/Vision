@@ -14,7 +14,7 @@ public class Language {
       add(new Locale("iw")); // TODO Change to HE including the res library.
     }
   };
-  private static final Locale _defaultLocal = Locale.US;
+  private static final Locale _defaultLocale = Locale.US;
   
   /**
    * 
@@ -39,6 +39,6 @@ public class Language {
    * @return The applications default Locale.
    */
   public static Locale getDefaultLocale() {
-    return _defaultLocal;
+    return _defaultLocale;
   }
 }

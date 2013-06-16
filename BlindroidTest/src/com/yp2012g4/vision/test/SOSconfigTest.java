@@ -49,8 +49,8 @@ public class SOSconfigTest extends ActivityInstrumentationTestCase2<SOSconfig> {
     int left1 = VisionGestureDetector.getRelativeLeft(v);
     int top1 = VisionGestureDetector.getRelativeTop(v);
     v = solo.getView(R.id.digit9);
-    int left2 = VisionGestureDetector.getRelativeLeft(v);
-    int top2 = VisionGestureDetector.getRelativeTop(v);
+    final int left2 = VisionGestureDetector.getRelativeLeft(v);
+    final int top2 = VisionGestureDetector.getRelativeTop(v);
     TouchUtils.drag(this, left1, left2 + 1, top1, top2 + 1, 10);
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "9");
     v = solo.getView(R.id.digit1);
@@ -77,7 +77,7 @@ public class SOSconfigTest extends ActivityInstrumentationTestCase2<SOSconfig> {
   }
   
   @MediumTest public void testOkButtonWithEmptyNumber() {
-    View v = solo.getView(R.id.button_ok);
+    final View v = solo.getView(R.id.button_ok);
     TouchUtils.longClickView(this, v);
     assertEquals(VisionGestureDetector._spokenString, activity.getString(R.string.SOS_number_empty));
   }

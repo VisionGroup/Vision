@@ -29,18 +29,14 @@ public class ContactsActivity extends VisionActivity {
   public static final String FAVORITS_CONTACTS = "favorits";
   public static final String ALL_CONTACTS = "all";
   public static final String LIST_TYPE = "list_type";
-  // TODO amit: 666 ???
   private static final int REQUEST_CODE = 666;
   private String listType = ALL_CONTACTS;
   private ContactManager contactManager;
-  // private TalkingButton b;
-  private final int VIBRATE_TIME = 150;
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
   private static final String TAG = "vision:ContactsActivity";
   
-//  private final CallsManager callsManager = new CallsManager(this);
   @Override public int getViewId() {
     return R.id.ContactsActivity;
   }
@@ -59,25 +55,23 @@ public class ContactsActivity extends VisionActivity {
     }
     if (ct == null)
       return false;
-    final String name;
     switch (button.getId()) {
       case R.id.contacts_call:
         intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
-        intent.setData(Uri.parse("tel:" + ct.getPhone()));
+        intent.setData(Uri.parse("tel:" + ct.phone));
         startActivity(intent);
         // TODO
-        // callsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
+        // callsManager.UnmarkCallLFromMissedCallList(this, ct.phone);
         break;
       case R.id.contacts_sms:
         intent = newFlaggedIntent(ContactsActivity.this, SendSMSActivity.class);
-        intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
+        intent.putExtra(CallUtils.NUMBER_KEY, ct.phone);
         startActivity(intent);
         break;
       case R.id.contacts_quick_sms:
         intent = newFlaggedIntent(ContactsActivity.this, QuickSMSActivity.class);
-        intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
-        name = ct.getContactName();
-        intent.putExtra(CONTACT_NAME_FLAG, name);
+        intent.putExtra(CallUtils.NUMBER_KEY, ct.phone);
+        intent.putExtra(CONTACT_NAME_FLAG, ct.name);
         startActivity(intent);
         break;
       case R.id.add_contact:
@@ -90,8 +84,7 @@ public class ContactsActivity extends VisionActivity {
         break;
       case R.id.edit_contact:
         intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
-        name = ct.getContactName();
-        intent.putExtra(CONTACT_NAME_FLAG, name);
+        intent.putExtra(CONTACT_NAME_FLAG, ct.name);
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.delete_contact:
@@ -121,10 +114,10 @@ public class ContactsActivity extends VisionActivity {
     if (extras != null && extras.getString(ACTION_EXTRA) != null)
       if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         final ContactType ct = contactManager.getContact(currentContact);
-        if (ContactManager.deleteContact(ct.getContactName(), this)) {
+        if (ContactManager.deleteContact(ct.name, this)) {
           selectCorrespondingContactsList();
           setContact();
-          speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
+          speakOutAsync(getString(R.string.delete_contact_success) + ct.name);
         } else
           speakOutAsync(R.string.delete_contact_failed);
         vibrate();
@@ -140,7 +133,7 @@ public class ContactsActivity extends VisionActivity {
       setContact();
     } else
       speakOutAsync(R.string.no_more_contacts);
-    vibrate(VIBRATE_TIME);
+    vibrate();
   }
   
   private void changeToNextContact() {
@@ -149,7 +142,7 @@ public class ContactsActivity extends VisionActivity {
       setContact();
     } else
       speakOutAsync(R.string.no_more_contacts);
-    vibrate(VIBRATE_TIME);
+    vibrate();
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
@@ -190,8 +183,6 @@ public class ContactsActivity extends VisionActivity {
       findViewById(getViewId()).setContentDescription(getString(R.string.favorite_list_screen));
       return;
     }
-    findViewById(getViewId()).setContentDescription("Test contacts screen");
-    contactManager.getTestContacts();
   }
   
   private void setContact() {
@@ -203,8 +194,8 @@ public class ContactsActivity extends VisionActivity {
       speakOutAsync(R.string.no_messages);
     else {
       final ContactType curContect = contactManager.getContact(currentContact);
-      currentName = curContect.getContactName();
-      currentPhone = curContect.getPhone();
+      currentName = curContect.name;
+      currentPhone = curContect.phone;
       callPhoneButton.setReadText(getString(R.string.call_message) + currentName);
       smsPhoneButton.setReadText(getString(R.string.send_quick_sms_message) + currentName);
       contactNameButton.setText(currentName);

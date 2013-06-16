@@ -50,7 +50,7 @@ public class AddContactActivity extends VisionActivity {
     _etName.setText(contactDisplayName);
     moveCursor(_etName, contactDisplayName);
     try {
-      contactPhone = ContactManager.getContactFromName(contactDisplayName, this).getPhone();
+      contactPhone = ContactManager.getContactFromName(contactDisplayName, this).phone;
     } catch (final Exception e) {
       contactPhone = "";
     }

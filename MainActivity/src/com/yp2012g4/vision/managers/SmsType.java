@@ -14,11 +14,6 @@ public class SmsType {
   public final String address;
   public final String person;
   public final String date;
-  public final String protocol = "";
-  public final String read;
-  public final String status;
-  public final String type;
-  public final String subject = "";
   public final String body;
   
   /**
@@ -29,11 +24,8 @@ public class SmsType {
    */
   public SmsType(final Cursor cur, final Context c) {
     address = cur.getString(cur.getColumnIndexOrThrow("address"));
-    final long m = Long.parseLong(cur.getString(cur.getColumnIndexOrThrow("date")));
-    date = (String) DateFormat.format("dd/MM/yy", m);
-    read = cur.getString(cur.getColumnIndexOrThrow("read"));
-    status = cur.getString(cur.getColumnIndexOrThrow("status"));
-    type = cur.getString(cur.getColumnIndexOrThrow("type"));
+    final long miliseconds = Long.parseLong(cur.getString(cur.getColumnIndexOrThrow("date")));
+    date = DateFormat.format("dd/MM/yy", miliseconds).toString();
     body = cur.getString(cur.getColumnIndexOrThrow("body"));
     person = new ContactManager(c).getNameFromPhone(address);
   }

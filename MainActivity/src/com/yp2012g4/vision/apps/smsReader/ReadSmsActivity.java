@@ -62,27 +62,23 @@ public class ReadSmsActivity extends VisionActivity {
     final SmsType currMsg = getCurrentSms();
     switch (getButtonByMode().getId()) {
       case R.id.sms_send_sms:
-        intent = new Intent(getApplicationContext(), SendSMSActivity.class);
-        setIntentFlags(intent);
+        intent = newFlaggedIntent(getApplicationContext(), SendSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, currMsg.address);
         startActivity(intent);
         break;
       case R.id.sms_send_quick_sms:
-        intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
+        intent = newFlaggedIntent(getApplicationContext(), QuickSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, currMsg.address);
-        setIntentFlags(intent);
         startActivity(intent);
         break;
       case R.id.sms_call_sender:
         intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + currMsg.address));
-        setIntentFlags(intent);
-        startActivity(intent);
+        startActivity(setIntentFlags(intent));
         break;
       case R.id.sms_remove:
-        intent = new Intent(this, DeleteConfirmation.class);
+        intent = newFlaggedIntent(this, DeleteConfirmation.class);
         intent.putExtra(DeleteConfirmation.ACTIVITY_EXTRA, this.getClass().getName());
-        setIntentFlags(intent);
         startActivity(intent);
         break;
       default:

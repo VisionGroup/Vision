@@ -33,7 +33,6 @@ public class ContactsActivity extends VisionActivity {
   private static final int REQUEST_CODE = 666;
   private String listType = ALL_CONTACTS;
   private ContactManager contactManager;
-  private final int VIBRATE_TIME = 150;
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
@@ -57,7 +56,6 @@ public class ContactsActivity extends VisionActivity {
     }
     if (ct == null)
       return false;
-    final String name;
     switch (button.getId()) {
       case R.id.contacts_call:
         intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
@@ -74,8 +72,7 @@ public class ContactsActivity extends VisionActivity {
       case R.id.contacts_quick_sms:
         intent = newFlaggedIntent(ContactsActivity.this, QuickSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, ct.phone);
-        name = ct.name;
-        intent.putExtra(CONTACT_NAME_FLAG, name);
+        intent.putExtra(CONTACT_NAME_FLAG, ct.name);
         startActivity(intent);
         break;
       case R.id.add_contact:
@@ -88,8 +85,7 @@ public class ContactsActivity extends VisionActivity {
         break;
       case R.id.edit_contact:
         intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
-        name = ct.name;
-        intent.putExtra(CONTACT_NAME_FLAG, name);
+        intent.putExtra(CONTACT_NAME_FLAG, ct.name);
         startActivityForResult(intent, REQUEST_CODE);
         break;
       case R.id.delete_contact:
@@ -138,7 +134,7 @@ public class ContactsActivity extends VisionActivity {
       setContact();
     } else
       speakOutAsync(R.string.no_more_contacts);
-    vibrate(VIBRATE_TIME);
+    vibrate();
   }
   
   private void changeToNextContact() {
@@ -147,7 +143,7 @@ public class ContactsActivity extends VisionActivity {
       setContact();
     } else
       speakOutAsync(R.string.no_more_contacts);
-    vibrate(VIBRATE_TIME);
+    vibrate();
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {

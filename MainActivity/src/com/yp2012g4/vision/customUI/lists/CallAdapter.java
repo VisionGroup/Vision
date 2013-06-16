@@ -70,13 +70,13 @@ public class CallAdapter extends BaseAdapter {
   private void setCallDisplay(final int p, final TalkingButton numberView, final TalkingButton nameView,
       final TalkingButton timeView) {
     final CallType call = (CallType) getItem(p);
-    String person = call.getName();
+    String person = call.name;
     person = person == "" ? call.number : person;
     numberView.setText(call.number);
-    nameView.setText(call.getName());
+    nameView.setText(call.name);
     timeView.setText(call.date.toLocaleString());
     numberView.setReadText(call.number);
-    nameView.setReadText(call.getName());
+    nameView.setReadText(call.name);
     timeView.setReadText(call.date.toLocaleString());
   }
   

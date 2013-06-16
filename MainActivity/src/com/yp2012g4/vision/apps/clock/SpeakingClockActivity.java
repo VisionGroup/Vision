@@ -101,7 +101,9 @@ public class SpeakingClockActivity extends VisionActivity {
           final Calendar cal = Calendar.getInstance();
           final String ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
           final int h = cal.get(Calendar.HOUR) == 0 ? 12 : cal.get(Calendar.HOUR);
-          final String s = h + " : " + cal.get(Calendar.MINUTE) + " " + ampm;
+          final int m = cal.get(Calendar.MINUTE);
+          final String minuteDisplay = m < 10 ? "0" + m : m + "";
+          final String s = h + " : " + minuteDisplay + " " + ampm;
           timeButton.setText(s);
         }
       });

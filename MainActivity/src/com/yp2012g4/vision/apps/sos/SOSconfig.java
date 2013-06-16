@@ -96,8 +96,7 @@ public class SOSconfig extends VisionActivity {
       dialed_number += ((TalkingButton) v).getText();
       read_number = read_number + ((TalkingButton) v).getText() + " ";
     }
-    // Vibrate for 150 milliseconds
-    vibrate(VIBRATE_DURATION);
+    vibrate();
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
     v.playSoundEffect(SoundEffectConstants.CLICK);

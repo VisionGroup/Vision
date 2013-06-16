@@ -73,14 +73,14 @@ public class SmsAdapter extends BaseAdapter {
    */
   private void setSMSDisplay(final int p, final TalkingButton fromView, final TalkingButton bodyView, final TalkingButton timeView) {
     final SmsType msg = (SmsType) getItem(p);
-    String person = msg.getPerson();
-    person = person == "" ? msg.getAddress() : person;
+    String person = msg.person;
+    person = person == "" ? msg.address : person;
     fromView.setText(person);
-    bodyView.setText(msg.getBody());
-    timeView.setText(msg.getDate());
+    bodyView.setText(msg.body);
+    timeView.setText(msg.date);
     fromView.setReadText(person);
-    bodyView.setReadText(msg.getBody());
-    timeView.setReadText(msg.getDate());
+    bodyView.setReadText(msg.body);
+    timeView.setReadText(msg.date);
   }
   
   /**

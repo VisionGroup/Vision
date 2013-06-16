@@ -3,6 +3,8 @@
  */
 package com.yp2012g4.vision.test;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
@@ -14,6 +16,8 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.managers.CallType;
+import com.yp2012g4.vision.managers.CallsManager;
 
 /**
  * @author Amit Yaffe
@@ -43,7 +47,12 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
-    checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
+    CallsManager cm = new CallsManager(activity.getApplicationContext());
+    ArrayList<CallType> missedCalls = cm.getMissedCallsList();
+    if (missedCalls.size() != 0)
+      checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
+    else
+      checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls, PhoneStatusActivity.class);
   }
   
   @MediumTest public void test_signalToPercent() {
@@ -76,6 +85,15 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     solo.waitForActivity(c.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", c);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
+    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+  }
+  
+  private void checkEmptyMissedCallList(int id, Class<?> c) {
+    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
+    // should go back if list is empty.
+    solo.clickOnView(tb);
+    solo.waitForActivity(c.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   

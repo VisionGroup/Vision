@@ -1,4 +1,4 @@
-/*
+/**
  * This example demonstrates a good way to communicate between Activity and
  * Service.
  * 
@@ -9,12 +9,12 @@
  * constructor 3. Send and receive messages on the service-side using send() and
  * onReceiveMessage()
  * 
- * Author: Philipp C. Heckel; based on code by Lance Lefebure from
- * http://stackoverflow
- * .com/questions/4300291/example-communication-between-activity
- * -and-service-using-messaging Source:
- * https://code.launchpad.net/~binwiederhier/+junk/android-service-example Date:
- * 6 Jun 2012
+ * @Author: Philipp C. Heckel; based on code by Lance Lefebure from
+ *          http://stackoverflow
+ *          .com/questions/4300291/example-communication-between-activity
+ *          -and-service-using-messaging Source:
+ *          https://code.launchpad.net/~binwiederhier
+ *          /+junk/android-service-example Date: 6 Jun 2012
  */
 package com.yp2012g4.vision.tools;
 

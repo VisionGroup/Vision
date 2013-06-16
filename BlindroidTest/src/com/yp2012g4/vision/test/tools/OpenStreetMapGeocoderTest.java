@@ -23,7 +23,8 @@ public class OpenStreetMapGeocoderTest extends TestCase {
   }
   
   @SuppressWarnings("static-method") public void testGeoLocation() {
-    assertEquals(OpenStreetMapGeocoder.getAddress(52.5487429714954, -1.81602098644987),
-        "137, Pilkington Avenue, Castle Vale, Birmingham, West Midlands, England, B72 1LH, United Kingdom, European Union");
+    assertEquals(
+        "137, Pilkington Avenue, Castle Vale, Birmingham, West Midlands, England, B72 1LH, United Kingdom, European Union",
+        OpenStreetMapGeocoder.getAddress(52.5487429714954, -1.81602098644987));
   }
 }

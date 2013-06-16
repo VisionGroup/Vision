@@ -16,7 +16,7 @@ import com.yp2012g4.vision.apps.settings.Language;
  * 
  * @author Auster Yaron
  * 
- * @author Olivier (Modified the class so that it is a singleton)
+ * @author Olivier Hofman (Modified the class so that it is a singleton)
  * 
  */
 public class TTS implements OnInitListener {
@@ -27,6 +27,8 @@ public class TTS implements OnInitListener {
   private boolean _init = false;
   private static TTS staticTTS = null;
   private static String _engine = "";
+  final static int maxLengthToSpell = 15;
+  final static double ratioOfDigitsToSpell = 0.8;
   
   public static void init(final Context c) {
     if (staticTTS == null || !TTS.isRunning() || !_engine.equals(staticTTS._tts.getDefaultEngine())) {
@@ -151,13 +153,13 @@ public class TTS implements OnInitListener {
    * @return The inputed string, transformed to "spelled" string if needed
    */
   private static String spellIfNeeded(final String s) {
-    if (s.length() <= 3 || s.length() >= 15)
+    if (s.length() >= maxLengthToSpell)
       return s;
     int digitCount = 0;
     for (final char c : s.toCharArray())
       if (c >= '0' && c <= '9' || c == '+')
         digitCount++;
-    if (digitCount / (double) s.length() > 0.8)
+    if (digitCount / (double) s.length() > ratioOfDigitsToSpell)
       return spell(s);
     return s;
   }
@@ -235,7 +237,7 @@ public class TTS implements OnInitListener {
   }
   
   public static String spell(final String s) {
-    if (s.length() == 0)
+    if (s.length() <= 1)
       return s;
     final StringBuilder $ = new StringBuilder();
     $.append(s.charAt(0));

@@ -23,7 +23,7 @@ import com.yp2012g4.vision.tools.VisionGestureDetector.Dir;
  * @author Amit
  * 
  */
-class CallScreenView extends ViewGroup implements OnGestureListener {
+public class CallScreenView extends ViewGroup implements OnGestureListener {
   private final Paint mLoadPaint;
   private String _number = "";
   private static final String TAG = "vision:CallScreenView";

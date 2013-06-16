@@ -105,6 +105,7 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Sett
     solo.assertCurrentActivity("wrong activity", ThemeSettingsActivity.class);
     solo.clickOnText(solo.getString(com.yp2012g4.vision.R.string.small_text_size_button));
     solo.clickOnView(solo.getView(R.id.back_button));
+    solo.waitForActivity(SettingsActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     assertEquals(VisionApplication._textSize, "SMALL");
     solo.clickOnView(solo.getView(R.id.button_set_colors));
@@ -137,6 +138,7 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Sett
   }
   
   @MediumTest public void testBlueBlackSmall() {
+    solo.waitForActivity(SettingsActivity.class.getName(), 2000);
     testSetFontSizeToSmall();
     solo.clickOnView(solo.getView(R.id.back_button));
     testSetColorsBlueBlack();

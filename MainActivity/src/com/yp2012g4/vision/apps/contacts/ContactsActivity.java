@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.apps.telephony.CallUtils;
@@ -16,6 +15,7 @@ import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.managers.ContactType;
+import com.yp2012g4.vision.tools.DeleteConfirmation;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
@@ -60,8 +60,6 @@ public class ContactsActivity extends VisionActivity {
         intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
         intent.setData(Uri.parse("tel:" + ct.phone));
         startActivity(intent);
-        // TODO
-        // callsManager.UnmarkCallLFromMissedCallList(this, ct.phone);
         break;
       case R.id.contacts_sms:
         intent = newFlaggedIntent(ContactsActivity.this, SendSMSActivity.class);
@@ -173,16 +171,11 @@ public class ContactsActivity extends VisionActivity {
   
   private void selectCorrespondingContactsList() {
     contactManager = new ContactManager(getApplicationContext());
-    if (listType.equalsIgnoreCase(ALL_CONTACTS)) {
+    if (listType.equalsIgnoreCase(ALL_CONTACTS))
       contactManager.getAllContacts();
-      findViewById(getViewId()).setContentDescription(getString(R.string.contact_list_screen));
-      return;
-    }
-    if (listType.equalsIgnoreCase(FAVORITS_CONTACTS)) {
+    else
       contactManager.getFavoriteContacts();
-      findViewById(getViewId()).setContentDescription(getString(R.string.favorite_list_screen));
-      return;
-    }
+    findViewById(getViewId()).setContentDescription(getString(R.string.contact_list_screen));
   }
   
   private void setContact() {

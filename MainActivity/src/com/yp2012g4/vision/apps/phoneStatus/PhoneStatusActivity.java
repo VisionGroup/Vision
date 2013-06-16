@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.managers.CallsManager;
@@ -101,8 +100,7 @@ public class PhoneStatusActivity extends VisionActivity {
         break;
       case R.id.button_getMissedCalls:
         // getMissedCalls();
-        final Intent intent = new Intent(this, CallListActivity.class);
-        setIntentFlags(intent);
+        final Intent intent = newFlaggedIntent(this, CallListActivity.class);
         startActivity(intent);
         break;
       default:

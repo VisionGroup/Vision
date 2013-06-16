@@ -1,4 +1,4 @@
-package com.yp2012g4.vision.apps.smsReader;
+package com.yp2012g4.vision.tools;
 
 /**
  * An activity offering the option to change the text size
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.tools.VisionActivity;
 
 public class DeleteConfirmation extends VisionActivity {
   public static final String ACTIVITY_EXTRA = "activity";
@@ -20,7 +19,7 @@ public class DeleteConfirmation extends VisionActivity {
   public static final String DELETE_FLAG = "DELETE";
   @SuppressWarnings("rawtypes") private Class _caller;
   private static final String TAG = "vision:DeleteConfirmation";
-  
+   
   /**
    * get the activity's main view ID
    * 

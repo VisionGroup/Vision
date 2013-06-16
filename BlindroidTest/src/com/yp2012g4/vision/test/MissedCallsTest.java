@@ -9,8 +9,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.phoneStatus.CallListActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;

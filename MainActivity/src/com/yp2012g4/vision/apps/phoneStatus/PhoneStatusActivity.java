@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.managers.CallType;
 import com.yp2012g4.vision.managers.CallsManager;

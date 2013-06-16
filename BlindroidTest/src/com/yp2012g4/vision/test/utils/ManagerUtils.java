@@ -3,13 +3,11 @@ package com.yp2012g4.vision.test.utils;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.test.ActivityInstrumentationTestCase2;
 
-import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
+import com.yp2012g4.vision.managers.SmsManager;
 
 public class ManagerUtils {
   /**
@@ -57,13 +55,19 @@ public class ManagerUtils {
   }
   
   /**
-   * @param confirmDelete
+   * writes an SMS to the SMS inbox  
+   * 
+   * @param ctx
+   *          Context  
+   * @param mobNo
+   *          mobile number  
+   * @param msg
+   *          text of the message  
    */
-  public static void useDeleteConfirmation(final boolean confirmDelete, final Solo solo, final ActivityInstrumentationTestCase2<?> c) {
-    solo.assertCurrentActivity("wrong activity", DeleteConfirmation.class);
-    if (confirmDelete)
-      GestureTestUtils.flingRight(c);
-    else
-      solo.clickOnView(solo.getView(R.id.Delete_Confirmation_Button));
+  public final static void storeMessage(final Context ctx, final String mobNo, final String msg) {
+    final ContentValues values = new ContentValues();
+    values.put("address", mobNo);
+    values.put("body", msg);
+    ctx.getContentResolver().insert(Uri.parse(SmsManager.CONTENT_SMS_INBOX), values);
   }
 }

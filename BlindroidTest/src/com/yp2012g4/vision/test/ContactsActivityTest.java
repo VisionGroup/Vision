@@ -15,7 +15,6 @@ import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.test.utils.GestureTestUtils;
-import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
   private Solo solo;
@@ -129,7 +128,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   @MediumTest private void deleteCurrentContact(final boolean confirmDelete) {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.delete_contact));
-    ManagerUtils.useDeleteConfirmation(confirmDelete, solo, this);
+    GestureTestUtils.useDeleteConfirmation(confirmDelete, solo, this);
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
   }
   

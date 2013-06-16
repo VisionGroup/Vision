@@ -165,22 +165,6 @@ public class TTS implements OnInitListener {
   }
   
   /**
-   * speak the given string, in synchronous mode.
-   * 
-   * @param s
-   *          string to speak.
-   */
-  public static void syncSpeak(final String s) {
-    speak(s);
-    while (isSpeaking())
-      try {
-        Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
-      } catch (final Exception e) {
-        e.printStackTrace();
-      }
-  }
-  
-  /**
    * Stop speak!.
    * 
    */

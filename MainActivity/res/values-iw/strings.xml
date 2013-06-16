@@ -156,7 +156,6 @@
     <string name="contacts_screen">מסך אנשי קשר</string>
     <string name="contacts_screen_help">באפשרותך לגעת במקומות שונים במסך כדי לשמוע: 1) את שם איש הקשר. 2) את מספר הטלפון של איש הקשר. כמו כן, באפשרותך להתקשר לאיש הקשר, לשלוח לו הודעת S M S, לשלוח לו הודעת S M S מהירה, להוסיף איש קשר חדש, לערוך איש קשר או למחוק איש קשר.</string>
     <string name="no_more_contacts">אין יותר אנשי קשר</string>
-    <string name="no_messages">אין הודעות SMS</string>
     <string name="no_contacts">הטלפון לא מכיל אנשי קשר</string>
     <string name="next_contact">איש הקשר הבא</string>
     <string name="previous_contact">איש קשר קודם</string>
@@ -167,7 +166,7 @@
     <string name="delete_contact_button">מחק איש קשר נוכחי</string>
     <string name="add_new_contact_button">הוסף איש קשר</string>
 
-      <!-- AddContactActivity -->
+    <!-- AddContactActivity -->
     <string name="add_contact_screen">קביעת איש קשר</string>
     <string name="add_edit_contacts_help">באפשרותך לערוך את שמו ומספר הטלפון של איש הקשר. לחלופין - באפשרותך להוסיף איש קשר חדש. לאישור - יש ללחוץ על כפתור האישור</string>
     <string name="add_contact_success">איש קשר התווסף בהצלחה</string>
@@ -177,7 +176,7 @@
     <string name="contact_exist">איש הקשר קיים</string>
     <string name="required_fields">יש למלא את כל השדות</string>
     <string name="confirmation_button">אישור נתוני איש הקשר.</string>
-    
+
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">מסך תפריט אנשי קשר</string>
     <string name="contacts_help">בחר אחת מ-3 אפשרויות: 1) מעבר למסך אנשי הקשר המועדפים. 2)מעבר למסך כל אנשי הקשר. 3) מעבר לחייגן</string>
@@ -247,6 +246,7 @@
     <string name="message_number">הודעה מספר</string>
     <string name="no_more_messages">אין יותר הודעות</string>
     <string name="delete_message">מחיקת הודעה</string>
+    <string name="no_messages">אין הודעות SMS</string>
 
     <!-- SOSActivity -->
     <string name="sos_screen">מסך SOS</string>

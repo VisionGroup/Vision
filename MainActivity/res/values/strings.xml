@@ -160,7 +160,6 @@
     <string name="contacts_screen">contacts screen.</string>
     <string name="contacts_screen_help">you can touch screen in defferent places to hear: 1) contact name. 2) contact phone number. you can also call this person, send an S M S, send quick S M S, add new contact, edit contact or delete contact.</string>
     <string name="no_more_contacts">no more contacts</string>
-    <string name="no_messages">sms list is empty</string>
     <string name="no_contacts">phone has no contacts</string>
     <string name="next_contact">next contact</string>
     <string name="previous_contact">previous contact</string>
@@ -256,6 +255,7 @@
     <string name="message_number">message number</string>
     <string name="no_more_messages">no more messages</string>
     <string name="delete_message">delete message</string>
+    <string name="no_messages">SMS list is empty</string>
 
     <!-- SOSActivity -->
     <string name="sos_screen">S O S screen</string>

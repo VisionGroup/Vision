@@ -14,18 +14,14 @@ import android.text.format.DateFormat;
  */
 public class CallType {
   private static int MINIMAL_SIZE_FOR_PHONE_NUMBER = 3;
-  private String _number = "";
-  private String _type = "";
-  private String _name = "";
-  private Date _date;
-  private String _numberType = "";
+  public final String number;
+  private String name = "";
+  public final Date date;
   
-  public CallType(final String number, final String type, final String name, final Date date, final String numberType) {
-    _number = number;
-    _type = type;
-    _name = name;
-    _date = date;
-    _numberType = numberType;
+  public CallType(final String num, final String newName, final Date d) {
+    number = num;
+    name = newName;
+    date = d;
   }
   
   /**
@@ -35,53 +31,39 @@ public class CallType {
    * @param c
    */
   public CallType(final Context c, final Cursor cur) {
+    Date d;
     try {
-      _date = new Date((String) DateFormat.format("dd/MM/yy hh:mm",
-          cur.getLong(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE))));
+      d = new Date(DateFormat.format("dd/MM/yy hh:mm", cur.getLong(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE)))
+          .toString());
     } catch (final Exception e1) {
-      _date = new Date();
+      d = new Date();
       e1.printStackTrace();
     }
+    date = d;
+    String num = "";
     try {
-      _number = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
-      if (_number.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
-        _number = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
+      num = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
+      if (num.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
+        num = name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
       else
-        _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
-      if (_name == null)
-        _name = " ";
+        name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
+      if (name == null)
+        name = " ";
     } catch (final Exception e) {
-      _name = " ";
+      name = " ";
     }
+    number = num;
+  }
+  
+  static String getValueFromCursor(final Cursor cur, final String colValue) {
     try {
-      _numberType = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NUMBER_TYPE));
+      return cur.getString(cur.getColumnIndexOrThrow(colValue));
     } catch (final Exception e) {
-      _numberType = "";
+      return "";
     }
-    try {
-      _type = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.TYPE));
-    } catch (final Exception e) {
-      _type = "";
-    }
-  }
-  
-  public synchronized String getNumber() {
-    return _number;
-  }
-  
-  public synchronized String getNumberType() {
-    return _numberType;
-  }
-  
-  public synchronized Date getDate() {
-    return _date;
-  }
-  
-  public synchronized String getType() {
-    return _type;
   }
   
   public synchronized String getName() {
-    return _name;
+    return name;
   }
 }

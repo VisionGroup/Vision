@@ -49,21 +49,18 @@ public class CallListActivity extends VisionActivity {
       return true;
     Intent intent;
     final CallType currCall = getCurrentCall();
-    Log.d(TAG, currCall.getName().toString() + " " + currCall.getNumber() + " " + currCall.getDate().toString());
+    Log.d(TAG, currCall.getName().toString() + " " + currCall.number + " " + currCall.date.toString());
     switch (getButtonByMode().getId()) {
       case R.id.calllist_send_quick_sms:
-        intent = new Intent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.getNumber());
-        setIntentFlags(intent);
+        intent = newFlaggedIntent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);
         startActivity(intent);
         break;
       case R.id.calllist_send_sms:
-        intent = new Intent(getApplicationContext(), SendSMSActivity.class);
-        setIntentFlags(intent);
-        intent.putExtra(CallUtils.NUMBER_KEY, currCall.getNumber());
+        intent = newFlaggedIntent(getApplicationContext(), SendSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);
         startActivity(intent);
         break;
       case R.id.calllist_call_sender:
-        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.getNumber())));
+        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.number)));
         break;
       default:
         break;

@@ -32,12 +32,12 @@ public class SendSMSActivityTest extends ActivityInstrumentationTestCase2<SendSM
   
   @MediumTest public void testEmptyPhoneNumber() {
     solo.clickOnView(solo.getView(R.id.phoneNumber));
-    assertEquals(VisionGestureDetector._spokenString, "Enter a phone number");
+    assertEquals(VisionGestureDetector._spokenString, activity.getString(R.string.enter_a_phone_number));
   }
   
   @MediumTest public void testEmptyMessage() {
     solo.clickOnView(solo.getView(R.id.message));
-    assertEquals(VisionGestureDetector._spokenString, "Enter a message");
+    assertEquals(VisionGestureDetector._spokenString, activity.getString(R.string.enter_a_message));
   }
   
   // TODO: Need to activate keyboard within test in order to test other branches

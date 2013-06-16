@@ -24,10 +24,9 @@ import com.yp2012g4.vision.tools.location.LocationHandler;
  * This class is an activity which sends a pre-defined SOS message to
  * configurable content
  * 
- * @author Amir Mizrachi
+ * @author Amir Mizrachi (Edited by Olivier Hofman on version 2.0)
  * @version 1.0
  * 
- *          Edited by Olivier Hofman on version 2.0
  */
 public class SOSActivity extends VisionActivity {
   private LocationFinder lf;

@@ -5,6 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -23,8 +24,10 @@ import com.yp2012g4.vision.tools.location.LocationHandler;
  * This class is an activity which sends a pre-defined SOS message to
  * configurable content
  * 
- * @author Amir
+ * @author Amir Mizrachi
  * @version 1.0
+ * 
+ *          Edited by Olivier Hofman on version 2.0
  */
 public class SOSActivity extends VisionActivity {
   private LocationFinder lf;
@@ -75,7 +78,11 @@ public class SOSActivity extends VisionActivity {
       return true;
     if (_number.length() == 0) {
       speakOutSync(R.string.SOS_number_empty);
-      finish(); // TODO: activate SOSconfig???
+      final Intent intent = new Intent(this, SOSconfig.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      startActivity(intent);
+      finish();
       return true;
     }
     switch (getButtonByMode().getId()) {

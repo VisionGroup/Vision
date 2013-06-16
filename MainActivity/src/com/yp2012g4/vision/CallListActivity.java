@@ -68,7 +68,7 @@ public class CallListActivity extends VisionActivity {
       default:
         break;
     }
-    // CallManager.markMessageRead(this, currMsg.getAddress(),
+    // CallManager.markMessageRead(this, currMsg.address,
     // currMsg.getBody());
     // TODO: Mark Call as read.
     return false;

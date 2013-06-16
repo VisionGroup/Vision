@@ -50,7 +50,7 @@ public class ReadSmsActivity extends VisionActivity {
         if (!res)
           speakOutAsync(R.string.no_more_contacts);
         else
-          speakOutAsync(getCurrentSms().getPerson());
+          speakOutAsync(getCurrentSms().person);
       }
     return super.onFling(e1, e2, f1, f2);
   }
@@ -64,18 +64,18 @@ public class ReadSmsActivity extends VisionActivity {
       case R.id.sms_send_sms:
         intent = new Intent(getApplicationContext(), SendSMSActivity.class);
         setIntentFlags(intent);
-        intent.putExtra(CallUtils.NUMBER_KEY, currMsg.getAddress());
+        intent.putExtra(CallUtils.NUMBER_KEY, currMsg.address);
         startActivity(intent);
         break;
       case R.id.sms_send_quick_sms:
         intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
-        intent.putExtra(CallUtils.NUMBER_KEY, currMsg.getAddress());
+        intent.putExtra(CallUtils.NUMBER_KEY, currMsg.address);
         setIntentFlags(intent);
         startActivity(intent);
         break;
       case R.id.sms_call_sender:
         intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + currMsg.getAddress()));
+        intent.setData(Uri.parse("tel:" + currMsg.address));
         setIntentFlags(intent);
         startActivity(intent);
         break;
@@ -88,7 +88,7 @@ public class ReadSmsActivity extends VisionActivity {
       default:
         break;
     }
-    SmsManager.markMessageRead(this, currMsg.getAddress(), currMsg.getBody());
+    SmsManager.markMessageRead(this, currMsg.address, currMsg.body);
     return false;
   }
   
@@ -99,7 +99,7 @@ public class ReadSmsActivity extends VisionActivity {
     if (extras != null)
       if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         // first we remove the SMS from the phone DB
-        SmsManager.deleteSMS(this, currMsg.getBody(), currMsg.getAddress());
+        SmsManager.deleteSMS(this, currMsg.body, currMsg.address);
         // then we remove the SMS from the displayed list
         final int pageNumber = listView.getPage();
         adapter.removeItemFromList((int) listView.getDisplayedItemIds()[0]);

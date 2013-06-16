@@ -1,5 +1,6 @@
 package com.yp2012g4.vision.tools;
 
+import java.util.Locale;
 import java.util.Map;
 
 import android.content.Context;
@@ -18,6 +19,8 @@ import android.widget.EditText;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.main.MainActivity;
+import com.yp2012g4.vision.apps.settings.Language;
+import com.yp2012g4.vision.apps.settings.SetupSettingsString;
 import com.yp2012g4.vision.customUI.TalkingButton;
 
 /*
@@ -108,6 +111,14 @@ public abstract class VisionActivity extends VisionGestureDetector {
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
     TTS.init(getApplicationContext());
+    // final SharedPreferences sp =
+    // PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    final Locale l = new Locale(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(
+        SetupSettingsString.Language, Language.getDefaultLocale().getLanguage()));
+    Locale.setDefault(l);
+    Log.d(TAG, "Language: " + l.getLanguage());
+    final int ret = TTS.setLanguage(l);
+    Log.d(TAG, "SetLanguage result=" + ret);
   }
   
   @Override public void onBackPressed() {

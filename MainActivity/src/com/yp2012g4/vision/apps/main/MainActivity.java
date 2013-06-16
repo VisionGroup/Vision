@@ -14,13 +14,15 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.alarm.AlarmActivity;
 import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
-import com.yp2012g4.vision.apps.settings.SettingsActivity;
 import com.yp2012g4.vision.apps.settings.Language;
+import com.yp2012g4.vision.apps.settings.SettingsActivity;
+import com.yp2012g4.vision.apps.settings.SetupSettingsString;
 import com.yp2012g4.vision.apps.smsReader.ReadSmsActivity;
 import com.yp2012g4.vision.apps.sos.SOSActivity;
 import com.yp2012g4.vision.apps.telephony.CallService;
@@ -62,6 +64,7 @@ public class MainActivity extends VisionActivity {
     Log.d(TAG, "SetLanguage result=" + ret);
     _config = new Configuration();
     _config.locale = l;
+    VisionApplication.savePrefs(SetupSettingsString.Language, l.getLanguage(), this);
     getBaseContext().getResources().updateConfiguration(_config, getBaseContext().getResources().getDisplayMetrics());
     final PhoneNotifications pn = new PhoneNotifications(this);
     pn.startSignalLisener();

@@ -223,7 +223,8 @@ public class TTS implements OnInitListener {
       _init = true;
       Log.d(TAG, "TTS init completed succesfully.");
       setQueueMode(TextToSpeech.QUEUE_FLUSH);
-      setLanguage(_language);
+      final int ret = setLanguage(_language);
+      Log.d(TAG, "set language to:" + _language.getLanguage() + " res:" + ret);
     }
   }
   

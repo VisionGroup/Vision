@@ -1,29 +1,18 @@
 package com.yp2012g4.vision.apps.telephony;
 
-import java.util.Locale;
-
 import android.content.Context;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.yp2012g4.vision.VisionApplication;
 import com.yp2012g4.vision.apps.telephony.CallUtils.CALL_TYPE;
-import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.AbstractService;
-import com.yp2012g4.vision.tools.TTS;
 
 public class CallScreenService extends AbstractService {
   private static final String TAG = "vision:CallScreenService";
@@ -93,106 +82,5 @@ public class CallScreenService extends AbstractService {
     final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
     csView.setNumber(phoneNumber);
     wm.addView(csView, params);
-  }
-}
-
-//TODO: spartanize, put in seperate class, remove other unused telephony classes.
-class CallScreenView extends ViewGroup implements OnGestureListener {
-  private final Paint mLoadPaint;
-  private String _number = "";
-  private static final String TAG = "vision:CallScreenView";
-  private final GestureDetector gd = new GestureDetector(this);
-  private final CallUtils _cu;
-  private final Context _c;
-  ContactManager _cm;
-  String _name;
-  
-  /********/
-  @Override protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
-    super.onSizeChanged(w, h, oldw, oldh);
-  }
-  
-  /********/
-  public CallScreenView(final Context c) {
-    super(c);
-    mLoadPaint = new Paint();
-    mLoadPaint.setAntiAlias(true);
-    mLoadPaint.setTextSize(VisionApplication.getTextSize());
-    mLoadPaint.setColor(VisionApplication.getTextColor());
-    // mLoadPaint.setTextAlign(Align.RIGHT);
-    _cu = new CallUtils(c);
-    _c = c;
-    _cm = new ContactManager(_c);
-//    final LayoutInflater vi = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//    final View v = vi.inflate(R.layout.activity_incoming_call, null);
-  }
-  
-  @Override protected void onDraw(final Canvas canvas) {
-    super.onDraw(canvas);
-    // final SharedPreferences sp =
-    // PreferenceManager.getDefaultSharedPreferences(_c.getApplicationContext());
-    canvas.drawColor(VisionApplication.getBackgroundColor());
-    // TODO:: Find screen center, discard magic numbers
-    canvas.drawText(_number, 40, /* getHeight() / 2 */100 - VisionApplication.getTextSize(), mLoadPaint);
-    canvas.drawText(_name, 40, /* getHeight() / 2 */100 + VisionApplication.getTextSize(), mLoadPaint);
-    if (TTS.getLanguage() == Locale.US && !TTS.isPureEnglish(_name))
-      TTS.speak(_number);
-    else
-      TTS.speak(_name);
-  }
-  
-  public void setNumber(final String number) {
-    _number = number;
-    _name = _cm.getNameFromPhone(_number);
-  }
-  
-  @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
-    // Unused
-  }
-  
-  @Override public boolean onTouchEvent(final MotionEvent event) {
-    _cu.silenceRinger();
-    Log.d(TAG, "onTOuch");
-    return gd.onTouchEvent(event);// true;
-  }
-  
-  @Override public boolean onDown(final MotionEvent e) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-  
-  public static final long VIBRATE_DURATION = 150;
-  public static final int SWIPE_THRESHOLD = 100;
-  public static final int SWIPE_VELOCITY_THRESHOLD = 100;
-  
-  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    Log.d(TAG, "OnFling"); // TODO: generify and move somewhere else onFling
-    final float diffX = e2.getX() - e1.getX();
-    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
-      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD)
-        if (diffX > 0)
-          CallUtils.answerCall(_c);
-        else
-          _cu.endCall();
-//TODO: Add speaker phone activation
-    return true;
-  }
-  
-  @Override public void onLongPress(final MotionEvent e) {
-    // TODO Auto-generated method stub
-  }
-  
-  @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-  
-  @Override public void onShowPress(final MotionEvent e) {
-    // TODO Auto-generated method stub
-  }
-  
-  @Override public boolean onSingleTapUp(final MotionEvent e) {
-    TTS.speak(_name + " " + _number);
-    return false;
   }
 }

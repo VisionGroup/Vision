@@ -3,6 +3,7 @@ package com.yp2012g4.vision.apps.contacts;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -37,6 +38,7 @@ public class ContactsActivity extends VisionActivity {
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
+  private static final String TAG = "vision:ContactsActivity";
   
 //  private final CallsManager callsManager = new CallsManager(this);
   @Override public int getViewId() {
@@ -48,7 +50,13 @@ public class ContactsActivity extends VisionActivity {
       return true;
     final View button = getButtonByMode();
     final Intent intent;
-    final ContactType ct = contactManager.getContact(currentContact);
+    ContactType ct;
+    try {
+      ct = contactManager.getContact(currentContact);
+    } catch (final Exception ex) {
+      Log.d(TAG, "Unable to get new contact.");
+      ct = null;
+    }
     if (ct == null)
       return false;
     final String name;
@@ -73,8 +81,12 @@ public class ContactsActivity extends VisionActivity {
         startActivity(intent);
         break;
       case R.id.add_contact:
-        intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
-        startActivityForResult(intent, REQUEST_CODE);
+        try {
+          intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
+          startActivityForResult(intent, REQUEST_CODE);
+        } catch (final Exception ex) {
+          Log.d(TAG, "Unable to start add contact activity.");
+        }
         break;
       case R.id.edit_contact:
         intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);

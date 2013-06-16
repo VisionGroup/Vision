@@ -28,12 +28,11 @@ import com.yp2012g4.vision.tools.TTS;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class SettingsActivity extends VisionActivity {
-  private static final String VISION_CALL_ENABLE_ENTRY = "VISION CALL ENABLE";
   /**
    * get the activity's main view ID
    * 
    */
-  private static final String TAG = "vision:DisplaySettingsActivity";
+  private static final String TAG = "vision:SettingsActivity";
   
   @Override public int getViewId() {
     return R.id.displaySettingsActivity;
@@ -103,9 +102,9 @@ public class SettingsActivity extends VisionActivity {
   }
   
   private void pressedButtonCallEnable(final SharedPreferences sp) {
-    final boolean enable = sp.getBoolean(VISION_CALL_ENABLE_ENTRY, true);
+    final boolean enable = sp.getBoolean(SetupSettingsString.VisionCallEnableEntry, true);
     // final boolean enable = !buttonMode.equals(ENABLE_PREF);
-    VisionApplication.savePrefs(VISION_CALL_ENABLE_ENTRY, !enable, this);
+    VisionApplication.savePrefs(SetupSettingsString.VisionCallEnableEntry, !enable, this);
     if (enable)
       speakOutAsync(R.string.enable_call_service);
     else
@@ -127,13 +126,13 @@ public class SettingsActivity extends VisionActivity {
   private void pressedLocalSelectButton(final SharedPreferences sp) {
     _config = new Configuration();
     // TODO Try to check availability of TTS engines
-    final String lang = sp.getString("LANGUAGE", Language.getDefaultLocale().getLanguage());
+    final String lang = sp.getString(SetupSettingsString.Language, Language.getDefaultLocale().getLanguage());
     Log.d(TAG, "Current lang: " + lang);
     final Locale nextLocale = Language.availableLocals().get(
         (Language.availableLocals().indexOf(new Locale(lang)) + 1) % Language.availableLocals().size());
     Log.d(TAG, "Next lang: " + nextLocale.getLanguage());
     if (TTS.isLanguageAvailable(nextLocale)) {
-      VisionApplication.savePrefs("LANGUAGE", nextLocale.getLanguage(), this);
+      VisionApplication.savePrefs(SetupSettingsString.Language, nextLocale.getLanguage(), this);
       Locale.setDefault(nextLocale);
       speakOutSync(getString(R.string.switched_to) + " " + nextLocale.getLanguage());
       _config.locale = nextLocale;

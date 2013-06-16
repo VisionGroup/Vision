@@ -59,6 +59,11 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   private boolean _mSeparateTouches = false;
   private byte _mTwoFingerTapCount = 0;
   private Vibrator vibrator = null;
+  
+  public enum Dir {
+    RIGHT, LEFT, UP, DOWN, NONE
+  }
+  
   /**
    * Stores the dimensions of a button
    */
@@ -115,8 +120,26 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return true;
   }
   
+  public static Dir flingDir(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
+    final float diffX = e2.getX() - e1.getX();
+    final float diffY = e2.getY() - e1.getY();
+    if (Math.abs(diffX) > Math.abs(diffY))
+      if (Math.abs(diffX) > VisionGestureDetector.SWIPE_THRESHOLD
+          && Math.abs(velocityX) > VisionGestureDetector.SWIPE_VELOCITY_THRESHOLD) {
+        if (diffX > 0)
+          return Dir.RIGHT;
+        return Dir.LEFT;
+      }
+    if (Math.abs(diffY) > VisionGestureDetector.SWIPE_THRESHOLD
+        && Math.abs(velocityY) > VisionGestureDetector.SWIPE_VELOCITY_THRESHOLD) {
+      if (diffY > 0)
+        return Dir.DOWN;
+      return Dir.UP;
+    }
+    return Dir.NONE;
+  }
+  
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
-    Log.i(TAG, "onFling");
     return false;
   }
   

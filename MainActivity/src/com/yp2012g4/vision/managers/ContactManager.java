@@ -71,7 +71,7 @@ public class ContactManager {
     if (getNumOfContacts() < p)
       return null;
     while (_contactsArray.size() <= p)
-      getNextContacts();
+      getNextContacts(); // TODO endless loop on empty phone.
     return _contactsArray.get(p);
   }
   

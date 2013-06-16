@@ -29,7 +29,6 @@ public class ContactsActivity extends VisionActivity {
   public static final String FAVORITS_CONTACTS = "favorits";
   public static final String ALL_CONTACTS = "all";
   public static final String LIST_TYPE = "list_type";
-  // TODO amit: 666 ???
   private static final int REQUEST_CODE = 666;
   private String listType = ALL_CONTACTS;
   private ContactManager contactManager;

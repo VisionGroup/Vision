@@ -1,5 +1,7 @@
 package com.yp2012g4.vision.apps.telephony;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
@@ -15,6 +17,9 @@ import com.yp2012g4.vision.apps.telephony.CallUtils.CALL_TYPE;
 import com.yp2012g4.vision.tools.AbstractService;
 
 public class CallScreenService extends AbstractService {
+  ArrayList<CallScreenView> csViews = new ArrayList<CallScreenView>();
+  // CallScreenView csView;
+  GestureOverlayView gV;
   private static final String TAG = "vision:CallScreenService";
   
   /**
@@ -48,10 +53,12 @@ public class CallScreenService extends AbstractService {
   }
   
   private void endCall() {
-    if (csView != null) {
-      ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(csView);
-      csView = null;
-    }
+    if (csViews != null)
+      for (final CallScreenView csView : csViews)
+        if (csView != null) {
+          ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(csView);
+          csViews.remove(csView);
+        }
     new CallUtils(this).restoreRinger();
   }
   
@@ -63,15 +70,12 @@ public class CallScreenService extends AbstractService {
     Log.d(TAG, "Service Stopped.");
   }
   
-  CallScreenView csView;
-  GestureOverlayView gV;
-  
   @Override public IBinder onBind(final Intent intent) {
     return super.onBind(intent);
   }
   
   private void processCall(final Context c, final String phoneNumber) {
-    csView = new CallScreenView(this);
+    final CallScreenView csv = new CallScreenView(this);
     gV = new GestureOverlayView(c);
     final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_PRIORITY_PHONE,
@@ -80,7 +84,8 @@ public class CallScreenService extends AbstractService {
     params.gravity = Gravity.RIGHT | Gravity.TOP;
     params.setTitle("Load Average");
     final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-    csView.setNumber(phoneNumber);
-    wm.addView(csView, params);
+    csv.setNumber(phoneNumber);
+    csViews.add(csv);
+    wm.addView(csv, params);
   }
 }

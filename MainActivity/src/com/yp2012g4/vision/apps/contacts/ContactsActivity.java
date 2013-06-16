@@ -183,9 +183,10 @@ public class ContactsActivity extends VisionActivity {
     final TalkingButton conactPhoneButton = getTalkingButton(R.id.contact_phone);
     final TalkingImageButton callPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_call);
     final TalkingImageButton smsPhoneButton = (TalkingImageButton) findViewById(R.id.contacts_quick_sms);
-    if (contactManager.getNumOfContacts() == 0)
-      speakOutAsync(R.string.no_contacts);
-    else {
+    if (contactManager.getNumOfContacts() == 0) {
+      speakOutSync(R.string.no_contacts);
+      finish();
+    } else {
       final ContactType curContect = contactManager.getContact(currentContact);
       currentName = curContect.name;
       currentPhone = curContect.phone;

@@ -8,8 +8,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.util.Log;
 
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.tools.StackTraceToString;
 
 /**
  * Call type container
@@ -22,6 +24,7 @@ public class CallsManager {
   private final Context _context;
   private static final String[] _projection = { CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DATE };
   private boolean _hasNext;
+  private static final String TAG = "vision:CallsManager";
   
   public CallsManager(final Context c) {
     _context = c;
@@ -87,26 +90,10 @@ public class CallsManager {
           new String[] { Integer.toString(Calls.MISSED_TYPE), phoneNumber });
       System.out.println(i);
     } catch (final Exception e) {
-      e.getMessage();
+      Log.e(TAG, "UnmarkCallLFromMissedCallList" + StackTraceToString.toString(e));
     }
   }
   
-//  public void MarkCallLFromMissedCallList() {
-//    int i;
-//    try {
-//      final ContentValues values = new ContentValues();
-//      values.put(Calls.NEW, 1);
-//      final StringBuilder where = new StringBuilder();
-//      where.append(Calls.NEW + " = 0");
-//      where.append(" AND ");
-//      where.append(Calls.TYPE + " = ?");
-//      i = _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
-//          new String[] { Integer.toString(Calls.MISSED_TYPE) });
-//      i++;
-//    } catch (final Exception e) {
-//      e.getMessage();
-//    }
-//  }
   /**
    * Get a list of all the missed calls with the date, name and phone number of
    * each

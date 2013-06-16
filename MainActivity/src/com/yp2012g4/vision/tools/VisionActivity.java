@@ -74,7 +74,8 @@ public abstract class VisionActivity extends VisionGestureDetector {
     switch (button.getId()) {
       case R.id.back_button:
         Log.i(TAG, _name);
-        if (_name.equals("Main screen")) {
+        vibrate();
+        if (_name.equals(getString(R.string.MainActivity_wheramai))) {
           speakOutSync(R.string.in_main_screen);
           break;
         }
@@ -82,17 +83,21 @@ public abstract class VisionActivity extends VisionGestureDetector {
         finish();
         return true;
       case R.id.tool_tip_button:
+        vibrate();
         speakOutAsync(getToolTip());
         return true;
       case R.id.home_button:
-        if (_name.equals("Main screen")) {
+        vibrate();
+        if (_name.equals(getString(R.string.MainActivity_wheramai))) {
           speakOutSync(getString(R.string.in_main_screen));
+          MainActivity.VoiceNotify(this);
           return true;
         }
         startActivity(setIntentFlags(_intent));
         finish();
         return true;
       case R.id.current_menu_button:
+        vibrate();
         speakOutAsync(getString(R.string.this_is) + " " + _name);
         return true;
       default:

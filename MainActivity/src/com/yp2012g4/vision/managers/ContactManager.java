@@ -12,6 +12,8 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
+import com.yp2012g4.vision.tools.StackTraceToString;
+
 public class ContactManager {
   private static final String TAG = "vision:ContactManager";
   private final Context _c;
@@ -157,8 +159,7 @@ public class ContactManager {
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
     } catch (final Exception e) {
-      e.printStackTrace();
-      Log.e("ContactManager", "Exception: " + e.getMessage());
+      Log.e(TAG, "add contact to phone: " + StackTraceToString.toString(e));
     }
   }
   
@@ -175,7 +176,7 @@ public class ContactManager {
           }
         while (curser.moveToNext());
     } catch (final Exception e) {
-      Log.e("ContactManager", "delete contact Exception: " + e.getMessage());
+      Log.e(TAG, "delete contact: " + StackTraceToString.toString(e));
     }
     return false;
   }

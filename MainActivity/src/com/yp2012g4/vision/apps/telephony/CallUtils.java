@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 
 import com.android.internal.telephony.ITelephony;
 import com.yp2012g4.vision.VisionApplication;
+import com.yp2012g4.vision.tools.StackTraceToString;
 
 /**
  * This util class is used to answer, reject (and later call) calls and more
@@ -85,9 +86,8 @@ public class CallUtils {
       telephonyService.endCall();
       Thread.sleep(VisionApplication.DEFUALT_DELAY_TIME);
     } catch (final Exception e) {
-      e.printStackTrace();
       Log.e(TAG, "FATAL ERROR: could not connect to telephony subsystem");
-      Log.e(TAG, "Exception object: " + e);
+      Log.e(TAG, StackTraceToString.toString(e));
     }
   }
   

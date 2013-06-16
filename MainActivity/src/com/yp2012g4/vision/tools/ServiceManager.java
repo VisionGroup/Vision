@@ -117,11 +117,10 @@ public class ServiceManager {
   
   public void send(final Message msg) throws RemoteException {
     Log.d(TAG, "Trying to Send msg." + _isBound + " " + _service);
-    if (_isBound)
-      if (_service != null) {
-        Log.d(TAG, "Sending msg.");
-        _service.send(msg);
-      }
+    if (_isBound && _service != null) {
+      Log.d(TAG, "Sending msg.");
+      _service.send(msg);
+    }
   }
   
   private void doStartService() {

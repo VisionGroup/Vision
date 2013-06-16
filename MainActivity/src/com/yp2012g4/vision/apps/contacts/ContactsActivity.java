@@ -127,7 +127,7 @@ public class ContactsActivity extends VisionActivity {
           speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
         } else
           speakOutAsync(R.string.delete_contact_failed);
-        vibrate(VIBRATE_DURATION);
+        vibrate();
       } else if (extras.getString(ACTION_EXTRA).equals(AddContactActivity.ADD_FLAG)) {
         selectCorrespondingContactsList();
         setContact();

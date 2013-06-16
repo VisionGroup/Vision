@@ -53,12 +53,11 @@ public class CallScreenService extends AbstractService {
   }
   
   private void endCall() {
-    if (csViews != null)
+    if (csViews != null && csViews.size() > 0)
       for (final CallScreenView csView : csViews)
-        if (csView != null) {
+        if (csView != null)
           ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(csView);
-          csViews.remove(csView);
-        }
+    csViews.clear();
     new CallUtils(this).restoreRinger();
   }
   

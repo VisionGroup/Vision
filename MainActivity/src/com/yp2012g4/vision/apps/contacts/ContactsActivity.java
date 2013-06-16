@@ -190,8 +190,6 @@ public class ContactsActivity extends VisionActivity {
       findViewById(getViewId()).setContentDescription(getString(R.string.favorite_list_screen));
       return;
     }
-    findViewById(getViewId()).setContentDescription("Test contacts screen");
-    contactManager.getTestContacts();
   }
   
   private void setContact() {

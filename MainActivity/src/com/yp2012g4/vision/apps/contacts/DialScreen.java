@@ -80,8 +80,7 @@ public class DialScreen extends VisionActivity {
         intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + dialed_number));
         intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
-        setIntentFlags(intent);
-        startActivity(intent);
+        startActivity(setIntentFlags(intent));
         dialed_number = "";
         break;
       case R.id.dialer_sms_button: // sms
@@ -90,9 +89,8 @@ public class DialScreen extends VisionActivity {
           speakOutAsync(R.string.dial_number);
           return;
         }
-        intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
+        intent = newFlaggedIntent(getApplicationContext(), QuickSMSActivity.class);
         intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
-        setIntentFlags(intent);
         startActivity(intent);
         dialed_number = "";
         break;

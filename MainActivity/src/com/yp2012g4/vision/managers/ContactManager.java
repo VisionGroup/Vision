@@ -35,9 +35,17 @@ public class ContactManager {
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
     final String so = ContactsContract.Data.TIMES_CONTACTED + " DESC, " + ContactsContract.Contacts.DISPLAY_NAME
         + " COLLATE LOCALIZED ASC LIMIT 10";
-    cur = _c.getContentResolver().query(Phone.CONTENT_URI, _projection, ss, null, so);
-    cur.moveToFirst();
-    _size = cur.getCount();
+    try {
+      cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
+    } catch (final Exception e) {
+      Log.d(TAG, "At getFavoriteContacts" + e.getMessage());
+      cur = null;
+    }
+    if (cur != null) {
+      cur.moveToFirst();
+      _size = cur.getCount();
+    } else
+      _size = 0;
   }
   
   /**
@@ -47,9 +55,17 @@ public class ContactManager {
   public void getAllContacts() {
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
     final String so = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
-    cur.moveToFirst();
-    _size = cur.getCount();
+    try {
+      cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
+    } catch (final Exception e) {
+      Log.d(TAG, "At getAllContacts" + e.getMessage());
+      cur = null;
+    }
+    if (cur != null) {
+      cur.moveToFirst();
+      _size = cur.getCount();
+    } else
+      _size = 0;
   }
   
   public void getNextContacts() {
@@ -68,7 +84,7 @@ public class ContactManager {
   }
   
   public ContactType getContact(final int p) {
-    if (getNumOfContacts() < p)
+    if (getNumOfContacts() <= p)
       return null;
     while (_contactsArray.size() <= p)
       getNextContacts(); // TODO endless loop on empty phone.

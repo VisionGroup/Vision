@@ -126,7 +126,7 @@
             android:theme="@android:style/Theme.Translucent" >
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.apps.smsReader.DeleteConfirmation"
+            android:name="com.yp2012g4.vision.tools.DeleteConfirmation"
             android:configChanges="locale"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
@@ -236,7 +236,7 @@
                 android:value="com.yp2012g4.vision.apps.main.MainActivity" />
         </activity>
         <activity
-            android:name="com.yp2012g4.vision.CallListActivity"
+            android:name="com.yp2012g4.vision.apps.phoneStatus.CallListActivity"
             android:configChanges="locale"
             android:label="@string/title_activity_call_list"
             android:launchMode="singleInstance"

@@ -4,7 +4,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.Display;
 
-public class GestureUtils {
+import com.jayway.android.robotium.solo.Solo;
+import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.tools.DeleteConfirmation;
+
+public class GestureTestUtils {
   public static void flingRight(final ActivityInstrumentationTestCase2<?> c) {
     fling(c, -150);
   }
@@ -21,5 +25,20 @@ public class GestureUtils {
     final int screenHeight = getDefaultDisplay(c).getHeight();
     final int screenWidth = getDefaultDisplay(c).getWidth();
     TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 + offset, screenHeight / 2, screenHeight / 2, 20);
+  }
+  
+//  public static void assertCurrentActivity(final Solo solo, final Class<?> c) {
+//    solo.assertCurrentActivity("wrong activity", c);
+//  }
+  /**
+   * @param confirmDelete
+   *          test
+   */
+  public static void useDeleteConfirmation(final boolean confirmDelete, final Solo solo, final ActivityInstrumentationTestCase2<?> c) {
+    solo.assertCurrentActivity("wrong activity", DeleteConfirmation.class);
+    if (confirmDelete)
+      flingRight(c);
+    else
+      solo.clickOnView(solo.getView(R.id.Delete_Confirmation_Button));
   }
 }

@@ -9,8 +9,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import com.jayway.android.robotium.solo.Solo;
-import com.yp2012g4.vision.CallListActivity;
 import com.yp2012g4.vision.R;
+import com.yp2012g4.vision.apps.phoneStatus.CallListActivity;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
@@ -72,7 +72,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
   }
   
-  private void checkNonEmptyCallList(int id) {
+  private void checkNonEmptyCallList(final int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
@@ -83,7 +83,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   
-  private void checkEmptyMissedCallList(int id) {
+  private void checkEmptyMissedCallList(final int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // should go back if list is empty.

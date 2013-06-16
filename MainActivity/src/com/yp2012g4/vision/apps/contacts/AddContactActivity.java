@@ -29,7 +29,7 @@ public class AddContactActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_contact);
-    init(0, getString(R.string.add_contact_screen), getString(R.string.add_contact_screen));
+    init(0, getString(R.string.add_contact_screen), getString(R.string.add_edit_contacts_help));
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
       try {
@@ -101,7 +101,7 @@ public class AddContactActivity extends VisionActivity {
       speakOutSync(R.string.required_fields);
       return;
     }
-    final Intent returnIntent = new Intent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
+    final Intent returnIntent = newFlaggedIntent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
     if (!createNewContact) {
       ContactManager.deleteContact(contactDisplayName, this);
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
@@ -115,7 +115,7 @@ public class AddContactActivity extends VisionActivity {
       speakOutSync(R.string.contact_exist);
       returnIntent.putExtra(RESULT_EXTRA, RESULT_CANCELED);
     }
-    startActivity(setIntentFlags(returnIntent));
+    startActivity(returnIntent);
     finish();
   }
   

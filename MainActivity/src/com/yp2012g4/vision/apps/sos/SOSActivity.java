@@ -24,10 +24,9 @@ import com.yp2012g4.vision.tools.location.LocationHandler;
  * This class is an activity which sends a pre-defined SOS message to
  * configurable content
  * 
- * @author Amir Mizrachi
+ * @author Amir Mizrachi (Edited by Olivier Hofman on version 2.0)
  * @version 1.0
  * 
- *          Edited by Olivier Hofman on version 2.0
  */
 public class SOSActivity extends VisionActivity {
   private LocationFinder lf;
@@ -37,6 +36,7 @@ public class SOSActivity extends VisionActivity {
   double latitude = DEFAULT_LAT_LONG;
   double longitude = DEFAULT_LAT_LONG;
   private final int maxLengthOfAddress = 100;
+  private static final int SOS_timeout = 10000; // time before sending the SOS
   private static final String TAG = "vision:SOSActivity";
   String _number = "";
   
@@ -88,7 +88,7 @@ public class SOSActivity extends VisionActivity {
     switch (getButtonByMode().getId()) {
       case R.id.Send_SOS_Message:
         speakOutSync(getString(R.string.sending_SOS_message) + " " + getString(R.string.to) + " " + _number);
-        _mHandler.postDelayed(sendSOSMessage, 5000);
+        _mHandler.postDelayed(sendSOSMessage, SOS_timeout);
         break;
       case R.id.SOS_phone_number:
         speakOutSync(getSosNumber());

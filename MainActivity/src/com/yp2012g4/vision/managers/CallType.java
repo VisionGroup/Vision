@@ -15,15 +15,13 @@ import android.text.format.DateFormat;
 public class CallType {
   private static int MINIMAL_SIZE_FOR_PHONE_NUMBER = 3;
   public final String number;
-  private String _name = "";
+  private String name = "";
   public final Date date;
-  public final String numberType;
   
-  public CallType(final String num, final String newName, final Date d, final String numType) {
+  public CallType(final String num, final String newName, final Date d) {
     number = num;
-    _name = newName;
+    name = newName;
     date = d;
-    numberType = numType;
   }
   
   /**
@@ -46,16 +44,15 @@ public class CallType {
     try {
       num = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.NUMBER));
       if (num.length() < MINIMAL_SIZE_FOR_PHONE_NUMBER)
-        num = _name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
+        num = name = c.getString(com.yp2012g4.vision.R.string.incoming_call_from_private_number);
       else
-        _name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
-      if (_name == null)
-        _name = " ";
+        name = cur.getString(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.CACHED_NAME));
+      if (name == null)
+        name = " ";
     } catch (final Exception e) {
-      _name = " ";
+      name = " ";
     }
     number = num;
-    numberType = getValueFromCursor(cur, android.provider.CallLog.Calls.CACHED_NUMBER_TYPE);
   }
   
   static String getValueFromCursor(final Cursor cur, final String colValue) {
@@ -67,6 +64,6 @@ public class CallType {
   }
   
   public synchronized String getName() {
-    return _name;
+    return name;
   }
 }

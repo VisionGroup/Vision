@@ -155,7 +155,7 @@ public class CallsManager {
     }
     if (_hasNext) {
       _hasNext = false;
-      return new CallType(" ", _context.getString(R.string.noCalls), new Date(), " ");
+      return new CallType(" ", _context.getString(R.string.noCalls), new Date());
     }
     return null;
   }

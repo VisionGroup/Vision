@@ -47,8 +47,8 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
-    CallsManager cm = new CallsManager(activity.getApplicationContext());
-    ArrayList<CallType> missedCalls = cm.getMissedCallsList();
+    final CallsManager cm = new CallsManager(activity.getApplicationContext());
+    final ArrayList<CallType> missedCalls = cm.getMissedCallsList();
     if (missedCalls.size() != 0)
       checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
     else
@@ -77,7 +77,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
   }
   
-  private void checkBack(int id, Class<?> c) {
+  private void checkBack(final int id, final Class<?> c) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
@@ -88,7 +88,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   
-  private void checkEmptyMissedCallList(int id, Class<?> c) {
+  private void checkEmptyMissedCallList(final int id, final Class<?> c) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // should go back if list is empty.

@@ -6,7 +6,7 @@ import com.yp2012g4.vision.tools.TTS;
 
 @SuppressWarnings("static-method")
 public class TTSTest extends TestCase {
-  public TTSTest(String name) {
+  public TTSTest(final String name) {
     super(name);
   }
   

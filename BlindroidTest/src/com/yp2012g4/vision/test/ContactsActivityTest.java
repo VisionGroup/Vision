@@ -93,19 +93,19 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     deleteCurrentContact(true);
   }
   
-  private void goToContact(boolean exist, String name) {
+  private void goToContact(final boolean exist, final String name) {
     goToStart();
     assertEquals(exist, findContact(name));
   }
   
-  private void fillAddContactFormAndConfirm(String name, String phone) {
+  private void fillAddContactFormAndConfirm(final String name, final String phone) {
     if (name != null) {
-      EditText nameText = (EditText) solo.getView(R.id.contact_name);
+      final EditText nameText = (EditText) solo.getView(R.id.contact_name);
       solo.clearEditText(nameText);
       solo.enterText(nameText, name);
     }
     if (phone != null) {
-      EditText phoneText = (EditText) solo.getView(R.id.phoneNumber);
+      final EditText phoneText = (EditText) solo.getView(R.id.phoneNumber);
       solo.clearEditText(phoneText);
       solo.enterText(phoneText, phone);
     }
@@ -126,7 +126,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     solo.assertCurrentActivity("wrong activity", AddContactActivity.class);
   }
   
-  @MediumTest private void deleteCurrentContact(boolean confirmDelete) {
+  @MediumTest private void deleteCurrentContact(final boolean confirmDelete) {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.delete_contact));
     solo.assertCurrentActivity("wrong activity", DeleteConfirmation.class);
@@ -167,13 +167,13 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     deleteCurrentContact(true);
   }
   
-  public static void flingRight(ActivityInstrumentationTestCase2<?> c) {
+  public static void flingRight(final ActivityInstrumentationTestCase2<?> c) {
     final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
     final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
     TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 - 150, screenHeight / 2, screenHeight / 2, 20);
   }
   
-  public static void flingLeft(ActivityInstrumentationTestCase2<?> c) {
+  public static void flingLeft(final ActivityInstrumentationTestCase2<?> c) {
     final int screenHeight = c.getActivity().getWindowManager().getDefaultDisplay().getHeight();
     final int screenWidth = c.getActivity().getWindowManager().getDefaultDisplay().getWidth();
     TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 + 150, screenHeight / 2, screenHeight / 2, 20);
@@ -191,7 +191,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     } while (!currContact.equals(lastContact));
   }
   
-  public boolean findContact(String name) {
+  public boolean findContact(final String name) {
     String lastContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     if (lastContact.equals(name))
       return true;

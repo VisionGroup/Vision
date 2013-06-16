@@ -199,7 +199,7 @@
     <string name="language">שפה</string>
     <!--
     <string name="switched_to_hebrew">הוחלף לעברית</string>
-    <string name="switched_to_english">הוחלף לאנגלית</string>
+    <string name="switched_to_english">הוחלף לאנגלית</string>
     -->
     <string name="one_lang_avail">רק שפה אחת זמינה.</string>
     <string name="switched_to">הוחלף ל-</string>
@@ -250,6 +250,7 @@
     <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
     <string name="SOS_number_empty">איש קשר S O S ריק. הכנס מספר תקין.</string>
     <string name="to">אל</string>
+    <string name="no_contact_number">יש להוסיף מספר איש קשר</string>
 
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">מסך אישור מחיקה</string>

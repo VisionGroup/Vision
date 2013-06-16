@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-	
 <resources>
+
     <string name="app_name">Vision</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_quick_sms">QuickSMSActivity</string>
@@ -83,17 +83,16 @@
     <string name="settings_button">Settings</string>
     <string name="contacts_button">Contacts</string>
     <string name="read_sms_button">Read S M S.</string>
-   	
+
     <plurals name="numberOfMissedCalls">
-       	<item quantity="one">One missed call.</item>
-       	<item quantity="other">%d missed calls.</item>
-   	</plurals>
-    
+        <item quantity="one">One missed call.</item>
+        <item quantity="other">%d missed calls.</item>
+    </plurals>
     <plurals name="numberOfNewSMS">
-       	<item quantity="one">One new SMS.</item>
-       	<item quantity="other">%d new SMS messages.</item>
-   	</plurals>
-   	
+        <item quantity="one">One new SMS.</item>
+        <item quantity="other">%d new SMS messages.</item>
+    </plurals>
+
     <!-- PhoneStatusActivity -->
     <string name="phoneStatus_whereami">Phone Status Menu</string>
     <string name="phoneStatus_help">You can press one of three buttons. \n1) to get Battery level and charger status. \n2)to get Reception status. \n3)to get missed calles list.</string>
@@ -171,7 +170,6 @@
     <string name="delete_contact_button">delete current contact</string>
     <string name="add_new_contact_button">add new contact</string>
     <string name="edit_contact_button">edit current contact</string>
-   
 
     <!-- AddContactActivity -->
     <string name="add_contact_screen">contact configuration screen</string>
@@ -181,7 +179,7 @@
     <string name="contact_name">contact name</string>
     <string name="contact_exist">contact already existes</string>
     <string name="required_fields">all required fields must be filled</string>
-     <string name="confirmation_button">confirm contact details</string>
+    <string name="confirmation_button">confirm contact details</string>
 
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">Contacts menu</string>
@@ -213,11 +211,12 @@
     <string name="theme_settings_button">Text Size Settings</string>
     <string name="clear_launcher_defaults">Clear Launcher Defaults</string>
     <string name="language">Language</string>
-    <!-- <string name="switched_to_hebrew">Switched to hebrew</string>
-    <string name="switched_to_english">Switched to english</string> -->
+    <!--
+    <string name="switched_to_hebrew">Switched to hebrew</string>
+    <string name="switched_to_english">Switched to english</string>
+    -->
     <string name="switched_to">Switched to</string>
     <string name="one_lang_avail">Only one language available.</string>
-    
     <string name="buttons_mode"> buttons mode </string>
     <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
     <string name="regular_buttons_mode">Switched to regular buttons mode </string>
@@ -269,7 +268,8 @@
     <string name="sos_msg_to_send">I need your help!</string>
     <string name="SOS_number_empty">S O S contact is empty. Please setup number in configuration screen</string>
     <string name="to">to</string>
-    
+    <string name="no_contact_number">Please add contact number</string>
+
     <!-- Delete Confirmation Activity -->
     <string name="delete_confirmation_screen">Delete confirmation</string>
     <string name="delete_confirmation_info">Are you sure?</string>
@@ -309,7 +309,7 @@
     <!-- CalcActivity -->
     <string name="calc_screen">Calculator Screen</string>
     <string name="calc_screen_info">The calculator buttons are at the center of the screen. At the top of the screen you can find
-        the expression, and the bottom you can find the button to click for the result.</string> 
+        the expression, and the bottom you can find the button to click for the result.</string>
     <string name="plus">+</string>
     <string name="ReadPlus">plus</string>
     <string name="minus">-</string>
@@ -353,5 +353,5 @@
 
     <!-- Manger's -->
     <string name="incoming_call_from_private_number">Private number</string>
-    
+
 </resources>

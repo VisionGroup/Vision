@@ -18,8 +18,8 @@ import com.yp2012g4.vision.tools.VisionGestureDetector;
 /**
  * Tests for SOSActivity
  * 
- * @author Amir
- * @version 1.0
+ * @author Amir Mizrachi
+ * @version 2.0
  */
 public class SOSActivityTest extends ActivityInstrumentationTestCase2<SOSActivity> {
   private Solo solo;
@@ -48,8 +48,7 @@ public class SOSActivityTest extends ActivityInstrumentationTestCase2<SOSActivit
   
   @MediumTest public void testSOSNumberButton() {
     solo.clickOnView(solo.getView(R.id.SOS_phone_number));
-    assertEquals(VisionGestureDetector._spokenString,
-        solo.getString(R.string.sos_contact_number_is) + " " + ((TalkingButton) solo.getView(R.id.SOS_phone_number)).getText());
+    assertEquals(VisionGestureDetector._spokenString, ((TalkingButton) solo.getView(R.id.SOS_phone_number)).getReadText());
     // TODO: add Send_SOS_Message button click
   }
   

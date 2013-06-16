@@ -90,6 +90,7 @@ public abstract class VisionActivity extends VisionGestureDetector {
         vibrate();
         if (_name.equals(getString(R.string.MainActivity_wheramai))) {
           speakOutSync(getString(R.string.in_main_screen));
+          MainActivity.VoiceNotify(this);
           return true;
         }
         startActivity(setIntentFlags(_intent));

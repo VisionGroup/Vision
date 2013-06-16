@@ -29,7 +29,6 @@ import com.yp2012g4.vision.tools.location.LocationHandler;
 public class SOSActivity extends VisionActivity {
   private LocationFinder lf;
   Lock l = null;
-  private String lastProvider = "";
   String address = "";
   private static final int DEFAULT_LAT_LONG = 10000;
   double latitude = DEFAULT_LAT_LONG;

@@ -33,14 +33,12 @@ public class ContactsActivity extends VisionActivity {
   private static final int REQUEST_CODE = 666;
   private String listType = ALL_CONTACTS;
   private ContactManager contactManager;
-  // private TalkingButton b;
   private final int VIBRATE_TIME = 150;
   private int currentContact = 0;
   private String currentName = "";
   private String currentPhone = "";
   private static final String TAG = "vision:ContactsActivity";
   
-//  private final CallsManager callsManager = new CallsManager(this);
   @Override public int getViewId() {
     return R.id.ContactsActivity;
   }
@@ -63,20 +61,20 @@ public class ContactsActivity extends VisionActivity {
     switch (button.getId()) {
       case R.id.contacts_call:
         intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
-        intent.setData(Uri.parse("tel:" + ct.getPhone()));
+        intent.setData(Uri.parse("tel:" + ct.phone));
         startActivity(intent);
         // TODO
         // callsManager.UnmarkCallLFromMissedCallList(this, ct.getPhone());
         break;
       case R.id.contacts_sms:
         intent = newFlaggedIntent(ContactsActivity.this, SendSMSActivity.class);
-        intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
+        intent.putExtra(CallUtils.NUMBER_KEY, ct.phone);
         startActivity(intent);
         break;
       case R.id.contacts_quick_sms:
         intent = newFlaggedIntent(ContactsActivity.this, QuickSMSActivity.class);
-        intent.putExtra(CallUtils.NUMBER_KEY, ct.getPhone());
-        name = ct.getContactName();
+        intent.putExtra(CallUtils.NUMBER_KEY, ct.phone);
+        name = ct.name;
         intent.putExtra(CONTACT_NAME_FLAG, name);
         startActivity(intent);
         break;
@@ -90,7 +88,7 @@ public class ContactsActivity extends VisionActivity {
         break;
       case R.id.edit_contact:
         intent = newFlaggedIntent(ContactsActivity.this, AddContactActivity.class);
-        name = ct.getContactName();
+        name = ct.name;
         intent.putExtra(CONTACT_NAME_FLAG, name);
         startActivityForResult(intent, REQUEST_CODE);
         break;
@@ -121,10 +119,10 @@ public class ContactsActivity extends VisionActivity {
     if (extras != null && extras.getString(ACTION_EXTRA) != null)
       if (extras.getString(ACTION_EXTRA).equals(DeleteConfirmation.DELETE_FLAG)) {
         final ContactType ct = contactManager.getContact(currentContact);
-        if (ContactManager.deleteContact(ct.getContactName(), this)) {
+        if (ContactManager.deleteContact(ct.name, this)) {
           selectCorrespondingContactsList();
           setContact();
-          speakOutAsync(getString(R.string.delete_contact_success) + ct.getContactName());
+          speakOutAsync(getString(R.string.delete_contact_success) + ct.name);
         } else
           speakOutAsync(R.string.delete_contact_failed);
         vibrate();
@@ -203,8 +201,8 @@ public class ContactsActivity extends VisionActivity {
       speakOutAsync(R.string.no_messages);
     else {
       final ContactType curContect = contactManager.getContact(currentContact);
-      currentName = curContect.getContactName();
-      currentPhone = curContect.getPhone();
+      currentName = curContect.name;
+      currentPhone = curContect.phone;
       callPhoneButton.setReadText(getString(R.string.call_message) + currentName);
       smsPhoneButton.setReadText(getString(R.string.send_quick_sms_message) + currentName);
       contactNameButton.setText(currentName);

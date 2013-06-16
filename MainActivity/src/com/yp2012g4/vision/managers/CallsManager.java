@@ -150,12 +150,12 @@ public class CallsManager {
     }
     if (_cur.moveToNext()) {
       final CallType $ = new CallType(_context, _cur);
-      UnmarkCallLFromMissedCallList($.getNumber());
+      UnmarkCallLFromMissedCallList($.number);
       return $;
     }
     if (_hasNext) {
       _hasNext = false;
-      return new CallType(" ", " ", _context.getString(R.string.noCalls), new Date(), " ");
+      return new CallType(" ", _context.getString(R.string.noCalls), new Date(), " ");
     }
     return null;
   }
@@ -185,6 +185,6 @@ public class CallsManager {
   public void UnmarkCallLFromMissedCallList(final CallType callType) {
     // TODO date?
     // if 12 call from 1 number ?
-    UnmarkCallLFromMissedCallList(callType.getNumber());
+    UnmarkCallLFromMissedCallList(callType.number);
   }
 }

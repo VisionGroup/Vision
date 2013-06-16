@@ -11,9 +11,9 @@ import android.provider.ContactsContract;
  * 
  */
 public class ContactType {
-  private String _phone = "";
-  private String _contactName = "";
-  private String _lookUpKey = "";
+  public final String phone;
+  public final String name;
+  public final String lookUpKey;
   
   /**
    * constructor with Cursor
@@ -22,10 +22,10 @@ public class ContactType {
    * @param c
    */
   public ContactType(final Cursor cur, final Context c) {
-    _contactName = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+    name = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
     final ContactManager cm = new ContactManager(c);
-    _lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
-    _phone = cm.lookupPhoneNumbers(_lookUpKey);
+    lookUpKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+    phone = cm.lookupPhoneNumbers(lookUpKey);
   }
   
   /**
@@ -37,19 +37,8 @@ public class ContactType {
    *          contact name string
    */
   public ContactType(final String ps, final String cs) {
-    _phone = ps;
-    _contactName = cs;
-  }
-  
-  public synchronized String getPhone() {
-    return _phone;
-  }
-  
-  public synchronized String getContactName() {
-    return _contactName;
-  }
-  
-  public synchronized String getLookUpKey() {
-    return _lookUpKey;
+    phone = ps;
+    name = cs;
+    lookUpKey = "";
   }
 }

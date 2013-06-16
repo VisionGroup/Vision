@@ -11,15 +11,15 @@ import android.text.format.DateFormat;
  * 
  */
 public class SmsType {
-  private String _address = "";
-  private String _person = "";
-  private String _date = "";
+  private final String _address;
+  private final String _person;
+  private final String _date;
   private final String _protocol = "";
-  private String _read = "";
-  private String _status = "";
-  private String _type = "";
+  private final String _read;
+  private final String _status;
+  private final String _type;
   private final String _subject = "";
-  private String _body = "";
+  private final String _body;
   
   /**
    * constructor with Cursor

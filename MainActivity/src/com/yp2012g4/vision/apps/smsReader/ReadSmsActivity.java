@@ -46,7 +46,7 @@ public class ReadSmsActivity extends VisionActivity {
           res = listView.prevPage();
         else
           res = listView.nextPage();
-        vibrate(VIBRATE_DURATION);
+        vibrate();
         if (!res)
           speakOutAsync(R.string.no_more_contacts);
         else
@@ -106,7 +106,7 @@ public class ReadSmsActivity extends VisionActivity {
         listView.setAdapter(adapter);
         listView.setPage(pageNumber);
         speakOutAsync(R.string.delete_message);
-        vibrate(VIBRATE_DURATION);
+        vibrate();
       }
   }
   

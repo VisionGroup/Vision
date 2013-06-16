@@ -81,7 +81,7 @@ public class SettingsActivity extends VisionActivity {
         break;
       case R.id.button_exit_launcher:
         pm.clearPackagePreferredActivities(getPackageName());
-        vibrate(VIBRATE_DURATION);
+        vibrate();
         break;
       case R.id.locale:
         pressedLocalSelectButton(sp);

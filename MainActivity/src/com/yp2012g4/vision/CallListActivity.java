@@ -118,7 +118,7 @@ public class CallListActivity extends VisionActivity {
       else
         _tlv.nextPage();
 //      callsManager.UnmarkCallLFromMissedCallList(((CallType) _ca.getItem(_tlv.getPage())).getNumber(), "");
-      vibrate(VIBRATE_DURATION);
+      vibrate();
     }
     return super.onFling(e1, e2, f1, f2);
   }

@@ -115,7 +115,6 @@ public class SOSActivity extends VisionActivity {
     lf.stop();
     l.lock();
     address = s2;
-    lastProvider = s1;
     latitude = d2;
     longitude = d1;
     l.unlock();

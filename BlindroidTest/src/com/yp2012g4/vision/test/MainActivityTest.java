@@ -79,7 +79,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
   /**
    * 
    */
-  @MediumTest public void checkBackAndHome(int id, Class<?> c) {
+  @MediumTest public void checkBackAndHome(final int id, final Class<?> c) {
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button

@@ -82,13 +82,13 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
   }
   
   @MediumTest public static void testGetViewId() {
-    VisionActivity screen = new DialScreen();
+    final VisionActivity screen = new DialScreen();
     assertEquals(screen.getViewId(), R.id.DialScreen);
   }
   
   @MediumTest public void testOnShowPress() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
-    View v = solo.getView(R.id.digit9);
+    final View v = solo.getView(R.id.digit9);
     TouchUtils.longClickView(this, v);
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "9");
   }
@@ -96,11 +96,11 @@ public class DialerTest extends ActivityInstrumentationTestCase2<DialScreen> {
   @MediumTest public void testMove() {
     solo.assertCurrentActivity("wrong activity", DialScreen.class);
     View v = solo.getView(R.id.digit3);
-    int left1 = VisionGestureDetector.getRelativeLeft(v);
-    int top1 = VisionGestureDetector.getRelativeTop(v);
+    final int left1 = VisionGestureDetector.getRelativeLeft(v);
+    final int top1 = VisionGestureDetector.getRelativeTop(v);
     v = solo.getView(R.id.digit9);
-    int left2 = VisionGestureDetector.getRelativeLeft(v);
-    int top2 = VisionGestureDetector.getRelativeTop(v);
+    final int left2 = VisionGestureDetector.getRelativeLeft(v);
+    final int top2 = VisionGestureDetector.getRelativeTop(v);
     TouchUtils.drag(this, left1, left2 + 1, top1, top2 + 1, 10);
     assertEquals(((TalkingButton) solo.getView(R.id.number)).getText().toString(), "9");
   }

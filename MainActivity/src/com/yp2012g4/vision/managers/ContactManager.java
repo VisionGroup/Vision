@@ -118,14 +118,6 @@ public class ContactManager {
     return $;
   }
   
-  // only for the use of tests
-  public void getTestContacts() {
-    cur = null;
-    _contactsArray.add(new ContactType("0544457141", "Roman Gurevitch"));
-    _contactsArray.add(new ContactType("0000000000", "John Doe"));
-    _size = _contactsArray.size();
-  }
-  
   public static void addContactToPhone(final Context context, final String DisplayName, final String MobileNumber) {
     final ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
     ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)

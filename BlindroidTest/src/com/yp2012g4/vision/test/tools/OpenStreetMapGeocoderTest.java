@@ -10,7 +10,7 @@ import com.yp2012g4.vision.tools.location.OpenStreetMapGeocoder;
  * 
  */
 public class OpenStreetMapGeocoderTest extends TestCase {
-  public OpenStreetMapGeocoderTest(String name) {
+  public OpenStreetMapGeocoderTest(final String name) {
     super(name);
   }
   

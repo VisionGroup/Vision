@@ -19,7 +19,7 @@ public class DeleteConfirmation extends VisionActivity {
   public static final String DELETE_FLAG = "DELETE";
   @SuppressWarnings("rawtypes") private Class _caller;
   private static final String TAG = "vision:DeleteConfirmation";
-   
+  
   /**
    * get the activity's main view ID
    * 
@@ -52,8 +52,7 @@ public class DeleteConfirmation extends VisionActivity {
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    final Intent intent = newFlaggedIntent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG);
-    startActivity(intent);
+    startActivity(newFlaggedIntent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG));
     finish();
     return super.onFling(e1, e2, f1, f2);
   }
@@ -68,8 +67,7 @@ public class DeleteConfirmation extends VisionActivity {
     try {
       _caller = Class.forName(getIntent().getStringExtra(ACTIVITY_EXTRA));
     } catch (final ClassNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      Log.e(TAG, StackTraceToString.toString(e));
     }
   }
 }

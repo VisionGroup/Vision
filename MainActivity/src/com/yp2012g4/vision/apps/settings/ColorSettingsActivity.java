@@ -52,9 +52,11 @@ public class ColorSettingsActivity extends VisionActivity {
     if (v instanceof TalkingButton) {
       speakOutSync(((TalkingButton) v).getReadText());
       final String s = ((TalkingButton) v).getPrefsValue();
-      if (!s.equals(""))
+      if (!s.equals("")) {
         changeSettings(s);
-      // finish();
+        finish();
+        startActivity(newFlaggedIntent(ColorSettingsActivity.this, ColorSettingsActivity.class));
+      }
       return true;
     }
     return false;

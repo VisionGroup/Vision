@@ -31,12 +31,12 @@
 
 
     <!-- DialScreen -->
-    <string name="dial_screen_whereami">Dial Screen</string>
+    <string name="dial_screen_whereami">dial Screen</string>
     <string name="dial_screen_info">The dialer consists of 12 buttons located in the middle of the screen.
         							The number dialed is at the top of the screen. At the bottom of the
-        							screen there are 4 buttons: undo, reset, call, and quick SMS.</string>
-    <string name="dial_number">Please dial a number first!</string>
-    <string name="quick_sms_button">Quick S M S</string>
+        							screen there are 4 buttons: undo, reset, call, and quick S M S.</string>
+    <string name="dial_number">please dial a number first!</string>
+    <string name="quick_sms_button">quick S M S</string>
     <string name="digit1">1</string>
     <string name="one">one</string>
     <string name="digit2">2</string>
@@ -64,107 +64,107 @@
     <string name="OK_button">OK</string>
     <string name="delete_button_read">undo</string>
     <string name="reset_button_read">reset</string>
-    <string name="quick_dial_screen">Quick dial screen</string>
-    <string name="quick_dial_button">Dial</string>
+    <string name="quick_dial_screen">quick dial screen</string>
+    <string name="quick_dial_button">dial</string>
 
     <!-- MainActivity -->
-    <string name="MainActivity_wheramai">Main screen</string>
-    <string name="MainActivity_help">Select one of eight options.</string>
-    <string name="low_battery">Low Battery! \n</string>
-    <string name="phoneStatus_message_veryPoorSignal_read">Signal is very poor</string>
+    <string name="MainActivity_wheramai">main screen</string>
+    <string name="MainActivity_help">select one of eight options.</string>
+    <string name="low_battery">low battery! \n</string>
+    <string name="phoneStatus_message_veryPoorSignal_read">signal is very poor</string>
     <string name="missed_call">missed call</string>
     <string name="new_sms">new S M S \n</string>
-    <string name="in_main_screen">In main screen</string>
+    <string name="in_main_screen">in main screen</string>
     <string name="sos_button">S O S</string>
-    <string name="time_button">Time</string>
-    <string name="where_am_i_button">Where am i</string>
-    <string name="alarm_clock_button">Alarm clock</string>
-    <string name="phone_status_button">Phone status</string>
-    <string name="settings_button">Settings</string>
-    <string name="contacts_button">Contacts</string>
-    <string name="read_sms_button">Read S M S.</string>
+    <string name="time_button">time</string>
+    <string name="where_am_i_button">where am i</string>
+    <string name="alarm_clock_button">alarm clock</string>
+    <string name="phone_status_button">phone status</string>
+    <string name="settings_button">settings</string>
+    <string name="contacts_button">contacts</string>
+    <string name="read_sms_button">read S M S.</string>
 
     <plurals name="numberOfMissedCalls">
-        <item quantity="one">One missed call.</item>
+        <item quantity="one">one missed call.</item>
         <item quantity="other">%d missed calls.</item>
     </plurals>
     <plurals name="numberOfNewSMS">
-        <item quantity="one">One new SMS.</item>
-        <item quantity="other">%d new SMS messages.</item>
+        <item quantity="one">one new S M S.</item>
+        <item quantity="other">%d new S M S messages.</item>
     </plurals>
 
     <!-- PhoneStatusActivity -->
-    <string name="phoneStatus_whereami">Phone Status Menu</string>
-    <string name="phoneStatus_help">You can press one of three buttons. \n1) to get Battery level and charger status. \n2)to get Reception status. \n3)to get missed calles list.</string>
-    <string name="phoneStatus_button_getBatteryStatus_read">Battery</string>
-    <string name="phoneStatus_button_getReceptionStatus_read">Reception</string>
-    <string name="phoneStatus_button_getMissedCalls_read">Missed calls</string>
-    <string name="no_missed_calls">There are no missed calls</string>
-    <string name="called_at"> called At </string>
+    <string name="phoneStatus_whereami">phone Status Menu</string>
+    <string name="phoneStatus_help">you can press one of three buttons. \n1) to get Battery level and charger status. \n2)to get Reception status. \n3)to get missed calles list.</string>
+    <string name="phoneStatus_button_getBatteryStatus_read">battery</string>
+    <string name="phoneStatus_button_getReceptionStatus_read">reception</string>
+    <string name="phoneStatus_button_getMissedCalls_read">missed calls</string>
+    <string name="no_missed_calls">there are no missed calls</string>
+    <string name="called_at">called At </string>
     <string name="from"> from </string>
-    <string name="phoneStatus_message_batteryStatus_read">Battery level is %1$d %% %2$s.</string>
-    <string name="phoneStatus_message_veryGoodSignal_read">Signal is very good</string>
-    <string name="phoneStatus_message_goodSignal_read">Signal is good</string>
-    <string name="phoneStatus_message_poorSignal_read">Signal is poor</string>
-    <string name="phoneStatus_message_noSignal_read">No Signal</string>
-    <string name="phoneStatus_message_charging_read">Charging</string>
+    <string name="phoneStatus_message_batteryStatus_read">battery level is %1$d %% %2$s.</string>
+    <string name="phoneStatus_message_veryGoodSignal_read">signal is very good</string>
+    <string name="phoneStatus_message_goodSignal_read">signal is good</string>
+    <string name="phoneStatus_message_poorSignal_read">signal is poor</string>
+    <string name="phoneStatus_message_noSignal_read">no Signal</string>
+    <string name="phoneStatus_message_charging_read">charging</string>
 
     <!-- WhereAmIActivity -->
-    <string name="where_am_i_screen">Where Am I screen</string>
-    <string name="where_am_i_help">Touch on screen to find your current location.</string>
-    <string name="your_location_is">Your Location is</string>
-    <string name="could_not_find_a_location">Could not find a location</string>
-    <string name="No_Location_Found_Yet">No location found yet</string>
-    <string name="finding_location">Trying to find a location</string>
-    <string name="initializing">Initializing&#8230; </string>
-    <string name="Location">Location</string>
+    <string name="where_am_i_screen">where Am I screen</string>
+    <string name="where_am_i_help">touch on screen to find your current location.</string>
+    <string name="your_location_is">your Location is</string>
+    <string name="could_not_find_a_location">could not find a location</string>
+    <string name="No_Location_Found_Yet">no location found yet</string>
+    <string name="finding_location">trying to find a location</string>
+    <string name="initializing">initializing&#8230; </string>
+    <string name="Location">location</string>
 
     <!-- AlarmActivity -->
-    <string name="title_activity_alarm">Alarm Clock</string>
-    <string name="alarm_clock_help">You can press one of 4 buttons. \n1) to get alarm status. \n2) to set the alarm time. \n3) to activate the alarm clock. \n4) to cancel the alarm clock.</string>
-    <string name="alarm_is_set_to">Alarm is set to </string>
-    <string name="alarm_is_on_at">Alarm is on at </string>
-    <string name="alarm_is_off_at">Alarm is off at </string>
-    <string name="alarm_is_canceled">Alarm is Canceled </string>
-    <string name="you_need_to_set_ther_alarm_first">You need to set the alarm first </string>
-    <string name="alarm_is_activated">Alarm is activated </string>
-    <string name="noAlarm">No alarm</string>
-    <string name="alarmStatus">Alarm Status</string>
-    <string name="setAlarmButton">Set Alarm</string>
-    <string name="startAlarm">Start Alarm</string>
-    <string name="stopAlarm">Stop Alarm</string>
+    <string name="title_activity_alarm">alarm clock</string>
+    <string name="alarm_clock_help">you can press one of 4 buttons. \n1) to get alarm status. \n2) to set the alarm time. \n3) to activate the alarm clock. \n4) to cancel the alarm clock.</string>
+    <string name="alarm_is_set_to">alarm is set to </string>
+    <string name="alarm_is_on_at">alarm is on at </string>
+    <string name="alarm_is_off_at">alarm is off at </string>
+    <string name="alarm_is_canceled">alarm is Canceled </string>
+    <string name="you_need_to_set_ther_alarm_first">you need to set the alarm first </string>
+    <string name="alarm_is_activated">alarm is activated </string>
+    <string name="noAlarm">no alarm</string>
+    <string name="alarmStatus">alarm Status</string>
+    <string name="setAlarmButton">set Alarm</string>
+    <string name="startAlarm">start alarm</string>
+    <string name="stopAlarm">stop alarm</string>
     <string name="setHour">hours</string>
-    <string name="setMinutes">Minutes</string>
+    <string name="setMinutes">minutes</string>
     <string name="am"></string>
     <string name="pm"></string>
     <string name="and">and</string>
     <string name="snooze_time">1</string>
 
     <!-- AlarmPopup -->
-    <string name="alarm_is_off">Alarm is turned Off.</string>
-    <string name="snooze_for">Snooze for</string>
+    <string name="alarm_is_off">alarm is turned Off.</string>
+    <string name="snooze_for">snooze for</string>
     <string name="minutes">minutes</string>
 
     <!-- SetClockActivity -->
-    <string name="title_activity_set_clock">Set Clock</string>
-    <string name="set_time_button">Set clock area</string>
+    <string name="title_activity_set_clock">set clock</string>
+    <string name="set_time_button">set clock area</string>
     <string name="set_clock_help">fling your finger up to increase the time and down to decrease the time\n tap the screen to confirm </string>
 
     <!-- SpeakingClockActivity -->
-    <string name="speaking_clock_help">You can press one of 2 buttons. \n1) to hear the time. \n2) to hear the date.</string>
-    <string name="ClockTitle">Speaking clock</string>
-    <string name="date_button">Date</string>
+    <string name="speaking_clock_help">you can press one of 2 buttons. \n1) to hear the time. \n2) to hear the date.</string>
+    <string name="ClockTitle">speaking clock</string>
+    <string name="date_button">date</string>
     <string name="hourFormat">%1$d and %2$d minutes %3$s.</string>
 
     <!-- ContactsActivity -->
-    <string name="contacts_screen">Contacts screen.</string>
-    <string name="contacts_screen_help">Touch on screen to select contact with next and previous buttons \n. Call or send message to current contact.</string>
-    <string name="no_more_contacts">No more contacts</string>
-    <string name="no_messages">No messages.</string>
-    <string name="next_contact">Next contact</string>
-    <string name="previous_contact">Previous contact</string>
-    <string name="call_contact">Call contact</string>
-    <string name="send_sms">Send SMS</string>
+    <string name="contacts_screen">contacts screen.</string>
+    <string name="contacts_screen_help">you can touch screen in defferent places to hear: 1) contact name. 2) contact phone number. you can also call this person, send an S M S, send quick S M S, add new contact, edit contact or delete contact.</string>
+    <string name="no_more_contacts">no more contacts</string>
+    <string name="no_messages">no messages.</string>
+    <string name="next_contact">next contact</string>
+    <string name="previous_contact">previous contact</string>
+    <string name="call_contact">call contact</string>
+    <string name="send_sms">send S M S</string>
     <string name="delete_contact_success">deleted contact </string>
     <string name="delete_contact_failed">contact deletion failed</string>
     <string name="delete_contact_button">delete current contact</string>
@@ -173,142 +173,139 @@
 
     <!-- AddContactActivity -->
     <string name="add_contact_screen">contact configuration screen</string>
+    <string name="add_edit_contacts_help">you can edit a contact name and number. or - you can add new contact. for confirmation press the check button.</string>
     <string name="add_contact_success">contact added</string>
     <string name="edit_contact_success">contact edited</string>
-    <string name="enter_a_name">Enter a name</string>
+    <string name="enter_a_name">enter a name</string>
     <string name="contact_name">contact name</string>
-    <string name="contact_exist">contact already existes</string>
+    <string name="contact_exist">contact already exists</string>
     <string name="required_fields">all required fields must be filled</string>
     <string name="confirmation_button">confirm contact details</string>
 
     <!-- ContactsMenuActivity -->
-    <string name="title_activity_contacts_menu">Contacts menu</string>
-    <string name="contacts_help">You can press one of three buttons. \n1) to go to your favorite contacts screen. \n2)to go to your full contacts screen. \n3) to go to the dialer screen.</string>
-    <string name="contact_list_screen">Contact list screen</string>
+    <string name="title_activity_contacts_menu">contacts menu</string>
+    <string name="contacts_help">you can press one of three buttons. \n1) to go to your favorite contacts screen. \n2)to go to your full contacts screen. \n3) to go to the dialer screen.</string>
+    <string name="contact_list_screen">contact list screen</string>
     <string name="favorite_list_screen">favorite list screen</string>
-    <string name="send_quick_sms_message">send quick SMS to: </string>
+    <string name="send_quick_sms_message">send quick S M S to: </string>
     <string name="call_message">call :  </string>
-    <string name="Dialer">Dialer</string>
+    <string name="Dialer">dialer</string>
     <string name="favorit_contacts_list">favorite contacts</string>
     <string name="contactsList">contacts</string>
 
     <!-- ColorSettingsActivity -->
-    <string name="color_settings_screen">Color settings screen</string>
-    <string name="color_setting_help">You can press one of 7 buttons. each button is a different color setting for the system</string>
-    <string name="WhiteBlack">White &amp; Black</string>
-    <string name="WhiteRed">White &amp; Red</string>
-    <string name="RedBlack">Red &amp; Black</string>
-    <string name="GreenBlack">Green &amp; Black</string>
-    <string name="WhiteGreen">White &amp; Green</string>
-    <string name="BlueBlack">Blue &amp; Black</string>
-    <string name="WhiteBlue">White &amp; Blue</string>
+    <string name="color_settings_screen">color settings screen</string>
+    <string name="color_setting_help">you can press one of 7 buttons. each button is a different color setting for the system</string>
+    <string name="WhiteBlack">white &amp; black</string>
+    <string name="WhiteRed">white &amp; red</string>
+    <string name="RedBlack">red &amp; black</string>
+    <string name="GreenBlack">green &amp; black</string>
+    <string name="WhiteGreen">white &amp; green</string>
+    <string name="BlueBlack">blue &amp; black</string>
+    <string name="WhiteBlue">white &amp; blue</string>
 
     <!-- SettingsActivity -->
-    <string name="settings_screen">Settings screen</string>
-    <string name="settings_help">A button screen in which you can define variuos program settings.</string>
-    <string name="title_activity_color_settings">Color Settings</string>
-    <string name="color_settings_button">Color Settings</string>
-    <string name="theme_settings_button">Text Size Settings</string>
-    <string name="clear_launcher_defaults">Clear Launcher Defaults</string>
-    <string name="language">Language</string>
-    <!--
-    <string name="switched_to_hebrew">Switched to hebrew</string>
-    <string name="switched_to_english">Switched to english</string>
-    -->
-    <string name="switched_to">Switched to</string>
-    <string name="one_lang_avail">Only one language available.</string>
+    <string name="settings_screen">settings screen</string>
+    <string name="settings_help">you can select one of 8 options: 1) color settings. 2) text size settings. 3) clear launcher defaults. 4) change language. 5) vision call service. 6) calculator. 7) S O S number configuration. 8) mute audio.</string>
+    <string name="title_activity_color_settings">color Settings</string>
+    <string name="color_settings_button">color settings</string>
+    <string name="theme_settings_button">text size settings</string>
+    <string name="clear_launcher_defaults">clear launcher defaults</string>
+    <string name="language">language</string>
+    <string name="switched_to">switched to</string>
+    <string name="one_lang_avail">only one language available.</string>
     <string name="buttons_mode"> buttons mode </string>
-    <string name="sticky_buttons_mode">Switched to sticky buttons mode </string>
-    <string name="regular_buttons_mode">Switched to regular buttons mode </string>
-    <string name="calculator">Calculator</string>
-    <string name="phone_call_service_button"> Vision call service </string>
+    <string name="sticky_buttons_mode">switched to sticky buttons mode </string>
+    <string name="regular_buttons_mode">switched to regular buttons mode </string>
+    <string name="calculator">calculator</string>
+    <string name="phone_call_service_button"> vision call service </string>
     <string name="disable_call_service">disabled vision phone call service</string>
     <string name="enable_call_service">enabled vision phone call service</string>
-    <string name="mute_sound">Mute or Activate Sound</string>
-    <string name="sound_muted">Sound Muted</string>
-    <string name="sound_Activated">Sound Activated</string>
+    <string name="mute_sound">mute or activate Sound</string>
+    <string name="sound_muted">sound muted</string>
+    <string name="sound_Activated">sound activated</string>
 
     <!-- ThemeSettingsActivity -->
-    <string name="theme_settings_screen">Theme settings screen</string>
-    <string name="size_setting_help">You can press one of 3 buttons. Each button is different text size for the system.\n the upper button is the smallest size and the bottom button is the largest.</string>
-    <string name="normal_text_size_button">Normal Text Size</string>
-    <string name="large_text_size_button">Large Text Size</string>
-    <string name="small_text_size_button">Small Text Size</string>
+    <string name="theme_settings_screen">theme settings screen</string>
+    <string name="size_setting_help">you can press one of 3 buttons. each button is different text size for the system.\n the upper button is the smallest size. the bottom button is the largest.</string>
+    <string name="normal_text_size_button">normal Text Size</string>
+    <string name="large_text_size_button">large Text Size</string>
+    <string name="small_text_size_button">small Text Size</string>
 
     <!-- QuickSMSActivity -->
-    <string name="quick_sms_screen">Quick S M S screen</string>
-    <string name="quick_sms_help">Choose quick S M S message from the list above.</string>
+    <string name="quick_sms_screen">quick S M S screen</string>
+    <string name="quick_sms_help">choose quick S M S message from the list above.</string>
     <string name="send_quick_sms">send quick S M S</string>
-    <string name="sending">Sending </string>
-    <string name="message_has_been_sent">Message has been sent</string>
-    <string name="SMS_number_1">Will call you back</string>
-    <string name="SMS_number_2">How are you?</string>
-    <string name="SMS_number_3">Where have you been?</string>
-    <string name="SMS_number_4">I am going to sleep</string>
-    <string name="SMS_number_5">See you tomorrow</string>
-    <string name="SMS_number_6">Please feed my dog</string>
-    <string name="SMS_number_7">Where are you?</string>
-    <string name="SMS_number_8">Remind me later</string>
-    <string name="SMS_number_9">Happy Birthday!</string>
-    <string name="error_in_sending_sms">Phone number is empty.</string>
+    <string name="sending">sending </string>
+    <string name="message_has_been_sent">message has been sent</string>
+    <string name="SMS_number_1">will call you back</string>
+    <string name="SMS_number_2">how are you?</string>
+    <string name="SMS_number_3">where have you been?</string>
+    <string name="SMS_number_4">i am going to sleep</string>
+    <string name="SMS_number_5">see you tomorrow</string>
+    <string name="SMS_number_6">please feed my dog</string>
+    <string name="SMS_number_7">where are you?</string>
+    <string name="SMS_number_8">remind me later</string>
+    <string name="SMS_number_9">happy Birthday!</string>
+    <string name="error_in_sending_sms">phone number is empty.</string>
 
     <!-- ReadSMSActivity -->
-    <string name="read_sms_screen">Read S M S screen</string>
-    <string name="read_sms_help"> touch screen to read message, slide your finger right or left to move to the next or previous message, you can reply to the message or delete it</string>
-    <string name="message_number">Message number</string>
-    <string name="no_more_messages">No more messages</string>
-    <string name="delete_message">Delete message</string>
+    <string name="read_sms_screen">read S M S screen</string>
+    <string name="read_sms_help">you can touch screen in defferent places to hear: 1) sender phone number. 2) date of message. 3) message content. you can also call this person, send an S M S, send quick S M S or delete the message.</string>
+    <string name="message_number">message number</string>
+    <string name="no_more_messages">no more messages</string>
+    <string name="delete_message">delete message</string>
 
     <!-- SOSActivity -->
     <string name="sos_screen">S O S screen</string>
-    <string name="sos_help">tap screen to send an S O S message with your location </string>
+    <string name="sos_help">tap screen to send an S O S message with your location. Touch at the top of the screen to hear The S O S contact number</string>
     <string name="SOS_message_has_been_sent">S O S message has been sent.</string>
-    <string name="sending_SOS_message">Sending S O S message</string>
-    <string name="send_SOS_message">Send S O S</string>
-    <string name="sos_msg_to_send">I need your help!</string>
-    <string name="SOS_number_empty">S O S contact is empty. Please setup number in configuration screen</string>
+    <string name="sending_SOS_message">sending S O S message</string>
+    <string name="send_SOS_message">send S O S</string>
+    <string name="sos_msg_to_send">i need your help!</string>
+    <string name="SOS_number_empty">S O S contact is empty. please setup number in configuration screen</string>
     <string name="to">to</string>
-    <string name="no_contact_number">Please add contact number</string>
+    <string name="no_contact_number">please add contact number</string>
 
     <!-- Delete Confirmation Activity -->
-    <string name="delete_confirmation_screen">Delete confirmation</string>
-    <string name="delete_confirmation_info">Are you sure?</string>
-    <string name="delete_confirmation_help">Fling to delete, tap screen to cancel. </string>
-    <string name="delete_confirmation_button">Fling to delete, tap screen to cancel. </string>
+    <string name="delete_confirmation_screen">delete confirmation</string>
+    <string name="delete_confirmation_info">are you sure?</string>
+    <string name="delete_confirmation_help">fling to delete, tap screen to cancel. </string>
+    <string name="delete_confirmation_button">fling to delete, tap screen to cancel. </string>
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">S O S configuration screen</string>
-    <string name="sos_config_screen_info">At the top you can find the number. In the middle you have the dialer. At the bottom you have three buttons,
+    <string name="sos_config_screen_info">at the top you can find the number. in the middle you have the dialer. at the bottom you have three buttons,
         from left to right: undo, reset, OK.</string>
-    <string name="ok_button">Set number</string>
+    <string name="ok_button">set number</string>
     <string name="sos_config_screen_whereami">S O S configuration screen</string>
     <string name="sos_number">sosNumber</string>
-    <string name="change_contact_number">Change S O S Contact Number</string>
+    <string name="change_contact_number">change S O S contact number</string>
     <string name="sos_contact_number_is">S O S contact number is.</string>
 
     <!-- IncomingCallActivity -->
-    <string name="IncomingCall_whereami">Call</string>
-    <string name="IncomingCall_help">You can either reject or answer the call.</string>
-    <string name="IncomingCall_button_Answer_read">Answer</string>
-    <string name="IncomingCall_button_Reject_read">Reject</string>
+    <string name="IncomingCall_whereami">call</string>
+    <string name="IncomingCall_help">you can either reject or answer the call.</string>
+    <string name="IncomingCall_button_Answer_read">answer</string>
+    <string name="IncomingCall_button_Reject_read">reject</string>
     <string name="IncomingCall_call_ended">call ended</string>
 
     <!-- VisionActivity -->
-    <string name="this_is">This is</string>
-    <string name="previous_screen">Previous screen</string>
-    <string name="back_button">Back</string>
-    <string name="home_button">Home</string>
+    <string name="this_is">this is</string>
+    <string name="previous_screen">previous screen</string>
+    <string name="back_button">back</string>
+    <string name="home_button">home</string>
     <string name="Tool_tip_button">screen info</string>
-    <string name="current_menu_button">Current menu</string>
+    <string name="current_menu_button">current menu</string>
 
     <!-- ActivityVoiceInput -->
     <string name="title_activity_activity_voice_input">ActivityVoiceInput</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">settings</string>
     <string name="title_activity_read_sms_test">ReadSmsTest</string>
 
     <!-- CalcActivity -->
-    <string name="calc_screen">Calculator Screen</string>
-    <string name="calc_screen_info">The calculator buttons are at the center of the screen. At the top of the screen you can find
+    <string name="calc_screen">calculator screen</string>
+    <string name="calc_screen_info">the calculator buttons are at the center of the screen. At the top of the screen you can find
         the expression, and the bottom you can find the button to click for the result.</string>
     <string name="plus">+</string>
     <string name="ReadPlus">plus</string>
@@ -324,34 +321,33 @@
     <string name="ReadEquals">equals</string>
     <string name="clear">C</string>
     <string name="ReadClear">clear</string>
-    <string name="bad_action">Bad action</string>
-    <string name="division_by_zero">Division by zero</string>
-    <string name="result">Result</string>
+    <string name="bad_action">bad action</string>
+    <string name="division_by_zero">division by zero</string>
+    <string name="result">result</string>
 
     <!-- CallListActivity -->
-    <string name="Call_sceen">Call list Screen</string>
-    <string name="Call">Call</string>
-    <string name="title_activity_call_list">CallList</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="call_list_screen">Call List Screen</string>
+    <string name="Call_sceen">call list Screen</string>
+    <string name="Call">call</string>
+    <string name="title_activity_call_list">callList</string>
+    <string name="call_list_screen">call list screen</string>
     <string name="call_list_help"> touch screen to read call properties, slide your finger right or left to move to the next or previous call, you can reply to the call or delete it.</string>
-    <string name="noCalls">No Calls.</string>
-    <string name="delete_call">Delete call</string>
+    <string name="noCalls">no calls.</string>
+    <string name="delete_call">delete call</string>
 
     <!-- SendSmsActivity -->
-    <string name="SendSms_whereami">Send SMS Screen</string>
-    <string name="SendSms_info">Tap the center of the screen to enter your text, then click the button at the bottom of the screen to send.
-        You can change the phone number by tapping the top of the screen.</string>
-    <string name="send_message">Send Message</string>
-    <string name="enter_a_phone_number">Enter a phone number</string>
-    <string name="message_content">Message content</string>
-    <string name="enter_a_message">Enter a message</string>
-    <string name="phone_number">Phone number</string>
+    <string name="SendSms_whereami">send S M S screen</string>
+    <string name="SendSms_info">tap at the center of the screen to enter your text, then click the button at the bottom of the screen to send.
+        you can change the phone number by tapping at the top of the screen.</string>
+    <string name="send_message">send message</string>
+    <string name="enter_a_phone_number">enter a phone number</string>
+    <string name="message_content">message content</string>
+    <string name="enter_a_message">enter a message</string>
+    <string name="phone_number">phone number</string>
     <string name="title_activity_sosconfiguation">SOSconfiguation</string>
     <string name="title_activity_add_contact">AddContactActivity</string>
-    <string name="message_was_not_sent">Message was not sent. Please check reception or sim card.</string>
+    <string name="message_was_not_sent">message was not sent. please check reception or sim card.</string>
 
     <!-- Manger's -->
-    <string name="incoming_call_from_private_number">Private number</string>
+    <string name="incoming_call_from_private_number">private number</string>
 
 </resources>

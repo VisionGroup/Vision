@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.smsSender.QuickSMSActivity;
+import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.apps.telephony.CallUtils;
 import com.yp2012g4.vision.apps.telephony.EndCallListener;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -84,17 +85,11 @@ public class DialScreen extends VisionActivity {
         startActivity(intent);
         dialed_number = "";
         break;
+      case R.id.dialer_quick_sms_button: // sms
+        sendSMS(QuickSMSActivity.class);
+        break;
       case R.id.dialer_sms_button: // sms
-        // no number was dialed
-        if (dialed_number == "") {
-          speakOutAsync(R.string.dial_number);
-          return;
-        }
-        intent = new Intent(getApplicationContext(), QuickSMSActivity.class);
-        intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
-        setIntentFlags(intent);
-        startActivity(intent);
-        dialed_number = "";
+        sendSMS(SendSMSActivity.class);
         break;
       case R.id.number: // user wished to hear the number, no action needed.
         return;
@@ -121,6 +116,20 @@ public class DialScreen extends VisionActivity {
     getTalkingButton(R.id.number).setText(dialed_number.toCharArray(), 0, dialed_number.length());
     getTalkingButton(R.id.number).setReadText(read_number);
     v.playSoundEffect(SoundEffectConstants.CLICK);
+  }
+  
+  private void sendSMS(final Class<?> c) {
+    final Intent intent;
+    // no number was dialed
+    if (dialed_number == "") {
+      speakOutAsync(R.string.dial_number);
+      return;
+    }
+    intent = new Intent(getApplicationContext(), c);
+    intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
+    setIntentFlags(intent);
+    startActivity(intent);
+    dialed_number = "";
   }
   
   /**

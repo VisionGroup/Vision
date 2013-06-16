@@ -105,10 +105,6 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   // ==================================================================
   // ===========================METHODS================================
   // ==================================================================
-  @Override public void onClick(final View v) {
-    // TODO Auto-generated method stub
-  }
-  
   @Override public boolean onDown(final MotionEvent e) {
     Log.i(TAG, "onDown");
     final SharedPreferences _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -139,16 +135,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     return Dir.NONE;
   }
   
-  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
-    return false;
-  }
-  
   @Override public void onLongPress(final MotionEvent e) {
     Log.i(TAG, "onLongPress");
-  }
-  
-  @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
-    return false;
   }
   
   @Override public void onShowPress(final MotionEvent e) {
@@ -469,7 +457,7 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
   };
   
   @Override public void startActivity(final Intent intent) {
-    vibrate(VIBRATE_DURATION);
+    vibrate();
     super.startActivity(intent);
   }
   

@@ -18,8 +18,7 @@ import com.yp2012g4.vision.R;
 public class TalkingButton extends Button implements Runnable {
   private Runnable _run; // the functionality of the button
   private String _readText; // the text for the TTS
-  private String _readToolTip = ""; // tool tip text
-  private String _prefsValue = ""; // value for preference buttons
+  private final String _prefsValue; // value for preference buttons
   
   /**
    * c'tor
@@ -50,39 +49,12 @@ public class TalkingButton extends Button implements Runnable {
   }
   
   /**
-   * Returns the tool tip text that should be used for TTS.
-   * 
-   * @return String ReadToolTip
-   */
-  public String getReadToolTip() {
-    return _readToolTip;
-  }
-  
-  /**
-   * Set the tool tip text that should be used for TTS.
-   * 
-   * @param s
-   */
-  public void setReadToolTip(final String s) {
-    _readToolTip = s;
-  }
-  
-  /**
    * Returns the value linked with the preference represented by the button.
    * 
    * @return String PrefsValue
    */
   public String getPrefsValue() {
     return _prefsValue;
-  }
-  
-  /**
-   * Set the value linked with the preference represented by the button.
-   * 
-   * @param s
-   */
-  public void setPrefsValue(final String s) {
-    _prefsValue = s;
   }
   
   /**

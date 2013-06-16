@@ -1,5 +1,10 @@
 package com.yp2012g4.vision.test.utils;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
@@ -12,7 +17,7 @@ public class ManagerUtils {
    * 
    * @param c
    */
-  public static void removeAllUnansweredCalls(Context c) {
+  public static void removeAllUnansweredCalls(final Context c) {
     try {
       final ContentValues values = new ContentValues();
       values.put(Calls.NEW, Integer.valueOf(0));
@@ -37,9 +42,9 @@ public class ManagerUtils {
    *          number of the unanswered call.
    * 
    */
-  public static void addUnansweredCall(Context c, String num) {
-    ContentResolver cr = c.getApplicationContext().getContentResolver();
-    ContentValues values = new ContentValues();
+  public static void addUnansweredCall(final Context c, final String num) {
+    final ContentResolver cr = c.getApplicationContext().getContentResolver();
+    final ContentValues values = new ContentValues();
     values.put(CallLog.Calls.NUMBER, num);
     values.put(CallLog.Calls.DATE, Long.valueOf(System.currentTimeMillis()));
     values.put(CallLog.Calls.DURATION, Integer.valueOf(2));
@@ -50,6 +55,7 @@ public class ManagerUtils {
     values.put(CallLog.Calls.CACHED_NUMBER_LABEL, "");
     cr.insert(CallLog.Calls.CONTENT_URI, values);
   }
+  
   /**
    * @param confirmDelete
    */

@@ -8,7 +8,7 @@
     android:layout_height="fill_parent"
     android:contentDescription="@string/dial_screen_whereami"
     android:orientation="vertical"
-    android:weightSum="6"
+    android:weightSum="7"
     tools:ignore="NestedWeights" >
 
     <LinearLayout
@@ -28,7 +28,6 @@
             android:ellipsize="start"
             android:gravity="left"
             android:paddingLeft="32dp"
-            android:paddingTop="15dp"
             android:singleLine="true"
             android:textStyle="bold" />
     </LinearLayout>
@@ -235,7 +234,7 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="4" >
+        android:weightSum="2" >
 
         <com.yp2012g4.vision.customUI.TalkingImageButton
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -244,8 +243,6 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_button"
             app:readText="@string/delete_button_read" />
@@ -257,36 +254,49 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/reset_button"
             app:readText="@string/reset_button_read" />
-
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3" >
+        
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_dial_button"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
             android:scaleType="fitCenter"
             android:src="@drawable/quick_dial_button"
             app:readText="@string/quick_dial_button" />
 
+        <com.yp2012g4.vision.customUI.TalkingImageButton
+            android:id="@+id/dialer_quick_sms_button"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/quick_sms_button"
+            app:readText="@string/quick_sms_button" />
+        
         <com.yp2012g4.vision.customUI.TalkingImageButton
             android:id="@+id/dialer_sms_button"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/quick_sms_button"
-            app:readText="@string/quick_sms_button" />
-    </LinearLayout>
+            android:src="@drawable/sms_send"
+            app:readText="@string/send_sms" />
+        
+    </LinearLayout>   
 
     <LinearLayout
         android:id="@+id/DialScreenBar"

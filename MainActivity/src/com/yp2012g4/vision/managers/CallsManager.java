@@ -79,13 +79,10 @@ public class CallsManager {
       final ContentValues values = new ContentValues();
       values.put(Calls.NEW, Integer.valueOf(0));
       final StringBuilder where = new StringBuilder();
-      where.append(Calls.NEW + " = 1");
-      where.append(" AND ");
-      where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
-      where.append(" AND ");
-      where.append(Calls.NUMBER + " = ? ");
-//      where.append(" AND ");
-//      where.append(Calls.DATE + " = ? ");
+      where.append(Calls.NEW + " = 1").append(" AND ").append(Calls.TYPE + " = ?");
+      // + Calls.MISSED_TYPE);
+      where.append(" AND ").append(Calls.NUMBER + " = ? ");
+//      where.append(" AND ").append(Calls.DATE + " = ? ");
       final int i = _context.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
           new String[] { Integer.toString(Calls.MISSED_TYPE), phoneNumber });
       System.out.println(i);

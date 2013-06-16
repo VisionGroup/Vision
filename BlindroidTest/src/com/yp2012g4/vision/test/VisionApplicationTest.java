@@ -62,7 +62,7 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Sett
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
-    float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
+    final float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_theme));
@@ -80,7 +80,7 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Sett
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
-    float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
+    final float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_theme));
@@ -98,7 +98,7 @@ public class VisionApplicationTest extends ActivityInstrumentationTestCase2<Sett
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_colors));
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
-    float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
+    final float size = ((Button) solo.getView(R.id.WhiteRed)).getTextSize();
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.button_set_theme));

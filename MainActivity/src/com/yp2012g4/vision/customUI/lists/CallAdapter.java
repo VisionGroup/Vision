@@ -71,13 +71,13 @@ public class CallAdapter extends BaseAdapter {
       final TalkingButton timeView) {
     final CallType call = (CallType) getItem(p);
     String person = call.getName();
-    person = person == "" ? call.getNumber() : person;
-    numberView.setText(call.getNumber());
+    person = person == "" ? call.number : person;
+    numberView.setText(call.number);
     nameView.setText(call.getName());
-    timeView.setText(call.getDate().toLocaleString());
-    numberView.setReadText(call.getNumber());
+    timeView.setText(call.date.toLocaleString());
+    numberView.setReadText(call.number);
     nameView.setReadText(call.getName());
-    timeView.setReadText(call.getDate().toLocaleString());
+    timeView.setReadText(call.date.toLocaleString());
   }
   
   /**

@@ -198,4 +198,18 @@ public abstract class VisionActivity extends VisionGestureDetector {
     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     return intent;
   }
+  
+  @Override public void onClick(final View arg0) {
+    // Do nothing
+  }
+  
+  @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
+    // Do nothing
+    return false;
+  }
+  
+  @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
+    // Do nothing
+    return false;
+  }
 }

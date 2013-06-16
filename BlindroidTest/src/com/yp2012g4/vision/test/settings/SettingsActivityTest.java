@@ -33,7 +33,7 @@ public class SettingsActivityTest extends ActivityInstrumentationTestCase2<Setti
   
   @MediumTest public void testMute() {
     solo.assertCurrentActivity("wrong activity", SettingsActivity.class);
-    boolean mute = VisionApplication.muted;
+    final boolean mute = VisionApplication.muted;
     solo.clickOnView(solo.getView(R.id.Mute_Sound));
     assertEquals(!mute, VisionApplication.muted);
     solo.clickOnView(solo.getView(R.id.Mute_Sound));

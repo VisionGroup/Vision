@@ -14,6 +14,7 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 /**
  * @author Amit Yaffe
@@ -43,8 +44,10 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
-    // TODO: Fails if no missed calls.
-    checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
+    ManagerUtils.addUnansweredCall(activity.getApplicationContext(), "00000");
+    checkNonEmptyCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
+    ManagerUtils.removeAllUnansweredCalls(activity.getApplicationContext());
+    checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
   }
   
   @MediumTest public void test_signalToPercent() {
@@ -69,13 +72,23 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
   }
   
-  private void checkBack(int id, Class<?> c) {
+  private void checkNonEmptyCallList(int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
-    solo.clickOnView(activity.findViewById(id));
-    solo.waitForActivity(c.getName(), 2000);
-    solo.assertCurrentActivity("wrong activity", c);
-    solo.clickOnView(solo.getView(R.id.back_button));
+    solo.clickOnView(tb);
+    solo.waitForActivity(CallListActivity.class.getName(), 2000);
+    solo.assertCurrentActivity("wrong activity", CallListActivity.class);
+    solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
+    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+  }
+  
+  private void checkEmptyMissedCallList(int id) {
+    solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
+    // should go back if list is empty.
+    solo.clickOnView(tb);
+    solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   

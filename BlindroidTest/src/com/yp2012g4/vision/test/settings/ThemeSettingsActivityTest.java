@@ -42,13 +42,13 @@ public class ThemeSettingsActivityTest extends ActivityInstrumentationTestCase2<
   
   @MediumTest public void testNumOfButtons() {
     solo.assertCurrentActivity("Check on first activity", ThemeSettingsActivity.class);
-    ArrayList<Button> btnList = solo.getCurrentButtons();
+    final ArrayList<Button> btnList = solo.getCurrentButtons();
     assertEquals(3, btnList.size());
   }
   
   @MediumTest public void testNumOfImageButtons() {
     solo.assertCurrentActivity("Check on first activity", ThemeSettingsActivity.class);
-    ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
+    final ArrayList<ImageButton> btnList = solo.getCurrentImageButtons();
     assertEquals(4, btnList.size());
   }
   

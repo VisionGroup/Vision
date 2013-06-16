@@ -45,19 +45,15 @@ public class DeleteConfirmation extends VisionActivity {
     if (super.onSingleTapUp(e))
       return true;
     Log.d(TAG, _caller.toString());
-    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, CANCEL_FLAG);
+    final Intent intent = newFlaggedIntent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, CANCEL_FLAG);
     Log.d(TAG, intent.toString());
-    // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    setIntentFlags(intent);
     startActivity(intent);
     finish();
     return false;
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    final Intent intent = new Intent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG);
-    // intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    setIntentFlags(intent);
+    final Intent intent = newFlaggedIntent(getApplicationContext(), _caller).putExtra(ACTION_EXTRA, DELETE_FLAG);
     startActivity(intent);
     finish();
     return super.onFling(e1, e2, f1, f2);

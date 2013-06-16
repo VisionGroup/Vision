@@ -54,8 +54,7 @@ public class SettingsActivity extends VisionActivity {
     final PackageManager pm = getPackageManager();
     switch (button.getId()) {
       case R.id.SOS_Change_contact:
-        intent = new Intent(SettingsActivity.this, SOSconfig.class);
-        setIntentFlags(intent);
+        intent = newFlaggedIntent(SettingsActivity.this, SOSconfig.class);
         startActivity(intent);
         break;
       case R.id.Mute_Sound:
@@ -70,13 +69,11 @@ public class SettingsActivity extends VisionActivity {
         VisionApplication.muted = true;
         break;
       case R.id.button_set_colors:
-        intent = new Intent(SettingsActivity.this, ColorSettingsActivity.class);
-        setIntentFlags(intent);
+        intent = newFlaggedIntent(SettingsActivity.this, ColorSettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.button_set_theme:
-        intent = new Intent(SettingsActivity.this, ThemeSettingsActivity.class);
-        setIntentFlags(intent);
+        intent = newFlaggedIntent(SettingsActivity.this, ThemeSettingsActivity.class);
         startActivity(intent);
         break;
       case R.id.button_exit_launcher:
@@ -141,8 +138,7 @@ public class SettingsActivity extends VisionActivity {
     } else
       speakOutSync(R.string.one_lang_avail);
     // empty activity stack
-    final Intent intent = new Intent(this, MainActivity.class);
-    setIntentFlags(intent);
+    final Intent intent = newFlaggedIntent(this, MainActivity.class);
     startActivity(intent);
     finish();
   }

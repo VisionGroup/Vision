@@ -101,7 +101,7 @@ public class AddContactActivity extends VisionActivity {
       speakOutSync(R.string.required_fields);
       return;
     }
-    final Intent returnIntent = new Intent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
+    final Intent returnIntent = newFlaggedIntent(getApplicationContext(), ContactsActivity.class).putExtra(ACTION_EXTRA, ADD_FLAG);
     if (!createNewContact) {
       ContactManager.deleteContact(contactDisplayName, this);
       ContactManager.addContactToPhone(this, name.toString(), num.toString());
@@ -115,7 +115,7 @@ public class AddContactActivity extends VisionActivity {
       speakOutSync(R.string.contact_exist);
       returnIntent.putExtra(RESULT_EXTRA, RESULT_CANCELED);
     }
-    startActivity(setIntentFlags(returnIntent));
+    startActivity(returnIntent);
     finish();
   }
   

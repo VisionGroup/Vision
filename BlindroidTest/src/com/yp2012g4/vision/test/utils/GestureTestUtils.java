@@ -4,7 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.Display;
 
-public class GestureUtils {
+public class GestureTestUtils {
   public static void flingRight(final ActivityInstrumentationTestCase2<?> c) {
     fling(c, -150);
   }
@@ -22,4 +22,7 @@ public class GestureUtils {
     final int screenWidth = getDefaultDisplay(c).getWidth();
     TouchUtils.drag(c, screenWidth / 2, screenWidth / 2 + offset, screenHeight / 2, screenHeight / 2, 20);
   }
+//  public static void assertCurrentActivity(final Solo solo, final Class<?> c) {
+//    solo.assertCurrentActivity("wrong activity", c);
+//  }
 }

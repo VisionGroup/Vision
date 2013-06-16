@@ -15,7 +15,7 @@ import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.test.utils.GestureUtils;
+import com.yp2012g4.vision.test.utils.GestureTestUtils;
 import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 /**
@@ -60,7 +60,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     ManagerUtils.addUnansweredCall(activity.getApplicationContext(), num2);
     goToCallsScreen();
     assertEquals(num1, ((TalkingButton) solo.getView(R.id.call_number)).getText());
-    GestureUtils.flingRight(this);
+    GestureTestUtils.flingRight(this);
     assertEquals(num2, ((TalkingButton) solo.getView(R.id.call_number)).getText());
     pressBack();
     ManagerUtils.removeAllUnansweredCalls(activity.getApplicationContext());

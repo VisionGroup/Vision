@@ -146,14 +146,11 @@ public class CallsManager {
     try {
       if (_cur == null)
         _cur = _context.getContentResolver().query(CallLog.Calls.CONTENT_URI, _projection, missedCallWhere(), null, null);
+      else
+        UnmarkCallLFromMissedCallList(new CallType(_context, _cur));
     } catch (final Exception e) {
       return null;
     }
-    // final ArrayList<CallType> $ = new ArrayList<CallType>();
-    // for (int i = 0; i < 1 && _cur.moveToNext(); i++)
-    // $.add(new CallType(_context, _cur));
-    // UnmarkCallLFromMissedCallList($.get(0).getNumber(), "");
-//    return $;
     if (_cur.moveToNext()) {
       final CallType $ = new CallType(_context, _cur);
       UnmarkCallLFromMissedCallList($.getNumber());

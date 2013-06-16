@@ -27,14 +27,15 @@ import com.yp2012g4.vision.tools.location.LocationHandler;
  * @version 1.0
  */
 public class SOSActivity extends VisionActivity {
-  LocationFinder lf;
+  private LocationFinder lf;
   Lock l = null;
-  String lastProvider = "", address = "";
-  static final int DEFAULT_LAT_LONG = 10000;
-  static final int SEND_DELAY = 5000;
-  double latitude = DEFAULT_LAT_LONG, longitude = DEFAULT_LAT_LONG;
-  final int maxLengthOfAddress = 100;
-  static final String TAG = "vision:SOSActivity";
+  private String lastProvider = "";
+  String address = "";
+  private static final int DEFAULT_LAT_LONG = 10000;
+  double latitude = DEFAULT_LAT_LONG;
+  double longitude = DEFAULT_LAT_LONG;
+  private final int maxLengthOfAddress = 100;
+  private static final String TAG = "vision:SOSActivity";
   String _number = "";
   
   @Override public int getViewId() {
@@ -75,7 +76,7 @@ public class SOSActivity extends VisionActivity {
       return true;
     if (_number.length() == 0) {
       speakOutSync(R.string.SOS_number_empty);
-      finish();
+      finish(); // TODO: activate SOSconfig???
       return true;
     }
     switch (getButtonByMode().getId()) {
@@ -84,7 +85,7 @@ public class SOSActivity extends VisionActivity {
         _mHandler.postDelayed(sendSOSMessage, 5000);
         break;
       case R.id.SOS_phone_number:
-        speakOutSync(getString(R.string.sos_contact_number_is) + " " + _number);
+        speakOutSync(getSosNumber());
         break;
       default:
         break;
@@ -138,11 +139,16 @@ public class SOSActivity extends VisionActivity {
     _number = sp.getString(getString(R.string.sos_number), _number);
     final TalkingButton tb = getTalkingButton(R.id.SOS_phone_number);
     tb.setText(_number);
-    tb.setReadText(getString(R.string.sos_contact_number_is) + " " + _number);
+    final String _s = getSosNumber();
+    tb.setReadText(_s);
   }
   
   @Override protected void onStop() {
     lf.stop();
     super.onStop();
+  }
+  
+  private String getSosNumber() {
+    return _number.equals("") ? getString(R.string.SOS_number_empty) : getString(R.string.sos_contact_number_is) + " " + _number;
   }
 }

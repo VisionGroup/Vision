@@ -11,6 +11,8 @@ import com.jayway.android.robotium.solo.Solo;
 import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.contacts.AddContactActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsActivity;
+import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
+import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.smsReader.DeleteConfirmation;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
@@ -74,7 +76,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   }
   
   // this test should run after testDeleteContacts() - because I assume the
-  // first added contact as been deleted
+  // first added contact has been deleted
   @MediumTest public void testEditContacts() {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     // first we change the phone number
@@ -135,15 +137,18 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
   }
   
-  @MediumTest public void testESendSmsToContact() throws Exception {
+  @MediumTest public void testSendSmsToContact() throws Exception {
+    goToAddContact();
+    fillAddContactFormAndConfirm(secondName, secondPhone);
     goToContact(true, secondName);
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.contacts_sms));
     solo.assertCurrentActivity("wrong activity", SendSMSActivity.class);
     solo.clickOnView(solo.getView(R.id.phoneNumber));
     assertEquals(((EditText) solo.getView(R.id.phoneNumber)).getText().toString(), secondPhone);
-//TODO: check why "click cannot be completed" error occurs????
-    // try {
+    solo.goBack();
+//TODO: Do we really want to send SMS in test?!?!
+//    try {
 //      solo.clickOnView(solo.getView(R.id.sendMessageButton));
 //    } catch (Error e) {
 //      Log.i("MyLog", VisionGestureDetector._spokenString);
@@ -151,6 +156,15 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
 //      return;
 //    }
 //    assertEquals(VisionGestureDetector._spokenString, "Message has been sent");
+    solo.clickOnView(solo.getView(R.id.home_button));
+    solo.assertCurrentActivity("wrong activity", MainActivity.class);
+    solo.clickOnView(solo.getView(R.id.contacts_button));
+    solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
+    solo.clickOnView(solo.getView(R.id.contactsListButton));
+    solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
+    goToContact(true, secondName);
+    assertEquals(secondPhone, ((TalkingButton) solo.getView(R.id.contact_phone)).getText());
+    deleteCurrentContact(true);
   }
   
   public static void flingRight(ActivityInstrumentationTestCase2<?> c) {

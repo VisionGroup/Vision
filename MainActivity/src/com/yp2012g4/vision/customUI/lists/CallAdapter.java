@@ -23,8 +23,8 @@ public class CallAdapter extends BaseAdapter {
     _c = c;
     _callsManager = new CallsManager(c);
     _callArray = new ArrayList<CallType>();
-    _callArray.add(_callsManager.getNextMissedCalls());
     _count = _callsManager.getMissedCallsNum();
+    _callArray.add(_callsManager.getNextMissedCalls());
   }
   
   @Override public int getCount() {

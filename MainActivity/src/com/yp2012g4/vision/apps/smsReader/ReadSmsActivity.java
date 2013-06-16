@@ -31,6 +31,10 @@ public class ReadSmsActivity extends VisionActivity {
     init(0, getString(R.string.read_sms_screen), getString(R.string.read_sms_help));
     listView = (TalkingListView) findViewById(R.id.TalkingSmsListView2);
     adapter = new SmsAdapter(this);
+    if (adapter.getCount() == 0) {
+      speakOutSync(R.string.no_messages);
+      finish();
+    }
     listView.setAdapter(adapter);
   }
   

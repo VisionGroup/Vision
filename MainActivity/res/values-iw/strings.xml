@@ -156,7 +156,8 @@
     <string name="contacts_screen">מסך אנשי קשר</string>
     <string name="contacts_screen_help">באפשרותך לגעת במקומות שונים במסך כדי לשמוע: 1) את שם איש הקשר. 2) את מספר הטלפון של איש הקשר. כמו כן, באפשרותך להתקשר לאיש הקשר, לשלוח לו הודעת S M S, לשלוח לו הודעת S M S מהירה, להוסיף איש קשר חדש, לערוך איש קשר או למחוק איש קשר.</string>
     <string name="no_more_contacts">אין יותר אנשי קשר</string>
-    <string name="no_messages">אין הודעות</string>
+    <string name="no_messages">אין הודעות SMS</string>
+    <string name="no_contacts">הטלפון לא מכיל אנשי קשר</string>
     <string name="next_contact">איש הקשר הבא</string>
     <string name="previous_contact">איש קשר קודם</string>
     <string name="call_contact">התקשר לאישר הקשר</string>

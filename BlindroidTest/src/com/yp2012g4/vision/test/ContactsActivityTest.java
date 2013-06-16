@@ -14,7 +14,8 @@ import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.main.MainActivity;
 import com.yp2012g4.vision.apps.smsSender.SendSMSActivity;
 import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.test.utils.GestureUtils;
+import com.yp2012g4.vision.test.utils.GestureTestUtils;
+import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
   private Solo solo;
@@ -128,7 +129,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
   @MediumTest private void deleteCurrentContact(final boolean confirmDelete) {
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
     solo.clickOnView(solo.getView(R.id.delete_contact));
-    GestureUtils.useDeleteConfirmation(confirmDelete, solo, this);
+    ManagerUtils.useDeleteConfirmation(confirmDelete, solo, this);
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
   }
   
@@ -169,7 +170,7 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     String currContact = lastContact;
     do {
       lastContact = currContact;
-      GestureUtils.flingLeft(this);
+      GestureTestUtils.flingLeft(this);
       currContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     } while (!currContact.equals(lastContact));
   }
@@ -178,13 +179,13 @@ public class ContactsActivityTest extends ActivityInstrumentationTestCase2<Conta
     String lastContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     if (lastContact.equals(name))
       return true;
-    GestureUtils.flingRight(this);
+    GestureTestUtils.flingRight(this);
     String currContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     while (!currContact.equals(lastContact)) {
       if (currContact.equals(name))
         return true;
       lastContact = currContact;
-      GestureUtils.flingRight(this);
+      GestureTestUtils.flingRight(this);
       currContact = (String) ((TalkingButton) solo.getView(R.id.contact_name)).getText();
     }
     return false;

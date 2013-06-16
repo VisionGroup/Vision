@@ -10,7 +10,7 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.contacts.ContactsActivity;
 import com.yp2012g4.vision.apps.contacts.ContactsMenuActivity;
 import com.yp2012g4.vision.apps.contacts.DialScreen;
-import com.yp2012g4.vision.test.utils.GestureUtils;
+import com.yp2012g4.vision.test.utils.GestureTestUtils;
 
 @Suppress
 // TODO - CHECK
@@ -35,8 +35,8 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.quickDialButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
-    GestureUtils.flingRight(this);
-    GestureUtils.flingLeft(this);
+    GestureTestUtils.flingRight(this);
+    GestureTestUtils.flingLeft(this);
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
   }
@@ -48,8 +48,8 @@ public class ContactsMenuActivityTest extends ActivityInstrumentationTestCase2<C
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
     solo.clickOnView(solo.getView(R.id.contactsListButton));
     solo.assertCurrentActivity("wrong activity", ContactsActivity.class);
-    GestureUtils.flingRight(this);
-    GestureUtils.flingLeft(this);
+    GestureTestUtils.flingRight(this);
+    GestureTestUtils.flingLeft(this);
     solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", ContactsMenuActivity.class);
   }

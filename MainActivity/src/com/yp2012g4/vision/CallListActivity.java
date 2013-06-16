@@ -49,7 +49,7 @@ public class CallListActivity extends VisionActivity {
       return true;
     Intent intent;
     final CallType currCall = getCurrentCall();
-    Log.d(TAG, currCall.getName().toString() + " " + currCall.number + " " + currCall.date.toString());
+    Log.d(TAG, currCall.name + " " + currCall.number + " " + currCall.date.toString());
     switch (getButtonByMode().getId()) {
       case R.id.calllist_send_quick_sms:
         intent = newFlaggedIntent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);
@@ -65,9 +65,6 @@ public class CallListActivity extends VisionActivity {
       default:
         break;
     }
-    // CallManager.markMessageRead(this, currMsg.address,
-    // currMsg.getBody());
-    // TODO: Mark Call as read.
     return false;
   }
   
@@ -86,10 +83,6 @@ public class CallListActivity extends VisionActivity {
    * @param currCall
    */
   private void removeFromCallList(final CallType currCall) {
-    // first we remove the Call from the phone DB
-    // TODO
-    // CallsManager.UnmarkCallLFromMissedCallList(this, currCall.getNumber());
-    // then we remove the Call from the displayed list
     _ca.removeItemFromList(_tlv.getPage());
     _tlv.setAdapter(_ca);
     _tlv.prevPage();
@@ -114,7 +107,6 @@ public class CallListActivity extends VisionActivity {
         _tlv.prevPage();
       else
         _tlv.nextPage();
-//      callsManager.UnmarkCallLFromMissedCallList(((CallType) _ca.getItem(_tlv.getPage())).getNumber(), "");
       vibrate();
     }
     return super.onFling(e1, e2, f1, f2);

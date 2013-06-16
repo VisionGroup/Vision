@@ -14,7 +14,7 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
   private static final String TAG = "vision:OutGoingCallReceiver";
   public static final String ABORT_PHONE_NUMBER = "1231231234";
   private static final String OUTGOING_CALL_ACTION = "android.intent.action.NEW_OUTGOING_CALL";
-  private static final String INTENT_PHONE_NUMBER = "android.intent.extra.PHONE_NUMBER";
+  public static final String INTENT_PHONE_NUMBER = "android.intent.extra.PHONE_NUMBER";
   
   @Override public void onReceive(final Context c, final Intent i) {
     Log.v(TAG, "OutgoingCallReceiver onReceive");
@@ -26,7 +26,8 @@ public class OutgoingCallReceiver extends BroadcastReceiver {
         return;
       final String phoneNumber = b.getString(OutgoingCallReceiver.INTENT_PHONE_NUMBER);
       Log.v(TAG, "Incoming phonenumber: " + phoneNumber);
-      final Message m = CallUtils.newMessage(phoneNumber, CALL_TYPE.INCOMING_CALL);
+      final Message m = CallUtils.newMessage(phoneNumber, CALL_TYPE.INCOMING_CALL);// TODO
+                                                                                   // check
       try {
         CallService.callScreenServiceManager.send(m);
       } catch (final RemoteException e) {

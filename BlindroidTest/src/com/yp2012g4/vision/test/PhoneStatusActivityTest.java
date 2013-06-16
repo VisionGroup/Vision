@@ -43,6 +43,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
+    // TODO: Fails if no missed calls.
     checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
   }
   
@@ -70,12 +71,11 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   
   private void checkBack(int id, Class<?> c) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
-    final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
-    solo.clickOnView(tb);
+    solo.clickOnView(activity.findViewById(id));
     solo.waitForActivity(c.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", c);
-    solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
+    solo.clickOnView(solo.getView(R.id.back_button));
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   

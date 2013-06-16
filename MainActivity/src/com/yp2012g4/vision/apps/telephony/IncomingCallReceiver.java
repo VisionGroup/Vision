@@ -29,7 +29,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       return;
     final String state = b1.getString(TelephonyManager.EXTRA_STATE);
     Log.d(TAG, "State: " + state);
-    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
+    if (state != null && state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
       _rang = true;
       try {
         final String phonenumber = b1.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
@@ -40,7 +40,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       }
       return;
     }
-    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE) && _rang) {
+    if (state != null && state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE) && _rang) {
       _rang = false;
       Log.i(TAG, "Call ended.");
       try {
@@ -50,7 +50,7 @@ public class IncomingCallReceiver extends BroadcastReceiver {
       }
       return;
     }
-    if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK))
+    if (state != null && state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK))
       _rang = true;
   }
   

@@ -51,6 +51,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteBlue));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#0489B1"));
@@ -60,6 +61,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteBlack));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
@@ -69,6 +71,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteRed));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#B40404"));
@@ -78,6 +81,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.WhiteGreen));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#FFFFFF"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#04B45F"));
@@ -87,6 +91,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.BlueBlack));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#0489B1"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
@@ -96,6 +101,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.RedBlack));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#B40404"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));
@@ -105,6 +111,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.GreenBlack));
     solo.clickOnView(solo.getView(R.id.home_button));
+    solo.waitForActivity(MainActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#04B45F"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));

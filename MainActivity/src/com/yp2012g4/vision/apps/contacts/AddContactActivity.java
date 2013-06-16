@@ -29,7 +29,7 @@ public class AddContactActivity extends VisionActivity {
   @Override public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_contact);
-    init(0, getString(R.string.add_contact_screen), getString(R.string.add_contact_screen));
+    init(0, getString(R.string.add_contact_screen), getString(R.string.add_edit_contacts_help));
     final Bundle extras = getIntent().getExtras();
     if (extras != null)
       try {

@@ -154,7 +154,7 @@
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">מסך אנשי קשר</string>
-    <string name="contacts_screen_help">החלק אצבע כלפי מעלה או כלפי מטה על גבי המסך בכדי לעבור בין אנשי הקשר. באפשרותך להתקשר או לשלוח הודעה לאיש הקשר</string>
+    <string name="contacts_screen_help">באפשרותך לגעת במקומות שונים במסך כדי לשמוע: 1) את שם איש הקשר. 2) את מספר הטלפון של איש הקשר. כמו כן, באפשרותך להתקשר לאיש הקשר, לשלוח לו הודעת S M S, לשלוח לו הודעת S M S מהירה, להוסיף איש קשר חדש, לערוך איש קשר או למחוק איש קשר.</string>
     <string name="no_more_contacts">אין יותר אנשי קשר</string>
     <string name="no_messages">אין הודעות</string>
     <string name="next_contact">איש הקשר הבא</string>
@@ -165,8 +165,18 @@
     <string name="delete_contact_failed">מחיקת איש הקשר נכשלה</string>
     <string name="delete_contact_button">מחק איש קשר נוכחי</string>
     <string name="add_new_contact_button">הוסף איש קשר</string>
-    <string name="add_contact_success">איש קשר התווסף בהצלחה</string>
 
+      <!-- AddContactActivity -->
+    <string name="add_contact_screen">קביעת איש קשר</string>
+    <string name="add_edit_contacts_help">באפשרותך לערוך את שמו ומספר הטלפון של איש הקשר. לחלופין - באפשרותך להוסיף איש קשר חדש. לאישור - יש ללחוץ על כפתור האישור</string>
+    <string name="add_contact_success">איש קשר התווסף בהצלחה</string>
+    <string name="edit_contact_success">עריכת איש הקשר הסתיימה.</string>
+    <string name="enter_a_name">הכנס שם</string>
+    <string name="contact_name">שם איש הקשר</string>
+    <string name="contact_exist">איש הקשר קיים</string>
+    <string name="required_fields">יש למלא את כל השדות</string>
+    <string name="confirmation_button">אישור נתוני איש הקשר.</string>
+    
     <!-- ContactsMenuActivity -->
     <string name="title_activity_contacts_menu">מסך תפריט אנשי קשר</string>
     <string name="contacts_help">בחר אחת מ-3 אפשרויות: 1) מעבר למסך אנשי הקשר המועדפים. 2)מעבר למסך כל אנשי הקשר. 3) מעבר לחייגן</string>
@@ -191,16 +201,12 @@
 
     <!-- SettingsActivity -->
     <string name="settings_screen">מסך הגדרות</string>
-    <string name="settings_help">מסך כפתורים המאפשר להגדיר הגדרות שונות של הטלפון.</string>
+    <string name="settings_help">באפשרותך לבחור אחת מבין 8 אפשרויות: 1)הגדרות צבעים. 2) הגדרות גודל טקסט. 3) ביטול מסך ברירת המחדל. 4) שינוי שפה. 5) מסך שיחה. 6) מחשבון. 7) קביעת מספר חירום. 8) השתקת דיבור.)</string>
     <string name="title_activity_color_settings">הגדרות צבע מסך</string>
     <string name="color_settings_button">הגדרת צבע</string>
     <string name="theme_settings_button">הגדרת גודל טקסט</string>
     <string name="clear_launcher_defaults">נקה ברירת מחדל</string>
     <string name="language">שפה</string>
-    <!--
-    <string name="switched_to_hebrew">הוחלף לעברית</string>
-    <string name="switched_to_english">הוחלף לאנגלית</string>
-    -->
     <string name="one_lang_avail">רק שפה אחת זמינה.</string>
     <string name="switched_to">הוחלף ל-</string>
     <string name="buttons_mode">מצב מקשים</string>
@@ -236,14 +242,14 @@
 
     <!-- ReadSMSActivity -->
     <string name="read_sms_screen">מסך קריאת SMS</string>
-    <string name="read_sms_help">לחץ על המסך לשמוע את ההודעה. באפשרותך לעבור בין ההודעות על ידי החלקת האצבע  ימינה ושמאלה.ניתן להשיב להודעה או למחוק אותה </string>
+    <string name="read_sms_help">באפשרותך לגעת במקומות שונים במסך על מנת לשמוע: 1) מספר הטפון של השולח. 2)תאריך ההודעה. 3)תוכן ההודעה. באפשרותך להתקשר לשולח, לשלוח לו  S M S, לשלוח לו S M S מהיר או למחוק את ההודעה.  </string>
     <string name="message_number">הודעה מספר</string>
     <string name="no_more_messages">אין יותר הודעות</string>
     <string name="delete_message">מחיקת הודעה</string>
 
     <!-- SOSActivity -->
     <string name="sos_screen">מסך SOS</string>
-    <string name="sos_help">באפשרותך לשלוח הודעת SMS עם מיקומך הנוכחי</string>
+    <string name="sos_help">באפשרותך לשלוח הודעת S M S עם מיקומך הנוכחי. יש לגעת בחלקו העליון של המסך כדי לשמוע את מספר החירום.</string>
     <string name="SOS_message_has_been_sent">הודעת SOS נשלחה</string>
     <string name="sending_SOS_message">שולח הודעת SOS</string>
     <string name="send_SOS_message">שליחת הודעת SOS</string>

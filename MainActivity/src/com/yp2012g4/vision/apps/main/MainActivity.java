@@ -40,7 +40,6 @@ import com.yp2012g4.vision.tools.VisionActivity;
 public class MainActivity extends VisionActivity {
   private static final double LOW_BATTERY_LEVEL = 0.3;
   private static String TAG = "vision:MainActivity";
-  private final CallsManager callsManager = new CallsManager(this);
   
   @Override public int getViewId() {
     return R.id.MainActivityView;
@@ -128,32 +127,30 @@ public class MainActivity extends VisionActivity {
     // may cause other problems
     if (!hasFocus)
       return;
-    VoiceNotify();
+    VoiceNotify(this);
   }
   
-  public void VoiceNotify() {
+  public static void VoiceNotify(final Context c) {
+    final CallsManager callsManager = new CallsManager(c);
     String s = "";
-    final PhoneNotifications pn = new PhoneNotifications(this);
+    final PhoneNotifications pn = new PhoneNotifications(c);
     final float batteryLevel = pn.getBatteryLevel();
     final boolean isCharging = pn.getChargerStatus();
     if (!isCharging && batteryLevel < LOW_BATTERY_LEVEL)
-      s += getString(R.string.low_battery);
+      s += c.getString(R.string.low_battery);
     final int signalS = PhoneNotifications.getSignalStrength();
     if (signalS <= PhoneStatusActivity.signal_noSignalThreshold)
-      s += getString(R.string.phoneStatus_message_noSignal_read) + "\n";
+      s += c.getString(R.string.phoneStatus_message_noSignal_read) + "\n";
     else if (signalS <= PhoneStatusActivity.signal_poor)
-      s += getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
+      s += c.getString(R.string.phoneStatus_message_veryPoorSignal_read) + "\n";
     final int numOfMissedCalls = callsManager.getMissedCallsNum();
-    final Resources res = getResources();
+    final Resources res = c.getResources();
     if (numOfMissedCalls > 0)
       s += res.getQuantityString(R.plurals.numberOfMissedCalls, numOfMissedCalls, Integer.valueOf(numOfMissedCalls));
-    final int numOfSms = SmsManager.getUnreadSMS(this);
+    final int numOfSms = SmsManager.getUnreadSMS(c);
     if (numOfSms > 0)
       s += res.getQuantityString(R.plurals.numberOfNewSMS, numOfSms, Integer.valueOf(numOfSms));
     TTS.speak(s, TextToSpeech.QUEUE_ADD);
-    // speakOutAsync(s);
-    // TTS.waitUntilFinishTalking(); // <- removing this increases speed, but
-    // may cause other problems
   }
   
   @Override public void onBackPressed() {

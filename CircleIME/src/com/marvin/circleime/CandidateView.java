@@ -254,7 +254,7 @@ public class CandidateView extends View {
 
     @SuppressLint("WrongCall")
     public void setSuggestions(List<String> suggestions,
-	    @SuppressWarnings("unused") boolean completions,
+	    boolean completions,
 	    boolean typedWordValid) {
 	clear();
 	if (suggestions != null)

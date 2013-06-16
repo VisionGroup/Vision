@@ -88,6 +88,7 @@ public class SettingsActivity extends VisionActivity {
       // break;
       case R.id.vision_call_enable_button:
         pressedButtonCallEnable(sp);
+        vibrate();
         break;
       case R.id.calculator:
         startActivity(newFlaggedIntent(this, CalcActivity.class));

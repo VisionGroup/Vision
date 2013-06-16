@@ -20,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yp2012g4.vision.apps.settings.SetupSettingsString;
-import com.yp2012g4.vision.customUI.TalkingButton;
-import com.yp2012g4.vision.customUI.TalkingEditText;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
 import com.zubhium.ZubhiumSDK;
 import com.zubhium.ZubhiumSDK.CrashReportingMode;
@@ -227,18 +225,24 @@ public class VisionApplication extends Application {
       return;
     }
     if (v instanceof TextView) {
-      final View viewType = v instanceof TalkingButton ? (TalkingButton) v : (TalkingEditText) v;
       String bg = _backgroundColor;
-      final int viewId = viewType.getId();
-      if (viewId == R.id.WhiteRed)
-        bg = "RED";
-      else if (viewId == R.id.WhiteGreen)
-        bg = "GREEN";
-      else if (viewId == R.id.WhiteBlue)
-        bg = "BLUE";
-      else if (((View) viewType.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
-        bg = "BLACK";
-      viewType.setBackgroundColor(_colorToString.get(bg).intValue());
+      bg = getBackgroudFromTheme(v, bg, v.getId());
+      v.setBackgroundColor(_colorToString.get(bg).intValue());
+    }
+  }
+  
+  private static String getBackgroudFromTheme(final View v, final String bg, final int viewId) {
+    switch (viewId) {
+      case R.id.WhiteRed:
+        return "RED";
+      case R.id.WhiteGreen:
+        return "GREEN";
+      case R.id.WhiteBlue:
+        return "BLUE";
+      default:
+        if (((View) v.getParent().getParent()).getId() == R.id.ColorSettingsActivity)
+          return "BLACK";
+        return bg;
     }
   }
   

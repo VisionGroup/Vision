@@ -4,11 +4,7 @@
 package com.yp2012g4.vision.test;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.res.Resources;
-import android.provider.CallLog;
-import android.provider.CallLog.Calls;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
@@ -18,6 +14,7 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
+import com.yp2012g4.vision.test.utils.ManagerUtils;
 
 /**
  * @author Amit Yaffe
@@ -27,7 +24,6 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   Resources res;
   private Solo solo;
   private Activity activity;
-  private final String phoneNumber = "000000";
   
   // private PhoneNotifications pn;
   public PhoneStatusActivityTest() {
@@ -48,9 +44,9 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
-    addUnansweredCall();
+    ManagerUtils.addUnansweredCall(activity.getApplicationContext(), "00000");
     checkNonEmptyCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
-    removeAllUnansweredCalls();
+    ManagerUtils.removeAllUnansweredCalls(activity.getApplicationContext());
     checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
   }
   
@@ -94,36 +90,6 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     solo.clickOnView(tb);
     solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
-  }
-  
-  private void removeAllUnansweredCalls() {
-    try {
-      final ContentValues values = new ContentValues();
-      values.put(Calls.NEW, Integer.valueOf(0));
-      final StringBuilder where = new StringBuilder();
-      where.append(Calls.NEW + " = 1");
-      where.append(" AND ");
-      where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
-      final int i = activity.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
-          new String[] { Integer.toString(Calls.MISSED_TYPE) });
-      System.out.println(i);
-    } catch (final Exception e) {
-      e.getMessage();
-    }
-  }
-  
-  private void addUnansweredCall() {
-    ContentResolver cr = activity.getApplicationContext().getContentResolver();
-    ContentValues values = new ContentValues();
-    values.put(CallLog.Calls.NUMBER, phoneNumber);
-    values.put(CallLog.Calls.DATE, Long.valueOf(System.currentTimeMillis()));
-    values.put(CallLog.Calls.DURATION, Integer.valueOf(2));
-    values.put(CallLog.Calls.TYPE, Integer.valueOf(CallLog.Calls.MISSED_TYPE));
-    values.put(CallLog.Calls.NEW, Integer.valueOf(1));
-    values.put(CallLog.Calls.CACHED_NAME, "");
-    values.put(CallLog.Calls.CACHED_NUMBER_TYPE, Integer.valueOf(0));
-    values.put(CallLog.Calls.CACHED_NUMBER_LABEL, "");
-    cr.insert(CallLog.Calls.CONTENT_URI, values);
   }
   
   /*

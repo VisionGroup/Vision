@@ -42,8 +42,8 @@ public class AlarmActivity extends VisionActivity {
   public void callSetClock(final boolean isSettingMinutes) {
     waitForMinutes = isSettingMinutes;
     final int type = isSettingMinutes ? SetClockActivity.MIN_CODE : SetClockActivity.HOUR_CODE;
-    final Intent intent = new Intent(AlarmActivity.this, SetClockActivity.class).putExtra(TYPE_STRING, type);
-    startActivityForResult(setIntentFlags(intent), REQUEST_CODE);
+    final Intent intent = newFlaggedIntent(AlarmActivity.this, SetClockActivity.class).putExtra(TYPE_STRING, type);
+    startActivityForResult(intent, REQUEST_CODE);
   }
   
   @Override public int getViewId() {
@@ -120,13 +120,9 @@ public class AlarmActivity extends VisionActivity {
     String s;
     if (alarmTime == null)
       s = getString(R.string.noAlarm);
-    else {
-      if (alarmIsSet)
-        s = getString(R.string.alarm_is_on_at);
-      else
-        s = getString(R.string.alarm_is_off_at);
-      s += " " + SpeakingClockActivity.parseTime(alarmTime, getResources());
-    }
+    else
+      s = getString(alarmIsSet ? R.string.alarm_is_on_at : R.string.alarm_is_off_at) + " "
+          + SpeakingClockActivity.parseTime(alarmTime, getResources());
     speakOutAsync(s);
   }
   

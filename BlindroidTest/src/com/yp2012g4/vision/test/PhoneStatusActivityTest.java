@@ -3,10 +3,12 @@
  */
 package com.yp2012g4.vision.test;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.res.Resources;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.MediumTest;
 
@@ -16,8 +18,6 @@ import com.yp2012g4.vision.R;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneNotifications;
 import com.yp2012g4.vision.apps.phoneStatus.PhoneStatusActivity;
 import com.yp2012g4.vision.customUI.TalkingImageButton;
-import com.yp2012g4.vision.managers.CallType;
-import com.yp2012g4.vision.managers.CallsManager;
 
 /**
  * @author Amit Yaffe
@@ -27,6 +27,7 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   Resources res;
   private Solo solo;
   private Activity activity;
+  private final String phoneNumber = "000000";
   
   // private PhoneNotifications pn;
   public PhoneStatusActivityTest() {
@@ -47,12 +48,10 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
   }
   
   @MediumTest public void test_missedCallsScreen() {
-    CallsManager cm = new CallsManager(activity.getApplicationContext());
-    ArrayList<CallType> missedCalls = cm.getMissedCallsList();
-    if (missedCalls.size() != 0)
-      checkBack(com.yp2012g4.vision.R.id.button_getMissedCalls, CallListActivity.class);
-    else
-      checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls, PhoneStatusActivity.class);
+    addUnansweredCall();
+    checkNonEmptyCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
+    removeAllUnansweredCalls();
+    checkEmptyMissedCallList(com.yp2012g4.vision.R.id.button_getMissedCalls);
   }
   
   @MediumTest public void test_signalToPercent() {
@@ -77,24 +76,54 @@ public class PhoneStatusActivityTest extends ActivityInstrumentationTestCase2<Ph
     assertEquals(tlkbtn.getReadToolTip(), "Test String2");
   }
   
-  private void checkBack(int id, Class<?> c) {
+  private void checkNonEmptyCallList(int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // Test Back button
     solo.clickOnView(tb);
-    solo.waitForActivity(c.getName(), 2000);
-    solo.assertCurrentActivity("wrong activity", c);
+    solo.waitForActivity(CallListActivity.class.getName(), 2000);
+    solo.assertCurrentActivity("wrong activity", CallListActivity.class);
     solo.clickOnView(solo.getView(com.yp2012g4.vision.R.id.back_button));
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
   }
   
-  private void checkEmptyMissedCallList(int id, Class<?> c) {
+  private void checkEmptyMissedCallList(int id) {
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
     final TalkingImageButton tb = (TalkingImageButton) activity.findViewById(id);
     // should go back if list is empty.
     solo.clickOnView(tb);
-    solo.waitForActivity(c.getName(), 2000);
+    solo.waitForActivity(CallListActivity.class.getName(), 2000);
     solo.assertCurrentActivity("wrong activity", PhoneStatusActivity.class);
+  }
+  
+  private void removeAllUnansweredCalls() {
+    try {
+      final ContentValues values = new ContentValues();
+      values.put(Calls.NEW, Integer.valueOf(0));
+      final StringBuilder where = new StringBuilder();
+      where.append(Calls.NEW + " = 1");
+      where.append(" AND ");
+      where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
+      final int i = activity.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
+          new String[] { Integer.toString(Calls.MISSED_TYPE) });
+      System.out.println(i);
+    } catch (final Exception e) {
+      e.getMessage();
+    }
+  }
+  
+  private void addUnansweredCall() {
+    ContentResolver cr = activity.getApplicationContext().getContentResolver();
+    ContentValues values = new ContentValues();
+    values.put(CallLog.Calls.NUMBER, phoneNumber);
+    values.put(CallLog.Calls.DATE, Long.valueOf(System.currentTimeMillis()));
+    values.put(CallLog.Calls.DURATION, Integer.valueOf(2));
+    values.put(CallLog.Calls.TYPE, Integer.valueOf(CallLog.Calls.MISSED_TYPE));
+    values.put(CallLog.Calls.NEW, Integer.valueOf(1));
+    values.put(CallLog.Calls.CACHED_NAME, "");
+    values.put(CallLog.Calls.CACHED_NUMBER_TYPE, Integer.valueOf(0));
+    values.put(CallLog.Calls.CACHED_NUMBER_LABEL, "");
+    cr.insert(CallLog.Calls.CONTENT_URI, values);
   }
   
   /*

@@ -19,11 +19,8 @@ import com.yp2012g4.vision.managers.ContactManager;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 /**
- * 
- * 
  * @author Yaron Auster
  * @version 2
- * 
  */
 public class IncomingCallActivity extends VisionActivity {
   private static final String TAG = "vision:IncomingCallActivity";
@@ -63,9 +60,9 @@ public class IncomingCallActivity extends VisionActivity {
   
   @Override public void onAttachedToWindow() {
     // make the activity show even when the screen is locked.
-    final Window window = getWindow();
-    window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-        + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+    getWindow().addFlags(
+        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON + WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            + WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
   }
   
   @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {

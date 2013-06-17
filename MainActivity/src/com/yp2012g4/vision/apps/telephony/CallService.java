@@ -1,12 +1,12 @@
 package com.yp2012g4.vision.apps.telephony;
 
 import android.content.Context;
-import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 
 import com.yp2012g4.vision.apps.telephony.CallUtils.CALL_TYPE;
 import com.yp2012g4.vision.tools.ServiceManager;
+import com.yp2012g4.vision.tools.StackTraceToString;
 
 public class CallService {
   public static ServiceManager callScreenServiceManager;
@@ -22,13 +22,12 @@ public class CallService {
   }
   
   public static void sendMessage(final Context c, final String number, final CALL_TYPE ct) {
-    final Message m = CallUtils.newMessage(number, ct);
     if (callScreenServiceManager == null)
       initialise(c);
     try {
-      callScreenServiceManager.send(m);
+      callScreenServiceManager.send(CallUtils.newMessage(number, ct));
     } catch (final RemoteException e) {
-      Log.d(TAG, "Unable to send message to callScreenService.", e);
+      Log.d(TAG, "Unable to send message to callScreenService " + StackTraceToString.toString(e));
     }
   }
 }

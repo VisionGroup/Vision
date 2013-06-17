@@ -21,6 +21,7 @@ public class CallScreenService extends AbstractService {
   // CallScreenView csView;
   GestureOverlayView gV;
   private static final String TAG = "vision:CallScreenService";
+  private CallUtils _cu;
   
   /**
    * Receives a message containing bundle with a phone number (using the
@@ -58,7 +59,7 @@ public class CallScreenService extends AbstractService {
         if (csView != null)
           ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(csView);
     csViews.clear();
-    new CallUtils(this).restoreRinger();
+    _cu.restoreRinger();
   }
   
   @Override public void onStartService() {
@@ -74,7 +75,8 @@ public class CallScreenService extends AbstractService {
   }
   
   private void processCall(final Context c, final String phoneNumber) {
-    final CallScreenView csv = new CallScreenView(this);
+    _cu = new CallUtils(c);
+    final CallScreenView csv = new CallScreenView(this, _cu);
     gV = new GestureOverlayView(c);
     final WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.TYPE_PRIORITY_PHONE,

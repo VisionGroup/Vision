@@ -5,6 +5,7 @@ import java.util.Date;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
+import android.util.Log;
 
 import com.yp2012g4.vision.tools.StackTraceToString;
 

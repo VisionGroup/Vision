@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.yp2012g4.vision.tools.StackTraceToString;
+
 /**
  * This is a service which will wait for updates from a Location Provider
  * (Network, GPS), and call a listener, providing an address corresponding to
@@ -127,7 +129,7 @@ public class LocationFinder {
     try {
       _downloader.execute();
     } catch (final Exception e) {
-      Log.e(TAG, "Error: " + e.getMessage());
+      Log.e(TAG, "Error: " + StackTraceToString.toString(e));
     }
   }
   

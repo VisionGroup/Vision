@@ -40,7 +40,7 @@ public class ContactManager {
     try {
       cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
     } catch (final Exception e) {
-      Log.d(TAG, "At getFavoriteContacts" + e.getMessage());
+      Log.e(TAG, "getFavoriteContacts " + StackTraceToString.toString(e));
       cur = null;
     }
     if (cur != null) {
@@ -60,7 +60,7 @@ public class ContactManager {
     try {
       cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
     } catch (final Exception e) {
-      Log.d(TAG, "At getAllContacts" + e.getMessage());
+      Log.e(TAG, "getAllContacts " + StackTraceToString.toString(e));
       cur = null;
     }
     if (cur != null) {
@@ -129,7 +129,7 @@ public class ContactManager {
       try {
         $ = cs.getString(cs.getColumnIndex(Phone.NUMBER));
       } catch (final Exception e) {
-        Log.d(TAG, "At lookupphonenumber" + e.getMessage());
+        Log.d(TAG, "lookupphonenumber " + StackTraceToString.toString(e));
         $ = "";
       }
     }

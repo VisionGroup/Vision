@@ -31,7 +31,7 @@
 
     <!-- DialScreen -->
     <string name="dial_screen_whereami">מסך חיוג</string>
-    <string name="dial_screen_info">כפתורי החיוג נמצאים באמצע המסך. בראש המסך נמצא המספר שחוייג. בתחתית המסך ישנם ארבעה כפתורים: אס אם אס מהיר, חיוג, מחיקת מספר ומחיקת ספרה.</string>
+    <string name="dial_screen_info">כפתורי החיוג נמצאים באמצע המסך. בראש המסך נמצא המספר שחוייג. בתחתית המסך ישנם חמישה כפתורים. מחיקת המספר. מחיקת ספרה. חיוג. שליחת S M S מהיר. שליחת S M S</string>
     <string name="dial_number">ראשית, יש להקיש מספר לחיוג</string>
     <string name="quick_sms_button">S M S מהיר</string>
     <string name="digit1">1</string>
@@ -87,8 +87,8 @@
         <item quantity="other">%d שיחות שלא נענו</item>
     </plurals>
     <plurals name="numberOfNewSMS">
-        <item quantity="one">הודעת אס אמ אס חדשה.</item>
-        <item quantity="other">%d הודעות אס אמ אס חדשות.</item>
+        <item quantity="one">הודעת S M S חדשה.</item>
+        <item quantity="other">%d הודעות S M S חדשות.</item>
     </plurals>
 
     <!-- PhoneStatusActivity -->
@@ -154,7 +154,7 @@
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">מסך אנשי קשר</string>
-    <string name="contacts_screen_help">באפשרותך לגעת במקומות שונים במסך כדי לשמוע: 1) את שם איש הקשר. 2) את מספר הטלפון של איש הקשר. כמו כן, באפשרותך להתקשר לאיש הקשר, לשלוח לו הודעת S M S, לשלוח לו הודעת S M S מהירה, להוסיף איש קשר חדש, לערוך איש קשר או למחוק איש קשר.</string>
+    <string name="contacts_screen_help">באפשרותך לגעת במקומות שונים במסך כדי לשמוע. 1) את שם איש הקשר. 2) את מספר הטלפון של איש הקשר. כמו כן, באפשרותך להתקשר לאיש הקשר. לשלוח לו הודעת S M S. לשלוח לו הודעת S M S מהיר. להוסיף איש קשר חדש. לערוך איש קשר. או למחוק איש קשר.</string>
     <string name="no_more_contacts">אין יותר אנשי קשר</string>
     <string name="no_contacts">הטלפון לא מכיל אנשי קשר</string>
     <string name="next_contact">איש הקשר הבא</string>
@@ -201,7 +201,7 @@
 
     <!-- SettingsActivity -->
     <string name="settings_screen">מסך הגדרות</string>
-    <string name="settings_help">באפשרותך לבחור אחת מבין 8 אפשרויות: 1)הגדרות צבעים. 2) הגדרות גודל טקסט. 3) ביטול מסך ברירת המחדל. 4) שינוי שפה. 5) מסך שיחה. 6) מחשבון. 7) קביעת מספר חירום. 8) השתקת דיבור.)</string>
+    <string name="settings_help">באפשרותך לבחור אחת מבין 8 אפשרויות. 1)הגדרות צבעים. 2) הגדרות גודל טקסט. 3) ביטול מסך ברירת המחדל. 4) שינוי שפה. 5) מסך שיחה. 6) מחשבון. 7) קביעת מספר חירום. 8) הפסקת או הפעלת דיבור.)</string>
     <string name="title_activity_color_settings">הגדרות צבע מסך</string>
     <string name="color_settings_button">הגדרת צבע</string>
     <string name="theme_settings_button">הגדרת גודל טקסט</string>
@@ -213,9 +213,12 @@
     <string name="sticky_buttons_mode">הוחלף למצב מקשים דביקים </string>
     <string name="regular_buttons_mode">הוחלף למצב מקשים רגיל </string>
     <string name="calculator">מחשבון</string>
-    <string name="phone_call_service_button"> שירות טלפון של vision </string>
+    <string name="phone_call_service_button"> שירות הטלפון של vision </string>
     <string name="disable_call_service">ביטול שירות טלפון</string>
     <string name="enable_call_service">אפשור שירות טלפון</string>
+    <string name="mute_sound">קול</string>
+    <string name="sound_muted">קול מושתק</string>
+    <string name="sound_Activated">קול מופעל</string>
 
     <!-- ThemeSettingsActivity -->
     <string name="theme_settings_screen">מסך הגדרות נושא</string>
@@ -242,7 +245,7 @@
 
     <!-- ReadSMSActivity -->
     <string name="read_sms_screen">מסך קריאת SMS</string>
-    <string name="read_sms_help">באפשרותך לגעת במקומות שונים במסך על מנת לשמוע: 1) מספר הטפון של השולח. 2)תאריך ההודעה. 3)תוכן ההודעה. באפשרותך להתקשר לשולח, לשלוח לו  S M S, לשלוח לו S M S מהיר או למחוק את ההודעה.  </string>
+    <string name="read_sms_help">באפשרותך לגעת במקומות שונים במסך על מנת לשמוע. 1) את מספר הטפון של השולח. 2) את תאריך ההודעה. 3) את תוכן ההודעה. כמו כן, באפשרותך להתקשר לשולח. לשלוח לו  S M S. לשלוח לו S M S מהיר. או למחוק את ההודעה.  </string>
     <string name="message_number">הודעה מספר</string>
     <string name="no_more_messages">אין יותר הודעות</string>
     <string name="delete_message">מחיקת הודעה</string>
@@ -267,7 +270,7 @@
 
     <!-- SOS config -->
     <string name="sos_config_screen_name">מסך הגדרת איש קשר S O S</string>
-    <string name="sos_config_screen_info">בראש המסך נמצא המספר שנבחר. במרכז המסך נמצאים כפתורי החיוג. בתחתית המסך יש שלושה כפתורים, מימין לשמאל: אישור, ניקוי, מחיקת ספרה. </string>
+    <string name="sos_config_screen_info">בראש המסך נמצא המספר שנבחר. במרכז המסך נמצאים כפתורי החיוג. בתחתית המסך יש שלושה כפתורים, מימין לשמאל. אישור. ניקוי. מחיקת ספרה. </string>
     <string name="ok_button">הגדר איש קשר</string>
     <string name="sos_config_screen_whereami">מסך הגדרת איש קשר S O S</string>
     <string name="change_contact_number">הגדר איש קשר S O S</string>
@@ -321,7 +324,7 @@
     <string name="SendSms_whereami">מסך שליחת SMS</string>
     <string name="SendSms_info">לחץ על מרכז המסך כדי להזין הודעה. לחץ על הכפתור בתחתית המסך על מנת לבצע שליחה. לחץ על החלק העליון של המסך על מנת לשנות מספר טלפון.</string>
     <string name="send_message">שלח הודעה</string>
-    <string name="enter_a_phone_number">הכנס מספר טלפון</string>
+    <string name="enter_a_phone_number">יש להכניס מספר טלפון</string>
     <string name="message_content">תוכן ההודעה</string>
     <string name="enter_a_message">הכנס הודעה</string>
     <string name="phone_number">מספר טלפון</string>

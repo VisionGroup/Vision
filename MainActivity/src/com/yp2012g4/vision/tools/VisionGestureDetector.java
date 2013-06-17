@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
@@ -40,8 +41,9 @@ import com.yp2012g4.vision.customUI.TalkingImageButton;
  * This super class is handling on touch events with text-to-speech feedback for
  * the (blind) user
  * 
- * @author Amir
+ * @author Amir Mizrachi (made some changes in version 2.0)
  * @version 1.1
+ * 
  */
 public abstract class VisionGestureDetector extends Activity implements OnClickListener, OnGestureListener, OnTouchListener {
   private static final int VIBRATE_SHORT_DURATION = 20;
@@ -157,39 +159,73 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     final String buttonMode = _sp.getString("BUTTON MODE", "regular");
     switch (action) {
       case MotionEvent.ACTION_DOWN:
-        Log.i(TAG, "onTouch: ACTION_DOWN");
-        VisionApplication.restoreColors(last_button_view, this);
-        if (buttonMode.equals("regular"))
-          last_button_view = getView(event.getRawX(), event.getRawY());
+        actionDown(event, buttonMode);
         break;
       case MotionEvent.ACTION_MOVE:
-        for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
-          if (isButtonType(entry.getKey()))
-            if (entry.getValue().contains((int) event.getRawX(), (int) event.getRawY()))
-              if (last_button_view != entry.getKey()) {
-                VisionApplication.restoreColors(entry.getKey(), this);
-                speakOutAsync(textToRead(entry.getKey()));
-                changeButton(entry.getKey());
-              } else
-                last_button_view = entry.getKey();
+        actionMove(event);
         break;
       case MotionEvent.ACTION_UP:
-        Log.i(TAG, "ACTION UP");
-        if (buttonMode.equals("regular"))
-          VisionApplication.restoreColors(last_button_view, this);
-        onActionUp(last_button_view);
+        actionUp(buttonMode);
         break;
       default:
         break;
     }
-    // gestureDetector.setIsLongpressEnabled(false);
-    // onTwoFingerDoubleTap(event);
     return _gestureDetector.onTouchEvent(event);
   }
   
   /**
+   * Handling the movement event
+   * 
+   * @param buttonMode
+   *          Whether the button is regular or sticky
+   */
+  private void actionUp(final String buttonMode) {
+    Log.i(TAG, "onTouch: ACTION_UP");
+    if (buttonMode.equals("regular"))
+      VisionApplication.restoreColors(last_button_view, this);
+    onActionUp(last_button_view);
+  }
+  
+  /**
+   * Handling the movement event
+   * 
+   * @param event
+   *          The movement event
+   * @param buttonMode
+   *          Whether the button is regular or sticky
+   */
+  private void actionDown(final MotionEvent event, final String buttonMode) {
+    Log.i(TAG, "onTouch: ACTION_DOWN");
+    VisionApplication.restoreColors(last_button_view, this);
+    if (buttonMode.equals("regular"))
+      last_button_view = getView(event.getRawX(), event.getRawY());
+  }
+  
+  /**
+   * Handling the movement event
+   * 
+   * @param event
+   *          The movement event
+   */
+  private void actionMove(final MotionEvent event) {
+    for (final Map.Entry<View, Rect> entry : view_to_rect.entrySet())
+      if (isButtonType(entry.getKey()))
+        if (entry.getValue().contains((int) event.getRawX(), (int) event.getRawY()))
+          if (last_button_view != entry.getKey()) {
+            VisionApplication.restoreColors(entry.getKey(), this);
+            speakOutAsync(textToRead(entry.getKey()));
+            entry.getKey().playSoundEffect(SoundEffectConstants.CLICK);
+            changeButton(entry.getKey());
+          } else
+            last_button_view = entry.getKey();
+  }
+  
+  /**
+   * Restore button color and making vibration when switching to different
+   * button
    * 
    * @param curr
+   *          Current view
    */
   private void changeButton(final View curr) {
     VisionApplication.restoreColors(last_button_view, this);

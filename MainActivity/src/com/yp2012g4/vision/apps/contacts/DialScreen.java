@@ -51,7 +51,7 @@ public class DialScreen extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    if (curr_view.getId() == R.id.dialer_sms_button)
+    if (curr_view.getId() == R.id.dialer_sms_button || curr_view.getId() == R.id.button_delete)
       return false;
     if (e.getAction() == MotionEvent.ACTION_UP)
       for (final Map.Entry<View, Rect> entry : getView_to_rect())
@@ -96,6 +96,10 @@ public class DialScreen extends VisionActivity {
         pressedResetButton();
         break;
       case R.id.button_delete: // delete
+        if (read_number.length() == 0) {
+          speakOutAsync(R.string.enter_a_phone_number);
+          return;
+        }
         pressedDeleteButton(buttonId);
         break;
       default:
@@ -147,6 +151,7 @@ public class DialScreen extends VisionActivity {
   private void pressedDeleteButton(final int buttonId) {
     if (dialed_number.length() == MAX_LENGTH || buttonId == R.id.button_delete) {
       dialed_number = dialed_number.substring(0, Math.max(0, dialed_number.length() - 1));
+      speakOutAsync(read_number.substring(read_number.length() - 2, read_number.length() - 1) + " " + getString(R.string.deleted));
       read_number = read_number.substring(0, Math.max(0, read_number.length() - 2));
     }
   }

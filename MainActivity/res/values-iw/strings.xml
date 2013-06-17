@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Vision</string>
     <string name="menu_settings">הגדרות</string>
     <string name="title_activity_quick_sms">מסך SMS מהיר</string>
     <string name="title_dial_screen">מסך חיוג</string>
@@ -64,6 +63,7 @@
     <string name="reset_button_read">איפוס</string>
     <string name="quick_dial_screen">מסך חיוג מהיר</string>
     <string name="quick_dial_button">חייג</string>
+    <string name="deleted">נמחק</string>
 
     <!-- MainActivity -->
     <string name="MainActivity_wheramai">מסך ראשי</string>
@@ -227,7 +227,7 @@
     <!-- QuickSMSActivity -->
     <string name="quick_sms_screen">מסך SMS מהיר</string>
     <string name="quick_sms_help">בחר הודעת SMS מהיר מהרשימה שלמעלה</string>
-    <string name="send_quick_sms">send quick S M S</string>
+    <string name="send_quick_sms">שלח S M S מהיר</string>
     <string name="sending">שולח</string>
     <string name="message_has_been_sent">ההודעה נשלחה</string>
     <string name="SMS_number_1">אתקשר מאוחר יותר</string>
@@ -251,9 +251,9 @@
     <!-- SOSActivity -->
     <string name="sos_screen">מסך SOS</string>
     <string name="sos_help">באפשרותך לשלוח הודעת S M S עם מיקומך הנוכחי. יש לגעת בחלקו העליון של המסך כדי לשמוע את מספר החירום.</string>
-    <string name="SOS_message_has_been_sent">הודעת SOS נשלחה</string>
-    <string name="sending_SOS_message">שולח הודעת SOS</string>
-    <string name="send_SOS_message">שליחת הודעת SOS</string>
+    <string name="SOS_message_has_been_sent">הודעת S O S נשלחה</string>
+    <string name="sending_SOS_message">שולח הודעת S O S</string>
+    <string name="send_SOS_message">שליחת הודעת S O S</string>
     <string name="sos_msg_to_send">אני זקוק לעזרתך!</string>
     <string name="SOS_number_empty">איש קשר S O S ריק. הכנס מספר תקין.</string>
     <string name="to">אל</string>
@@ -270,7 +270,6 @@
     <string name="sos_config_screen_info">בראש המסך נמצא המספר שנבחר. במרכז המסך נמצאים כפתורי החיוג. בתחתית המסך יש שלושה כפתורים, מימין לשמאל: אישור, ניקוי, מחיקת ספרה. </string>
     <string name="ok_button">הגדר איש קשר</string>
     <string name="sos_config_screen_whereami">מסך הגדרת איש קשר S O S</string>
-    <string name="sos_number">sosNumber</string>
     <string name="change_contact_number">הגדר איש קשר S O S</string>
     <string name="sos_contact_number_is">איש קשר S O S הוא</string>
 

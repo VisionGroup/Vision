@@ -68,10 +68,10 @@ public class CallScreenView extends ViewGroup implements OnGestureListener {
     _name = _cm.getNameFromPhone(_number);
   }
   
-  @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
-    // Unused
-  }
-  
+  /*
+   * @Override protected void onLayout(final boolean arg0, final int arg1, final
+   * int arg2, final int arg3, final int arg4) { // Unused }
+   */
   @Override public boolean onTouchEvent(final MotionEvent event) {
     _cu.silenceRinger();
     Log.d(TAG, "onTOuch");
@@ -106,16 +106,16 @@ public class CallScreenView extends ViewGroup implements OnGestureListener {
   }
   
   @Override public void onLongPress(final MotionEvent e) {
-    // TODO Auto-generated method stub
+    // Do nothing
   }
   
   @Override public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
-    // TODO Auto-generated method stub
+    // Do nothing
     return false;
   }
   
   @Override public void onShowPress(final MotionEvent e) {
-    // TODO Auto-generated method stub
+    // Do nothing
   }
   
   @Override public boolean onSingleTapUp(final MotionEvent e) {

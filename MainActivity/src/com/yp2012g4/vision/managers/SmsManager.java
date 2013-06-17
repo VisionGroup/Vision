@@ -8,8 +8,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
+import com.yp2012g4.vision.tools.StackTraceToString;
+
 public class SmsManager {
   public static final String CONTENT_SMS_INBOX = "content://sms/inbox";
+  public static final String TAG = "vision:SmsManager";
   
   public static ArrayList<SmsType> getIncomingMessages(final Context c) {
     final ArrayList<SmsType> $ = new ArrayList<SmsType>();
@@ -93,7 +96,7 @@ public class SmsManager {
           }
         } while (cur.moveToNext());
     } catch (final Exception e) {
-      Log.e("ReadSmsActivity", "Could not delete SMS from inbox: " + e.getMessage());
+      Log.e(TAG, "deleteSMS " + StackTraceToString.toString(e));
     }
   }
 }

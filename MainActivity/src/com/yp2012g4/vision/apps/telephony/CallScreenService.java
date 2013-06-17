@@ -82,9 +82,8 @@ public class CallScreenService extends AbstractService {
             | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_FULLSCREEN, PixelFormat.TRANSLUCENT);
     params.gravity = Gravity.RIGHT | Gravity.TOP;
     params.setTitle("Load Average");
-    final WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
     csv.setNumber(phoneNumber);
     csViews.add(csv);
-    wm.addView(csv, params);
+    ((WindowManager) getSystemService(WINDOW_SERVICE)).addView(csv, params);
   }
 }

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
 
+import com.yp2012g4.vision.tools.StackTraceToString;
+
 /**
  * Call type container
  * 
@@ -14,6 +16,7 @@ import android.text.format.DateFormat;
  */
 public class CallType {
   private static int MINIMAL_SIZE_FOR_PHONE_NUMBER = 3;
+  private static final String TAG = "vision:CallType";
   public final String number;
   public final String name;
   public final Date date;
@@ -53,9 +56,9 @@ public class CallType {
     try {
       $ = new Date(DateFormat.format("dd/MM/yy hh:mm", cur.getLong(cur.getColumnIndexOrThrow(android.provider.CallLog.Calls.DATE)))
           .toString());
-    } catch (final Exception e1) {
+    } catch (final Exception e) {
       $ = new Date();
-      e1.printStackTrace();
+      Log.e(TAG, "getDateOfCall " + StackTraceToString.toString(e));
     }
     return $;
   }

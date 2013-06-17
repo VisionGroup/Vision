@@ -1,7 +1,5 @@
 package com.yp2012g4.vision.tools;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
 import java.util.Locale;
@@ -366,11 +364,8 @@ public abstract class VisionGestureDetector extends Activity implements OnClickL
     _gestureDetector = new GestureDetector(this);
     vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-      @Override public void uncaughtException(final Thread thread, final Throwable ex) {
-        final StringWriter s = new StringWriter();
-        final PrintWriter p = new PrintWriter(s);
-        ex.printStackTrace(p);
-        Log.e(TAG, "fatal exception: " + s.toString());
+      @Override public void uncaughtException(final Thread thread, final Throwable t) {
+        Log.e(TAG, "fatal exception: " + StackTraceToString.toString(t));
       }
     });
   }

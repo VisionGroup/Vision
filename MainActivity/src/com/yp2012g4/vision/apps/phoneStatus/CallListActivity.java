@@ -61,7 +61,7 @@ public class CallListActivity extends VisionActivity {
         startActivity(intent);
         break;
       case R.id.calllist_call_sender:
-        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.number)));
+        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(CallUtils.CALL_TEL_STRING + currCall.number)));
         break;
       default:
         break;

@@ -58,7 +58,7 @@ public class MainActivity extends VisionActivity {
   
   private void programSetup() {
     final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    final Locale l = new Locale(sp.getString("LANGUAGE", Language.getDefaultLocale().getLanguage()));
+    final Locale l = new Locale(sp.getString(SetupSettingsString.Language, Language.getDefaultLocale().getLanguage()));
     Locale.setDefault(l);
     Log.d(TAG, "Language: " + l.getLanguage());
     final int ret = TTS.setLanguage(l);

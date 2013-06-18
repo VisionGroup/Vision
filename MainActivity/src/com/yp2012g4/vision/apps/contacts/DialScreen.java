@@ -79,7 +79,7 @@ public class DialScreen extends VisionActivity {
           return;
         }
         intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + dialed_number));
+        intent.setData(Uri.parse(CallUtils.CALL_TEL_STRING + dialed_number));
         intent.putExtra(CallUtils.NUMBER_KEY, dialed_number);
         startActivity(setIntentFlags(intent));
         dialed_number = "";

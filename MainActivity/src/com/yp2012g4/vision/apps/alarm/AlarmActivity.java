@@ -21,7 +21,7 @@ import com.yp2012g4.vision.apps.clock.SpeakingClockActivity;
 import com.yp2012g4.vision.tools.VisionActivity;
 
 public class AlarmActivity extends VisionActivity {
-  private static final String TYPE_STRING = "type";
+  public static final String TYPE_STRING = "type";
   public static final int USER_PRESSED_HOME = -2;
   public static final int USER_PRESSED_BACK = -1;
   public static PendingIntent pendingIntent;

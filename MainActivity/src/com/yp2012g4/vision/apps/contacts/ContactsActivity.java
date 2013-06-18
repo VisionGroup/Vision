@@ -58,7 +58,7 @@ public class ContactsActivity extends VisionActivity {
     switch (button.getId()) {
       case R.id.contacts_call:
         intent = setIntentFlags(new Intent(Intent.ACTION_CALL));
-        intent.setData(Uri.parse("tel:" + ct.phone));
+        intent.setData(Uri.parse(CallUtils.CALL_TEL_STRING + ct.phone));
         startActivity(intent);
         break;
       case R.id.contacts_sms:

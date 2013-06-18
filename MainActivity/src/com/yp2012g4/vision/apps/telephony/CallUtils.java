@@ -30,6 +30,8 @@ public class CallUtils {
   public static final String RANG_KEY = "rang";
   public static final String NUMBER_KEY = TelephonyManager.EXTRA_INCOMING_NUMBER;
   public static final String CALL_TYPE_KEY = "call_type_key";
+  // Used for the URI for placing a call.
+  public static final String CALL_TEL_STRING = "tel:";
   private static boolean speakerPhone = false;
   
   public static enum CALL_TYPE {

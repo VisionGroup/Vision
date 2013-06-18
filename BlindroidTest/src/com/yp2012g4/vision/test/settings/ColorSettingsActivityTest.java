@@ -35,7 +35,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo = new Solo(getInstrumentation(), activity);
   }
   
-  @Override protected void tearDown() throws Exception {
+  @SuppressWarnings("deprecation") @Override protected void tearDown() throws Exception {
     try {
       solo.finishInactiveActivities();
       getActivity().finish();

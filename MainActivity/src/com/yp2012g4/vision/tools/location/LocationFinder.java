@@ -10,7 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.yp2012g4.vision.tools.StackTraceToString;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 /**
  * This is a service which will wait for updates from a Location Provider
@@ -129,7 +129,7 @@ public class LocationFinder {
     try {
       _downloader.execute();
     } catch (final Exception e) {
-      Log.e(TAG, "Error: " + StackTraceToString.toString(e));
+      Log.e(TAG, "Error: " + ThrowableToString.toString(e));
     }
   }
   

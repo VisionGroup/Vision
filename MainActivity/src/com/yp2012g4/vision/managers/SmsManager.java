@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.yp2012g4.vision.tools.StackTraceToString;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 public class SmsManager {
   public static final String CONTENT_SMS_INBOX = "content://sms/inbox";
@@ -96,7 +96,7 @@ public class SmsManager {
           }
         } while (cur.moveToNext());
     } catch (final Exception e) {
-      Log.e(TAG, "deleteSMS " + StackTraceToString.toString(e));
+      Log.e(TAG, "deleteSMS " + ThrowableToString.toString(e));
     }
   }
 }

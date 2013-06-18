@@ -11,7 +11,7 @@ import android.provider.CallLog.Calls;
 import android.util.Log;
 
 import com.yp2012g4.vision.R;
-import com.yp2012g4.vision.tools.StackTraceToString;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 /**
  * Call type container
@@ -73,9 +73,8 @@ public class CallsManager {
    * Delete all the entries of a number from the missed call list - require
    * WRITE_CONTACTS permission
    * 
-   * @param c
-   * @param ns
-   *          - string of the phone number in the call log
+   * @param phoneNumber
+   *          string of the phone number in the call log
    */
   public void UnmarkCallLFromMissedCallList(final String phoneNumber) {
     try {
@@ -90,7 +89,7 @@ public class CallsManager {
           new String[] { Integer.toString(Calls.MISSED_TYPE), phoneNumber });
       System.out.println(i);
     } catch (final Exception e) {
-      Log.e(TAG, "UnmarkCallLFromMissedCallList" + StackTraceToString.toString(e));
+      Log.e(TAG, "UnmarkCallLFromMissedCallList" + ThrowableToString.toString(e));
     }
   }
   
@@ -98,10 +97,6 @@ public class CallsManager {
    * Get a list of all the missed calls with the date, name and phone number of
    * each
    * 
-   * @param c
-   *          Context
-   * @param number
-   *          how may call to get back
    * @return list of missed calls
    */
   public CallType getLastOutgoingCall() {
@@ -120,10 +115,6 @@ public class CallsManager {
    * Get a list of all the missed calls with the date, name and phone number of
    * each
    * 
-   * @param c
-   *          Context
-   * @param ns
-   *          how may call to get back
    * @return list of missed calls
    */
   public CallType getNextMissedCalls() {

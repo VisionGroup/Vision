@@ -67,7 +67,7 @@ public class DeleteConfirmation extends VisionActivity {
     try {
       _caller = Class.forName(getIntent().getStringExtra(ACTIVITY_EXTRA));
     } catch (final ClassNotFoundException e) {
-      Log.e(TAG, StackTraceToString.toString(e));
+      Log.e(TAG, ThrowableToString.toString(e));
     }
   }
 }

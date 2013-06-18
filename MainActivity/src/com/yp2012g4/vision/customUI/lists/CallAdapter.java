@@ -61,12 +61,6 @@ public class CallAdapter extends BaseAdapter {
     return $;
   }
   
-  /**
-   * @param p
-   * @param fromView
-   * @param bodyView
-   * @param timeView
-   */
   private void setCallDisplay(final int p, final TalkingButton numberView, final TalkingButton nameView,
       final TalkingButton timeView) {
     final CallType call = (CallType) getItem(p);
@@ -80,11 +74,6 @@ public class CallAdapter extends BaseAdapter {
     timeView.setReadText(call.date.toLocaleString());
   }
   
-  /**
-   * @param fromView
-   * @param bodyView
-   * @param timeView
-   */
   private static void resetCallDisplay(final TalkingButton numberView, final TalkingButton nameView, final TalkingButton timeView) {
     numberView.setText("");
     nameView.setText("");

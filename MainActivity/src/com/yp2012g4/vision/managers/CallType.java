@@ -5,8 +5,9 @@ import java.util.Date;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
+import android.util.Log;
 
-import com.yp2012g4.vision.tools.StackTraceToString;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 /**
  * Call type container
@@ -58,7 +59,7 @@ public class CallType {
           .toString());
     } catch (final Exception e) {
       $ = new Date();
-      Log.e(TAG, "getDateOfCall " + StackTraceToString.toString(e));
+      Log.e(TAG, "getDateOfCall " + ThrowableToString.toString(e));
     }
     return $;
   }

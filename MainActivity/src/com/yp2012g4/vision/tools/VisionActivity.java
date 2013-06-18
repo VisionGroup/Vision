@@ -23,11 +23,13 @@ import com.yp2012g4.vision.apps.settings.Language;
 import com.yp2012g4.vision.apps.settings.SetupSettingsString;
 import com.yp2012g4.vision.customUI.TalkingButton;
 
-/*
- * write by Yaron Auster
+/**
  * 
- * The VisionActivity extend the normal activity. it's give extra functionality
- * to this app.
+ * @author Yaron Auster
+ * 
+ *         The VisionActivity extend the normal activity. It gives an extra
+ *         functionality to this application.
+ * 
  */
 public abstract class VisionActivity extends VisionGestureDetector {
   private static final String TAG = "vision:VisionActivity";
@@ -115,8 +117,6 @@ public abstract class VisionActivity extends VisionGestureDetector {
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setVolumeControlStream(AudioManager.STREAM_MUSIC);
     TTS.init(getApplicationContext());
-    // final SharedPreferences sp =
-    // PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     final Locale l = new Locale(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(
         SetupSettingsString.Language, Language.getDefaultLocale().getLanguage()));
     Locale.setDefault(l);

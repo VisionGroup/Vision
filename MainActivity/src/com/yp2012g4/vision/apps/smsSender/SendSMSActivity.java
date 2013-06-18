@@ -139,10 +139,9 @@ public class SendSMSActivity extends VisionActivity {
   }
   
   private static String ignoreSeparator(final CharSequence cs) {
-    final String[] _s = cs.toString().split("-");
-    String _newString = "";
-    for (final String s : _s)
-      _newString += s;
-    return _newString;
+    final StringBuilder $ = new StringBuilder();
+    for (final String s : cs.toString().split("-"))
+      $.append(s);
+    return $.toString();
   }
 }

@@ -69,12 +69,10 @@ public class SettingsActivity extends VisionActivity {
         VisionApplication.muted = true;
         break;
       case R.id.button_set_colors:
-        intent = newFlaggedIntent(SettingsActivity.this, ColorSettingsActivity.class);
-        startActivity(intent);
+        startActivity(newFlaggedIntent(SettingsActivity.this, ColorSettingsActivity.class));
         break;
       case R.id.button_set_theme:
-        intent = newFlaggedIntent(SettingsActivity.this, ThemeSettingsActivity.class);
-        startActivity(intent);
+        startActivity(newFlaggedIntent(SettingsActivity.this, ThemeSettingsActivity.class));
         break;
       case R.id.button_exit_launcher:
         pm.clearPackagePreferredActivities(getPackageName());
@@ -83,7 +81,7 @@ public class SettingsActivity extends VisionActivity {
       case R.id.locale:
         pressedLocalSelectButton(sp);
         break;
-      // case R.id.button_selecting_mode: TODO: add this button and fixed bugs
+      // case R.id.button_selecting_mode: TODO: add this button and fix bugs
       // pressedButtonSelectButton(sp);
       // break;
       case R.id.vision_call_enable_button:

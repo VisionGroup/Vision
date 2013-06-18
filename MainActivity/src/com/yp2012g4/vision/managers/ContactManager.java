@@ -12,7 +12,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
-import com.yp2012g4.vision.tools.StackTraceToString;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 public class ContactManager {
   private static final String TAG = "vision:ContactManager";
@@ -23,6 +23,7 @@ public class ContactManager {
   public ArrayList<ContactType> _contactsArray;
   private final String[] _projection = new String[] { BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME,
       ContactsContract.Data.TIMES_CONTACTED, ContactsContract.Contacts.HAS_PHONE_NUMBER, ContactsContract.Contacts.LOOKUP_KEY };
+  private final static int numOfFavoritesContact = 10;
   
   public ContactManager(final Context c) {
     _c = c;
@@ -30,17 +31,16 @@ public class ContactManager {
   }
   
   /**
-   * 
-   * @return 10 favorite contacts.
+   * Set the current contacts to the 10 favorites contacts;
    */
   public void getFavoriteContacts() {
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
     final String so = ContactsContract.Data.TIMES_CONTACTED + " DESC, " + ContactsContract.Contacts.DISPLAY_NAME
-        + " COLLATE LOCALIZED ASC LIMIT 10";
+        + " COLLATE LOCALIZED ASC LIMIT " + numOfFavoritesContact;
     try {
       cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
     } catch (final Exception e) {
-      Log.e(TAG, "getFavoriteContacts " + StackTraceToString.toString(e));
+      Log.e(TAG, "getFavoriteContacts " + ThrowableToString.toString(e));
       cur = null;
     }
     if (cur != null) {
@@ -51,8 +51,7 @@ public class ContactManager {
   }
   
   /**
-   * 
-   * @return all contacts arranged alphabetically
+   * Set the current contacts to all contacts arranged alphabetically
    */
   public void getAllContacts() {
     final String ss = ContactsContract.Contacts.HAS_PHONE_NUMBER + "='1'";
@@ -60,7 +59,7 @@ public class ContactManager {
     try {
       cur = _c.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, _projection, ss, null, so);
     } catch (final Exception e) {
-      Log.e(TAG, "getAllContacts " + StackTraceToString.toString(e));
+      Log.e(TAG, "getAllContacts " + ThrowableToString.toString(e));
       cur = null;
     }
     if (cur != null) {
@@ -129,7 +128,7 @@ public class ContactManager {
       try {
         $ = cs.getString(cs.getColumnIndex(Phone.NUMBER));
       } catch (final Exception e) {
-        Log.d(TAG, "lookupphonenumber " + StackTraceToString.toString(e));
+        Log.d(TAG, "lookupphonenumber " + ThrowableToString.toString(e));
         $ = "";
       }
     }
@@ -159,10 +158,20 @@ public class ContactManager {
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
     } catch (final Exception e) {
-      Log.e(TAG, "add contact to phone: " + StackTraceToString.toString(e));
+      Log.e(TAG, "add contact to phone: " + ThrowableToString.toString(e));
     }
   }
   
+  /**
+   * Delete a contact by name.
+   * 
+   * @param name
+   *          The name of the contact
+   * @param c
+   *          The context
+   * @return true if we could delete the contact, false otherwise
+   * 
+   */
   public static boolean deleteContact(final String name, final Context c) {
     final Cursor curser = c.getContentResolver().query(Phone.CONTENT_URI, null, null, null, null);
     try {
@@ -176,7 +185,7 @@ public class ContactManager {
           }
         while (curser.moveToNext());
     } catch (final Exception e) {
-      Log.e(TAG, "delete contact: " + StackTraceToString.toString(e));
+      Log.e(TAG, "delete contact: " + ThrowableToString.toString(e));
     }
     return false;
   }

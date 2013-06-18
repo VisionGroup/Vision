@@ -56,8 +56,7 @@ public class PhoneNotifications {
    * @return battery level between 0 to 1
    */
   public float getBatteryLevel() {
-    final IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-    final Intent batteryStatus = c.registerReceiver(null, ifilter);
+    final Intent batteryStatus = c.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     final int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, DEFAULT_EXTRA_VALUE);
     final int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, DEFAULT_EXTRA_VALUE);
     final float batteryPct = level / (float) scale;

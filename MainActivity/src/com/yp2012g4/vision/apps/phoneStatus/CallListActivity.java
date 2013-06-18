@@ -31,8 +31,6 @@ public class CallListActivity extends VisionActivity {
     setContentView(R.layout.activity_call_list);
     init(0, getString(R.string.call_list_screen), getString(R.string.call_list_help));
     _tlv = (TalkingListView) findViewById(R.id.TalkingCallListView);
-//    if (_tlv.isEmpty())
-//      TTS.speak(getString(R.string.noCalls));
   }
   
   @Override public void onResume() {
@@ -48,24 +46,24 @@ public class CallListActivity extends VisionActivity {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     if (super.onSingleTapUp(e))
       return true;
-    Intent intent;
+    Intent intent = null;
     final CallType currCall = getCurrentCall();
     Log.d(TAG, currCall.name + " " + currCall.number + " " + currCall.date.toString());
     switch (getButtonByMode().getId()) {
       case R.id.calllist_send_quick_sms:
         intent = newFlaggedIntent(getApplicationContext(), QuickSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);
-        startActivity(intent);
         break;
       case R.id.calllist_send_sms:
         intent = newFlaggedIntent(getApplicationContext(), SendSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);
-        startActivity(intent);
         break;
       case R.id.calllist_call_sender:
-        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.number)));
+        intent = new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.number));
         break;
       default:
         break;
     }
+    if (intent != null)
+      startActivity(intent);
     return false;
   }
   

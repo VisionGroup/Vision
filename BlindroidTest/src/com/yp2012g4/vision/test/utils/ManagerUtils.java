@@ -6,10 +6,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.util.Log;
 
 import com.yp2012g4.vision.managers.SmsManager;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 public class ManagerUtils {
+  private static String TAG = "VisionTest:ManagerUtils";
+  
   /**
    * remove all unanswered calls from phone.
    * 
@@ -20,14 +24,13 @@ public class ManagerUtils {
       final ContentValues values = new ContentValues();
       values.put(Calls.NEW, Integer.valueOf(0));
       final StringBuilder where = new StringBuilder();
-      where.append(Calls.NEW + " = 1");
-      where.append(" AND ");
-      where.append(Calls.TYPE + " = ?");// + Calls.MISSED_TYPE);
+      where.append(Calls.NEW + " = 1").append(" AND ").append(Calls.TYPE + " = ?");
+      // + Calls.MISSED_TYPE);
       final int i = c.getContentResolver().update(Calls.CONTENT_URI, values, where.toString(),
           new String[] { Integer.toString(Calls.MISSED_TYPE) });
       System.out.println(i);
     } catch (final Exception e) {
-      e.getMessage();
+      Log.e(TAG, "getAddress " + ThrowableToString.toString(e));
     }
   }
   

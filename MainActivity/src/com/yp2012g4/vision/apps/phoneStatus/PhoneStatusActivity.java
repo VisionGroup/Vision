@@ -2,7 +2,6 @@ package com.yp2012g4.vision.apps.phoneStatus;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,10 +67,8 @@ public class PhoneStatusActivity extends VisionActivity {
     else
       for (final CallType c : calls) {
         s += getString(R.string.called_at) + " " + c.date.toLocaleString() + ". " + getString(R.string.from) + " ";
-        if (TTS.isPureEnglish(c.name))
-          s += c.name + ".\n";
-        else
-          s += c.number + ".\n";// TODO: Remove when Hebrew is detected.
+        s += (TTS.isPureEnglish(c.name) ? c.name : c.number) + ".\n";
+        // TODO: Remove when Hebrew is detected.
       }
     speakOutSync(s);
   }
@@ -99,9 +96,7 @@ public class PhoneStatusActivity extends VisionActivity {
         speakOutAsync(signalToString());
         break;
       case R.id.button_getMissedCalls:
-        // getMissedCalls();
-        final Intent intent = newFlaggedIntent(this, CallListActivity.class);
-        startActivity(intent);
+        startActivity(newFlaggedIntent(this, CallListActivity.class));
         break;
       default:
         break;

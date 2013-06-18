@@ -124,11 +124,7 @@ public class TalkingListView extends RelativeLayout {
    * @param
    */
   public void setPage(final int n) {
-    if (_adapter == null)
-      return;
-    if (n < 0)
-      return;
-    if (n >= _numOfPages)
+    if (_adapter == null || n < 0 || n >= _numOfPages)
       return;
     setNewViewArr(n);
     setNewViewDisp();

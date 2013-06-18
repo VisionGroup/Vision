@@ -43,20 +43,16 @@ public class ReadSmsActivity extends VisionActivity {
   }
   
   @Override public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float f1, final float f2) {
-    boolean res = true;
     final float diffX = e2.getX() - e1.getX();
-    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()))
-      if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
-        if (diffX > 0)
-          res = listView.prevPage();
-        else
-          res = listView.nextPage();
-        vibrate();
-        if (!res)
-          speakOutAsync(R.string.no_more_contacts);
-        else
-          speakOutAsync(getCurrentSms().person);
-      }
+    if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY()) && Math.abs(diffX) > SWIPE_THRESHOLD
+        && Math.abs(f1) > SWIPE_VELOCITY_THRESHOLD) {
+      final boolean res = diffX > 0 ? listView.prevPage() : listView.nextPage();
+      vibrate();
+      if (!res)
+        speakOutAsync(R.string.no_more_contacts);
+      else
+        speakOutAsync(getCurrentSms().person);
+    }
     return super.onFling(e1, e2, f1, f2);
   }
   
@@ -112,7 +108,6 @@ public class ReadSmsActivity extends VisionActivity {
   }
   
   public SmsType getCurrentSms() {
-    final int displayItemId = listView.getPage();
-    return (SmsType) adapter.getItem(displayItemId);
+    return (SmsType) adapter.getItem(listView.getPage());
   }
 }

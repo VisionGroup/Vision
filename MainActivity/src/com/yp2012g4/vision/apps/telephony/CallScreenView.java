@@ -32,6 +32,7 @@ public class CallScreenView extends ViewGroup implements OnGestureListener {
   private final Context _c;
   ContactManager _cm;
   String _name;
+  private boolean _silence = false;
   
   /********/
   @Override protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
@@ -39,15 +40,20 @@ public class CallScreenView extends ViewGroup implements OnGestureListener {
   }
   
   /********/
-  public CallScreenView(final Context c) {
+  public CallScreenView(final Context c, final CallUtils cu) {
     super(c);
     mLoadPaint = new Paint();
     mLoadPaint.setAntiAlias(true);
     mLoadPaint.setTextSize(VisionApplication.getTextSize());
     mLoadPaint.setColor(VisionApplication.getTextColor());
-    _cu = new CallUtils(c);
+    _cu = cu;
     _c = c;
     _cm = new ContactManager(_c);
+  }
+  
+  @Override protected void finalize() throws Throwable {
+    _cu.restoreRinger();
+    super.finalize();
   }
   
   @Override protected void onDraw(final Canvas canvas) {
@@ -73,7 +79,10 @@ public class CallScreenView extends ViewGroup implements OnGestureListener {
    * int arg2, final int arg3, final int arg4) { // Unused }
    */
   @Override public boolean onTouchEvent(final MotionEvent event) {
-    _cu.silenceRinger();
+    if (!_silence) {
+      _cu.silenceRinger();
+      _silence = true;
+    }
     Log.d(TAG, "onTOuch");
     return gd.onTouchEvent(event);
   }
@@ -121,5 +130,9 @@ public class CallScreenView extends ViewGroup implements OnGestureListener {
   @Override public boolean onSingleTapUp(final MotionEvent e) {
     TTS.speak(_name + " " + _number);
     return false;
+  }
+  
+  @Override protected void onLayout(final boolean arg0, final int arg1, final int arg2, final int arg3, final int arg4) {
+    // TODO Auto-generated method stub
   }
 }

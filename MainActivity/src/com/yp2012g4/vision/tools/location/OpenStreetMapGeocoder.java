@@ -9,7 +9,7 @@ import org.xml.sax.InputSource;
 
 import android.util.Log;
 
-import com.yp2012g4.vision.tools.StackTraceToString;
+import com.yp2012g4.vision.tools.ThrowableToString;
 
 /**
  * Converts geographic coordinates to an address, using OpenStreetMap
@@ -40,7 +40,7 @@ public class OpenStreetMapGeocoder {
           .parse(new InputSource(new URL(String.format(Locale.US, _srcUrl, Double.valueOf(lat), Double.valueOf(lon))).openStream()))
           .getElementsByTagName(_adrTag).item(0).getChildNodes().item(0).getNodeValue();
     } catch (final Exception e) {
-      Log.e(TAG, "getAddress " + StackTraceToString.toString(e));
+      Log.e(TAG, "getAddress " + ThrowableToString.toString(e));
     }
     return r;
   }

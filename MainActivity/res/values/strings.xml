@@ -66,6 +66,7 @@
     <string name="reset_button_read">reset</string>
     <string name="quick_dial_screen">quick dial screen</string>
     <string name="quick_dial_button">dial</string>
+    <string name="deleted">deleted</string>
 
     <!-- MainActivity -->
     <string name="MainActivity_wheramai">main screen</string>

@@ -74,7 +74,7 @@ public class ReadSmsActivity extends VisionActivity {
         break;
       case R.id.sms_call_sender:
         intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + currMsg.address));
+        intent.setData(Uri.parse(CallUtils.CALL_TEL_STRING + currMsg.address));
         startActivity(setIntentFlags(intent));
         break;
       case R.id.sms_remove:

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry combineaccessrules="false" kind="src" path="/Vision"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen">
-		<attributes>
-			<attribute name="ignore_optional_problems" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="libs/mockito-all-1.9.5.jar"/>
-	<classpathentry kind="lib" path="libs/dexmaker-mockito-1.0.jar"/>
-	<classpathentry kind="lib" path="libs/robotium-solo-3.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="libs/robotium-solo-3.6.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/programing/Android/g4a/BlindroidTest/libs/robotium-solo-3.6-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="output" path="bin/classes"/>
+        <classpathentry combineaccessrules="false" kind="src" path="/Vision"/>
+        <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+        <classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+        <classpathentry kind="src" path="src"/>
+        <classpathentry kind="src" path="gen">
+                <attributes>
+                        <attribute name="ignore_optional_problems" value="true"/>
+                </attributes>
+        </classpathentry>
+        <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+        <classpathentry kind="lib" path="libs/mockito-all-1.9.5.jar"/>
+        <classpathentry kind="lib" path="libs/dexmaker-mockito-1.0.jar"/>
+        <classpathentry kind="lib" path="libs/robotium-solo-3.6-javadoc.jar"/>
+        <classpathentry kind="lib" path="libs/robotium-solo-3.6.jar">
+                <attributes>
+                        <attribute name="javadoc_location" value="jar:file:/C:/programing/Android/g4a/BlindroidTest/libs/robotium-solo-3.6-javadoc.jar!/"/>
+                </attributes>
+        </classpathentry>
+        <classpathentry kind="output" path="bin/classes"/>
 </classpath>

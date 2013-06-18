@@ -151,6 +151,8 @@
     <string name="speaking_clock_help">בחר אחת מ-2 אפשרויות: 1) שמיעת השעה. 2) שמיעת התאריך</string>
     <string name="ClockTitle">מסך שעון</string>
     <string name="date_button">תאריך</string>
+    <string name="AM">AM</string>
+    <string name="PM">PM</string>
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">מסך אנשי קשר</string>

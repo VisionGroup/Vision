@@ -35,6 +35,21 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo = new Solo(getInstrumentation(), activity);
   }
   
+  @Override protected void tearDown() throws Exception {
+    try {
+      solo.finishInactiveActivities();
+      getActivity().finish();
+      solo.finishOpenedActivities();
+      System.gc();
+      solo.finalize();
+    } catch (final Throwable e) {
+      e.printStackTrace();
+    }
+    super.tearDown();
+    solo = null;
+    super.tearDown();
+  }
+  
   @MediumTest public void testNumOfButtons() {
     solo.assertCurrentActivity("Check on first activity", ColorSettingsActivity.class);
     final ArrayList<Button> btnList = solo.getCurrentButtons();
@@ -91,7 +106,7 @@ public class ColorSettingsActivityTest extends ActivityInstrumentationTestCase2<
     solo.assertCurrentActivity("wrong activity", ColorSettingsActivity.class);
     solo.clickOnView(solo.getView(R.id.BlueBlack));
     solo.clickOnView(solo.getView(R.id.home_button));
-    solo.waitForActivity(MainActivity.class.getName(), 2000);
+    solo.waitForActivity(MainActivity.class.getName(), 5000);
     solo.assertCurrentActivity("wrong activity", MainActivity.class);
     assertEquals(VisionApplication.getTextColor(), Color.parseColor("#0489B1"));
     assertEquals(VisionApplication.getBackgroundColor(), Color.parseColor("#000000"));

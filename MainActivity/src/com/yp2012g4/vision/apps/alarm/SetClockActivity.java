@@ -43,7 +43,7 @@ public class SetClockActivity extends VisionActivity {
     setContentView(R.layout.activity_set_clock);
     init(0, getString(R.string.title_activity_set_clock), getString(R.string.set_clock_help));
     final Bundle b = getIntent().getExtras();
-    type = b.getInt("type");
+    type = b.getInt(AlarmActivity.TYPE_STRING);
     updateDisplayByType();
   }
   

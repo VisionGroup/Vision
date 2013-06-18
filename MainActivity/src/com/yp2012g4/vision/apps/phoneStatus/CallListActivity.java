@@ -57,7 +57,7 @@ public class CallListActivity extends VisionActivity {
         intent = newFlaggedIntent(getApplicationContext(), SendSMSActivity.class).putExtra(CallUtils.NUMBER_KEY, currCall.number);
         break;
       case R.id.calllist_call_sender:
-        intent = new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + currCall.number));
+        intent = new Intent(Intent.ACTION_CALL).setData(Uri.parse(CallUtils.CALL_TEL_STRING + currCall.number));
         break;
       default:
         break;

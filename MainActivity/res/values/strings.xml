@@ -156,6 +156,9 @@
     <string name="ClockTitle">speaking clock</string>
     <string name="date_button">date</string>
     <string name="hourFormat">%1$d and %2$d minutes %3$s.</string>
+    <string name="AM">AM</string>
+    <string name="PM">PM</string>
+    
 
     <!-- ContactsActivity -->
     <string name="contacts_screen">contacts screen.</string>
